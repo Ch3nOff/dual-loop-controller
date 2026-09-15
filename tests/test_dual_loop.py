@@ -72,6 +72,23 @@ class TestDualLoopComponents(unittest.TestCase):
         self.assertEqual(logits.shape, (self.B, self.vocab_size))
         self.assertEqual(info["num_thoughts"], self.L_thought)
 
+    def test_per_sample_dynamic_halting_forward(self):
+        model = DualLoopTransformer(
+            vocab_size=self.vocab_size,
+            d_model=self.D,
+            n_heads=4,
+            d_ff=128,
+            max_ponder_steps=3,
+            entropy_threshold=1.30
+        )
+        input_ids = torch.randint(0, self.vocab_size, (8, self.N))
+        logits, info = model(input_ids, dynamic_halting=True)
+        self.assertEqual(logits.shape, (8, self.vocab_size))
+        self.assertIn("steps_taken", info)
+        self.assertEqual(info["steps_taken"].shape, (8,))
+        # Check that effective_k is a valid float within [1.0, 3.0]
+        self.assertTrue(1.0 <= info["effective_k"] <= 3.0)
+
     def test_gradient_flow(self):
         model = DualLoopTransformer(
             vocab_size=self.vocab_size,

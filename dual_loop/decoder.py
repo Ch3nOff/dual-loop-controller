@@ -60,19 +60,17 @@ class DualLoopTransformer(nn.Module):
         self.inner_decoder = nn.TransformerEncoder(dec_layer, num_layers=num_decoder_layers)
         self.lm_head = nn.Linear(d_model, vocab_size)
 
-    def calibrate_halting(self, sample_inputs: torch.Tensor, percentile: float = 50.0):
+    def calibrate_halting(self, sample_inputs: torch.Tensor, percentile: float = 35.0):
         """
         Dynamically calibrates the halting threshold against the model's actual
-        entropy distribution on real validation samples.
+        decoder entropy distribution on step 1 of validation samples.
         """
         self.eval()
         with torch.no_grad():
-            logits, info = self.forward(sample_inputs, return_aux=True)
-            if info["aux_logits"]:
-                probe_logits = info["aux_logits"][-1]
-            else:
-                probe_logits = logits
-            calibrated = self.outer_loop.halting_unit.calibrate_threshold(probe_logits, percentile=percentile)
+            logits_k1, _ = self.forward(sample_inputs, k_steps=1, dynamic_halting=False)
+            ent_k1 = self.outer_loop.halting_unit.calculate_entropy(logits_k1)
+            calibrated = torch.quantile(ent_k1, percentile / 100.0).item()
+            self.outer_loop.halting_unit.entropy_threshold = calibrated
             return calibrated
 
     def forward(
@@ -84,18 +82,7 @@ class DualLoopTransformer(nn.Module):
         return_aux: bool = False
     ) -> Tuple[torch.Tensor, Dict[str, Any]]:
         """
-        Forward pass with dual-loop cognition.
-        
-        Args:
-            input_ids: [B, SeqLen] input tokens
-            k_steps: Optional override for outer loop ponder steps
-            query_token_pos: Index of the query token in prompt (-2 by default)
-            dynamic_halting: Enable predictive entropy early halting
-            return_aux: Return intermediate probe outputs and entropies
-            
-        Returns:
-            logits: [B, VocabSize] prediction on final target token
-            info: Dictionary containing auxiliary outputs and telemetry
+        Forward pass with dual-loop cognition and per-sample dynamic halting.
         """
         B, S = input_ids.shape
         x_emb = self.embedding(input_ids) + self.pos_emb[:, :S, :]
@@ -107,29 +94,89 @@ class DualLoopTransformer(nn.Module):
         # 1. Compress context into Cognitive Working Memory (SRAM cache)
         cwm_memory = self.cwm(ctx) # [B, M, D]
         
-        # 2. Outer Loop: System 2 Pondering in Continuous Latent Space
+        max_k = self.outer_loop.max_ponder_steps if k_steps is None else k_steps
+        
+        # =====================================================================
+        # PATH A: Per-Sample Dynamic Halting (Validated from halting_audit.py)
+        # =====================================================================
+        if dynamic_halting:
+            thresh = self.outer_loop.halting_unit.entropy_threshold
+            active_mask = torch.ones(B, dtype=torch.bool, device=input_ids.device)
+            steps_taken = torch.full((B,), float(max_k), dtype=torch.float, device=input_ids.device)
+            final_logits = torch.zeros(B, self.vocab_size, device=input_ids.device)
+            
+            # Initialize latent thoughts
+            H = self.outer_loop.initialize_thoughts(query_rep)
+            H_anchor = H.clone()
+            
+            aux_logits_list = []
+            step_entropies_list = []
+            
+            for k in range(1, max_k + 1):
+                # 1. Execute single recurrent step of Outer Loop
+                attn_self, _ = self.outer_loop.latent_self_attn(H, H, H)
+                H = self.outer_loop.norm1(H + attn_self)
+                H_cross = self.outer_loop.capacity_cross_attn(H, cwm_memory)
+                H = self.outer_loop.norm2(H + H_cross + 0.1 * H_anchor)
+                H = self.outer_loop.norm3(H + self.outer_loop.latent_mlp(H))
+                
+                # 2. Fuse soft prefix and decode through Inner Loop
+                fused = torch.cat([H, ctx], dim=1)
+                dec = self.inner_decoder(fused)
+                logits_k = self.lm_head(dec[:, -1, :]) # [B, VocabSize]
+                
+                # 3. Compute predictive entropy per sample from actual decoder logits
+                ent_k = self.outer_loop.halting_unit.calculate_entropy(logits_k) # [B]
+                step_entropies_list.append(ent_k)
+                
+                if self.outer_loop.audit_probe is not None:
+                    aux_logits_list.append(self.outer_loop.audit_probe(H[:, 0, :]))
+                
+                # 4. Per-sample halting: freeze predictions for confident sequences
+                newly_halted = active_mask & (ent_k <= thresh)
+                if newly_halted.any():
+                    final_logits[newly_halted] = logits_k[newly_halted]
+                    steps_taken[newly_halted] = float(k)
+                    active_mask[newly_halted] = False
+                
+                # Early exit if 100% of samples in the batch have confident consensus
+                if not active_mask.any():
+                    break
+                    
+            # Any remaining unhalted samples take the final step's prediction
+            if active_mask.any():
+                final_logits[active_mask] = logits_k[active_mask]
+                steps_taken[active_mask] = float(max_k)
+                
+            info = {
+                "aux_logits": aux_logits_list,
+                "step_entropies": step_entropies_list,
+                "num_thoughts": H.shape[1],
+                "steps_taken": steps_taken,
+                "effective_k": steps_taken.mean().item()
+            }
+            return final_logits, info
+
+        # =====================================================================
+        # PATH B: Standard Static Pondering (Zero-Overhead for Training / Fixed K)
+        # =====================================================================
         h_thought, aux_logits, step_entropies = self.outer_loop(
             query_rep=query_rep,
             memory=cwm_memory,
             k_steps=k_steps,
-            dynamic_halting=dynamic_halting,
+            dynamic_halting=False,
             return_aux=return_aux
         ) # [B, L_thought, D]
         
-        # 3. Fuse Soft-Prefix: Prepend thoughts directly to context
-        # Shape: [B, L_thought + S, D]
         fused_sequence = torch.cat([h_thought, ctx], dim=1)
-        
-        # 4. Inner Loop: System 1 Language Generator
         decoded = self.inner_decoder(fused_sequence)
-        
-        # 5. LM Head prediction from the final sequence position
         final_logits = self.lm_head(decoded[:, -1, :])
         
         info = {
             "aux_logits": aux_logits,
             "step_entropies": step_entropies,
             "num_thoughts": h_thought.shape[1],
-            "effective_k": len(step_entropies) if step_entropies else (self.outer_loop.max_ponder_steps if k_steps is None else k_steps)
+            "steps_taken": torch.full((B,), float(max_k), device=input_ids.device),
+            "effective_k": float(max_k)
         }
         return final_logits, info
