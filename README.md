@@ -91,7 +91,8 @@ Despite the scaling limits at small model regimes, the repository provides clean
 ### 1. Installation
 ```bash
 # Install officially from PyPI:
-pip install dual-loop-controller
+pip install --pre dual-loop-controller
+# or exact version: pip install dual-loop-controller==2.0.0a1
 
 # Or install direct from GitHub release tag:
 pip install git+https://github.com/Ch3nOff/dual-loop-controller.git@v2.0.0-alpha
