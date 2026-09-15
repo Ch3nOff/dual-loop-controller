@@ -1,6 +1,7 @@
 # Dual-Loop Cognitive Controller v2.0
 > **A Hardware-Aligned Latent Deliberation Framework for Transformers: Architecture & Empirical Analysis**
 
+[![PyPI](https://img.shields.io/pypi/v/dual-loop-controller.svg)](https://pypi.org/project/dual-loop-controller/)
 [![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)](tests/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.14%2B-ee4c2c.svg)](https://pytorch.org/)
 [![Status](https://img.shields.io/badge/status-empirical--audit-orange.svg)](#empirical-findings)
@@ -89,7 +90,10 @@ Despite the scaling limits at small model regimes, the repository provides clean
 
 ### 1. Installation
 ```bash
-# Direct install from GitHub release tag:
+# Install officially from PyPI:
+pip install dual-loop-controller
+
+# Or install direct from GitHub release tag:
 pip install git+https://github.com/Ch3nOff/dual-loop-controller.git@v2.0.0-alpha
 
 # Or clone locally and install in editable mode:
