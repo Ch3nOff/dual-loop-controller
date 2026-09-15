@@ -26,7 +26,7 @@ class DualLoopTransformer(nn.Module):
         num_cwm_slots: int = 16,
         max_ponder_steps: int = 3,
         capacity_factor: float = 0.5,
-        entropy_threshold: float = 0.5
+        entropy_threshold: float = 1.30
     ):
         super().__init__()
         self.vocab_size = vocab_size
@@ -59,6 +59,21 @@ class DualLoopTransformer(nn.Module):
         dec_layer = nn.TransformerEncoderLayer(d_model, n_heads, d_ff, batch_first=True, norm_first=True)
         self.inner_decoder = nn.TransformerEncoder(dec_layer, num_layers=num_decoder_layers)
         self.lm_head = nn.Linear(d_model, vocab_size)
+
+    def calibrate_halting(self, sample_inputs: torch.Tensor, percentile: float = 50.0):
+        """
+        Dynamically calibrates the halting threshold against the model's actual
+        entropy distribution on real validation samples.
+        """
+        self.eval()
+        with torch.no_grad():
+            logits, info = self.forward(sample_inputs, return_aux=True)
+            if info["aux_logits"]:
+                probe_logits = info["aux_logits"][-1]
+            else:
+                probe_logits = logits
+            calibrated = self.outer_loop.halting_unit.calibrate_threshold(probe_logits, percentile=percentile)
+            return calibrated
 
     def forward(
         self,

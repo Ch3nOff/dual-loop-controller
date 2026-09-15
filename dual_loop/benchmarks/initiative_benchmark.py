@@ -5,18 +5,10 @@ import torch.nn as nn
 
 class DynamicProblemEnvironment:
     """
-    Lingkungan Uji Inisiatif:
-    Sebuah sistem dinamis dengan rintangan tak terduga (Obstacles & Traps).
-    Agen hanya diberi tujuan umum ("Capai Target di (5,5)").
-    Jalan langsung menuju target diblokade oleh tembok baja di (3, 0), (3, 1), (3, 2).
-    
-    Agen reaktif serakah yang hanya mengikuti petunjuk langsung akan menabrak
-    dan mengalami DEADLOCK (gagal).
-    
-    Agen berinisiatif harus:
-    1. Membaca/mensimulasikan jalan buntu sebelum menabrak.
-    2. Mengambil inisiatif mandiri untuk membelok ke (0, 5) guna mengambil Kunci Bypass.
-    3. Membuka blokade dan menyelesaikan misi tanpa disuruh manusia.
+    Simulated Environment for Testing Proactive Initiative (Policy Prototype).
+    NOTE: This is a behavioral policy specification / proof-of-concept simulation,
+    comparing greedy heuristic navigation vs. forward-checking deliberative search.
+    It is NOT an end-to-end neural network policy.
     """
     def __init__(self, size=6, seed=42):
         random.seed(seed)

@@ -107,58 +107,46 @@ A sequence halts dynamically when $\mathcal{H}(p_k) \le \tau_{\text{halt}}$. Whe
 
 ---
 
-## 3. Empirical Verification & The Breakthrough of Query-Conditioning
+## 3. Empirical Verification & Analysis of Negative Results
 
-To objectively evaluate the validity of latent pondering, we constructed a benchmark on **Multi-Hop Pointer Traversal**.
+To prevent publication bias, we report the exact empirical metrics measured from our 225,959-parameter reference model trained on 3-hop graph traversal ($H=3$, 16 nodes, chance baseline = 6.25%).
 
-### 3.1 The Canonical Multi-Hop Benchmark
-* **Task**: Given a randomized permutation of directed graph edges $(u \to v)$ and a query $(s \to ?)$, find the target reached after $H = 3$ hops.
-* **Theoretical Constraint**: A single-layer self-attention network cannot resolve $H \ge 2$ hops in a single forward pass without intermediate reasoning tokens.
+### 3.1 Unvarnished Test-Time Compute Scaling Evaluation
+A primary theoretical motivation for latent recurrence is that increasing inference steps ($K$) will progressively refine multi-hop reasoning. In our empirical run (35 epochs, 3,500 training instances, AdamW), this hypothesis was subjected to direct measurement:
 
-### 3.2 Head-to-Head Empirical Results
+```text
+========================================================================================
+MEASURED TEST-TIME COMPUTE PERFORMANCE (500 Unseen Test Samples)
+========================================================================================
+Ponder Step (K)  | Accuracy (%) | Mean Predictive Entropy (nats) | Qualitative State
+----------------------------------------------------------------------------------------
+K = 0 (Bypass)   | 27.4% - 30.6%| 1.332 - 1.362 nats             | Shallow baseline
+K = 1            | 28.2%        | 1.370 nats                     | 1-hop transition
+K = 2            | 30.6%        | 1.307 nats                     | 2-hop transition
+K = 3 (Trained)  | 30.4%        | 1.268 nats                     | Nominal ponder budget
+K = 4            | 30.0%        | 1.268 nats                     | Extrapolated step
+K = 5            | 31.6%        | 1.275 nats                     | Extrapolated step
+========================================================================================
+```
 
-Models were trained under identical conditions (2,500 training instances, 500 test instances, $V=20$ nodes, chance baseline = 5.0%, AdamW optimizer, 30 epochs).
+### 3.2 Critical Diagnostic Findings (Audit 1–4)
 
-| Model Architecture | Parameters | Train Acc | **Test Acc** | GradNorm | Training Time |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **Standard Shallow ($L=1$, No Ponder)** | 42,839 | 20.6% | **13.6%** | 2.523 | **6.6 s** |
-| **Dual-Loop v1 (GRU 1D Bottleneck)** | 101,080 | 37.5% | **16.0%** | 3.078 | 12.2 s |
-| **Dual-Loop v2 (Prefix Thoughts $K=3$)** | 126,807 | 35.9% | **17.8%** | 2.995 | 22.1 s |
-| **Deep Transformer ($L=4$, Stacked)** | 143,255 | 44.1% | **14.6%** | 3.545 | 31.5 s |
+1. **The Absence of Clear Scaling Uplift**:
+   $K=0$ achieves ~27.4–30.6% accuracy, matching or slightly outperforming intermediate pondering steps. The curve is noisy and effectively flat across $K=0 \dots 5$.
+2. **Case-Level Over-Thinking Degradation (Audit 2)**:
+   Step-by-step tracing of individual test instances reveals that recurrent pondering is not uniformly beneficial:
+   * *Positive Case*: A prediction moves from incorrect at $K=0$ (24.3% confidence) to correct at $K=3$ (44.3% confidence).
+   * *Degradation Case*: A prediction begins correct at $K=0$ (Node_0 at 31.1%), but subsequent pondering steps $K=2..3$ diverge toward an incorrect distractor (Node_12 at 55.8%).
+   * *Conclusion*: Without discrete token verification, continuous recurrence can destabilize already correct initial representations.
+3. **Decay Under Contextual Distractors (Audit 3)**:
+   Increasing distractor edges from 6 to 16 causes test accuracy to drop monotonically from $31.0\% \to 21.0\% \to 13.7\% \to 10.3\%$. The latent loop does not recover from dense distractor noise.
+4. **Miscalibrated Dynamic Halting Thresholds (Audit 4)**:
+   The naive theoretical threshold of $0.5$ nats was never reached because the trained model operates with an empirical predictive entropy of $1.25 – 1.40$ nats. Consequently, dynamic halting defaulted to $K=K_{\max}$ in 100% of cases. Proper dynamic halting requires quantile-based empirical calibration (e.g. median calibration to ~1.30 nats).
 
-**Critical Findings**:
-1. Dual-Loop v2 outperforms the 1-layer baseline ($17.8\%$ vs $13.6\%$) and surpasses the parameter-matched 4-layer Deep Transformer ($14.6\%$), which suffered severe overfitting.
-2. The 1D bottleneck in Dual-Loop v1 saturated prematurely, confirming the necessity of sequence-based thought prefixes.
-
-### 3.3 The Discovery of Query-Conditioned Initialization
-In our initial experiments with Dual-Loop v2, dynamically scaling $K$ at test time produced a flat scaling curve ($K=0: 17.0\% \to K=5: 18.2\%$, gain of only $+1.2\%$).
-
-**Diagnostic Root Cause**: The thought seeds were initialized as static learned vectors (`nn.Parameter`), meaning the latent space was decoupled from the actual question during step $k=0$.
-
-**The Remedy**: We conditioned $H_0$ directly on the query token embedding:
-$$H^{(0)} = \text{QueryProjector}(h_{\text{query}}) + \mathbf{Offset}$$
-
-**Empirical Result of Query-Conditioning**:
-$$\begin{aligned}
-K = 0 \text{ (Zero Ponder)} &\longrightarrow \mathbf{7.6\%} \quad \text{(Near random chance 6.25\%)} \\
-K = 1 \text{ (Hop 1 Resolution)} &\longrightarrow \mathbf{19.4\%} \\
-K = 2 \text{ (Hop 2 Resolution)} &\longrightarrow \mathbf{21.2\%} \\
-K = 3 \text{ (Hop 3 Target Reach)} &\longrightarrow \mathbf{25.4\%} \\
-K = 4 \text{ (Optimal Convergence)} &\longrightarrow \mathbf{26.6\%}
-\end{aligned}$$
-
-### 3.4 Multi-Category Comprehensive Evaluation Matrix
-To prevent over-indexing on a single synthetic task, we evaluated Dual-Loop v2.0 across four distinct problem domains measuring different cognitive dimensions:
-
-| Benchmark Category | Core Competency Evaluated | Reactive Baseline | Dual-Loop v2.0 | Architectural Insight |
-| :--- | :--- | :---: | :---: | :--- |
-| **Cat A: Relational Multi-Hop ($H=3$)** | Symbolic pointer chasing depth | 13.6% | **29.5%** | +15.9% effective depth expansion |
-| **Cat B: Multi-Lock Autonomous Detour** | Agentic initiative & sub-goal formulation | 0.0% (Deadlock) | **100.0%** | Latent counterfactual deadlock avoidance |
-| **Cat C: Counterfactual Rule Inversion** | Contextual attention re-weighting | 48.0% | **76.4%** | Fast adaptation to mid-stream rule shifts |
-| **Cat D: High-Branching Tree ($d=5$)** | Search capacity under high out-degree | 8.0% | **15.5%** | Exposes physical limit of continuous representations |
-
-**Key Boundary Analysis (Category D)**:
-As the branching factor increases ($d=2 \to 3 \to 5$), continuous latent vectors suffer from superpositional interference between competing valid pathways ($68.5\% \to 41.0\% \to 15.5\%$). This establishes an authentic scientific boundary: continuous latent deliberation is optimal for directed multi-step deduction and proactive obstacle avoidance, but must be paired with discrete beam search or MCTS when exploration spaces branch exponentially.
+### 3.3 Scientific Implications: Confirmation of Historical Ponder Pathologies
+These empirical findings provide valuable, authentic confirmation of the exact challenges identified in prior literature (Banino et al., 2021 on PonderNet; Hao et al., 2024 on Coconut):
+* At small parameter scales (225K parameters), continuous latent representations lack the semantic depth to sustain multi-step deduction without token-level supervised checkpoints.
+* Therefore, claims of "seamless latent reasoning" must be tempered: continuous deliberation either requires large pretrained models with rich semantic manifolds, or hybrid curriculums that gradually transition from discrete CoT to latent representations.
 
 ## 4. Plug-and-Play Integration with Foundation Models: The Latent Deliberation Adapter
 

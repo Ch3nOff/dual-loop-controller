@@ -1,124 +1,97 @@
 # Dual-Loop Cognitive Controller v2.0
-> **A Hardware-Aligned, Manifold-Preserving Latent Deliberation Framework for Transformers**
+> **A Hardware-Aligned Latent Deliberation Framework for Transformers: Architecture & Empirical Analysis**
 
 [![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)](tests/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.14%2B-ee4c2c.svg)](https://pytorch.org/)
+[![Status](https://img.shields.io/badge/status-empirical--audit-orange.svg)](#empirical-findings)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Standard Autoregressive Transformers perform uniform $O(1)$ layer computation per token regardless of task complexity. While Chain-of-Thought (CoT) prompting allows multi-step reasoning, it expends significant output token bandwidth and introduces severe token generation latency.
+Standard Autoregressive Transformers perform uniform $O(1)$ layer computation per token regardless of task complexity. While Chain-of-Thought (CoT) prompting allows multi-step reasoning, it expends significant output token bandwidth and introduces serial generation latency.
 
-The **Dual-Loop Cognitive Controller** decouples cognition into two distinct processing loops:
+The **Dual-Loop Cognitive Controller** investigates decoupling deliberation from token generation into two loops:
 1. **Outer Loop (Executive Deliberation / System 2)**: Runs recursive state transitions in a continuous latent space without emitting intermediate tokens.
-2. **Inner Loop (Language Generation / System 1)**: Reads the matured latent thoughts ($H_{\text{thought}}$) as a soft prefix to stream final text responses.
+2. **Inner Loop (Language Generation / System 1)**: Reads the matured latent thoughts ($H_{\text{thought}}$) as a soft prefix to decode final text responses.
 
 ---
 
-## Key Architectural Highlights
+## Empirical Findings & Negative Results (The Unvarnished Truth)
 
-* **Query-Conditioned Thought Anchoring**: Resolves unanchored latent drift by initializing the thought trajectory directly from query token representations ($H_0 = f(\text{Query})$), unlocking genuine test-time compute scaling.
-* **Cognitive Working Memory (CWM)**: Compresses the context into a compact set of memory slots ($M \ll N$) stored in GPU SRAM/L2 cache, bypassing repeated HBM memory bandwidth roundtrips.
-* **Top-K Capacity Routing**: Eliminates SIMD warp divergence on GPUs by enforcing deterministic, static-shaped tensor operations (MoD-style).
-* **Predictive Entropy Dynamic Halting**: Halts pondering based on Shannon entropy $\mathcal{H}(p_k)$ of predictions, replacing fragile ACT loss penalties.
-* **Plug-and-Play Latent Adapter**: Easily injects mid-network deliberation into standard pretrained models (e.g., Llama, Qwen, Mistral).
+To maintain strict scientific integrity, this repository reports **the actual, measured behavior of the model trained end-to-end (225,959 parameters, 35 epochs, 3,500 samples, 16 nodes, chance baseline = 6.25%)**, rather than idealized projections.
 
----
+### 1. The Model Learns Real Relational Signals
+* **Final Test Accuracy (3-Hop Graph Reasoning)**: **29.4%** vs. random chance **6.25%** (~4.7x better than random guessing).
+* This confirms that the weight-tied recurrent Transformer and CWM buffer are capable of gradient propagation and multi-step pattern learning.
 
-## Repository Structure
+### 2. The Absence of Monotonic Test-Time Compute Scaling
+A central theoretical hypothesis of recurrent latent pondering is that increasing inference steps ($K$) will progressively improve answer accuracy. **On this 225K parameter implementation, this claim does not hold**:
 
 ```text
-X-Star/
-├── dual_loop/
-│   ├── __init__.py           # Public exports
-│   ├── controller.py         # RecurrentLatentController & TopKCapacityCrossAttention
-│   ├── memory.py             # CognitiveWorkingMemory (CWM compressor)
-│   ├── halting.py            # EntropyHaltingUnit (predictive uncertainty halting)
-│   ├── decoder.py            # DualLoopTransformer (System 1 + System 2 fusion)
-│   ├── adapters/
-│   │   ├── __init__.py
-│   │   └── latent_adapter.py # LatentDeliberationAdapter for pretrained LLMs
-│   └── benchmarks/
-│       ├── __init__.py
-│       └── graph_reasoning.py # Multi-hop pointer traversal benchmark
-├── tests/
-│   ├── test_dual_loop.py     # Unit tests for core components
-│   └── test_adapter_integration.py # Integration test for LLM adapter
-├── train.py                  # CLI training and evaluation runner
-├── run_experiment.py         # Comparative benchmark script
-├── WHITEPAPER.md             # Formal technical research paper
-└── README.md
+========================================================================================
+EMPIRICAL TEST-TIME COMPUTE EVALUATION (Checkpoint: checkpoint_trained_dualloop.pt)
+========================================================================================
+Ponder Steps (K) | Test Accuracy (500 samples) | Mean Predictive Entropy (nats)
+----------------------------------------------------------------------------------------
+K = 0 (No Ponder)| 27.4% - 30.6%               | 1.332 - 1.362 nats
+K = 1            | 28.2%                       | 1.370 nats
+K = 2            | 30.6%                       | 1.307 nats
+K = 3 (Trained)  | 30.4%                       | 1.268 nats
+K = 4            | 30.0%                       | 1.268 nats
+K = 5            | 31.6%                       | 1.275 nats
+========================================================================================
 ```
+
+**Scientific Diagnosis**:
+* **Flat/Noisy Trajectory**: $K=0$ (bypassing the Outer Loop entirely) performs at parity with or slightly exceeds intermediate $K$ values.
+* **Representational Drift**: Tracing individual predictions step-by-step reveals that while some cases improve with pondering, others degrade (e.g. correct at $K=0..1$, but diverging to incorrect candidates at $K=2..3$ due to distractor pull).
+* **Scale Artifact vs. Fundamental Limit**: At 225K parameters, the latent space lacks the geometric capacity to preserve stable multi-step deductions without explicit discrete token anchors. Pondering without token-level supervision introduces noise as much as refinement.
+
+### 3. Degradation Under Context Distractors (Stress Test)
+When distractor edge count increases on 3-hop graphs, performance decays steadily:
+* **6 Edges**: 31.0%
+* **8 Edges**: 21.0%
+* **12 Edges**: 13.7%
+* **16 Edges**: 10.3%
+
+### 4. Dynamic Halting Requires Empirical Calibration
+* The default `entropy_threshold = 0.5` nats from naive theory is **miscalibrated**: the model's actual predictive entropy operates in the **1.25 – 1.40 nats** regime.
+* With threshold = 0.5, dynamic halting acts as a static loop using $K=K_{\max}$ for 100% of samples.
+* To make dynamic halting functional, the `EntropyHaltingUnit` now includes `calibrate_threshold(percentile=50.0)` to tune the cutoff against the model's actual validation distribution.
+
+---
+
+## Architectural Implementation
+
+Despite the scaling limits at small model regimes, the repository provides clean, production-grade PyTorch implementations of the core modules:
+
+* **Cognitive Working Memory (`dual_loop/memory.py`)**: Compresses context into $M \ll N$ slots in GPU SRAM/L2 cache to avoid HBM memory bandwidth roundtrips.
+* **Top-K Capacity Routing (`dual_loop/controller.py`)**: Enforces static tensor shapes $[B, K_{\text{cap}}, D]$ to eliminate CUDA warp divergence (MoD-style).
+* **Calibrated Entropy Halting (`dual_loop/halting.py`)**: Adaptive stopping based on predictive uncertainty and convergence delta.
+* **Latent Deliberation Adapter (`dual_loop/adapters/latent_adapter.py`)**: A plug-and-play mid-network adapter for pretrained LLMs (e.g., Llama, Qwen).
 
 ---
 
 ## Quickstart
 
 ### 1. Installation
-
-Clone this repository and ensure PyTorch is installed:
 ```bash
-git clone https://github.com/your-username/dual-loop-controller.git
+git clone https://github.com/Ch3nOff/dual-loop-controller.git
 cd dual-loop-controller
 python -m pip install torch numpy
 ```
 
-### 2. Running Unit & Integration Tests
+### 2. Running Component Tests (Verifying Shapes & Gradients)
 ```bash
 python -m unittest discover -s tests -p "test_*.py"
 ```
 
-### 3. Training the Model
-Train the Dual-Loop Transformer on the 3-hop graph reasoning benchmark:
-```bash
-python train.py --epochs 30 --hops 3 --k_steps 3 --d_model 64
-```
-
-### 4. Using the Latent Adapter with Pretrained Transformer Backbones
-```python
-import torch
-from dual_loop import LatentDeliberationAdapter
-
-# Create adapter matching your LLM's hidden dimension
-adapter = LatentDeliberationAdapter(
-    d_model=768,           # Matching hidden_size of e.g. Qwen-2.5-0.5B
-    n_heads=8,
-    num_thought_tokens=4,
-    max_ponder_steps=3,
-    adapter_mode="residual" # Or "prefix"
-)
-
-# Intercept hidden states at layer L/2
-hidden_states = torch.randn(2, 128, 768) # [Batch, SeqLen, HiddenDim]
-enhanced_states, telemetry = adapter(hidden_states, k_steps=3)
-
-# Pass enhanced_states to subsequent layers
-```
-
----
-
-## Empirical Multi-Category Benchmark Suite
-
-To avoid evaluating on a single cherry-picked task, the framework is tested across **four distinct, diverse problem categories** demonstrating both its core strengths and architectural boundary limits:
-
-```text
-=====================================================================================
-MULTI-CATEGORY SYNTHESIS MATRIX
-=====================================================================================
-Benchmark Category                  | Reactive Baseline    | Dual-Loop Controller   | Primary Insight
--------------------------------------------------------------------------------------------------------
-Cat A: 3-Hop Graph Reasoning        | 13.6%                | 29.5%                  | +15.9% Effective Depth
-Cat B: Multi-Lock Autonomous Detour | 0.0% (Deadlock)      | 100.0% (Self-Directed) | Autonomous Agentic Initiative
-Cat C: Counterfactual Rule Shift    | 48.0%                | 76.4%                  | Latent Attention Reweighting
-Cat D: High-Branching Search (d=5)  | 8.0%                 | 15.5% (Stress Limit)   | Physical Boundary of Latent Space
-=====================================================================================
-```
-
-### Key Insights Across Categories:
-1. **Category A (Relational Multi-Hop Chains)**: Latent recurrence expands effective attention depth without token emission ($29.5\%$ vs $13.6\%$). However, at $H=4$, accuracy decays to $14.1\%$, showing that unbounded depth still requires explicit token anchoring.
-2. **Category B (Autonomous Detour & Initiative)**: When unexpected obstacles block direct greedy progression, standard LLMs suffer $100\%$ deadlock. The Dual-Loop Controller uses its latent sandbox to proactively formulate sub-goals and detour, achieving $100\%$ task resolution without human intervention.
-3. **Category C (Counterfactual Rule Inversion)**: Dual-Loop reweights context via latent self-attention to adapt to sudden rule shifts ($76.4\%$ vs $48.0\%$).
-4. **Category D (High-Branching Factor Stress Limit)**: When branching increases ($d=2 \to 3 \to 5$), continuous latent representations face interference between competing pathways ($68.5\% \to 41.0\% \to 15.5\%$), exposing the authentic boundary where discrete search algorithms (MCTS/CoT) become necessary.
-
-### Running the Multi-Category Benchmark:
+### 3. Running the Honest Benchmark Suite (Live Tensor Computations)
 ```bash
 python -m dual_loop.benchmarks.comprehensive_suite
 ```
+
+### 4. Re-Training from Scratch
+```bash
+python train.py --epochs 35 --hops 3 --k_steps 3 --d_model 64
+```
+
+For the complete technical paper and theoretical post-mortem, see [WHITEPAPER.md](WHITEPAPER.md).
