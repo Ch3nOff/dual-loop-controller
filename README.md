@@ -89,9 +89,13 @@ Despite the scaling limits at small model regimes, the repository provides clean
 
 ### 1. Installation
 ```bash
+# Direct install from GitHub release tag:
+pip install git+https://github.com/Ch3nOff/dual-loop-controller.git@v2.0.0-alpha
+
+# Or clone locally and install in editable mode:
 git clone https://github.com/Ch3nOff/dual-loop-controller.git
 cd dual-loop-controller
-python -m pip install torch numpy
+pip install -e .
 ```
 
 ### 2. Running Component Tests (Verifying Shapes & Gradients)

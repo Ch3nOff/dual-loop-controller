@@ -11,7 +11,7 @@ from .controller import RecurrentLatentController, TopKCapacityCrossAttention
 from .decoder import DualLoopTransformer
 from .adapters.latent_adapter import LatentDeliberationAdapter
 
-__version__ = "2.0.0"
+__version__ = "2.0.0a1"
 __all__ = [
     "CognitiveWorkingMemory",
     "EntropyHaltingUnit",

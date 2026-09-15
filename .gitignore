@@ -3,4 +3,7 @@ __pycache__/
 *.pyc
 *.pt
 *.bin
+*.egg-info/
+dist/
+build/
 .DS_Store

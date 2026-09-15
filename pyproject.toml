@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dual-loop-controller"
+version = "2.0.0a1"
+description = "A hardware-aligned, manifold-preserving latent deliberation framework for Transformers"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [
+    { name = "Ch3nOff" }
+]
+keywords = [
+    "deep-learning",
+    "transformers",
+    "latent-reasoning",
+    "cognitive-architecture",
+    "system-2-thinking",
+    "pytorch"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+    "torch>=2.0.0",
+    "numpy>=1.24.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "build",
+    "twine",
+]
+
+[project.urls]
+Homepage = "https://github.com/Ch3nOff/dual-loop-controller"
+Repository = "https://github.com/Ch3nOff/dual-loop-controller.git"
+"Bug Tracker" = "https://github.com/Ch3nOff/dual-loop-controller/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["dual_loop*"]
+exclude = ["tests*", "dist*", "build*"]
