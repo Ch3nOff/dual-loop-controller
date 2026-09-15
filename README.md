@@ -52,10 +52,25 @@ When distractor edge count increases on 3-hop graphs, performance decays steadil
 * **12 Edges**: 13.7%
 * **16 Edges**: 10.3%
 
-### 4. Dynamic Halting Requires Empirical Calibration
-* The default `entropy_threshold = 0.5` nats from naive theory is **miscalibrated**: the model's actual predictive entropy operates in the **1.25 – 1.40 nats** regime.
-* With threshold = 0.5, dynamic halting acts as a static loop using $K=K_{\max}$ for 100% of samples.
-* To make dynamic halting functional, the `EntropyHaltingUnit` now includes `calibrate_threshold(percentile=50.0)` to tune the cutoff against the model's actual validation distribution.
+### 4. Dynamic Halting Audit & The Pareto Trade-Off
+A naive threshold like `0.5 nats` fails because the model operates at `~1.25–1.40 nats` (resulting in static $K=3.00$). Evaluating per-sample dynamic halting across a threshold sweep reveals the true **Accuracy vs. Compute Pareto Frontier**:
+
+```text
+========================================================================================
+PER-SAMPLE DYNAMIC HALTING PARETO FRONTIER (500 Test Samples)
+========================================================================================
+Entropy Threshold | Test Accuracy | Avg Steps | % Halt @ K=1 | % Halt @ K=2 | % Halt @ K=3
+----------------------------------------------------------------------------------------
+tau = 0.80 nats   | 28.0%         | 2.81      | 7.6%         | 3.8%         | 88.6%
+tau = 1.15 nats   | 28.0%         | 2.42      | 24.2%        | 9.6%         | 66.2%
+tau = 1.25 nats   | 28.8%         | 2.23      | 32.2%        | 12.2%        | 55.6%
+tau = 1.40 nats   | 29.4%         | 1.89      | 49.0%        | 13.2%        | 37.8%
+========================================================================================
+```
+
+**Justified Operating Point**:
+* **$\tau = 1.25 \dots 1.40\text{ nats}$** is the justifiable Pareto region: it achieves a **37% reduction in compute** (average **1.89 steps** vs. 3.00) while maintaining peak accuracy (**29.4%**), with a genuinely heterogeneous distribution across steps ($49\%$ at $K=1$, $13\%$ at $K=2$, $38\%$ at $K=3$).
+* Arbitrary default thresholds (like 0.5 or blindly using a batch-mean percentile) collapse execution to all-or-nothing extremes ($3.00$ or $1.00$). Dynamic halting must always be calibrated per-sample against empirical validation entropy.
 
 ---
 

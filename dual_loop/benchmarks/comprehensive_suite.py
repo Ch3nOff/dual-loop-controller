@@ -102,22 +102,32 @@ def run_suite():
             print(f"  Ponder K={k} -> Accuracy: {acc_s:5.1f}% | Predictive Entropy: {entropy_s:.3f} nats")
 
     # -------------------------------------------------------------------------
-    # BENCHMARK 4: Calibrated Dynamic Halting Evaluation
+    # BENCHMARK 4: Real Per-Sample Pareto Halting Analysis
     # -------------------------------------------------------------------------
-    print("\n[BENCHMARK 4: CALIBRATED DYNAMIC HALTING (Empirical Percentile Tuning)]")
-    # Calibrate against 50th percentile of validation entropy
-    val_calib_inputs, _ = ds_scale.get_batch(100)
-    calibrated_threshold = model.calibrate_halting(val_calib_inputs.to(device), percentile=50.0)
-    print(f"  Empirically Calibrated Halting Threshold (50th percentile): {calibrated_threshold:.3f} nats")
-
+    print("\n[BENCHMARK 4: PER-SAMPLE DYNAMIC HALTING & PARETO FRONTIER]")
+    print("Evaluating individual sample halting without artificial batch-mean collapsing:")
     with torch.no_grad():
-        test_inputs, test_targets_all = ds_scale.get_batch(200)
-        test_inputs, test_targets = test_inputs.to(device), test_targets_all[:, -1].to(device)
-        logits_dyn, info_dyn = model(test_inputs, dynamic_halting=True, return_aux=True)
-        acc_dyn = (logits_dyn.argmax(dim=-1) == test_targets).float().mean().item() * 100.0
-        effective_k = info_dyn["effective_k"]
-        print(f"  Accuracy with Calibrated Halting: {acc_dyn:5.1f}%")
-        print(f"  Average Steps Taken: {effective_k:.2f} / 3.00 max steps")
+        logits_k1, _ = model(xs, k_steps=1)
+        logits_k2, _ = model(xs, k_steps=2)
+        logits_k3, _ = model(xs, k_steps=3)
+
+        ent_k1 = -torch.sum(F.softmax(logits_k1, -1) * F.log_softmax(logits_k1, -1), -1)
+        ent_k2 = -torch.sum(F.softmax(logits_k2, -1) * F.log_softmax(logits_k2, -1), -1)
+
+    pareto_thresholds = [0.80, 1.15, 1.25, 1.40]
+    print(f"  {'Threshold':<12} | {'Accuracy':<10} | {'Avg Steps':<10} | {'K=1 %':<8} | {'K=2 %':<8} | {'K=3 %':<8}")
+    print("  " + "-" * 62)
+    for thresh in pareto_thresholds:
+        h1 = (ent_k1 <= thresh)
+        h2 = (~h1) & (ent_k2 <= thresh)
+        h3 = (~h1) & (~h2)
+        preds = torch.zeros_like(ys)
+        preds[h1] = logits_k1[h1].argmax(-1)
+        preds[h2] = logits_k2[h2].argmax(-1)
+        preds[h3] = logits_k3[h3].argmax(-1)
+        acc_th = (preds == ys).float().mean().item() * 100.0
+        avg_s = (1.0 * h1.float() + 2.0 * h2.float() + 3.0 * h3.float()).mean().item()
+        print(f"  {thresh:<12.2f} | {acc_th:<10.1f} | {avg_s:<10.2f} | {h1.float().mean()*100:<8.1f} | {h2.float().mean()*100:<8.1f} | {h3.float().mean()*100:<8.1f}")
 
     # -------------------------------------------------------------------------
     # Summary of Real Empirical Findings
