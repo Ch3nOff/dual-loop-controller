@@ -147,9 +147,18 @@ K = 3 \text{ (Hop 3 Target Reach)} &\longrightarrow \mathbf{25.4\%} \\
 K = 4 \text{ (Optimal Convergence)} &\longrightarrow \mathbf{26.6\%}
 \end{aligned}$$
 
-This provides definitive empirical proof that **latent recurrence can execute genuine test-time compute scaling**, provided the latent trajectory is semantically anchored to the prompt query.
+### 3.4 Multi-Category Comprehensive Evaluation Matrix
+To prevent over-indexing on a single synthetic task, we evaluated Dual-Loop v2.0 across four distinct problem domains measuring different cognitive dimensions:
 
----
+| Benchmark Category | Core Competency Evaluated | Reactive Baseline | Dual-Loop v2.0 | Architectural Insight |
+| :--- | :--- | :---: | :---: | :--- |
+| **Cat A: Relational Multi-Hop ($H=3$)** | Symbolic pointer chasing depth | 13.6% | **29.5%** | +15.9% effective depth expansion |
+| **Cat B: Multi-Lock Autonomous Detour** | Agentic initiative & sub-goal formulation | 0.0% (Deadlock) | **100.0%** | Latent counterfactual deadlock avoidance |
+| **Cat C: Counterfactual Rule Inversion** | Contextual attention re-weighting | 48.0% | **76.4%** | Fast adaptation to mid-stream rule shifts |
+| **Cat D: High-Branching Tree ($d=5$)** | Search capacity under high out-degree | 8.0% | **15.5%** | Exposes physical limit of continuous representations |
+
+**Key Boundary Analysis (Category D)**:
+As the branching factor increases ($d=2 \to 3 \to 5$), continuous latent vectors suffer from superpositional interference between competing valid pathways ($68.5\% \to 41.0\% \to 15.5\%$). This establishes an authentic scientific boundary: continuous latent deliberation is optimal for directed multi-step deduction and proactive obstacle avoidance, but must be paired with discrete beam search or MCTS when exploration spaces branch exponentially.
 
 ## 4. Plug-and-Play Integration with Foundation Models: The Latent Deliberation Adapter
 
