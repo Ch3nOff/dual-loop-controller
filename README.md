@@ -84,9 +84,9 @@ A crucial empirical insight discovered during data isolation audits:
 
 ### Real-World Scale: Qwen3.5-2B Multi-Task Empirical Evaluation
 
-To evaluate whether continuous latent deliberation scales when integrated into modern open-weights architectures, we attached the Dual-Loop Cognitive Controller into **Qwen3.5-2B** (`Qwen3_5ForConditionalGeneration`, 2.37B base parameters, 24 transformer layers, $D=2048$).
+To evaluate whether continuous latent deliberation scales when integrated into modern open-weights architectures, we attached the Dual-Loop Cognitive Controller into **Qwen3.5-2B** (`Qwen3_5ForConditionalGeneration`, 1.88B base parameters, 24 transformer layers, $D=2048$).
 
-The adapter attaches at **Layer 11** (`full_attention`) in residual mode with ReZero learnable gating and **Adaptive Confidence Routing** (110.2M adapter parameters, ~5.5% trainable ratio with frozen backbone). 
+The adapter attaches at **Layer 11** (`full_attention`) in residual mode with ReZero learnable gating and **Adaptive Confidence Routing** (110.22M adapter parameters, ~5.86% trainable ratio with frozen backbone). 
 
 ### Architectural Discovery: Hybrid SSM + Attention Layer Compatibility
 
@@ -123,38 +123,59 @@ When the deliberation hook is anchored at **the question boundary (`query_idx = 
 
 ---
 
-### Rescued Question Highlights (Direct Log Audit: Wrong $\to$ Right)
+#### Rescued Question Highlights (Direct Log Audit: Wrong $\to$ Right)
 
-System 2 latent deliberation successfully rescued 10 questions across the suite:
+System 2 latent deliberation successfully rescued 10 questions across the suite (verified against public Hugging Face datasets: [`allenai/ai2_arc`](https://huggingface.co/datasets/allenai/ai2_arc), [`allenai/openbookqa`](https://huggingface.co/datasets/allenai/openbookqa), and [`lighteval/piqa`](https://huggingface.co/datasets/lighteval/piqa)):
 
-1. **ARC-Challenge #6 (Small Mammal High-Altitude Adaptation)**:
-   - *Question*: *A type of small mammal from the mountain regions of the western United States...*
-   - Base Choice: Distractor (Incorrect) $\to$ Dual-Loop Choice ($K=2$): **`thick fur` (Correct)**
-2. **ARC-Challenge #16 (Dinosaur Paleontology)**:
-   - *Question*: *Fossil bones and teeth of dinosaurs have been researched for the last century...*
-   - Base Choice: Distractor (Incorrect) $\to$ Dual-Loop Choice ($K=2$): **`evolutionary history` (Correct)**
-3. **ARC-Challenge #24 (Atmospheric Precipitation)**:
-   - *Question*: *Snow, rain, hail, and fog are all forms of...*
-   - Base Choice: Distractor (Incorrect) $\to$ Dual-Loop Choice ($K=2$): **`precipitation` (Correct)**
-4. **ARC-Challenge #39 (Mechanical Fluid Dynamics)**:
-   - *Question*: *Which of the following is the primary difference between hydraulic and pneumatic...*
-   - Base Choice: Distractor (Incorrect) $\to$ Dual-Loop Choice ($K=2$): **`incompressible fluid vs compressed gas` (Correct)**
-5. **ARC-Easy #1 (Mold Spores Safety)**:
-   - *Question*: *Which piece of safety equipment is used to keep mold spores from entering the...*
-   - Base Choice: `goggles` (Incorrect) $\to$ Dual-Loop Choice ($K=2$): **`breathing mask` (Correct)**
-6. **ARC-Easy #15 (Geological Formations)**:
-   - *Question*: *Which process best explains how the Grand Canyon became so wide?...*
-   - Base Choice: `volcanic activity` (Incorrect) $\to$ Dual-Loop Choice ($K=2$): **`erosion` (Correct)**
-7. **ARC-Easy #18 (Simple Machines)**:
-   - *Question*: *Using a softball bat to hit a softball is an example of using which simple machine...*
-   - Base Choice: `inclined plane` (Incorrect) $\to$ Dual-Loop Choice ($K=2$): **`lever` (Correct)**
-8. **ARC-Easy #29 (Acoustics & Waves)**:
-   - *Question*: *What causes sound?...*
-   - Base Choice: Distractor (Incorrect) $\to$ Dual-Loop Choice ($K=2$): **`vibrations` (Correct)**
-9. **OpenBookQA #31**: Multi-hop scientific fact deduction $\to$ **Correct**
-10. **PIQA #25 (Culinary Chemistry)**:
-    - *Question*: *How do you make raw nuts have more flavor?...*
-    - Base Choice: Distractor (Incorrect) $\to$ Dual-Loop Choice ($K=2$): **`roasting them` (Correct)**
+1. **ARC-Challenge #6** (`id: MCAS_2014_5_7`):
+   - *Question*: *A type of small mammal from the mountain regions of the western United States makes its home out of piles of rock. During summer months, the mammal places grasses and seeds in protected places in the rock piles. Which of the following is the most likely reason for this behavior?*
+   - Base Choice: `[D] to protect the grasses and seeds from decay before winter` (Incorrect)
+   - Dual-Loop Choice ($K=2$): **`[C] to store food that will be eaten over the winter months` (Correct)**
+
+2. **ARC-Challenge #16** (`id: Mercury_7186358`):
+   - *Question*: *Fossil bones and teeth of dinosaurs have been researched for the last century. Recent discoveries of fossilized dinosaurs have also revealed details of soft tissues, such as skin. Which is best for a scientist to do when reporting research on dinosaurs now?*
+   - Base Choice: `[B] predict what the next discovery will be` (Incorrect)
+   - Dual-Loop Choice ($K=2$): **`[C] analyze new data as it becomes available` (Correct)**
+
+3. **ARC-Challenge #24** (`id: Mercury_SC_405086`):
+   - *Question*: *Snow, rain, hail, and fog are all forms of*
+   - Base Choice: `[D] clouds.` (Incorrect)
+   - Dual-Loop Choice ($K=2$): **`[B] water.` (Correct)**
+
+4. **ARC-Challenge #39** (`id: MCAS_2004_9_15-v1`):
+   - *Question*: *Which of the following is the primary difference between hydraulic and pneumatic systems?*
+   - Base Choice: `[C] Hydraulic systems are open systems and pneumatic systems are closed systems.` (Incorrect)
+   - Dual-Loop Choice ($K=2$): **`[B] Hydraulic systems involve liquids and pneumatic systems involve gases.` (Correct)**
+
+5. **ARC-Easy #1** (`id: Mercury_7081673`):
+   - *Question*: *Which piece of safety equipment is used to keep mold spores from entering the respiratory system?*
+   - Base Choice: `[A] safety goggles` (Incorrect)
+   - Dual-Loop Choice ($K=2$): **`[B] breathing mask` (Correct)**
+
+6. **ARC-Easy #15** (`id: Mercury_SC_401777`):
+   - *Question*: *Which process best explains how the Grand Canyon became so wide?*
+   - Base Choice: `[D] sedimentation` (Incorrect)
+   - Dual-Loop Choice ($K=2$): **`[B] erosion` (Correct)**
+
+7. **ARC-Easy #18** (`id: Mercury_SC_LBS10784`):
+   - *Question*: *Using a softball bat to hit a softball is an example of using which simple machine?*
+   - Base Choice: `[D] wheel and axle` (Incorrect)
+   - Dual-Loop Choice ($K=2$): **`[B] lever` (Correct)**
+
+8. **ARC-Easy #29** (`id: MCAS_2003_5_3`):
+   - *Question*: *What causes sound?*
+   - Base Choice: `[C] x-rays` (Incorrect)
+   - Dual-Loop Choice ($K=2$): **`[B] vibrations` (Correct)**
+
+9. **OpenBookQA #31** (`id: 8-466`):
+   - *Question*: *What is the best way to guess a babies eye color?*
+   - Base Choice: `[C] Just take a random guess.` (Incorrect)
+   - Dual-Loop Choice ($K=2$): **`[D] The genealogy records of their family.` (Correct)**
+
+10. **PIQA #25** (`validation row: 25`):
+    - *Goal*: *How do you make raw nuts have more flavor.*
+    - Base Choice: `[0] Boil the nuts in milk for about 20 minutes while stirring constantly.` (Incorrect)
+    - Dual-Loop Choice ($K=2$): **`[1] Toast the nuts in a skillet for a few minutes while stirring constantly.` (Correct)**
 
 All raw evaluation logs are stored in `eval_results/qwen35_2b_authentic_suite_n160.json` (160 samples with per-item decisions).
 
@@ -163,11 +184,11 @@ All raw evaluation logs are stored in `eval_results/qwen35_2b_authentic_suite_n1
 1. **Resolution of Negative Transfer on Hybrid Architectures**:
    Qwen3.5-2B uses 18 layers of Linear Attention (Chunk Gated Delta Rule / SSM) and 6 layers of Full Attention. Hooking at Layer 11 (`full_attention`) instead of Layer 12 (`linear_attention`) eliminates state matrix corruption.
 2. **ReZero Learnable Gating**:
-   Scaling the adapter residual by $\tanh(\alpha) \cdot \mathbf{W}_{\text{proj}}(\mathbf{h}_{\text{thought}})$ (initialized at $\alpha=0.05$, learned to $0.0513$) guarantees numerical stability and prevents uncalibrated vectors from dominating the residual manifold.
+   Scaling the adapter residual by $\tanh(\alpha) \cdot \mathbf{W}_{\text{proj}}(\mathbf{h}_{\text{thought}})$ (initialized at $\alpha=0.05$, learned to $0.0514$) guarantees numerical stability and prevents uncalibrated vectors from dominating the residual manifold.
 3. **Adaptive Confidence Routing (Dynamic Halting)**:
-   When System 1 confidence margin between top-1 and top-2 candidates exceeds $\tau = 3.0$ nats, deliberation is bypassed ($K=0$), completely eliminating degradation on already-confident answers while focusing System 2 compute only on ambiguous queries.
+   When System 1 confidence margin between top-1 and top-2 candidates exceeds $\tau = 0.35$ nats, deliberation is bypassed ($K=0$), completely eliminating degradation on already-confident answers while focusing System 2 compute only on ambiguous queries.
 4. **PEFT Efficiency**:
-   Only 96.58M parameters (~1.78% of base weights) are trained while freezing all 2.37B base model weights (`model.freeze_backbone()`), enabling efficient deliberation fine-tuning on consumer hardware.
+   Only 110.22M parameters (~5.86% of the 1.88B base weights, 110,224,469 parameters) are trained while freezing all base model weights (`model.freeze_backbone()`), enabling efficient deliberation fine-tuning on consumer hardware.
 
 ---
 
@@ -239,10 +260,10 @@ base_model = AutoModelForCausalLM.from_pretrained(
     revision=revision
 )
 
-# 2. Attach Dual-Loop Cognitive Controller at Layer 12 (residual mode)
+# 2. Attach Dual-Loop Cognitive Controller at Layer 11 (full_attention, residual mode)
 model = attach_dual_loop_to_qwen(
     base_model,
-    layer_idx=12,
+    layer_idx=11,
     num_thought_tokens=4,
     max_ponder_steps=3,
     adapter_mode="residual"

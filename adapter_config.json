@@ -20,7 +20,7 @@
   "rezero_gating": true,
   "rezero_alpha_learned": 0.0514,
   "total_adapter_parameters": 110224469,
-  "trainable_ratio_pct": 5.533,
+  "trainable_ratio_pct": 5.857,
   "torch_dtype": "float32",
   "empirical_suite_results_n160": {
     "arc_easy": {
