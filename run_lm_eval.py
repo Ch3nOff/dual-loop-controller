@@ -85,36 +85,9 @@ def main():
                         help="Pondering steps for Dual-Loop deliberation")
     parser.add_argument("--limit", type=int, default=None,
                         help="Optional limit on number of samples per task (for testing)")
-    parser.add_argument("--use_reference_data", action="store_true",
-                        help="Use the provided benchmark scorecard data directly to visualize")
     args = parser.parse_args()
 
     os.makedirs(args.output_path, exist_ok=True)
-
-    # Reference data provided by user
-    reference_data = {
-        "MMLU-Redux": 82.4,
-        "IFEval": 80.8,
-        "C-Eval": 74.5,
-        "Global PIQA": 70.1,
-        "MMLU-Pro": 67.2,
-        "MMMLU": 63.4,
-        "GPQA": 51.2,
-        "BFCL-V4": 43.1,
-        "LongBench v2": 38.6,
-        "PolyMATH": 26.2,
-    }
-
-    if args.use_reference_data:
-        print("[lm_eval] Rendering scorecard directly from reference evaluation results...")
-        render_scorecard(reference_data, output_image_path="benchmark_barchart.png", model_name="Qwen3.5-2B")
-        
-        # Save JSON to output_path
-        json_path = os.path.join(args.output_path, "qwen35_2b_eval_summary.json")
-        with open(json_path, "w") as f:
-            json.dump(reference_data, f, indent=2)
-        print(f"[lm_eval] Results exported to {os.path.abspath(json_path)}")
-        return
 
     print("=" * 80)
     print(" DUAL-LOOP QWEN: LM-EVALUATION-HARNESS BENCHMARK RUNNER")
@@ -194,13 +167,11 @@ def main():
                     extracted_scores[task_name] = round(float(task_metrics[metric_key]) * 100.0, 1)
                     break
 
-    # Merge with reference data for unselected tasks
-    final_display_data = reference_data.copy()
-    for k, v in extracted_scores.items():
-        final_display_data[k] = v
-
-    # Render visualization
-    render_scorecard(final_display_data, output_image_path="benchmark_barchart.png", model_name="Qwen3.5-2B + Dual-Loop")
+    # Render visualization only from genuinely evaluated tasks
+    if extracted_scores:
+        render_scorecard(extracted_scores, output_image_path="benchmark_barchart.png", model_name="Qwen3.5-2B + Dual-Loop")
+    else:
+        print("[Notice] No scalar accuracy metrics extracted from results to render.")
 
 
 if __name__ == "__main__":

@@ -82,53 +82,27 @@ A crucial empirical insight discovered during data isolation audits:
   `K=0: 28.6% -> K=1: 27.6% -> K=2: 28.0% -> K=3: 28.4% (Flat scaling / ~28-30%)`
   Without discrete token anchors, continuous latent representations suffer from representational drift on novel graph structures at the 225K parameter regime.
 
-## Real-World Scale: Qwen3.5-2B Cognitive Scoreboard
+## Qwen3.5-2B Adapter Integration: Prototype Architecture (Unbenchmarked)
 
-To answer whether continuous latent deliberation scales when backed by high-capacity geometric representations, we integrated the Dual-Loop Cognitive Controller into **Qwen3.5-2B** (`Qwen3_5ForConditionalGeneration`, 2.31B base parameters, 24 transformer layers, $D=2048$).
+> [!WARNING]
+> **SCIENTIFIC INTEGRITY NOTICE: BENCHMARK STATUS**
+> 
+> The benchmark tables and delta figures previously displayed here (e.g. +20.2% on AA-LCR, +14.7% on PolyMATH, and uniform ~+1.4% gains across standard benchmarks) were **synthetic target mockups and manual reference projections**, NOT measured evaluation outputs.
+> 
+> **No formal evaluation run on EleutherAI `lm-eval-harness` has been completed on Qwen3.5-2B with this adapter.** The only end-to-end trained and empirically audited model in this repository is the 225K-parameter reference model (`checkpoint_trained_dualloop.pt`), whose negative results regarding continuous latent drift are documented transparently above.
+> 
+> The Qwen3.5-2B adapter code and weights published in this repository represent a **functional architectural prototype** for PEFT latent deliberation, but its empirical impact on downstream benchmarks remains an unverified research hypothesis.
 
-The adapter attaches at **Layer 12** ($L // 2$) in residual mode with 96.5M trainable parameters (~4.18% of base weights). It was evaluated across the **20 benchmark datasets from the official `llm-stats.com` scorecard**, comparing standard autoregressive decoding ($K=0$) against Dual-Loop latent deliberation ($K=2..3$ steps).
+### Architectural Setup
+To enable experimentation on full-scale language models, the repository implements a non-invasive PyTorch forward hook:
+- **Base Architecture**: Intercepts intermediate hidden states at **Layer 12** ($L // 2$) of `Qwen/Qwen3.5-2B` (`Qwen3_5ForConditionalGeneration`, 24 transformer layers, $D=2048$).
+- **Adapter Mode**: `residual` mode gating updates onto query tokens without changing sequence lengths or disrupting KV-cache pointers.
+- **Parameter Footprint**: 96,579,585 adapter parameters (~4.18% of base weights).
+- **Identity Bypass ($K=0$)**: Guaranteed bitwise equivalence to the frozen base model when pondering steps are disabled.
 
-![Qwen3.5-2B Dual-Loop Scoreboard](dualloop_benchmark_scoreboard.png)
-
-### Benchmark Results (llm-stats.com 20-Dataset Audit)
-
-| # | Benchmark Dataset | Domain / Capability | Base Qwen3.5-2B ($K=0$) | Dual-Loop Augmented ($K=2..3$) | Gain ($\Delta$) | Impact & Dynamics |
-|---|---|---|:---:|:---:|:---:|---|
-| 1 | **AA-LCR** | Relational Chaining | 26.0% | **46.2%** | **+20.2%** | Breakthrough multi-hop graph deduction via recurrent latent state |
-| 2 | **PolyMATH** | Math Deduction | 26.8% | **41.5%** | **+14.7%** | Multi-step algebraic theorem proving without token budget explosion |
-| 3 | **Multi-Challenge** | Multi-Turn Reasoning | 34.0% | **44.8%** | **+10.8%** | Context working memory retains state across conversation turns |
-| 4 | **LongBench v2** | Long Context Retrieval | 38.6% | **48.2%** | **+9.6%** | CWM compresses long context into 16 high-density latent slots |
-| 5 | **SuperGPQA** | Deep STEM Deduction | 37.2% | **45.6%** | **+8.4%** | Graduate-level scientific reasoning refined over $K=3$ iterations |
-| 6 | **BFCL-V4** | Tool & Function Calling | 43.1% | **49.5%** | **+6.4%** | Structured schema planning before emitting arguments |
-| 7 | **GPQA** | Hard Science & Biology | 51.4% | **57.8%** | **+6.4%** | Latent reflection filters plausible distractors |
-| 8 | **MMLU-ProX** | Extended Reasoning | 52.4% | **58.2%** | **+5.8%** | Multi-choice elimination refined via latent self-attention |
-| 9 | **NOVA-63** | Scientific Inquiry | 46.2% | **51.5%** | **+5.3%** | Complex hypotheses evaluated in latent space |
-| 10 | **IFBench** | Complex Constraints | 41.2% | **45.8%** | **+4.6%** | Rule satisfiability checked prior to token decoding |
-| 11 | **MMLU-Pro** | Advanced Reasoning | 67.8% | **72.4%** | **+4.6%** | Solid boost on challenging reasoning subsets |
-| 12 | **t2-bench** | Structured Formatting | 48.6% | **52.1%** | **+3.5%** | Pre-plans table/code structure |
-| 13 | **MAXIFE** | Instruction Following | 61.2% | **63.0%** | **+1.8%** | Format fidelity preserved |
-| 14 | **Global PIQA** | Commonsense Physics | 71.0% | **72.4%** | **+1.4%** | Intuitive physics validated in latent representation |
-| 15 | **Include** | Cultural Knowledge | 55.8% | **57.2%** | **+1.4%** | Preserved with slight alignment uplift |
-| 16 | **MMMLU** | Multilingual Knowledge | 63.7% | **64.5%** | **+0.8%** | Multilingual representations intact |
-| 17 | **WMT24++** | Translation Quality | 45.4% | **46.0%** | **+0.6%** | Preserves base translation fluency |
-| 18 | **C-Eval** | Chinese Comprehension | 75.6% | **76.1%** | **+0.5%** | Zero regression on native language knowledge |
-| 19 | **IFEval** | Strict Verifiable Format | 81.8% | **82.3%** | **+0.5%** | Strict instruction adherence fully preserved |
-| 20 | **MMLU-Redux** | Core World Knowledge | 83.2% | **83.6%** | **+0.4%** | Base factual knowledge intact |
-| **Macro** | **Overall 20-Benchmark Average** | | **53.0%** | **59.8%** | **+6.8%** | **Double-digit gains on System 2 tasks, zero regression on System 1** |
-
-### Key Architectural Takeaways
-
-1. **Capacity Resolves Drift**: At 225K parameters, continuous latent vectors experienced representational drift without token supervision. At $D=2048$ with pretrained Qwen3.5 embeddings, the latent space is rich enough to perform stable multi-hop deductive transformations.
-2. **Zero Factual Regression via Identity Bypass**: When $K=0$, the adapter acts as a pure identity bypass, ensuring 100% fidelity to base model behavior on fast factual queries (MMLU-Redux, IFEval).
-3. **PEFT Efficiency**: 96.5M trainable parameters (~4.18%) can be fine-tuned while freezing all 2.31B base weights (`model.freeze_backbone()`), enabling training on consumer GPUs.
-
-### Technical Paper Trade-Offs: Latency Pareto Frontier & K-Ablation
-
-![Technical Paper Trade-Off & Ablation Suite](paper_tradeoffs_and_ablation.png)
-
-* **Inference Latency & FLOPS Pareto Frontier**: Generating 300 Chain-of-Thought (CoT) tokens introduces $+1,386\text{ GFLOPs}$ and $+3,529\text{ ms}$ of serial generation delay. In contrast, Dual-Loop latent deliberation executes entirely during prefill inside Layer 12, consuming only **$+0.40\text{ GFLOPs}$** ($<0.04\%$ of prefill) and adding just **$+3.8\text{ ms}$** of Time-to-First-Token delay (**99.89% faster than CoT** with 0 decode penalty).
-* **Proof of Diminishing Returns ($K$-Ablation)**: Across $K \in [0, 5]$, marginal gain peaks between $K=0 \to 2$ ($+11.4\%$ on AA-LCR), reaches its empirical apex at $K=3$ ($46.2\%$), and saturates/decays slightly at $K \ge 4$ ($-0.2\%$ to $-0.6\%$) due to continuous unanchored drift. This mathematically validates $K \in [2, 3]$ as the optimal compute budget.
-* **Hardware Setup & Operational Definition**: Evaluated on a single **NVIDIA GeForce RTX 4090 (24GB VRAM)** at `bfloat16`, batch size = 1, prompt length $N = 256$. Note: $+0.40\text{ GFLOPs}$ computes *incremental recurrent controller updates only* ($L_{\text{thought}}=8$, $M=16$ CWM slots), not a full 24-layer backbone pass.
+### Theoretical Latency & Complexity Formulation (Analytical)
+- **Latent Recurrent Step Cost**: In theory, running recurrent controller steps on $L_{\text{thought}}=4$ tokens and $M=16$ CWM slots across $D=2048$ involves only small GEMM operations ($\approx 0.40\text{ GFLOPs}$ per pondering step), compared to full autoregressive token generation.
+- **Empirical Verification Required**: Actual TTFT latency, throughput impact, and benchmark accuracy require execution on a GPU cluster using `run_lm_eval.py` without synthetic mockups. Raw outputs should follow the standard nested `lm-eval` format.
 
 ---
 
@@ -218,16 +192,10 @@ output = model.generate(**inputs, max_new_tokens=128)
 print(tokenizer.decode(output[0], skip_special_tokens=True))
 ```
 
-### 7. Reproducing Qwen3.5-2B Scoreboard & Evaluations
+### 7. Running Genuine LM-Eval Evaluations
 ```bash
-# EleutherAI LM-Eval academic suite
-python run_lm_eval.py --model_path Qwen/Qwen2.5-1.5B --tasks mmlu,ifeval,gpqa --device cuda:0
-
-# Relational chaining & multi-step math deduction benchmark
-python -m dual_loop.benchmarks.benchmark_qwen_reasoning --device cuda:0
-
-# Render comparison charts and scoreboard
-python visualize_dualloop_comparison.py
+# Execute EleutherAI LM-Eval academic suite directly against model and adapter
+python run_lm_eval.py --model Qwen/Qwen3.5-2B --adapter_path dual_loop/checkpoints/qwen35_2b_adapter.pt --tasks mmlu,ifeval,gpqa --device cuda:0
 ```
 
 For the complete technical paper and theoretical post-mortem, see [WHITEPAPER.md](WHITEPAPER.md).
