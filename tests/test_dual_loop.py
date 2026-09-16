@@ -106,5 +106,46 @@ class TestDualLoopComponents(unittest.TestCase):
         self.assertIsNotNone(model.outer_loop.query_projector[0].weight.grad)
         self.assertGreater(model.outer_loop.query_projector[0].weight.grad.norm().item(), 0.0)
 
+    def test_calibrate_halting_default_and_search(self):
+        model = DualLoopTransformer(
+            vocab_size=self.vocab_size,
+            d_model=self.D,
+            max_ponder_steps=3
+        )
+        sample_inputs = torch.randint(0, self.vocab_size, (16, self.N))
+        
+        # Test 1: Default percentile (75.0)
+        calib_thresh = model.calibrate_halting(sample_inputs)
+        self.assertIsInstance(calib_thresh, float)
+        self.assertEqual(model.outer_loop.halting_unit.entropy_threshold, calib_thresh)
+
+        # Test 2: Automated Grid-Search with target_labels
+        target_labels = torch.randint(0, self.vocab_size, (16,))
+        best_thresh = model.calibrate_halting(sample_inputs, target_labels=target_labels)
+        self.assertIsInstance(best_thresh, float)
+        self.assertEqual(model.outer_loop.halting_unit.entropy_threshold, best_thresh)
+
+    def test_load_trained_checkpoint(self):
+        from dual_loop import load_trained_checkpoint
+        model = DualLoopTransformer(vocab_size=19, d_model=64, num_cwm_slots=12, max_ponder_steps=3)
+        loaded_model, loaded_path = load_trained_checkpoint(model)
+        self.assertIsNotNone(loaded_model)
+        self.assertTrue(len(loaded_path) > 0)
+
+    def test_multihop_graph_dataset_reproducibility(self):
+        from dual_loop.benchmarks import MultiHopGraphDataset
+        ds1 = MultiHopGraphDataset(num_samples=50, num_nodes=16, num_edges=6, hops=3, seed=123)
+        ds2 = MultiHopGraphDataset(num_samples=50, num_nodes=16, num_edges=6, hops=3, seed=123)
+        
+        # Check first sequence and targets match exactly
+        self.assertTrue(torch.equal(ds1.data[0][0], ds2.data[0][0]))
+        self.assertTrue(torch.equal(ds1.data[0][1], ds2.data[0][1]))
+
+        # Check get_batch matches
+        b1_x, b1_y = ds1.get_batch(20, shuffle=False)
+        b2_x, b2_y = ds2.get_batch(20, shuffle=False)
+        self.assertTrue(torch.equal(b1_x, b2_x))
+        self.assertTrue(torch.equal(b1_y, b2_y))
+
 if __name__ == "__main__":
     unittest.main()

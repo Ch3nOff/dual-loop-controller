@@ -60,18 +60,66 @@ class DualLoopTransformer(nn.Module):
         self.inner_decoder = nn.TransformerEncoder(dec_layer, num_layers=num_decoder_layers)
         self.lm_head = nn.Linear(d_model, vocab_size)
 
-    def calibrate_halting(self, sample_inputs: torch.Tensor, percentile: float = 35.0):
+    def calibrate_halting(
+        self,
+        sample_inputs: torch.Tensor,
+        target_labels: Optional[torch.Tensor] = None,
+        percentile: Optional[float] = None,
+        candidate_percentiles: Tuple[float, ...] = (25.0, 35.0, 50.0, 65.0, 75.0, 85.0),
+        verbose: bool = False
+    ) -> float:
         """
         Dynamically calibrates the halting threshold against the model's actual
-        decoder entropy distribution on step 1 of validation samples.
+        decoder predictive entropy distribution on validation samples.
+
+        Modes:
+        1. Fixed Quantile (default: 75th percentile / upper quartile):
+           If `percentile` is specified (or when `target_labels is None`), sets the threshold
+           directly to the specified quantile of step-1 predictive entropy.
+        2. Automated Pareto Grid-Search:
+           If `target_labels` is provided and `percentile is None`, sweeps across candidate
+           percentiles to find the Pareto-optimal threshold balancing high accuracy with reduced
+           pondering steps (effective K).
         """
         self.eval()
         with torch.no_grad():
             logits_k1, _ = self.forward(sample_inputs, k_steps=1, dynamic_halting=False)
             ent_k1 = self.outer_loop.halting_unit.calculate_entropy(logits_k1)
-            calibrated = torch.quantile(ent_k1, percentile / 100.0).item()
-            self.outer_loop.halting_unit.entropy_threshold = calibrated
-            return calibrated
+
+            if target_labels is not None and percentile is None:
+                best_score = -float('inf')
+                best_thresh = None
+                best_p = 75.0
+
+                for p in candidate_percentiles:
+                    cand_thresh = torch.quantile(ent_k1, p / 100.0).item()
+                    self.outer_loop.halting_unit.entropy_threshold = cand_thresh
+                    logits_dyn, info = self.forward(sample_inputs, dynamic_halting=True)
+                    acc = (logits_dyn.argmax(dim=-1) == target_labels).float().mean().item() * 100.0
+                    eff_k = info["effective_k"]
+
+                    # Pareto scoring: maximize accuracy, reward compute savings
+                    max_k = float(self.outer_loop.max_ponder_steps)
+                    compute_saving = (max_k - eff_k) / max_k if max_k > 0 else 0.0
+                    score = acc + (compute_saving * 5.0)
+
+                    if verbose:
+                        print(f"[Calibration Search] P={p:4.1f}% -> Thresh={cand_thresh:.3f} | Acc={acc:5.1f}% | Avg K={eff_k:.2f} | Score={score:.2f}")
+
+                    if score > best_score:
+                        best_score = score
+                        best_thresh = cand_thresh
+                        best_p = p
+
+                self.outer_loop.halting_unit.entropy_threshold = best_thresh
+                if verbose:
+                    print(f"[Calibration Search] Selected Pareto-optimal Percentile={best_p}% (Threshold={best_thresh:.3f} nats)")
+                return best_thresh
+            else:
+                p = 75.0 if percentile is None else percentile
+                calibrated = torch.quantile(ent_k1, p / 100.0).item()
+                self.outer_loop.halting_unit.entropy_threshold = calibrated
+                return calibrated
 
     def forward(
         self,

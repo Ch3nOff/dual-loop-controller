@@ -1,16 +1,21 @@
 import os
+import random
 import torch
 import torch.nn.functional as F
 import numpy as np
 
-from dual_loop import DualLoopTransformer
+from dual_loop import DualLoopTransformer, load_trained_checkpoint
 from dual_loop.benchmarks import MultiHopGraphDataset
 
 def run_halting_audit():
+    random.seed(42)
+    np.random.seed(42)
     torch.manual_seed(42)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(42)
+
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     num_nodes = 16
-    checkpoint_path = "checkpoint_trained_dualloop.pt"
 
     # Instantiate model
     model = DualLoopTransformer(
@@ -24,19 +29,18 @@ def run_halting_audit():
         capacity_factor=0.5
     ).to(device)
 
-    if os.path.exists(checkpoint_path):
-        state_dict = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
-        model.load_state_dict(state_dict, strict=False)
-        print(f"Loaded checkpoint '{checkpoint_path}'.")
-    else:
-        print("Error: Checkpoint not found.")
+    try:
+        _, loaded_path = load_trained_checkpoint(model)
+        print(f"Loaded checkpoint from '{loaded_path}'.")
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
         return
 
     model.eval()
 
-    # Load 500 test samples
-    dataset = MultiHopGraphDataset(num_samples=500, num_nodes=num_nodes, num_edges=6, hops=3)
-    x_test, y_test_all = dataset.get_batch(500)
+    # Load 500 test samples deterministically
+    dataset = MultiHopGraphDataset(num_samples=500, num_nodes=num_nodes, num_edges=6, hops=3, seed=42)
+    x_test, y_test_all = dataset.get_batch(500, shuffle=False)
     x_test = x_test.to(device)
     y_test = y_test_all[:, -1].to(device)
 

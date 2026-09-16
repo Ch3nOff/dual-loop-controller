@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dual-loop-controller"
-version = "2.0.0a1"
+version = "2.0.0a2"
 description = "A hardware-aligned, manifold-preserving latent deliberation framework for Transformers"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -51,3 +51,6 @@ Repository = "https://github.com/Ch3nOff/dual-loop-controller.git"
 where = ["."]
 include = ["dual_loop*"]
 exclude = ["tests*", "dist*", "build*"]
+
+[tool.setuptools.package-data]
+dual_loop = ["checkpoints/*.pt"]

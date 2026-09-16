@@ -92,10 +92,10 @@ Despite the scaling limits at small model regimes, the repository provides clean
 ```bash
 # Install officially from PyPI:
 pip install --pre dual-loop-controller
-# or exact version: pip install dual-loop-controller==2.0.0a1
+# or exact version: pip install dual-loop-controller==2.0.0a2
 
 # Or install direct from GitHub release tag:
-pip install git+https://github.com/Ch3nOff/dual-loop-controller.git@v2.0.0-alpha
+pip install git+https://github.com/Ch3nOff/dual-loop-controller.git@v2.0.0a2
 
 # Or clone locally and install in editable mode:
 git clone https://github.com/Ch3nOff/dual-loop-controller.git
@@ -103,17 +103,25 @@ cd dual-loop-controller
 pip install -e .
 ```
 
+> [!NOTE]
+> **Pretrained Weights Bundled**: A 225K parameter trained reference checkpoint (~912 KB) is bundled directly in `dual_loop/checkpoints/checkpoint_trained_dualloop.pt`. Fresh clones and pip installs run inference and audits out-of-the-box without requiring a training step first.
+
 ### 2. Running Component Tests (Verifying Shapes & Gradients)
 ```bash
 python -m unittest discover -s tests -p "test_*.py"
 ```
 
-### 3. Running the Honest Benchmark Suite (Live Tensor Computations)
+### 3. Verifying Dynamic Halting & Pareto Calibration
+```bash
+python verify_dynamic_inference.py
+```
+
+### 4. Running the Honest Benchmark Suite (Live Tensor Computations)
 ```bash
 python -m dual_loop.benchmarks.comprehensive_suite
 ```
 
-### 4. Re-Training from Scratch
+### 5. Re-Training from Scratch
 ```bash
 python train.py --epochs 35 --hops 3 --k_steps 3 --d_model 64
 ```

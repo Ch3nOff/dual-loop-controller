@@ -33,10 +33,10 @@ class EntropyHaltingUnit(nn.Module):
         entropy = -torch.sum(probs * log_probs, dim=-1)
         return entropy
 
-    def calibrate_threshold(self, sample_logits: torch.Tensor, percentile: float = 50.0):
+    def calibrate_threshold(self, sample_logits: torch.Tensor, percentile: float = 75.0):
         """
         Calibrates the entropy threshold to match the model's actual empirical
-        predictive distribution (e.g. median / 50th percentile of validation entropy).
+        predictive distribution (defaults to 75th percentile / upper quartile of validation entropy).
         """
         with torch.no_grad():
             entropies = self.calculate_entropy(sample_logits)

@@ -1,17 +1,27 @@
 import random
 import torch
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 class MultiHopGraphDataset:
     """
     Synthetic Multi-Hop Graph Reasoning Benchmark.
     Generates directed pointer chains with random distractor edges.
+    Supports isolated deterministic seeding for 100% reproducible benchmarks.
     """
-    def __init__(self, num_samples: int = 2000, num_nodes: int = 20, num_edges: int = 8, hops: int = 3):
+    def __init__(
+        self,
+        num_samples: int = 2000,
+        num_nodes: int = 20,
+        num_edges: int = 8,
+        hops: int = 3,
+        seed: Optional[int] = None
+    ):
         self.num_samples = num_samples
         self.num_nodes = num_nodes
         self.num_edges = num_edges
         self.hops = hops
+        self.seed = seed
+        self.rng = random.Random(seed) if seed is not None else random.Random()
         
         self.ARROW = num_nodes
         self.SEP = num_nodes + 1
@@ -23,7 +33,7 @@ class MultiHopGraphDataset:
         samples = []
         for _ in range(self.num_samples):
             nodes = list(range(self.num_nodes))
-            random.shuffle(nodes)
+            self.rng.shuffle(nodes)
             
             chain = nodes[:self.hops + 1]
             edges = []
@@ -31,12 +41,12 @@ class MultiHopGraphDataset:
                 edges.append((chain[i], chain[i+1]))
             
             while len(edges) < self.num_edges:
-                u = random.choice(nodes)
-                v = random.choice([n for n in nodes if n != u])
+                u = self.rng.choice(nodes)
+                v = self.rng.choice([n for n in nodes if n != u])
                 if (u, v) not in edges:
                     edges.append((u, v))
             
-            random.shuffle(edges)
+            self.rng.shuffle(edges)
             
             seq = []
             for u, v in edges:
@@ -52,8 +62,20 @@ class MultiHopGraphDataset:
             ))
         return samples
 
-    def get_batch(self, batch_size: int = 64) -> Tuple[torch.Tensor, torch.Tensor]:
-        indices = random.sample(range(self.num_samples), batch_size)
+    def get_batch(
+        self,
+        batch_size: int = 64,
+        shuffle: bool = True,
+        seed: Optional[int] = None
+    ) -> Tuple[torch.Tensor, torch.Tensor]:
+        if not shuffle:
+            indices = list(range(min(batch_size, self.num_samples)))
+        elif seed is not None:
+            batch_rng = random.Random(seed)
+            indices = batch_rng.sample(range(self.num_samples), batch_size)
+        else:
+            indices = self.rng.sample(range(self.num_samples), batch_size)
+
         seqs = [self.data[i][0] for i in indices]
         targets = torch.stack([self.data[i][1] for i in indices])
         inputs = torch.stack(seqs)

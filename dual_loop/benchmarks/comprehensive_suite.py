@@ -13,13 +13,15 @@ Evaluations Performed:
 
 import os
 import time
+import random
+import numpy as np
 import torch
 import torch.nn.functional as F
 
-from dual_loop import DualLoopTransformer
+from dual_loop import DualLoopTransformer, load_trained_checkpoint
 from dual_loop.benchmarks import MultiHopGraphDataset
 
-def load_or_instantiate_model(checkpoint_path="checkpoint_trained_dualloop.pt", num_nodes=16):
+def load_or_instantiate_model(checkpoint_path=None, num_nodes=16):
     vocab_size = num_nodes + 3
     model = DualLoopTransformer(
         vocab_size=vocab_size,
@@ -30,19 +32,33 @@ def load_or_instantiate_model(checkpoint_path="checkpoint_trained_dualloop.pt", 
         num_cwm_slots=12,
         max_ponder_steps=3,
         capacity_factor=0.5,
-        entropy_threshold=1.30
+        entropy_threshold=1.35
     )
-    if os.path.exists(checkpoint_path):
-        state_dict = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
-        model.load_state_dict(state_dict, strict=False)
-        print(f"[Model Loader] Loaded weights from '{checkpoint_path}'.")
-    else:
-        print("[Model Loader] Warning: Checkpoint not found; running with initialized weights.")
+    try:
+        _, loaded_path = load_trained_checkpoint(model, checkpoint_path)
+        print(f"[Model Loader] Successfully loaded weights from '{loaded_path}'.")
+    except FileNotFoundError as e:
+        print("\n" + "!" * 80)
+        print("CRITICAL WARNING: TRAINED CHECKPOINT NOT FOUND!")
+        print("The benchmark suite is currently executing on UNTRAINED (random) weights.")
+        print("Reported metrics will reflect random baseline (~6.25%).")
+        print("To evaluate true model capabilities (29-34% accuracy), generate weights with:")
+        print("    python train.py --epochs 35 --hops 3 --k_steps 3")
+        print("or:")
+        print("    python evaluate_real_behavior.py")
+        print("!" * 80 + "\n")
+
     model.eval()
     return model
 
 def run_suite():
+    # Deterministic Seeding for 100% Reproducibility
+    random.seed(42)
+    np.random.seed(42)
     torch.manual_seed(42)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(42)
+
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     num_nodes = 16
     chance_baseline = 100.0 / num_nodes # 6.25%
@@ -61,8 +77,8 @@ def run_suite():
     hop_results = {}
     with torch.no_grad():
         for h in [1, 2, 3]:
-            ds = MultiHopGraphDataset(num_samples=400, num_nodes=num_nodes, num_edges=6, hops=h)
-            x, y_all = ds.get_batch(400)
+            ds = MultiHopGraphDataset(num_samples=400, num_nodes=num_nodes, num_edges=6, hops=h, seed=100 + h)
+            x, y_all = ds.get_batch(400, shuffle=False)
             x, y = x.to(device), y_all[:, -1].to(device)
             logits, _ = model(x, k_steps=h)
             acc = (logits.argmax(dim=-1) == y).float().mean().item() * 100.0
@@ -76,8 +92,8 @@ def run_suite():
     distractor_results = {}
     with torch.no_grad():
         for e in [6, 8, 12, 16]:
-            ds_e = MultiHopGraphDataset(num_samples=300, num_nodes=num_nodes, num_edges=e, hops=3)
-            x_e, y_e_all = ds_e.get_batch(300)
+            ds_e = MultiHopGraphDataset(num_samples=300, num_nodes=num_nodes, num_edges=e, hops=3, seed=200 + e)
+            x_e, y_e_all = ds_e.get_batch(300, shuffle=False)
             x_e, y_e = x_e.to(device), y_e_all[:, -1].to(device)
             logits_e, _ = model(x_e, k_steps=3)
             acc_e = (logits_e.argmax(dim=-1) == y_e).float().mean().item() * 100.0
@@ -85,11 +101,11 @@ def run_suite():
             print(f"  {e:2d} Total Edges -> Test Accuracy (Computed from Logits): {acc_e:5.1f}%")
 
     # -------------------------------------------------------------------------
-    # BENCHMARK 3: Unvarnished Test-Time Compute Scaling (K = 0 .. 5)
+    # BENCHMARK 3: UnvarnISHED TEST-TIME COMPUTE SCALING (K = 0 .. 5)
     # -------------------------------------------------------------------------
     print("\n[BENCHMARK 3: UNVARNISHED TEST-TIME COMPUTE SCALING (K = 0 .. 5)]")
-    ds_scale = MultiHopGraphDataset(num_samples=500, num_nodes=num_nodes, num_edges=6, hops=3)
-    xs, ys_all = ds_scale.get_batch(500)
+    ds_scale = MultiHopGraphDataset(num_samples=500, num_nodes=num_nodes, num_edges=6, hops=3, seed=42)
+    xs, ys_all = ds_scale.get_batch(500, shuffle=False)
     xs, ys = xs.to(device), ys_all[:, -1].to(device)
     scale_results = {}
     with torch.no_grad():
@@ -107,6 +123,13 @@ def run_suite():
     print("\n[BENCHMARK 4: PER-SAMPLE DYNAMIC HALTING & PARETO FRONTIER]")
     print("Evaluating individual sample halting without artificial batch-mean collapsing:")
     with torch.no_grad():
+        opt_thresh = model.calibrate_halting(xs, target_labels=ys, verbose=False)
+        logits_dyn, info_dyn = model(xs, dynamic_halting=True)
+        acc_dyn = (logits_dyn.argmax(-1) == ys).float().mean().item() * 100.0
+        st = info_dyn['steps_taken']
+        print(f"  Direct Inference: Calibrated Threshold={opt_thresh:.3f} nats | Accuracy={acc_dyn:.1f}% | Effective K={info_dyn['effective_k']:.2f} steps")
+        print(f"  Steps Taken: K=1: {(st==1).float().mean()*100:.1f}%, K=2: {(st==2).float().mean()*100:.1f}%, K=3: {(st==3).float().mean()*100:.1f}%\n")
+
         logits_k1, _ = model(xs, k_steps=1)
         logits_k2, _ = model(xs, k_steps=2)
         logits_k3, _ = model(xs, k_steps=3)

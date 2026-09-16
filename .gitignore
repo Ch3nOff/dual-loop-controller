@@ -3,6 +3,8 @@ __pycache__/
 *.pyc
 *.pt
 *.bin
+!dual_loop/checkpoints/*.pt
+!checkpoints/*.pt
 *.egg-info/
 dist/
 build/
