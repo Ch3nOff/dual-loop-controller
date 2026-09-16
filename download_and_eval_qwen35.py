@@ -81,8 +81,11 @@ print(" STAGE 3: EVALUATING DUAL-LOOP AUGMENTED MODEL (K=2)")
 print("=" * 80)
 sys.stdout.flush()
 
-dualloop_model = attach_dual_loop_to_qwen(base_model, layer_idx=12, k_steps=2)
+dualloop_model = attach_dual_loop_to_qwen(base_model, layer_idx=11, k_steps=2)
 dualloop_model.load_adapter(ADAPTER_PATH)
+
+print(f"[Setup] Attached Dual-Loop to Layer {dualloop_model.layer_idx} (Full Attention)")
+print(f"[Setup] ReZero Gate Scale: {float(torch.tanh(dualloop_model.adapter.gate_alpha).item()):.4f}")
 
 hflm_dualloop = HFLM(pretrained=dualloop_model, tokenizer=tokenizer, batch_size=1, device="cpu")
 

@@ -4853,8 +4853,8 @@
     "torch_seed": 1234,
     "fewshot_seed": 1234
   },
-  "git_hash": "v2.0.0a3-7-g46037a7",
-  "date": 1789539545.301049,
+  "git_hash": "v2.0.0a3-8-g79ce9ca",
+  "date": 1789540442.6453516,
   "pretty_env_info": "PyTorch version: 2.14.0+cpu\nIs debug build: False\nCUDA used to build PyTorch: Could not collect\nROCM used to build PyTorch: N/A\n\nOS: Microsoft Windows 11 Home Single Language (10.0.26200 64-bit)\nGCC version: Could not collect\nClang version: Could not collect\nCMake version: Could not collect\nLibc version: N/A\n\nPython version: 3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)] (64-bit runtime)\nPython platform: Windows-11-10.0.26200-SP0\nIs CUDA available: False\nCUDA runtime version: Could not collect\nCUDA_MODULE_LOADING set to: N/A\nGPU models and configuration: GPU 0: NVIDIA GeForce RTX 5060 Laptop GPU\nNvidia driver version: Could not collect\ncuDNN version: Could not collect\nIs XPU available: False\nHIP runtime version: N/A\nMIOpen runtime version: N/A\nIs XNNPACK available: False\nCaching allocator config: N/A\n\nCPU:\nName: Intel(R) Core(TM) Ultra 9 275HX\nManufacturer: GenuineIntel\nFamily: 775\nArchitecture: 9\nProcessorType: 3\nDeviceID: CPU0\nCurrentClockSpeed: 2700\nMaxClockSpeed: 2700\nL2CacheSize: 40960\nL2CacheSpeed: None\nRevision: None\n\nVersions of relevant libraries:\n[pip3] numpy==2.5.3\n[pip3] torch==2.14.0+cpu\n[conda] Could not collect",
   "transformers_version": "5.17.0",
   "lm_eval_version": "0.4.13",

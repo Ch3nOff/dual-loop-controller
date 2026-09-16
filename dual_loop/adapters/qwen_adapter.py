@@ -68,8 +68,20 @@ class DualLoopQwenModel(nn.Module):
         layers = _find_transformer_layers(self.qwen)
         total_layers = len(layers)
         
-        # Target layer defaults to midpoint L // 2
-        self.layer_idx = layer_idx if layer_idx is not None else total_layers // 2
+        # Target layer defaults to midpoint L // 2 (or nearest full_attention layer for hybrid architectures)
+        if layer_idx is None:
+            default_idx = total_layers // 2
+            cfg = getattr(self.qwen, "config", None)
+            tc = getattr(cfg, "text_config", cfg)
+            layer_types = getattr(tc, "layer_types", None) if tc else None
+            if layer_types and isinstance(layer_types, list):
+                full_attn_indices = [i for i, lt in enumerate(layer_types) if lt == "full_attention"]
+                if full_attn_indices:
+                    default_idx = min(full_attn_indices, key=lambda x: abs(x - (total_layers // 2)))
+            self.layer_idx = default_idx
+        else:
+            self.layer_idx = layer_idx
+
         if not (0 <= self.layer_idx < total_layers):
             raise IndexError(f"layer_idx {self.layer_idx} out of range [0, {total_layers-1}]")
             
@@ -272,7 +284,23 @@ class DualLoopQwenModel(nn.Module):
             import safetensors.torch
             state_dict = safetensors.torch.load_file(file_to_load)
         else:
-            state_dict = torch.load(file_to_load, map_location="cpu", weights_only=True)
+            # Try safetensors first in case it was saved as safetensors with a .pt extension
+            loaded = False
+            try:
+                import safetensors.torch
+                state_dict = safetensors.torch.load_file(file_to_load)
+                loaded = True
+            except Exception:
+                pass
+            if not loaded:
+                try:
+                    state_dict = torch.load(file_to_load, map_location="cpu", weights_only=True)
+                except Exception:
+                    state_dict = torch.load(file_to_load, map_location="cpu", weights_only=False)
+            
+        # Allow missing gate_alpha for backward compatibility with un-gated checkpoints
+        if "gate_alpha" not in state_dict and hasattr(self.adapter, "gate_alpha"):
+            state_dict["gate_alpha"] = self.adapter.gate_alpha.data.clone()
             
         self.adapter.load_state_dict(state_dict, strict=strict)
         try:

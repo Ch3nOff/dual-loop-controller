@@ -27,6 +27,7 @@ class LatentDeliberationAdapter(nn.Module):
         capacity_factor: float = 0.5,
         num_cwm_slots: int = 16,
         adapter_mode: str = "residual", # "residual" or "prefix"
+        gate_alpha_init: float = 0.05,
         vocab_size: Optional[int] = None
     ):
         super().__init__()
@@ -58,6 +59,8 @@ class LatentDeliberationAdapter(nn.Module):
             # Small scale initialization to stabilize residual injection
             nn.init.normal_(self.residual_proj[-1].weight, std=0.01)
             nn.init.zeros_(self.residual_proj[-1].bias)
+            # ReZero learnable gate initialized to gate_alpha_init (stabilized residual injection)
+            self.gate_alpha = nn.Parameter(torch.tensor([float(gate_alpha_init)]))
 
     def forward(
         self,
@@ -113,8 +116,9 @@ class LatentDeliberationAdapter(nn.Module):
             # Prepend thoughts as soft prefix: [B, L_thought + S, D]
             enhanced = torch.cat([h_thought, hidden_states], dim=1)
         elif self.adapter_mode == "residual":
-            # Add thoughts as a gating residual onto the query token
-            delta = self.residual_proj(h_thought[:, 0, :]).unsqueeze(1) # [B, 1, D]
+            # Add thoughts as a ReZero-gated residual onto the query token
+            scale = torch.tanh(self.gate_alpha)
+            delta = scale * self.residual_proj(h_thought[:, 0, :]).unsqueeze(1) # [B, 1, D]
             enhanced = hidden_states.clone()
             enhanced[:, query_idx:query_idx+1, :] = enhanced[:, query_idx:query_idx+1, :] + delta
         else:
@@ -125,6 +129,7 @@ class LatentDeliberationAdapter(nn.Module):
             "ponder_steps": steps,
             "effective_k": float(len(entropies)) if (dynamic_halting and entropies) else float(steps),
             "step_entropies": [e.detach().cpu() for e in entropies] if entropies else [],
+            "gate_scale": float(torch.tanh(self.gate_alpha).item()) if hasattr(self, "gate_alpha") else 1.0,
             "adapter_mode": self.adapter_mode,
             "bypassed": False
         }
