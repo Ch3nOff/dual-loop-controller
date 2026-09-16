@@ -26,12 +26,14 @@ class LatentDeliberationAdapter(nn.Module):
         max_ponder_steps: int = 3,
         capacity_factor: float = 0.5,
         num_cwm_slots: int = 16,
-        adapter_mode: str = "prefix" # "prefix" or "residual"
+        adapter_mode: str = "residual", # "residual" or "prefix"
+        vocab_size: Optional[int] = None
     ):
         super().__init__()
         self.d_model = d_model
         self.num_thought_tokens = num_thought_tokens
         self.adapter_mode = adapter_mode
+        self.max_ponder_steps = max_ponder_steps
         
         # Memory compressor
         self.cwm = CognitiveWorkingMemory(d_model=d_model, num_slots=num_cwm_slots, n_heads=n_heads)
@@ -43,7 +45,8 @@ class LatentDeliberationAdapter(nn.Module):
             d_ff=d_model * 2,
             num_thought_tokens=num_thought_tokens,
             max_ponder_steps=max_ponder_steps,
-            capacity_factor=capacity_factor
+            capacity_factor=capacity_factor,
+            vocab_size=vocab_size
         )
         
         if adapter_mode == "residual":
@@ -60,17 +63,32 @@ class LatentDeliberationAdapter(nn.Module):
         self,
         hidden_states: torch.Tensor,
         k_steps: Optional[int] = None,
-        query_idx: int = -1
+        query_idx: int = -1,
+        dynamic_halting: bool = False
     ) -> Tuple[torch.Tensor, Dict[str, Any]]:
         """
         Args:
             hidden_states: [B, SeqLen, D] Hidden activations from intermediate layer l.
-            k_steps: Number of latent deliberation steps.
+            k_steps: Number of latent deliberation steps (0 bypasses pondering completely).
             query_idx: Position of the query/instruction token (default -1).
+            dynamic_halting: Whether to halt pondering early upon entropy/latent convergence.
         Returns:
             enhanced_states: [B, SeqLen', D] Modified hidden states for layer l+1.
             telemetry: Diagnostic information.
         """
+        steps = self.max_ponder_steps if k_steps is None else k_steps
+        
+        # Zero pondering steps: exact identity bypass (System 1 mode)
+        if steps == 0:
+            telemetry = {
+                "num_thoughts": 0,
+                "ponder_steps": 0,
+                "effective_k": 0.0,
+                "adapter_mode": self.adapter_mode,
+                "bypassed": True
+            }
+            return hidden_states, telemetry
+
         B, S, D = hidden_states.shape
         
         # 1. Extract query anchor (normalize negative index)
@@ -85,7 +103,9 @@ class LatentDeliberationAdapter(nn.Module):
         h_thought, aux, entropies = self.controller(
             query_rep=query_rep,
             memory=memory,
-            k_steps=k_steps
+            k_steps=steps,
+            dynamic_halting=dynamic_halting,
+            return_aux=True
         ) # [B, L_thought, D]
         
         # 4. Integrate into stream
@@ -102,7 +122,10 @@ class LatentDeliberationAdapter(nn.Module):
             
         telemetry = {
             "num_thoughts": self.num_thought_tokens,
-            "ponder_steps": self.controller.max_ponder_steps if k_steps is None else k_steps,
-            "adapter_mode": self.adapter_mode
+            "ponder_steps": steps,
+            "effective_k": float(len(entropies)) if (dynamic_halting and entropies) else float(steps),
+            "step_entropies": [e.detach().cpu() for e in entropies] if entropies else [],
+            "adapter_mode": self.adapter_mode,
+            "bypassed": False
         }
         return enhanced, telemetry

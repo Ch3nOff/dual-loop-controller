@@ -41,6 +41,10 @@ dev = [
     "build",
     "twine",
 ]
+llm = [
+    "transformers>=4.40.0",
+    "accelerate>=0.28.0",
+]
 
 [project.urls]
 Homepage = "https://github.com/Ch3nOff/dual-loop-controller"

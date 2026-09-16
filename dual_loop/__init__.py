@@ -10,6 +10,7 @@ from .halting import EntropyHaltingUnit
 from .controller import RecurrentLatentController, TopKCapacityCrossAttention
 from .decoder import DualLoopTransformer
 from .adapters.latent_adapter import LatentDeliberationAdapter
+from .adapters.qwen_adapter import DualLoopQwenModel, attach_dual_loop_to_qwen
 
 import os
 import torch
@@ -61,6 +62,8 @@ __all__ = [
     "TopKCapacityCrossAttention",
     "DualLoopTransformer",
     "LatentDeliberationAdapter",
+    "DualLoopQwenModel",
+    "attach_dual_loop_to_qwen",
     "get_default_checkpoint_path",
     "load_trained_checkpoint",
 ]

@@ -150,6 +150,8 @@ class RecurrentLatentController(nn.Module):
         step_entropies = []
 
         for step in range(steps):
+            H_prev = H.clone()
+
             # 1. Latent Self-Attention (Reflective deliberation)
             attn_self, _ = self.latent_self_attn(H, H, H)
             H = self.norm1(H + attn_self)
@@ -172,5 +174,11 @@ class RecurrentLatentController(nn.Module):
                     if dynamic_halting and (entropy.mean().item() < self.halting_unit.entropy_threshold):
                         # Batch has achieved confident consensus; early halt
                         break
+            elif dynamic_halting:
+                # Latent representation delta convergence
+                rel_delta = (H - H_prev).norm() / (H_prev.norm() + 1e-6)
+                step_entropies.append(rel_delta.unsqueeze(0))
+                if step > 0 and rel_delta.item() < self.halting_unit.delta_threshold:
+                    break
 
         return H, aux_logits, step_entropies
