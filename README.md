@@ -202,14 +202,15 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from dual_loop import attach_dual_loop_to_qwen
 
-# 1. Load base Qwen model
+# 1. Load base Qwen model (pinned revision SHA for supply chain security)
 model_name = "Qwen/Qwen3.5-2B"  # or Qwen2.5-1.5B / Qwen2.5-7B
-tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+revision = "15852e8c16360a2fea060d615a32b45270f8a8fc"
+tokenizer = AutoTokenizer.from_pretrained(model_name, revision=revision)
 base_model = AutoModelForCausalLM.from_pretrained(
     model_name,
     torch_dtype=torch.bfloat16,
     device_map="auto",
-    trust_remote_code=True
+    revision=revision
 )
 
 # 2. Attach Dual-Loop Cognitive Controller at Layer 12 (residual mode)

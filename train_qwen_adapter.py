@@ -235,9 +235,9 @@ def train(args):
             labels = batch["labels"].to(args.device)
             attention_mask = batch["attention_mask"].to(args.device)
             
-            # Target the last prompt token position for deliberation
+            # Target the last prompt token position for deliberation per-sample (ARCH-03)
             anchors = batch["query_anchor_pos"]
-            model.query_idx = anchors[0] if len(anchors) > 0 else -1
+            model.query_idx = torch.tensor(anchors, dtype=torch.long, device=input_ids.device) if len(anchors) > 0 else -1
 
             optimizer.zero_grad()
             outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
@@ -263,7 +263,7 @@ def train(args):
                 labels = batch["labels"].to(args.device)
                 attention_mask = batch["attention_mask"].to(args.device)
                 anchors = batch["query_anchor_pos"]
-                model.query_idx = anchors[0] if len(anchors) > 0 else -1
+                model.query_idx = torch.tensor(anchors, dtype=torch.long, device=input_ids.device) if len(anchors) > 0 else -1
 
                 outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
                 val_loss += outputs.loss.item()

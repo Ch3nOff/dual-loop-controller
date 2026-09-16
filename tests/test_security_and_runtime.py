@@ -181,6 +181,33 @@ class SecurityAndRuntimeTests(unittest.TestCase):
         model = load_or_instantiate_model(checkpoint_path=non_existent, allow_untrained=True)
         self.assertIsNotNone(model)
 
+    def test_sec04_hash_verification(self):
+        """SEC-04: Verify expected_sha256 enforces exact integrity check."""
+        import hashlib
+        mock_model = MockQwenModel()
+        wrapped = DualLoopQwenModel(mock_model, layer_idx=1, k_steps=2)
+
+        temp_fd, temp_path = tempfile.mkstemp(suffix=".safetensors")
+        os.close(temp_fd)
+        try:
+            wrapped.save_adapter(temp_path, format="safetensors")
+            # Calculate actual hash
+            with open(temp_path, "rb") as f:
+                actual_hash = hashlib.sha256(f.read()).hexdigest()
+
+            # 1. Loading with correct hash must succeed
+            loaded = wrapped.load_adapter(temp_path, expected_sha256=actual_hash)
+            self.assertEqual(loaded, temp_path)
+
+            # 2. Loading with incorrect hash must raise ValueError
+            wrong_hash = "0" * 64
+            with self.assertRaises(ValueError) as ctx:
+                wrapped.load_adapter(temp_path, expected_sha256=wrong_hash)
+            self.assertIn("SHA-256 integrity check failed", str(ctx.exception))
+        finally:
+            if os.path.exists(temp_path):
+                os.unlink(temp_path)
+
 
 if __name__ == "__main__":
     unittest.main()

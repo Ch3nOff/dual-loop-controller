@@ -60,7 +60,14 @@ print(" STAGE 2: LOADING TOKENIZER & BASE MODEL")
 print("=" * 80)
 sys.stdout.flush()
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, trust_remote_code=True)
+import argparse
+
+parser = argparse.ArgumentParser(description="Download and Evaluate Qwen3.5-2B")
+parser.add_argument("--trust_remote_code", action="store_true", default=False, help="Allow executing remote code from Hugging Face Hub")
+parser.add_argument("--revision", type=str, default="15852e8c16360a2fea060d615a32b45270f8a8fc", help="Pinned commit SHA for supply-chain security (SEC-02)")
+args, _ = parser.parse_known_args()
+
+tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, trust_remote_code=args.trust_remote_code, revision=args.revision)
 if tokenizer.pad_token_id is None:
     tokenizer.pad_token_id = tokenizer.eos_token_id
 
@@ -69,7 +76,8 @@ sys.stdout.flush()
 base_model = AutoModelForCausalLM.from_pretrained(
     MODEL_ID,
     torch_dtype=torch.float32,
-    trust_remote_code=True,
+    trust_remote_code=args.trust_remote_code,
+    revision=args.revision,
     device_map="cpu"
 )
 print("Base model loaded into memory successfully!")

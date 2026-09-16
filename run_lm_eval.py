@@ -87,6 +87,8 @@ def main():
                         help="Optional limit on number of samples per task (for testing)")
     parser.add_argument("--trust_remote_code", action="store_true", default=False,
                         help="Allow executing remote code from Hugging Face Hub")
+    parser.add_argument("--revision", type=str, default="15852e8c16360a2fea060d615a32b45270f8a8fc",
+                        help="Pinned commit SHA for supply-chain security (SEC-02)")
     args = parser.parse_args()
 
     os.makedirs(args.output_path, exist_ok=True)
@@ -95,6 +97,7 @@ def main():
     print(" DUAL-LOOP QWEN: LM-EVALUATION-HARNESS BENCHMARK RUNNER")
     print("=" * 80)
     print(f"Base Model:     {args.model}")
+    print(f"Revision:       {args.revision}")
     print(f"Adapter:        {args.adapter_path}")
     print(f"Tasks:          {args.tasks}")
     print(f"Device:         {args.device}")
@@ -111,7 +114,7 @@ def main():
         sys.exit(1)
 
     print(f"[1/4] Loading tokenizer for {args.model}...")
-    tokenizer = AutoTokenizer.from_pretrained(args.model, trust_remote_code=args.trust_remote_code)
+    tokenizer = AutoTokenizer.from_pretrained(args.model, trust_remote_code=args.trust_remote_code, revision=args.revision)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token_id = tokenizer.eos_token_id
 
@@ -121,6 +124,7 @@ def main():
         args.model,
         torch_dtype=dtype,
         trust_remote_code=args.trust_remote_code,
+        revision=args.revision,
         device_map=args.device if "cuda" in args.device else None
     )
     if args.device == "cpu":

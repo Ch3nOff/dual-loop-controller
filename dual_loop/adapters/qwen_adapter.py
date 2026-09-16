@@ -1,4 +1,5 @@
 import os
+import hashlib
 import torch
 import torch.nn as nn
 from typing import Optional, Dict, Any, Union
@@ -274,10 +275,22 @@ class DualLoopQwenModel(nn.Module):
         torch.save(self.adapter.state_dict(), save_path)
         return save_path
 
-    def load_adapter(self, load_path: str, strict: bool = True):
+    def load_adapter(
+        self,
+        load_path: str,
+        strict: bool = True,
+        expected_sha256: Optional[str] = None,
+        revision: Optional[str] = None
+    ):
         """
         Loads lightweight adapter weights from a local file, local directory,
         or directly from Hugging Face Hub (e.g. 'CH3NDev/dual-loop-qwen3.5-2b').
+        
+        Args:
+            load_path: Path to weights file, local directory, or HF repo ID.
+            strict: Whether to strictly enforce key matching in load_state_dict.
+            expected_sha256: Optional SHA-256 hex string to verify file integrity (SEC-04).
+            revision: Optional commit SHA/branch for Hugging Face Hub downloads (SEC-02).
         """
         file_to_load = None
         
@@ -301,7 +314,7 @@ class DualLoopQwenModel(nn.Module):
                 from huggingface_hub import hf_hub_download
                 for filename in ["adapter_model.safetensors", "qwen35_2b_adapter.pt", "adapter.pt"]:
                     try:
-                        file_to_load = hf_hub_download(repo_id=load_path, filename=filename)
+                        file_to_load = hf_hub_download(repo_id=load_path, filename=filename, revision=revision)
                         break
                     except Exception:
                         continue
@@ -313,6 +326,20 @@ class DualLoopQwenModel(nn.Module):
                 f"Could not load adapter from '{load_path}'. "
                 "Ensure the file exists locally or is a valid Hugging Face repository ID."
             )
+
+        # Hash integrity check (SEC-04)
+        if expected_sha256 is not None:
+            sha256_hasher = hashlib.sha256()
+            with open(file_to_load, "rb") as f:
+                while chunk := f.read(65536):
+                    sha256_hasher.update(chunk)
+            actual_sha256 = sha256_hasher.hexdigest().lower()
+            expected_clean = expected_sha256.strip().lower()
+            if actual_sha256 != expected_clean:
+                raise ValueError(
+                    f"SHA-256 integrity check failed for '{file_to_load}'. "
+                    f"Expected: {expected_clean}, but got: {actual_sha256}."
+                )
 
         # Load weights safely (enforce safetensors or weights_only=True)
         if file_to_load.endswith(".safetensors"):
