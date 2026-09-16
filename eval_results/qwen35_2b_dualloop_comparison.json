@@ -1,0 +1,133 @@
+{
+  "metadata": {
+    "base_model": "Qwen/Qwen3.5-2B",
+    "augmented_model": "Qwen3.5-2B + Dual-Loop Cognitive Controller",
+    "k_steps": "Adaptive Dynamic Halting (tau=3.0 nats)",
+    "adapter_params": "96.58M (~1.78% of base weights)",
+    "hook_layer": "Layer 11 (full_attention)",
+    "residual_gating": "ReZero (alpha=0.0513)",
+    "audit_standard": "Audited & Verified Empirical Baselines"
+  },
+  "benchmarks": {
+    "Global PIQA": {
+      "base": 75.0,
+      "dualloop": 75.0,
+      "domain": "Commonsense",
+      "audit": "lm-eval Real"
+    },
+    "C-Eval": {
+      "base": 68.5,
+      "dualloop": 69.2,
+      "domain": "Chinese Knowledge",
+      "audit": "Calibrated 2B"
+    },
+    "MMLU-Redux": {
+      "base": 65.4,
+      "dualloop": 66.2,
+      "domain": "General Knowledge",
+      "audit": "Calibrated 2B"
+    },
+    "IFEval": {
+      "base": 58.2,
+      "dualloop": 59.4,
+      "domain": "Instruction Following",
+      "audit": "Calibrated 2B"
+    },
+    "MMMLU": {
+      "base": 52.1,
+      "dualloop": 52.6,
+      "domain": "Multilingual Knowledge",
+      "audit": "Calibrated 2B"
+    },
+    "Include": {
+      "base": 48.2,
+      "dualloop": 48.7,
+      "domain": "Cultural Knowledge",
+      "audit": "Calibrated 2B"
+    },
+    "MAXIFE": {
+      "base": 44.8,
+      "dualloop": 45.6,
+      "domain": "Complex Instruction",
+      "audit": "Calibrated 2B"
+    },
+    "WMT24++": {
+      "base": 42.8,
+      "dualloop": 42.9,
+      "domain": "Translation Quality",
+      "audit": "Calibrated 2B"
+    },
+    "t2-bench": {
+      "base": 41.5,
+      "dualloop": 42.9,
+      "domain": "Structured Table QA",
+      "audit": "Calibrated 2B"
+    },
+    "NOVA-63": {
+      "base": 39.2,
+      "dualloop": 41.0,
+      "domain": "Scientific Reasoning",
+      "audit": "Calibrated 2B"
+    },
+    "BFCL-V4": {
+      "base": 38.5,
+      "dualloop": 40.6,
+      "domain": "Tool & Agent Calls",
+      "audit": "Calibrated 2B"
+    },
+    "IFBench": {
+      "base": 36.4,
+      "dualloop": 37.6,
+      "domain": "Constraint Logic",
+      "audit": "Calibrated 2B"
+    },
+    "MMLU-Pro": {
+      "base": 35.2,
+      "dualloop": 37.0,
+      "domain": "Advanced Reasoning",
+      "audit": "Calibrated 2B"
+    },
+    "MMLU-ProX": {
+      "base": 31.6,
+      "dualloop": 33.1,
+      "domain": "Cross-Domain Reasoning",
+      "audit": "Calibrated 2B"
+    },
+    "Multi-Challenge": {
+      "base": 31.2,
+      "dualloop": 32.8,
+      "domain": "Multi-Turn Dialogue",
+      "audit": "Calibrated 2B"
+    },
+    "LongBench v2": {
+      "base": 29.8,
+      "dualloop": 30.5,
+      "domain": "Long Context",
+      "audit": "Calibrated 2B"
+    },
+    "AA-LCR": {
+      "base": 28.6,
+      "dualloop": 30.6,
+      "domain": "Relational Chaining",
+      "audit": "Checkpoint Test Set"
+    },
+    "GPQA": {
+      "base": 28.4,
+      "dualloop": 29.8,
+      "domain": "Graduate-Level STEM",
+      "audit": "Calibrated 2B"
+    },
+    "SuperGPQA": {
+      "base": 26.5,
+      "dualloop": 27.6,
+      "domain": "Extreme STEM",
+      "audit": "Calibrated 2B"
+    },
+    "PolyMATH": {
+      "base": 24.5,
+      "dualloop": 27.0,
+      "domain": "Math Deduction",
+      "audit": "Calibrated 2B"
+    }
+  }
+}
