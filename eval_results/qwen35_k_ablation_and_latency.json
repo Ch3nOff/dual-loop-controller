@@ -5,7 +5,8 @@
     "base_parameters": "2.31B",
     "adapter_parameters": "96.5M (~4.18%)",
     "target_hook_layer": 12,
-    "hardware": "NVIDIA RTX / CUDA",
+    "benchmark_hardware": "Single NVIDIA RTX 4090 (24GB VRAM) | CUDA 12.4 | PyTorch 2.4 | bfloat16 | Batch Size = 1 | Prompt Length N = 256",
+    "latent_flops_definition": "Recurrent controller updates only across L_thought=8, M=16, D=2048, K=3 steps; does not include base 24-layer backbone prefill",
     "date": "September 2026"
   },
   "k_step_ablation": {

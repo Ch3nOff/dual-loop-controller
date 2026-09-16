@@ -199,6 +199,11 @@ Reviewers and production system architects must evaluate the computational trade
 
 ![Inference Efficiency & Pareto Frontier](figure_pareto_latency.png)
 
+> [!IMPORTANT]
+> **Benchmarking Environment & Operational Definitions**:
+> * **Hardware Reference**: Evaluated on a single **NVIDIA GeForce RTX 4090 (24GB VRAM)**, CUDA 12.4, PyTorch 2.4 with native `bfloat16` precision, **Batch Size = 1**, prompt length $N = 256$ tokens (averaged across 500 test samples).
+> * **Definition of Latent Deliberation FLOPs**: The reported **$+0.40\text{ GFLOPs}$** overhead strictly computes the *incremental recurrent state transitions* inside the Outer Loop controller module ($L_{\text{thought}}=8$, $M=16$ CWM slots, $D=2048$, $K=3$ ponder steps). It **does not** represent a full forward pass through all 24 layers of the base model backbone.
+
 #### 1. Analytical Compute Complexity
 Let $N$ denote prompt length, $N_{\text{params}} = 2.31 \times 10^9$, and $D = 2048$.
 * **Autoregressive CoT Overhead**: Generating $T_{\text{CoT}}$ discrete reasoning tokens requires $T_{\text{CoT}}$ full forward passes through all 24 layers:

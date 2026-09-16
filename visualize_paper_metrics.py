@@ -106,7 +106,12 @@ def main():
     ax2.legend(loc="upper right", frameon=True, facecolor=card_color, edgecolor=border_color, fontsize=9.5)
 
     plt.suptitle("Qwen3.5-2B Dual-Loop Deliberation: K-Ablation & Saturation Analysis", fontsize=15, fontweight="bold", color=text_color, y=0.98)
-    plt.tight_layout()
+    plt.tight_layout(rect=[0, 0.04, 1, 0.96])
+    fig_ablation.text(
+        0.5, 0.015,
+        "Benchmark Setup: NVIDIA RTX 4090 (24GB) | PyTorch 2.4 | bfloat16 | Qwen3.5-2B (2.31B params) + 96.5M Latent Adapter (Layer 12)",
+        ha="center", fontsize=8.5, color="#8B949E"
+    )
     fig_ablation.savefig("figure_k_ablation.png", dpi=300, bbox_inches="tight", facecolor=bg_color)
     plt.close(fig_ablation)
     print("[OK] figure_k_ablation.png saved!")
@@ -193,7 +198,13 @@ def main():
 
     plt.suptitle("Inference Efficiency & Pareto Frontier: Dual-Loop vs Autoregressive Chain-of-Thought",
                  fontsize=15, fontweight="bold", color=text_color, y=0.98)
-    plt.tight_layout()
+    plt.tight_layout(rect=[0, 0.05, 1, 0.96])
+    fig_pareto.text(
+        0.5, 0.015,
+        "Benchmark Hardware: Single NVIDIA RTX 4090 (24GB) | PyTorch 2.4 | bfloat16 | Batch Size = 1 | Prompt Length N = 256\n"
+        "*Latent FLOPs Definition: +0.40 GFLOPs accounts strictly for recurrent controller updates (L_thought=8, M=16 CWM slots), not a full 24-layer backbone pass.",
+        ha="center", fontsize=8.5, color="#8B949E", linespacing=1.35
+    )
     fig_pareto.savefig("figure_pareto_latency.png", dpi=300, bbox_inches="tight", facecolor=bg_color)
     plt.close(fig_pareto)
     print("[OK] figure_pareto_latency.png saved!")
@@ -201,7 +212,7 @@ def main():
     # =========================================================================
     # MASTER FIGURE 3: Combined 4-Panel Publication Chart
     # =========================================================================
-    fig_master, axes = plt.subplots(2, 2, figsize=(18, 12), facecolor=bg_color)
+    fig_master, axes = plt.subplots(2, 2, figsize=(18, 12.5), facecolor=bg_color)
 
     # Copy Panel 1: Trajectory
     ax_t = axes[0, 0]
@@ -296,7 +307,13 @@ def main():
 
     plt.suptitle("Dual-Loop Cognitive Controller: Technical Paper Trade-Off & Ablation Suite",
                  fontsize=16, fontweight="bold", color=text_color, y=0.99)
-    plt.tight_layout()
+    plt.tight_layout(rect=[0, 0.035, 1, 0.97])
+    fig_master.text(
+        0.5, 0.012,
+        "Benchmark Setup: NVIDIA RTX 4090 (24GB) | PyTorch 2.4 | bfloat16 | Batch Size = 1 | Prompt Length N = 256 | "
+        "*Latent FLOPs Definition: Computes recurrent controller updates only (L_thought=8, M=16 CWM slots), not a full 24-layer backbone pass.",
+        ha="center", fontsize=9.0, color="#8B949E"
+    )
     fig_master.savefig("paper_tradeoffs_and_ablation.png", dpi=300, bbox_inches="tight", facecolor=bg_color)
     plt.close(fig_master)
     print("[OK] paper_tradeoffs_and_ablation.png saved!")
