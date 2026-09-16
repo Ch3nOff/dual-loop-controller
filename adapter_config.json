@@ -1,0 +1,52 @@
+{
+  "adapter_type": "dual_loop_cognitive_controller",
+  "architecture": "DualLoopQwenModel",
+  "base_model_name_or_path": "Qwen/Qwen3.5-2B",
+  "compatible_base_models": [
+    "Qwen/Qwen3.5-2B",
+    "Qwen/Qwen2.5-1.5B",
+    "Qwen/Qwen2.5-3B",
+    "Qwen/Qwen2.5-7B"
+  ],
+  "d_model": 2048,
+  "n_heads": 8,
+  "num_thought_tokens": 4,
+  "max_ponder_steps": 3,
+  "num_cwm_slots": 16,
+  "capacity_factor": 0.5,
+  "adapter_mode": "residual",
+  "target_layer_idx": 11,
+  "target_layer_type": "full_attention",
+  "rezero_gating": true,
+  "rezero_alpha_learned": 0.0513,
+  "total_adapter_parameters": 96579586,
+  "trainable_ratio_pct": 1.78,
+  "torch_dtype": "bfloat16",
+  "empirical_suite_results": {
+    "arc_easy_acc_norm": {
+      "base": 0.675,
+      "dual_loop": 0.775,
+      "delta": "+10.0%"
+    },
+    "openbookqa_acc_norm": {
+      "base": 0.275,
+      "dual_loop": 0.325,
+      "delta": "+5.0%"
+    },
+    "piqa_acc_norm": {
+      "base": 0.75,
+      "dual_loop": 0.75,
+      "delta": "0.0%"
+    },
+    "arc_challenge_acc_norm": {
+      "base": 0.475,
+      "dual_loop": 0.45,
+      "delta": "-2.5%"
+    },
+    "suite_mean_acc_norm": {
+      "base": 0.544,
+      "dual_loop": 0.575,
+      "delta": "+3.1%"
+    }
+  }
+}

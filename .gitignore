@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 *.pt
 *.bin
+*.safetensors
 !dual_loop/checkpoints/checkpoint_trained_dualloop.pt
 *.egg-info/
 dist/
