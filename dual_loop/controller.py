@@ -41,10 +41,11 @@ class TopKCapacityCrossAttention(nn.Module):
         # Cross-attend only on the fixed quota
         attn_out, _ = self.mha(selected_thoughts, memory, memory)
 
-        # Scatter back to the thoughts matrix
-        updated_thoughts = thoughts.clone()
-        updated_thoughts[batch_idx, topk_indices] = thoughts[batch_idx, topk_indices] + attn_out
-        return updated_thoughts
+        # Scatter back: return only the cross-attention delta so the caller's
+        # residual addition (H + H_cross) is clean and avoids a double residual (TENSOR-03)
+        attn_delta = torch.zeros_like(thoughts)
+        attn_delta[batch_idx, topk_indices] = attn_out
+        return attn_delta
 
 
 class RecurrentLatentController(nn.Module):
@@ -143,7 +144,7 @@ class RecurrentLatentController(nn.Module):
             step_entropies: List of [B] entropy values per step.
         """
         H = self.initialize_thoughts(query_rep)
-        H_anchor = H.clone() # Anchor for residual stream stability
+        H_anchor = H.detach() if not self.training else H.clone() # Anchor for residual stream stability (TENSOR-01)
 
         steps = self.max_ponder_steps if k_steps is None else k_steps
         aux_logits = []
@@ -158,10 +159,17 @@ class RecurrentLatentController(nn.Module):
 
             # 2. Capacity-Gated Cross-Attention ke Memory (Context grounding)
             H_cross = self.capacity_cross_attn(H, memory)
-            H = self.norm2(H + H_cross + 0.1 * H_anchor)
+            anchor_scale = (0.1 / (step + 1)) if not self.training else 0.1
+            H = self.norm2(H + H_cross + anchor_scale * H_anchor)
 
             # 3. Latent MLP
             H = self.norm3(H + self.latent_mlp(H))
+
+            # Recurrent state norm clipping (ARCH-01: prevent divergence at higher ponder steps)
+            h_norm = torch.norm(H, p=2, dim=-1, keepdim=True)
+            max_norm = 50.0
+            clip_coef = torch.clamp(max_norm / (h_norm + 1e-6), max=1.0)
+            H = H * clip_coef
 
             # Audit Probe & Entropy evaluation
             if self.audit_probe is not None:

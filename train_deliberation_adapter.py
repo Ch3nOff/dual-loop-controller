@@ -1,4 +1,4 @@
-﻿"""
+"""
 Dual-Loop Cognitive Controller: PEFT Deliberation Fine-Tuning Pipeline
 =====================================================================
 Trains the Dual-Loop LatentDeliberationAdapter (attached to Layer 11 Full-Attention)
@@ -124,6 +124,7 @@ def main():
     parser.add_argument("--batch_size", type=int, default=2)
     parser.add_argument("--lr", type=float, default=2e-4)
     parser.add_argument("--max_samples", type=int, default=80)
+    parser.add_argument("--trust_remote_code", action="store_true", default=False, help="Allow executing remote code from Hugging Face Hub")
     args = parser.parse_args()
 
     print("=" * 80)
@@ -136,7 +137,7 @@ def main():
     print(f"Save Path:     {args.save_path}")
     print("=" * 80)
 
-    tokenizer = AutoTokenizer.from_pretrained(args.model, trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained(args.model, trust_remote_code=args.trust_remote_code)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token_id = tokenizer.eos_token_id
 
@@ -144,7 +145,7 @@ def main():
     base_model = AutoModelForCausalLM.from_pretrained(
         args.model,
         torch_dtype=torch.float32,
-        trust_remote_code=True,
+        trust_remote_code=args.trust_remote_code,
         device_map="cpu"
     )
 
@@ -184,8 +185,8 @@ def main():
             attention_mask = batch["attention_mask"]
             anchors = batch["query_anchor_pos"]
             
-            # Anchor deliberation onto the last token of the question
-            model.query_idx = anchors[0] if len(anchors) > 0 else -1
+            # Anchor deliberation per-sample onto each sequence's question boundary (ARCH-03)
+            model.query_idx = torch.tensor(anchors, dtype=torch.long, device=input_ids.device) if len(anchors) > 0 else -1
             
             optimizer.zero_grad()
             outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)

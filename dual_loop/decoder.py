@@ -26,11 +26,15 @@ class DualLoopTransformer(nn.Module):
         num_cwm_slots: int = 16,
         max_ponder_steps: int = 3,
         capacity_factor: float = 0.5,
-        entropy_threshold: float = 1.30
+        entropy_threshold: float = 1.30,
+        padding_idx: Optional[int] = None,
+        is_causal: bool = False
     ):
         super().__init__()
         self.vocab_size = vocab_size
         self.d_model = d_model
+        self.padding_idx = padding_idx
+        self.is_causal = is_causal
         
         # 1. Embeddings
         self.embedding = nn.Embedding(vocab_size, d_model)
@@ -127,20 +131,30 @@ class DualLoopTransformer(nn.Module):
         k_steps: Optional[int] = None,
         query_token_pos: int = -2,
         dynamic_halting: bool = False,
-        return_aux: bool = False
+        return_aux: bool = False,
+        padding_mask: Optional[torch.Tensor] = None
     ) -> Tuple[torch.Tensor, Dict[str, Any]]:
         """
         Forward pass with dual-loop cognition and per-sample dynamic halting.
         """
         B, S = input_ids.shape
+        if S > self.pos_emb.size(1):
+            raise ValueError(
+                f"Sequence length S={S} exceeds maximum supported positional embedding length {self.pos_emb.size(1)}."
+            )
+
         x_emb = self.embedding(input_ids) + self.pos_emb[:, :S, :]
         ctx = self.context_encoder(x_emb) # [B, S, D]
         
-        # Extract query token representation for query-conditioning
-        query_rep = ctx[:, query_token_pos, :] # [B, D]
+        # Extract query token representation with sequence length bounds guard (TENSOR-04)
+        pos = query_token_pos if query_token_pos >= 0 else S + query_token_pos
+        pos = max(0, min(S - 1, pos))
+        query_rep = ctx[:, pos, :] # [B, D]
         
-        # 1. Compress context into Cognitive Working Memory (SRAM cache)
-        cwm_memory = self.cwm(ctx) # [B, M, D]
+        # 1. Compress context into Cognitive Working Memory (SRAM cache) with padding mask (ARCH-05)
+        if padding_mask is None and self.padding_idx is not None:
+            padding_mask = (input_ids == self.padding_idx)
+        cwm_memory = self.cwm(ctx, key_padding_mask=padding_mask) # [B, M, D]
         
         max_k = self.outer_loop.max_ponder_steps if k_steps is None else k_steps
         
@@ -155,7 +169,7 @@ class DualLoopTransformer(nn.Module):
             
             # Initialize latent thoughts
             H = self.outer_loop.initialize_thoughts(query_rep)
-            H_anchor = H.clone()
+            H_anchor = H.detach() if not self.training else H.clone()
             
             aux_logits_list = []
             step_entropies_list = []
@@ -165,12 +179,20 @@ class DualLoopTransformer(nn.Module):
                 attn_self, _ = self.outer_loop.latent_self_attn(H, H, H)
                 H = self.outer_loop.norm1(H + attn_self)
                 H_cross = self.outer_loop.capacity_cross_attn(H, cwm_memory)
-                H = self.outer_loop.norm2(H + H_cross + 0.1 * H_anchor)
+                anchor_scale = (0.1 / k) if not self.training else 0.1
+                H = self.outer_loop.norm2(H + H_cross + anchor_scale * H_anchor)
                 H = self.outer_loop.norm3(H + self.outer_loop.latent_mlp(H))
+                
+                # Norm clipping (ARCH-01)
+                h_norm = torch.norm(H, p=2, dim=-1, keepdim=True)
+                clip_coef = torch.clamp(50.0 / (h_norm + 1e-6), max=1.0)
+                H = H * clip_coef
                 
                 # 2. Fuse soft prefix and decode through Inner Loop
                 fused = torch.cat([H, ctx], dim=1)
-                dec = self.inner_decoder(fused)
+                tot_len = fused.size(1)
+                mask = nn.Transformer.generate_square_subsequent_mask(tot_len, device=input_ids.device) if self.is_causal else None
+                dec = self.inner_decoder(fused, mask=mask)
                 logits_k = self.lm_head(dec[:, -1, :]) # [B, VocabSize]
                 
                 # 3. Compute predictive entropy per sample from actual decoder logits
@@ -217,7 +239,9 @@ class DualLoopTransformer(nn.Module):
         ) # [B, L_thought, D]
         
         fused_sequence = torch.cat([h_thought, ctx], dim=1)
-        decoded = self.inner_decoder(fused_sequence)
+        tot_len = fused_sequence.size(1)
+        mask = nn.Transformer.generate_square_subsequent_mask(tot_len, device=input_ids.device) if self.is_causal else None
+        decoded = self.inner_decoder(fused_sequence, mask=mask)
         final_logits = self.lm_head(decoded[:, -1, :])
         
         info = {

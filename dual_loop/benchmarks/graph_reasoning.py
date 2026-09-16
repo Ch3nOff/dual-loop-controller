@@ -24,6 +24,17 @@ class MultiHopGraphDataset:
         self.split = split.lower()
         self.base_seed = seed
 
+        max_possible_edges = num_nodes * (num_nodes - 1)
+        if num_edges > max_possible_edges:
+            raise ValueError(
+                f"num_edges ({num_edges}) exceeds maximum possible directed edges "
+                f"for {num_nodes} nodes ({max_possible_edges})."
+            )
+        if hops >= num_nodes:
+            raise ValueError(
+                f"hops ({hops}) must be strictly less than num_nodes ({num_nodes})."
+            )
+
         # Disjoint seed offsets guarantee that test and validation sets
         # never collide with training data in random generation space.
         split_offsets = {"train": 0, "val": 10_000, "test": 50_000}

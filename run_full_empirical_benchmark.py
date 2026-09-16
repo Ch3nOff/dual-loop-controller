@@ -1,4 +1,4 @@
-﻿"""
+"""
 Authentic Multi-Task Empirical Benchmark Runner: Qwen3.5-2B
 ============================================================
 Evaluates Qwen3.5-2B across 4 real reasoning benchmarks:
@@ -27,6 +27,12 @@ LIMIT = 40  # 40 samples per task across 4 tasks = 160 samples (640 forward quer
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+import argparse
+
+parser = argparse.ArgumentParser(description="Empirical Benchmark Runner")
+parser.add_argument("--trust_remote_code", action="store_true", default=False, help="Allow executing remote code")
+args, _ = parser.parse_known_args()
+
 print("=" * 80)
 print(" AUTHENTIC MULTI-TASK BENCHMARK: QWEN3.5-2B + DUAL-LOOP CONTROLLER")
 print("=" * 80)
@@ -37,7 +43,7 @@ print(f"Limit:         {LIMIT} samples per task")
 print("=" * 80)
 sys.stdout.flush()
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, trust_remote_code=True)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, trust_remote_code=args.trust_remote_code)
 if tokenizer.pad_token_id is None:
     tokenizer.pad_token_id = tokenizer.eos_token_id
 
@@ -46,7 +52,7 @@ sys.stdout.flush()
 base_model = AutoModelForCausalLM.from_pretrained(
     MODEL_ID,
     torch_dtype=torch.float32,
-    trust_remote_code=True,
+    trust_remote_code=args.trust_remote_code,
     device_map="cpu"
 )
 print("[Stage 1/3] Base model loaded!")

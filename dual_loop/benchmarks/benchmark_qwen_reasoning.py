@@ -18,6 +18,7 @@ import sys
 import time
 import random
 import argparse
+import re
 from typing import List, Dict, Any, Tuple
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, Qwen2Config, Qwen2ForCausalLM
@@ -158,8 +159,9 @@ def evaluate_model_on_dataset(
         generated_tokens = outputs[0, prompt_len:]
         prediction = tokenizer.decode(generated_tokens, skip_special_tokens=True).strip()
         
-        # Exact match or prefix match
-        if target.lower() in prediction.lower() or prediction.lower().startswith(target.lower()):
+        # Strict word-boundary match (ARCH-07: avoids false positives on substring occurrences)
+        pattern = r"\b" + re.escape(target.lower()) + r"\b"
+        if bool(re.search(pattern, prediction.lower())):
             correct += 1
             
         eff_k = model.last_telemetry.get("effective_k", float(k_steps))

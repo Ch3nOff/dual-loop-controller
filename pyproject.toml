@@ -32,8 +32,8 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
-    "torch>=2.0.0",
-    "numpy>=1.24.0",
+    "torch>=2.0.0,<3.0.0",
+    "numpy>=1.24.0,<3.0.0",
 ]
 
 [project.optional-dependencies]
@@ -42,8 +42,8 @@ dev = [
     "twine",
 ]
 llm = [
-    "transformers>=4.40.0",
-    "accelerate>=0.28.0",
+    "transformers>=4.40.0,<5.0.0",
+    "accelerate>=0.28.0,<2.0.0",
 ]
 
 [project.urls]
@@ -57,4 +57,4 @@ include = ["dual_loop*"]
 exclude = ["tests*", "dist*", "build*"]
 
 [tool.setuptools.package-data]
-dual_loop = ["checkpoints/*.pt"]
+dual_loop = ["checkpoints/checkpoint_trained_dualloop.pt"]

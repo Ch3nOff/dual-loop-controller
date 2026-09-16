@@ -14,6 +14,8 @@ Evaluations Performed:
 import os
 import time
 import random
+import argparse
+from typing import Optional
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -21,7 +23,7 @@ import torch.nn.functional as F
 from dual_loop import DualLoopTransformer, load_trained_checkpoint
 from dual_loop.benchmarks import MultiHopGraphDataset
 
-def load_or_instantiate_model(checkpoint_path=None, num_nodes=16):
+def load_or_instantiate_model(checkpoint_path=None, num_nodes=16, allow_untrained: bool = False):
     vocab_size = num_nodes + 3
     model = DualLoopTransformer(
         vocab_size=vocab_size,
@@ -38,6 +40,12 @@ def load_or_instantiate_model(checkpoint_path=None, num_nodes=16):
         _, loaded_path = load_trained_checkpoint(model, checkpoint_path)
         print(f"[Model Loader] Successfully loaded weights from '{loaded_path}'.")
     except FileNotFoundError as e:
+        if not allow_untrained:
+            raise FileNotFoundError(
+                f"Trained checkpoint not found. To prevent generating misleading benchmark metrics "
+                f"from untrained random weights, this run is halted. Provide a valid checkpoint "
+                f"path or pass allow_untrained=True / --allow-untrained. Original error: {e}"
+            ) from e
         print("\n" + "!" * 80)
         print("CRITICAL WARNING: TRAINED CHECKPOINT NOT FOUND!")
         print("The benchmark suite is currently executing on UNTRAINED (random) weights.")
@@ -51,7 +59,7 @@ def load_or_instantiate_model(checkpoint_path=None, num_nodes=16):
     model.eval()
     return model
 
-def run_suite():
+def run_suite(checkpoint_path: Optional[str] = None, allow_untrained: bool = False):
     # Deterministic Seeding for 100% Reproducibility
     random.seed(42)
     np.random.seed(42)
@@ -68,7 +76,7 @@ def run_suite():
     print(f"Device: {device} | Base Nodes: {num_nodes} | Chance Baseline: {chance_baseline:.2f}%")
     print("=" * 80)
 
-    model = load_or_instantiate_model().to(device)
+    model = load_or_instantiate_model(checkpoint_path=checkpoint_path, allow_untrained=allow_untrained).to(device)
 
     # -------------------------------------------------------------------------
     # BENCHMARK 1: Real Multi-Hop Relational Depth (H = 1, 2, 3)
@@ -198,4 +206,8 @@ def run_suite():
     print("=" * 80)
 
 if __name__ == "__main__":
-    run_suite()
+    parser = argparse.ArgumentParser(description="Dual-Loop Comprehensive Benchmark Suite")
+    parser.add_argument("--checkpoint", type=str, default=None, help="Path to trained checkpoint file")
+    parser.add_argument("--allow-untrained", action="store_true", help="Allow running on untrained weights if checkpoint missing")
+    args = parser.parse_args()
+    run_suite(checkpoint_path=args.checkpoint, allow_untrained=args.allow_untrained)

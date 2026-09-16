@@ -134,11 +134,19 @@ class DualLoopQwenModel(nn.Module):
         Intercepts intermediate hidden states, deliberations in latent space,
         and seamlessly injects deliberated representations into the residual stream.
         """
+        self.last_telemetry = {} # ARCH-02: prevent cross-request diagnostic leakage
         if not self.enabled or self.k_steps == 0:
             if self.k_steps == 0:
                 self.last_telemetry = {
                     "bypassed": True,
                     "k_steps": 0,
+                    "effective_k": 0.0
+                }
+            else:
+                self.last_telemetry = {
+                    "bypassed": True,
+                    "enabled": False,
+                    "k_steps": self.k_steps,
                     "effective_k": 0.0
                 }
             return output
@@ -158,12 +166,29 @@ class DualLoopQwenModel(nn.Module):
         except StopIteration:
             pass
 
+        # ARCH-03 & ARCH-05: Resolve per-sample query anchor and key_padding_mask
+        query_idx = self.query_idx
+        key_padding_mask = None
+        att_mask = getattr(self, "_current_attention_mask", None)
+        if att_mask is not None and isinstance(att_mask, torch.Tensor) and att_mask.dim() == 2:
+            # key_padding_mask for PyTorch MHA (True = ignore/pad)
+            seq_len = hidden_states.size(1)
+            mask_slice = att_mask[:, :seq_len]
+            key_padding_mask = (mask_slice == 0)
+            if self.query_idx == -1:
+                # Find last token index where att_mask == 1 for each sequence in batch
+                pos = torch.arange(seq_len, device=att_mask.device).unsqueeze(0).expand(att_mask.size(0), -1)
+                valid_positions = torch.where(mask_slice == 1, pos, -1)
+                query_idx = valid_positions.max(dim=-1).values
+                query_idx = torch.clamp(query_idx, min=0)
+
         # Execute recurrent latent deliberation
         enhanced, telemetry = self.adapter(
             hidden_states=hidden_states,
             k_steps=self.k_steps,
-            query_idx=self.query_idx,
-            dynamic_halting=self.dynamic_halting
+            query_idx=query_idx,
+            dynamic_halting=self.dynamic_halting,
+            key_padding_mask=key_padding_mask
         )
         self.last_telemetry = telemetry
 
@@ -289,7 +314,7 @@ class DualLoopQwenModel(nn.Module):
                 "Ensure the file exists locally or is a valid Hugging Face repository ID."
             )
 
-        # Load weights
+        # Load weights safely (enforce safetensors or weights_only=True)
         if file_to_load.endswith(".safetensors"):
             import safetensors.torch
             state_dict = safetensors.torch.load_file(file_to_load)
@@ -305,8 +330,12 @@ class DualLoopQwenModel(nn.Module):
             if not loaded:
                 try:
                     state_dict = torch.load(file_to_load, map_location="cpu", weights_only=True)
-                except Exception:
-                    state_dict = torch.load(file_to_load, map_location="cpu", weights_only=False)
+                except Exception as e:
+                    raise RuntimeError(
+                        f"Failed to safely deserialize '{file_to_load}' with weights_only=True. "
+                        "This file may contain unsafe pickled objects. In accordance with security "
+                        f"standards, arbitrary code execution via weights_only=False is strictly prohibited. Error: {e}"
+                    ) from e
             
         # Allow missing gate_alpha for backward compatibility with un-gated checkpoints
         if "gate_alpha" not in state_dict and hasattr(self.adapter, "gate_alpha"):
@@ -328,11 +357,24 @@ class DualLoopQwenModel(nn.Module):
 
     def forward(self, *args, **kwargs):
         """Passes inputs directly through the base model, intercepted by the hook."""
-        return self.qwen(*args, **kwargs)
+        self.last_telemetry = {}
+        # Extract attention_mask if present
+        self._current_attention_mask = kwargs.get("attention_mask", None)
+        if self._current_attention_mask is None and len(args) > 1 and isinstance(args[1], torch.Tensor):
+            self._current_attention_mask = args[1]
+        try:
+            return self.qwen(*args, **kwargs)
+        finally:
+            self._current_attention_mask = None
 
     def generate(self, *args, **kwargs):
         """Autoregressive generation with Dual-Loop latent deliberation enabled."""
-        return self.qwen.generate(*args, **kwargs)
+        self.last_telemetry = {}
+        self._current_attention_mask = kwargs.get("attention_mask", None)
+        try:
+            return self.qwen.generate(*args, **kwargs)
+        finally:
+            self._current_attention_mask = None
 
     def __getattr__(self, name: str):
         """Transparently delegates undefined attributes/methods to the underlying model."""

@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from typing import Optional, Tuple, Dict, Any
+from typing import Optional, Tuple, Dict, Any, Union, List
 from ..controller import RecurrentLatentController
 from ..memory import CognitiveWorkingMemory
 
@@ -66,15 +66,17 @@ class LatentDeliberationAdapter(nn.Module):
         self,
         hidden_states: torch.Tensor,
         k_steps: Optional[int] = None,
-        query_idx: int = -1,
-        dynamic_halting: bool = False
+        query_idx: Union[int, torch.Tensor, List[int]] = -1,
+        dynamic_halting: bool = False,
+        key_padding_mask: Optional[torch.Tensor] = None
     ) -> Tuple[torch.Tensor, Dict[str, Any]]:
         """
         Args:
             hidden_states: [B, SeqLen, D] Hidden activations from intermediate layer l.
             k_steps: Number of latent deliberation steps (0 bypasses pondering completely).
-            query_idx: Position of the query/instruction token (default -1).
+            query_idx: Position of the query/instruction token (int, or per-sample [B] Tensor/List).
             dynamic_halting: Whether to halt pondering early upon entropy/latent convergence.
+            key_padding_mask: Optional [B, SeqLen] boolean mask (True for padded positions).
         Returns:
             enhanced_states: [B, SeqLen', D] Modified hidden states for layer l+1.
             telemetry: Diagnostic information.
@@ -94,13 +96,29 @@ class LatentDeliberationAdapter(nn.Module):
 
         B, S, D = hidden_states.shape
         
-        # 1. Extract query anchor (normalize negative index)
-        if query_idx < 0:
-            query_idx = S + query_idx
-        query_rep = hidden_states[:, query_idx, :] # [B, D]
+        # 1. Extract query anchor (support int, per-sample Tensor [B], or List[int]) - ARCH-03
+        if isinstance(query_idx, int):
+            idx_int = query_idx if query_idx >= 0 else S + query_idx
+            idx_int = max(0, min(S - 1, idx_int))
+            query_rep = hidden_states[:, idx_int, :] # [B, D]
+            is_scalar_idx = True
+        else:
+            if isinstance(query_idx, list):
+                idx_tensor = torch.tensor(query_idx, device=hidden_states.device, dtype=torch.long)
+            elif isinstance(query_idx, torch.Tensor):
+                idx_tensor = query_idx.to(device=hidden_states.device, dtype=torch.long)
+            else:
+                raise TypeError(f"query_idx must be int, torch.Tensor, or List[int], got {type(query_idx)}")
+            
+            # Normalize negative indices & clamp
+            idx_tensor = torch.where(idx_tensor < 0, S + idx_tensor, idx_tensor)
+            idx_tensor = torch.clamp(idx_tensor, 0, S - 1)
+            batch_idx = torch.arange(B, device=hidden_states.device)
+            query_rep = hidden_states[batch_idx, idx_tensor, :] # [B, D]
+            is_scalar_idx = False
         
-        # 2. Compress context into working memory
-        memory = self.cwm(hidden_states) # [B, M, D]
+        # 2. Compress context into working memory (pass key_padding_mask - ARCH-05)
+        memory = self.cwm(hidden_states, key_padding_mask=key_padding_mask) # [B, M, D]
         
         # 3. Deliberate in latent space
         h_thought, aux, entropies = self.controller(
@@ -118,9 +136,12 @@ class LatentDeliberationAdapter(nn.Module):
         elif self.adapter_mode == "residual":
             # Add thoughts as a ReZero-gated residual onto the query token
             scale = torch.tanh(self.gate_alpha)
-            delta = scale * self.residual_proj(h_thought[:, 0, :]).unsqueeze(1) # [B, 1, D]
+            delta = scale * self.residual_proj(h_thought[:, 0, :]) # [B, D]
             enhanced = hidden_states.clone()
-            enhanced[:, query_idx:query_idx+1, :] = enhanced[:, query_idx:query_idx+1, :] + delta
+            if is_scalar_idx:
+                enhanced[:, idx_int:idx_int+1, :] = enhanced[:, idx_int:idx_int+1, :] + delta.unsqueeze(1)
+            else:
+                enhanced[batch_idx, idx_tensor, :] = enhanced[batch_idx, idx_tensor, :] + delta
         else:
             raise ValueError(f"Unknown adapter mode: {self.adapter_mode}")
             

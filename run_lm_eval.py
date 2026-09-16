@@ -85,6 +85,8 @@ def main():
                         help="Pondering steps for Dual-Loop deliberation")
     parser.add_argument("--limit", type=int, default=None,
                         help="Optional limit on number of samples per task (for testing)")
+    parser.add_argument("--trust_remote_code", action="store_true", default=False,
+                        help="Allow executing remote code from Hugging Face Hub")
     args = parser.parse_args()
 
     os.makedirs(args.output_path, exist_ok=True)
@@ -109,7 +111,7 @@ def main():
         sys.exit(1)
 
     print(f"[1/4] Loading tokenizer for {args.model}...")
-    tokenizer = AutoTokenizer.from_pretrained(args.model, trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained(args.model, trust_remote_code=args.trust_remote_code)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token_id = tokenizer.eos_token_id
 
@@ -118,7 +120,7 @@ def main():
     base_model = AutoModelForCausalLM.from_pretrained(
         args.model,
         torch_dtype=dtype,
-        trust_remote_code=True,
+        trust_remote_code=args.trust_remote_code,
         device_map=args.device if "cuda" in args.device else None
     )
     if args.device == "cpu":

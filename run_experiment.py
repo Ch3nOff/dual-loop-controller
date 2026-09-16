@@ -27,6 +27,17 @@ class MultiHopGraphDataset:
         self.num_edges = num_edges
         self.hops = hops
         
+        max_possible_edges = num_nodes * (num_nodes - 1)
+        if num_edges > max_possible_edges:
+            raise ValueError(
+                f"num_edges ({num_edges}) exceeds maximum possible directed edges "
+                f"for {num_nodes} nodes ({max_possible_edges})."
+            )
+        if hops >= num_nodes:
+            raise ValueError(
+                f"hops ({hops}) must be strictly less than num_nodes ({num_nodes})."
+            )
+        
         self.ARROW = num_nodes
         self.SEP = num_nodes + 1
         self.QUERY = num_nodes + 2
