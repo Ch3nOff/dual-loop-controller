@@ -106,6 +106,13 @@ api.upload_file(
     repo_id=REPO_ID
 )
 
+print("[*] Uploading comprehensive_dual_loop_behavior.png...")
+api.upload_file(
+    path_or_fileobj="comprehensive_dual_loop_behavior.png",
+    path_in_repo="comprehensive_dual_loop_behavior.png",
+    repo_id=REPO_ID
+)
+
 print("[*] Uploading README.md...")
 api.upload_file(
     path_or_fileobj="hf_model_card.md",

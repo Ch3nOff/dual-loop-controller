@@ -1,0 +1,86 @@
+{
+  "ARC-Easy": {
+    "samples": 40,
+    "base_raw_acc": 72.5,
+    "base_norm_acc": 70.0,
+    "static_raw_acc": 70.0,
+    "static_norm_acc": 77.5,
+    "adaptive": {
+      "tau_0.25": {
+        "norm_acc": 70.0,
+        "bypassed_pct": 77.5
+      },
+      "tau_0.35": {
+        "norm_acc": 70.0,
+        "bypassed_pct": 72.5
+      },
+      "tau_0.5": {
+        "norm_acc": 70.0,
+        "bypassed_pct": 65.0
+      }
+    }
+  },
+  "ARC-Challenge": {
+    "samples": 40,
+    "base_raw_acc": 50.0,
+    "base_norm_acc": 52.5,
+    "static_raw_acc": 55.00000000000001,
+    "static_norm_acc": 57.49999999999999,
+    "adaptive": {
+      "tau_0.25": {
+        "norm_acc": 52.5,
+        "bypassed_pct": 67.5
+      },
+      "tau_0.35": {
+        "norm_acc": 52.5,
+        "bypassed_pct": 52.5
+      },
+      "tau_0.5": {
+        "norm_acc": 52.5,
+        "bypassed_pct": 40.0
+      }
+    }
+  },
+  "OpenBookQA": {
+    "samples": 40,
+    "base_raw_acc": 5.0,
+    "base_norm_acc": 25.0,
+    "static_raw_acc": 5.0,
+    "static_norm_acc": 22.5,
+    "adaptive": {
+      "tau_0.25": {
+        "norm_acc": 25.0,
+        "bypassed_pct": 92.5
+      },
+      "tau_0.35": {
+        "norm_acc": 25.0,
+        "bypassed_pct": 82.5
+      },
+      "tau_0.5": {
+        "norm_acc": 25.0,
+        "bypassed_pct": 70.0
+      }
+    }
+  },
+  "PIQA": {
+    "samples": 40,
+    "base_raw_acc": 70.0,
+    "base_norm_acc": 67.5,
+    "static_raw_acc": 75.0,
+    "static_norm_acc": 62.5,
+    "adaptive": {
+      "tau_0.25": {
+        "norm_acc": 67.5,
+        "bypassed_pct": 52.5
+      },
+      "tau_0.35": {
+        "norm_acc": 67.5,
+        "bypassed_pct": 42.5
+      },
+      "tau_0.5": {
+        "norm_acc": 65.0,
+        "bypassed_pct": 32.5
+      }
+    }
+  }
+}
