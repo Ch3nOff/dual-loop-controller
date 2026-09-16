@@ -44,8 +44,8 @@ def run_training_and_deep_behavior_audit():
     num_nodes = 16
     hops = 3
     num_edges = 6
-    train_data = MultiHopGraphDataset(num_samples=3500, num_nodes=num_nodes, num_edges=num_edges, hops=hops)
-    test_data = MultiHopGraphDataset(num_samples=500, num_nodes=num_nodes, num_edges=num_edges, hops=hops)
+    train_data = MultiHopGraphDataset(num_samples=3500, num_nodes=num_nodes, num_edges=num_edges, hops=hops, split="train", seed=42)
+    test_data = MultiHopGraphDataset(num_samples=500, num_nodes=num_nodes, num_edges=num_edges, hops=hops, split="test", seed=42)
     vocab_size = train_data.vocab_size
 
     # 2. Instantiate Small, Efficient Dual-Loop Model
@@ -184,7 +184,7 @@ def run_training_and_deep_behavior_audit():
     print("AUDIT 3: UJI KETAHANAN GANGGUAN / STRESS-TEST (Distractor Robustness)")
     print("Menguji model pada graf dengan gangguan edge palsu (distractors) 2x lebih banyak (12 edges)")
     print("=" * 80)
-    ood_dataset = MultiHopGraphDataset(num_samples=300, num_nodes=num_nodes, num_edges=12, hops=hops)
+    ood_dataset = MultiHopGraphDataset(num_samples=300, num_nodes=num_nodes, num_edges=12, hops=hops, split="test", seed=42)
     with torch.no_grad():
         ox, oy_hops = ood_dataset.get_batch(batch_size=300)
         ox, oy_final = ox.to(device), oy_hops[:, -1].to(device)

@@ -38,7 +38,7 @@ def audit_halting_pareto():
     load_trained_checkpoint(model)
     model.eval()
 
-    dataset = MultiHopGraphDataset(num_samples=500, num_nodes=num_nodes, num_edges=6, hops=3, seed=42)
+    dataset = MultiHopGraphDataset(num_samples=500, num_nodes=num_nodes, num_edges=6, hops=3, split="test", seed=42)
     x_test, y_test_all = dataset.get_batch(500, shuffle=False)
     x_test, y_test = x_test.to(device), y_test_all[:, -1].to(device)
 
