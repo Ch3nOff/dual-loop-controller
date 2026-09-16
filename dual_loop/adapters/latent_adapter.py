@@ -28,13 +28,19 @@ class LatentDeliberationAdapter(nn.Module):
         num_cwm_slots: int = 16,
         adapter_mode: str = "residual", # "residual" or "prefix"
         gate_alpha_init: float = 0.05,
-        vocab_size: Optional[int] = None
+        vocab_size: Optional[int] = None,
+        enable_critique: bool = True,
+        use_learned_halting: bool = False,
+        lambda_prior: float = 0.5,
+        tau_halt: float = 0.75
     ):
         super().__init__()
         self.d_model = d_model
         self.num_thought_tokens = num_thought_tokens
         self.adapter_mode = adapter_mode
         self.max_ponder_steps = max_ponder_steps
+        self.enable_critique = enable_critique
+        self.use_learned_halting = use_learned_halting
         
         # Memory compressor
         self.cwm = CognitiveWorkingMemory(d_model=d_model, num_slots=num_cwm_slots, n_heads=n_heads)
@@ -47,7 +53,11 @@ class LatentDeliberationAdapter(nn.Module):
             num_thought_tokens=num_thought_tokens,
             max_ponder_steps=max_ponder_steps,
             capacity_factor=capacity_factor,
-            vocab_size=vocab_size
+            vocab_size=vocab_size,
+            enable_critique=enable_critique,
+            use_learned_halting=use_learned_halting,
+            lambda_prior=lambda_prior,
+            tau_halt=tau_halt
         )
         
         if adapter_mode == "residual":
@@ -89,6 +99,9 @@ class LatentDeliberationAdapter(nn.Module):
                 "num_thoughts": 0,
                 "ponder_steps": 0,
                 "effective_k": 0.0,
+                "step_entropies": [],
+                "error_norms": [],
+                "halting_lambdas": [],
                 "adapter_mode": self.adapter_mode,
                 "bypassed": True
             }
@@ -150,6 +163,8 @@ class LatentDeliberationAdapter(nn.Module):
             "ponder_steps": steps,
             "effective_k": float(len(entropies)) if (dynamic_halting and entropies) else float(steps),
             "step_entropies": [e.detach().cpu() for e in entropies] if entropies else [],
+            "error_norms": [e.detach().cpu() for e in self.controller.last_error_norms] if self.controller.last_error_norms else [],
+            "halting_lambdas": [l.detach().cpu() for l in self.controller.last_lambdas] if self.controller.last_lambdas else [],
             "gate_scale": float(torch.tanh(self.gate_alpha).item()) if hasattr(self, "gate_alpha") else 1.0,
             "adapter_mode": self.adapter_mode,
             "bypassed": False

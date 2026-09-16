@@ -6,8 +6,8 @@ for Transformer architectures.
 """
 
 from .memory import CognitiveWorkingMemory
-from .halting import EntropyHaltingUnit
-from .controller import RecurrentLatentController, TopKCapacityCrossAttention
+from .halting import EntropyHaltingUnit, LearnedHaltingGate
+from .controller import RecurrentLatentController, TopKCapacityCrossAttention, LatentCritiqueRefinementUnit
 from .decoder import DualLoopTransformer
 from .adapters.latent_adapter import LatentDeliberationAdapter
 from .adapters.qwen_adapter import DualLoopQwenModel, attach_dual_loop_to_qwen
@@ -58,8 +58,10 @@ def load_trained_checkpoint(model: Optional[DualLoopTransformer] = None, checkpo
 __all__ = [
     "CognitiveWorkingMemory",
     "EntropyHaltingUnit",
+    "LearnedHaltingGate",
     "RecurrentLatentController",
     "TopKCapacityCrossAttention",
+    "LatentCritiqueRefinementUnit",
     "DualLoopTransformer",
     "LatentDeliberationAdapter",
     "DualLoopQwenModel",

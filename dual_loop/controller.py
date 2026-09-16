@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from typing import Optional, Tuple, List
-from .halting import EntropyHaltingUnit
+from .halting import EntropyHaltingUnit, LearnedHaltingGate
 
 class TopKCapacityCrossAttention(nn.Module):
     """
@@ -48,9 +48,48 @@ class TopKCapacityCrossAttention(nn.Module):
         return attn_delta
 
 
+class LatentCritiqueRefinementUnit(nn.Module):
+    """
+    Metacognitive Latent Critique & Error-Refinement Unit.
+    
+    Evaluates discrepancy between current deliberation thoughts and grounded context,
+    extracting an error vector e_k that is projected into a corrective residual delta:
+    
+    1. Discrepancy signal: e_k = LayerNorm(thoughts - cross_delta)
+    2. Metacognitive critique: delta_correct = GELU(W_critique(e_k)) * sigmoid(W_gate(e_k))
+    3. Returns:
+       - delta_correct: [B, L, D] corrective direction to repair mistakes
+       - error_norm: [B] scalar inconsistency score used for adaptive halting
+    """
+    def __init__(self, d_model: int):
+        super().__init__()
+        self.d_model = d_model
+        self.norm_err = nn.LayerNorm(d_model)
+        self.critique_net = nn.Sequential(
+            nn.Linear(d_model, d_model),
+            nn.GELU(),
+            nn.Linear(d_model, d_model)
+        )
+        self.error_gate = nn.Linear(d_model, d_model)
+        
+        # Initialize final projection with small scale so critique starts gentle
+        nn.init.normal_(self.critique_net[-1].weight, std=0.01)
+        nn.init.zeros_(self.critique_net[-1].bias)
+        nn.init.zeros_(self.error_gate.weight)
+        nn.init.constant_(self.error_gate.bias, -1.0)
+
+    def forward(self, thoughts: torch.Tensor, cross_delta: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+        raw_err = thoughts - cross_delta
+        e_k = self.norm_err(raw_err)
+        gate = torch.sigmoid(self.error_gate(e_k))
+        delta_correct = self.critique_net(e_k) * gate
+        error_norm = raw_err.norm(dim=-1).mean(dim=-1) # [B]
+        return delta_correct, error_norm
+
+
 class RecurrentLatentController(nn.Module):
     """
-    System 2: Recurrent Latent Executive Controller.
+    System 2: Recurrent Latent Executive Controller with Metacognitive Error-Refinement.
     
     Features:
     1. Query-Conditioned Thought Initialization: Hooks directly onto the query
@@ -58,8 +97,11 @@ class RecurrentLatentController(nn.Module):
     2. Weight-Tied Recurrent Transformer Layer: Preserves latent manifold geometry
        and enables residual BPTT without gradient vanishing.
     3. Top-K Capacity Gating: Deterministic compute quota for GPU SIMT alignment.
-    4. On-Demand Audit Probe: Linear probe head for training semantic supervision
-       and regulatory compliance audit logging.
+    4. Metacognitive Critique & Error Correction: Actively computes discrepancy against
+       context memory and injects corrective critique updates (learns from mistakes).
+    5. Adaptive Learned Anchor Gate: Contraction mapping guaranteeing stability at K >= 4.
+    6. Multi-Signal Halting Unit: PonderNet-inspired learned halting or calibrated entropy.
+    7. On-Demand Audit Probe: Linear probe head for training semantic supervision.
     """
     def __init__(
         self,
@@ -70,7 +112,11 @@ class RecurrentLatentController(nn.Module):
         max_ponder_steps: int = 4,
         vocab_size: Optional[int] = None,
         capacity_factor: float = 0.5,
-        entropy_threshold: float = 0.5
+        entropy_threshold: float = 0.5,
+        enable_critique: bool = True,
+        use_learned_halting: bool = False,
+        lambda_prior: float = 0.5,
+        tau_halt: float = 0.75
     ):
         super().__init__()
         self.d_model = d_model
@@ -89,6 +135,16 @@ class RecurrentLatentController(nn.Module):
         # Weight-tied recurrent transformer block
         self.latent_self_attn = nn.MultiheadAttention(d_model, n_heads, batch_first=True)
         self.capacity_cross_attn = TopKCapacityCrossAttention(d_model, n_heads, capacity_factor=capacity_factor)
+        
+        # Metacognitive Critique Unit (Error Recognition & Self-Correction)
+        self.enable_critique = enable_critique
+        self.critique_unit = LatentCritiqueRefinementUnit(d_model) if enable_critique else None
+
+        # Learned Adaptive Anchor Gate (Contraction Mapping for K >= 4 stabilization)
+        self.anchor_gate = nn.Linear(d_model, 1)
+        nn.init.constant_(self.anchor_gate.bias, 1.0)
+        nn.init.normal_(self.anchor_gate.weight, std=0.01)
+
         self.latent_mlp = nn.Sequential(
             nn.Linear(d_model, d_ff),
             nn.GELU(),
@@ -98,8 +154,18 @@ class RecurrentLatentController(nn.Module):
         self.norm2 = nn.LayerNorm(d_model)
         self.norm3 = nn.LayerNorm(d_model)
 
-        # Dynamic Halting unit
+        # Dynamic Halting units
         self.halting_unit = EntropyHaltingUnit(entropy_threshold=entropy_threshold)
+        self.use_learned_halting = use_learned_halting
+        self.learned_halting_gate = LearnedHaltingGate(
+            d_model=d_model,
+            lambda_prior=lambda_prior,
+            tau_halt=tau_halt,
+            vocab_size=vocab_size
+        ) if use_learned_halting else None
+
+        self.last_lambdas: List[torch.Tensor] = []
+        self.last_error_norms: List[torch.Tensor] = []
 
         # Optional auxiliary probe head
         if vocab_size is not None:
@@ -149,6 +215,9 @@ class RecurrentLatentController(nn.Module):
         steps = self.max_ponder_steps if k_steps is None else k_steps
         aux_logits = []
         step_entropies = []
+        lambdas = []
+        error_norms = []
+        h_prev_primary = None
 
         for step in range(steps):
             H_prev = H.clone()
@@ -159,10 +228,21 @@ class RecurrentLatentController(nn.Module):
 
             # 2. Capacity-Gated Cross-Attention ke Memory (Context grounding)
             H_cross = self.capacity_cross_attn(H, memory)
-            anchor_scale = (0.1 / (step + 1)) if not self.training else 0.1
-            H = self.norm2(H + H_cross + anchor_scale * H_anchor)
 
-            # 3. Latent MLP
+            # 3. Metacognitive Error-Reflection & Self-Correction (Learn from mistakes)
+            if self.critique_unit is not None:
+                delta_critique, err_norm = self.critique_unit(H, H_cross)
+                error_norms.append(err_norm)
+                H_updated = H + H_cross + delta_critique
+            else:
+                err_norm = None
+                H_updated = H + H_cross
+
+            # 4. Learned Adaptive Anchor Gate (Contraction Mapping: guarantees stability at K >= 4)
+            alpha = torch.sigmoid(self.anchor_gate(H_updated)) # [B, L, 1]
+            H = self.norm2(alpha * H_updated + (1.0 - alpha) * H_anchor)
+
+            # 5. Latent MLP
             H = self.norm3(H + self.latent_mlp(H))
 
             # Recurrent state norm clipping (ARCH-01: prevent divergence at higher ponder steps)
@@ -171,22 +251,43 @@ class RecurrentLatentController(nn.Module):
             clip_coef = torch.clamp(max_norm / (h_norm + 1e-6), max=1.0)
             H = H * clip_coef
 
+            h_primary = H[:, 0, :]
+
+            # 6. Learned Halting Gate Evaluation (PonderNet multi-signal)
+            if self.learned_halting_gate is not None:
+                lam_k = self.learned_halting_gate.compute_lambda(
+                    h_curr=h_primary,
+                    h_prev=h_prev_primary,
+                    H_curr=H,
+                    H_prev=H_prev,
+                    discrepancy_norm=err_norm
+                )
+                lambdas.append(lam_k)
+                h_prev_primary = h_primary.detach()
+
+                if dynamic_halting and not self.training:
+                    halt_mask = self.learned_halting_gate.should_halt_inference(lam_k)
+                    if halt_mask.all():
+                        break
+
             # Audit Probe & Entropy evaluation
             if self.audit_probe is not None:
-                probe_out = self.audit_probe(H[:, 0, :]) # Probe primary thought token
+                probe_out = self.audit_probe(h_primary) # Probe primary thought token
                 if return_aux or dynamic_halting:
                     aux_logits.append(probe_out)
                     entropy = self.halting_unit.calculate_entropy(probe_out)
                     step_entropies.append(entropy)
 
-                    if dynamic_halting and (entropy.mean().item() < self.halting_unit.entropy_threshold):
+                    if self.learned_halting_gate is None and dynamic_halting and (entropy.mean().item() < self.halting_unit.entropy_threshold):
                         # Batch has achieved confident consensus; early halt
                         break
-            elif dynamic_halting:
+            elif dynamic_halting and self.learned_halting_gate is None:
                 # Latent representation delta convergence
                 rel_delta = (H - H_prev).norm() / (H_prev.norm() + 1e-6)
                 step_entropies.append(rel_delta.unsqueeze(0))
                 if step > 0 and rel_delta.item() < self.halting_unit.delta_threshold:
                     break
 
+        self.last_lambdas = lambdas
+        self.last_error_norms = error_norms
         return H, aux_logits, step_entropies

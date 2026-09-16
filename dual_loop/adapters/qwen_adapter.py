@@ -61,6 +61,8 @@ class DualLoopQwenModel(nn.Module):
         query_idx: int = -1,
         vocab_size: Optional[int] = None,
         confidence_threshold: Optional[float] = None,
+        enable_critique: bool = True,
+        use_learned_halting: bool = False,
         **adapter_kwargs
     ):
         super().__init__()
@@ -124,6 +126,8 @@ class DualLoopQwenModel(nn.Module):
             num_cwm_slots=num_cwm_slots,
             adapter_mode=adapter_mode,
             vocab_size=vocab_size,
+            enable_critique=enable_critique,
+            use_learned_halting=use_learned_halting,
             **adapter_kwargs
         )
         
