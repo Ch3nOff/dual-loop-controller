@@ -26,47 +26,47 @@
     "arc_easy": {
       "samples": 40,
       "base_acc": 0.725,
-      "loop_acc": 0.675,
-      "delta_acc": "-5.0%",
-      "base_acc_norm": 0.675,
+      "loop_acc": 0.7,
+      "delta_acc": "-2.5%",
+      "base_acc_norm": 0.7,
       "loop_acc_norm": 0.775,
-      "delta_acc_norm": "+10.0%"
+      "delta_acc_norm": "+7.5%"
     },
     "arc_challenge": {
       "samples": 40,
       "base_acc": 0.5,
-      "loop_acc": 0.475,
-      "delta_acc": "-2.5%",
-      "base_acc_norm": 0.475,
-      "loop_acc_norm": 0.45,
-      "delta_acc_norm": "-2.5%"
+      "loop_acc": 0.55,
+      "delta_acc": "+5.0%",
+      "base_acc_norm": 0.525,
+      "loop_acc_norm": 0.575,
+      "delta_acc_norm": "+5.0%"
     },
     "openbookqa": {
       "samples": 40,
-      "base_acc": 0.15,
-      "loop_acc": 0.125,
-      "delta_acc": "-2.5%",
-      "base_acc_norm": 0.275,
-      "loop_acc_norm": 0.325,
-      "delta_acc_norm": "+5.0%"
+      "base_acc": 0.05,
+      "loop_acc": 0.05,
+      "delta_acc": "0.0%",
+      "base_acc_norm": 0.25,
+      "loop_acc_norm": 0.225,
+      "delta_acc_norm": "-2.5%"
     },
     "piqa": {
       "samples": 40,
-      "base_acc": 0.675,
-      "loop_acc": 0.675,
-      "delta_acc": "0.0%",
-      "base_acc_norm": 0.75,
-      "loop_acc_norm": 0.75,
-      "delta_acc_norm": "0.0%"
+      "base_acc": 0.7,
+      "loop_acc": 0.75,
+      "delta_acc": "+5.0%",
+      "base_acc_norm": 0.675,
+      "loop_acc_norm": 0.625,
+      "delta_acc_norm": "-5.0%"
     },
     "suite_mean": {
       "samples": 160,
-      "base_acc": 0.5125,
-      "loop_acc": 0.4875,
-      "delta_acc": "-2.50%",
-      "base_acc_norm": 0.5438,
-      "loop_acc_norm": 0.575,
-      "delta_acc_norm": "+3.12%"
+      "base_acc": 0.4938,
+      "loop_acc": 0.5125,
+      "delta_acc": "+1.88%",
+      "base_acc_norm": 0.5375,
+      "loop_acc_norm": 0.55,
+      "delta_acc_norm": "+1.25%"
     }
   }
 }

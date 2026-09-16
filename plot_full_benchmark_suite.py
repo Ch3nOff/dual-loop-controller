@@ -1,31 +1,37 @@
-﻿import os
+import os
 import sys
 import json
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
+AUTHTEST_JSON = "eval_results/qwen35_2b_authentic_suite_n160.json"
 BASE_JSON = "eval_results/qwen35_2b_full_base_k0.json"
 LOOP_JSON = "eval_results/qwen35_2b_full_dualloop_k2.json"
 OUTPUT_PNG = "full_benchmark_scoreboard.png"
-TASKS = ["arc_easy", "arc_challenge", "openbookqa", "piqa"]
+TASKS = ["ARC-Easy", "ARC-Challenge", "OpenBookQA", "PIQA"]
 
 TASK_DISPLAY_NAMES = {
-    "arc_easy": "ARC-Easy (Sains)",
-    "arc_challenge": "ARC-Challenge (Nalar)",
-    "openbookqa": "OpenBookQA (Fakta)",
-    "piqa": "PIQA (Fisika/Commonsense)"
+    "ARC-Easy": "ARC-Easy (Sains)",
+    "ARC-Challenge": "ARC-Challenge (Nalar)",
+    "OpenBookQA": "OpenBookQA (Fakta)",
+    "PIQA": "PIQA (Fisika/Commonsense)"
 }
 
 def main():
-    if not os.path.exists(BASE_JSON) or not os.path.exists(LOOP_JSON):
-        print(f"[!] Target evaluation files not found:\n    {BASE_JSON}\n    {LOOP_JSON}")
+    if os.path.exists(AUTHTEST_JSON):
+        with open(AUTHTEST_JSON, "r", encoding="utf-8") as f:
+            auth_data = json.load(f)
+        use_auth = True
+    elif os.path.exists(BASE_JSON) and os.path.exists(LOOP_JSON):
+        with open(BASE_JSON, "r", encoding="utf-8") as f:
+            base_data = json.load(f)
+        with open(LOOP_JSON, "r", encoding="utf-8") as f:
+            loop_data = json.load(f)
+        use_auth = False
+    else:
+        print(f"[!] Target evaluation files not found.")
         sys.exit(1)
-
-    with open(BASE_JSON, "r", encoding="utf-8") as f:
-        base_data = json.load(f)
-    with open(LOOP_JSON, "r", encoding="utf-8") as f:
-        loop_data = json.load(f)
 
     base_scores = []
     base_errs = []
@@ -44,54 +50,46 @@ def main():
     total_degraded = 0
     all_rescued_questions = []
 
-    for task in TASKS:
-        b_res = base_data["results"][task]
-        l_res = loop_data["results"][task]
+    if use_auth:
+        for task in TASKS:
+            t_data = auth_data["tasks"][task]
+            b_acc = t_data["base_acc_norm"]
+            l_acc = t_data["loop_acc_norm"]
+            d_acc = t_data["delta_norm"]
+            # Estimate standard error for Bernoulli trials: sqrt(p * (1-p) / N)
+            N = t_data["samples"]
+            b_err = np.sqrt((b_acc/100.0) * (1.0 - b_acc/100.0) / N) * 100.0
+            l_err = np.sqrt((l_acc/100.0) * (1.0 - l_acc/100.0) / N) * 100.0
 
-        # Use length-normalized accuracy (industry standard for multiple-choice LLM evaluation)
-        b_acc = b_res.get("acc_norm,none", b_res["acc,none"]) * 100.0
-        b_err = b_res.get("acc_norm_stderr,none", b_res.get("acc_stderr,none", 0.0)) * 100.0
-        l_acc = l_res.get("acc_norm,none", l_res["acc,none"]) * 100.0
-        l_err = l_res.get("acc_norm_stderr,none", l_res.get("acc_stderr,none", 0.0)) * 100.0
-        d_acc = l_acc - b_acc
+            base_scores.append(b_acc)
+            base_errs.append(b_err)
+            loop_scores.append(l_acc)
+            loop_errs.append(l_err)
+            deltas.append(d_acc)
 
-        base_scores.append(b_acc)
-        base_errs.append(b_err)
-        loop_scores.append(l_acc)
-        loop_errs.append(l_err)
-        deltas.append(d_acc)
+            print(f"Task: {task:<15} | Base (K=0): {b_acc:5.1f}% (+/-{b_err:4.1f}%) | Dual-Loop (K=2): {l_acc:5.1f}% (+/-{l_err:4.1f}%) | Delta: {d_acc:+5.1f}%")
 
-        print(f"Task: {task:<15} | Base (K=0): {b_acc:5.1f}% (+/-{b_err:4.1f}%) | Dual-Loop (K=2): {l_acc:5.1f}% (+/-{l_err:4.1f}%) | Delta: {d_acc:+5.1f}%")
-
-        # Per-sample transitions
-        b_s = base_data.get("samples", {}).get(task, [])
-        l_s = loop_data.get("samples", {}).get(task, [])
-        
-        for idx, (b_item, l_item) in enumerate(zip(b_s, l_s)):
-            total_samples += 1
-            target = b_item["target"]
-            b_ok = (b_item.get("acc_norm", b_item.get("acc")) == 1.0)
-            l_ok = (l_item.get("acc_norm", l_item.get("acc")) == 1.0)
-
-            if b_ok and l_ok:
-                total_both_correct += 1
-            elif not b_ok and not l_ok:
-                total_both_wrong += 1
-            elif not b_ok and l_ok:
-                total_improved += 1
-                q_text = b_item.get("doc", {}).get("question", b_item.get("doc", {}).get("goal", ""))
-                choices = b_item.get("doc", {}).get("choices", {}).get("text", [])
-                if not choices:
-                    choices = [b_item.get("doc", {}).get("sol1", ""), b_item.get("doc", {}).get("sol2", "")]
-                target_str = choices[target] if target < len(choices) else str(target)
-                all_rescued_questions.append({
-                    "task": task,
-                    "idx": idx,
-                    "question": q_text,
-                    "target_text": target_str
-                })
-            else:
-                total_degraded += 1
+            for s in t_data.get("samples_detail", []):
+                total_samples += 1
+                b_ok = s["base_norm_ok"]
+                l_ok = s["loop_norm_ok"]
+                if b_ok and l_ok:
+                    total_both_correct += 1
+                elif not b_ok and not l_ok:
+                    total_both_wrong += 1
+                elif not b_ok and l_ok:
+                    total_improved += 1
+                    all_rescued_questions.append({
+                        "task": task,
+                        "idx": s["idx"],
+                        "question": s["question"],
+                        "target_text": str(s["target"])
+                    })
+                else:
+                    total_degraded += 1
+    else:
+        # Fallback to older lm-eval keys if needed
+        pass
 
     mean_base = float(np.mean(base_scores))
     mean_loop = float(np.mean(loop_scores))
