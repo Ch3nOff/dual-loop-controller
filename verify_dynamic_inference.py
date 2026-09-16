@@ -31,8 +31,8 @@ def test_inference_halting():
 
     model.eval()
 
-    # 3. Deterministic Benchmark Dataset
-    dataset = MultiHopGraphDataset(num_samples=500, num_nodes=16, num_edges=6, hops=3, seed=42)
+    # 3. Deterministic Benchmark Dataset (Held-out Test Split)
+    dataset = MultiHopGraphDataset(num_samples=500, num_nodes=16, num_edges=6, hops=3, split="test", seed=42)
     x, y_all = dataset.get_batch(500, shuffle=False)
     y = y_all[:, -1]
 

@@ -73,38 +73,38 @@ def run_suite():
     # -------------------------------------------------------------------------
     # BENCHMARK 1: Real Multi-Hop Relational Depth (H = 1, 2, 3)
     # -------------------------------------------------------------------------
-    print("\n[BENCHMARK 1: RELATIONAL HOP COMPLEXITY (H = 1, 2, 3)]")
+    print("\n[BENCHMARK 1: RELATIONAL HOP COMPLEXITY (H = 1, 2, 3 on Held-Out Graphs)]")
     hop_results = {}
     with torch.no_grad():
         for h in [1, 2, 3]:
-            ds = MultiHopGraphDataset(num_samples=400, num_nodes=num_nodes, num_edges=6, hops=h, seed=100 + h)
+            ds = MultiHopGraphDataset(num_samples=400, num_nodes=num_nodes, num_edges=6, hops=h, split="test", seed=42)
             x, y_all = ds.get_batch(400, shuffle=False)
             x, y = x.to(device), y_all[:, -1].to(device)
             logits, _ = model(x, k_steps=h)
             acc = (logits.argmax(dim=-1) == y).float().mean().item() * 100.0
             hop_results[f"{h}-Hop"] = acc
-            print(f"  Hop {h} -> Test Accuracy (Computed from Logits): {acc:5.1f}%")
+            print(f"  Hop {h} -> Held-Out Test Accuracy: {acc:5.1f}%")
 
     # -------------------------------------------------------------------------
     # BENCHMARK 2: Distractor Edge Stress-Test (E = 6, 8, 12, 16)
     # -------------------------------------------------------------------------
-    print("\n[BENCHMARK 2: DISTRACTOR EDGE STRESS-TEST (E = 6, 8, 12, 16 at H=3)]")
+    print("\n[BENCHMARK 2: DISTRACTOR EDGE STRESS-TEST (E = 6, 8, 12, 16 at H=3 on Held-Out Graphs)]")
     distractor_results = {}
     with torch.no_grad():
         for e in [6, 8, 12, 16]:
-            ds_e = MultiHopGraphDataset(num_samples=300, num_nodes=num_nodes, num_edges=e, hops=3, seed=200 + e)
+            ds_e = MultiHopGraphDataset(num_samples=300, num_nodes=num_nodes, num_edges=e, hops=3, split="test", seed=42)
             x_e, y_e_all = ds_e.get_batch(300, shuffle=False)
             x_e, y_e = x_e.to(device), y_e_all[:, -1].to(device)
             logits_e, _ = model(x_e, k_steps=3)
             acc_e = (logits_e.argmax(dim=-1) == y_e).float().mean().item() * 100.0
             distractor_results[f"{e} Edges"] = acc_e
-            print(f"  {e:2d} Total Edges -> Test Accuracy (Computed from Logits): {acc_e:5.1f}%")
+            print(f"  {e:2d} Total Edges -> Held-Out Test Accuracy: {acc_e:5.1f}%")
 
     # -------------------------------------------------------------------------
-    # BENCHMARK 3: UnvarnISHED TEST-TIME COMPUTE SCALING (K = 0 .. 5)
+    # BENCHMARK 3: Unvarnished Test-Time Compute Scaling (K = 0 .. 5)
     # -------------------------------------------------------------------------
-    print("\n[BENCHMARK 3: UNVARNISHED TEST-TIME COMPUTE SCALING (K = 0 .. 5)]")
-    ds_scale = MultiHopGraphDataset(num_samples=500, num_nodes=num_nodes, num_edges=6, hops=3, seed=42)
+    print("\n[BENCHMARK 3: UNVARNISHED TEST-TIME COMPUTE SCALING (K = 0 .. 5 on Held-Out Graphs)]")
+    ds_scale = MultiHopGraphDataset(num_samples=500, num_nodes=num_nodes, num_edges=6, hops=3, split="test", seed=42)
     xs, ys_all = ds_scale.get_batch(500, shuffle=False)
     xs, ys = xs.to(device), ys_all[:, -1].to(device)
     scale_results = {}
@@ -116,6 +116,21 @@ def run_suite():
             entropy_s = -torch.sum(probs_s * F.log_softmax(logits_s, dim=-1), dim=-1).mean().item()
             scale_results[k] = (acc_s, entropy_s)
             print(f"  Ponder K={k} -> Accuracy: {acc_s:5.1f}% | Predictive Entropy: {entropy_s:.3f} nats")
+
+    # -------------------------------------------------------------------------
+    # DIAGNOSTIC: In-Distribution (Train) vs Generalization (Held-Out Test)
+    # -------------------------------------------------------------------------
+    print("\n[DIAGNOSTIC: IN-DISTRIBUTION (TRAIN SET) VS GENERALIZATION (TEST SET)]")
+    ds_train = MultiHopGraphDataset(num_samples=500, num_nodes=num_nodes, num_edges=6, hops=3, split="train", seed=42)
+    x_tr, y_tr_all = ds_train.get_batch(500, shuffle=False)
+    x_tr, y_tr = x_tr.to(device), y_tr_all[:, -1].to(device)
+    with torch.no_grad():
+        out_tr_k0, _ = model(x_tr, k_steps=0)
+        out_tr_k3, _ = model(x_tr, k_steps=3)
+        acc_tr_k0 = (out_tr_k0.argmax(-1) == y_tr).float().mean().item() * 100.0
+        acc_tr_k3 = (out_tr_k3.argmax(-1) == y_tr).float().mean().item() * 100.0
+    print(f"  Train Set (Seen Graphs)     : K=0: {acc_tr_k0:5.1f}% -> K=3: {acc_tr_k3:5.1f}% (Delta: {acc_tr_k3 - acc_tr_k0:+5.1f}% monotonic memorization)")
+    print(f"  Held-Out Set (Unseen Graphs): K=0: {scale_results[0][0]:5.1f}% -> K=3: {scale_results[3][0]:5.1f}% (Delta: {scale_results[3][0] - scale_results[0][0]:+5.1f}% generalization scaling)")
 
     # -------------------------------------------------------------------------
     # BENCHMARK 4: Real Per-Sample Pareto Halting Analysis
@@ -153,17 +168,33 @@ def run_suite():
         print(f"  {thresh:<12.2f} | {acc_th:<10.1f} | {avg_s:<10.2f} | {h1.float().mean()*100:<8.1f} | {h2.float().mean()*100:<8.1f} | {h3.float().mean()*100:<8.1f}")
 
     # -------------------------------------------------------------------------
-    # Summary of Real Empirical Findings
+    # Dynamically Generated Scientific Summary
     # -------------------------------------------------------------------------
+    k0_acc, k0_ent = scale_results[0]
+    k3_acc, k3_ent = scale_results[3]
+    delta_k = k3_acc - k0_acc
+
     print("\n" + "=" * 80)
     print("HONEST SCIENTIFIC SUMMARY (Empirical Findings & Realities)")
     print("=" * 80)
-    print("1. MODEL HAS LEARNED: Final accuracy on 3-hop is ~29-30% vs chance 6.25% (4.7x over random).")
-    print(f"2. ABSENCE OF TEST-TIME UPLIFT: K=0 ({scale_results[0][0]:.1f}%) matches or slightly exceeds K=3 ({scale_results[3][0]:.1f}%).")
-    print("   At 225K parameters, iterative latent pondering does not yield progressive scaling.")
-    print("3. DEGRADATION UNDER DISTRACTORS: Accuracy falls from ~29% (6 edges) to ~13-14% (16 edges).")
-    print("4. CALIBRATION REQUIRED: Entropy thresholding requires empirical calibration to match")
-    print("   the model's ~1.3 nats operational entropy distribution.")
+    print(f"1. RELATIONAL LEARNING: Final 3-hop accuracy is {k3_acc:.1f}% vs random baseline {chance_baseline:.2f}% ({k3_acc/chance_baseline:.1f}x over random chance).")
+    
+    if delta_k > 5.0:
+        scaling_status = f"POSITIVE TEST-TIME SCALING: Pondering (K=3) yields +{delta_k:.1f}% accuracy over K=0 ({k0_acc:.1f}% -> {k3_acc:.1f}%)."
+    elif delta_k >= -2.0:
+        scaling_status = f"FLAT / MARGINAL SCALING TRAJECTORY: Pondering yields marginal delta ({delta_k:+.1f}%) over K=0 ({k0_acc:.1f}% vs {k3_acc:.1f}%)."
+    else:
+        scaling_status = f"REPRESENTATIONAL DRIFT / OVER-THINKING: Pondering degraded accuracy by {delta_k:.1f}% from K=0 ({k0_acc:.1f}% -> {k3_acc:.1f}%)."
+    print(f"2. GENERALIZATION SCALING REGIME: {scaling_status}")
+
+    # Distractor robustness dynamic evaluation
+    e_keys = sorted(distractor_results.keys(), key=lambda k: int(k.split()[0]))
+    print(f"3. DISTRACTOR DECAY: Performance decays from {distractor_results[e_keys[0]]:.1f}% ({e_keys[0]}) to {distractor_results[e_keys[-1]]:.1f}% ({e_keys[-1]}).")
+
+    # Dynamic halting compute savings
+    max_k = 3.0
+    k_saving = (max_k - info_dyn['effective_k']) / max_k * 100.0
+    print(f"4. DYNAMIC HALTING: Calibrated threshold ({opt_thresh:.3f} nats) saves {k_saving:.1f}% compute (effective K: {info_dyn['effective_k']:.2f} vs {max_k:.1f}) at {acc_dyn:.1f}% accuracy.")
     print("=" * 80)
 
 if __name__ == "__main__":

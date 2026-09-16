@@ -9,13 +9,18 @@ from dual_loop.benchmarks import MultiHopGraphDataset
 
 def main():
     parser = argparse.ArgumentParser(description="Train Dual-Loop Cognitive Controller v2.0")
-    parser.add_argument("--epochs", type=int, default=30, help="Number of training epochs")
+    parser.add_argument("--epochs", type=int, default=35, help="Number of training epochs")
     parser.add_argument("--batch_size", type=int, default=64, help="Batch size")
     parser.add_argument("--lr", type=float, default=1e-3, help="Learning rate")
     parser.add_argument("--hops", type=int, default=3, help="Number of relational hops in benchmark")
     parser.add_argument("--k_steps", type=int, default=3, help="Number of latent deliberation steps")
+    parser.add_argument("--num_nodes", type=int, default=16, help="Number of graph nodes")
+    parser.add_argument("--num_edges", type=int, default=6, help="Number of edges per graph")
     parser.add_argument("--num_thoughts", type=int, default=4, help="Number of thought tokens")
+    parser.add_argument("--num_cwm_slots", type=int, default=12, help="Number of CWM memory slots (SRAM cache)")
     parser.add_argument("--d_model", type=int, default=64, help="Hidden dimension")
+    parser.add_argument("--num_samples", type=int, default=3500, help="Number of training samples")
+    parser.add_argument("--checkpoint_path", type=str, default="checkpoint_trained_dualloop.pt", help="Path to save checkpoint")
     args = parser.parse_args()
 
     torch.manual_seed(42)
@@ -23,22 +28,36 @@ def main():
 
     print("=" * 70)
     print(f"Dual-Loop Cognitive Controller Training Pipeline")
-    print(f"Device: {device} | Hops: {args.hops} | Ponder Steps (K): {args.k_steps}")
+    print(f"Device: {device} | Hops: {args.hops} | Ponder Steps (K): {args.k_steps} | Nodes: {args.num_nodes} | CWM Slots: {args.num_cwm_slots}")
     print("=" * 70)
 
-    # Initialize benchmark datasets
-    train_dataset = MultiHopGraphDataset(num_samples=2500, num_nodes=20, num_edges=8, hops=args.hops)
-    test_dataset = MultiHopGraphDataset(num_samples=500, num_nodes=20, num_edges=8, hops=args.hops)
+    # Initialize benchmark datasets with strict split separation
+    train_dataset = MultiHopGraphDataset(
+        num_samples=args.num_samples,
+        num_nodes=args.num_nodes,
+        num_edges=args.num_edges,
+        hops=args.hops,
+        split="train",
+        seed=42
+    )
+    test_dataset = MultiHopGraphDataset(
+        num_samples=500,
+        num_nodes=args.num_nodes,
+        num_edges=args.num_edges,
+        hops=args.hops,
+        split="test",
+        seed=42
+    )
     vocab_size = train_dataset.vocab_size
 
-    # Initialize Dual-Loop Model
+    # Initialize Dual-Loop Model with matching reference architecture
     model = DualLoopTransformer(
         vocab_size=vocab_size,
         d_model=args.d_model,
         n_heads=4,
         d_ff=args.d_model * 2,
         num_thought_tokens=args.num_thoughts,
-        num_cwm_slots=16,
+        num_cwm_slots=args.num_cwm_slots,
         max_ponder_steps=args.k_steps,
         capacity_factor=0.5
     ).to(device)
@@ -113,6 +132,10 @@ def main():
             logits_k, _ = model(test_in, k_steps=k)
             acc_k = (logits_k.argmax(dim=-1) == test_tgt).float().mean().item() * 100.0
             print(f"  Ponder Steps K = {k} -> Test Accuracy: {acc_k:.1f}%")
+
+    # Save trained checkpoint
+    torch.save(model.state_dict(), args.checkpoint_path)
+    print(f"\n[Checkpoint] Saved trained weights to '{args.checkpoint_path}'.")
 
 if __name__ == "__main__":
     main()

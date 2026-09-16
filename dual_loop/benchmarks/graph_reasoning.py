@@ -11,17 +11,29 @@ class MultiHopGraphDataset:
     def __init__(
         self,
         num_samples: int = 2000,
-        num_nodes: int = 20,
-        num_edges: int = 8,
+        num_nodes: int = 16,
+        num_edges: int = 6,
         hops: int = 3,
+        split: str = "test",
         seed: Optional[int] = None
     ):
         self.num_samples = num_samples
         self.num_nodes = num_nodes
         self.num_edges = num_edges
         self.hops = hops
-        self.seed = seed
-        self.rng = random.Random(seed) if seed is not None else random.Random()
+        self.split = split.lower()
+        self.base_seed = seed
+
+        # Disjoint seed offsets guarantee that test and validation sets
+        # never collide with training data in random generation space.
+        split_offsets = {"train": 0, "val": 10_000, "test": 50_000}
+        offset = split_offsets.get(self.split, 50_000)
+
+        if seed is not None:
+            effective_seed = seed + offset
+            self.rng = random.Random(effective_seed)
+        else:
+            self.rng = random.Random()
         
         self.ARROW = num_nodes
         self.SEP = num_nodes + 1

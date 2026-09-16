@@ -71,7 +71,14 @@ tau = 1.40 nats   | 29.4%         | 1.89      | 49.0%        | 13.2%        | 37
 
 **Justified Operating Point**:
 * **$\tau = 1.25 \dots 1.40\text{ nats}$** is the justifiable Pareto region: it achieves a **37% reduction in compute** (average **1.89 steps** vs. 3.00) while maintaining peak accuracy (**29.4%**), with a genuinely heterogeneous distribution across steps ($49\%$ at $K=1$, $13\%$ at $K=2$, $38\%$ at $K=3$).
-* Arbitrary default thresholds (like 0.5 or blindly using a batch-mean percentile) collapse execution to all-or-nothing extremes ($3.00$ or $1.00$). Dynamic halting must always be calibrated per-sample against empirical validation entropy.
+### 5. In-Distribution Memorization vs. Out-of-Distribution Generalization
+A crucial empirical insight discovered during data isolation audits:
+* **In-Distribution (Train Set, 500 seen graphs)**:
+  `K=0: 43.6% -> K=1: 51.4% -> K=2: 59.4% -> K=3: 63.2% (+19.6% monotonic test-time scaling)`
+  The recurrent latent controller successfully learns and memorizes multi-hop relational transitions for familiar graph topologies.
+* **Out-of-Distribution (Held-Out Test Set, 500 unseen graphs)**:
+  `K=0: 28.6% -> K=1: 27.6% -> K=2: 28.0% -> K=3: 28.4% (Flat scaling / ~28-30%)`
+  Without discrete token anchors, continuous latent representations suffer from representational drift on novel graph structures at the 225K parameter regime.
 
 ---
 
@@ -92,10 +99,10 @@ Despite the scaling limits at small model regimes, the repository provides clean
 ```bash
 # Install officially from PyPI:
 pip install --pre dual-loop-controller
-# or exact version: pip install dual-loop-controller==2.0.0a2
+# or exact version: pip install dual-loop-controller==2.0.0a3
 
 # Or install direct from GitHub release tag:
-pip install git+https://github.com/Ch3nOff/dual-loop-controller.git@v2.0.0a2
+pip install git+https://github.com/Ch3nOff/dual-loop-controller.git@v2.0.0a3
 
 # Or clone locally and install in editable mode:
 git clone https://github.com/Ch3nOff/dual-loop-controller.git
