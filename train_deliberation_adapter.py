@@ -20,29 +20,35 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 from datasets import load_dataset
 from dual_loop import attach_dual_loop_to_qwen
 
-def build_training_samples(max_samples=100, seed=42):
+def build_training_samples(max_samples=120, seed=42):
     random.seed(seed)
-    print(f"[Data] Loading training splits from allenai/ai2_arc (ARC-Easy & ARC-Challenge)...")
+    print(f"[Data] Loading multi-hop science reasoning training splits from allenai/ai2_arc & allenai/openbookqa...")
     ds_easy = load_dataset("allenai/ai2_arc", "ARC-Easy", split="train")
     ds_chal = load_dataset("allenai/ai2_arc", "ARC-Challenge", split="train")
+    ds_obqa = load_dataset("allenai/openbookqa", "main", split="train")
     
-    combined = []
-    for item in ds_easy:
-        combined.append(item)
-    for item in ds_chal:
-        combined.append(item)
-        
-    random.shuffle(combined)
-    selected = combined[:max_samples]
+    # Mix ARC and OpenBookQA equally
+    arc_items = list(ds_easy) + list(ds_chal)
+    obqa_items = list(ds_obqa)
+    random.shuffle(arc_items)
+    random.shuffle(obqa_items)
+    
+    n_arc = max_samples // 2
+    n_obqa = max_samples - n_arc
+    selected = arc_items[:n_arc] + obqa_items[:n_obqa]
+    random.shuffle(selected)
     
     formatted = []
     for item in selected:
-        q = item["question"].strip()
+        q = item.get("question", "")
+        if not q and "question_stem" in item:
+            q = item["question_stem"]
+        q = str(q).strip()
+        
         choices = item["choices"]["text"]
         labels = item["choices"]["label"]
-        key = item["answerKey"].strip()
+        key = str(item.get("answerKey", "")).strip()
         
-        # Determine correct choice text
         target_text = None
         for l, c in zip(labels, choices):
             if l.strip().upper() == key.upper() or (key.isdigit() and str(l).strip() == key):
@@ -56,7 +62,7 @@ def build_training_samples(max_samples=100, seed=42):
             "target": f" {target_text}"
         })
         
-    print(f"[Data] Successfully built {len(formatted)} high-quality reasoning training samples.")
+    print(f"[Data] Successfully built {len(formatted)} balanced multi-hop reasoning training samples ({n_arc} ARC + {n_obqa} OpenBookQA).")
     return formatted
 
 class ReasoningSFTDataset(Dataset):
@@ -116,14 +122,14 @@ def collate_fn(batch, pad_token_id=0):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=str, default="Qwen/Qwen3.5-2B")
-    parser.add_argument("--init_adapter", type=str, default="dual_loop/checkpoints/qwen35_2b_adapter.pt")
+    parser.add_argument("--init_adapter", type=str, default="dual_loop/checkpoints/qwen35_2b_deliberation_adapter.safetensors")
     parser.add_argument("--save_path", type=str, default="dual_loop/checkpoints/qwen35_2b_deliberation_adapter.pt")
     parser.add_argument("--layer_idx", type=int, default=11)
     parser.add_argument("--k_steps", type=int, default=2)
-    parser.add_argument("--epochs", type=int, default=3)
+    parser.add_argument("--epochs", type=int, default=2)
     parser.add_argument("--batch_size", type=int, default=2)
-    parser.add_argument("--lr", type=float, default=2e-4)
-    parser.add_argument("--max_samples", type=int, default=80)
+    parser.add_argument("--lr", type=float, default=5e-5)
+    parser.add_argument("--max_samples", type=int, default=100)
     parser.add_argument("--trust_remote_code", action="store_true", default=False, help="Allow executing remote code from Hugging Face Hub")
     parser.add_argument("--revision", type=str, default="15852e8c16360a2fea060d615a32b45270f8a8fc", help="Pinned commit SHA for supply-chain security (SEC-02)")
     args = parser.parse_args()
@@ -135,7 +141,7 @@ def main():
     print(f"Revision:      {args.revision}")
     print(f"Interception:  Layer {args.layer_idx} (Full Attention)")
     print(f"Deliberation:  K={args.k_steps} recurrent steps")
-    print(f"Samples:       {args.max_samples} from ARC train split")
+    print(f"Samples:       {args.max_samples} from ARC + OpenBookQA train splits")
     print(f"Save Path:     {args.save_path}")
     print("=" * 80)
 
@@ -210,10 +216,12 @@ def main():
         print(f"[Epoch {epoch} Complete] Average Loss: {avg_loss:.4f} in {time.time() - t0_train:.1f}s")
         sys.stdout.flush()
 
-    # Save trained checkpoint
+    # Save trained checkpoint (both pt and safetensors)
     os.makedirs(os.path.dirname(os.path.abspath(args.save_path)), exist_ok=True)
-    saved_file = model.save_adapter(args.save_path)
-    print(f"\n[+] Fine-Tuning Complete! Trained adapter saved to: {saved_file}")
+    saved_file = model.save_adapter(args.save_path, format="pt")
+    safetensors_path = os.path.splitext(args.save_path)[0] + ".safetensors"
+    model.save_adapter(safetensors_path, format="safetensors")
+    print(f"\n[+] Fine-Tuning Complete! Trained adapter saved to: {saved_file} and {safetensors_path}")
     print(f"    Final Learned ReZero Gate: {float(torch.tanh(model.adapter.gate_alpha).item()):.4f}")
 
 if __name__ == "__main__":

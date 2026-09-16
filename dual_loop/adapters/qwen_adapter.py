@@ -182,7 +182,13 @@ class DualLoopQwenModel(nn.Module):
             seq_len = hidden_states.size(1)
             mask_slice = att_mask[:, :seq_len]
             key_padding_mask = (mask_slice == 0)
-            if self.query_idx == -1:
+            is_all_negative = False
+            if isinstance(self.query_idx, (int, float)) and int(self.query_idx) == -1:
+                is_all_negative = True
+            elif isinstance(self.query_idx, torch.Tensor) and (self.query_idx == -1).all():
+                is_all_negative = True
+                
+            if is_all_negative:
                 # Find last token index where att_mask == 1 for each sequence in batch
                 pos = torch.arange(seq_len, device=att_mask.device).unsqueeze(0).expand(att_mask.size(0), -1)
                 valid_positions = torch.where(mask_slice == 1, pos, -1)

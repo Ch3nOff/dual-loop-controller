@@ -204,9 +204,12 @@ def evaluate_multiple_choice(dataset_name, subset, split, sample_limit, config_m
     for i, item in enumerate(ds):
         if total >= sample_limit:
             break
-        q = item.get("question", "").strip()
+        q = item.get("question", "")
+        if not q and "question_stem" in item:
+            q = item["question_stem"]
         if not q and "goal" in item:
-            q = item["goal"].strip()
+            q = item["goal"]
+        q = str(q).strip()
             
         choices_text = []
         labels = []

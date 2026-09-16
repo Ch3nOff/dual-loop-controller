@@ -1,4 +1,4 @@
-﻿import os
+import os
 import json
 import shutil
 from huggingface_hub import HfApi
@@ -29,16 +29,16 @@ config_2b = {
     "target_layer_idx": 11,
     "target_layer_type": "full_attention",
     "rezero_gating": True,
-    "rezero_alpha_learned": 0.0513,
-    "total_adapter_parameters": 96579586,
-    "trainable_ratio_pct": 1.78,
-    "torch_dtype": "bfloat16",
+    "rezero_alpha_learned": 0.0514,
+    "total_adapter_parameters": 110224469,
+    "trainable_ratio_pct": 5.533,
+    "torch_dtype": "float32",
     "empirical_suite_results": {
-        "arc_easy_acc_norm": {"base": 0.675, "dual_loop": 0.775, "delta": "+10.0%"},
-        "openbookqa_acc_norm": {"base": 0.275, "dual_loop": 0.325, "delta": "+5.0%"},
-        "piqa_acc_norm": {"base": 0.750, "dual_loop": 0.750, "delta": "0.0%"},
-        "arc_challenge_acc_norm": {"base": 0.475, "dual_loop": 0.450, "delta": "-2.5%"},
-        "suite_mean_acc_norm": {"base": 0.544, "dual_loop": 0.575, "delta": "+3.1%"}
+        "arc_easy": {"base": 0.750, "before_update": 0.850, "after_update": 0.850, "delta": "+10.0%"},
+        "openbookqa": {"base": 0.250, "before_update": 0.300, "after_update": 0.250, "delta": "0.0%"},
+        "piqa": {"base": 0.800, "before_update": 0.700, "after_update": 0.750, "delta": "-5.0%"},
+        "arc_challenge": {"base": 0.500, "before_update": 0.500, "after_update": 0.550, "delta": "+5.0%"},
+        "suite_mean": {"base": 0.575, "before_update": 0.588, "after_update": 0.588, "delta": "+1.2%"}
     }
 }
 
@@ -207,6 +207,13 @@ print("[*] Uploading full_benchmark_scoreboard.png...")
 api.upload_file(
     path_or_fileobj="full_benchmark_scoreboard.png",
     path_in_repo="full_benchmark_scoreboard.png",
+    repo_id=REPO_ID
+)
+
+print("[*] Uploading qwen35_2b_three_way_comparison.png...")
+api.upload_file(
+    path_or_fileobj="eval_results/qwen35_2b_three_way_comparison.png",
+    path_in_repo="qwen35_2b_three_way_comparison.png",
     repo_id=REPO_ID
 )
 

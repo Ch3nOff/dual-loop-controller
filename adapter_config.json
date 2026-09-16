@@ -18,35 +18,40 @@
   "target_layer_idx": 11,
   "target_layer_type": "full_attention",
   "rezero_gating": true,
-  "rezero_alpha_learned": 0.0513,
-  "total_adapter_parameters": 96579586,
-  "trainable_ratio_pct": 1.78,
-  "torch_dtype": "bfloat16",
+  "rezero_alpha_learned": 0.0514,
+  "total_adapter_parameters": 110224469,
+  "trainable_ratio_pct": 5.533,
+  "torch_dtype": "float32",
   "empirical_suite_results": {
-    "arc_easy_acc_norm": {
-      "base": 0.675,
-      "dual_loop": 0.775,
+    "arc_easy": {
+      "base": 0.75,
+      "before_update": 0.85,
+      "after_update": 0.85,
       "delta": "+10.0%"
     },
-    "openbookqa_acc_norm": {
-      "base": 0.275,
-      "dual_loop": 0.325,
-      "delta": "+5.0%"
-    },
-    "piqa_acc_norm": {
-      "base": 0.75,
-      "dual_loop": 0.75,
+    "openbookqa": {
+      "base": 0.25,
+      "before_update": 0.3,
+      "after_update": 0.25,
       "delta": "0.0%"
     },
-    "arc_challenge_acc_norm": {
-      "base": 0.475,
-      "dual_loop": 0.45,
-      "delta": "-2.5%"
+    "piqa": {
+      "base": 0.8,
+      "before_update": 0.7,
+      "after_update": 0.75,
+      "delta": "-5.0%"
     },
-    "suite_mean_acc_norm": {
-      "base": 0.544,
-      "dual_loop": 0.575,
-      "delta": "+3.1%"
+    "arc_challenge": {
+      "base": 0.5,
+      "before_update": 0.5,
+      "after_update": 0.55,
+      "delta": "+5.0%"
+    },
+    "suite_mean": {
+      "base": 0.575,
+      "before_update": 0.588,
+      "after_update": 0.588,
+      "delta": "+1.2%"
     }
   }
 }

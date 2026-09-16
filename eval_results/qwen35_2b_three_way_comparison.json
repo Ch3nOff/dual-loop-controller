@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-16 17:12:46",
+  "timestamp": "2026-09-16 17:51:50",
   "model_id": "Qwen/Qwen3.5-2B",
   "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
   "device": "CPU (Intel/AMD Host System)",
@@ -7,26 +7,26 @@
     "ARC-Easy": {
       "base_accuracy_pct": 75.0,
       "before_update_pct": 85.0,
-      "after_update_pct": 90.0,
+      "after_update_pct": 85.0,
       "samples": 20,
-      "delta_vs_base": 15.0,
-      "delta_vs_before": 5.0
+      "delta_vs_base": 10.0,
+      "delta_vs_before": 0.0
     },
     "OpenBookQA": {
-      "base_accuracy_pct": 15.0,
-      "before_update_pct": 15.0,
-      "after_update_pct": 15.0,
+      "base_accuracy_pct": 25.0,
+      "before_update_pct": 30.0,
+      "after_update_pct": 25.0,
       "samples": 20,
       "delta_vs_base": 0.0,
-      "delta_vs_before": 0.0
+      "delta_vs_before": -5.0
     },
     "PIQA": {
       "base_accuracy_pct": 80.0,
       "before_update_pct": 70.0,
-      "after_update_pct": 80.0,
+      "after_update_pct": 70.0,
       "samples": 20,
-      "delta_vs_base": 0.0,
-      "delta_vs_before": 10.0
+      "delta_vs_base": -10.0,
+      "delta_vs_before": 0.0
     },
     "ARC-Challenge": {
       "base_accuracy_pct": 50.0,
@@ -38,36 +38,36 @@
     }
   },
   "macro_average": {
-    "base_accuracy_pct": 55.0,
-    "before_update_pct": 55.0,
-    "after_update_pct": 60.0,
-    "net_gain_vs_base": 5.0,
-    "net_gain_vs_before": 5.0
+    "base_accuracy_pct": 57.5,
+    "before_update_pct": 58.75,
+    "after_update_pct": 58.75,
+    "net_gain_vs_base": 1.25,
+    "net_gain_vs_before": 0.0
   },
   "speed_and_throughput": {
     "Base (K=0)": {
-      "ttft_ms": 231.48,
-      "decode_latency_ms_per_token": 142.16,
-      "generation_throughput_tokens_sec": 6.82,
-      "total_time_20_tokens_sec": 2.932
+      "ttft_ms": 216.97,
+      "decode_latency_ms_per_token": 135.77,
+      "generation_throughput_tokens_sec": 7.15,
+      "total_time_20_tokens_sec": 2.797
     },
     "Before Update (K=2, No Critique)": {
-      "ttft_ms": 224.33,
-      "decode_latency_ms_per_token": 150.52,
-      "generation_throughput_tokens_sec": 6.48,
-      "total_time_20_tokens_sec": 3.084
+      "ttft_ms": 227.06,
+      "decode_latency_ms_per_token": 150.08,
+      "generation_throughput_tokens_sec": 6.5,
+      "total_time_20_tokens_sec": 3.079
     },
     "After Update (K=2, Metacognitive)": {
-      "ttft_ms": 233.09,
-      "decode_latency_ms_per_token": 153.49,
-      "generation_throughput_tokens_sec": 6.35,
-      "total_time_20_tokens_sec": 3.149
+      "ttft_ms": 250.09,
+      "decode_latency_ms_per_token": 154.26,
+      "generation_throughput_tokens_sec": 6.29,
+      "total_time_20_tokens_sec": 3.181
     }
   },
   "metacognitive_error_trajectory": {
-    "step_1": 63.02770233154297,
-    "step_2": 63.511558532714844,
-    "step_3": 63.245704650878906,
-    "step_4": 63.191749572753906
+    "step_1": 64.19526672363281,
+    "step_2": 63.5535888671875,
+    "step_3": 63.531494140625,
+    "step_4": 63.53391647338867
   }
 }
