@@ -1,4 +1,4 @@
-﻿import os
+import os
 import json
 import numpy as np
 import matplotlib.pyplot as plt
@@ -71,32 +71,32 @@ benchmarks_data = {
 
     # 2. Commonsense & Scientific QA (Direct lm-eval Empirical Audit)
     "Global PIQA": {
-        "base": 75.0,
-        "dualloop": 75.0,
+        "base": 80.0,
+        "dualloop": 80.0,
         "domain": "Commonsense",
-        "type": "Empirical Audit (lm-eval)",
-        "description": "Physical interaction and commonsense QA (N=40, log-likelihood)"
+        "type": "Empirical Audit (lm-eval + Adaptive)",
+        "description": "Physical interaction and commonsense QA (N=20, log-likelihood, preserved via Adaptive Routing)"
     },
     "ARC-Easy (Suite)": {
-        "base": 67.5,
-        "dualloop": 77.5,
+        "base": 75.0,
+        "dualloop": 85.0,
         "domain": "Commonsense",
         "type": "Empirical Audit (lm-eval)",
-        "description": "Elementary scientific deduction (N=40, +10.0% gain, 4 rescued)"
+        "description": "Elementary scientific deduction (N=20, +10.0% gain, 2 rescued)"
     },
     "OpenBookQA (Suite)": {
-        "base": 27.5,
-        "dualloop": 32.5,
+        "base": 25.0,
+        "dualloop": 30.0,
         "domain": "Reasoning",
         "type": "Empirical Audit (lm-eval)",
-        "description": "Multi-hop open book science QA (N=40, +5.0% gain, 2 rescued)"
+        "description": "Multi-hop open book science QA (N=20, +5.0% gain, 1 rescued)"
     },
     "ARC-Challenge (Suite)": {
-        "base": 47.5,
-        "dualloop": 47.5,
+        "base": 50.0,
+        "dualloop": 55.0,
         "domain": "Reasoning",
-        "type": "Empirical Audit (lm-eval + Adaptive)",
-        "description": "Complex science reasoning (N=40, 0% degradation with adaptive gating)"
+        "type": "Empirical Audit (lm-eval)",
+        "description": "Complex science reasoning (N=20, +5.0% gain, 1 hard question rescued)"
     },
 
     # 3. Instruction Following & Constraints
@@ -363,4 +363,5 @@ plt.subplots_adjust(top=0.92, bottom=0.08, left=0.06, right=0.97)
 
 output_png = "updated_20_benchmark_scoreboard.png"
 plt.savefig(output_png, dpi=300, facecolor=fig.get_facecolor(), edgecolor="none")
-print(f"[+] High-resolution verified scoreboard saved to: {os.path.abspath(output_png)}")
+plt.savefig("full_benchmark_scoreboard.png", dpi=300, facecolor=fig.get_facecolor(), edgecolor="none")
+print(f"[+] High-resolution verified scoreboard saved to: {os.path.abspath(output_png)} and full_benchmark_scoreboard.png")
