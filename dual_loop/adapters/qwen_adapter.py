@@ -282,7 +282,7 @@ class DualLoopQwenModel(nn.Module):
     def load_adapter(
         self,
         load_path: str,
-        strict: bool = True,
+        strict: bool = False,
         expected_sha256: Optional[str] = None,
         revision: Optional[str] = None
     ):

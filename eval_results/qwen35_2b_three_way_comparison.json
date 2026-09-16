@@ -1,0 +1,73 @@
+{
+  "timestamp": "2026-09-16 16:49:02",
+  "model_id": "Qwen/Qwen3.5-2B",
+  "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+  "device": "CPU (Intel/AMD Host System)",
+  "benchmarks": {
+    "ARC-Easy": {
+      "base_accuracy_pct": 75.0,
+      "before_update_pct": 85.0,
+      "after_update_pct": 85.0,
+      "samples": 20,
+      "delta_vs_base": 10.0,
+      "delta_vs_before": 0.0
+    },
+    "OpenBookQA": {
+      "base_accuracy_pct": 15.0,
+      "before_update_pct": 15.0,
+      "after_update_pct": 15.0,
+      "samples": 20,
+      "delta_vs_base": 0.0,
+      "delta_vs_before": 0.0
+    },
+    "PIQA": {
+      "base_accuracy_pct": 80.0,
+      "before_update_pct": 70.0,
+      "after_update_pct": 70.0,
+      "samples": 20,
+      "delta_vs_base": -10.0,
+      "delta_vs_before": 0.0
+    },
+    "ARC-Challenge": {
+      "base_accuracy_pct": 50.0,
+      "before_update_pct": 50.0,
+      "after_update_pct": 50.0,
+      "samples": 20,
+      "delta_vs_base": 0.0,
+      "delta_vs_before": 0.0
+    }
+  },
+  "macro_average": {
+    "base_accuracy_pct": 55.0,
+    "before_update_pct": 55.0,
+    "after_update_pct": 55.0,
+    "net_gain_vs_base": 0.0,
+    "net_gain_vs_before": 0.0
+  },
+  "speed_and_throughput": {
+    "Base (K=0)": {
+      "ttft_ms": 248.58,
+      "decode_latency_ms_per_token": 156.52,
+      "generation_throughput_tokens_sec": 6.21,
+      "total_time_20_tokens_sec": 3.223
+    },
+    "Before Update (K=2, No Critique)": {
+      "ttft_ms": 248.93,
+      "decode_latency_ms_per_token": 160.09,
+      "generation_throughput_tokens_sec": 6.08,
+      "total_time_20_tokens_sec": 3.291
+    },
+    "After Update (K=2, Metacognitive)": {
+      "ttft_ms": 246.39,
+      "decode_latency_ms_per_token": 162.1,
+      "generation_throughput_tokens_sec": 6.01,
+      "total_time_20_tokens_sec": 3.326
+    }
+  },
+  "metacognitive_error_trajectory": {
+    "step_1": 63.02770233154297,
+    "step_2": 63.094329833984375,
+    "step_3": 62.817298889160156,
+    "step_4": 62.74346160888672
+  }
+}
