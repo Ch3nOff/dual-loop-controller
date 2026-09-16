@@ -28,7 +28,11 @@ class DualLoopTransformer(nn.Module):
         capacity_factor: float = 0.5,
         entropy_threshold: float = 1.30,
         padding_idx: Optional[int] = None,
-        is_causal: bool = False
+        is_causal: bool = False,
+        enable_critique: bool = True,
+        use_learned_halting: bool = False,
+        lambda_prior: float = 0.5,
+        tau_halt: float = 0.75
     ):
         super().__init__()
         self.vocab_size = vocab_size
@@ -56,7 +60,11 @@ class DualLoopTransformer(nn.Module):
             max_ponder_steps=max_ponder_steps,
             vocab_size=vocab_size,
             capacity_factor=capacity_factor,
-            entropy_threshold=entropy_threshold
+            entropy_threshold=entropy_threshold,
+            enable_critique=enable_critique,
+            use_learned_halting=use_learned_halting,
+            lambda_prior=lambda_prior,
+            tau_halt=tau_halt
         )
         
         # 5. System 1: Inner Loop Decoder
@@ -156,6 +164,9 @@ class DualLoopTransformer(nn.Module):
             padding_mask = (input_ids == self.padding_idx)
         cwm_memory = self.cwm(ctx, key_padding_mask=padding_mask) # [B, M, D]
         
+        # Clear outer loop mutable instance state at forward entry (ARCH-02 / NEW-02)
+        self.outer_loop.reset_state()
+
         max_k = self.outer_loop.max_ponder_steps if k_steps is None else k_steps
         
         # =====================================================================
@@ -173,20 +184,28 @@ class DualLoopTransformer(nn.Module):
             
             aux_logits_list = []
             step_entropies_list = []
+            lambdas_list = []
+            error_norms_list = []
+            h_prev_primary = None
             
             for k in range(1, max_k + 1):
-                # 1. Execute single recurrent step of Outer Loop
-                attn_self, _ = self.outer_loop.latent_self_attn(H, H, H)
-                H = self.outer_loop.norm1(H + attn_self)
-                H_cross = self.outer_loop.capacity_cross_attn(H, cwm_memory)
-                anchor_scale = (0.1 / k) if not self.training else 0.1
-                H = self.outer_loop.norm2(H + H_cross + anchor_scale * H_anchor)
-                H = self.outer_loop.norm3(H + self.outer_loop.latent_mlp(H))
-                
-                # Norm clipping (ARCH-01)
-                h_norm = torch.norm(H, p=2, dim=-1, keepdim=True)
-                clip_coef = torch.clamp(50.0 / (h_norm + 1e-6), max=1.0)
-                H = H * clip_coef
+                H_prev = H.clone()
+
+                # 1. Execute unified single recurrent step of Outer Loop (NEW-01)
+                # Unifies LatentCritiqueRefinementUnit, learned anchor gate, and LearnedHaltingGate
+                H, err_norm, lam_k = self.outer_loop.step_deliberation(
+                    H=H,
+                    H_anchor=H_anchor,
+                    memory=cwm_memory,
+                    H_prev=H_prev,
+                    h_prev_primary=h_prev_primary
+                )
+
+                if err_norm is not None:
+                    error_norms_list.append(err_norm)
+                if lam_k is not None:
+                    lambdas_list.append(lam_k)
+                    h_prev_primary = H[:, 0, :].detach()
                 
                 # 2. Fuse soft prefix and decode through Inner Loop
                 fused = torch.cat([H, ctx], dim=1)
@@ -202,8 +221,13 @@ class DualLoopTransformer(nn.Module):
                 if self.outer_loop.audit_probe is not None:
                     aux_logits_list.append(self.outer_loop.audit_probe(H[:, 0, :]))
                 
-                # 4. Per-sample halting: freeze predictions for confident sequences
-                newly_halted = active_mask & (ent_k <= thresh)
+                # 4. Per-sample halting: check halting criteria (learned halting gate or predictive entropy)
+                if self.outer_loop.learned_halting_gate is not None and lam_k is not None and not self.training:
+                    halt_decision = self.outer_loop.learned_halting_gate.should_halt_inference(lam_k)
+                    newly_halted = active_mask & halt_decision
+                else:
+                    newly_halted = active_mask & (ent_k <= thresh)
+
                 if newly_halted.any():
                     final_logits[newly_halted] = logits_k[newly_halted]
                     steps_taken[newly_halted] = float(k)
@@ -218,12 +242,17 @@ class DualLoopTransformer(nn.Module):
                 final_logits[active_mask] = logits_k[active_mask]
                 steps_taken[active_mask] = float(max_k)
                 
+            self.outer_loop.last_lambdas = lambdas_list
+            self.outer_loop.last_error_norms = error_norms_list
+
             info = {
                 "aux_logits": aux_logits_list,
                 "step_entropies": step_entropies_list,
                 "num_thoughts": H.shape[1],
                 "steps_taken": steps_taken,
-                "effective_k": steps_taken.mean().item()
+                "effective_k": steps_taken.mean().item(),
+                "error_norms": error_norms_list,
+                "halting_lambdas": lambdas_list
             }
             return final_logits, info
 
@@ -248,7 +277,9 @@ class DualLoopTransformer(nn.Module):
             "aux_logits": aux_logits,
             "step_entropies": step_entropies,
             "num_thoughts": h_thought.shape[1],
-            "steps_taken": torch.full((B,), float(max_k), device=input_ids.device),
-            "effective_k": float(max_k)
+            "steps_taken": torch.full((B,), float(max_k), dtype=torch.float, device=input_ids.device),
+            "effective_k": float(max_k),
+            "error_norms": self.outer_loop.last_error_norms,
+            "halting_lambdas": self.outer_loop.last_lambdas
         }
         return final_logits, info

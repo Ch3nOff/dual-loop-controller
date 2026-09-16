@@ -208,6 +208,109 @@ class SecurityAndRuntimeTests(unittest.TestCase):
             if os.path.exists(temp_path):
                 os.unlink(temp_path)
 
+    def test_new01_path_a_v2_modules_alignment(self):
+        """NEW-01: Verify decoder PATH A uses unified step_deliberation with v2 modules."""
+        from dual_loop.decoder import DualLoopTransformer
+        model = DualLoopTransformer(
+            vocab_size=50,
+            d_model=32,
+            n_heads=2,
+            d_ff=64,
+            num_thought_tokens=2,
+            num_cwm_slots=4,
+            max_ponder_steps=3,
+            enable_critique=True,
+            use_learned_halting=True
+        )
+        self.assertIsNotNone(model.outer_loop.critique_unit)
+        self.assertIsNotNone(model.outer_loop.learned_halting_gate)
+
+        input_ids = torch.randint(0, 50, (2, 8))
+        
+        # Test PATH A (dynamic halting)
+        logits_dyn, info_dyn = model(input_ids, dynamic_halting=True)
+        self.assertEqual(logits_dyn.shape, (2, 50))
+        self.assertIn("error_norms", info_dyn)
+        self.assertIn("halting_lambdas", info_dyn)
+        self.assertGreater(len(info_dyn["error_norms"]), 0)
+        self.assertGreater(len(info_dyn["halting_lambdas"]), 0)
+
+        # Test step 1 consistency: PATH A and PATH B for k_steps=1 should produce identical thoughts and logits
+        model.eval()
+        with torch.no_grad():
+            logits_k1_b, _ = model(input_ids, k_steps=1, dynamic_halting=False)
+            logits_k1_a, _ = model(input_ids, k_steps=1, dynamic_halting=True)
+            self.assertTrue(torch.allclose(logits_k1_a, logits_k1_b, atol=1e-5))
+
+    def test_new02_controller_state_reset_on_forward_entry(self):
+        """NEW-02: Verify controller mutable state is cleared at forward entry and on bypass."""
+        from dual_loop.controller import RecurrentLatentController
+        controller = RecurrentLatentController(
+            d_model=32,
+            n_heads=2,
+            d_ff=64,
+            num_thought_tokens=2,
+            max_ponder_steps=4,
+            vocab_size=50,
+            enable_critique=True,
+            use_learned_halting=True
+        )
+        query = torch.randn(2, 32)
+        memory = torch.randn(2, 4, 32)
+
+        # Request 1: 4 ponder steps
+        controller(query, memory, k_steps=4)
+        self.assertEqual(len(controller.last_error_norms), 4)
+        self.assertEqual(len(controller.last_lambdas), 4)
+
+        # Request 2: 1 ponder step — must reset to 1 without accumulating or retaining 4
+        controller(query, memory, k_steps=1)
+        self.assertEqual(len(controller.last_error_norms), 1)
+        self.assertEqual(len(controller.last_lambdas), 1)
+
+        # Also test with LatentDeliberationAdapter bypass
+        adapter = LatentDeliberationAdapter(
+            d_model=32,
+            n_heads=2,
+            num_thought_tokens=2,
+            max_ponder_steps=2,
+            enable_critique=True,
+            use_learned_halting=True
+        )
+        hidden = torch.randn(2, 6, 32)
+        _, telem_run = adapter(hidden, k_steps=2)
+        self.assertEqual(len(adapter.controller.last_error_norms), 2)
+
+        # Bypass must clear controller state
+        _, telem_byp = adapter(hidden, k_steps=0)
+        self.assertEqual(len(adapter.controller.last_error_norms), 0)
+        self.assertEqual(len(adapter.controller.last_lambdas), 0)
+
+    def test_new03_beta_gate_telemetry_shape_resilience(self):
+        """NEW-03: Verify beta_gate telemetry is resilient to shape changes and batch size 1."""
+        adapter = LatentDeliberationAdapter(
+            d_model=32,
+            n_heads=2,
+            num_thought_tokens=2,
+            max_ponder_steps=2
+        )
+        # Ensure hypothesis_gate is present
+        self.assertIsNotNone(adapter.hypothesis_gate)
+
+        # 1. Test single-sample batch (B=1)
+        hidden_b1 = torch.randn(1, 5, 32)
+        _, telem_b1 = adapter(hidden_b1, k_steps=1)
+        self.assertIn("acceptance_beta", telem_b1)
+        self.assertEqual(len(telem_b1["acceptance_beta"]), 1)
+        self.assertIsInstance(telem_b1["acceptance_beta"][0], float)
+
+        # 2. Test multi-sample batch (B=3)
+        hidden_b3 = torch.randn(3, 5, 32)
+        _, telem_b3 = adapter(hidden_b3, k_steps=1)
+        self.assertEqual(len(telem_b3["acceptance_beta"]), 3)
+        for val in telem_b3["acceptance_beta"]:
+            self.assertIsInstance(val, float)
+
 
 if __name__ == "__main__":
     unittest.main()

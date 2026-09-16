@@ -104,6 +104,7 @@ class LatentDeliberationAdapter(nn.Module):
         
         # Zero pondering steps: exact identity bypass (System 1 mode)
         if steps == 0:
+            self.controller.reset_state()
             telemetry = {
                 "num_thoughts": 0,
                 "ponder_steps": 0,
@@ -172,7 +173,7 @@ class LatentDeliberationAdapter(nn.Module):
             # Add thoughts as a ReZero-gated residual onto the query token
             # beta_gate scales delta: if hypothesis is rejected (overthinking), delta -> 0!
             scale = torch.tanh(self.gate_alpha)
-            delta = scale * beta_gate.squeeze(-1) * self.residual_proj(h_thought[:, 0, :]) # [B, D]
+            delta = scale * beta_gate.reshape(B, 1) * self.residual_proj(h_thought[:, 0, :]) # [B, D]
             enhanced = hidden_states.clone()
             if is_scalar_idx:
                 enhanced[:, idx_int:idx_int+1, :] = enhanced[:, idx_int:idx_int+1, :] + delta.unsqueeze(1)
@@ -188,7 +189,7 @@ class LatentDeliberationAdapter(nn.Module):
             "step_entropies": [e.detach().cpu() for e in entropies] if entropies else [],
             "error_norms": [e.detach().cpu() for e in self.controller.last_error_norms] if self.controller.last_error_norms else [],
             "halting_lambdas": [l.detach().cpu() for l in self.controller.last_lambdas] if self.controller.last_lambdas else [],
-            "acceptance_beta": [float(b.item()) for b in beta_gate.squeeze(-1).squeeze(-1).detach().cpu()] if self.hypothesis_gate is not None else [1.0] * B,
+            "acceptance_beta": [float(b) for b in beta_gate.reshape(-1).detach().cpu().tolist()] if self.hypothesis_gate is not None else [1.0] * B,
             "evidence_gain": [float(eg.item()) for eg in v_telem["evidence_gain"].cpu()] if "evidence_gain" in v_telem else [],
             "gate_scale": float(torch.tanh(self.gate_alpha).item()) if hasattr(self, "gate_alpha") else 1.0,
             "adapter_mode": self.adapter_mode,

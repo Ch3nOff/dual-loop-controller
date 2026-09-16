@@ -173,6 +173,11 @@ class RecurrentLatentController(nn.Module):
         else:
             self.audit_probe = None
 
+    def reset_state(self):
+        """Clear mutable instance telemetry state to prevent cross-request leakage (ARCH-02 / NEW-02)."""
+        self.last_lambdas = []
+        self.last_error_norms = []
+
     def initialize_thoughts(self, query_rep: torch.Tensor) -> torch.Tensor:
         """
         Initializes H_0 conditioned directly on the query.
@@ -185,6 +190,76 @@ class RecurrentLatentController(nn.Module):
         base = self.query_projector(query_rep).unsqueeze(1) # [B, 1, D]
         H_0 = base.expand(B, self.num_thought_tokens, -1) + self.learned_slot_offsets
         return H_0
+
+    def step_deliberation(
+        self,
+        H: torch.Tensor,
+        H_anchor: torch.Tensor,
+        memory: torch.Tensor,
+        H_prev: Optional[torch.Tensor] = None,
+        h_prev_primary: Optional[torch.Tensor] = None
+    ) -> Tuple[torch.Tensor, Optional[torch.Tensor], Optional[torch.Tensor]]:
+        """
+        Executes a single recurrent step of outer loop deliberation.
+        Unified across full rollout (forward) and per-step interactive decoding (decoder PATH A).
+        
+        Args:
+            H: [B, L_thought, D] Current thought representations.
+            H_anchor: [B, L_thought, D] Anchor thoughts from initial query.
+            memory: [B, M, D] Working memory buffer (CWM).
+            H_prev: [B, L_thought, D] Optional previous step thought representations.
+            h_prev_primary: [B, D] Optional previous primary thought representation.
+            
+        Returns:
+            H_next: [B, L_thought, D] Updated thought representations.
+            err_norm: [B] or None Discrepancy norm from LatentCritiqueRefinementUnit.
+            lam_k: [B] or None Halting probability from LearnedHaltingGate.
+        """
+        if H_prev is None:
+            H_prev = H.clone()
+
+        # 1. Latent Self-Attention (Reflective deliberation)
+        attn_self, _ = self.latent_self_attn(H, H, H)
+        H = self.norm1(H + attn_self)
+
+        # 2. Capacity-Gated Cross-Attention to Memory (Context grounding)
+        H_cross = self.capacity_cross_attn(H, memory)
+
+        # 3. Metacognitive Error-Reflection & Self-Correction (Learn from mistakes)
+        if self.critique_unit is not None:
+            delta_critique, err_norm = self.critique_unit(H, H_cross)
+            H_updated = H + H_cross + delta_critique
+        else:
+            err_norm = None
+            H_updated = H + H_cross
+
+        # 4. Learned Adaptive Anchor Gate (Contraction Mapping: guarantees stability at K >= 4)
+        alpha = torch.sigmoid(self.anchor_gate(H_updated)) # [B, L, 1]
+        H = self.norm2(alpha * H_updated + (1.0 - alpha) * H_anchor)
+
+        # 5. Latent MLP
+        H = self.norm3(H + self.latent_mlp(H))
+
+        # Recurrent state norm clipping (ARCH-01: prevent divergence at higher ponder steps)
+        h_norm = torch.norm(H, p=2, dim=-1, keepdim=True)
+        max_norm = 50.0
+        clip_coef = torch.clamp(max_norm / (h_norm + 1e-6), max=1.0)
+        H = H * clip_coef
+
+        h_primary = H[:, 0, :]
+
+        # 6. Learned Halting Gate Evaluation (PonderNet multi-signal)
+        lam_k = None
+        if self.learned_halting_gate is not None:
+            lam_k = self.learned_halting_gate.compute_lambda(
+                h_curr=h_primary,
+                h_prev=h_prev_primary,
+                H_curr=H,
+                H_prev=H_prev,
+                discrepancy_norm=err_norm
+            )
+
+        return H, err_norm, lam_k
 
     def forward(
         self,
@@ -209,6 +284,9 @@ class RecurrentLatentController(nn.Module):
             aux_logits: List of [B, VocabSize] for each step (if audit_probe exists).
             step_entropies: List of [B] entropy values per step.
         """
+        # ARCH-02 / NEW-02: Clear mutable instance state at forward entry to prevent cross-request leakage
+        self.reset_state()
+
         H = self.initialize_thoughts(query_rep)
         H_anchor = H.detach() if not self.training else H.clone() # Anchor for residual stream stability (TENSOR-01)
 
@@ -222,48 +300,21 @@ class RecurrentLatentController(nn.Module):
         for step in range(steps):
             H_prev = H.clone()
 
-            # 1. Latent Self-Attention (Reflective deliberation)
-            attn_self, _ = self.latent_self_attn(H, H, H)
-            H = self.norm1(H + attn_self)
+            # Execute unified recurrent step of Outer Loop
+            H, err_norm, lam_k = self.step_deliberation(
+                H=H,
+                H_anchor=H_anchor,
+                memory=memory,
+                H_prev=H_prev,
+                h_prev_primary=h_prev_primary
+            )
 
-            # 2. Capacity-Gated Cross-Attention ke Memory (Context grounding)
-            H_cross = self.capacity_cross_attn(H, memory)
-
-            # 3. Metacognitive Error-Reflection & Self-Correction (Learn from mistakes)
-            if self.critique_unit is not None:
-                delta_critique, err_norm = self.critique_unit(H, H_cross)
+            if err_norm is not None:
                 error_norms.append(err_norm)
-                H_updated = H + H_cross + delta_critique
-            else:
-                err_norm = None
-                H_updated = H + H_cross
 
-            # 4. Learned Adaptive Anchor Gate (Contraction Mapping: guarantees stability at K >= 4)
-            alpha = torch.sigmoid(self.anchor_gate(H_updated)) # [B, L, 1]
-            H = self.norm2(alpha * H_updated + (1.0 - alpha) * H_anchor)
-
-            # 5. Latent MLP
-            H = self.norm3(H + self.latent_mlp(H))
-
-            # Recurrent state norm clipping (ARCH-01: prevent divergence at higher ponder steps)
-            h_norm = torch.norm(H, p=2, dim=-1, keepdim=True)
-            max_norm = 50.0
-            clip_coef = torch.clamp(max_norm / (h_norm + 1e-6), max=1.0)
-            H = H * clip_coef
-
-            h_primary = H[:, 0, :]
-
-            # 6. Learned Halting Gate Evaluation (PonderNet multi-signal)
-            if self.learned_halting_gate is not None:
-                lam_k = self.learned_halting_gate.compute_lambda(
-                    h_curr=h_primary,
-                    h_prev=h_prev_primary,
-                    H_curr=H,
-                    H_prev=H_prev,
-                    discrepancy_norm=err_norm
-                )
+            if lam_k is not None:
                 lambdas.append(lam_k)
-                h_prev_primary = h_primary.detach()
+                h_prev_primary = H[:, 0, :].detach()
 
                 if dynamic_halting and not self.training:
                     halt_mask = self.learned_halting_gate.should_halt_inference(lam_k)
@@ -271,6 +322,7 @@ class RecurrentLatentController(nn.Module):
                         break
 
             # Audit Probe & Entropy evaluation
+            h_primary = H[:, 0, :]
             if self.audit_probe is not None:
                 probe_out = self.audit_probe(h_primary) # Probe primary thought token
                 if return_aux or dynamic_halting:
