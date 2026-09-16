@@ -12,10 +12,10 @@ OUTPUT_PNG = "full_benchmark_scoreboard.png"
 TASKS = ["ARC-Easy", "ARC-Challenge", "OpenBookQA", "PIQA"]
 
 TASK_DISPLAY_NAMES = {
-    "ARC-Easy": "ARC-Easy (Sains)",
-    "ARC-Challenge": "ARC-Challenge (Nalar)",
-    "OpenBookQA": "OpenBookQA (Fakta)",
-    "PIQA": "PIQA (Fisika/Commonsense)"
+    "ARC-Easy": "ARC-Easy (Science)",
+    "ARC-Challenge": "ARC-Challenge (Reasoning)",
+    "OpenBookQA": "OpenBookQA (Facts)",
+    "PIQA": "PIQA (Physical Commonsense)"
 }
 
 def main():
