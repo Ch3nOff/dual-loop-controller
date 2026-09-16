@@ -59,6 +59,7 @@ class DualLoopQwenModel(nn.Module):
         capacity_factor: float = 0.5,
         query_idx: int = -1,
         vocab_size: Optional[int] = None,
+        confidence_threshold: Optional[float] = None,
         **adapter_kwargs
     ):
         super().__init__()
@@ -107,6 +108,7 @@ class DualLoopQwenModel(nn.Module):
         self.hidden_size = hidden_size
         self.k_steps = k_steps
         self.dynamic_halting = dynamic_halting
+        self.confidence_threshold = confidence_threshold
         self.query_idx = query_idx
         self.enabled = True
         self.last_telemetry: Dict[str, Any] = {}
@@ -176,6 +178,14 @@ class DualLoopQwenModel(nn.Module):
         k>=1: System 2 latent deliberation.
         """
         self.k_steps = max(0, int(k))
+
+    def set_confidence_threshold(self, threshold: Optional[float] = None):
+        """
+        Configures adaptive confidence-gated deliberation (Dynamic Halting).
+        If margin between top-1 and top-2 candidates exceeds threshold (e.g. 3.0 nats),
+        System 1 is confident and bypasses deliberation (k=0) to prevent over-pondering.
+        """
+        self.confidence_threshold = threshold
 
     def enable_adapter(self, enabled: bool = True):
         """Enables or disables adapter interception."""
