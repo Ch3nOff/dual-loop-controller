@@ -1,0 +1,4876 @@
+{
+  "results": {
+    "arc_easy": {
+      "name": "arc_easy",
+      "alias": "arc_easy",
+      "sample_len": 50,
+      "acc,none": 0.58,
+      "acc_stderr,none": 0.07050835816716038,
+      "acc_norm,none": 0.64,
+      "acc_norm_stderr,none": 0.06857142857142857
+    }
+  },
+  "group_subtasks": {},
+  "configs": {
+    "arc_easy": {
+      "task": "arc_easy",
+      "dataset_path": "allenai/ai2_arc",
+      "dataset_name": "ARC-Easy",
+      "training_split": "train",
+      "validation_split": "validation",
+      "test_split": "test",
+      "doc_to_text": "Question: {{question}}\nAnswer:",
+      "doc_to_target": "{{choices.label.index(answerKey)}}",
+      "unsafe_code": false,
+      "doc_to_choice": "{{choices.text}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "fewshot_config": {
+        "sampler": "default",
+        "split": null,
+        "process_docs": null,
+        "fewshot_indices": null,
+        "samples": null,
+        "doc_to_text": "Question: {{question}}\nAnswer:",
+        "doc_to_choice": "{{choices.text}}",
+        "doc_to_target": "{{choices.label.index(answerKey)}}",
+        "gen_prefix": null,
+        "fewshot_delimiter": "\n\n",
+        "target_delimiter": " "
+      },
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "acc_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": true,
+      "doc_to_decontamination_query": "Question: {{question}}\nAnswer:",
+      "metadata": {
+        "version": 1.0,
+        "config_source": "C:\\Users\\Matthew Chen\\Documents\\X-Star\\.venv\\Lib\\site-packages\\lm_eval\\tasks\\arc\\arc_easy.yaml"
+      }
+    }
+  },
+  "versions": {
+    "arc_easy": 1.0
+  },
+  "n-shot": {
+    "arc_easy": 0
+  },
+  "higher_is_better": {
+    "arc_easy": {
+      "acc": true,
+      "acc_norm": true
+    }
+  },
+  "n-samples": {
+    "arc_easy": {
+      "original": 2376,
+      "effective": 50
+    }
+  },
+  "samples": {
+    "arc_easy": [
+      {
+        "doc_id": 0,
+        "doc": {
+          "id": "Mercury_417466",
+          "question": "Which statement best explains why photosynthesis is the foundation of most food webs?",
+          "choices": {
+            "text": [
+              "Sunlight is the source of energy for nearly all ecosystems.",
+              "Most ecosystems are found on land instead of in water.",
+              "Carbon dioxide is more available than other gases.",
+              "The producers in all ecosystems are plants."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "A"
+        },
+        "target": 0,
+        "arguments": [
+          [
+            "Question: Which statement best explains why photosynthesis is the foundation of most food webs?\nAnswer:",
+            " Sunlight is the source of energy for nearly all ecosystems."
+          ],
+          [
+            "Question: Which statement best explains why photosynthesis is the foundation of most food webs?\nAnswer:",
+            " Most ecosystems are found on land instead of in water."
+          ],
+          [
+            "Question: Which statement best explains why photosynthesis is the foundation of most food webs?\nAnswer:",
+            " Carbon dioxide is more available than other gases."
+          ],
+          [
+            "Question: Which statement best explains why photosynthesis is the foundation of most food webs?\nAnswer:",
+            " The producers in all ecosystems are plants."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -19.029504776000977,
+              false
+            ]
+          ],
+          [
+            [
+              -29.934595108032227,
+              false
+            ]
+          ],
+          [
+            [
+              -25.48636245727539,
+              false
+            ]
+          ],
+          [
+            [
+              -20.27716064453125,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -19.029504776000977,
+            false
+          ],
+          [
+            -29.934595108032227,
+            false
+          ],
+          [
+            -25.48636245727539,
+            false
+          ],
+          [
+            -20.27716064453125,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "b91fe1a8fdc40a80b9364f6256ac729d010ba076b02e75a362c2cf7ad3303bdf",
+        "prompt_hash": "f804da9f5e214341d08d56228bb255177a0e5740f82e61b45887fcb5dc5c08ce",
+        "target_hash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 1,
+        "doc": {
+          "id": "Mercury_7081673",
+          "question": "Which piece of safety equipment is used to keep mold spores from entering the respiratory system?",
+          "choices": {
+            "text": [
+              "safety goggles",
+              "breathing mask",
+              "rubber gloves",
+              "lead apron"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "B"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "Question: Which piece of safety equipment is used to keep mold spores from entering the respiratory system?\nAnswer:",
+            " safety goggles"
+          ],
+          [
+            "Question: Which piece of safety equipment is used to keep mold spores from entering the respiratory system?\nAnswer:",
+            " breathing mask"
+          ],
+          [
+            "Question: Which piece of safety equipment is used to keep mold spores from entering the respiratory system?\nAnswer:",
+            " rubber gloves"
+          ],
+          [
+            "Question: Which piece of safety equipment is used to keep mold spores from entering the respiratory system?\nAnswer:",
+            " lead apron"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -14.604650497436523,
+              false
+            ]
+          ],
+          [
+            [
+              -15.652677536010742,
+              false
+            ]
+          ],
+          [
+            [
+              -14.064412117004395,
+              false
+            ]
+          ],
+          [
+            [
+              -18.953256607055664,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -14.604650497436523,
+            false
+          ],
+          [
+            -15.652677536010742,
+            false
+          ],
+          [
+            -14.064412117004395,
+            false
+          ],
+          [
+            -18.953256607055664,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "864be3c890aba1a77f2d3e9592fa7ec90942afb66250f0e99ac11b30a1330e5a",
+        "prompt_hash": "6a93081b5b26e4862753ccd0003303f0323bda7ba6ca7c495000f9905a37fce5",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 0.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 2,
+        "doc": {
+          "id": "Mercury_7239733",
+          "question": "Meiosis is a type of cell division in which germ cells divide to produce haploid cells. Where does meiosis occur?",
+          "choices": {
+            "text": [
+              "brain cells",
+              "bone cells",
+              "muscle cells",
+              "ovary cells"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "D"
+        },
+        "target": 3,
+        "arguments": [
+          [
+            "Question: Meiosis is a type of cell division in which germ cells divide to produce haploid cells. Where does meiosis occur?\nAnswer:",
+            " brain cells"
+          ],
+          [
+            "Question: Meiosis is a type of cell division in which germ cells divide to produce haploid cells. Where does meiosis occur?\nAnswer:",
+            " bone cells"
+          ],
+          [
+            "Question: Meiosis is a type of cell division in which germ cells divide to produce haploid cells. Where does meiosis occur?\nAnswer:",
+            " muscle cells"
+          ],
+          [
+            "Question: Meiosis is a type of cell division in which germ cells divide to produce haploid cells. Where does meiosis occur?\nAnswer:",
+            " ovary cells"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -22.000642776489258,
+              false
+            ]
+          ],
+          [
+            [
+              -22.667572021484375,
+              false
+            ]
+          ],
+          [
+            [
+              -18.503013610839844,
+              false
+            ]
+          ],
+          [
+            [
+              -21.34177017211914,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -22.000642776489258,
+            false
+          ],
+          [
+            -22.667572021484375,
+            false
+          ],
+          [
+            -18.503013610839844,
+            false
+          ],
+          [
+            -21.34177017211914,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "c79937cfecd9c1d852b0a65a6816710ce98507019ed48c57239077092a4963b6",
+        "prompt_hash": "f24174cef34920abaa4009384735df768e4b3832cb8b18246fcd6917f6c1f945",
+        "target_hash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+        "acc": 0.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 3,
+        "doc": {
+          "id": "NYSEDREGENTS_2015_4_8",
+          "question": "Which characteristic describes the texture of a kitten's fur?",
+          "choices": {
+            "text": [
+              "gray",
+              "warm",
+              "long",
+              "soft"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "D"
+        },
+        "target": 3,
+        "arguments": [
+          [
+            "Question: Which characteristic describes the texture of a kitten's fur?\nAnswer:",
+            " gray"
+          ],
+          [
+            "Question: Which characteristic describes the texture of a kitten's fur?\nAnswer:",
+            " warm"
+          ],
+          [
+            "Question: Which characteristic describes the texture of a kitten's fur?\nAnswer:",
+            " long"
+          ],
+          [
+            "Question: Which characteristic describes the texture of a kitten's fur?\nAnswer:",
+            " soft"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -14.343596458435059,
+              false
+            ]
+          ],
+          [
+            [
+              -14.711390495300293,
+              false
+            ]
+          ],
+          [
+            [
+              -15.674983978271484,
+              false
+            ]
+          ],
+          [
+            [
+              -11.705602645874023,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -14.343596458435059,
+            false
+          ],
+          [
+            -14.711390495300293,
+            false
+          ],
+          [
+            -15.674983978271484,
+            false
+          ],
+          [
+            -11.705602645874023,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "0b1d32d8fff63c6f801aa24ea0d27d565a4433b59fa7720e7d2682c8b772594f",
+        "prompt_hash": "6e97b5b88ed30269249a32f617efecbdde79e2d13d39061ce3fce23c0f152888",
+        "target_hash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 4,
+        "doc": {
+          "id": "Mercury_7037258",
+          "question": "Which best describes the structure of an atom?",
+          "choices": {
+            "text": [
+              "a lightweight core surrounded by neutral particles",
+              "a massive core surrounded by negatively-charged particles",
+              "a network of interacting positive and negative particles",
+              "overlapping layers of neutral, positive, and negative particles"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "B"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "Question: Which best describes the structure of an atom?\nAnswer:",
+            " a lightweight core surrounded by neutral particles"
+          ],
+          [
+            "Question: Which best describes the structure of an atom?\nAnswer:",
+            " a massive core surrounded by negatively-charged particles"
+          ],
+          [
+            "Question: Which best describes the structure of an atom?\nAnswer:",
+            " a network of interacting positive and negative particles"
+          ],
+          [
+            "Question: Which best describes the structure of an atom?\nAnswer:",
+            " overlapping layers of neutral, positive, and negative particles"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -40.493064880371094,
+              false
+            ]
+          ],
+          [
+            [
+              -40.71013641357422,
+              false
+            ]
+          ],
+          [
+            [
+              -38.225223541259766,
+              false
+            ]
+          ],
+          [
+            [
+              -48.80173110961914,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -40.493064880371094,
+            false
+          ],
+          [
+            -40.71013641357422,
+            false
+          ],
+          [
+            -38.225223541259766,
+            false
+          ],
+          [
+            -48.80173110961914,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "d864a18b0f67ac89ae51c69c131dfb95a8d866e5b751391658f795dd173e0c28",
+        "prompt_hash": "db2e78924b0f06335f46af5876767f1f8dd92425f9c80597c94a9895607fd67d",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 0.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 5,
+        "doc": {
+          "id": "CSZ20679",
+          "question": "To express the distance between the Milky Way galaxy and other galaxies, the most appropriate unit of measurement is the",
+          "choices": {
+            "text": [
+              "meter.",
+              "kilometer.",
+              "light-year.",
+              "astronomical unit."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "C"
+        },
+        "target": 2,
+        "arguments": [
+          [
+            "Question: To express the distance between the Milky Way galaxy and other galaxies, the most appropriate unit of measurement is the\nAnswer:",
+            " meter."
+          ],
+          [
+            "Question: To express the distance between the Milky Way galaxy and other galaxies, the most appropriate unit of measurement is the\nAnswer:",
+            " kilometer."
+          ],
+          [
+            "Question: To express the distance between the Milky Way galaxy and other galaxies, the most appropriate unit of measurement is the\nAnswer:",
+            " light-year."
+          ],
+          [
+            "Question: To express the distance between the Milky Way galaxy and other galaxies, the most appropriate unit of measurement is the\nAnswer:",
+            " astronomical unit."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -9.002483367919922,
+              false
+            ]
+          ],
+          [
+            [
+              -10.459911346435547,
+              false
+            ]
+          ],
+          [
+            [
+              -6.05995512008667,
+              false
+            ]
+          ],
+          [
+            [
+              -10.353652000427246,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -9.002483367919922,
+            false
+          ],
+          [
+            -10.459911346435547,
+            false
+          ],
+          [
+            -6.05995512008667,
+            false
+          ],
+          [
+            -10.353652000427246,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "2ad43d968ffc99e1b2a73c7757f38b272afcb3b9647a05c76ec5cf8f26281310",
+        "prompt_hash": "ca6340c0a56291c8fff926247ca0684c52d1ffed3cbf974f8064a5f777fa5978",
+        "target_hash": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 6,
+        "doc": {
+          "id": "Mercury_182158",
+          "question": "A student has just completed a laboratory activity. What is the last action that the student should perform before leaving the lab area?",
+          "choices": {
+            "text": [
+              "wash hands",
+              "turn off all equipment",
+              "put away all glassware",
+              "wash instruments and table tops"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "A"
+        },
+        "target": 0,
+        "arguments": [
+          [
+            "Question: A student has just completed a laboratory activity. What is the last action that the student should perform before leaving the lab area?\nAnswer:",
+            " wash hands"
+          ],
+          [
+            "Question: A student has just completed a laboratory activity. What is the last action that the student should perform before leaving the lab area?\nAnswer:",
+            " turn off all equipment"
+          ],
+          [
+            "Question: A student has just completed a laboratory activity. What is the last action that the student should perform before leaving the lab area?\nAnswer:",
+            " put away all glassware"
+          ],
+          [
+            "Question: A student has just completed a laboratory activity. What is the last action that the student should perform before leaving the lab area?\nAnswer:",
+            " wash instruments and table tops"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -9.786897659301758,
+              false
+            ]
+          ],
+          [
+            [
+              -13.088011741638184,
+              false
+            ]
+          ],
+          [
+            [
+              -20.9665470123291,
+              false
+            ]
+          ],
+          [
+            [
+              -27.281103134155273,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -9.786897659301758,
+            false
+          ],
+          [
+            -13.088011741638184,
+            false
+          ],
+          [
+            -20.9665470123291,
+            false
+          ],
+          [
+            -27.281103134155273,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "f4474d28f6064f40d5343be38d4da2976befc1813be9490ec7b4772360cdac7d",
+        "prompt_hash": "447745ef526f1caf3279975333fb886cd4cab80f5d8f066f8176a04a1ab25510",
+        "target_hash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "acc": 1.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 7,
+        "doc": {
+          "id": "Mercury_7216668",
+          "question": "Students are investigating the effects of different fertilizers on plant growth. Which units would be best to measure the mass of the fertilizer used?",
+          "choices": {
+            "text": [
+              "meters",
+              "centimeters",
+              "grams",
+              "milligrams"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "C"
+        },
+        "target": 2,
+        "arguments": [
+          [
+            "Question: Students are investigating the effects of different fertilizers on plant growth. Which units would be best to measure the mass of the fertilizer used?\nAnswer:",
+            " meters"
+          ],
+          [
+            "Question: Students are investigating the effects of different fertilizers on plant growth. Which units would be best to measure the mass of the fertilizer used?\nAnswer:",
+            " centimeters"
+          ],
+          [
+            "Question: Students are investigating the effects of different fertilizers on plant growth. Which units would be best to measure the mass of the fertilizer used?\nAnswer:",
+            " grams"
+          ],
+          [
+            "Question: Students are investigating the effects of different fertilizers on plant growth. Which units would be best to measure the mass of the fertilizer used?\nAnswer:",
+            " milligrams"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -11.114830017089844,
+              false
+            ]
+          ],
+          [
+            [
+              -11.085848808288574,
+              false
+            ]
+          ],
+          [
+            [
+              -1.6132066249847412,
+              false
+            ]
+          ],
+          [
+            [
+              -5.309943199157715,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -11.114830017089844,
+            false
+          ],
+          [
+            -11.085848808288574,
+            false
+          ],
+          [
+            -1.6132066249847412,
+            false
+          ],
+          [
+            -5.309943199157715,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "bdf22e417c39d42f49cafeb9731041d701e027adc75ffb8c8607ccfd9173b968",
+        "prompt_hash": "5ef14b419dda9e87350e95fecc17b8aec2372bb763922340826e65f03b1ec54c",
+        "target_hash": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 8,
+        "doc": {
+          "id": "MCAS_2001_5_19",
+          "question": "Plants use sunlight to make",
+          "choices": {
+            "text": [
+              "soil.",
+              "minerals.",
+              "food.",
+              "water."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "C"
+        },
+        "target": 2,
+        "arguments": [
+          [
+            "Question: Plants use sunlight to make\nAnswer:",
+            " soil."
+          ],
+          [
+            "Question: Plants use sunlight to make\nAnswer:",
+            " minerals."
+          ],
+          [
+            "Question: Plants use sunlight to make\nAnswer:",
+            " food."
+          ],
+          [
+            "Question: Plants use sunlight to make\nAnswer:",
+            " water."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -15.157777786254883,
+              false
+            ]
+          ],
+          [
+            [
+              -13.712213516235352,
+              false
+            ]
+          ],
+          [
+            [
+              -9.910755157470703,
+              false
+            ]
+          ],
+          [
+            [
+              -12.12889289855957,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -15.157777786254883,
+            false
+          ],
+          [
+            -13.712213516235352,
+            false
+          ],
+          [
+            -9.910755157470703,
+            false
+          ],
+          [
+            -12.12889289855957,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "53c446572bbe1742d595bca18fbb48e2afcd59aff9cd14aee84a7b08cd0b93f0",
+        "prompt_hash": "7fefaad40aafcb4acd97c590c6868ffcb0fd0170a5ac9b44a0c10cc376bec409",
+        "target_hash": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "acc": 1.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 9,
+        "doc": {
+          "id": "Mercury_SC_413631",
+          "question": "Which of these correctly identifies the way materials are transported in a plant?",
+          "choices": {
+            "text": [
+              "Xylem carries water from the roots to the leaves.",
+              "Phloem carries minerals from the roots to the leaves.",
+              "Xylem carries sugars from the flowers to the stems.",
+              "Phloem carries water from the flowers to the stems."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "A"
+        },
+        "target": 0,
+        "arguments": [
+          [
+            "Question: Which of these correctly identifies the way materials are transported in a plant?\nAnswer:",
+            " Xylem carries water from the roots to the leaves."
+          ],
+          [
+            "Question: Which of these correctly identifies the way materials are transported in a plant?\nAnswer:",
+            " Phloem carries minerals from the roots to the leaves."
+          ],
+          [
+            "Question: Which of these correctly identifies the way materials are transported in a plant?\nAnswer:",
+            " Xylem carries sugars from the flowers to the stems."
+          ],
+          [
+            "Question: Which of these correctly identifies the way materials are transported in a plant?\nAnswer:",
+            " Phloem carries water from the flowers to the stems."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -17.627376556396484,
+              false
+            ]
+          ],
+          [
+            [
+              -20.312950134277344,
+              false
+            ]
+          ],
+          [
+            [
+              -38.03879928588867,
+              false
+            ]
+          ],
+          [
+            [
+              -30.817012786865234,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -17.627376556396484,
+            false
+          ],
+          [
+            -20.312950134277344,
+            false
+          ],
+          [
+            -38.03879928588867,
+            false
+          ],
+          [
+            -30.817012786865234,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "7f47698765741ab2d9dafc93bf09f3530b534f061a2319760dce0e0f55a6c91c",
+        "prompt_hash": "f091d181c484319e55a300cf050aff6c69cd3c24901f1c85874c41d53e500ba7",
+        "target_hash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 10,
+        "doc": {
+          "id": "MCAS_2005_5_10",
+          "question": "When trees develop leaves in the spring, 10 changes occur on the forest floor. Why does the development of leaves cause changes on the forest floor?",
+          "choices": {
+            "text": [
+              "Rainfall increases.",
+              "Sunlight is reduced.",
+              "Wind speed increases.",
+              "Animal migration is stopped."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "B"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "Question: When trees develop leaves in the spring, 10 changes occur on the forest floor. Why does the development of leaves cause changes on the forest floor?\nAnswer:",
+            " Rainfall increases."
+          ],
+          [
+            "Question: When trees develop leaves in the spring, 10 changes occur on the forest floor. Why does the development of leaves cause changes on the forest floor?\nAnswer:",
+            " Sunlight is reduced."
+          ],
+          [
+            "Question: When trees develop leaves in the spring, 10 changes occur on the forest floor. Why does the development of leaves cause changes on the forest floor?\nAnswer:",
+            " Wind speed increases."
+          ],
+          [
+            "Question: When trees develop leaves in the spring, 10 changes occur on the forest floor. Why does the development of leaves cause changes on the forest floor?\nAnswer:",
+            " Animal migration is stopped."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -14.31220817565918,
+              false
+            ]
+          ],
+          [
+            [
+              -23.529136657714844,
+              false
+            ]
+          ],
+          [
+            [
+              -18.562091827392578,
+              false
+            ]
+          ],
+          [
+            [
+              -25.084671020507812,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -14.31220817565918,
+            false
+          ],
+          [
+            -23.529136657714844,
+            false
+          ],
+          [
+            -18.562091827392578,
+            false
+          ],
+          [
+            -25.084671020507812,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "834bd1c15768df73c4a854009254c40a7ae85fa795a5512aed97bbddcd537000",
+        "prompt_hash": "8a49b05a1b06cba1367f07d27c518012aec4385a441358b7da3e35447055c526",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 0.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 11,
+        "doc": {
+          "id": "Mercury_7166145",
+          "question": "The circulatory system and the endocrine system work together in the human body. Which describes one way in which these systems interact?",
+          "choices": {
+            "text": [
+              "taking in oxygen and transporting it to cells of the body",
+              "releasing hormones and transporting them to cells of the body",
+              "absorbing nutrients from food and transporting them to cells in the body",
+              "collecting waste products from the cells and transporting it out of the body"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "B"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "Question: The circulatory system and the endocrine system work together in the human body. Which describes one way in which these systems interact?\nAnswer:",
+            " taking in oxygen and transporting it to cells of the body"
+          ],
+          [
+            "Question: The circulatory system and the endocrine system work together in the human body. Which describes one way in which these systems interact?\nAnswer:",
+            " releasing hormones and transporting them to cells of the body"
+          ],
+          [
+            "Question: The circulatory system and the endocrine system work together in the human body. Which describes one way in which these systems interact?\nAnswer:",
+            " absorbing nutrients from food and transporting them to cells in the body"
+          ],
+          [
+            "Question: The circulatory system and the endocrine system work together in the human body. Which describes one way in which these systems interact?\nAnswer:",
+            " collecting waste products from the cells and transporting it out of the body"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -34.232845306396484,
+              false
+            ]
+          ],
+          [
+            [
+              -34.00624465942383,
+              false
+            ]
+          ],
+          [
+            [
+              -32.292327880859375,
+              false
+            ]
+          ],
+          [
+            [
+              -37.62376022338867,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -34.232845306396484,
+            false
+          ],
+          [
+            -34.00624465942383,
+            false
+          ],
+          [
+            -32.292327880859375,
+            false
+          ],
+          [
+            -37.62376022338867,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "2b87c31ea5d82bb13d4092b0727d61d7647c5deffc31a3241a9f621e008cb5a5",
+        "prompt_hash": "64c6b3bacb0668bad86894cbea653fd2db20685e827556a26405b3df4526f6e0",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 0.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 12,
+        "doc": {
+          "id": "MSA_2013_5_6",
+          "question": "A student throws a ball into the air. While the ball travels up, the speed of the ball decreases. What force causes the ball to slow while traveling up?",
+          "choices": {
+            "text": [
+              "electricity",
+              "gravity",
+              "magnetism",
+              "tension"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "B"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "Question: A student throws a ball into the air. While the ball travels up, the speed of the ball decreases. What force causes the ball to slow while traveling up?\nAnswer:",
+            " electricity"
+          ],
+          [
+            "Question: A student throws a ball into the air. While the ball travels up, the speed of the ball decreases. What force causes the ball to slow while traveling up?\nAnswer:",
+            " gravity"
+          ],
+          [
+            "Question: A student throws a ball into the air. While the ball travels up, the speed of the ball decreases. What force causes the ball to slow while traveling up?\nAnswer:",
+            " magnetism"
+          ],
+          [
+            "Question: A student throws a ball into the air. While the ball travels up, the speed of the ball decreases. What force causes the ball to slow while traveling up?\nAnswer:",
+            " tension"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -13.8005952835083,
+              false
+            ]
+          ],
+          [
+            [
+              -3.1684257984161377,
+              false
+            ]
+          ],
+          [
+            [
+              -13.357282638549805,
+              false
+            ]
+          ],
+          [
+            [
+              -9.666282653808594,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -13.8005952835083,
+            false
+          ],
+          [
+            -3.1684257984161377,
+            false
+          ],
+          [
+            -13.357282638549805,
+            false
+          ],
+          [
+            -9.666282653808594,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "39771cb49c5e425f2564a4719a0a746d8961e79d9d5ee3ac5f0d65bbf08f635c",
+        "prompt_hash": "d3ca56721ef5e0cd71cffa63ac0e6b44e8a86095fd3cbbb73d4b62838bf03aee",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 13,
+        "doc": {
+          "id": "Mercury_SC_405199",
+          "question": "Which of these will most likely harm a habitat?",
+          "choices": {
+            "text": [
+              "planting trees",
+              "water pollution",
+              "rainfall",
+              "sunlight"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "B"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "Question: Which of these will most likely harm a habitat?\nAnswer:",
+            " planting trees"
+          ],
+          [
+            "Question: Which of these will most likely harm a habitat?\nAnswer:",
+            " water pollution"
+          ],
+          [
+            "Question: Which of these will most likely harm a habitat?\nAnswer:",
+            " rainfall"
+          ],
+          [
+            "Question: Which of these will most likely harm a habitat?\nAnswer:",
+            " sunlight"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -15.728626251220703,
+              false
+            ]
+          ],
+          [
+            [
+              -12.5468111038208,
+              false
+            ]
+          ],
+          [
+            [
+              -14.605972290039062,
+              false
+            ]
+          ],
+          [
+            [
+              -14.077021598815918,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -15.728626251220703,
+            false
+          ],
+          [
+            -12.5468111038208,
+            false
+          ],
+          [
+            -14.605972290039062,
+            false
+          ],
+          [
+            -14.077021598815918,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "62fdf7ac0d5a7ee975b0b63b98d86419f36b1b30541beeea62417ea961276dec",
+        "prompt_hash": "d7007b687cf0556bd16b2cbe46877fb5fc62d28ba039021b580dc78f383ddb35",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 14,
+        "doc": {
+          "id": "NYSEDREGENTS_2015_8_28",
+          "question": "All living and nonliving material is composed of",
+          "choices": {
+            "text": [
+              "air",
+              "elements",
+              "water",
+              "soil"
+            ],
+            "label": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "answerKey": "2"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "Question: All living and nonliving material is composed of\nAnswer:",
+            " air"
+          ],
+          [
+            "Question: All living and nonliving material is composed of\nAnswer:",
+            " elements"
+          ],
+          [
+            "Question: All living and nonliving material is composed of\nAnswer:",
+            " water"
+          ],
+          [
+            "Question: All living and nonliving material is composed of\nAnswer:",
+            " soil"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -9.47577953338623,
+              false
+            ]
+          ],
+          [
+            [
+              -7.99688720703125,
+              false
+            ]
+          ],
+          [
+            [
+              -7.871817588806152,
+              false
+            ]
+          ],
+          [
+            [
+              -12.537679672241211,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -9.47577953338623,
+            false
+          ],
+          [
+            -7.99688720703125,
+            false
+          ],
+          [
+            -7.871817588806152,
+            false
+          ],
+          [
+            -12.537679672241211,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "d6cefe3b3986a9b85fe6e68cd556b0ad5e5857b192f3a896d0cb8d87840e4e31",
+        "prompt_hash": "82626b146948fb241ce3ca70a294453f6b0a25c8d8ef3aee6d33457a3086a655",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 0.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 15,
+        "doc": {
+          "id": "Mercury_SC_401777",
+          "question": "Which process best explains how the Grand Canyon became so wide?",
+          "choices": {
+            "text": [
+              "folding",
+              "erosion",
+              "deposition",
+              "sedimentation"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "B"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "Question: Which process best explains how the Grand Canyon became so wide?\nAnswer:",
+            " folding"
+          ],
+          [
+            "Question: Which process best explains how the Grand Canyon became so wide?\nAnswer:",
+            " erosion"
+          ],
+          [
+            "Question: Which process best explains how the Grand Canyon became so wide?\nAnswer:",
+            " deposition"
+          ],
+          [
+            "Question: Which process best explains how the Grand Canyon became so wide?\nAnswer:",
+            " sedimentation"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -18.01546859741211,
+              false
+            ]
+          ],
+          [
+            [
+              -9.611948013305664,
+              false
+            ]
+          ],
+          [
+            [
+              -12.483545303344727,
+              false
+            ]
+          ],
+          [
+            [
+              -13.287893295288086,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -18.01546859741211,
+            false
+          ],
+          [
+            -9.611948013305664,
+            false
+          ],
+          [
+            -12.483545303344727,
+            false
+          ],
+          [
+            -13.287893295288086,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "dc2b1148e9b6439baa628da48472ce75e4f269a987667a3b6b51cffcfc133147",
+        "prompt_hash": "e1aed4f5f9d32f3a24cec0df6548526098790e0bf11e9b6eada6133fb0031e46",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 1.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 16,
+        "doc": {
+          "id": "Mercury_7198188",
+          "question": "As global temperatures increase, certain organisms will be more affected than others. The changes associated with global warming may result in an increase in sea level. Which organisms will be affected most as a result of the change in sea level?",
+          "choices": {
+            "text": [
+              "birds that eat fish from shallow waters",
+              "fish that live in coral reefs in shallow waters",
+              "mammals that swim in cold, deep ocean waters",
+              "crustaceans at the bottom of deep sea ocean waters"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "B"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "Question: As global temperatures increase, certain organisms will be more affected than others. The changes associated with global warming may result in an increase in sea level. Which organisms will be affected most as a result of the change in sea level?\nAnswer:",
+            " birds that eat fish from shallow waters"
+          ],
+          [
+            "Question: As global temperatures increase, certain organisms will be more affected than others. The changes associated with global warming may result in an increase in sea level. Which organisms will be affected most as a result of the change in sea level?\nAnswer:",
+            " fish that live in coral reefs in shallow waters"
+          ],
+          [
+            "Question: As global temperatures increase, certain organisms will be more affected than others. The changes associated with global warming may result in an increase in sea level. Which organisms will be affected most as a result of the change in sea level?\nAnswer:",
+            " mammals that swim in cold, deep ocean waters"
+          ],
+          [
+            "Question: As global temperatures increase, certain organisms will be more affected than others. The changes associated with global warming may result in an increase in sea level. Which organisms will be affected most as a result of the change in sea level?\nAnswer:",
+            " crustaceans at the bottom of deep sea ocean waters"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -36.39180374145508,
+              false
+            ]
+          ],
+          [
+            [
+              -32.16774368286133,
+              false
+            ]
+          ],
+          [
+            [
+              -34.477272033691406,
+              false
+            ]
+          ],
+          [
+            [
+              -44.410152435302734,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -36.39180374145508,
+            false
+          ],
+          [
+            -32.16774368286133,
+            false
+          ],
+          [
+            -34.477272033691406,
+            false
+          ],
+          [
+            -44.410152435302734,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "ed9246f5dba2f6092643addd83791292ff22941fb348a9bc056bf367dc972119",
+        "prompt_hash": "d9558f7613d5c601031b0bcf6119adb33e2adbeef01871a5836f6c071c37470a",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 17,
+        "doc": {
+          "id": "MCAS_1998_4_11",
+          "question": "A dish of sugar water was left on a window sill. One week later, there were only sugar crystals left in the dish. The water was gone. The best explanation for the appearance of sugar crystals is",
+          "choices": {
+            "text": [
+              "some of the water was absorbed by the dish.",
+              "the air condensed.",
+              "the light shining on the window sill produced more sugar.",
+              "the water evaporated."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "D"
+        },
+        "target": 3,
+        "arguments": [
+          [
+            "Question: A dish of sugar water was left on a window sill. One week later, there were only sugar crystals left in the dish. The water was gone. The best explanation for the appearance of sugar crystals is\nAnswer:",
+            " some of the water was absorbed by the dish."
+          ],
+          [
+            "Question: A dish of sugar water was left on a window sill. One week later, there were only sugar crystals left in the dish. The water was gone. The best explanation for the appearance of sugar crystals is\nAnswer:",
+            " the air condensed."
+          ],
+          [
+            "Question: A dish of sugar water was left on a window sill. One week later, there were only sugar crystals left in the dish. The water was gone. The best explanation for the appearance of sugar crystals is\nAnswer:",
+            " the light shining on the window sill produced more sugar."
+          ],
+          [
+            "Question: A dish of sugar water was left on a window sill. One week later, there were only sugar crystals left in the dish. The water was gone. The best explanation for the appearance of sugar crystals is\nAnswer:",
+            " the water evaporated."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -28.030376434326172,
+              false
+            ]
+          ],
+          [
+            [
+              -21.542598724365234,
+              false
+            ]
+          ],
+          [
+            [
+              -37.6156005859375,
+              false
+            ]
+          ],
+          [
+            [
+              -9.386401176452637,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -28.030376434326172,
+            false
+          ],
+          [
+            -21.542598724365234,
+            false
+          ],
+          [
+            -37.6156005859375,
+            false
+          ],
+          [
+            -9.386401176452637,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "91a03b17fb5115c962419c23e1c9f7ef2eef8a134b52af47bb37db2d53f9564b",
+        "prompt_hash": "8d12c6ab497c6dbaceb590e6632e001c88df85359bab72e962b9d1514e493a18",
+        "target_hash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 18,
+        "doc": {
+          "id": "Mercury_SC_LBS10784",
+          "question": "Using a softball bat to hit a softball is an example of using which simple machine?",
+          "choices": {
+            "text": [
+              "pulley",
+              "lever",
+              "inclined plane",
+              "wheel and axle"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "B"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "Question: Using a softball bat to hit a softball is an example of using which simple machine?\nAnswer:",
+            " pulley"
+          ],
+          [
+            "Question: Using a softball bat to hit a softball is an example of using which simple machine?\nAnswer:",
+            " lever"
+          ],
+          [
+            "Question: Using a softball bat to hit a softball is an example of using which simple machine?\nAnswer:",
+            " inclined plane"
+          ],
+          [
+            "Question: Using a softball bat to hit a softball is an example of using which simple machine?\nAnswer:",
+            " wheel and axle"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -1.4915958642959595,
+              true
+            ]
+          ],
+          [
+            [
+              -5.305629253387451,
+              false
+            ]
+          ],
+          [
+            [
+              -9.710701942443848,
+              false
+            ]
+          ],
+          [
+            [
+              -8.932880401611328,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -1.4915958642959595,
+            true
+          ],
+          [
+            -5.305629253387451,
+            false
+          ],
+          [
+            -9.710701942443848,
+            false
+          ],
+          [
+            -8.932880401611328,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "48f5e7962156a90e34214ae5fd0dca3d01abcb005c791842e1cbc2243ab1b225",
+        "prompt_hash": "84dc8e6871253e6a7c0ee4cf569efc0211fcf6104f6954a133893c05c3e3f613",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 0.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 19,
+        "doc": {
+          "id": "Mercury_7033548",
+          "question": "When an igneous intrusion comes into contact with surrounding rock, the surrounding rock will",
+          "choices": {
+            "text": [
+              "erode.",
+              "foliate.",
+              "precipitate.",
+              "recrystallize."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "D"
+        },
+        "target": 3,
+        "arguments": [
+          [
+            "Question: When an igneous intrusion comes into contact with surrounding rock, the surrounding rock will\nAnswer:",
+            " erode."
+          ],
+          [
+            "Question: When an igneous intrusion comes into contact with surrounding rock, the surrounding rock will\nAnswer:",
+            " foliate."
+          ],
+          [
+            "Question: When an igneous intrusion comes into contact with surrounding rock, the surrounding rock will\nAnswer:",
+            " precipitate."
+          ],
+          [
+            "Question: When an igneous intrusion comes into contact with surrounding rock, the surrounding rock will\nAnswer:",
+            " recrystallize."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -12.148816108703613,
+              false
+            ]
+          ],
+          [
+            [
+              -12.940230369567871,
+              false
+            ]
+          ],
+          [
+            [
+              -12.992355346679688,
+              false
+            ]
+          ],
+          [
+            [
+              -10.304557800292969,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -12.148816108703613,
+            false
+          ],
+          [
+            -12.940230369567871,
+            false
+          ],
+          [
+            -12.992355346679688,
+            false
+          ],
+          [
+            -10.304557800292969,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "af7a5e94647391d05e8954031a71cf27e8f8ad46d1310c749afcc3d5e2161bf6",
+        "prompt_hash": "74899fa59189bf88a1bd2b9b9920fc9ee742e816ec084592ca2fd9afac145bd3",
+        "target_hash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 20,
+        "doc": {
+          "id": "Mercury_7146195",
+          "question": "A research scientist writes a paper on the initial regrowth of a forest after a fire has damaged the entire ecosystem. Which title would be best for the paper?",
+          "choices": {
+            "text": [
+              "Primary Succession",
+              "Stable Communities",
+              "Climax Communities",
+              "Secondary Succession"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "D"
+        },
+        "target": 3,
+        "arguments": [
+          [
+            "Question: A research scientist writes a paper on the initial regrowth of a forest after a fire has damaged the entire ecosystem. Which title would be best for the paper?\nAnswer:",
+            " Primary Succession"
+          ],
+          [
+            "Question: A research scientist writes a paper on the initial regrowth of a forest after a fire has damaged the entire ecosystem. Which title would be best for the paper?\nAnswer:",
+            " Stable Communities"
+          ],
+          [
+            "Question: A research scientist writes a paper on the initial regrowth of a forest after a fire has damaged the entire ecosystem. Which title would be best for the paper?\nAnswer:",
+            " Climax Communities"
+          ],
+          [
+            "Question: A research scientist writes a paper on the initial regrowth of a forest after a fire has damaged the entire ecosystem. Which title would be best for the paper?\nAnswer:",
+            " Secondary Succession"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -17.425222396850586,
+              false
+            ]
+          ],
+          [
+            [
+              -17.021114349365234,
+              false
+            ]
+          ],
+          [
+            [
+              -21.634319305419922,
+              false
+            ]
+          ],
+          [
+            [
+              -21.36155128479004,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -17.425222396850586,
+            false
+          ],
+          [
+            -17.021114349365234,
+            false
+          ],
+          [
+            -21.634319305419922,
+            false
+          ],
+          [
+            -21.36155128479004,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "f66077e184dd2bf007677084f20baa9f2981268b58b863364e7c18bb8a3880b8",
+        "prompt_hash": "459d84fc69c182bbbf13881b2b9d7ad51934a4b6177d09d157ceb1ce85dd3364",
+        "target_hash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+        "acc": 0.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 21,
+        "doc": {
+          "id": "NCEOGA_2013_8_36",
+          "question": "Where do plants get most of the energy they need to live and grow?",
+          "choices": {
+            "text": [
+              "water",
+              "soil",
+              "air",
+              "sunlight"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "D"
+        },
+        "target": 3,
+        "arguments": [
+          [
+            "Question: Where do plants get most of the energy they need to live and grow?\nAnswer:",
+            " water"
+          ],
+          [
+            "Question: Where do plants get most of the energy they need to live and grow?\nAnswer:",
+            " soil"
+          ],
+          [
+            "Question: Where do plants get most of the energy they need to live and grow?\nAnswer:",
+            " air"
+          ],
+          [
+            "Question: Where do plants get most of the energy they need to live and grow?\nAnswer:",
+            " sunlight"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -13.45377254486084,
+              false
+            ]
+          ],
+          [
+            [
+              -15.305707931518555,
+              false
+            ]
+          ],
+          [
+            [
+              -15.298443794250488,
+              false
+            ]
+          ],
+          [
+            [
+              -12.113279342651367,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -13.45377254486084,
+            false
+          ],
+          [
+            -15.305707931518555,
+            false
+          ],
+          [
+            -15.298443794250488,
+            false
+          ],
+          [
+            -12.113279342651367,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "2f5888af4fb84d525059ecd5e07b2818f8095a0840e6bf56727e2901d74e94de",
+        "prompt_hash": "bc57d3a1b4f68b1b439adfda4801d01a528addf53f9c1df62b0ac162e764c683",
+        "target_hash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 22,
+        "doc": {
+          "id": "Mercury_SC_415412",
+          "question": "Which is a statement about climate?",
+          "choices": {
+            "text": [
+              "The average temperature yesterday was 15\u00b0C.",
+              "The temperature range today was 10\u00b0C to 20\u00b0C.",
+              "The high temperature tomorrow will be 14\u00b0C.",
+              "The average high temperature in May is 20\u00b0C."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "D"
+        },
+        "target": 3,
+        "arguments": [
+          [
+            "Question: Which is a statement about climate?\nAnswer:",
+            " The average temperature yesterday was 15\u00b0C."
+          ],
+          [
+            "Question: Which is a statement about climate?\nAnswer:",
+            " The temperature range today was 10\u00b0C to 20\u00b0C."
+          ],
+          [
+            "Question: Which is a statement about climate?\nAnswer:",
+            " The high temperature tomorrow will be 14\u00b0C."
+          ],
+          [
+            "Question: Which is a statement about climate?\nAnswer:",
+            " The average high temperature in May is 20\u00b0C."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -28.660097122192383,
+              false
+            ]
+          ],
+          [
+            [
+              -34.5136604309082,
+              false
+            ]
+          ],
+          [
+            [
+              -35.76553726196289,
+              false
+            ]
+          ],
+          [
+            [
+              -28.763195037841797,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -28.660097122192383,
+            false
+          ],
+          [
+            -34.5136604309082,
+            false
+          ],
+          [
+            -35.76553726196289,
+            false
+          ],
+          [
+            -28.763195037841797,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "e86cd633efd3b7ee3aec9e6032c276211225b58e1bbc54ba8d681ae9c8c530fc",
+        "prompt_hash": "83dece74c992603049a0115238ecaa7df7e97508e1bccc698c92e142b664b7ce",
+        "target_hash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+        "acc": 0.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 23,
+        "doc": {
+          "id": "Mercury_7126840",
+          "question": "While on a movie set, a stuntman jumps off the roof of a building. As he falls toward an airbag, what is increasing?",
+          "choices": {
+            "text": [
+              "gravity",
+              "wind velocity",
+              "kinetic energy",
+              "potential energy"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "C"
+        },
+        "target": 2,
+        "arguments": [
+          [
+            "Question: While on a movie set, a stuntman jumps off the roof of a building. As he falls toward an airbag, what is increasing?\nAnswer:",
+            " gravity"
+          ],
+          [
+            "Question: While on a movie set, a stuntman jumps off the roof of a building. As he falls toward an airbag, what is increasing?\nAnswer:",
+            " wind velocity"
+          ],
+          [
+            "Question: While on a movie set, a stuntman jumps off the roof of a building. As he falls toward an airbag, what is increasing?\nAnswer:",
+            " kinetic energy"
+          ],
+          [
+            "Question: While on a movie set, a stuntman jumps off the roof of a building. As he falls toward an airbag, what is increasing?\nAnswer:",
+            " potential energy"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -3.3776307106018066,
+              false
+            ]
+          ],
+          [
+            [
+              -8.204253196716309,
+              false
+            ]
+          ],
+          [
+            [
+              -2.5481863021850586,
+              false
+            ]
+          ],
+          [
+            [
+              -8.197074890136719,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -3.3776307106018066,
+            false
+          ],
+          [
+            -8.204253196716309,
+            false
+          ],
+          [
+            -2.5481863021850586,
+            false
+          ],
+          [
+            -8.197074890136719,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "a8ed6432746a9dd1a7bf9c3a64f1ea261d5dd8043b0674d00d82e8587bfcc1e4",
+        "prompt_hash": "693dba37a20420e1759a5697b0437d8bb35db41b9bd119b79f3f8eb0b44a955b",
+        "target_hash": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 24,
+        "doc": {
+          "id": "Mercury_SC_408362",
+          "question": "Jessica wants to see cells in an oak tree leaf. Which tool is best for Jessica to use to see the cells?",
+          "choices": {
+            "text": [
+              "binoculars",
+              "microscope",
+              "reading glasses",
+              "magnifying glass"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "B"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "Question: Jessica wants to see cells in an oak tree leaf. Which tool is best for Jessica to use to see the cells?\nAnswer:",
+            " binoculars"
+          ],
+          [
+            "Question: Jessica wants to see cells in an oak tree leaf. Which tool is best for Jessica to use to see the cells?\nAnswer:",
+            " microscope"
+          ],
+          [
+            "Question: Jessica wants to see cells in an oak tree leaf. Which tool is best for Jessica to use to see the cells?\nAnswer:",
+            " reading glasses"
+          ],
+          [
+            "Question: Jessica wants to see cells in an oak tree leaf. Which tool is best for Jessica to use to see the cells?\nAnswer:",
+            " magnifying glass"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -12.08216667175293,
+              false
+            ]
+          ],
+          [
+            [
+              -7.513044834136963,
+              false
+            ]
+          ],
+          [
+            [
+              -19.928470611572266,
+              false
+            ]
+          ],
+          [
+            [
+              -10.022982597351074,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -12.08216667175293,
+            false
+          ],
+          [
+            -7.513044834136963,
+            false
+          ],
+          [
+            -19.928470611572266,
+            false
+          ],
+          [
+            -10.022982597351074,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "a7e87eb0160be2cb2a1fdfc96ce4629bf6135efea1d28026d03f6de7679d0f07",
+        "prompt_hash": "b4585f41979836d539abf4ae4fe768dd1415876098c50ee1393d65e2de7b2a09",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 1.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 25,
+        "doc": {
+          "id": "MDSA_2008_8_35",
+          "question": "Biologists conduct investigations to learn about living organisms. Which method helps reduce bias during an investigation?",
+          "choices": {
+            "text": [
+              "developing a hypothesis after collecting data in the investigation",
+              "limiting the amount of background research before the investigation",
+              "designing an investigation with repeated trials during the investigation",
+              "obtaining other opinions concerning what should happen during the investigation"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "C"
+        },
+        "target": 2,
+        "arguments": [
+          [
+            "Question: Biologists conduct investigations to learn about living organisms. Which method helps reduce bias during an investigation?\nAnswer:",
+            " developing a hypothesis after collecting data in the investigation"
+          ],
+          [
+            "Question: Biologists conduct investigations to learn about living organisms. Which method helps reduce bias during an investigation?\nAnswer:",
+            " limiting the amount of background research before the investigation"
+          ],
+          [
+            "Question: Biologists conduct investigations to learn about living organisms. Which method helps reduce bias during an investigation?\nAnswer:",
+            " designing an investigation with repeated trials during the investigation"
+          ],
+          [
+            "Question: Biologists conduct investigations to learn about living organisms. Which method helps reduce bias during an investigation?\nAnswer:",
+            " obtaining other opinions concerning what should happen during the investigation"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -37.42207717895508,
+              false
+            ]
+          ],
+          [
+            [
+              -37.17452621459961,
+              false
+            ]
+          ],
+          [
+            [
+              -40.488468170166016,
+              false
+            ]
+          ],
+          [
+            [
+              -49.633811950683594,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -37.42207717895508,
+            false
+          ],
+          [
+            -37.17452621459961,
+            false
+          ],
+          [
+            -40.488468170166016,
+            false
+          ],
+          [
+            -49.633811950683594,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "07c29d3ffad838a3d069396154920ddc13b12e9392269d1aa5cf7e42b8a6b3ba",
+        "prompt_hash": "3b76904bd21b09bd1a2eb9d2f30ee79765a2eb3498c785ae7f9ef9b85ff745a4",
+        "target_hash": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "acc": 0.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 26,
+        "doc": {
+          "id": "NYSEDREGENTS_2015_8_21",
+          "question": "Which factor is most likely to cause the number of rabbits living in an area to increase?",
+          "choices": {
+            "text": [
+              "less water",
+              "fewer predators",
+              "lack of shelter",
+              "limited food"
+            ],
+            "label": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "answerKey": "2"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "Question: Which factor is most likely to cause the number of rabbits living in an area to increase?\nAnswer:",
+            " less water"
+          ],
+          [
+            "Question: Which factor is most likely to cause the number of rabbits living in an area to increase?\nAnswer:",
+            " fewer predators"
+          ],
+          [
+            "Question: Which factor is most likely to cause the number of rabbits living in an area to increase?\nAnswer:",
+            " lack of shelter"
+          ],
+          [
+            "Question: Which factor is most likely to cause the number of rabbits living in an area to increase?\nAnswer:",
+            " limited food"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -17.41588592529297,
+              false
+            ]
+          ],
+          [
+            [
+              -14.439257621765137,
+              false
+            ]
+          ],
+          [
+            [
+              -20.912425994873047,
+              false
+            ]
+          ],
+          [
+            [
+              -18.809938430786133,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -17.41588592529297,
+            false
+          ],
+          [
+            -14.439257621765137,
+            false
+          ],
+          [
+            -20.912425994873047,
+            false
+          ],
+          [
+            -18.809938430786133,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "94a3536e92eb5bcbf2fa37adc93996fb0554d6ea2cb22fa3e3f2d67ebfc8371f",
+        "prompt_hash": "0e25767c1b75c255e3e1e4f63a540e1d777f10b3814bf5e4568aae04b96c04f6",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 27,
+        "doc": {
+          "id": "VASoL_2008_5_12",
+          "question": "Seeds that remain inactive until the right conditions of light, water, and soil are present are called ___.",
+          "choices": {
+            "text": [
+              "pollen",
+              "dormant",
+              "flowers",
+              "recycled"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "B"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "Question: Seeds that remain inactive until the right conditions of light, water, and soil are present are called ___.\nAnswer:",
+            " pollen"
+          ],
+          [
+            "Question: Seeds that remain inactive until the right conditions of light, water, and soil are present are called ___.\nAnswer:",
+            " dormant"
+          ],
+          [
+            "Question: Seeds that remain inactive until the right conditions of light, water, and soil are present are called ___.\nAnswer:",
+            " flowers"
+          ],
+          [
+            "Question: Seeds that remain inactive until the right conditions of light, water, and soil are present are called ___.\nAnswer:",
+            " recycled"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -10.709023475646973,
+              false
+            ]
+          ],
+          [
+            [
+              -1.1031579971313477,
+              true
+            ]
+          ],
+          [
+            [
+              -10.59453296661377,
+              false
+            ]
+          ],
+          [
+            [
+              -15.012613296508789,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -10.709023475646973,
+            false
+          ],
+          [
+            -1.1031579971313477,
+            true
+          ],
+          [
+            -10.59453296661377,
+            false
+          ],
+          [
+            -15.012613296508789,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "0e1da1a3f87add01a65176ddb20cb22a7355768cdbc43b67743170161d37f6ac",
+        "prompt_hash": "5908e94e39875a906c39948a03d3e1c198a3138abc68778722fb74650bf84efe",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 28,
+        "doc": {
+          "id": "Mercury_SC_LBS10680",
+          "question": "What allows a light bulb to give off light?",
+          "choices": {
+            "text": [
+              "the current flowing through the wire to the light bulb",
+              "the light bulb giving electrical energy to the battery",
+              "the light bulb generating heat energy",
+              "the battery pushing light through the wire"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "A"
+        },
+        "target": 0,
+        "arguments": [
+          [
+            "Question: What allows a light bulb to give off light?\nAnswer:",
+            " the current flowing through the wire to the light bulb"
+          ],
+          [
+            "Question: What allows a light bulb to give off light?\nAnswer:",
+            " the light bulb giving electrical energy to the battery"
+          ],
+          [
+            "Question: What allows a light bulb to give off light?\nAnswer:",
+            " the light bulb generating heat energy"
+          ],
+          [
+            "Question: What allows a light bulb to give off light?\nAnswer:",
+            " the battery pushing light through the wire"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -29.162418365478516,
+              false
+            ]
+          ],
+          [
+            [
+              -40.96954345703125,
+              false
+            ]
+          ],
+          [
+            [
+              -30.493391036987305,
+              false
+            ]
+          ],
+          [
+            [
+              -37.8302001953125,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -29.162418365478516,
+            false
+          ],
+          [
+            -40.96954345703125,
+            false
+          ],
+          [
+            -30.493391036987305,
+            false
+          ],
+          [
+            -37.8302001953125,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "eb4d8f6e8ed693f1ee56655d473d27185a0ee3f6ecf0499b8a85d5c58684e625",
+        "prompt_hash": "0991c140225d197dc64c4707ced418f6a98360fb755e9bf0a348a4a4a9fe90ca",
+        "target_hash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 29,
+        "doc": {
+          "id": "MCAS_2003_5_3",
+          "question": "What causes sound?",
+          "choices": {
+            "text": [
+              "sunlight",
+              "vibrations",
+              "x-rays",
+              "pitch"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "B"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "Question: What causes sound?\nAnswer:",
+            " sunlight"
+          ],
+          [
+            "Question: What causes sound?\nAnswer:",
+            " vibrations"
+          ],
+          [
+            "Question: What causes sound?\nAnswer:",
+            " x-rays"
+          ],
+          [
+            "Question: What causes sound?\nAnswer:",
+            " pitch"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -15.09319019317627,
+              false
+            ]
+          ],
+          [
+            [
+              -12.148818016052246,
+              false
+            ]
+          ],
+          [
+            [
+              -16.44178009033203,
+              false
+            ]
+          ],
+          [
+            [
+              -13.337793350219727,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -15.09319019317627,
+            false
+          ],
+          [
+            -12.148818016052246,
+            false
+          ],
+          [
+            -16.44178009033203,
+            false
+          ],
+          [
+            -13.337793350219727,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "bb707a0f3355939c099241b4c94ce168c9f27b956dbbaabda9f7082523d1e90d",
+        "prompt_hash": "7b1d5413975218414657682179c26b73b8d37e4aefa35195907e23f4c5154928",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 30,
+        "doc": {
+          "id": "VASoL_2010_5_18",
+          "question": "Photosynthesis occurs in which of these organisms?",
+          "choices": {
+            "text": [
+              "Sunflower plant",
+              "Mushroom",
+              "Sunfish",
+              "Luna moth"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "A"
+        },
+        "target": 0,
+        "arguments": [
+          [
+            "Question: Photosynthesis occurs in which of these organisms?\nAnswer:",
+            " Sunflower plant"
+          ],
+          [
+            "Question: Photosynthesis occurs in which of these organisms?\nAnswer:",
+            " Mushroom"
+          ],
+          [
+            "Question: Photosynthesis occurs in which of these organisms?\nAnswer:",
+            " Sunfish"
+          ],
+          [
+            "Question: Photosynthesis occurs in which of these organisms?\nAnswer:",
+            " Luna moth"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -16.662614822387695,
+              false
+            ]
+          ],
+          [
+            [
+              -13.428540229797363,
+              false
+            ]
+          ],
+          [
+            [
+              -15.782795906066895,
+              false
+            ]
+          ],
+          [
+            [
+              -20.856664657592773,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -16.662614822387695,
+            false
+          ],
+          [
+            -13.428540229797363,
+            false
+          ],
+          [
+            -15.782795906066895,
+            false
+          ],
+          [
+            -20.856664657592773,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "f850eb5cf1ea097c14ffc762f8fac01d6a431c8e935c56fffdc2c41d8d23a78c",
+        "prompt_hash": "da0192e38287f6bbdd380d4aa287d5cbb62636f0aa623ad361281631d10a737c",
+        "target_hash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "acc": 0.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 31,
+        "doc": {
+          "id": "Mercury_7074900",
+          "question": "In order for cells to grow at a normal rate, they must",
+          "choices": {
+            "text": [
+              "take in light.",
+              "be specialized.",
+              "take in nutrients.",
+              "be of similar size."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "C"
+        },
+        "target": 2,
+        "arguments": [
+          [
+            "Question: In order for cells to grow at a normal rate, they must\nAnswer:",
+            " take in light."
+          ],
+          [
+            "Question: In order for cells to grow at a normal rate, they must\nAnswer:",
+            " be specialized."
+          ],
+          [
+            "Question: In order for cells to grow at a normal rate, they must\nAnswer:",
+            " take in nutrients."
+          ],
+          [
+            "Question: In order for cells to grow at a normal rate, they must\nAnswer:",
+            " be of similar size."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -22.207595825195312,
+              false
+            ]
+          ],
+          [
+            [
+              -23.622703552246094,
+              false
+            ]
+          ],
+          [
+            [
+              -16.637657165527344,
+              false
+            ]
+          ],
+          [
+            [
+              -25.944351196289062,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -22.207595825195312,
+            false
+          ],
+          [
+            -23.622703552246094,
+            false
+          ],
+          [
+            -16.637657165527344,
+            false
+          ],
+          [
+            -25.944351196289062,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "81755ed085852e343c48816c10777a00988d2795f3f8501e9ad6f031fbdb59b1",
+        "prompt_hash": "b2f209a50bfdad29b0be1ba36e9d818fb2f979c08f4c6983dfdf3ec22c73de6b",
+        "target_hash": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 32,
+        "doc": {
+          "id": "Mercury_SC_408762",
+          "question": "Marshall learned that plants need a substance from the air to make their own food. What does a plant take from the air in the presence of sunlight?",
+          "choices": {
+            "text": [
+              "carbon dioxide",
+              "hydrogen",
+              "nitrogen",
+              "oxygen"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "A"
+        },
+        "target": 0,
+        "arguments": [
+          [
+            "Question: Marshall learned that plants need a substance from the air to make their own food. What does a plant take from the air in the presence of sunlight?\nAnswer:",
+            " carbon dioxide"
+          ],
+          [
+            "Question: Marshall learned that plants need a substance from the air to make their own food. What does a plant take from the air in the presence of sunlight?\nAnswer:",
+            " hydrogen"
+          ],
+          [
+            "Question: Marshall learned that plants need a substance from the air to make their own food. What does a plant take from the air in the presence of sunlight?\nAnswer:",
+            " nitrogen"
+          ],
+          [
+            "Question: Marshall learned that plants need a substance from the air to make their own food. What does a plant take from the air in the presence of sunlight?\nAnswer:",
+            " oxygen"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -8.604116439819336,
+              false
+            ]
+          ],
+          [
+            [
+              -12.168292999267578,
+              false
+            ]
+          ],
+          [
+            [
+              -10.446552276611328,
+              false
+            ]
+          ],
+          [
+            [
+              -8.76734733581543,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -8.604116439819336,
+            false
+          ],
+          [
+            -12.168292999267578,
+            false
+          ],
+          [
+            -10.446552276611328,
+            false
+          ],
+          [
+            -8.76734733581543,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "bc272c66114b54fd79d2262dc5bb56f15754940eb6be80adec2f1f5f8c3e13a8",
+        "prompt_hash": "1ba6b75123d2625b74eef36c973654de86d912e236e797a6d21b6325d377e56c",
+        "target_hash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 33,
+        "doc": {
+          "id": "ACTAAP_2015_5_8",
+          "question": "Antarctica is a continent at Earth's south pole. Fossils of tropical fern plants were discovered in Antarctica even though these plants do not grow there today. Which conclusion does the fossil evidence best support?",
+          "choices": {
+            "text": [
+              "Millions of years ago, Antarctica was in a warmer location on Earth.",
+              "Recently, a natural disaster killed all of the fern plants in Antarctica.",
+              "Recently, birds stopped carrying the seeds of fern plants to Antarctica.",
+              "Millions of years ago, Earth's south pole was much colder than it is today."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "A"
+        },
+        "target": 0,
+        "arguments": [
+          [
+            "Question: Antarctica is a continent at Earth's south pole. Fossils of tropical fern plants were discovered in Antarctica even though these plants do not grow there today. Which conclusion does the fossil evidence best support?\nAnswer:",
+            " Millions of years ago, Antarctica was in a warmer location on Earth."
+          ],
+          [
+            "Question: Antarctica is a continent at Earth's south pole. Fossils of tropical fern plants were discovered in Antarctica even though these plants do not grow there today. Which conclusion does the fossil evidence best support?\nAnswer:",
+            " Recently, a natural disaster killed all of the fern plants in Antarctica."
+          ],
+          [
+            "Question: Antarctica is a continent at Earth's south pole. Fossils of tropical fern plants were discovered in Antarctica even though these plants do not grow there today. Which conclusion does the fossil evidence best support?\nAnswer:",
+            " Recently, birds stopped carrying the seeds of fern plants to Antarctica."
+          ],
+          [
+            "Question: Antarctica is a continent at Earth's south pole. Fossils of tropical fern plants were discovered in Antarctica even though these plants do not grow there today. Which conclusion does the fossil evidence best support?\nAnswer:",
+            " Millions of years ago, Earth's south pole was much colder than it is today."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -31.261878967285156,
+              false
+            ]
+          ],
+          [
+            [
+              -42.0841178894043,
+              false
+            ]
+          ],
+          [
+            [
+              -58.051513671875,
+              false
+            ]
+          ],
+          [
+            [
+              -25.027856826782227,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -31.261878967285156,
+            false
+          ],
+          [
+            -42.0841178894043,
+            false
+          ],
+          [
+            -58.051513671875,
+            false
+          ],
+          [
+            -25.027856826782227,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "567d25925dfcb28400eef6e1a3ca5a0733452316a68038649f3fc95d26822eb7",
+        "prompt_hash": "9d7479e96a71558c77ef841c910f3e63d843b5bdbddf5e5896c91afc7a0170cd",
+        "target_hash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "acc": 0.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 34,
+        "doc": {
+          "id": "Mercury_7263008",
+          "question": "Which two theories of Moon formation propose that much or all of the material comprising the Moon came from Earth?",
+          "choices": {
+            "text": [
+              "The Fission Theory and The Coaccretion Theory",
+              "The Coaccretion Theory and The Capture Theory",
+              "The Fission Theory and the Giant Impact Theory",
+              "The Capture Theory and the Giant Impact Theory"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "C"
+        },
+        "target": 2,
+        "arguments": [
+          [
+            "Question: Which two theories of Moon formation propose that much or all of the material comprising the Moon came from Earth?\nAnswer:",
+            " The Fission Theory and The Coaccretion Theory"
+          ],
+          [
+            "Question: Which two theories of Moon formation propose that much or all of the material comprising the Moon came from Earth?\nAnswer:",
+            " The Coaccretion Theory and The Capture Theory"
+          ],
+          [
+            "Question: Which two theories of Moon formation propose that much or all of the material comprising the Moon came from Earth?\nAnswer:",
+            " The Fission Theory and the Giant Impact Theory"
+          ],
+          [
+            "Question: Which two theories of Moon formation propose that much or all of the material comprising the Moon came from Earth?\nAnswer:",
+            " The Capture Theory and the Giant Impact Theory"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -45.49523162841797,
+              false
+            ]
+          ],
+          [
+            [
+              -39.517616271972656,
+              false
+            ]
+          ],
+          [
+            [
+              -27.34758949279785,
+              false
+            ]
+          ],
+          [
+            [
+              -19.862457275390625,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -45.49523162841797,
+            false
+          ],
+          [
+            -39.517616271972656,
+            false
+          ],
+          [
+            -27.34758949279785,
+            false
+          ],
+          [
+            -19.862457275390625,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "4eb1fd541f242f4de98389c958d859e72cfb79fbf2c7ad3c084595ec1021d831",
+        "prompt_hash": "fcbb7523847b7b870c784a980762e78cac9472771add02c7b70d208678ab0fda",
+        "target_hash": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "acc": 0.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 35,
+        "doc": {
+          "id": "MCAS_2000_4_29",
+          "question": "When white, fluffy clouds appear in Massachusetts, the weather that day will MOST LIKELY be",
+          "choices": {
+            "text": [
+              "fair.",
+              "stormy.",
+              "foggy.",
+              "rainy."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "A"
+        },
+        "target": 0,
+        "arguments": [
+          [
+            "Question: When white, fluffy clouds appear in Massachusetts, the weather that day will MOST LIKELY be\nAnswer:",
+            " fair."
+          ],
+          [
+            "Question: When white, fluffy clouds appear in Massachusetts, the weather that day will MOST LIKELY be\nAnswer:",
+            " stormy."
+          ],
+          [
+            "Question: When white, fluffy clouds appear in Massachusetts, the weather that day will MOST LIKELY be\nAnswer:",
+            " foggy."
+          ],
+          [
+            "Question: When white, fluffy clouds appear in Massachusetts, the weather that day will MOST LIKELY be\nAnswer:",
+            " rainy."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -12.9901123046875,
+              false
+            ]
+          ],
+          [
+            [
+              -9.51872444152832,
+              false
+            ]
+          ],
+          [
+            [
+              -10.634854316711426,
+              false
+            ]
+          ],
+          [
+            [
+              -9.776134490966797,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -12.9901123046875,
+            false
+          ],
+          [
+            -9.51872444152832,
+            false
+          ],
+          [
+            -10.634854316711426,
+            false
+          ],
+          [
+            -9.776134490966797,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "647f9e597c2d85c49d89985d1b110872f42016912c51e7ace28f3e23e179f027",
+        "prompt_hash": "abcb3124cdc4f20327bc1d482fff22f142abb00aea81a89694c6adea6b071c8d",
+        "target_hash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "acc": 0.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 36,
+        "doc": {
+          "id": "CSZ_2008_5_CSZ10233",
+          "question": "Plants and animals are composed of organic compounds. Which of the following are the common elements found in organic compounds?",
+          "choices": {
+            "text": [
+              "iron, oxygen, nickel, copper.",
+              "sodium, potassium, gold, hydrogen.",
+              "helium, neon, argon, krypton.",
+              "carbon, hydrogen, oxygen, nitrogen."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "D"
+        },
+        "target": 3,
+        "arguments": [
+          [
+            "Question: Plants and animals are composed of organic compounds. Which of the following are the common elements found in organic compounds?\nAnswer:",
+            " iron, oxygen, nickel, copper."
+          ],
+          [
+            "Question: Plants and animals are composed of organic compounds. Which of the following are the common elements found in organic compounds?\nAnswer:",
+            " sodium, potassium, gold, hydrogen."
+          ],
+          [
+            "Question: Plants and animals are composed of organic compounds. Which of the following are the common elements found in organic compounds?\nAnswer:",
+            " helium, neon, argon, krypton."
+          ],
+          [
+            "Question: Plants and animals are composed of organic compounds. Which of the following are the common elements found in organic compounds?\nAnswer:",
+            " carbon, hydrogen, oxygen, nitrogen."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -31.41807746887207,
+              false
+            ]
+          ],
+          [
+            [
+              -38.301490783691406,
+              false
+            ]
+          ],
+          [
+            [
+              -26.637208938598633,
+              false
+            ]
+          ],
+          [
+            [
+              -12.467089653015137,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -31.41807746887207,
+            false
+          ],
+          [
+            -38.301490783691406,
+            false
+          ],
+          [
+            -26.637208938598633,
+            false
+          ],
+          [
+            -12.467089653015137,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "8b762b0dd678112d54f240db645131513ee1ecb1e67084735c248f5d57b2ea77",
+        "prompt_hash": "5ae6cf42e983c218d99c7580117b383c163efa944f28d0802ca11bd8605c1fbd",
+        "target_hash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 37,
+        "doc": {
+          "id": "Mercury_7128660",
+          "question": "New research uncovers information that proves that the data from an old theory is partially incorrect. What should the scientific community do about the old theory?",
+          "choices": {
+            "text": [
+              "remove the old theory from historical records",
+              "change the research notes in the original theory",
+              "use the new information to update the old theory",
+              "ban the public from discussing the old theory"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "C"
+        },
+        "target": 2,
+        "arguments": [
+          [
+            "Question: New research uncovers information that proves that the data from an old theory is partially incorrect. What should the scientific community do about the old theory?\nAnswer:",
+            " remove the old theory from historical records"
+          ],
+          [
+            "Question: New research uncovers information that proves that the data from an old theory is partially incorrect. What should the scientific community do about the old theory?\nAnswer:",
+            " change the research notes in the original theory"
+          ],
+          [
+            "Question: New research uncovers information that proves that the data from an old theory is partially incorrect. What should the scientific community do about the old theory?\nAnswer:",
+            " use the new information to update the old theory"
+          ],
+          [
+            "Question: New research uncovers information that proves that the data from an old theory is partially incorrect. What should the scientific community do about the old theory?\nAnswer:",
+            " ban the public from discussing the old theory"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -23.008073806762695,
+              false
+            ]
+          ],
+          [
+            [
+              -41.792327880859375,
+              false
+            ]
+          ],
+          [
+            [
+              -20.905118942260742,
+              false
+            ]
+          ],
+          [
+            [
+              -34.063053131103516,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -23.008073806762695,
+            false
+          ],
+          [
+            -41.792327880859375,
+            false
+          ],
+          [
+            -20.905118942260742,
+            false
+          ],
+          [
+            -34.063053131103516,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "dc0de1618725105d10cedb002fcf243896fea2ceba515e6d8d5986d3f1a98bf9",
+        "prompt_hash": "cdc915e2fe88b7e7ece9b2d76381354b600d407e38d43cbd6cb4128f0c44fbd4",
+        "target_hash": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 38,
+        "doc": {
+          "id": "Mercury_7100520",
+          "question": "Which is the greatest benefit of sexual reproduction?",
+          "choices": {
+            "text": [
+              "capable of reproducing by meiosis",
+              "ability to reproduce without a mate",
+              "ability to produce genetically different offspring",
+              "capable of producing offspring genetically identical to parent"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "C"
+        },
+        "target": 2,
+        "arguments": [
+          [
+            "Question: Which is the greatest benefit of sexual reproduction?\nAnswer:",
+            " capable of reproducing by meiosis"
+          ],
+          [
+            "Question: Which is the greatest benefit of sexual reproduction?\nAnswer:",
+            " ability to reproduce without a mate"
+          ],
+          [
+            "Question: Which is the greatest benefit of sexual reproduction?\nAnswer:",
+            " ability to produce genetically different offspring"
+          ],
+          [
+            "Question: Which is the greatest benefit of sexual reproduction?\nAnswer:",
+            " capable of producing offspring genetically identical to parent"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -34.90208435058594,
+              false
+            ]
+          ],
+          [
+            [
+              -30.324295043945312,
+              false
+            ]
+          ],
+          [
+            [
+              -27.605587005615234,
+              false
+            ]
+          ],
+          [
+            [
+              -30.64534568786621,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -34.90208435058594,
+            false
+          ],
+          [
+            -30.324295043945312,
+            false
+          ],
+          [
+            -27.605587005615234,
+            false
+          ],
+          [
+            -30.64534568786621,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "e811d8cef1371d0ffda5b27192f4e2698b24c878b37b1c39ee31f06a80b1ec8a",
+        "prompt_hash": "333f826004297890781a452fae49267eb9e562e39b035510476e03f439f60904",
+        "target_hash": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "acc": 1.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 39,
+        "doc": {
+          "id": "Mercury_7017728",
+          "question": "The speed at which sound waves travel depends on the",
+          "choices": {
+            "text": [
+              "distance between the vibration source and the receiver.",
+              "type of material through which the sound travels.",
+              "size of the object making the sound.",
+              "type of device making the sound."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "B"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "Question: The speed at which sound waves travel depends on the\nAnswer:",
+            " distance between the vibration source and the receiver."
+          ],
+          [
+            "Question: The speed at which sound waves travel depends on the\nAnswer:",
+            " type of material through which the sound travels."
+          ],
+          [
+            "Question: The speed at which sound waves travel depends on the\nAnswer:",
+            " size of the object making the sound."
+          ],
+          [
+            "Question: The speed at which sound waves travel depends on the\nAnswer:",
+            " type of device making the sound."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -24.219375610351562,
+              false
+            ]
+          ],
+          [
+            [
+              -20.86234474182129,
+              false
+            ]
+          ],
+          [
+            [
+              -20.2495174407959,
+              false
+            ]
+          ],
+          [
+            [
+              -30.86638641357422,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -24.219375610351562,
+            false
+          ],
+          [
+            -20.86234474182129,
+            false
+          ],
+          [
+            -20.2495174407959,
+            false
+          ],
+          [
+            -30.86638641357422,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "e2951e92e2f1c9c48577d33b1c7ebb1a0ae0acb06e380eb031f954e509226fb4",
+        "prompt_hash": "f90ef0386bd93b5310ab3446078fe6cf41e94916f2318a5411f2662f954068b0",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 0.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 40,
+        "doc": {
+          "id": "Mercury_7032865",
+          "question": "Which scientist is credited with discovering the first four moons of Jupiter?",
+          "choices": {
+            "text": [
+              "Galileo Galilei",
+              "Albert Einstein",
+              "Charles Darwin",
+              "Sir Isaac Newton"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "A"
+        },
+        "target": 0,
+        "arguments": [
+          [
+            "Question: Which scientist is credited with discovering the first four moons of Jupiter?\nAnswer:",
+            " Galileo Galilei"
+          ],
+          [
+            "Question: Which scientist is credited with discovering the first four moons of Jupiter?\nAnswer:",
+            " Albert Einstein"
+          ],
+          [
+            "Question: Which scientist is credited with discovering the first four moons of Jupiter?\nAnswer:",
+            " Charles Darwin"
+          ],
+          [
+            "Question: Which scientist is credited with discovering the first four moons of Jupiter?\nAnswer:",
+            " Sir Isaac Newton"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -0.52829909324646,
+              true
+            ]
+          ],
+          [
+            [
+              -8.742968559265137,
+              false
+            ]
+          ],
+          [
+            [
+              -10.94784927368164,
+              false
+            ]
+          ],
+          [
+            [
+              -8.97844409942627,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -0.52829909324646,
+            true
+          ],
+          [
+            -8.742968559265137,
+            false
+          ],
+          [
+            -10.94784927368164,
+            false
+          ],
+          [
+            -8.97844409942627,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "fb094c87e53605a63e24f0b4f998ba2bed0e94cf04e9f38d71ea92bc996959c4",
+        "prompt_hash": "4558693d875f756a5522e0e032ae85b41fbd014136f7be5ba3a807a268fe9a6b",
+        "target_hash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 41,
+        "doc": {
+          "id": "Mercury_405057",
+          "question": "During science class, a teacher explains that the samples the students are studying are made of two or more minerals. What are the students studying?",
+          "choices": {
+            "text": [
+              "gases",
+              "rocks",
+              "elements",
+              "molecules"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "B"
+        },
+        "target": 1,
+        "arguments": [
+          [
+            "Question: During science class, a teacher explains that the samples the students are studying are made of two or more minerals. What are the students studying?\nAnswer:",
+            " gases"
+          ],
+          [
+            "Question: During science class, a teacher explains that the samples the students are studying are made of two or more minerals. What are the students studying?\nAnswer:",
+            " rocks"
+          ],
+          [
+            "Question: During science class, a teacher explains that the samples the students are studying are made of two or more minerals. What are the students studying?\nAnswer:",
+            " elements"
+          ],
+          [
+            "Question: During science class, a teacher explains that the samples the students are studying are made of two or more minerals. What are the students studying?\nAnswer:",
+            " molecules"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -11.719427108764648,
+              false
+            ]
+          ],
+          [
+            [
+              -3.5988240242004395,
+              false
+            ]
+          ],
+          [
+            [
+              -7.855597019195557,
+              false
+            ]
+          ],
+          [
+            [
+              -10.453487396240234,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -11.719427108764648,
+            false
+          ],
+          [
+            -3.5988240242004395,
+            false
+          ],
+          [
+            -7.855597019195557,
+            false
+          ],
+          [
+            -10.453487396240234,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "ee5fccf3a52b587c9b5ee97f57f719cfc0953441a5c2983b834cbcd685963f15",
+        "prompt_hash": "bcc4534f43420c41b985aea70785629aff00969919eb00db129101b3d0bbe69c",
+        "target_hash": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 42,
+        "doc": {
+          "id": "Mercury_7057593",
+          "question": "When the Northern Hemisphere is tilted away from the Sun causing the rays of light to hit Earth at large angles, which season occurs?",
+          "choices": {
+            "text": [
+              "winter",
+              "spring",
+              "summer",
+              "fall"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "A"
+        },
+        "target": 0,
+        "arguments": [
+          [
+            "Question: When the Northern Hemisphere is tilted away from the Sun causing the rays of light to hit Earth at large angles, which season occurs?\nAnswer:",
+            " winter"
+          ],
+          [
+            "Question: When the Northern Hemisphere is tilted away from the Sun causing the rays of light to hit Earth at large angles, which season occurs?\nAnswer:",
+            " spring"
+          ],
+          [
+            "Question: When the Northern Hemisphere is tilted away from the Sun causing the rays of light to hit Earth at large angles, which season occurs?\nAnswer:",
+            " summer"
+          ],
+          [
+            "Question: When the Northern Hemisphere is tilted away from the Sun causing the rays of light to hit Earth at large angles, which season occurs?\nAnswer:",
+            " fall"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -1.3665965795516968,
+              false
+            ]
+          ],
+          [
+            [
+              -1.8331321477890015,
+              false
+            ]
+          ],
+          [
+            [
+              -3.4508719444274902,
+              false
+            ]
+          ],
+          [
+            [
+              -4.80999231338501,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -1.3665965795516968,
+            false
+          ],
+          [
+            -1.8331321477890015,
+            false
+          ],
+          [
+            -3.4508719444274902,
+            false
+          ],
+          [
+            -4.80999231338501,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "898779ec44169f14fa4a8587cb6126e3c9496f213ad0bfdea9e2b2cb0358e17c",
+        "prompt_hash": "ba2766773e3617d37dc984497a2e81e41c23ee269aef7d9267475a05ed966612",
+        "target_hash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 43,
+        "doc": {
+          "id": "Mercury_SC_405231",
+          "question": "A scientist found fossils of ocean shells on a mountain top. Based on this find, which statement can be made?",
+          "choices": {
+            "text": [
+              "The climate was once colder.",
+              "The shells were carried by the wind.",
+              "The mountain was covered by water.",
+              "The shells once lived on dry land."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "C"
+        },
+        "target": 2,
+        "arguments": [
+          [
+            "Question: A scientist found fossils of ocean shells on a mountain top. Based on this find, which statement can be made?\nAnswer:",
+            " The climate was once colder."
+          ],
+          [
+            "Question: A scientist found fossils of ocean shells on a mountain top. Based on this find, which statement can be made?\nAnswer:",
+            " The shells were carried by the wind."
+          ],
+          [
+            "Question: A scientist found fossils of ocean shells on a mountain top. Based on this find, which statement can be made?\nAnswer:",
+            " The mountain was covered by water."
+          ],
+          [
+            "Question: A scientist found fossils of ocean shells on a mountain top. Based on this find, which statement can be made?\nAnswer:",
+            " The shells once lived on dry land."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -25.28061866760254,
+              false
+            ]
+          ],
+          [
+            [
+              -27.325910568237305,
+              false
+            ]
+          ],
+          [
+            [
+              -17.205942153930664,
+              false
+            ]
+          ],
+          [
+            [
+              -28.01797103881836,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -25.28061866760254,
+            false
+          ],
+          [
+            -27.325910568237305,
+            false
+          ],
+          [
+            -17.205942153930664,
+            false
+          ],
+          [
+            -28.01797103881836,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "78e25fc219df56ba70b24bfaaeb95f3caa9257235b734d1e0d0a6ccc994d7c36",
+        "prompt_hash": "189454eba0fd3bb7a04fee955418ac333ef9e952369c0f33cb2e783cde5879e0",
+        "target_hash": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "acc": 1.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 44,
+        "doc": {
+          "id": "VASoL_2007_5_38",
+          "question": "A student sees many plants around a pond. The student can determine which plants are nonvascular by",
+          "choices": {
+            "text": [
+              "observing if they lack true stems, roots, or leaves",
+              "examining the plants for spores",
+              "counting the number of leaves on each stalk",
+              "noticing if the plants are near rocks"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "A"
+        },
+        "target": 0,
+        "arguments": [
+          [
+            "Question: A student sees many plants around a pond. The student can determine which plants are nonvascular by\nAnswer:",
+            " observing if they lack true stems, roots, or leaves"
+          ],
+          [
+            "Question: A student sees many plants around a pond. The student can determine which plants are nonvascular by\nAnswer:",
+            " examining the plants for spores"
+          ],
+          [
+            "Question: A student sees many plants around a pond. The student can determine which plants are nonvascular by\nAnswer:",
+            " counting the number of leaves on each stalk"
+          ],
+          [
+            "Question: A student sees many plants around a pond. The student can determine which plants are nonvascular by\nAnswer:",
+            " noticing if the plants are near rocks"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -26.990434646606445,
+              false
+            ]
+          ],
+          [
+            [
+              -20.926509857177734,
+              false
+            ]
+          ],
+          [
+            [
+              -26.379169464111328,
+              false
+            ]
+          ],
+          [
+            [
+              -32.51498794555664,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -26.990434646606445,
+            false
+          ],
+          [
+            -20.926509857177734,
+            false
+          ],
+          [
+            -26.379169464111328,
+            false
+          ],
+          [
+            -32.51498794555664,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "7b930f663f7afb4d5591856ee9ddcbf46b00fd94ae16d32e922c376ba94efeed",
+        "prompt_hash": "cb031b6d8f8794241a107fe69041656866abdc4e11ade64493ca5cb878bea40a",
+        "target_hash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "acc": 0.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 45,
+        "doc": {
+          "id": "Mercury_SC_410895",
+          "question": "Darryl learns that freezing temperatures may help cause weathering. Which statement explains how freezing temperatures most likely cause weathering?",
+          "choices": {
+            "text": [
+              "by freezing the leaves on trees",
+              "by causing rocks to stick together",
+              "by turning acid rain into acid snow",
+              "by freezing water in the cracks of rocks"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "D"
+        },
+        "target": 3,
+        "arguments": [
+          [
+            "Question: Darryl learns that freezing temperatures may help cause weathering. Which statement explains how freezing temperatures most likely cause weathering?\nAnswer:",
+            " by freezing the leaves on trees"
+          ],
+          [
+            "Question: Darryl learns that freezing temperatures may help cause weathering. Which statement explains how freezing temperatures most likely cause weathering?\nAnswer:",
+            " by causing rocks to stick together"
+          ],
+          [
+            "Question: Darryl learns that freezing temperatures may help cause weathering. Which statement explains how freezing temperatures most likely cause weathering?\nAnswer:",
+            " by turning acid rain into acid snow"
+          ],
+          [
+            "Question: Darryl learns that freezing temperatures may help cause weathering. Which statement explains how freezing temperatures most likely cause weathering?\nAnswer:",
+            " by freezing water in the cracks of rocks"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -25.545635223388672,
+              false
+            ]
+          ],
+          [
+            [
+              -22.11849594116211,
+              false
+            ]
+          ],
+          [
+            [
+              -34.510414123535156,
+              false
+            ]
+          ],
+          [
+            [
+              -24.90573501586914,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -25.545635223388672,
+            false
+          ],
+          [
+            -22.11849594116211,
+            false
+          ],
+          [
+            -34.510414123535156,
+            false
+          ],
+          [
+            -24.90573501586914,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "701822f678e34194cfb9ecffc3ab1bba5f5d076b51386b43a17238daf6f0d468",
+        "prompt_hash": "0d56942d97a353b1dec718a6175e41d00aec8e1cf0746a62d0745eac565c4202",
+        "target_hash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+        "acc": 0.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 46,
+        "doc": {
+          "id": "Mercury_7015978",
+          "question": "A bond is formed when an electron is transferred from a sodium atom to a chlorine atom. What happens to the sodium atom during this process?",
+          "choices": {
+            "text": [
+              "The mass of the atom increases.",
+              "The atom becomes an isotope.",
+              "The atomic number decreases.",
+              "The atom becomes a positive ion."
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "D"
+        },
+        "target": 3,
+        "arguments": [
+          [
+            "Question: A bond is formed when an electron is transferred from a sodium atom to a chlorine atom. What happens to the sodium atom during this process?\nAnswer:",
+            " The mass of the atom increases."
+          ],
+          [
+            "Question: A bond is formed when an electron is transferred from a sodium atom to a chlorine atom. What happens to the sodium atom during this process?\nAnswer:",
+            " The atom becomes an isotope."
+          ],
+          [
+            "Question: A bond is formed when an electron is transferred from a sodium atom to a chlorine atom. What happens to the sodium atom during this process?\nAnswer:",
+            " The atomic number decreases."
+          ],
+          [
+            "Question: A bond is formed when an electron is transferred from a sodium atom to a chlorine atom. What happens to the sodium atom during this process?\nAnswer:",
+            " The atom becomes a positive ion."
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -22.530282974243164,
+              false
+            ]
+          ],
+          [
+            [
+              -20.711259841918945,
+              false
+            ]
+          ],
+          [
+            [
+              -15.327507019042969,
+              false
+            ]
+          ],
+          [
+            [
+              -18.559646606445312,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -22.530282974243164,
+            false
+          ],
+          [
+            -20.711259841918945,
+            false
+          ],
+          [
+            -15.327507019042969,
+            false
+          ],
+          [
+            -18.559646606445312,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "bcdc6b3e60b462267d98d6c136a4c2ef1e830dde327ac5dbc77c82461d2c3008",
+        "prompt_hash": "c5bbb4789374f120540c713b3a90f3d351b6ccbb94fa3cbbf395d6a96fc6a865",
+        "target_hash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+        "acc": 0.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 47,
+        "doc": {
+          "id": "ACTAAP_2010_5_5",
+          "question": "A group of fish was released into a local lake. This species of fish had never lived in the lake before. Scientists want to collect data on how the lake's ecosystem is affected by the new fish. Which method of data collection will give the most accurate results?",
+          "choices": {
+            "text": [
+              "Measuring oxygen levels in the lake for two months",
+              "Checking the lake water for nutrient levels on one day",
+              "Sampling fish populations in the lake over several years",
+              "Observing the surface of the lake for signs of the new fish after one week"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "C"
+        },
+        "target": 2,
+        "arguments": [
+          [
+            "Question: A group of fish was released into a local lake. This species of fish had never lived in the lake before. Scientists want to collect data on how the lake's ecosystem is affected by the new fish. Which method of data collection will give the most accurate results?\nAnswer:",
+            " Measuring oxygen levels in the lake for two months"
+          ],
+          [
+            "Question: A group of fish was released into a local lake. This species of fish had never lived in the lake before. Scientists want to collect data on how the lake's ecosystem is affected by the new fish. Which method of data collection will give the most accurate results?\nAnswer:",
+            " Checking the lake water for nutrient levels on one day"
+          ],
+          [
+            "Question: A group of fish was released into a local lake. This species of fish had never lived in the lake before. Scientists want to collect data on how the lake's ecosystem is affected by the new fish. Which method of data collection will give the most accurate results?\nAnswer:",
+            " Sampling fish populations in the lake over several years"
+          ],
+          [
+            "Question: A group of fish was released into a local lake. This species of fish had never lived in the lake before. Scientists want to collect data on how the lake's ecosystem is affected by the new fish. Which method of data collection will give the most accurate results?\nAnswer:",
+            " Observing the surface of the lake for signs of the new fish after one week"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -25.89471435546875,
+              false
+            ]
+          ],
+          [
+            [
+              -39.37876892089844,
+              false
+            ]
+          ],
+          [
+            [
+              -28.617374420166016,
+              false
+            ]
+          ],
+          [
+            [
+              -34.56282424926758,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -25.89471435546875,
+            false
+          ],
+          [
+            -39.37876892089844,
+            false
+          ],
+          [
+            -28.617374420166016,
+            false
+          ],
+          [
+            -34.56282424926758,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "88424f44fbedd6c436c4df618480e1ab01a1181585303e469a4a1b5105f75e67",
+        "prompt_hash": "628135af7e3a5a0de5ec58e619acfd79418b0625c0c01f13176d6fde9bf55c8d",
+        "target_hash": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "acc": 0.0,
+        "acc_norm": 0.0
+      },
+      {
+        "doc_id": 48,
+        "doc": {
+          "id": "Mercury_7080955",
+          "question": "On a career day at school, an X-ray technician discusses her daily work with the class. Which equipment would she most likely say she uses on a regular basis to help ensure the safety of patients?",
+          "choices": {
+            "text": [
+              "earplugs",
+              "rubber gloves",
+              "goggles",
+              "lead aprons"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "D"
+        },
+        "target": 3,
+        "arguments": [
+          [
+            "Question: On a career day at school, an X-ray technician discusses her daily work with the class. Which equipment would she most likely say she uses on a regular basis to help ensure the safety of patients?\nAnswer:",
+            " earplugs"
+          ],
+          [
+            "Question: On a career day at school, an X-ray technician discusses her daily work with the class. Which equipment would she most likely say she uses on a regular basis to help ensure the safety of patients?\nAnswer:",
+            " rubber gloves"
+          ],
+          [
+            "Question: On a career day at school, an X-ray technician discusses her daily work with the class. Which equipment would she most likely say she uses on a regular basis to help ensure the safety of patients?\nAnswer:",
+            " goggles"
+          ],
+          [
+            "Question: On a career day at school, an X-ray technician discusses her daily work with the class. Which equipment would she most likely say she uses on a regular basis to help ensure the safety of patients?\nAnswer:",
+            " lead aprons"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -14.974658966064453,
+              false
+            ]
+          ],
+          [
+            [
+              -12.251691818237305,
+              false
+            ]
+          ],
+          [
+            [
+              -9.684587478637695,
+              false
+            ]
+          ],
+          [
+            [
+              -10.311932563781738,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -14.974658966064453,
+            false
+          ],
+          [
+            -12.251691818237305,
+            false
+          ],
+          [
+            -9.684587478637695,
+            false
+          ],
+          [
+            -10.311932563781738,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "693d3e7ad096c9ff63672ece66dd311e22f1e2c9f3a47a3068e983fc19fd620d",
+        "prompt_hash": "4129f11110f463c07bbd81f3bb8e298f58fcd27ce72c90f71ba443b1a2f2c2b1",
+        "target_hash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+        "acc": 0.0,
+        "acc_norm": 1.0
+      },
+      {
+        "doc_id": 49,
+        "doc": {
+          "id": "ACTAAP_2009_5_4",
+          "question": "In the United States, windmills have been used for farming for hundreds of years. Which simple machine is the most important part of a windmill?",
+          "choices": {
+            "text": [
+              "lever",
+              "pulley",
+              "inclined plane",
+              "wheel and axle"
+            ],
+            "label": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "answerKey": "D"
+        },
+        "target": 3,
+        "arguments": [
+          [
+            "Question: In the United States, windmills have been used for farming for hundreds of years. Which simple machine is the most important part of a windmill?\nAnswer:",
+            " lever"
+          ],
+          [
+            "Question: In the United States, windmills have been used for farming for hundreds of years. Which simple machine is the most important part of a windmill?\nAnswer:",
+            " pulley"
+          ],
+          [
+            "Question: In the United States, windmills have been used for farming for hundreds of years. Which simple machine is the most important part of a windmill?\nAnswer:",
+            " inclined plane"
+          ],
+          [
+            "Question: In the United States, windmills have been used for farming for hundreds of years. Which simple machine is the most important part of a windmill?\nAnswer:",
+            " wheel and axle"
+          ]
+        ],
+        "resps": [
+          [
+            [
+              -10.697393417358398,
+              false
+            ]
+          ],
+          [
+            [
+              -6.075408935546875,
+              false
+            ]
+          ],
+          [
+            [
+              -11.398618698120117,
+              false
+            ]
+          ],
+          [
+            [
+              -8.249327659606934,
+              false
+            ]
+          ]
+        ],
+        "filtered_resps": [
+          [
+            -10.697393417358398,
+            false
+          ],
+          [
+            -6.075408935546875,
+            false
+          ],
+          [
+            -11.398618698120117,
+            false
+          ],
+          [
+            -8.249327659606934,
+            false
+          ]
+        ],
+        "filter": "none",
+        "metrics": [
+          "acc",
+          "acc_norm"
+        ],
+        "doc_hash": "9d013657d62abe667cd976c8114a947f9ae54a48e2f50dcdb6b34b4056bbb04d",
+        "prompt_hash": "16a3f0bad1d1066243ec2818733eb766988c51d56a78d21694101beb3b4af9a7",
+        "target_hash": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+        "acc": 0.0,
+        "acc_norm": 1.0
+      }
+    ]
+  },
+  "config": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "model_args": null,
+    "model_num_parameters": 494032768,
+    "model_dtype": "torch.float32",
+    "model_revision": "main",
+    "model_sha": "",
+    "batch_size": null,
+    "batch_sizes": [],
+    "device": null,
+    "use_cache": null,
+    "limit": 50,
+    "bootstrap_iters": 100000,
+    "gen_kwargs": null,
+    "random_seed": 0,
+    "numpy_seed": 1234,
+    "torch_seed": 1234,
+    "fewshot_seed": 1234
+  },
+  "git_hash": "v2.0.0a3-6-g406bbbf",
+  "date": 1789538541.57025,
+  "pretty_env_info": "PyTorch version: 2.14.0+cpu\nIs debug build: False\nCUDA used to build PyTorch: Could not collect\nROCM used to build PyTorch: N/A\n\nOS: Microsoft Windows 11 Home Single Language (10.0.26200 64-bit)\nGCC version: Could not collect\nClang version: Could not collect\nCMake version: Could not collect\nLibc version: N/A\n\nPython version: 3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)] (64-bit runtime)\nPython platform: Windows-11-10.0.26200-SP0\nIs CUDA available: False\nCUDA runtime version: Could not collect\nCUDA_MODULE_LOADING set to: N/A\nGPU models and configuration: GPU 0: NVIDIA GeForce RTX 5060 Laptop GPU\nNvidia driver version: Could not collect\ncuDNN version: Could not collect\nIs XPU available: False\nHIP runtime version: N/A\nMIOpen runtime version: N/A\nIs XNNPACK available: False\nCaching allocator config: N/A\n\nCPU:\nName: Intel(R) Core(TM) Ultra 9 275HX\nManufacturer: GenuineIntel\nFamily: 775\nArchitecture: 9\nProcessorType: 3\nDeviceID: CPU0\nCurrentClockSpeed: 2700\nMaxClockSpeed: 2700\nL2CacheSize: 40960\nL2CacheSpeed: None\nRevision: None\n\nVersions of relevant libraries:\n[pip3] numpy==2.5.3\n[pip3] torch==2.14.0+cpu\n[conda] Could not collect",
+  "transformers_version": "5.17.0",
+  "lm_eval_version": "0.4.13",
+  "upper_git_hash": null,
+  "tokenizer_pad_token": [
+    "<|endoftext|>",
+    "151643"
+  ],
+  "tokenizer_eos_token": [
+    "<|im_end|>",
+    "151645"
+  ],
+  "tokenizer_bos_token": [
+    null,
+    "None"
+  ],
+  "eot_token_id": 151645,
+  "max_length": 32768
+}

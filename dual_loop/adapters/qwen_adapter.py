@@ -136,6 +136,14 @@ class DualLoopQwenModel(nn.Module):
         if not isinstance(hidden_states, torch.Tensor):
             return output
 
+        # Automatically match adapter device and dtype to intercepted hidden states
+        try:
+            adapter_param = next(self.adapter.parameters())
+            if hidden_states.dtype != adapter_param.dtype or hidden_states.device != adapter_param.device:
+                self.adapter.to(device=hidden_states.device, dtype=hidden_states.dtype)
+        except StopIteration:
+            pass
+
         # Execute recurrent latent deliberation
         enhanced, telemetry = self.adapter(
             hidden_states=hidden_states,
@@ -267,6 +275,11 @@ class DualLoopQwenModel(nn.Module):
             state_dict = torch.load(file_to_load, map_location="cpu", weights_only=True)
             
         self.adapter.load_state_dict(state_dict, strict=strict)
+        try:
+            sample_param = next(self.qwen.parameters())
+            self.adapter.to(device=sample_param.device, dtype=sample_param.dtype)
+        except StopIteration:
+            pass
         return file_to_load
 
     def remove_hook(self):
