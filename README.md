@@ -6,6 +6,7 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.14%2B-ee4c2c.svg)](https://pytorch.org/)
 [![Status](https://img.shields.io/badge/status-empirical--audit-orange.svg)](#empirical-findings)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Attributions](https://img.shields.io/badge/attributions-open--source-blue.svg)](ATTRIBUTION.md)
 
 Standard Autoregressive Transformers perform uniform $O(1)$ layer computation per token regardless of task complexity. While Chain-of-Thought (CoT) prompting allows multi-step reasoning, it expends significant output token bandwidth and introduces serial generation latency.
 
@@ -220,3 +221,11 @@ python visualize_dualloop_comparison.py
 ```
 
 For the complete technical paper and theoretical post-mortem, see [WHITEPAPER.md](WHITEPAPER.md).
+
+---
+
+## License & Attribution
+
+This project is licensed under the [MIT License](LICENSE).
+
+For complete third-party open-source attributions, foundation model interfaces (Qwen Apache 2.0 / Tongyi Qianwen License), academic benchmark datasets (MMLU, IFEval, GPQA, C-Eval, LongBench, BFCL), and research citations, please consult [ATTRIBUTION.md](ATTRIBUTION.md).
