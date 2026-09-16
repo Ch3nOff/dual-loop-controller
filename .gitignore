@@ -8,3 +8,6 @@ __pycache__/
 dist/
 build/
 .DS_Store
+hf_staging/
+hf_upload/
+prepare_hf_upload.py

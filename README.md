@@ -2,6 +2,7 @@
 > **A Hardware-Aligned Latent Deliberation Framework for Transformers: Architecture & Empirical Analysis**
 
 [![PyPI](https://img.shields.io/pypi/v/dual-loop-controller.svg)](https://pypi.org/project/dual-loop-controller/)
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-dual--loop--qwen3.5--2b-yellow.svg)](https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b)
 [![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)](tests/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.14%2B-ee4c2c.svg)](https://pytorch.org/)
 [![Status](https://img.shields.io/badge/status-empirical--audit-orange.svg)](#empirical-findings)
@@ -189,22 +190,31 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from dual_loop import attach_dual_loop_to_qwen
 
 # 1. Load base Qwen model
-model_name = "Qwen/Qwen2.5-1.5B"  # or Qwen3.5-2B
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-base_model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.bfloat16, device_map="auto")
+model_name = "Qwen/Qwen3.5-2B"  # or Qwen2.5-1.5B / Qwen2.5-7B
+tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+base_model = AutoModelForCausalLM.from_pretrained(
+    model_name,
+    torch_dtype=torch.bfloat16,
+    device_map="auto",
+    trust_remote_code=True
+)
 
-# 2. Attach Dual-Loop Cognitive Controller at layer 12 (residual mode)
+# 2. Attach Dual-Loop Cognitive Controller at Layer 12 (residual mode)
 model = attach_dual_loop_to_qwen(
     base_model,
     layer_idx=12,
-    num_thought_tokens=8,
+    num_thought_tokens=4,
     max_ponder_steps=3,
     adapter_mode="residual"
 )
 
-# 3. Deliberate for K=3 steps in latent space without generating CoT tokens:
-inputs = tokenizer("Deduce the relation between entity A and entity D via B and C.", return_tensors="pt").to(base_model.device)
-output = model.generate(**inputs, max_new_tokens=128, k_steps=3)
+# 3. Load adapter weights directly from Hugging Face Hub!
+model.load_adapter("CH3NDev/dual-loop-qwen3.5-2b")
+
+# 4. Deliberate in latent space without emitting intermediate discrete tokens:
+prompt = "Alice has 3 brothers. Each brother has 2 sisters. How many sisters does Alice have?"
+inputs = tokenizer(prompt, return_tensors="pt").to(base_model.device)
+output = model.generate(**inputs, max_new_tokens=128)
 print(tokenizer.decode(output[0], skip_special_tokens=True))
 ```
 

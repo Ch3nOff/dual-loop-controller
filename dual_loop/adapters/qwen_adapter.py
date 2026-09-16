@@ -200,15 +200,74 @@ class DualLoopQwenModel(nn.Module):
             "adapter_mode": self.adapter.adapter_mode
         }
 
-    def save_adapter(self, save_path: str):
-        """Saves only the lightweight adapter weights."""
+    def save_adapter(self, save_path: str, format: str = "safetensors"):
+        """
+        Saves only the lightweight adapter weights.
+        Supports format='safetensors' (recommended) or format='pt'.
+        """
         os.makedirs(os.path.dirname(os.path.abspath(save_path)), exist_ok=True)
+        if save_path.endswith(".safetensors") or format == "safetensors":
+            if not save_path.endswith(".safetensors") and not save_path.endswith(".pt"):
+                save_path = save_path + ".safetensors"
+            try:
+                import safetensors.torch
+                contiguous_dict = {k: v.contiguous() for k, v in self.adapter.state_dict().items()}
+                safetensors.torch.save_file(contiguous_dict, save_path)
+                return save_path
+            except ImportError:
+                pass
         torch.save(self.adapter.state_dict(), save_path)
+        return save_path
 
     def load_adapter(self, load_path: str, strict: bool = True):
-        """Loads lightweight adapter weights."""
-        state_dict = torch.load(load_path, map_location="cpu", weights_only=True)
+        """
+        Loads lightweight adapter weights from a local file, local directory,
+        or directly from Hugging Face Hub (e.g. 'CH3NDev/dual-loop-qwen3.5-2b').
+        """
+        file_to_load = None
+        
+        # 1. Local file
+        if os.path.isfile(load_path):
+            file_to_load = load_path
+        # 2. Local directory
+        elif os.path.isdir(load_path):
+            candidates = [
+                os.path.join(load_path, "adapter_model.safetensors"),
+                os.path.join(load_path, "qwen35_2b_adapter.pt"),
+                os.path.join(load_path, "adapter.pt"),
+            ]
+            for c in candidates:
+                if os.path.isfile(c):
+                    file_to_load = c
+                    break
+        # 3. Hugging Face Hub repository
+        if file_to_load is None:
+            try:
+                from huggingface_hub import hf_hub_download
+                for filename in ["adapter_model.safetensors", "qwen35_2b_adapter.pt", "adapter.pt"]:
+                    try:
+                        file_to_load = hf_hub_download(repo_id=load_path, filename=filename)
+                        break
+                    except Exception:
+                        continue
+            except ImportError:
+                pass
+                
+        if file_to_load is None:
+            raise FileNotFoundError(
+                f"Could not load adapter from '{load_path}'. "
+                "Ensure the file exists locally or is a valid Hugging Face repository ID."
+            )
+
+        # Load weights
+        if file_to_load.endswith(".safetensors"):
+            import safetensors.torch
+            state_dict = safetensors.torch.load_file(file_to_load)
+        else:
+            state_dict = torch.load(file_to_load, map_location="cpu", weights_only=True)
+            
         self.adapter.load_state_dict(state_dict, strict=strict)
+        return file_to_load
 
     def remove_hook(self):
         """Cleanly detaches the forward hook from the underlying model."""
