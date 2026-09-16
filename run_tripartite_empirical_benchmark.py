@@ -62,8 +62,9 @@ print("[Stage 1/5] Model loaded successfully.")
 sys.stdout.flush()
 
 # Attach Dual-Loop wrapper
-wrapped_model = attach_dual_loop_to_qwen(base_model, layer_idx=11, k_steps=2, enable_critique=True)
+wrapped_model = attach_dual_loop_to_qwen(base_model, layer_idx=11, k_steps=2, enable_critique=True, use_hypothesis_verification=True)
 saved_critique_unit = wrapped_model.adapter.controller.critique_unit
+saved_hypothesis_gate = wrapped_model.adapter.hypothesis_gate
 if os.path.exists(ADAPTER_PATH):
     print(f"[Stage 2/5] Loading trained adapter weights from {ADAPTER_PATH}...")
     wrapped_model.load_adapter(ADAPTER_PATH, strict=False)
@@ -81,9 +82,9 @@ test_prompts = [
 ]
 
 configs = [
-    {"name": "Base (K=0)", "k": 0, "critique": False},
-    {"name": "Before Update (K=2, No Critique)", "k": 2, "critique": False},
-    {"name": "After Update (K=2, Metacognitive)", "k": 2, "critique": True},
+    {"name": "Base (K=0)", "k": 0, "critique": False, "verify": False},
+    {"name": "Before Update (K=2, No Critique)", "k": 2, "critique": False, "verify": False},
+    {"name": "After Update (K=2, Metacognitive)", "k": 2, "critique": True, "verify": True},
 ]
 
 speed_results = {}
@@ -96,6 +97,11 @@ for cfg in configs:
         wrapped_model.adapter.controller.critique_unit = None
     else:
         wrapped_model.adapter.controller.critique_unit = saved_critique_unit
+
+    if not cfg.get("verify", False):
+        wrapped_model.adapter.hypothesis_gate = None
+    else:
+        wrapped_model.adapter.hypothesis_gate = saved_hypothesis_gate
 
     ttft_list = []
     decode_latencies = []
@@ -188,10 +194,12 @@ def evaluate_multiple_choice(dataset_name, subset, split, sample_limit, config_m
         wrapped_model.set_ponder_steps(2)
         wrapped_model.adapter.controller.enable_critique = False
         wrapped_model.adapter.controller.critique_unit = None
+        wrapped_model.adapter.hypothesis_gate = None
     elif config_mode == "after":
         wrapped_model.set_ponder_steps(2)
         wrapped_model.adapter.controller.enable_critique = True
         wrapped_model.adapter.controller.critique_unit = saved_critique_unit
+        wrapped_model.adapter.hypothesis_gate = saved_hypothesis_gate
 
     for i, item in enumerate(ds):
         if total >= sample_limit:

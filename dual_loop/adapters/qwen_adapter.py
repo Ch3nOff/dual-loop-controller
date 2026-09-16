@@ -63,6 +63,7 @@ class DualLoopQwenModel(nn.Module):
         confidence_threshold: Optional[float] = None,
         enable_critique: bool = True,
         use_learned_halting: bool = False,
+        use_hypothesis_verification: bool = True,
         **adapter_kwargs
     ):
         super().__init__()
@@ -128,6 +129,7 @@ class DualLoopQwenModel(nn.Module):
             vocab_size=vocab_size,
             enable_critique=enable_critique,
             use_learned_halting=use_learned_halting,
+            use_hypothesis_verification=use_hypothesis_verification,
             **adapter_kwargs
         )
         

@@ -8,6 +8,7 @@ for Transformer architectures.
 from .memory import CognitiveWorkingMemory
 from .halting import EntropyHaltingUnit, LearnedHaltingGate
 from .controller import RecurrentLatentController, TopKCapacityCrossAttention, LatentCritiqueRefinementUnit
+from .verification import HypothesisVerificationGate
 from .decoder import DualLoopTransformer
 from .adapters.latent_adapter import LatentDeliberationAdapter
 from .adapters.qwen_adapter import DualLoopQwenModel, attach_dual_loop_to_qwen
@@ -62,6 +63,7 @@ __all__ = [
     "RecurrentLatentController",
     "TopKCapacityCrossAttention",
     "LatentCritiqueRefinementUnit",
+    "HypothesisVerificationGate",
     "DualLoopTransformer",
     "LatentDeliberationAdapter",
     "DualLoopQwenModel",
