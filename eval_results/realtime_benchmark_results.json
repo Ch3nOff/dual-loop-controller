@@ -1,0 +1,197 @@
+{
+  "timestamp": "2026-09-17 19:28:53",
+  "model_id": "Qwen/Qwen3.5-2B",
+  "device": "cpu",
+  "samples_per_task": 10,
+  "summary": {
+    "macro_base": 56.00000000000001,
+    "macro_delib": 56.49999999999999,
+    "delta": 0.4999999999999858,
+    "total_rescued": 1,
+    "total_degraded": 0,
+    "total_items": 200,
+    "total_time": 1013.0518634319305
+  },
+  "benchmarks": {
+    "ARC-Easy": {
+      "base_acc": 80.0,
+      "delib_acc": 80.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.6075825750827789,
+      "elapsed": 29.25851798057556
+    },
+    "ARC-Challenge": {
+      "base_acc": 50.0,
+      "delib_acc": 50.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.6030545353889465,
+      "elapsed": 43.42350912094116
+    },
+    "OpenBookQA": {
+      "base_acc": 30.0,
+      "delib_acc": 30.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.589982408285141,
+      "elapsed": 30.647547721862793
+    },
+    "PIQA": {
+      "base_acc": 80.0,
+      "delib_acc": 80.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.6218819260597229,
+      "elapsed": 16.976701021194458
+    },
+    "BBH-LogicalDeduction": {
+      "base_acc": 90.0,
+      "delib_acc": 90.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.5880224943161011,
+      "elapsed": 38.935561656951904
+    },
+    "BBH-DateUnderstanding": {
+      "base_acc": 40.0,
+      "delib_acc": 40.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.6095033943653106,
+      "elapsed": 64.59492182731628
+    },
+    "BBH-TrackingShuffledObjects": {
+      "base_acc": 50.0,
+      "delib_acc": 50.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.5904082477092742,
+      "elapsed": 47.42773771286011
+    },
+    "BBH-BooleanExpressions": {
+      "base_acc": 80.0,
+      "delib_acc": 90.0,
+      "delta": 10.0,
+      "rescued": 1,
+      "degraded": 0,
+      "mean_vacuity": 0.5751683413982391,
+      "elapsed": 14.3283212184906
+    },
+    "BBH-CausalJudgement": {
+      "base_acc": 40.0,
+      "delib_acc": 40.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.5986526846885681,
+      "elapsed": 61.079410552978516
+    },
+    "BBH-FormalFallacies": {
+      "base_acc": 60.0,
+      "delib_acc": 60.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.6022790670394897,
+      "elapsed": 33.885899782180786
+    },
+    "BBH-GeometricShapes": {
+      "base_acc": 40.0,
+      "delib_acc": 40.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.589226508140564,
+      "elapsed": 156.9232530593872
+    },
+    "BBH-Hyperbaton": {
+      "base_acc": 80.0,
+      "delib_acc": 80.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.600052285194397,
+      "elapsed": 14.646111249923706
+    },
+    "BBH-Navigate": {
+      "base_acc": 60.0,
+      "delib_acc": 60.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.5905472457408905,
+      "elapsed": 22.729705572128296
+    },
+    "BBH-ColoredObjects": {
+      "base_acc": 70.0,
+      "delib_acc": 70.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.5903010487556457,
+      "elapsed": 147.64960312843323
+    },
+    "BBH-WebOfLies": {
+      "base_acc": 20.0,
+      "delib_acc": 20.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.5908887326717377,
+      "elapsed": 21.487623929977417
+    },
+    "Sector1-InvertedPhysics": {
+      "base_acc": 40.0,
+      "delib_acc": 40.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.6091805875301362,
+      "elapsed": 53.43345785140991
+    },
+    "Sector2-5HopTransitive": {
+      "base_acc": 40.0,
+      "delib_acc": 40.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.6099662721157074,
+      "elapsed": 46.94257712364197
+    },
+    "Sector3-CounterSyllogisms": {
+      "base_acc": 100.0,
+      "delib_acc": 100.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.5943877875804902,
+      "elapsed": 50.785866260528564
+    },
+    "Sector4-ModularCalendar": {
+      "base_acc": 10.0,
+      "delib_acc": 10.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.6126978695392609,
+      "elapsed": 48.524131059646606
+    },
+    "Sector5-StateAutomata": {
+      "base_acc": 60.0,
+      "delib_acc": 60.0,
+      "delta": 0.0,
+      "rescued": 0,
+      "degraded": 0,
+      "mean_vacuity": 0.6090163588523865,
+      "elapsed": 69.37025570869446
+    }
+  }
+}

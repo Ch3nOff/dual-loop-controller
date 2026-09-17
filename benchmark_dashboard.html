@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dual-Loop Cognitive Controller — Live Benchmark Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+/* ===== ROOT & RESET ===== */
+:root {
+    --bg-primary: #080c18;
+    --bg-secondary: #0d1225;
+    --bg-card: rgba(255,255,255,0.035);
+    --bg-card-hover: rgba(255,255,255,0.06);
+    --border-card: rgba(255,255,255,0.08);
+    --text-primary: #e8eaf6;
+    --text-secondary: #90a4ae;
+    --text-dim: #546e7a;
+    --accent-green: #1b9e77;
+    --accent-teal: #26c6da;
+    --accent-gray: #78909c;
+    --accent-red: #ef5350;
+    --accent-orange: #ffa726;
+    --rescued-color: #00e676;
+    --degraded-color: #ff5252;
+    --preserved-color: #42a5f5;
+    --radius: 12px;
+    --shadow: 0 4px 30px rgba(0,0,0,0.5);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; }
+body {
+    font-family: 'Segoe UI', 'Inter', -apple-system, sans-serif;
+    background: linear-gradient(145deg, var(--bg-primary), var(--bg-secondary));
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+a { color: var(--accent-teal); text-decoration: none; }
+
+/* ===== HEADER ===== */
+.header {
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-card);
+    padding: 1rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.75rem;
+    position: sticky; top: 0; z-index: 100;
+}
+.header-left { display: flex; align-items: center; gap: 1rem; }
+.header-logo { font-size: 1.6rem; }
+.header-title { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; }
+.header-subtitle { font-size: 0.78rem; color: var(--text-secondary); font-weight: 400; }
+.header-right { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+
+/* Status Badge */
+.status-badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.3rem 0.75rem; border-radius: 20px;
+    font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+}
+.status-badge.waiting { background: rgba(255,167,38,0.15); color: var(--accent-orange); }
+.status-badge.waiting .dot { background: var(--accent-orange); }
+.status-badge.running { background: rgba(0,230,118,0.12); color: var(--rescued-color); }
+.status-badge.running .dot { background: var(--rescued-color); animation: pulse 1.4s infinite; }
+.status-badge.complete { background: rgba(27,158,119,0.15); color: var(--accent-green); }
+.status-badge.complete .dot { background: var(--accent-green); }
+.status-badge.error { background: rgba(239,83,80,0.15); color: var(--accent-red); }
+.status-badge.error .dot { background: var(--accent-red); }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,230,118,0.5); }
+    50% { box-shadow: 0 0 0 8px rgba(0,230,118,0); }
+}
+
+/* Info Pill */
+.info-pill {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border-card);
+    padding: 0.25rem 0.65rem; border-radius: 16px;
+    font-size: 0.72rem; color: var(--text-secondary);
+}
+.info-pill .label { color: var(--text-dim); }
+.info-pill .value { color: var(--text-primary); font-weight: 600; }
+
+/* ===== MAIN LAYOUT ===== */
+.main { max-width: 1400px; margin: 0 auto; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+
+/* ===== CARD ===== */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+    transition: background 0.3s;
+}
+.card:hover { background: var(--bg-card-hover); }
+.card-title {
+    font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-secondary); margin-bottom: 1rem; font-weight: 600;
+    display: flex; align-items: center; gap: 0.5rem;
+}
+.card-title .icon { font-size: 1rem; }
+
+/* Grid Layouts */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; }
+@media (max-width: 900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+/* ===== PROGRESS SECTION ===== */
+.progress-group { margin-bottom: 0.8rem; }
+.progress-label {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.78rem; margin-bottom: 0.35rem; color: var(--text-secondary);
+}
+.progress-label .value { color: var(--text-primary); font-weight: 600; }
+.progress-bar {
+    width: 100%; height: 10px; background: rgba(255,255,255,0.06);
+    border-radius: 6px; overflow: hidden; position: relative;
+}
+.progress-fill {
+    height: 100%; border-radius: 6px; transition: width 0.6s cubic-bezier(0.25,0.8,0.25,1);
+    background: linear-gradient(90deg, var(--accent-green), var(--accent-teal));
+    position: relative;
+}
+.progress-fill::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+    animation: shimmer 2.5s ease-in-out infinite;
+}
+@keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
+
+/* ===== BIG STAT ===== */
+.stat-card { text-align: center; padding: 1.2rem 1rem; }
+.stat-number { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; margin-bottom: 0.3rem; }
+.stat-label { font-size: 0.72rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+.stat-sub { font-size: 0.8rem; font-weight: 600; margin-top: 0.2rem; }
+.stat-number.green { color: var(--accent-green); }
+.stat-number.gray { color: var(--accent-gray); }
+.stat-number.teal { color: var(--accent-teal); }
+.stat-sub.positive { color: var(--rescued-color); }
+.stat-sub.negative { color: var(--degraded-color); }
+.stat-sub.neutral { color: var(--accent-gray); }
+
+/* ===== CHART ===== */
+.chart-wrapper { position: relative; height: 340px; }
+@media (max-width: 900px) { .chart-wrapper { height: 260px; } }
+
+/* ===== TABLE ===== */
+.table-wrapper { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+thead th {
+    text-align: left; padding: 0.7rem 0.75rem; font-weight: 600;
+    color: var(--text-secondary); border-bottom: 1px solid var(--border-card);
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em;
+    position: sticky; top: 0; background: rgba(8,12,24,0.95); z-index: 1;
+}
+tbody td { padding: 0.6rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.03); }
+tbody tr { transition: background 0.2s; }
+tbody tr:hover { background: rgba(255,255,255,0.04); }
+tbody tr.active-benchmark { background: rgba(27,158,119,0.08); border-left: 3px solid var(--accent-green); }
+tbody tr.completed { opacity: 1; }
+tbody tr.pending { opacity: 0.4; }
+.delta-positive { color: var(--rescued-color); font-weight: 700; }
+.delta-negative { color: var(--degraded-color); font-weight: 700; }
+.delta-zero { color: var(--text-dim); }
+.badge-rescued {
+    display: inline-block; background: rgba(0,230,118,0.15); color: var(--rescued-color);
+    padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600;
+}
+.badge-degraded {
+    display: inline-block; background: rgba(255,82,82,0.15); color: var(--degraded-color);
+    padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600;
+}
+
+/* ===== ACTIVITY LOG ===== */
+.activity-log { max-height: 320px; overflow-y: auto; font-family: 'Cascadia Code', 'Fira Code', monospace; font-size: 0.72rem; line-height: 1.6; }
+.activity-log::-webkit-scrollbar { width: 4px; }
+.activity-log::-webkit-scrollbar-track { background: transparent; }
+.activity-log::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+.log-entry { padding: 0.15rem 0; animation: fadeIn 0.3s; }
+.log-entry .time { color: var(--text-dim); margin-right: 0.5rem; }
+.log-entry .ok { color: var(--rescued-color); }
+.log-entry .fail { color: var(--accent-red); }
+.log-entry .rescued { color: var(--rescued-color); font-weight: 700; }
+.log-entry .degraded { color: var(--degraded-color); font-weight: 700; }
+.log-entry .preserved { color: var(--text-secondary); }
+.log-entry .benchmark-name { color: var(--accent-teal); font-weight: 600; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ===== DONUT CHART ===== */
+.donut-wrapper { position: relative; height: 220px; display: flex; align-items: center; justify-content: center; }
+
+/* ===== FOOTER ===== */
+.footer { text-align: center; padding: 1.5rem; color: var(--text-dim); font-size: 0.72rem; }
+
+/* ===== WAITING OVERLAY ===== */
+.waiting-overlay {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 4rem 2rem; text-align: center;
+}
+.waiting-overlay .spinner {
+    width: 48px; height: 48px; border: 3px solid var(--border-card);
+    border-top-color: var(--accent-teal); border-radius: 50%;
+    animation: spin 1s linear infinite; margin-bottom: 1.5rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.waiting-overlay h2 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+/* ===== SPOTLIGHT CARD ===== */
+.spotlight-box {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-card);
+    border-radius: 10px;
+    padding: 1.25rem;
+    display: flex; flex-direction: column; gap: 1rem;
+}
+.spotlight-q-title {
+    font-size: 0.95rem; font-weight: 700; color: #fff; line-height: 1.5;
+}
+.spotlight-choices-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.6rem;
+}
+.choice-pill {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px; padding: 0.6rem 0.8rem;
+    font-size: 0.8rem; display: flex; align-items: center; justify-content: space-between;
+}
+.choice-pill.correct-choice {
+    border-color: rgba(0,230,118,0.4); background: rgba(0,230,118,0.05);
+}
+.verdict-comparison-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem;
+}
+@media (max-width: 768px) { .verdict-comparison-grid { grid-template-columns: 1fr; } }
+.verdict-box {
+    border-radius: 10px; padding: 1rem; border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(13,18,37,0.7); display: flex; flex-direction: column; gap: 0.4rem;
+}
+.verdict-box.base { border-left: 4px solid var(--accent-gray); }
+.verdict-box.dl { border-left: 4px solid var(--accent-green); box-shadow: 0 0 15px rgba(27,158,119,0.15); }
+.verdict-box.rescued { border-left: 4px solid var(--rescued-color); background: rgba(0,230,118,0.04); box-shadow: 0 0 20px rgba(0,230,118,0.2); }
+.verdict-header {
+    font-size: 0.72rem; text-transform: uppercase; font-weight: 700; color: var(--text-secondary);
+    display: flex; justify-content: space-between; align-items: center;
+}
+.verdict-answer {
+    font-size: 1.15rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 0.5rem;
+}
+.verdict-desc { font-size: 0.78rem; color: var(--text-secondary); }
+.verdict-meta { font-size: 0.72rem; color: var(--text-dim); display: flex; gap: 1rem; margin-top: 0.2rem; }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+    <div class="header-left">
+        <span class="header-logo">🧠</span>
+        <div>
+            <div class="header-title">Dual-Loop Cognitive Controller</div>
+            <div class="header-subtitle">Real-Time Benchmark Dashboard</div>
+        </div>
+    </div>
+    <div class="header-right">
+        <div id="statusBadge" class="status-badge waiting">
+            <span class="dot"></span>
+            <span id="statusText">CONNECTING...</span>
+        </div>
+        <div class="info-pill"><span class="label">Model</span><span id="infoModel" class="value">—</span></div>
+        <div class="info-pill"><span class="label">Device</span><span id="infoDevice" class="value">—</span></div>
+        <div class="info-pill"><span class="label">Layer</span><span id="infoLayer" class="value">11</span></div>
+        <div class="info-pill"><span class="label">K</span><span id="infoK" class="value">2</span></div>
+        <div class="info-pill"><span class="label">Elapsed</span><span id="infoElapsed" class="value">0:00</span></div>
+    </div>
+</header>
+
+<!-- ===== MAIN ===== -->
+<div class="main">
+
+    <!-- WAITING OVERLAY (shown before init) -->
+    <div id="waitingOverlay" class="card waiting-overlay">
+        <div class="spinner"></div>
+        <h2>Waiting for Benchmark to Start</h2>
+        <p>Run <code>run_benchmark.bat</code> to begin the evaluation suite.<br>
+        This dashboard will auto-update via Server-Sent Events.</p>
+    </div>
+
+    <!-- CONTENT (hidden until init) -->
+    <div id="mainContent" style="display:none; flex-direction: column; gap: 1.25rem;">
+
+        <!-- Row 1: Progress + Summary Stats -->
+        <div class="grid-2">
+            <!-- Progress -->
+            <div class="card">
+                <div class="card-title"><span class="icon">📊</span> Benchmark Progress</div>
+                <div class="progress-group">
+                    <div class="progress-label">
+                        <span>Overall Suite</span>
+                        <span class="value"><span id="progOverallPct">0</span>% — <span id="progOverallCount">0/0</span> benchmarks</span>
+                    </div>
+                    <div class="progress-bar"><div id="progOverallFill" class="progress-fill" style="width:0%"></div></div>
+                </div>
+                <div class="progress-group">
+                    <div class="progress-label">
+                        <span id="progCurrentName">—</span>
+                        <span class="value"><span id="progCurrentPct">0</span>% — <span id="progCurrentCount">0/0</span> items</span>
+                    </div>
+                    <div class="progress-bar"><div id="progCurrentFill" class="progress-fill" style="width:0%"></div></div>
+                </div>
+                <div style="margin-top:0.8rem; font-size:0.78rem; color:var(--text-secondary);">
+                    <span id="progStatusDetail">Initializing model...</span>
+                </div>
+            </div>
+
+            <!-- Summary Stats -->
+            <div class="grid-3" style="gap:0.75rem;">
+                <div class="card stat-card">
+                    <div class="stat-number gray" id="statBase">—</div>
+                    <div class="stat-label">Base (K=0)</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-number green" id="statDualLoop">—</div>
+                    <div class="stat-label">Dual-Loop (K=2)</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-number teal" id="statDelta">—</div>
+                    <div class="stat-label">Net Delta</div>
+                    <div class="stat-sub neutral" id="statRescuedDegraded">R: 0 / D: 0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spotlight Card: Live Question & Quality Comparison -->
+        <div class="card" id="spotlightCard">
+            <div class="card-title" style="justify-content:space-between">
+                <div><span class="icon">🔍</span> Live Question & Decision Quality Spotlight (Qwen3.5-2B)</div>
+                <div id="spotlightStatus"><span class="status-badge waiting">Ready</span></div>
+            </div>
+            <div class="spotlight-box">
+                <div class="spotlight-q-title" id="spotlightQuestion">Loading authentic benchmark questions from Qwen3.5-2B backbone...</div>
+                <div class="spotlight-choices-grid" id="spotlightChoices"></div>
+                <div class="verdict-comparison-grid">
+                    <!-- Base Model Box -->
+                    <div class="verdict-box base" id="spotlightBaseCard">
+                        <div class="verdict-header">
+                            <span>Base Qwen3.5-2B (System 1 Fast Path K=0)</span>
+                            <span id="spotlightBaseStatusBadge" class="info-pill">Intuitive</span>
+                        </div>
+                        <div class="verdict-answer" id="spotlightBasePred">—</div>
+                        <div class="verdict-meta">
+                            <span id="spotlightBaseMargin">Margin: —</span>
+                        </div>
+                    </div>
+                    <!-- Dual-Loop Controller Box -->
+                    <div class="verdict-box dl" id="spotlightDLCard">
+                        <div class="verdict-header">
+                            <span>Dual-Loop Cognitive Controller (Layer 11 Hook K=2)</span>
+                            <span id="spotlightDLStatusBadge" class="info-pill" style="color:var(--accent-green); border-color:var(--accent-green)">Deliberated</span>
+                        </div>
+                        <div class="verdict-answer" id="spotlightDLPred">—</div>
+                        <div class="verdict-meta">
+                            <span id="spotlightDLMargin">Post-Margin: —</span>
+                            <span id="spotlightDLVacuity">u(x): —</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2: Accuracy Chart -->
+        <div class="card">
+            <div class="card-title"><span class="icon">📈</span> Accuracy Comparison — Base vs Dual-Loop</div>
+            <div class="chart-wrapper">
+                <canvas id="accuracyChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Row 3: Scoreboard + Donut -->
+        <div class="grid-2" style="grid-template-columns: 2.5fr 1fr;">
+            <!-- Scoreboard Table -->
+            <div class="card">
+                <div class="card-title"><span class="icon">🎯</span> Live Scoreboard</div>
+                <div class="table-wrapper" style="max-height:480px; overflow-y:auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Benchmark</th>
+                                <th>Category</th>
+                                <th style="text-align:right">Base %</th>
+                                <th style="text-align:right">DL %</th>
+                                <th style="text-align:right">Δ</th>
+                                <th style="text-align:center">R / D</th>
+                                <th style="text-align:right">u(x)</th>
+                                <th style="text-align:right">Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scoreboardBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Decision Donut -->
+            <div class="card">
+                <div class="card-title"><span class="icon">🔄</span> Decision Transitions</div>
+                <div class="donut-wrapper">
+                    <canvas id="donutChart"></canvas>
+                </div>
+                <div style="font-size:0.72rem; color:var(--text-secondary); text-align:center; margin-top:0.5rem;">
+                    <span id="donutTotal">0</span> total items evaluated
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 4: Activity Log -->
+        <div class="card">
+            <div class="card-title"><span class="icon">📋</span> Live Activity Feed</div>
+            <div id="activityLog" class="activity-log">
+                <div class="log-entry"><span class="time">[--:--:--]</span> <span class="preserved">Waiting for evaluation results...</span></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer class="footer">
+    Dual-Loop Cognitive Controller v2.1 — Authentic PyTorch Benchmark Suite — Zero Mocked Data
+</footer>
+
+<script>
+// ===== STATE =====
+const state = {
+    connected: false,
+    startTime: null,
+    totalBenchmarks: 20,
+    samplesPerTask: 10,
+    completedBenchmarks: 0,
+    currentBenchmark: null,
+    currentItemIndex: 0,
+    currentItemTotal: 0,
+    totalBaseCorrect: 0,
+    totalDelibCorrect: 0,
+    totalItems: 0,
+    totalRescued: 0,
+    totalDegraded: 0,
+    totalPreservedCorrect: 0,
+    totalPreservedWrong: 0,
+    benchmarkNames: [],
+    baseAccs: [],
+    delibAccs: [],
+    benchmarkResults: {},
+    elapsedTimer: null
+};
+
+// ===== CHART SETUP =====
+let accuracyChart = null;
+let donutChart = null;
+
+function initCharts() {
+    const ctx1 = document.getElementById('accuracyChart').getContext('2d');
+    accuracyChart = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: [],
+            datasets: [
+                {
+                    label: 'Base Qwen3.5-2B (K=0)',
+                    data: [],
+                    backgroundColor: 'rgba(120, 144, 156, 0.7)',
+                    borderColor: 'rgba(120, 144, 156, 1)',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                },
+                {
+                    label: 'Dual-Loop Controller (K=2)',
+                    data: [],
+                    backgroundColor: 'rgba(27, 158, 119, 0.7)',
+                    borderColor: 'rgba(27, 158, 119, 1)',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: { duration: 600, easing: 'easeOutQuart' },
+            plugins: {
+                legend: {
+                    labels: { color: '#e8eaf6', font: { size: 12 }, padding: 16 }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(13,18,37,0.95)',
+                    titleColor: '#e8eaf6',
+                    bodyColor: '#90a4ae',
+                    borderColor: 'rgba(255,255,255,0.1)',
+                    borderWidth: 1,
+                    cornerRadius: 8,
+                    callbacks: {
+                        label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}%`
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: '#90a4ae', font: { size: 10 }, maxRotation: 40 },
+                    grid: { color: 'rgba(255,255,255,0.04)' }
+                },
+                y: {
+                    min: 0, max: 110,
+                    ticks: { color: '#90a4ae', callback: v => v + '%' },
+                    grid: { color: 'rgba(255,255,255,0.06)' }
+                }
+            }
+        }
+    });
+
+    const ctx2 = document.getElementById('donutChart').getContext('2d');
+    donutChart = new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: ['Preserved Correct', 'Rescued ✨', 'Preserved Wrong', 'Degraded ⚠️'],
+            datasets: [{
+                data: [0, 0, 0, 0],
+                backgroundColor: [
+                    'rgba(66, 165, 245, 0.8)',
+                    'rgba(0, 230, 118, 0.8)',
+                    'rgba(120, 144, 156, 0.5)',
+                    'rgba(239, 83, 80, 0.8)'
+                ],
+                borderColor: 'rgba(8, 12, 24, 0.8)',
+                borderWidth: 2,
+                hoverOffset: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '65%',
+            animation: { duration: 500 },
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { color: '#90a4ae', font: { size: 10 }, padding: 8, usePointStyle: true, pointStyleWidth: 8 }
+                }
+            }
+        }
+    });
+}
+
+// ===== HELPERS =====
+function shortName(name) {
+    return name.replace('Sector', 'S.').replace('BBH-', '').replace('TrackingShuffledObjects', 'ShuffledObj')
+               .replace('BooleanExpressions', 'Boolean').replace('CausalJudgement', 'CausalJdg')
+               .replace('FormalFallacies', 'Fallacies').replace('GeometricShapes', 'GeoShapes')
+               .replace('ColoredObjects', 'ColorObj').replace('WebOfLies', 'WebLies')
+               .replace('LogicalDeduction', 'LogicDed').replace('DateUnderstanding', 'DateUnd')
+               .replace('InvertedPhysics', 'InvPhys').replace('5HopTransitive', '5Hop')
+               .replace('CounterSyllogisms', 'CntrSyll').replace('ModularCalendar', 'ModCal')
+               .replace('StateAutomata', 'DFA');
+}
+
+function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${m}:${String(s).padStart(2, '0')}`;
+}
+
+function addLogEntry(html) {
+    const log = document.getElementById('activityLog');
+    const now = new Date();
+    const ts = now.toTimeString().slice(0, 8);
+    const entry = document.createElement('div');
+    entry.className = 'log-entry';
+    entry.innerHTML = `<span class="time">[${ts}]</span> ${html}`;
+    log.appendChild(entry);
+    log.scrollTop = log.scrollHeight;
+    // Keep only last 200 entries
+    while (log.children.length > 200) log.removeChild(log.firstChild);
+}
+
+function updateElapsed() {
+    if (!state.startTime) return;
+    const elapsed = (Date.now() - state.startTime) / 1000;
+    document.getElementById('infoElapsed').textContent = formatTime(elapsed);
+}
+
+function updateSummaryStats() {
+    const totalEval = state.totalItems;
+    if (totalEval === 0) return;
+    const baseAcc = (state.totalBaseCorrect / totalEval * 100);
+    const dlAcc = (state.totalDelibCorrect / totalEval * 100);
+    const delta = dlAcc - baseAcc;
+
+    document.getElementById('statBase').textContent = baseAcc.toFixed(1) + '%';
+    document.getElementById('statDualLoop').textContent = dlAcc.toFixed(1) + '%';
+    document.getElementById('statDelta').textContent = (delta >= 0 ? '+' : '') + delta.toFixed(2) + '%';
+
+    const deltaEl = document.getElementById('statDelta');
+    deltaEl.className = 'stat-number ' + (delta > 0 ? 'green' : delta < 0 ? 'degraded-color' : 'teal');
+
+    const rdText = `R: +${state.totalRescued} / D: -${state.totalDegraded}`;
+    const rdEl = document.getElementById('statRescuedDegraded');
+    rdEl.textContent = rdText;
+    rdEl.className = 'stat-sub ' + (state.totalRescued > state.totalDegraded ? 'positive' : state.totalDegraded > 0 ? 'negative' : 'neutral');
+}
+
+function updateDonut() {
+    donutChart.data.datasets[0].data = [
+        state.totalPreservedCorrect,
+        state.totalRescued,
+        state.totalPreservedWrong,
+        state.totalDegraded
+    ];
+    donutChart.update('none');
+    document.getElementById('donutTotal').textContent = state.totalItems;
+}
+
+function setStatus(type, text) {
+    const badge = document.getElementById('statusBadge');
+    badge.className = 'status-badge ' + type;
+    document.getElementById('statusText').textContent = text;
+}
+
+// ===== SCOREBOARD =====
+function addScoreboardRow(index, name, category) {
+    const tbody = document.getElementById('scoreboardBody');
+    const tr = document.createElement('tr');
+    tr.id = `bench-row-${index}`;
+    tr.className = 'active-benchmark';
+    tr.innerHTML = `
+        <td>${index}</td>
+        <td><strong>${name}</strong></td>
+        <td style="font-size:0.72rem;color:var(--text-secondary)">${category}</td>
+        <td style="text-align:right" class="base-acc">—</td>
+        <td style="text-align:right" class="dl-acc">—</td>
+        <td style="text-align:right" class="delta">—</td>
+        <td style="text-align:center" class="rd">—</td>
+        <td style="text-align:right" class="vacuity">—</td>
+        <td style="text-align:right" class="elapsed">⏳</td>
+    `;
+    tbody.appendChild(tr);
+}
+
+function updateScoreboardRow(index, data) {
+    const row = document.getElementById(`bench-row-${index}`);
+    if (!row) return;
+    row.className = 'completed';
+
+    const delta = data.delta;
+    let deltaClass = 'delta-zero';
+    let deltaText = '0.0%';
+    if (delta > 0) { deltaClass = 'delta-positive'; deltaText = `+${delta.toFixed(1)}%`; }
+    else if (delta < 0) { deltaClass = 'delta-negative'; deltaText = `${delta.toFixed(1)}%`; }
+
+    let rdHtml = `${data.rescued}/${data.degraded}`;
+    if (data.rescued > 0) rdHtml = `<span class="badge-rescued">${data.rescued}</span> / ${data.degraded}`;
+    if (data.degraded > 0) rdHtml = `${data.rescued} / <span class="badge-degraded">${data.degraded}</span>`;
+
+    row.querySelector('.base-acc').textContent = data.base_acc.toFixed(1) + '%';
+    row.querySelector('.dl-acc').textContent = data.delib_acc.toFixed(1) + '%';
+    row.querySelector('.delta').innerHTML = `<span class="${deltaClass}">${deltaText}</span>`;
+    row.querySelector('.rd').innerHTML = rdHtml;
+    row.querySelector('.vacuity').textContent = data.mean_vacuity.toFixed(3);
+    row.querySelector('.elapsed').textContent = data.elapsed.toFixed(1) + 's';
+}
+
+// Mark remaining benchmarks as pending
+function addPendingRows(benchmarkNames) {
+    // benchmarkNames is array of {index, name, category}
+    benchmarkNames.forEach(b => {
+        const existing = document.getElementById(`bench-row-${b.index}`);
+        if (!existing) {
+            const tbody = document.getElementById('scoreboardBody');
+            const tr = document.createElement('tr');
+            tr.id = `bench-row-${b.index}`;
+            tr.className = 'pending';
+            tr.innerHTML = `
+                <td>${b.index}</td>
+                <td>${b.name}</td>
+                <td style="font-size:0.72rem;color:var(--text-dim)">${b.category}</td>
+                <td style="text-align:right">—</td><td style="text-align:right">—</td>
+                <td style="text-align:right">—</td><td style="text-align:center">—</td>
+                <td style="text-align:right">—</td><td style="text-align:right">—</td>
+            `;
+            tbody.appendChild(tr);
+        }
+    });
+}
+
+// ===== SSE CONNECTION =====
+function connectSSE() {
+    const evtSource = new EventSource('/events');
+
+    evtSource.addEventListener('init', (e) => {
+        const d = JSON.parse(e.data);
+        state.startTime = Date.now();
+        state.totalBenchmarks = d.total_benchmarks || 20;
+        state.samplesPerTask = d.samples_per_task || 10;
+
+        document.getElementById('infoModel').textContent = d.model_id ? d.model_id.split('/').pop() : 'Qwen3.5-2B';
+        document.getElementById('infoDevice').textContent = (d.device || 'cpu').toUpperCase();
+
+        document.getElementById('waitingOverlay').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'flex';
+
+        setStatus('running', 'RUNNING');
+        addLogEntry(`<span class="benchmark-name">Benchmark suite initialized</span> — ${state.totalBenchmarks} benchmarks × ${state.samplesPerTask} samples = ${state.totalBenchmarks * state.samplesPerTask} total evaluations`);
+
+        // Add pending rows if benchmark list provided
+        if (d.benchmark_list) {
+            addPendingRows(d.benchmark_list);
+        }
+
+        state.elapsedTimer = setInterval(updateElapsed, 1000);
+    });
+
+    evtSource.addEventListener('model_loaded', (e) => {
+        const d = JSON.parse(e.data);
+        addLogEntry(`<span class="ok">✓</span> Model loaded: <span class="benchmark-name">${d.model_id}</span> (${d.load_time.toFixed(1)}s) — Adapter: ${d.adapter_status}`);
+        document.getElementById('progStatusDetail').textContent = 'Model loaded. Starting evaluation...';
+    });
+
+    evtSource.addEventListener('benchmark_start', (e) => {
+        const d = JSON.parse(e.data);
+        state.currentBenchmark = d.name;
+        state.currentItemIndex = 0;
+        state.currentItemTotal = d.total_items;
+
+        document.getElementById('progCurrentName').textContent = `${d.name} (${d.domain})`;
+        document.getElementById('progCurrentPct').textContent = '0';
+        document.getElementById('progCurrentCount').textContent = `0/${d.total_items}`;
+        document.getElementById('progCurrentFill').style.width = '0%';
+        document.getElementById('progStatusDetail').textContent = `Evaluating: ${d.name} — ${d.category}`;
+
+        // Activate row in scoreboard
+        const row = document.getElementById(`bench-row-${d.index}`);
+        if (row) { row.className = 'active-benchmark'; }
+        else { addScoreboardRow(d.index, d.name, d.category); }
+
+        addLogEntry(`<span class="benchmark-name">▶ [${d.index}/${state.totalBenchmarks}] ${d.name}</span> — ${d.domain} (${d.total_items} items)`);
+    });
+
+    evtSource.addEventListener('item_complete', (e) => {
+        const d = JSON.parse(e.data);
+        state.currentItemIndex = d.item_index + 1;
+        state.totalItems++;
+
+        if (d.base_ok) state.totalBaseCorrect++;
+        if (d.delib_ok) state.totalDelibCorrect++;
+        if (d.status === 'Rescued (Wrong->Right)') { state.totalRescued++; state.totalPreservedWrong--; /* adjust */ }
+        if (d.status === 'Degraded (Right->Wrong)') { state.totalDegraded++; }
+        if (d.status === 'Preserved Correct') state.totalPreservedCorrect++;
+        if (d.status === 'Preserved Wrong') state.totalPreservedWrong++;
+
+        // Fix: rescued/degraded are already counted in item status, adjust preserved counts
+        // Actually let me just count properly
+        // Reset and recount from status
+        if (d.status === 'Rescued (Wrong->Right)') {
+            // Already incremented totalRescued, undo the premature totalPreservedWrong--
+            state.totalPreservedWrong++;
+        }
+
+        // Update current progress
+        const pct = (state.currentItemIndex / state.currentItemTotal * 100);
+        document.getElementById('progCurrentPct').textContent = Math.round(pct);
+        document.getElementById('progCurrentCount').textContent = `${state.currentItemIndex}/${state.currentItemTotal}`;
+        document.getElementById('progCurrentFill').style.width = pct + '%';
+
+        // Update summary
+        updateSummaryStats();
+        updateDonut();
+        updateSpotlight(d);
+
+        // Log entry
+        const baseIcon = d.base_ok ? '<span class="ok">✓</span>' : '<span class="fail">✗</span>';
+        const dlIcon = d.delib_ok ? '<span class="ok">✓</span>' : '<span class="fail">✗</span>';
+        let statusHtml = `<span class="preserved">${d.status}</span>`;
+        if (d.status.includes('Rescued')) statusHtml = `<span class="rescued">✨ ${d.status}</span>`;
+        if (d.status.includes('Degraded')) statusHtml = `<span class="degraded">⚠️ ${d.status}</span>`;
+
+        addLogEntry(`  Item ${d.item_index + 1}/${state.currentItemTotal} | Base: ${baseIcon} (${d.pred_base}) → DL: ${dlIcon} (${d.pred_delib}) | u=${d.vacuity_u.toFixed(3)} | ${statusHtml}`);
+    });
+
+    function updateSpotlight(d) {
+        if (!d.prompt) return;
+        const cleanPrompt = d.prompt.replace(/\nAnswer:$/, '').replace(/^Question:\s*/i, '').trim();
+        document.getElementById('spotlightQuestion').textContent = cleanPrompt;
+        
+        // Render Choices
+        const choicesEl = document.getElementById('spotlightChoices');
+        choicesEl.innerHTML = '';
+        if (d.choices && d.labels) {
+            d.labels.forEach((lbl, idx) => {
+                const chText = d.choices[idx] || '';
+                const pill = document.createElement('div');
+                const isTarget = (String(lbl).toUpperCase() === String(d.target).toUpperCase());
+                pill.className = `choice-pill ${isTarget ? 'correct-choice' : ''}`;
+                pill.innerHTML = `<span><strong>[${lbl}]</strong> ${chText}</span> ${isTarget ? '<span style="color:var(--rescued-color); font-weight:700">✓ Target</span>' : ''}`;
+                choicesEl.appendChild(pill);
+            });
+        }
+
+        // Base Box
+        const baseBox = document.getElementById('spotlightBaseCard');
+        const baseDesc = (d.choices && d.labels) ? (d.choices[d.labels.indexOf(d.pred_base)] || '') : '';
+        document.getElementById('spotlightBasePred').innerHTML = `${d.base_ok ? '<span style="color:var(--rescued-color)">✓</span>' : '<span style="color:var(--accent-red)">✗</span>'} [${d.pred_base}] <span style="font-size:0.85rem; font-weight:400; color:var(--text-secondary)">${baseDesc}</span>`;
+        document.getElementById('spotlightBaseMargin').textContent = `Margin: ${d.margin_base ? d.margin_base.toFixed(3) : '0.000'} nats`;
+
+        // Dual-Loop Box
+        const dlBox = document.getElementById('spotlightDLCard');
+        const dlDesc = (d.choices && d.labels) ? (d.choices[d.labels.indexOf(d.pred_delib)] || '') : '';
+        const isRescued = (d.status && d.status.includes('Rescued'));
+        dlBox.className = `verdict-box dl ${isRescued ? 'rescued' : ''}`;
+        document.getElementById('spotlightDLPred').innerHTML = `${d.delib_ok ? '<span style="color:var(--rescued-color)">✓</span>' : '<span style="color:var(--accent-red)">✗</span>'} [${d.pred_delib}] <span style="font-size:0.85rem; font-weight:400; color:var(--text-secondary)">${dlDesc}</span>`;
+        document.getElementById('spotlightDLMargin').textContent = `Post-Margin: ${d.margin_post ? d.margin_post.toFixed(3) : '0.000'} nats`;
+        document.getElementById('spotlightDLVacuity').textContent = `u(x): ${d.vacuity_u ? d.vacuity_u.toFixed(3) : '0.500'}`;
+        
+        // Status Badge
+        const statusEl = document.getElementById('spotlightStatus');
+        if (isRescued) {
+            statusEl.innerHTML = '<span class="badge-rescued" style="font-size:0.8rem; padding:0.25rem 0.6rem">✨ RESCUED (WRONG → RIGHT)</span>';
+        } else if (d.status && d.status.includes('Degraded')) {
+            statusEl.innerHTML = '<span class="badge-degraded" style="font-size:0.8rem; padding:0.25rem 0.6rem">⚠️ DEGRADED</span>';
+        } else if (d.delib_ok) {
+            statusEl.innerHTML = '<span class="status-badge" style="background:rgba(27,158,119,0.2); color:var(--accent-green)">Preserved Correct</span>';
+        } else {
+            statusEl.innerHTML = '<span class="status-badge" style="background:rgba(255,255,255,0.06); color:var(--text-dim)">Preserved Wrong</span>';
+        }
+    }
+
+    evtSource.addEventListener('benchmark_complete', (e) => {
+        const d = JSON.parse(e.data);
+        state.completedBenchmarks++;
+
+        // Update overall progress
+        const overallPct = (state.completedBenchmarks / state.totalBenchmarks * 100);
+        document.getElementById('progOverallPct').textContent = Math.round(overallPct);
+        document.getElementById('progOverallCount').textContent = `${state.completedBenchmarks}/${state.totalBenchmarks}`;
+        document.getElementById('progOverallFill').style.width = overallPct + '%';
+
+        // Update chart
+        state.benchmarkNames.push(shortName(d.name));
+        state.baseAccs.push(d.base_acc);
+        state.delibAccs.push(d.delib_acc);
+        accuracyChart.data.labels = [...state.benchmarkNames];
+        accuracyChart.data.datasets[0].data = [...state.baseAccs];
+        accuracyChart.data.datasets[1].data = [...state.delibAccs];
+        accuracyChart.update();
+
+        // Update scoreboard
+        updateScoreboardRow(d.index, d);
+
+        // Log summary
+        const deltaStr = d.delta >= 0 ? `+${d.delta.toFixed(1)}%` : `${d.delta.toFixed(1)}%`;
+        const deltaClass = d.delta > 0 ? 'rescued' : d.delta < 0 ? 'degraded' : 'preserved';
+        addLogEntry(`  <span class="benchmark-name">✓ ${d.name}</span> — Base: ${d.base_acc.toFixed(1)}% | DL: ${d.delib_acc.toFixed(1)}% | <span class="${deltaClass}">Δ${deltaStr}</span> | R:${d.rescued} D:${d.degraded} (${d.elapsed.toFixed(1)}s)`);
+    });
+
+    evtSource.addEventListener('suite_complete', (e) => {
+        const d = JSON.parse(e.data);
+        clearInterval(state.elapsedTimer);
+
+        setStatus('complete', 'COMPLETED');
+        document.getElementById('progStatusDetail').textContent = `Suite completed in ${formatTime(d.total_time)}!`;
+        document.getElementById('progOverallPct').textContent = '100';
+        document.getElementById('progOverallFill').style.width = '100%';
+        document.getElementById('progCurrentName').textContent = 'All benchmarks completed!';
+        document.getElementById('progCurrentFill').style.width = '100%';
+        document.getElementById('infoElapsed').textContent = formatTime(d.total_time);
+
+        // Final log entries
+        addLogEntry('');
+        addLogEntry('═'.repeat(70));
+        addLogEntry(`<span class="benchmark-name">🏁 BENCHMARK SUITE COMPLETED</span>`);
+        addLogEntry(`   Macro Base Accuracy  : <strong>${d.macro_base.toFixed(2)}%</strong>`);
+        addLogEntry(`   Macro Dual-Loop      : <strong class="ok">${d.macro_delib.toFixed(2)}%</strong>`);
+        addLogEntry(`   Net Delta            : <strong class="${d.delta >= 0 ? 'rescued' : 'degraded'}">${d.delta >= 0 ? '+' : ''}${d.delta.toFixed(2)}%</strong>`);
+        addLogEntry(`   Rescued: <span class="rescued">+${d.total_rescued}</span> | Degraded: <span class="${d.total_degraded > 0 ? 'degraded' : 'preserved'}">${d.total_degraded}</span>`);
+        addLogEntry(`   Total Time: ${formatTime(d.total_time)}`);
+        addLogEntry('═'.repeat(70));
+
+        // Stop shimmer animation
+        document.querySelectorAll('.progress-fill').forEach(el => {
+            el.style.animation = 'none';
+            if (el.querySelector('::after')) el.style.setProperty('--shimmer', 'none');
+        });
+    });
+
+    evtSource.addEventListener('error_msg', (e) => {
+        const d = JSON.parse(e.data);
+        setStatus('error', 'ERROR');
+        addLogEntry(`<span class="degraded">❌ Error: ${d.message}</span>`);
+    });
+
+    evtSource.onerror = () => {
+        if (state.completedBenchmarks >= state.totalBenchmarks && state.completedBenchmarks > 0) return;
+        setStatus('waiting', 'RECONNECTING...');
+        setTimeout(() => {
+            if (evtSource.readyState === EventSource.CLOSED) {
+                addLogEntry('<span class="preserved">Connection lost. Attempting reconnect...</span>');
+            }
+        }, 2000);
+    };
+
+    evtSource.onopen = () => {
+        state.connected = true;
+    };
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+    initCharts();
+
+    // Reset donut transition counters
+    state.totalPreservedCorrect = 0;
+    state.totalPreservedWrong = 0;
+    state.totalRescued = 0;
+    state.totalDegraded = 0;
+
+    connectSSE();
+});
+</script>
+</body>
+</html>

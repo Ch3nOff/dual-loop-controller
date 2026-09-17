@@ -1,0 +1,113 @@
+{
+  "architecture": "Dual-Loop Cognitive Controller v2.2 with CognitiveMatrixHelper",
+  "backbone": "Qwen/Qwen3.5-2B",
+  "total_items": 6,
+  "bench1_base_accuracy": 50.0,
+  "bench2_matrix_dualloop_accuracy": 83.33333333333334,
+  "net_gain": 33.33333333333334,
+  "degradation_rate": 0.0,
+  "items": [
+    {
+      "idx": 1,
+      "domain": "BBH-ColoredObjects",
+      "target": "F",
+      "b1_pred": "D",
+      "b1_ok": false,
+      "b2_pred": "F",
+      "b2_ok": true,
+      "verdict": "RESCUED",
+      "eliminated_distractors": [
+        "A",
+        "B",
+        "C",
+        "G"
+      ],
+      "surviving_contenders": [
+        "D",
+        "E",
+        "F"
+      ]
+    },
+    {
+      "idx": 2,
+      "domain": "ARC-Challenge",
+      "target": "B",
+      "b1_pred": "B",
+      "b1_ok": true,
+      "b2_pred": "B",
+      "b2_ok": true,
+      "verdict": "PRESERVED_CORRECT",
+      "eliminated_distractors": [
+        "C"
+      ],
+      "surviving_contenders": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "idx": 3,
+      "domain": "BBH-WebOfLies",
+      "target": "A",
+      "b1_pred": "B",
+      "b1_ok": false,
+      "b2_pred": "A",
+      "b2_ok": true,
+      "verdict": "RESCUED",
+      "eliminated_distractors": [],
+      "surviving_contenders": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "idx": 4,
+      "domain": "BBH-BooleanExpressions",
+      "target": "A",
+      "b1_pred": "A",
+      "b1_ok": true,
+      "b2_pred": "A",
+      "b2_ok": true,
+      "verdict": "PRESERVED_CORRECT",
+      "eliminated_distractors": [],
+      "surviving_contenders": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "idx": 5,
+      "domain": "Inverted Physics",
+      "target": "A",
+      "b1_pred": "B",
+      "b1_ok": false,
+      "b2_pred": "B",
+      "b2_ok": false,
+      "verdict": "PRESERVED_WRONG",
+      "eliminated_distractors": [
+        "D"
+      ],
+      "surviving_contenders": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "idx": 6,
+      "domain": "Counter-Intuitive Syllogism",
+      "target": "A",
+      "b1_pred": "A",
+      "b1_ok": true,
+      "b2_pred": "A",
+      "b2_ok": true,
+      "verdict": "PRESERVED_CORRECT",
+      "eliminated_distractors": [],
+      "surviving_contenders": [
+        "A",
+        "B"
+      ]
+    }
+  ]
+}

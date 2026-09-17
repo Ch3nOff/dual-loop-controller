@@ -18,6 +18,7 @@ from .verification import (
     DirectionalSafetyProjection,
     AdaptiveSurpriseThreshold
 )
+from .matrix_helper import CognitiveMatrixHelper
 from .decoder import DualLoopTransformer
 from .adapters.latent_adapter import LatentDeliberationAdapter
 from .adapters.qwen_adapter import DualLoopQwenModel, attach_dual_loop_to_qwen
@@ -81,6 +82,7 @@ __all__ = [
     "ContrastiveEvidenceAccumulator",
     "DirectionalSafetyProjection",
     "AdaptiveSurpriseThreshold",
+    "CognitiveMatrixHelper",
     "DualLoopTransformer",
     "LatentDeliberationAdapter",
     "DualLoopQwenModel",

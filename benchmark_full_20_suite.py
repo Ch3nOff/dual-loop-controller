@@ -383,6 +383,9 @@ def evaluate_item(wrapped_model, tokenizer, item):
     wrapped_model.reset_state(force=False)
 
     return {
+        "prompt": prompt,
+        "choices": choices,
+        "labels": labels,
         "pred_base": str(pred_base),
         "pred_delib": str(pred_delib),
         "base_ok": base_ok,
