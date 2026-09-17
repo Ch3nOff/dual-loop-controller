@@ -33,7 +33,9 @@ from transformers import (
 from dual_loop import DualLoopQwenModel, attach_dual_loop_to_qwen
 from dual_loop.benchmarks.benchmark_qwen_reasoning import (
     generate_relational_sample,
-    generate_deduction_sample
+    generate_deduction_sample,
+    generate_swap_tracking_sample,
+    generate_logical_ordering_sample
 )
 
 
@@ -121,13 +123,35 @@ def collate_fn(batch: List[Dict[str, Any]], pad_token_id: int = 0) -> Dict[str, 
 
 
 def create_synthetic_data(num_samples: int, seed: int = 42) -> List[Dict[str, Any]]:
-    """Creates a balanced mixture of AA-LCR relational chains and PolyMATH deductions."""
+    """Creates a balanced mixture of all four reasoning task types.
+    
+    Task distribution (25% each):
+    - AA-LCR: Multi-hop relational pointer chains (trains serial deduction)
+    - PolyMATH: Multi-step arithmetic deduction (trains sequential computation)
+    - State Tracking: Entity-object swap tracking (trains discrete state maintenance)
+    - Logical Ordering: Transitive relational ordering (trains rank inference)
+    """
     samples = []
-    half = num_samples // 2
-    for i in range(half):
-        samples.append(generate_relational_sample(hops=random.choice([2, 3]), seed=seed + i))
-    for i in range(half, num_samples):
-        samples.append(generate_deduction_sample(steps=random.choice([2, 3]), seed=seed + i))
+    quarter = num_samples // 4
+    offset = 0
+    for i in range(quarter):
+        samples.append(generate_relational_sample(hops=random.choice([2, 3]), seed=seed + offset + i))
+    offset += quarter
+    for i in range(quarter):
+        samples.append(generate_deduction_sample(steps=random.choice([2, 3]), seed=seed + offset + i))
+    offset += quarter
+    for i in range(quarter):
+        samples.append(generate_swap_tracking_sample(
+            n_entities=random.choice([3, 4, 5]),
+            n_swaps=random.choice([2, 3]),
+            seed=seed + offset + i
+        ))
+    offset += quarter
+    for i in range(num_samples - 3 * quarter):
+        samples.append(generate_logical_ordering_sample(
+            n_entities=random.choice([3, 4, 5]),
+            seed=seed + offset + i
+        ))
     random.Random(seed).shuffle(samples)
     return samples
 

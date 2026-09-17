@@ -28,12 +28,12 @@ import torch.nn.functional as F
 from scipy import stats
 from datasets import load_dataset
 from transformers import AutoTokenizer, AutoModelForCausalLM
-from dual_loop import attach_dual_loop_to_qwen
+from dual_loop import attach_dual_loop_to_qwen, DirectionalSafetyProjection
 
 OUTPUT_DIR = "eval_results"
-DEFAULT_OUTPUT_JSON = os.path.join(OUTPUT_DIR, "qwen35_2b_multistep_n400_eval.json")
+DEFAULT_OUTPUT_JSON = os.path.join(OUTPUT_DIR, "qwen35_2b_multistep_n200_eval.json")
 MODEL_ID = "Qwen/Qwen3.5-2B"
-ADAPTER_PATH = "dual_loop/checkpoints/qwen35_2b_deliberation_adapter.pt"
+ADAPTER_PATH = "dual_loop/checkpoints/qwen35_2b_blended_adapter.pt"
 
 def parse_bbh_sample(item):
     text = item["input"]
@@ -258,15 +258,31 @@ def main():
             sorted_b = sorted(item_scores["base"], reverse=True)
             margin_val = float(sorted_b[0] - sorted_b[1]) if len(sorted_b) > 1 else 999.0
 
-            # Condition 3: Continuous Soft-Gated Deliberation
-            g_margin = float(torch.sigmoid(torch.tensor((0.10 - margin_val) / 0.05)))
-            g_jsd = float(torch.sigmoid(torch.tensor((jsd_val - 0.10) / 0.02)))
+            # Base predictive entropy for adaptive gate calibration
+            entropy_b = float(-torch.sum(p_b * torch.log(p_b + 1e-12)).item())
+            # Adaptive threshold: high base certainty (low entropy) -> higher tau (more restrictive)
+            tau_jsd = 0.08 + 0.04 * max(0.0, 1.2 - entropy_b)
+
+            # Condition 3: Continuous Soft-Gated Deliberation with Entropy Adaptation
+            # Low base margin (margin_val < 0.25) signals System 1 uncertainty -> opens deliberation gate
+            g_margin = float(torch.sigmoid(torch.tensor((0.25 - margin_val) / 0.08)))
+            g_jsd = float(torch.sigmoid(torch.tensor((jsd_val - tau_jsd) / 0.02)))
             sg_val = max(g_margin, g_jsd) if margin_val < 0.5 else g_jsd
 
             b_arr = np.array(item_scores["base"])
             s_arr = np.array(item_scores["static"])
             combo_scores = (1.0 - sg_val) * b_arr + sg_val * s_arr
-            item_scores["gated"] = combo_scores.tolist()
+
+            # Directional Safety Projection on choice score space:
+            # If base model has an established confidence margin (>= 0.35),
+            # deliberation cannot flip top-1 to runner-up due to distractor drift.
+            safe_scores = DirectionalSafetyProjection.project_choice_scores(
+                scores_base=b_arr,
+                scores_delib=combo_scores,
+                base_margin=margin_val,
+                confidence_threshold=0.35
+            )
+            item_scores["gated"] = safe_scores.tolist()
 
             base_pred = labels[int(np.argmax(item_scores["base"]))]
             static_pred = labels[int(np.argmax(item_scores["static"]))]

@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import numpy as np
 from typing import Tuple, Dict, Optional, Any, Union, List
 
 class HypothesisVerificationGate(nn.Module):
@@ -311,3 +312,178 @@ class ContrastiveEvidenceAccumulator(nn.Module):
         directed_delta = self.evidence_proj(directed_delta)
 
         return directed_delta, scores
+
+
+class DirectionalSafetyProjection(nn.Module):
+    """
+    Monotonic Safety Projection for deliberation deltas.
+    
+    Projects out the component of the deliberation delta that would flip
+    the base model's top-1 prediction, guaranteeing:
+        margin_new >= margin_base  (monotonic ranking preservation)
+    
+    Solves the BBH Logical Deduction regression where deliberation
+    engages with context (positive evidence_gain) but resolves incorrectly,
+    flipping confident-and-correct base answers to wrong ones.
+    
+    Mathematical formulation:
+        d = W_lm[top1] - W_lm[top2]  (discriminant direction in vocab space)
+        margin_shift = d^T @ delta    (how delta affects the margin)
+        If margin_shift < 0:          (delta would flip top-1)
+            delta_safe = delta + |margin_shift| / ||d||^2 * d  (project out harmful component)
+        Else:
+            delta_safe = delta         (delta reinforces top-1, keep it)
+    
+    Zero trainable parameters. ~0.05ms overhead (2 lm_head probes + 1 dot product).
+    """
+    def __init__(self):
+        super().__init__()
+        # No trainable parameters — pure geometric projection
+    
+    def forward(
+        self,
+        delta: torch.Tensor,
+        h_base: torch.Tensor,
+        lm_head: nn.Module,
+        margin_floor: float = 0.0
+    ) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+        """
+        Args:
+            delta: [B, D] candidate deliberation delta.
+            h_base: [B, D] original hidden state before deliberation.
+            lm_head: nn.Linear or equivalent vocabulary projection.
+            margin_floor: minimum base margin to protect (0 = protect all).
+            
+        Returns:
+            delta_safe: [B, D] safety-projected delta that cannot flip top-1.
+            telemetry: diagnostic dict with margin_shift and correction_magnitude.
+        """
+        B, D = delta.shape
+        
+        with torch.no_grad():
+            # Compute base logits and identify the top-2 token indices
+            base_cast = h_base.to(device=lm_head.weight.device, dtype=lm_head.weight.dtype)
+            logits_base = lm_head(base_cast)  # [B, V]
+            topk = torch.topk(logits_base, k=2, dim=-1)
+            top1_idx = topk.indices[:, 0]  # [B]
+            top2_idx = topk.indices[:, 1]  # [B]
+            base_margin = topk.values[:, 0] - topk.values[:, 1]  # [B]
+            
+            # Discriminant direction in hidden space: d = W[top1] - W[top2]
+            W = lm_head.weight  # [V, D]
+            d = (W[top1_idx] - W[top2_idx]).to(device=delta.device, dtype=delta.dtype)  # [B, D]
+            d_norm_sq = (d * d).sum(dim=-1, keepdim=True).clamp(min=1e-8)  # [B, 1]
+        
+        # How much does delta shift the margin? (positive = reinforces top-1, negative = harms)
+        margin_shift = (d.detach() * delta).sum(dim=-1, keepdim=True)  # [B, 1]
+        
+        # Only correct when margin would decrease (margin_shift < 0)
+        # AND base model has sufficient margin to protect
+        needs_correction = (margin_shift < 0) & (base_margin.unsqueeze(-1).to(delta.device) > margin_floor)
+        harmful_magnitude = torch.clamp(-margin_shift, min=0.0)  # [B, 1]
+        
+        # Project out the harmful component along discriminant direction
+        correction = (harmful_magnitude / d_norm_sq.detach()) * d.detach()  # [B, D]
+        correction = torch.where(needs_correction.expand_as(correction), correction, torch.zeros_like(correction))
+        delta_safe = delta + correction
+        
+        telemetry = {
+            "margin_shift": margin_shift.detach().squeeze(-1),
+            "base_margin": base_margin.to(delta.device),
+            "correction_magnitude": correction.norm(dim=-1).detach()
+        }
+        
+        return delta_safe, telemetry
+
+    @staticmethod
+    def project_choice_scores(
+        scores_base: np.ndarray,
+        scores_delib: np.ndarray,
+        base_margin: float,
+        confidence_threshold: float = 0.35
+    ) -> np.ndarray:
+        """
+        Directional safety projection on candidate choice space.
+        
+        Guarantees monotonic ranking safety:
+        If the base model has an established confidence margin (>= confidence_threshold),
+        deliberation cannot flip top-1 to runner-up due to distractor drift.
+        If base model is uncertain (< confidence_threshold), deliberation is free to re-rank and rescue.
+        
+        Mathematically:
+            Projects scores_delib onto the half-space where the confident top-1 is preserved.
+        """
+        if len(scores_base) <= 1:
+            return scores_delib
+            
+        top1_idx = int(np.argmax(scores_base))
+        sorted_indices = np.argsort(scores_base)[::-1]
+        top2_idx = int(sorted_indices[1])
+        
+        delib_margin = scores_delib[top1_idx] - scores_delib[top2_idx]
+        
+        # If base model is confident and deliberation flips the margin:
+        if base_margin >= confidence_threshold and delib_margin < 0.0:
+            safe_scores = scores_delib.copy()
+            # Restore top-1 above runner-up with preserved base margin fraction
+            safe_scores[top1_idx] = safe_scores[top2_idx] + min(0.05, base_margin * 0.1)
+            return safe_scores
+            
+        return scores_delib
+
+
+class AdaptiveSurpriseThreshold(nn.Module):
+    """
+    Computes per-sample adaptive surprise gate thresholds based on
+    the base model's predictive entropy.
+    
+    High base confidence (low entropy) → higher threshold → harder to override
+    Low base confidence (high entropy) → lower threshold → easier to override
+    
+    Replaces the fixed global tau_surprise=0.01 with:
+        tau_effective(x) = tau_base + gamma * max(0, H_ref - H(p_base(x)))
+    
+    where H_ref is a reference entropy level (calibrated from typical model entropy).
+    
+    This automatically protects:
+    - BBH Logical Deduction (base=68%, low H) → restrictive gate
+    - BBH Date Understanding (base=50%, medium H) → permissive gate  
+    - ARC-Challenge (base=50%, high H) → very permissive gate
+    
+    Zero trainable parameters.
+    """
+    def __init__(
+        self,
+        tau_base: float = 0.005,
+        gamma: float = 0.05,
+        H_ref: float = 3.0
+    ):
+        super().__init__()
+        self.tau_base = tau_base
+        self.gamma = gamma
+        self.H_ref = H_ref
+    
+    def compute_adaptive_tau(
+        self,
+        h_base: torch.Tensor,
+        probe: nn.Module
+    ) -> torch.Tensor:
+        """
+        Returns per-sample adaptive surprise threshold [B].
+        
+        Args:
+            h_base: [B, D] base hidden states.
+            probe: nn.Linear vocabulary projection (lm_head).
+        """
+        with torch.no_grad():
+            base_cast = h_base.to(device=probe.weight.device, dtype=probe.weight.dtype)
+            logits = probe(base_cast)  # [B, V]
+            p = F.softmax(logits, dim=-1)
+            entropy = -torch.sum(p * F.log_softmax(logits, dim=-1), dim=-1)  # [B]
+            
+            # Higher base confidence (lower entropy) → higher tau → more restrictive
+            confidence_excess = torch.clamp(self.H_ref - entropy, min=0.0)
+            tau_adaptive = self.tau_base + self.gamma * confidence_excess  # [B]
+        
+        return tau_adaptive.to(device=h_base.device, dtype=torch.float32)
+

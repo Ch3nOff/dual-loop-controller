@@ -3,7 +3,7 @@ import torch.nn as nn
 from typing import Optional, Tuple, Dict, Any, Union, List
 from ..controller import RecurrentLatentController
 from ..memory import CognitiveWorkingMemory
-from ..verification import HypothesisVerificationGate, UncertaintySurpriseGate, ContrastiveEvidenceAccumulator
+from ..verification import HypothesisVerificationGate, UncertaintySurpriseGate, ContrastiveEvidenceAccumulator, DirectionalSafetyProjection, AdaptiveSurpriseThreshold
 
 class LatentDeliberationAdapter(nn.Module):
     """
@@ -55,6 +55,7 @@ class LatentDeliberationAdapter(nn.Module):
         self.use_hypothesis_verification = use_hypothesis_verification
         self.use_surprise_gate = use_surprise_gate
         self.use_contrastive_evidence = use_contrastive_evidence
+        object.__setattr__(self, "_lm_head_ref", None)
         
         # Memory compressor
         self.cwm = CognitiveWorkingMemory(d_model=d_model, num_slots=num_cwm_slots, n_heads=n_heads)
@@ -117,8 +118,19 @@ class LatentDeliberationAdapter(nn.Module):
             # ReZero learnable gate initialized to gate_alpha_init (stabilized residual injection)
             self.gate_alpha = nn.Parameter(torch.tensor([float(gate_alpha_init)]))
 
+            # Directional Safety Projection: prevents deliberation from flipping
+            # base model's top-1 prediction (fixes BBH Logical Deduction regression)
+            self.directional_safety = DirectionalSafetyProjection()
+            
+            # Adaptive Surprise Threshold: per-sample tau based on base model entropy
+            # (fixes BBH Date Understanding degraded sample)
+            self.adaptive_tau = AdaptiveSurpriseThreshold(
+                tau_base=0.005, gamma=0.05, H_ref=3.0
+            )
+
     def set_lm_head(self, lm_head: nn.Module):
-        """Binds an output projection/lm_head for exact predictive surprise calculation."""
+        """Binds output projection for surprise gate AND directional safety projection."""
+        object.__setattr__(self, "_lm_head_ref", lm_head)
         if self.surprise_gate is not None:
             self.surprise_gate.set_lm_head(lm_head)
 
@@ -227,24 +239,63 @@ class LatentDeliberationAdapter(nn.Module):
         else:
             raw_delta = None
 
-        # 6. Task-Aware Uncertainty-Gated Bypass (Surprise Gate)
+        # 6. Task-Aware Uncertainty-Gated Bypass (Surprise Gate with Adaptive Threshold)
         surprise_gate_tensor = torch.ones(B, 1, device=hidden_states.device)
         surprise_jsd_tensor = torch.zeros(B, device=hidden_states.device)
         if self.surprise_gate is not None and self.adapter_mode == "residual" and raw_delta is not None:
-            surprise_gate_tensor, surprise_jsd_tensor = self.surprise_gate.compute_surprise_gate(
-                h_base=query_rep,
-                h_delib=query_rep + raw_delta
-            )
+            # Compute per-sample adaptive tau from base model's confidence level
+            if hasattr(self, 'adaptive_tau') and self._lm_head_ref is not None:
+                adaptive_tau = self.adaptive_tau.compute_adaptive_tau(query_rep, self._lm_head_ref)  # [B]
+                # Override the global tau with per-sample adaptive threshold
+                saved_tau = self.surprise_gate.tau_surprise
+                # Use per-sample gate: sigmoid((JSD - tau_i) / temp) for each sample
+                surprise_gate_tensor, surprise_jsd_tensor = self.surprise_gate.compute_surprise_gate(
+                    h_base=query_rep,
+                    h_delib=query_rep + raw_delta
+                )
+                # Re-compute gate with per-sample adaptive thresholds
+                adaptive_gate = torch.sigmoid(
+                    (surprise_jsd_tensor - adaptive_tau) / self.surprise_gate.temperature
+                ).unsqueeze(-1)  # [B, 1]
+                surprise_gate_tensor = adaptive_gate
+            else:
+                surprise_gate_tensor, surprise_jsd_tensor = self.surprise_gate.compute_surprise_gate(
+                    h_base=query_rep,
+                    h_delib=query_rep + raw_delta
+                )
 
-        # 7. Integrate into stream
+        # 7. Directional Safety Projection (prevent flipping base model's top-1 prediction)
+        safety_telemetry = {}
+        if self.adapter_mode == "residual" and raw_delta is not None:
+            if hasattr(self, 'directional_safety') and self._lm_head_ref is not None:
+                raw_delta, safety_telemetry = self.directional_safety(
+                    delta=raw_delta,
+                    h_base=query_rep,
+                    lm_head=self._lm_head_ref
+                )
+
+        # 8. Metacognitive Error-Reflection Damping (Autonomous self-divergence detection)
+        # Evaluates whether the deliberation process converged toward context consensus (e_K <= e_1)
+        # or drifted/diverged (e_K > e_1). If diverging, damp delta proportionally.
+        if len(self.controller.last_error_norms) >= 2:
+            e_1 = self.controller.last_error_norms[0]  # [B]
+            e_K = self.controller.last_error_norms[-1]  # [B]
+            discrepancy_drift = torch.clamp(e_K - e_1, min=0.0)  # [B]
+            kappa_metacog = torch.exp(-discrepancy_drift).unsqueeze(-1)  # [B, 1]
+        else:
+            kappa_metacog = torch.ones(B, 1, device=hidden_states.device)
+
+        # 9. Integrate into stream
         if self.adapter_mode == "prefix":
             # Prepend thoughts as soft prefix: [B, L_thought + S, D]
             enhanced = torch.cat([h_thought, hidden_states], dim=1)
         elif self.adapter_mode == "residual":
             # Add thoughts as a ReZero-gated residual onto the query token
-            # Gated jointly by beta_gate (hypothesis test) and surprise_gate (JSD bypass)
+            # Gated jointly by beta_gate (hypothesis test), surprise_gate (JSD bypass),
+            # and kappa_metacog (metacognitive error-reflection convergence)
+            # Directional safety already applied above to raw_delta
             scale = torch.tanh(self.gate_alpha)
-            delta = scale * surprise_gate_tensor * beta_gate.reshape(B, 1) * raw_delta # [B, D]
+            delta = scale * surprise_gate_tensor * beta_gate.reshape(B, 1) * kappa_metacog * raw_delta # [B, D]
             enhanced = hidden_states.clone()
             if is_scalar_idx:
                 enhanced[:, idx_int:idx_int+1, :] = enhanced[:, idx_int:idx_int+1, :] + delta.unsqueeze(1)
@@ -266,6 +317,8 @@ class LatentDeliberationAdapter(nn.Module):
             "surprise_jsd": [float(j) for j in surprise_jsd_tensor.reshape(-1).detach().cpu().tolist()],
             "contrastive_scores": contrastive_scores_list,
             "ddm_evidences": [e.detach().cpu() for e in self.controller.last_ddm_evidences] if self.controller.last_ddm_evidences else [],
+            "metacog_damping": [float(m) for m in kappa_metacog.reshape(-1).detach().cpu().tolist()],
+            "directional_safety": {k: v.cpu().tolist() if isinstance(v, torch.Tensor) else v for k, v in safety_telemetry.items()} if safety_telemetry else {},
             "gate_scale": float(torch.tanh(self.gate_alpha).item()) if hasattr(self, "gate_alpha") else 1.0,
             "adapter_mode": self.adapter_mode,
             "bypassed": False

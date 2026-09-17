@@ -299,5 +299,116 @@ def main():
     print_scorecard_comparison(benchmark_results, model_name=args.model.split("/")[-1])
 
 
+
+# =====================================================================
+# Task 3: State Tracking (BBH Shuffled Objects-style)
+# =====================================================================
+
+def generate_swap_tracking_sample(n_entities: int = 3, n_swaps: int = 2, seed: int = 42) -> Dict[str, Any]:
+    """
+    Generates entity-object swap tracking problems (BBH Shuffled Objects proxy).
+    Tests discrete state maintenance across sequential permutations.
+    
+    Example:
+        Alice has a ball. Bob has a hat. Carol has a glove.
+        Alice and Bob swap their items.
+        Then Bob and Carol swap their items.
+        Question: What does Carol have?
+        Answer: ball
+    """
+    rng = random.Random(seed)
+    entity_pool = ["Alice", "Bob", "Carol", "Diana", "Eve", "Frank", "Grace", "Hank"]
+    object_pool = ["ball", "hat", "glove", "ring", "book", "coin", "key", "lamp"]
+    
+    entities = entity_pool[:n_entities]
+    rng.shuffle(entity_pool)
+    objects = object_pool[:n_entities]
+    rng.shuffle(objects)
+    
+    # Initial assignment
+    assignment = dict(zip(entities, objects))
+    steps = [f"{e} has a {o}." for e, o in assignment.items()]
+    
+    # Apply swaps
+    for s in range(n_swaps):
+        e1, e2 = rng.sample(entities, 2)
+        assignment[e1], assignment[e2] = assignment[e2], assignment[e1]
+        if s == 0:
+            steps.append(f"{e1} and {e2} swap their items.")
+        else:
+            steps.append(f"Then {e1} and {e2} swap their items.")
+    
+    query_entity = rng.choice(entities)
+    context = " ".join(steps)
+    
+    return {
+        "prompt_text": f"Context:\n{context}\n\nQuestion: What does {query_entity} have?\nAnswer:",
+        "target_text": assignment[query_entity],
+        "task_type": "state_tracking",
+        "n_swaps": n_swaps
+    }
+
+
+# =====================================================================
+# Task 4: Logical Ordering (BBH Logical Deduction-style)
+# =====================================================================
+
+def generate_logical_ordering_sample(n_entities: int = 4, seed: int = 42) -> Dict[str, Any]:
+    """
+    Generates transitive relational ordering problems (BBH Logical Deduction proxy).
+    Tests transitive inference over ordered relations.
+    
+    Example:
+        Alice is taller than Bob.
+        Bob is taller than Carol.
+        Carol is taller than Diana.
+        Question: Who is the tallest?
+        Answer: Alice
+    """
+    rng = random.Random(seed)
+    entity_pool = ["Alice", "Bob", "Carol", "Diana", "Eve", "Frank", "Grace", "Hank"]
+    rng.shuffle(entity_pool)
+    entities = entity_pool[:n_entities]
+    
+    # Create a definitive ordering (index 0 = highest rank)
+    true_order = list(entities)  # true_order[0] is "tallest"
+    
+    # Relations (presented in shuffled order to prevent positional shortcuts)
+    relations = []
+    comparisons = ["taller than", "older than", "faster than", "heavier than"]
+    relation_word = rng.choice(comparisons)
+    
+    for i in range(n_entities - 1):
+        relations.append(f"{true_order[i]} is {relation_word} {true_order[i + 1]}.")
+    
+    # Shuffle presentation order (so the chain isn't trivially linear)
+    rng.shuffle(relations)
+    context = " ".join(relations)
+    
+    # Query for superlative (tallest/oldest/fastest/heaviest)
+    superlative_map = {
+        "taller than": ("tallest", "shortest"),
+        "older than": ("oldest", "youngest"),
+        "faster than": ("fastest", "slowest"),
+        "heavier than": ("heaviest", "lightest")
+    }
+    sup_max, sup_min = superlative_map[relation_word]
+    
+    # Randomly ask for max or min
+    if rng.random() < 0.5:
+        query_word = sup_max
+        answer = true_order[0]
+    else:
+        query_word = sup_min
+        answer = true_order[-1]
+    
+    return {
+        "prompt_text": f"Context:\n{context}\n\nQuestion: Who is the {query_word}?\nAnswer:",
+        "target_text": answer,
+        "task_type": "logical_ordering",
+        "n_entities": n_entities
+    }
+
+
 if __name__ == "__main__":
     main()
