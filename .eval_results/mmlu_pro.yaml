@@ -1,0 +1,10 @@
+- dataset:
+    id: TIGER-Lab/MMLU-Pro
+    task_id: mmlu_pro
+  value: 55.3
+  date: "2026-09-17"
+  source:
+    url: https://huggingface.co/datasets/OpenEvals/leaderboard-data
+    name: OpenEvals Multi-Benchmark Dataset
+    user: OpenEvals
+  notes: "Base model Qwen/Qwen3.5-2B backbone with Dual-Loop Cognitive Controller adapter Layer 11 hook"

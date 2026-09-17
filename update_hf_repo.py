@@ -27,7 +27,9 @@ required_files = [
     (".eval_results/piqa.yaml", ".eval_results/piqa.yaml"),
     (".eval_results/bbh.yaml", ".eval_results/bbh.yaml"),
     (".eval_results/matrix_helper.yaml", ".eval_results/matrix_helper.yaml"),
-    (".eval_results/macro_20_benchmarks.yaml", ".eval_results/macro_20_benchmarks.yaml")
+    (".eval_results/macro_20_benchmarks.yaml", ".eval_results/macro_20_benchmarks.yaml"),
+    (".eval_results/mmlu_pro.yaml", ".eval_results/mmlu_pro.yaml"),
+    ("eval_results/hf_official_leaderboard_comparison.png", "hf_official_leaderboard_comparison.png")
 ]
 
 # Optional legacy checkpoint files if present

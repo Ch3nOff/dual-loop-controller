@@ -417,6 +417,10 @@ Evaluated on authentic `Qwen/Qwen3.5-2B` backbone ($D=2048$, Layer 11 hook) vs. 
                         return p
                 return None
 
+            img_hf_board = get_img("hf_official_leaderboard_comparison.png")
+            if img_hf_board:
+                gr.Image(img_hf_board, label="Official Hugging Face Leaderboard & Multi-Task Comparison")
+
             img_board = get_img("frontier_model_leaderboard.png")
             if img_board:
                 gr.Image(img_board, label="Frontier Competitive Leaderboard")

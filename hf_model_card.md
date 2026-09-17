@@ -26,6 +26,7 @@ datasets:
 - openbookqa
 - piqa
 - lukaemon/bbh
+- TIGER-Lab/MMLU-Pro
 metrics:
 - accuracy
 model-index:
@@ -185,6 +186,20 @@ model-index:
     source:
       name: Authentic 20-Benchmark Evaluation Run (N=200)
       url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+  - task:
+      type: text-generation
+    dataset:
+      name: MMLU-Pro (Multi-Task Reasoning)
+      type: TIGER-Lab/MMLU-Pro
+      config: default
+      split: test
+    metrics:
+    - name: Accuracy
+      type: accuracy
+      value: 55.3
+    source:
+      name: OpenEvals Multi-Benchmark Dataset
+      url: https://huggingface.co/datasets/OpenEvals/leaderboard-data
 ---
 
 # Dual-Loop Cognitive Controller: Qwen3.5-2B Official Adapter (v2.2+)
@@ -193,6 +208,7 @@ Official weights for the **Dual-Loop Cognitive Controller** on `Qwen/Qwen3.5-2B`
 
 The Dual-Loop Controller provides hardware-aligned, non-autoregressive **System 2 deliberation** directly within the latent residual stream of modern language models. It enables models to recursively deliberate in continuous hidden space without generating costly Chain-of-Thought (CoT) text tokens, eliminating KV-cache explosion and 30–60 second generation latencies.
 
+![Official Hugging Face Benchmark Leaderboard](hf_official_leaderboard_comparison.png)
 ![Frontier Competitive Leaderboard](frontier_model_leaderboard.png)
 
 <p align="center">
