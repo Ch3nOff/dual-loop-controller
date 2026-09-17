@@ -9,11 +9,14 @@
   <a href="https://pypi.org/project/dual-loop-controller/"><img src="https://img.shields.io/pypi/v/dual-loop-controller.svg?color=blue" alt="PyPI version"></a>
   <a href="https://pypi.org/project/dual-loop-controller/"><img src="https://img.shields.io/pypi/pyversions/dual-loop-controller.svg" alt="Python Versions"></a>
   <a href="https://pytorch.org/"><img src="https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg" alt="PyTorch"></a>
+  <a href="https://huggingface.co/spaces/CH3NDev/dual-loop-controller-demo"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces%20Live%20Demo-blue.svg" alt="Hugging Face Spaces"></a>
   <a href="https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Adapter%20Weights-yellow.svg" alt="Hugging Face"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></a>
   <a href="tests/"><img src="https://img.shields.io/badge/tests-74%20passed-brightgreen.svg" alt="Unit Tests"></a>
   <a href="#directional-safety-projection"><img src="https://img.shields.io/badge/negative%20drift-0.0%25%20(zero%20regression)-blueviolet.svg" alt="Zero Drift"></a>
 </p>
+
+> 🚀 **Live Interactive Demo**: Try the ZeroGPU Dual-Loop Cognitive Controller directly in your browser: [huggingface.co/spaces/CH3NDev/dual-loop-controller-demo](https://huggingface.co/spaces/CH3NDev/dual-loop-controller-demo)
 
 ---
 

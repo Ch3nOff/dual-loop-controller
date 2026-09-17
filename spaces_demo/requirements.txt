@@ -1,0 +1,7 @@
+torch>=2.0.0
+transformers>=4.40.0
+accelerate>=0.28.0
+safetensors
+numpy
+dual-loop-controller>=2.2.3
+huggingface_hub
