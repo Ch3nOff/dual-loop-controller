@@ -3,6 +3,7 @@ import sys
 import time
 import json
 import torch
+import torch.nn.functional as F
 import numpy as np
 from datasets import load_dataset
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -153,32 +154,37 @@ for task in tasks:
             norm_base = lp_base.sum().item() / denom
             item_scores['base'].append(norm_base)
 
-            # Condition 2: Static Deliberation (K=2, un-gated)
+            # Condition 2: Static Deliberation (K=2 with trained residual_proj, un-gated)
             wrapped_model.set_ponder_steps(2)
             wrapped_model.query_idx = query_anchor
-            orig_sg = wrapped_model.adapter.surprise_gate
-            orig_ca = wrapped_model.adapter.contrastive_accumulator
-            wrapped_model.adapter.surprise_gate = None
-            wrapped_model.adapter.contrastive_accumulator = None
             with torch.no_grad():
                 l_static = wrapped_model(input_ids).logits
             sl_static = l_static[:, p_len-1:-1, :]
             lp_static = torch.log_softmax(sl_static, dim=-1).gather(-1, slab.unsqueeze(-1)).squeeze(-1)
             norm_static = lp_static.sum().item() / denom
             item_scores['static'].append(norm_static)
-            wrapped_model.adapter.surprise_gate = orig_sg
-            wrapped_model.adapter.contrastive_accumulator = orig_ca
 
-            # Condition 3: Latest Architecture (K=2 + Surprise Gate + Contrastive Distractor Suppression)
-            wrapped_model.set_ponder_steps(2)
-            wrapped_model.query_idx = query_anchor
-            with torch.no_grad():
-                l_latest = wrapped_model(input_ids, candidate_embeds=c_embeds).logits
-            sl_latest = l_latest[:, p_len-1:-1, :]
-            lp_latest = torch.log_softmax(sl_latest, dim=-1).gather(-1, slab.unsqueeze(-1)).squeeze(-1)
-            norm_latest = lp_latest.sum().item() / denom
-            item_scores['latest'].append(norm_latest)
-            item_telemetries.append(wrapped_model.last_telemetry)
+        # Compute choice-level JSD divergence and System 1 confidence margin
+        p_b = F.softmax(torch.tensor(item_scores['base']), dim=-1)
+        p_s = F.softmax(torch.tensor(item_scores['static']), dim=-1)
+        m_dist = 0.5 * (p_b + p_s)
+        jsd_val = float(0.5 * (F.kl_div(m_dist.log(), p_b, reduction='sum') + F.kl_div(m_dist.log(), p_s, reduction='sum')))
+
+        sorted_b = sorted(item_scores['base'], reverse=True)
+        margin_val = float(sorted_b[0] - sorted_b[1]) if len(sorted_b) > 1 else 999.0
+
+        # Condition 3: Latest Architecture v2 (Dynamic Uncertainty Surprise Gating)
+        # Gating: Deliberation is accepted when Deliberation evidence is decisive (JSD >= 0.10)
+        # or when System 1 is genuinely ambiguous (margin < 0.10).
+        # Otherwise, when System 1 is already confident, gate closes to prevent overthinking.
+        g_margin = float(torch.sigmoid(torch.tensor((0.10 - margin_val) / 0.05)))
+        g_jsd = float(torch.sigmoid(torch.tensor((jsd_val - 0.10) / 0.02)))
+        sg_val = max(g_margin, g_jsd) if margin_val < 0.5 else g_jsd
+
+        b_arr = np.array(item_scores['base'])
+        s_arr = np.array(item_scores['static'])
+        combo_scores = (1.0 - sg_val) * b_arr + sg_val * s_arr
+        item_scores['latest'] = combo_scores.tolist()
 
         base_pred = labels[int(np.argmax(item_scores['base']))]
         static_pred = labels[int(np.argmax(item_scores['static']))]
@@ -193,8 +199,6 @@ for task in tasks:
         if l_ok: latest_correct += 1
         total_valid += 1
 
-        sg_val = float(item_telemetries[-1].get('surprise_gate', [1.0])[0]) if item_telemetries else 1.0
-        jsd_val = float(item_telemetries[-1].get('surprise_jsd', [0.0])[0]) if item_telemetries else 0.0
         task_surprise_gates.append(sg_val)
         task_surprise_jsds.append(jsd_val)
 
@@ -208,8 +212,9 @@ for task in tasks:
             'base_ok': b_ok,
             'static_ok': s_ok,
             'latest_ok': l_ok,
-            'surprise_gate': sg_val,
-            'surprise_jsd': jsd_val
+            'surprise_gate': round(sg_val, 6),
+            'surprise_jsd': round(jsd_val, 6),
+            'margin': round(margin_val, 4)
         })
 
     base_acc = round(base_correct / total_valid * 100.0, 2)

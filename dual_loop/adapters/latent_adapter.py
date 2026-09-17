@@ -214,14 +214,16 @@ class LatentDeliberationAdapter(nn.Module):
 
         # 5. Contrastive Option Distractor Suppression & Directional Delta
         contrastive_scores_list = []
-        if candidate_embeds is not None and self.contrastive_accumulator is not None:
-            raw_delta, contrastive_scores = self.contrastive_accumulator(
-                thought=h_thought[:, 0, :],
-                candidate_embeds=candidate_embeds
-            )
-            contrastive_scores_list = contrastive_scores.detach().cpu().tolist()
-        elif self.adapter_mode == "residual":
+        if self.adapter_mode == "residual":
             raw_delta = self.residual_proj(h_thought[:, 0, :])
+            if candidate_embeds is not None and self.contrastive_accumulator is not None:
+                c_delta, contrastive_scores = self.contrastive_accumulator(
+                    thought=h_thought[:, 0, :],
+                    candidate_embeds=candidate_embeds
+                )
+                contrastive_scores_list = contrastive_scores.detach().cpu().tolist()
+                # Contrastive refinement on top of trained deliberation projection
+                raw_delta = raw_delta + 0.1 * c_delta
         else:
             raw_delta = None
 

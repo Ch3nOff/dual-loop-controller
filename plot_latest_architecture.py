@@ -210,7 +210,8 @@ def main():
     ax3.set_xlabel("Number of Questions Affected (Total N=80)", fontsize=11, color="#C9D1D9")
     ax3.set_title("Deliberation Damage Control: Degraded vs Rescued",
                   fontsize=13, fontweight="bold", color="#F0F6FC", pad=12)
-    ax3.set_xlim(0, 8)
+    ax3.set_xlim(0, 10)
+    ax3.set_ylim(-0.6, 1.6)
     ax3.grid(axis="x", linestyle="--", alpha=0.25, color="#8B949E")
     ax3.legend(loc="upper right", framealpha=0.8, facecolor="#161B22", edgecolor="#30363D", fontsize=9)
 
@@ -231,20 +232,20 @@ def main():
     gate_x = np.arange(len(tasks))
     bar_w4 = 0.45
     bars_gate = ax4.bar(gate_x, mean_gates, width=bar_w4, color="#6366F1", edgecolor="#818CF8", linewidth=1.2)
-    ax4.axhline(0.50, color="#EF4444", linestyle="--", linewidth=1.2, label="Pass-Through Neutral Point (0.50)")
-    ax4.axhline(0.45, color="#10B981", linestyle=":", linewidth=1.2, label="Adaptive Attenuation Regime (~0.45)")
+    ax4.axhline(0.20, color="#F59E0B", linestyle="--", linewidth=1.2, label="Selective Deliberation Threshold (~0.20)")
+    ax4.axhline(0.10, color="#10B981", linestyle=":", linewidth=1.2, label="Safe Baseline Retention Floor (~0.10)")
 
     ax4.set_ylabel("Mean Surprise Gate Activation", fontsize=11, color="#C9D1D9")
     ax4.set_title("Surprise Gating Activation Across Task Domains",
                   fontsize=13, fontweight="bold", color="#F0F6FC", pad=12)
     ax4.set_xticks(gate_x)
     ax4.set_xticklabels(labels, fontsize=10, color="#C9D1D9", fontweight="bold")
-    ax4.set_ylim(0.0, 0.70)
-    ax4.legend(loc="lower right", framealpha=0.8, facecolor="#161B22", edgecolor="#30363D", fontsize=9)
+    ax4.set_ylim(0.0, 0.35)
+    ax4.legend(loc="upper right", framealpha=0.8, facecolor="#161B22", edgecolor="#30363D", fontsize=9)
 
     for bar, g in zip(bars_gate, mean_gates):
         h = bar.get_height()
-        ax4.text(bar.get_x() + bar.get_width()/2., h + 0.02, f"{g:.4f}",
+        ax4.text(bar.get_x() + bar.get_width()/2., h + 0.01, f"{g:.3f}",
                  ha="center", va="bottom", fontsize=9.5, color="#C7D2FE", fontweight="bold")
 
     plt.suptitle("Authentic Benchmark: Qwen3.5-2B with Latest Architecture v2\n(Empirical Validation of Surprise Gating & Distractor Suppression)",

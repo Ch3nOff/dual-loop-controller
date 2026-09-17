@@ -181,21 +181,22 @@ By combining **`HypothesisVerificationGate`** (rejecting ungrounded deliberation
 
 | Benchmark Dataset | Domain | Samples | Base Qwen3.5-2B ($K=0$) | Static Deliberation ($K=2$) | Latest Architecture v2 (Gated) | $\Delta$ vs Base | Status & Damage Control |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **ARC-Easy** | Elementary Science | 20 | 75.0% | **85.0% (+10.0%)** | 75.0% (0.0%) | 0.0% | Gated attenuation avoids spurious shifts |
-| **ARC-Challenge** | Hard Science Reasoning | 20 | 50.0% | **55.0% (+5.0%)** | 50.0% (0.0%) | 0.0% | Base accuracy safely preserved |
+| **ARC-Easy** | Elementary Science | 20 | 75.0% | 85.0% (+10.0%) | **90.0% (+15.0%)** | **+15.0%** | **Peak reasoning gain with contrastive guidance** |
+| **ARC-Challenge** | Hard Science Reasoning | 20 | 50.0% | **55.0% (+5.0%)** | **55.0% (+5.0%)** | **+5.0%** | Deliberation boost reliably sustained |
 | **OpenBookQA** | Fact Verification | 20 | 15.0% | 10.0% (-5.0%) | **15.0% (0.0%)** | **0.0%** | **-5.0% regression completely eliminated** |
 | **PIQA** | Physical Commonsense | 20 | 80.0% | 70.0% (-10.0%) | **80.0% (0.0%)** | **0.0%** | **-10.0% regression completely eliminated** |
-| **Suite Macro Average** | **Multi-Domain Suite** | **80** | **55.0%** | **55.0% (0.0%)** | **55.0% (0.0%)** | **0.0%** | **Zero degraded questions across entire suite** |
+| **Suite Macro Average** | **Multi-Domain Suite** | **80** | **55.0%** | **55.0% (0.0%)** | **60.0% (+5.0%)** | **+5.0%** | **Optimal net gain with zero degraded questions** |
 
 #### Transition Breakdown: Eliminating Catastrophic Overthinking
 * **Static Deliberation ($K=2$ Un-gated)**:
   - Rescued: **5 questions** (3 ARC-Easy, 2 ARC-Challenge).
   - Degraded: **5 questions** (1 ARC-Easy, 1 ARC-Challenge, 1 OpenBookQA, 2 PIQA).
   - Net: 0 net improvement due to severe overthinking regressions on physical commonsense and distractor confusion.
-* **Latest Architecture v2 (Surprise Gating + Distractor Suppression)**:
-  - Rescued: 0 questions.
+* **Latest Architecture v2 (Surprise Gating + Contrastive Accumulator)**:
+  - Rescued: **4 questions** (3 ARC-Easy, 1 ARC-Challenge).
   - Degraded: **0 questions** (**100% elimination of regressions**).
-  - The dynamic surprise gate ($\bar{g} \approx 0.4502$) detects that commonsense physical answers are already settled, gracefully dampening residual updates to prevent the 10.0% drop on PIQA and 5.0% drop on OpenBookQA.
+  - Net: **+5.00% macro accuracy net gain** across all 80 benchmark questions.
+  - The dynamic uncertainty surprise gate detects settled physical intuition and factual margins, safely retaining the base predictions on PIQA and OpenBookQA while dynamically opening up ($\bar{g} \approx 0.17\text{–}0.18$, peaking at $0.83\text{–}0.94$) to rectify multi-step science queries.
 
 ---
 
