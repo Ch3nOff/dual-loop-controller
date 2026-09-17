@@ -297,23 +297,20 @@ All raw evaluation logs are stored in `eval_results/qwen35_2b_authentic_suite_n1
 
 ---
 
-### Autonomous Cognitive Plasticity: Epistemic Gating, Fast-Weights & Open-Concept Synthesis
+### Toy Architecture Plasticity Feasibility Study (225K Parameters, d_model=64)
 
-*Source File*: [`eval_results/autonomous_plasticity_eval.json`](eval_results/autonomous_plasticity_eval.json) (Empirical evaluation of Dirichlet evidential epistemic self-awareness, in-situ Hebbian fast-weight associative trace, and out-of-vocabulary continuous prototype synthesis):
+> [!NOTE]
+> **Scope & Target Model Notice**: The following ablation was executed exclusively on the experimental 225K parameter toy recurrent Transformer (`checkpoint_trained_dualloop.pt`, $D=64$, 16 graph nodes), NOT on `Qwen/Qwen3.5-2B` ($D=2048$). It is documented here strictly as an exploratory feasibility study of continuous fast-weight dynamics and Dirichlet evidential modeling in low-dimensional toy regimes.
 
-![Autonomous Cognitive Plasticity Benchmark](autonomous_plasticity_benchmark.png)
+*Source File*: [`eval_results/toy_model_225k_plasticity_eval.json`](eval_results/toy_model_225k_plasticity_eval.json) (Ablation study on toy 225K parameter model evaluating Dirichlet uncertainty, fast-weight traces, and prototype synthesis):
 
-#### Direct Empirical Metrics across Knowledge Regimes (N=300 Evidential Evaluations & Stress Tests)
+![Toy Architecture Plasticity Feasibility Study](autonomous_plasticity_benchmark.png)
 
-| Evaluation Metric | In-Distribution (Known Protocol) | Partial Domain Shift | Black Swan / Non-Protocol | Status & Physical Meaning |
-| :--- | :---: | :---: | :---: | :--- |
-| **Epistemic Vacuity $u(x)$** | $0.4188$ | $0.4384$ | **$0.8874$** | **Clear mathematical separation of familiar vs unprecedented inputs** |
-| **Belief Mass $\sum b_m$** | **$0.5812$** | $0.5616$ | $0.1126$ | **$100.0\%$ conservation ($\sum b_m + u \equiv 1.0$) across all 300 evaluations** |
-| **Novelty Flag ($\tau = 0.40$)** | Baseline floor | **$75.0\%$** | $100.0\%$ | Calibrated early detection of distribution shift |
-| **Unseen Concept Trigger ($\tau = 0.65$)**| $0.0\%$ | $0.0\%$ | **$100.0\%$** | **$100\%$ precision in triggering prototype synthesis only for true OOD** |
-| **Fast-Weight Trace ($\|\mathbf{M}_{\text{fast}}\|_F$)** | $0.5678$ | - | **$1.2320$** | **$2.17\times$ adaptation gain under Black Swan conditions** |
-| **Synthesized Prototypes Diversity** | - | - | **$0.0218$** | Orthogonal semantic coordinates (pairwise cosine $\approx 0.02$) |
-| **Task Acc under Heavy Distractors (16 Edges)** | $33.0\%$ (K=0) / $27.0\%$ (Static) / **$31.0\%$ (Plastic)** | - | $11.0\%$ (K=0) $\to$ **$14.0\text{--}15.0\%$ (Deliberation)** | **Deliberation sustains superior reasoning over System 1 baseline** |
+#### Empirical Observations on 225K Toy Model
+
+1. **Evidential Vacuity Calibration**: Epistemic vacuity $u(x)$ increased from $0.419$ on in-distribution graphs to $0.887$ on black-swan distractor graphs, showing mathematical separation of familiar vs novel topologies in low dimensions under Subjective Logic conservation ($\sum b_m + u \equiv 1.0$).
+2. **Fast-Weight Limitations**: On graph reasoning tasks, plastic fast-weights underperformed: in-distribution accuracy reached $31.0\%$ (vs. $33.0\%$ Base System 1), and under 16 distractors reached $14.0\%$ (vs. $15.0\%$ Static Deliberation). Continuous Hebbian updates did not produce a net accuracy advantage over static deliberation at this model scale.
+3. **Concept Synthesis Scope**: Prototype synthesis generated 100 orthogonal prototype vectors in an isolated synthetic unit test, while in fixed-vocabulary graph tasks, concept synthesis remained inactive (`synthesized_concepts_total: 0`) as all query entities fell within the 16-node training dictionary.
 
 ---
 

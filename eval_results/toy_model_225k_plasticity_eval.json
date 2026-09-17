@@ -1,12 +1,18 @@
 {
   "timestamp": "2026-09-17 11:44:52",
+  "audit_note": "HONEST EXPERIMENTAL AUDIT: This experiment was executed on the 225K parameter Toy Recurrent Transformer (checkpoint_trained_dualloop.pt, d_model=64), NOT Qwen3.5-2B (which uses d_model=2048). Kept for archival ablation purposes only.",
   "checkpoint_used": "C:\\Users\\Matthew Chen\\Documents\\X-Star\\checkpoint_trained_dualloop.pt",
+  "model_target": "Toy Recurrent Transformer (225,959 parameters, d_model=64, 16 graph nodes) - NOT Qwen3.5-2B",
   "architecture": {
     "d_model": 64,
     "plastic_rank": 16,
     "plastic_lr": 0.25,
     "tau_novelty": 0.4,
     "tau_unseen": 0.65
+  },
+  "discrepancy_reconciliation": {
+    "open_concept_synthesis_reconciliation": "Experiment 3 generated 100 prototype vectors in an isolated synthetic unit-test with random tensors. In the subsequent graph reasoning evaluation (Experiment 4), all nodes belonged to the fixed 16-node dictionary, resulting in synthesized_concepts_total: 0.",
+    "empirical_limitation": "On the 225K toy model, plastic fast-weights underperformed: in-distribution accuracy was lower than Base (31.0% vs 33.0%), and black-swan accuracy under 16 distractors was lower than Static deliberation (14.0% vs 15.0%). Fast-weights did not produce net reasoning gains."
   },
   "epistemic_calibration": {
     "mean_u_in_distribution": 0.4187644273042679,
