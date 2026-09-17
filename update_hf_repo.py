@@ -134,6 +134,13 @@ api.upload_file(
     repo_id=REPO_ID
 )
 
+print("[*] Uploading real_multisector_two_pass_comparison.png...")
+api.upload_file(
+    path_or_fileobj="real_multisector_two_pass_comparison.png",
+    path_in_repo="real_multisector_two_pass_comparison.png",
+    repo_id=REPO_ID
+)
+
 print("[*] Uploading README.md...")
 api.upload_file(
     path_or_fileobj="hf_model_card.md",
