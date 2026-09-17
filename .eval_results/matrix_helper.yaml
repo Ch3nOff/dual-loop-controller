@@ -1,0 +1,10 @@
+- dataset:
+    id: lukaemon/bbh
+    task_id: cognitive_matrix_helper_dilemma
+  value: 83.33
+  date: "2026-09-17"
+  source:
+    url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/matrix_helper_benchmark.json
+    name: Cognitive Matrix Helper 2-Bench Showdown
+    user: CH3NDev
+  notes: "Backbone: Qwen/Qwen3.5-2B, Bench 1 Base: 50.0% -> Bench 2 Dual-Loop + Matrix Helper: 83.33% (+33.33% net gain, 0.0% degradation)"

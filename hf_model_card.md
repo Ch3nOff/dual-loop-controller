@@ -4,22 +4,187 @@ language:
 - id
 license: mit
 library_name: transformers
+base_model: Qwen/Qwen3.5-2B
+base_model_relation: adapter
+pipeline_tag: text-generation
 tags:
+- qwen
+- qwen3.5
+- qwen3.5-2b
 - dual-loop
 - cognitive-controller
 - recurrent-latent-deliberation
 - system-2
-- qwen
-- qwen3.5
 - reasoning
 - peft
 - matrix-helper
 - elimination-by-aspects
 - artificial-brain
-base_model: Qwen/Qwen3.5-2B
+- zero-gpu
+datasets:
+- ai2_arc
+- openbookqa
+- piqa
+- lukaemon/bbh
 metrics:
 - accuracy
-pipeline_tag: text-generation
+model-index:
+- name: dual-loop-qwen3.5-2b
+  results:
+  - task:
+      type: text-generation
+    dataset:
+      name: AI2 Reasoning Challenge (ARC-Easy)
+      type: ai2_arc
+      config: ARC-Easy
+      split: test
+    metrics:
+    - name: Accuracy
+      type: accuracy
+      value: 80.0
+    source:
+      name: Authentic 20-Benchmark Evaluation Run (N=200)
+      url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+  - task:
+      type: text-generation
+    dataset:
+      name: AI2 Reasoning Challenge (ARC-Challenge)
+      type: ai2_arc
+      config: ARC-Challenge
+      split: test
+    metrics:
+    - name: Accuracy
+      type: accuracy
+      value: 50.0
+    source:
+      name: Authentic 20-Benchmark Evaluation Run (N=200)
+      url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+  - task:
+      type: text-generation
+    dataset:
+      name: OpenBookQA
+      type: openbookqa
+      config: main
+      split: test
+    metrics:
+    - name: Accuracy
+      type: accuracy
+      value: 30.0
+    source:
+      name: Authentic 20-Benchmark Evaluation Run (N=200)
+      url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+  - task:
+      type: text-generation
+    dataset:
+      name: PIQA (Physical Interaction QA)
+      type: piqa
+      config: plain_text
+      split: validation
+    metrics:
+    - name: Accuracy
+      type: accuracy
+      value: 80.0
+    source:
+      name: Authentic 20-Benchmark Evaluation Run (N=200)
+      url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+  - task:
+      type: text-generation
+    dataset:
+      name: Big-Bench Hard (Boolean Expressions)
+      type: lukaemon/bbh
+      config: boolean_expressions
+      split: test
+    metrics:
+    - name: Accuracy
+      type: accuracy
+      value: 90.0
+    source:
+      name: Authentic 20-Benchmark Evaluation Run (N=200)
+      url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+  - task:
+      type: text-generation
+    dataset:
+      name: Big-Bench Hard (Colored Objects)
+      type: lukaemon/bbh
+      config: colored_objects
+      split: test
+    metrics:
+    - name: Accuracy
+      type: accuracy
+      value: 80.0
+    source:
+      name: Authentic 20-Benchmark Evaluation Run (N=200)
+      url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+  - task:
+      type: text-generation
+    dataset:
+      name: Big-Bench Hard (Logical Deduction)
+      type: lukaemon/bbh
+      config: logical_deduction_five_objects
+      split: test
+    metrics:
+    - name: Accuracy
+      type: accuracy
+      value: 90.0
+    source:
+      name: Authentic 20-Benchmark Evaluation Run (N=200)
+      url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+  - task:
+      type: text-generation
+    dataset:
+      name: Big-Bench Hard (Web of Lies)
+      type: lukaemon/bbh
+      config: web_of_lies
+      split: test
+    metrics:
+    - name: Accuracy
+      type: accuracy
+      value: 30.0
+    source:
+      name: Authentic 20-Benchmark Evaluation Run (N=200)
+      url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+  - task:
+      type: text-generation
+    dataset:
+      name: Big-Bench Hard (Hyperbaton)
+      type: lukaemon/bbh
+      config: hyperbaton
+      split: test
+    metrics:
+    - name: Accuracy
+      type: accuracy
+      value: 80.0
+    source:
+      name: Authentic 20-Benchmark Evaluation Run (N=200)
+      url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+  - task:
+      type: text-generation
+    dataset:
+      name: Big-Bench Hard (Formal Fallacies)
+      type: lukaemon/bbh
+      config: formal_fallacies
+      split: test
+    metrics:
+    - name: Accuracy
+      type: accuracy
+      value: 60.0
+    source:
+      name: Authentic 20-Benchmark Evaluation Run (N=200)
+      url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+  - task:
+      type: text-generation
+    dataset:
+      name: Big-Bench Hard (Navigate)
+      type: lukaemon/bbh
+      config: navigate
+      split: test
+    metrics:
+    - name: Accuracy
+      type: accuracy
+      value: 60.0
+    source:
+      name: Authentic 20-Benchmark Evaluation Run (N=200)
+      url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
 ---
 
 # Dual-Loop Cognitive Controller: Qwen3.5-2B Official Adapter (v2.2+)
@@ -29,6 +194,37 @@ Official weights for the **Dual-Loop Cognitive Controller** on `Qwen/Qwen3.5-2B`
 The Dual-Loop Controller provides hardware-aligned, non-autoregressive **System 2 deliberation** directly within the latent residual stream of modern language models. It enables models to recursively deliberate in continuous hidden space without generating costly Chain-of-Thought (CoT) text tokens, eliminating KV-cache explosion and 30–60 second generation latencies.
 
 ![Frontier Competitive Leaderboard](frontier_model_leaderboard.png)
+
+<p align="center">
+  <a href="https://huggingface.co/spaces/CH3NDev/dual-loop-controller-demo"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-ZeroGPU%20Live%20Demo-blue.svg" alt="Live Demo"></a>
+  <a href="https://pypi.org/project/dual-loop-controller/"><img src="https://img.shields.io/pypi/v/dual-loop-controller.svg?color=blue" alt="PyPI version"></a>
+  <a href="https://github.com/Ch3nOff/dual-loop-controller"><img src="https://img.shields.io/badge/GitHub-Ch3nOff%2Fdual--loop--controller-black.svg" alt="GitHub"></a>
+  <a href="https://huggingface.co/Qwen/Qwen3.5-2B"><img src="https://img.shields.io/badge/Base%20Backbone-Qwen%2FQwen3.5--2B-orange.svg" alt="Base Model Qwen3.5-2B"></a>
+</p>
+
+> 🚀 **Interactive ZeroGPU Space**: Test the model live in your browser: [huggingface.co/spaces/CH3NDev/dual-loop-controller-demo](https://huggingface.co/spaces/CH3NDev/dual-loop-controller-demo)
+
+---
+
+## 🏗️ Base Model Architecture: Exclusively Qwen/Qwen3.5-2B
+
+This adapter is strictly designed, calibrated, and hooked into the architectural dimensions of **`Qwen/Qwen3.5-2B`**:
+
+| Architectural Dimension | Value / Specification |
+| :--- | :--- |
+| **Target Base Model** | **`Qwen/Qwen3.5-2B`** (Alibaba Cloud / Qwen Team) |
+| **Model Family** | `Qwen2ForCausalLM` / Decoder-Only Autoregressive Transformer |
+| **Base Parameter Count** | **1,880,000,000 (~1.88 Billion Parameters)** |
+| **Hidden State Dimension ($D$)** | **2048** |
+| **Total Layers** | **24 Transformer Blocks** |
+| **Hook Location** | **Layer 11** (Mid-layer latent residual stream) |
+| **Attention Architecture** | 16 Query Heads / 2 Key-Value Heads (Grouped-Query Attention, GQA) |
+| **Vocabulary Size** | 151,936 tokens |
+| **Adapter Parameter Size** | **110,224,469 parameters (~110.2M, 5.86% of base model)** |
+| **Weight Serialization** | Safetensors (`adapter_model.safetensors`, BF16/FP32) |
+
+> [!IMPORTANT]
+> **Qwen-Exclusive Compatibility**: The adapter weights in this repository project into a $D=2048$ latent subspace matched specifically to Qwen3.5-2B's Layer 11 representations. They are **not** interchangeable with other model families (such as LLaMA-3-8B $D=4096$ or Gemma-2B $D=2304$) without retraining or using the universal framework constructor `attach_dual_loop()`.
 
 ---
 

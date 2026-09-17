@@ -1,0 +1,110 @@
+- dataset:
+    id: lukaemon/bbh
+    task_id: boolean_expressions
+  value: 90.0
+  date: "2026-09-17"
+  source:
+    url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+    name: Authentic 20-Benchmark Evaluation Run
+    user: CH3NDev
+  notes: "Backbone: Qwen/Qwen3.5-2B, Rescued (+10.0% gain vs Base 80.0%)"
+- dataset:
+    id: lukaemon/bbh
+    task_id: colored_objects
+  value: 80.0
+  date: "2026-09-17"
+  source:
+    url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+    name: Authentic 20-Benchmark Evaluation Run
+    user: CH3NDev
+  notes: "Backbone: Qwen/Qwen3.5-2B, Rescued (+10.0% gain vs Base 70.0%)"
+- dataset:
+    id: lukaemon/bbh
+    task_id: web_of_lies
+  value: 30.0
+  date: "2026-09-17"
+  source:
+    url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+    name: Authentic 20-Benchmark Evaluation Run
+    user: CH3NDev
+  notes: "Backbone: Qwen/Qwen3.5-2B, Rescued (+10.0% gain vs Base 20.0%)"
+- dataset:
+    id: lukaemon/bbh
+    task_id: logical_deduction_five_objects
+  value: 90.0
+  date: "2026-09-17"
+  source:
+    url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+    name: Authentic 20-Benchmark Evaluation Run
+    user: CH3NDev
+  notes: "Backbone: Qwen/Qwen3.5-2B (90.0% Preserved Correct)"
+- dataset:
+    id: lukaemon/bbh
+    task_id: date_understanding
+  value: 40.0
+  date: "2026-09-17"
+  source:
+    url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+    name: Authentic 20-Benchmark Evaluation Run
+    user: CH3NDev
+  notes: "Backbone: Qwen/Qwen3.5-2B"
+- dataset:
+    id: lukaemon/bbh
+    task_id: formal_fallacies
+  value: 60.0
+  date: "2026-09-17"
+  source:
+    url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+    name: Authentic 20-Benchmark Evaluation Run
+    user: CH3NDev
+  notes: "Backbone: Qwen/Qwen3.5-2B"
+- dataset:
+    id: lukaemon/bbh
+    task_id: tracking_shuffled_objects_five_objects
+  value: 50.0
+  date: "2026-09-17"
+  source:
+    url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+    name: Authentic 20-Benchmark Evaluation Run
+    user: CH3NDev
+  notes: "Backbone: Qwen/Qwen3.5-2B"
+- dataset:
+    id: lukaemon/bbh
+    task_id: hyperbaton
+  value: 80.0
+  date: "2026-09-17"
+  source:
+    url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+    name: Authentic 20-Benchmark Evaluation Run
+    user: CH3NDev
+  notes: "Backbone: Qwen/Qwen3.5-2B"
+- dataset:
+    id: lukaemon/bbh
+    task_id: navigate
+  value: 60.0
+  date: "2026-09-17"
+  source:
+    url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+    name: Authentic 20-Benchmark Evaluation Run
+    user: CH3NDev
+  notes: "Backbone: Qwen/Qwen3.5-2B"
+- dataset:
+    id: lukaemon/bbh
+    task_id: causal_judgement
+  value: 40.0
+  date: "2026-09-17"
+  source:
+    url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+    name: Authentic 20-Benchmark Evaluation Run
+    user: CH3NDev
+  notes: "Backbone: Qwen/Qwen3.5-2B"
+- dataset:
+    id: lukaemon/bbh
+    task_id: geometric_shapes
+  value: 40.0
+  date: "2026-09-17"
+  source:
+    url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+    name: Authentic 20-Benchmark Evaluation Run
+    user: CH3NDev
+  notes: "Backbone: Qwen/Qwen3.5-2B"

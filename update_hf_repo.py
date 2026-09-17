@@ -21,7 +21,13 @@ required_files = [
     ("smart_brain_loop_architecture.png", "smart_brain_loop_architecture.png"),
     ("eval_results/matrix_helper_benchmark.json", "eval_results/matrix_helper_benchmark.json"),
     ("eval_results/frontier_model_leaderboard.json", "eval_results/frontier_model_leaderboard.json"),
-    ("eval_results/qwen35_2b_authentic_20_benchmarks.json", "eval_results/qwen35_2b_authentic_20_benchmarks.json")
+    ("eval_results/qwen35_2b_authentic_20_benchmarks.json", "eval_results/qwen35_2b_authentic_20_benchmarks.json"),
+    (".eval_results/ai2_arc.yaml", ".eval_results/ai2_arc.yaml"),
+    (".eval_results/openbookqa.yaml", ".eval_results/openbookqa.yaml"),
+    (".eval_results/piqa.yaml", ".eval_results/piqa.yaml"),
+    (".eval_results/bbh.yaml", ".eval_results/bbh.yaml"),
+    (".eval_results/matrix_helper.yaml", ".eval_results/matrix_helper.yaml"),
+    (".eval_results/macro_20_benchmarks.yaml", ".eval_results/macro_20_benchmarks.yaml")
 ]
 
 # Optional legacy checkpoint files if present

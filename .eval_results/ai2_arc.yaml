@@ -1,0 +1,20 @@
+- dataset:
+    id: ai2_arc
+    task_id: ARC-Easy
+  value: 80.0
+  date: "2026-09-17"
+  source:
+    url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+    name: Authentic 20-Benchmark Evaluation Run
+    user: CH3NDev
+  notes: "Backbone: Qwen/Qwen3.5-2B, Adapter: Dual-Loop Cognitive Controller Layer 11 hook (D=2048), zero-token latent deliberation"
+- dataset:
+    id: ai2_arc
+    task_id: ARC-Challenge
+  value: 50.0
+  date: "2026-09-17"
+  source:
+    url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
+    name: Authentic 20-Benchmark Evaluation Run
+    user: CH3NDev
+  notes: "Backbone: Qwen/Qwen3.5-2B, Adapter: Dual-Loop Cognitive Controller Layer 11 hook (D=2048), zero-token latent deliberation"
