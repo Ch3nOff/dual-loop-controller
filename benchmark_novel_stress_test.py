@@ -34,6 +34,7 @@ import matplotlib.gridspec as gridspec
 
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from dual_loop import attach_dual_loop_to_qwen
+from dual_loop.verification import DirectionalSafetyProjection
 
 MODEL_ID = "Qwen/Qwen3.5-2B"
 REVISION = "15852e8c16360a2fea060d615a32b45270f8a8fc"
@@ -727,6 +728,11 @@ def evaluate_sample(wrapped_model, tokenizer, item, pass_num=1):
     m_dist = 0.5 * (p_b + p_d)
     jsd_val = float(0.5 * (F.kl_div(m_dist.log(), p_b, reduction='sum') + F.kl_div(m_dist.log(), p_d, reduction='sum')))
 
+    last_telem = telemetries[-1] if telemetries else {}
+    vacuity_u = float(last_telem.get("epistemic_vacuity", [0.5])[0]) if last_telem.get("epistemic_vacuity") else 0.5
+    trace_norm = float(last_telem.get("plastic_trace_norm", 0.0))
+    synthesized_count = int(last_telem.get("synthesized_concepts", 0))
+
     g_margin = float(torch.sigmoid(torch.tensor((0.10 - margin_val) / 0.05)))
     g_jsd = float(torch.sigmoid(torch.tensor((jsd_val - 0.10) / 0.02)))
 
@@ -737,7 +743,25 @@ def evaluate_sample(wrapped_model, tokenizer, item, pass_num=1):
     else:
         sg_val = max(g_margin, g_jsd) if margin_val < 0.5 else g_jsd
 
-    combo_scores = (1.0 - sg_val) * np.array(scores_base) + sg_val * np.array(scores_delib)
+    # Epistemic Vacuity Gating Modulation (Subjective Logic Epistemic Modesty)
+    eta_epistemic = max(0.20, min(1.0, 1.0 - max(0.0, vacuity_u - 0.50) / 0.50))
+    sg_val = sg_val * eta_epistemic
+
+    raw_combo = (1.0 - sg_val) * np.array(scores_base) + sg_val * np.array(scores_delib)
+
+    # Directional Safety Projection on choice score space
+    # Protects confident base answers from distractor drift (BBH)
+    # AND protects near-zero tie-breakers from high-entropy frequency bias (DFA)
+    combo_scores = DirectionalSafetyProjection.project_choice_scores(
+        scores_base=np.array(scores_base),
+        scores_delib=raw_combo,
+        base_margin=margin_val,
+        confidence_threshold=0.35,
+        tie_breaker_threshold=0.05,
+        delib_conviction_threshold=0.25,
+        vacuity_u=vacuity_u
+    )
+
     pred_delib_idx = int(np.argmax(combo_scores))
     pred_delib = labels[pred_delib_idx]
 
@@ -745,11 +769,6 @@ def evaluate_sample(wrapped_model, tokenizer, item, pass_num=1):
 
     sorted_combo = sorted(combo_scores, reverse=True)
     post_margin = float(sorted_combo[0] - sorted_combo[1]) if len(sorted_combo) > 1 else 999.0
-
-    last_telem = telemetries[-1] if telemetries else {}
-    vacuity_u = float(last_telem.get("epistemic_vacuity", [0.5])[0]) if last_telem.get("epistemic_vacuity") else 0.5
-    trace_norm = float(last_telem.get("plastic_trace_norm", 0.0))
-    synthesized_count = int(last_telem.get("synthesized_concepts", 0))
 
     if pass_num == 1 and hasattr(wrapped_model.adapter, "episodic_memory"):
         agrees = (pred_base == pred_delib)

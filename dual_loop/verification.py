@@ -256,7 +256,8 @@ class ContrastiveEvidenceAccumulator(nn.Module):
     def forward(
         self,
         thought: torch.Tensor,
-        candidate_embeds: Any
+        candidate_embeds: Any,
+        query_anchor: Optional[torch.Tensor] = None
     ) -> Tuple[torch.Tensor, torch.Tensor]:
         """
         Args:
@@ -264,6 +265,8 @@ class ContrastiveEvidenceAccumulator(nn.Module):
             candidate_embeds: Either:
                 - List of [B, L_i, D] tensors, OR
                 - Tensor of shape [B, n_cands, L_c, D] or [B, n_cands, D].
+            query_anchor: Optional [B, D] or [B, 1, D] Query representation for debiasing
+                          superficial prompt token frequency / salience bias.
                 
         Returns:
             directed_delta: [B, D] Contrastive deliberation delta.
@@ -304,8 +307,20 @@ class ContrastiveEvidenceAccumulator(nn.Module):
 
         # Contrastive scoring via cosine similarity against thought
         thought_expanded = h_prim.unsqueeze(1).expand_as(evidence) # [B, n_cands, D]
-        cos_sims = F.cosine_similarity(evidence, thought_expanded, dim=-1) # [B, n_cands]
-        scores = F.softmax(cos_sims / self.tau_contrast, dim=-1) # [B, n_cands]
+        cos_delib = F.cosine_similarity(evidence, thought_expanded, dim=-1) # [B, n_cands]
+
+        if query_anchor is not None:
+            # Saliency-Debiased Evidence Gain: Subtract ambient query/context baseline similarity
+            # so high-frequency prompt tokens (e.g. S2 in DFA rules) do not cause spurious attractors.
+            q_anchor_prim = query_anchor if query_anchor.dim() == 2 else query_anchor[:, 0, :]
+            q_anchor_expanded = q_anchor_prim.unsqueeze(1).expand_as(evidence)
+            cos_query = F.cosine_similarity(evidence, q_anchor_expanded, dim=-1)
+            # Relative inferential evidence gain
+            effective_sim = cos_delib - 0.5 * cos_query
+        else:
+            effective_sim = cos_delib
+
+        scores = F.softmax(effective_sim / self.tau_contrast, dim=-1) # [B, n_cands]
 
         # Weight evidence vectors by contrastive scores -> directed delta
         directed_delta = (scores.unsqueeze(-1) * evidence).sum(dim=1) # [B, D]
@@ -400,18 +415,24 @@ class DirectionalSafetyProjection(nn.Module):
         scores_base: np.ndarray,
         scores_delib: np.ndarray,
         base_margin: float,
-        confidence_threshold: float = 0.35
+        confidence_threshold: float = 0.35,
+        tie_breaker_threshold: float = 0.05,
+        delib_conviction_threshold: float = 0.25,
+        vacuity_u: float = 0.50
     ) -> np.ndarray:
         """
         Directional safety projection on candidate choice space.
         
-        Guarantees monotonic ranking safety:
-        If the base model has an established confidence margin (>= confidence_threshold),
-        deliberation cannot flip top-1 to runner-up due to distractor drift.
-        If base model is uncertain (< confidence_threshold), deliberation is free to re-rank and rescue.
-        
-        Mathematically:
-            Projects scores_delib onto the half-space where the confident top-1 is preserved.
+        Guarantees monotonic ranking safety across confidence spectra:
+        1. High Confidence (base_margin >= confidence_threshold):
+           Deliberation cannot flip top-1 to runner-up due to distractor drift.
+        2. High Ambiguity / Near-Zero Tie-Breaker (base_margin <= tie_breaker_threshold):
+           If base model was near-uniform (e.g. 33% vs 33%), deliberation is only
+           permitted to override the prior if it establishes a decisive conviction
+           (delib_margin >= delib_conviction_threshold) and epistemic vacuity is low (u < 0.60).
+           Otherwise, "in dubio pro reo" applies: preserve the prior to prevent random degradations.
+        3. Moderate Uncertainty (tie_breaker_threshold < base_margin < confidence_threshold):
+           Deliberation is fully active to explore, re-rank, and rescue.
         """
         if len(scores_base) <= 1:
             return scores_delib
@@ -420,14 +441,26 @@ class DirectionalSafetyProjection(nn.Module):
         sorted_indices = np.argsort(scores_base)[::-1]
         top2_idx = int(sorted_indices[1])
         
-        delib_margin = scores_delib[top1_idx] - scores_delib[top2_idx]
+        delib_top1_idx = int(np.argmax(scores_delib))
+        sorted_delib = np.sort(scores_delib)[::-1]
+        delib_margin = float(sorted_delib[0] - sorted_delib[1]) if len(sorted_delib) > 1 else 999.0
         
-        # If base model is confident and deliberation flips the margin:
-        if base_margin >= confidence_threshold and delib_margin < 0.0:
+        # 1. Protect confident base predictions from distractor drift
+        margin_diff = scores_delib[top1_idx] - scores_delib[top2_idx]
+        if base_margin >= confidence_threshold and margin_diff < 0.0:
             safe_scores = scores_delib.copy()
-            # Restore top-1 above runner-up with preserved base margin fraction
             safe_scores[top1_idx] = safe_scores[top2_idx] + min(0.05, base_margin * 0.1)
             return safe_scores
+
+        # 2. Protect near-zero tie-breakers from high-entropy hallucination / token frequency bias
+        if base_margin <= tie_breaker_threshold and delib_top1_idx != top1_idx:
+            # Did deliberation establish a clear inferential conviction with low vacuity?
+            has_conviction = (delib_margin >= delib_conviction_threshold) and (vacuity_u < 0.60)
+            if not has_conviction:
+                # In dubio pro reo: preserve base top-1 choice
+                safe_scores = scores_delib.copy()
+                safe_scores[top1_idx] = safe_scores[delib_top1_idx] + 0.01
+                return safe_scores
             
         return scores_delib
 

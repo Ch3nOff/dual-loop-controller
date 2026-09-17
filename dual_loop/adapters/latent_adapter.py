@@ -320,7 +320,8 @@ class LatentDeliberationAdapter(nn.Module):
             if candidate_embeds is not None and self.contrastive_accumulator is not None:
                 c_delta, contrastive_scores = self.contrastive_accumulator(
                     thought=h_thought[:, 0, :],
-                    candidate_embeds=candidate_embeds
+                    candidate_embeds=candidate_embeds,
+                    query_anchor=query_rep
                 )
                 contrastive_scores_list = contrastive_scores.detach().cpu().tolist()
                 # Contrastive refinement on top of trained deliberation projection
@@ -397,7 +398,13 @@ class LatentDeliberationAdapter(nn.Module):
             # and kappa_metacog (metacognitive error-reflection convergence)
             # Directional safety already applied above to raw_delta
             scale = torch.tanh(self.gate_alpha)
-            delta = scale * surprise_gate_tensor * beta_gate.reshape(B, 1) * kappa_metacog * raw_delta # [B, D]
+            # Epistemic Vacuity Gating Modulation (Subjective Logic Epistemic Modesty)
+            if vacuity_u is not None:
+                vac_t = vacuity_u.to(device=hidden_states.device, dtype=hidden_states.dtype)
+                eta_epistemic = torch.clamp(1.0 - torch.clamp(vac_t - 0.50, min=0.0) / 0.50, min=0.20, max=1.0).view(B, 1)
+            else:
+                eta_epistemic = 1.0
+            delta = scale * surprise_gate_tensor * beta_gate.reshape(B, 1) * kappa_metacog * eta_epistemic * raw_delta # [B, D]
             enhanced = hidden_states.clone()
             if is_scalar_idx:
                 enhanced[:, idx_int:idx_int+1, :] = enhanced[:, idx_int:idx_int+1, :] + delta.unsqueeze(1)
