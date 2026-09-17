@@ -41,24 +41,38 @@ In standard transformers, residual adapters can hook into arbitrary attention la
 
 ## Authentic Multi-Task Empirical Benchmark Suite (N=160 Samples)
 
-The model was evaluated across 160 genuine test samples (40 per task across 4 core reasoning datasets) with deliberation properly anchored at the prompt's question token (`query_idx = prompt_len - 1`). In accordance with rigorous scientific practice, both **Raw Accuracy (`acc`)** and **Length-Normalized Accuracy (`acc_norm`)** are reported side-by-side:
+In accordance with rigorous scientific practice, both **Raw Accuracy (`acc`)** and **Length-Normalized Accuracy (`acc_norm`)** are reported side-by-side, directly mapped to their respective JSON evaluation logs in `eval_results/`.
 
-| Benchmark Dataset | Domain | Samples | Base `acc` (Raw) | Loop `acc` (Raw) | $\\Delta_{\\text{raw}}$ | Base `acc_norm` | Loop `acc_norm` | $\\Delta_{\\text{norm}}$ | Decision Dynamics |
+### Table 1: Standard Unanchored lm-eval Evaluation (`query_idx = -1`, Continuation Hook)
+*Source Files*: `eval_results/qwen35_2b_full_base_k0.json` & `eval_results/qwen35_2b_full_dualloop_k2.json` (40 samples/task, standard lm-eval multiple-choice harness without prompt boundary alignment):
+
+| Benchmark Dataset | Domain | Base `acc` | Loop `acc` | $\Delta_{\text{raw}}$ | Base `acc_norm` | Loop `acc_norm` | $\Delta_{\text{norm}}$ | Observation |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| **AI2 ARC-Challenge** | Hard Reasoning | 50.0% | 47.5% | **-2.5%** | 47.5% | 45.0% | **-2.5%** | **Active degradation** (continuation perturbation) |
+| **AI2 ARC-Easy** | Elementary Science | 72.5% | 67.5% | -5.0% | 67.5% | **77.5%** | **+10.0%** | Length-normalized gain preserved |
+| **OpenBookQA** | Multi-hop Facts | 15.0% | 12.5% | -2.5% | 27.5% | **32.5%** | **+5.0%** | Near chance baseline (~25%) |
+| **PIQA** | Physical Commonsense | 67.5% | 67.5% | 0.0% | 75.0% | 75.0% | 0.0% | Exactly invariant |
+| **Macro Average** | **Suite Mean** | **51.25%** | **48.75%** | **-2.50%** | **54.38%** | **57.50%** | **+3.12%** | Acc drops; Acc_norm gains +3.12% |
+
+### Table 2: Prompt-Anchored Evaluation (`query_idx = prompt_len - 1`, Question Hook)
+*Source File*: `eval_results/qwen35_2b_authentic_suite_n160.json` (160 samples, deliberation anchored at question boundary):
+
+| Benchmark Dataset | Domain | Samples | Base `acc` (Raw) | Loop `acc` (Raw) | $\Delta_{\text{raw}}$ | Base `acc_norm` | Loop `acc_norm` | $\Delta_{\text{norm}}$ | Decision Dynamics |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
 | **AI2 ARC-Easy** | Elementary Science | 40 | 72.5% | 70.0% | -2.5% | 70.0% | **77.5%** | **+7.5%** | **4 Rescued Questions** (Mold spores, Canyon, Lever, Sound) |
 | **AI2 ARC-Challenge** | Hard Science Reasoning | 40 | 50.0% | **55.0%** | **+5.0%** | 52.5% | **57.5%** | **+5.0%** | **4 Rescued Questions** (Mammal, Dinosaur, Precip, Hydraulics) |
 | **OpenBookQA** | Multi-hop Fact Science | 40 | 5.0% | 5.0% | 0.0% | 25.0% | 22.5% | -2.5% | 1 Rescued, 2 Degraded |
-| **PIQA** | Physical Commonsense | 40 | 70.0% | **75.0%** | **+5.0%** | 67.5% | 62.5% | -5.0% | Raw +5.0%; Norm stabilized via Adaptive Routing |
+| **PIQA** | Physical Commonsense | 40 | 70.0% | **75.0%** | **+5.0%** | 67.5% | 62.5% | -5.0% | Raw +5.0%; Norm overthinking on basic motor skills |
 | **Suite Overall Mean** | **Multi-Domain Suite** | **160** | **49.38%** | **51.25%** | **+1.88%** | **53.75%** | **55.00%** | **+1.25%** | **Consistent net gain across both Raw and Norm metrics** |
 
 ### Crucial Insight: Query Token Anchoring vs. Continuation Drift
 
-In naive autoregressive evaluations without adapter awareness, `query_idx` defaults to `-1` (the very last token of the choice continuation). Because autoregressive attention cannot look forward, evaluating candidates with an unanchored hook causes the model to score answer tokens *before* deliberation occurs, injecting thought vectors only into the final token as uncalibrated noise.
+In naive autoregressive evaluations without adapter awareness, `query_idx` defaults to `-1` (the very last token of the choice continuation). Because autoregressive attention cannot look forward, evaluating candidates with an unanchored hook causes the model to score answer tokens *before* deliberation occurs, injecting thought vectors only into the final token as uncalibrated noise (Table 1: ARC-Challenge -2.5%).
 
 When the deliberation hook is anchored at **the question boundary (`query_idx = prompt_len - 1`)**:
 1. The Dual-Loop Controller deliberates on the entire question context before candidate tokens are evaluated.
 2. In subsequent layers (Layers 12–23), every single candidate token attends causally to the deliberated latent representation.
-3. On **ARC-Challenge (Nalar)**, this eliminates spurious degradation, producing a robust **+5.0% net gain** in both raw accuracy (50.0% $\to$ 55.0%) and normalized accuracy (52.5% $\to$ 57.5%).
+3. On **ARC-Challenge**, this eliminates spurious degradation, producing a robust **+5.0% net gain** in both raw accuracy (50.0% $\to$ 55.0%) and normalized accuracy (52.5% $\to$ 57.5%) (Table 2).
 
 ---
 
@@ -123,35 +137,6 @@ By combining **`HypothesisVerificationGate`** (rejecting ungrounded deliberation
 3. **Best for High-Throughput & Low-Latency Edge: Mode 1 (Pure System 1 $K=0$)**
    - **Why**: Exact zero-overhead identity bypass. Delivers the lowest latency (216 ms TTFT) and maximum decoding throughput (7.15 tok/s).
    - **Use Case**: Chit-chat dialog, summarization, spell checking, edge device on-device inference.
-
----
-
-### Comparative Evaluation with Peer Models (~1B – 3B Parameter Tier)
-
-To place the performance of the **Dual-Loop Cognitive Controller** into context across the open-weights ecosystem, we benchmarked `Qwen3.5-2B + Dual-Loop` against peer models within the ~1B to ~3B parameter regime: **Llama-3.2-1B**, **SmolLM2-1.7B**, **Qwen2.5-1.5B**, **Qwen3.5-2B (Base)**, **Gemma-2-2B**, and **Llama-3.2-3B**.
-
-All models were evaluated across the standardized multi-task suite (AI2 ARC-Challenge, AI2 ARC-Easy, OpenBookQA, and PIQA) using standardized prompt-anchored evaluation and length-normalized metrics:
-
-![Peer Model Benchmark Comparison](peer_model_comparison.png)
-
-| Model Name | Developer | Parameters | ARC-Challenge (Hard) | ARC-Easy (Science) | OpenBookQA (Multi-hop) | PIQA (Commonsense) | Suite Macro Score |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **SmolLM2-1.7B** | Hugging Face | 1.71B | 43.0% | 65.0% | 27.0% | 73.0% | 52.00% |
-| **Llama-3.2-1B** | Meta | 1.23B | 41.2% | 64.5% | 28.5% | 74.0% | 52.05% |
-| **Qwen3.5-2B (Base K=0)** | Alibaba | 1.88B | 52.5% | 70.0% | 25.0% | 67.5% | 53.75% |
-| **Qwen2.5-1.5B** | Alibaba | 1.54B | 44.5% | 68.4% | 29.0% | 74.5% | 54.10% |
-| **Qwen3.5-2B + Dual-Loop (Adaptive)** | **Ours** | **1.88B + 0.11B** | **57.5%** | **77.5%** | **25.0%** | **67.5%** | **56.88% (+3.13%)** |
-| **Gemma-2-2B** | Google | 2.61B | 53.2% | 77.0% | 32.0% | 75.0% | 59.30% |
-| **Llama-3.2-3B** | Meta | 3.21B | 51.5% | 78.0% | 34.0% | 77.5% | 60.25% |
-
-#### Key Comparative Findings:
-1. **#1 Rank in Complex Reasoning (ARC-Challenge)**:
-   - On the AI2 ARC-Challenge benchmark (the hardest multi-step scientific reasoning test), `Qwen3.5-2B + Dual-Loop` scores **57.5%**, outperforming not only all sub-2B models (41.2% – 44.5%) and its base model (52.5%), but also surpassing larger models including **Gemma-2-2B (53.2%)** and **Llama-3.2-3B (51.5%)**.
-   - This demonstrates the power of recurrent test-time deliberation: iterative latent scrutiny provides a greater reasoning boost on hard deduction tasks than adding 50% to 70% more static parameters.
-2. **Surpassing All Sub-2B Models in Macro Score**:
-   - With an overall macro accuracy of **56.88%**, `Qwen3.5-2B + Dual-Loop` comfortably surpasses `Qwen2.5-1.5B` (54.10%), `Llama-3.2-1B` (52.05%), and `SmolLM2-1.7B` (52.00%).
-3. **Closing the Gap to 3B-Class Models Without Full Retraining**:
-   - The lightweight 110.22M adapter (~5.86% parameter footprint) brings the 1.88B base model within striking distance of 3B-class foundation models (56.88% vs. 59.30% for Gemma-2-2B and 60.25% for Llama-3.2-3B), while keeping the entire base backbone weights frozen.
 
 ---
 
