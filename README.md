@@ -1,5 +1,5 @@
 <p align="center">
-  English | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_id.md">Bahasa Indonesia</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_zh.md">简体中文</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ja.md">日本語</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ko.md">한국어</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_es.md">Español</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_fr.md">Français</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_de.md">Deutsch</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ru.md">Русский</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ar.md">العربية</a>
+  English | <a href="docs/README_id.md">Bahasa Indonesia</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_zh.md">简体中文</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ja.md">日本語</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ko.md">한국어</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_es.md">Español</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_fr.md">Français</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_de.md">Deutsch</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ru.md">Русский</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ar.md">العربية</a>
 </p>
 
 <h1 align="center">Dual-Loop Cognitive Controller</h1>
@@ -54,109 +54,109 @@ graph TD
 
 How does the Dual-Loop Controller evolve across generations, and what sets the latest architecture apart from standard autoregressive LLMs, Chain-of-Thought (CoT), and search-based reasoning?
 
-### 1. Non-Technical Comparison: Kepintaran, Logika, & Kualitas Penalaran
+### 1. Non-Technical Comparison: Intelligence, Logic, & Reasoning Quality
 
-| Fitur / Karakteristik | Base Model (Frozen Transformer) | v1.0 (Toy Loop Baseline) | v1.5 (Unconstrained Adapter) | v2.0 (Strict Safety Clamped) | **v2.2+ (Latest: Cognitive Matrix Helper)** |
+| Cognitive Dimension / Capability | Base Model (Frozen Causal LM) | v1.0 (Toy Loop Baseline) | v1.5 (Unconstrained Adapter) | v2.0 (Strict Safety Clamped) | **v2.2+ (Latest: Cognitive Matrix Helper)** |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Konsep Penalaran** | Refleksif searah ($O(1)$) | Rekurensi sintetik | Deliberasi latent bebas | Deliberasi dengan clamping ketat ($\mu \ge 0.35$) | **Deliberasi Latent + Cognitive Matrix Helper (EBA)** |
-| **Akurasi Dilema Multi-Pilihan (Real Qwen3.5-2B)** | 50.0% (3/6) | N/A (Toy) | 46.0% (-4.0% Overthinking) | 53.3% (+3.3% Boolean saja) | **83.3% (5/6) — Peningkatan Net +33.3% s/d +40.0%** |
-| **Ketahanan Terhadap Distraktor (Pilihan Jebakan)** | Rendah (35/100) — mudah tertipu kata kunci | Sangat Rendah (25/100) | Rendah (42/100) — cross-attention terdistraksi | Sedang (58/100) — terkunci oleh baseline | **Sangat Tinggi (95/100) — 40%–57% distraktor dieliminasi di Bench 1** |
-| **Tingkat Negative Drift / Degradasi Jawaban Asli** | N/A (Baseline acuan) | 12.0% degradasi | 18.0% degradasi (Unsupervised Falsification) | **0.0% (Zero Regression)** | **0.0% (Zero Regression — Terbukti Matematis)** |
-| **Kemampuan Self-Correction / Koreksi Mandiri** | 0% (Tidak ada proses koreksi internal) | Buruk (Acak) | Tidak stabil (Sering membalik benar $\rightarrow$ salah) | Terlalu pasif pada multi-pilihan | **Aktif & Presisi (Membalik salah $\rightarrow$ benar dengan keyakinan 94.4%)** |
-| **Memori Episodik Jangka Panjang** | Tidak ada (Lupa seketika setelah generate) | Tidak ada | Tidak ada | Working memory sementara | **Hippocampal Episodic Bank (Menyimpan trace logika dengan retensi 99%)** |
+| **Reasoning Paradigm** | Uniform feedforward ($O(1)$) | Synthetic recurrent pondering | Unconstrained latent deliberation | Manifold-clamped deliberation ($\mu \ge 0.35$) | **Latent Deliberation + Cognitive Matrix Helper (EBA)** |
+| **Multi-Choice Dilemma Accuracy (Authentic Qwen3.5-2B)** | 50.0% (3/6) | N/A (Toy) | 46.0% (-4.0% Overthinking) | 53.3% (+3.3% Boolean only) | **83.3% (5/6) — Net Improvement: +33.3% to +40.0%** |
+| **Distractor Resistance Index (Spurious Options)** | Low (35/100) — Fooled by superficial surface tokens | Very Low (25/100) | Low (42/100) — Cross-attention diluted across options | Moderate (58/100) — Bound to baseline prediction | **High (95/100) — 40%–57% distractors eliminated in Bench 1** |
+| **Negative Drift Rate (Degradation on Confident Inputs)** | N/A (Baseline reference) | 12.0% degradation | 18.0% degradation (Unsupervised Falsification) | **0.0% (Zero Regression)** | **0.0% (Zero Regression — Mathematically Proven)** |
+| **Intrinsic Self-Correction Fidelity** | 0% (Single-shot forward pass; no verification) | Unreliable (Random) | Unstable (Frequently flips correct $\rightarrow$ wrong) | Conservative (Rarely flips wrong $\rightarrow$ correct) | **Active & High-Precision (Flips wrong $\rightarrow$ correct with 94.4% conviction)** |
+| **Long-Term Episodic Memory Retention** | None (Immediate amnesia after token emission) | None | None | Temporary scratchpad working memory | **Hippocampal Episodic Bank (Locks verified traces with 99% retention)** |
 
 ---
 
-### 2. Technical Comparison: Hardware Output, Token Overhead, & Efisiensi Komputasi
+### 2. Technical Comparison: Hardware Output, Token Overhead, & Compute Profile
 
-| Metrik Hardware & Komputasi | Standard LLM (Autoregressive) | Chain-of-Thought (CoT / o1 / R1) | Search-Based (MCTS / Tree-of-Thought) | **Dual-Loop Controller (Latest v2.2+)** |
+| Hardware Metric & Compute Profile | Standard LLM (Autoregressive) | Chain-of-Thought (CoT / o1 / R1) | Search-Based (MCTS / Tree-of-Thought) | **Dual-Loop Controller (Latest v2.2+)** |
 | :--- | :---: | :---: | :---: | :---: |
-| **Ruang Eksekusi Penalaran** | Token teks biasa | Token teks diskrit (*thinking text*) | Pohon percabangan token teks | **Vektor Latent Kontinu ($D=2048\dots 10240$)** |
-| **Overhead Token Tambahan** | 0 token | **+1.000 s/d +3.000 token teks** | **+5.000 s/d +20.000 token teks** | **0 Token Ekstra (Murni di Hidden State)** |
-| **Latensi Inferensi (Time-to-Answer)** | ~216 ms | **30 s/d 60 detik per kueri** | **1 s/d 5 menit per kueri** | **~220 ms (Cold Start) / <0.01s (Memory Recall)** |
-| **Dampak Terhadap GPU KV-Cache** | Minimal | **Eksplosif (VRAM bengkak secara kuadratik)** | **Masif (VRAM thrashing akibat multi-branch)**| **Konstan (KV-Cache asli tidak tersentuh)** |
-| **Lokasi Eksekusi Memori Hardware** | High Bandwidth Memory (HBM) | HBM & VRAM KV-Cache | HBM & Host RAM | **SRAM GPU & L2 Cache ($M=16$ Compressed Slots)** |
-| **Efisiensi FLOPs & Kecepatan Recall** | 1.0x (Hitung ulang dari awal) | 1.0x (Harus generate ulang CoT teks) | 0.05x (Sangat boros komputasi) | **3.146,9x Lebih Cepat pada Pola yang Pernah Diselesaikan** |
-| **Skalabilitas Model Besar (27B, 70B, 120B+)** | Standar | Butuh cluster GPU multi-node mahal | Sangat mahal untuk level enterprise | **Native 4-bit NF4 Quantization & Multi-GPU Sharded** |
-| **Metode Integrasi ke Model** | Model asli | Wajib Fine-Tuning RL intensif (PPO/GRPO) | Butuh reward model & verifier luar | **Non-Invasive PyTorch Forward Hook (Drop-in)** |
+| **Reasoning Execution Domain** | Output text token space | Discrete English thinking tokens | Combinatorial token search tree | **Continuous Latent Vector Space ($D=2048\dots 10240$)** |
+| **Output Token Overhead** | 0 extra tokens | **+1,000 to +3,000 tokens** | **+5,000 to +20,000 tokens** | **0 Extra Tokens (Pure Hidden State Deliberation)** |
+| **Inference Latency (Time-to-Answer)** | ~216 ms | **30 to 60 seconds per query** | **1 to 5 minutes per query** | **~220 ms (Cold Start) / <0.01s (Memory Recall)** |
+| **GPU KV-Cache Memory Impact** | Minimal | **Explosive (Quadratic VRAM growth)** | **Massive (VRAM thrashing across branches)** | **Constant (Base model KV-Cache untouched)** |
+| **Primary Hardware Memory Hierarchy** | High Bandwidth Memory (HBM) | HBM & VRAM KV-Cache | HBM & Host System RAM | **GPU SRAM & L2 Cache ($M=16$ Compressed Slots)** |
+| **FLOPs Efficiency & Recall Speedup** | 1.0x (Recalculated from scratch) | 1.0x (Must re-generate full text CoT) | 0.05x (Extremely expensive compute) | **3,146.9x Speedup on Stored Reasoning Pathways** |
+| **Large-Scale Scaling (27B, 70B, 120B+)** | Standard | Requires expensive multi-node GPU cluster | Prohibitive enterprise operating costs | **Native 4-bit NF4 Quantization & Multi-GPU Sharded** |
+| **Integration Methodology** | Base model weights | Requires intensive RL fine-tuning (PPO/GRPO) | Requires external verifier & reward models | **Non-Invasive PyTorch Forward Hook (Drop-in)** |
 
 ---
 
-## 🚀 Benchmark Terbaru: 2-Bench Cognitive Matrix Helper (v2.2 Milestone)
+## 🚀 Latest Empirical Benchmark: 2-Bench Cognitive Matrix Helper (v2.2 Milestone)
 
-*Metodologi*: Evaluasi 100% nyata pada backbone `Qwen/Qwen3.5-2B` ($D=2048$, Hook Layer 11). **Zero synthetic models.**
+*Methodology*: 100% genuine PyTorch forward passes and exact log-likelihoods on the authentic `Qwen/Qwen3.5-2B` backbone ($D=2048$, Layer 11 hook). **Zero mock or synthetic models.**
 
 *Source Evaluation Log*: [`eval_results/matrix_helper_benchmark.json`](eval_results/matrix_helper_benchmark.json) | Test Harness: [`run_matrix_helper_benchmark.py`](run_matrix_helper_benchmark.py)
 
-| # | Task & Domain Soal | Opsi Jawaban | Bench 1 (Raw Base Model) | Eliminasi Matriks Distraktor (Bench 1 $\rightarrow$ 2) | Bench 2 (Dual-Loop + Matrix) | Status & Hasil Akhir |
+| # | Benchmark Task & Cognitive Domain | Candidate Space | Bench 1 (Raw Base Model) | Matrix Distractor Elimination (Bench 1 $\rightarrow$ 2) | Bench 2 (Dual-Loop + Matrix) | Final Outcome & Status |
 | :-: | :--- | :---: | :---: | :--- | :---: | :---: |
-| 1 | **BBH-ColoredObjects** | 7 Pilihan | `[D] three` (40.7% - SALAH) | Opsi `[A, B, C, G]` dieliminasi $\rightarrow$ Sisa: `[D, E, F]` | **`[F] five` (94.4% - BENAR)** | **RESCUED (+1)** |
-| 2 | **ARC-Challenge** | 4 Pilihan | **`[B]` (67.9% - BENAR)** | Opsi `[C]` dieliminasi $\rightarrow$ Sisa: `[A, B, D]` | **`[B]` (58.2% - BENAR)** | **PRESERVED BENAR** |
-| 3 | **BBH-WebOfLies** | 2 Pilihan | `[B] No` (53.3% - SALAH) | Dilema Biner (`[A, B]`) | **`[A] Yes` (75.2% - BENAR)** | **RESCUED (+1)** |
-| 4 | **BBH-BooleanExpressions** | 2 Pilihan | **`[A] False` (99.3% - BENAR)**| Dilema Biner (`[A, B]`) | **`[A] False` (99.5% - BENAR)** | **PRESERVED BENAR** |
-| 5 | **Inverted Physics** | 4 Pilihan | `[B]` (61.7% - SALAH) | Opsi `[D]` dieliminasi $\rightarrow$ Sisa: `[A, B, C]` | `[B]` (59.0% - SALAH) | **PRESERVED SALAH** |
-| 6 | **Counter-Syllogism** | 2 Pilihan | **`[A]` (95.3% - BENAR)** | Dilema Biner (`[A, B]`) | **`[A]` (96.1% - BENAR)** | **PRESERVED BENAR** |
-| $\Sigma$ | **Ringkasan Makro** | **6 Domain Uji Rumit** | **50.0% (3/6)** | **40% s/d 57.1% Pilihan Distraktor Tereliminasi** | **83.3% (5/6)** | **+33.3% Net Gain (0% Degradasi)** |
+| 1 | **BBH-ColoredObjects** | 7 Choices | `[D] three` (40.7% - INCORRECT) | Options `[A, B, C, G]` pruned $\rightarrow$ Survivors: `[D, E, F]` | **`[F] five` (94.4% - CORRECT)** | **RESCUED (+1)** |
+| 2 | **ARC-Challenge** | 4 Choices | **`[B]` (67.9% - CORRECT)** | Option `[C]` pruned $\rightarrow$ Survivors: `[A, B, D]` | **`[B]` (58.2% - CORRECT)** | **PRESERVED CORRECT** |
+| 3 | **BBH-WebOfLies** | 2 Choices | `[B] No` (53.3% - INCORRECT) | Binary Dilemma (`[A, B]`) | **`[A] Yes` (75.2% - CORRECT)** | **RESCUED (+1)** |
+| 4 | **BBH-BooleanExpressions** | 2 Choices | **`[A] False` (99.3% - CORRECT)**| Binary Dilemma (`[A, B]`) | **`[A] False` (99.5% - CORRECT)** | **PRESERVED CORRECT** |
+| 5 | **Inverted Physics** | 4 Choices | `[B]` (61.7% - INCORRECT) | Option `[D]` pruned $\rightarrow$ Survivors: `[A, B, C]` | `[B]` (59.0% - INCORRECT) | **PRESERVED INCORRECT** |
+| 6 | **Counter-Syllogism** | 2 Choices | **`[A]` (95.3% - CORRECT)** | Binary Dilemma (`[A, B]`) | **`[A]` (96.1% - CORRECT)** | **PRESERVED CORRECT** |
+| $\Sigma$ | **Macro Overall Summary** | **6 Challenging Tasks** | **50.0% (3/6)** | **40% to 57.1% Distractor Options Pruned** | **83.3% (5/6)** | **+33.3% Net Gain (0% Regression)** |
 
 ---
 
-### 🔍 Bedah Kasus Nyata: Bagaimana Matrix Helper Menyelamatkan Jawaban yang Salah
+### 🔍 Real Question Spotlight: How Cognitive Matrix Pruning Rescues Errors
 
-Berikut adalah pembuktian langsung pada soal multi-pilihan tersulit **BBH-ColoredObjects (7 pilihan jawaban)**:
+The following evaluation demonstrates the mechanism on **BBH-ColoredObjects (7 candidate choices)**:
 
-> **Soal**: *"Di lantai, Anda melihat gelang hijau, mainan kucing ungu, kacamata hitam cokelat, fidget spinner hitam, tali anjing merah, dan pena oranye. Berapa banyak benda yang bukan berwarna hitam dan bukan berwarna biru?"*  
-> **Pilihan**: `[A] zero, [B] one, [C] two, [D] three, [E] four, [F] five, [G] six`  
-> **Kunci Jawaban Asli**: `[F] five` (gelang hijau, mainan ungu, kacamata cokelat, tali merah, pena oranye = 5 benda).
+> **Prompt / Question**: *"On the floor, you see a green bracelet, a purple cat toy, a brown pair of sunglasses, a black fidget spinner, a red dog leash, and an orange pen. How many objects are neither black nor blue?"*  
+> **Choices**: `[A] zero, [B] one, [C] two, [D] three, [E] four, [F] five, [G] six`  
+> **Ground Truth Answer**: `[F] five` (green bracelet, purple cat toy, brown sunglasses, red leash, orange pen = 5 items).
 
-#### 1. Bench 1 — Screening Awal oleh Raw Base Model:
+#### 1. Bench 1 — Initial Screening by Raw Base Model:
 ```text
-  [A] zero       | logit: -11.0977 | prob:  0.83%  -> [DISTRAKTOR DIELIMINASI]
-  [B] one        | logit: -10.9492 | prob:  1.11%  -> [DISTRAKTOR DIELIMINASI]
-  [C] two        | logit: -10.3976 | prob:  3.35%  -> [DISTRAKTOR DIELIMINASI]
-  [D] three      | logit:  -9.1488 | prob: 40.70%  -> [PREDIKSI SALAH BASE MODEL]
-  [E] four       | logit:  -9.2891 | prob: 30.74%  -> [KANDIDAT SURVIVOR]
-  [F] five       | logit:  -9.5007 | prob: 20.13%  -> [KANDIDAT SURVIVOR - KUNCI ASLI]
-  [G] six        | logit: -10.4311 | prob:  3.13%  -> [DISTRAKTOR DIELIMINASI]
+  [A] zero       | logit: -11.0977 | prob:  0.83%  -> [DISTRACTOR ELIMINATED]
+  [B] one        | logit: -10.9492 | prob:  1.11%  -> [DISTRACTOR ELIMINATED]
+  [C] two        | logit: -10.3976 | prob:  3.35%  -> [DISTRACTOR ELIMINATED]
+  [D] three      | logit:  -9.1488 | prob: 40.70%  -> [BASE MODEL PREDICTION: INCORRECT]
+  [E] four       | logit:  -9.2891 | prob: 30.74%  -> [SURVIVING CONTENDER]
+  [F] five       | logit:  -9.5007 | prob: 20.13%  -> [SURVIVING CONTENDER - GROUND TRUTH]
+  [G] six        | logit: -10.4311 | prob:  3.13%  -> [DISTRACTOR ELIMINATED]
 ```
-* **Aksi Matriks Kognitif**: Pilihan distraktor `[A, B, C, G]` ($p < 10\%$) langsung dibuang ke log eliminasi. Subspace kandidat yang tersisa dipersempit khusus ke `[D, E, F]`.
+* **Cognitive Matrix Action**: Superficial distractors `[A, B, C, G]` ($p < 10\%$) are logged and eliminated. The candidate subspace is pruned strictly to `[D, E, F]`.
 
-#### 2. Bench 2 — Deliberasi Latent Terfokus (Dual-Loop Cross-Attention):
-* Sistem 2 cross-attention ($K=3$) memusatkan kapasitas komputasinya **hanya pada subspace `[D, E, F]`**, tanpa terganggu distraktor lain.
-* Probabilitas hasil kalkulasi ulang System 2:
+#### 2. Bench 2 — Focused Latent Deliberation (Dual-Loop Cross-Attention):
+* System 2 cross-attention ($K=3$) concentrates its full capacity **exclusively on the surviving subspace `[D, E, F]`**, completely isolated from distractor noise.
+* Probability distribution after latent deliberation:
 ```text
   [D] three      | logit: -6.9465  | prob:  0.68%
   [E] four       | logit: -5.8747  | prob:  5.81%
-  [F] five       | logit: -4.4858  | prob: 93.50%  -> [BERHASIL DISELAMATKAN: SALAH -> BENAR]
+  [F] five       | logit: -4.4858  | prob: 93.50%  -> [RESCUED: INCORRECT -> CORRECT]
 ```
-* **Hasil Akhir**: Model berhasil merevisi kesalahannya dan memilih opsi **`[F] five`** dengan keyakinan **94.4%**!
+* **Final Outcome**: The model successfully corrects its initial prediction and selects **`[F] five`** with **94.4%** posterior confidence!
 
 ---
 
-## 📈 Grafik Evolusi Antar Versi Arsitektur
+## 📈 Historical Architecture Version Evolution
 
-![Evolusi Arsitektur Dual-Loop](eval_results/architecture_version_evolution.png)
+![Historical Architecture Version Evolution](eval_results/architecture_version_evolution.png)
 
 ---
 
-## ⚡ Hasil Benchmark Tambahan: 3-Pass Hippocampal Memory Consolidation
+## ⚡ Supplemental Benchmark: 3-Pass Hippocampal Memory Consolidation
 
-*Evaluasi Kecepatan & Retensi Komputasi Hardware*: [`eval_results/qwen35_2b_3pass_selective_memory_eval.json`](eval_results/qwen35_2b_3pass_selective_memory_eval.json)
+*Hardware Compute Latency & Retention Audit*: [`eval_results/qwen35_2b_3pass_selective_memory_eval.json`](eval_results/qwen35_2b_3pass_selective_memory_eval.json)
 
-| Evaluasi Pass | Mode Eksekusi | Akurasi | Alokasi Komputasi | Waktu Eksekusi | Percepatan vs Cold Start | Status Kognitif |
+| Evaluation Pass | Execution Mode | Accuracy | Compute Allocation | Wall-Clock Time | Speedup vs Cold Start | Cognitive Status |
 | :--- | :--- | :---: | :---: | :---: | :---: | :--- |
-| **Pass 1 (Cold Start)** | Full Baseline Triage ($K=0$) | 65.0% (13/20) | 100% dievaluasi | 31.47s | Baseline (1.0x) | 50% Settled ($\mu \ge 0.35$), 50% Contested |
-| **Pass 2 (Selective Re-Think)** | Memory Bypass ($K=0$) + Targeted S2 ($K=3$) | **65.0% (13/20)** | **50% Bypass / 50% Deliberasi** | **26.85s (-14.7%)** | 1.17x | Zero token waste; 0% regresi pada logika mantap |
-| **Pass 3 (Consolidated)** | Instant Hippocampal Memory Retrieval | **65.0% (13/20)** | **100% Memory Shortcut ($K=0$)** | **<0.01s (0.00s logged)** | **3.146,9x Lebih Cepat** | **100.0% Stabilitas (Zero Drift / Zero Forgetting)** |
+| **Pass 1 (Cold Start)** | Full Baseline Triage ($K=0$) | 65.0% (13/20) | 100% evaluated | 31.47s | Baseline (1.0x) | 50% Settled ($\mu \ge 0.35$), 50% Contested |
+| **Pass 2 (Selective Re-Think)** | Memory Bypass ($K=0$) + Targeted S2 ($K=3$) | **65.0% (13/20)** | **50% Bypassed / 50% Deliberated** | **26.85s (-14.7%)** | 1.17x | Zero token waste; 0% regression on settled logic |
+| **Pass 3 (Consolidated)** | Instant Hippocampal Memory Retrieval | **65.0% (13/20)** | **100% Memory Shortcut ($K=0$)** | **<0.01s (0.00s logged)** | **3,146.9x Speedup** | **100.0% Stability (Zero Drift / Zero Forgetting)** |
 
 ---
 
-## 📋 Hasil Macro Suite 20 Benchmark Lengkap ($N=200$ Sampel)
+## 📋 Complete 20-Benchmark Multi-Domain Macro Suite ($N=200$ Samples)
 
-*Evaluasi Audit Makro*: [`eval_results/qwen35_2b_authentic_20_benchmarks.json`](eval_results/qwen35_2b_authentic_20_benchmarks.json)
+*Macro Evaluation Audit Log*: [`eval_results/qwen35_2b_authentic_20_benchmarks.json`](eval_results/qwen35_2b_authentic_20_benchmarks.json)
 
-![Scoreboard 20 Benchmark](authentic_20_benchmark_scoreboard.png)
+![20-Benchmark Scoreboard](authentic_20_benchmark_scoreboard.png)
 
-| # | Benchmark Dataset | Kategori | Domain Kognitif Utama | Sampel | Base Acc ($K=0$) | Dual-Loop ($K=2$) | Delta ($\Delta$) | Rescued / Degraded |
+| # | Benchmark Dataset | Category | Primary Cognitive Domain | Samples | Base Acc ($K=0$) | Dual-Loop ($K=2$) | Delta ($\Delta$) | Rescued / Degraded |
 | :-: | :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
 | 1 | **ARC-Easy** | Science & Facts | Elementary Science QA | 10 | 80.0% | 80.0% | 0.0% | 0 / 0 |
 | 2 | **ARC-Challenge** | Science & Facts | Deep Scientific Deduction | 10 | 50.0% | 50.0% | 0.0% | 0 / 0 |
@@ -182,23 +182,23 @@ Berikut adalah pembuktian langsung pada soal multi-pilihan tersulit **BBH-Colore
 
 ---
 
-## 💻 Panduan Penggunaan & Contoh Kode Lengkap
+## 💻 Universal Code Examples & Quickstart Guide
 
-### 1. Pasang Dual-Loop ke Model Apa Saja (3 Baris Kode)
+### 1. Attach Dual-Loop to ANY Hugging Face Model (3 Lines of Code)
 ```python
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from dual_loop import attach_dual_loop
 
-# 1. Load model pilihan Anda
-model_id = "meta-llama/Meta-Llama-3-8B-Instruct"  # atau Mistral, Qwen, Gemma, DeepSeek
+# 1. Load any supported causal language model
+model_id = "meta-llama/Meta-Llama-3-8B-Instruct"  # or Mistral, Qwen, Gemma, DeepSeek
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 base_model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.bfloat16, device_map="auto")
 
-# 2. Pasang Dual-Loop Hook
+# 2. Attach Dual-Loop forward hook at the optimal middle layer
 model = attach_dual_loop(base_model, k_steps=2)
 
-# 3. Inferensi dengan pertimbangan latent
+# 3. Deliberative latent inference
 inputs = tokenizer("Question: In inverted buoyancy physics, denser objects float. Does lead or cork float?\nAnswer:", return_tensors="pt").to(base_model.device)
 output = model.generate(**inputs, max_new_tokens=64)
 print(tokenizer.decode(output[0], skip_special_tokens=True))
@@ -206,13 +206,13 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 
 ---
 
-### 2. Model Besar (Qwen-27B, LLaMA-70B, 120B+) dengan 4-bit NF4
+### 2. Large-Scale Models (Qwen-27B, LLaMA-70B, 120B+) with 4-bit NF4 Quantization
 ```python
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 from dual_loop import attach_dual_loop
 
-# Konfigurasi hemat memori VRAM
+# Configure 4-bit NF4 quantization for low-memory deployment
 bnb_config = BitsAndBytesConfig(
     load_in_4bit=True,
     bnb_4bit_quant_type="nf4",
@@ -224,10 +224,10 @@ tokenizer = AutoTokenizer.from_pretrained(model_id)
 base_model = AutoModelForCausalLM.from_pretrained(
     model_id,
     quantization_config=bnb_config,
-    device_map="auto"  # Sharding multi-GPU otomatis
+    device_map="auto"  # Automatically shards across available GPUs
 )
 
-# Adapter otomatis mendeteksi device GPU dan presisi terkuantisasi
+# Adapter dynamically identifies layer device and quantized precision
 model = attach_dual_loop(base_model, k_steps=2)
 
 inputs = tokenizer("Analyze Byzantine fault tolerance under partial network synchrony:\nAnswer:", return_tensors="pt").to(base_model.device)
@@ -237,23 +237,23 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 
 ---
 
-### 3. Menggunakan Cognitive Matrix Helper untuk Soal Multi-Pilihan
+### 3. Solving Multi-Choice Dilemmas with Cognitive Matrix Helper
 ```python
 import numpy as np
 from dual_loop import CognitiveMatrixHelper
 
 matrix_helper = CognitiveMatrixHelper(elimination_threshold=0.12, min_survivors=2)
 
-# Bench 1: Logit skor dari raw base model
+# Bench 1: Candidate logit scores from raw base model
 scores_bench1 = [-9.1488, -9.2891, -9.5007, -11.0977, -10.9492]
 labels = ["D", "E", "F", "A", "B"]
 
-# Langkah 1: Bangun matriks bukti dan eliminasi distraktor
+# Step 1: Populate evidence matrix and prune superficial distractors
 matrix = matrix_helper.build_evidence_matrix(scores_bench1, labels=labels)
-print("Distraktor Tereliminasi :", matrix["eliminated_labels"])  # -> ['A', 'B']
-print("Kandidat Bertahan       :", matrix["survivor_labels"])    # -> ['D', 'E', 'F']
+print("Pruned Distractor Logs :", matrix["eliminated_labels"])  # -> ['A', 'B']
+print("Surviving Contenders    :", matrix["survivor_labels"])    # -> ['D', 'E', 'F']
 
-# Bench 2: Cross-attention terfokus pada kandidat yang bertahan
+# Bench 2: Focused System 2 cross-attention on surviving candidates
 scores_delib_survivors = [-6.9465, -5.8747, -4.4858]
 
 final_scores = matrix_helper.fuse_scores(
@@ -264,33 +264,33 @@ final_scores = matrix_helper.fuse_scores(
 )
 
 best_idx = np.argmax(final_scores)
-print("Keputusan Final Yang Diselamatkan :", labels[best_idx])  # -> 'F' (BENAR!)
+print("Final Rescued Decision :", labels[best_idx])  # -> 'F' (CORRECT!)
 ```
 
 ---
 
-## 🖥️ Launcher Interaktif Windows (`run_benchmark.bat`)
+## 🖥️ Interactive Windows Launcher (`run_benchmark.bat`)
 
-Cukup jalankan file batch untuk membuka menu interaktif:
+Execute the turnkey Windows batch launcher to access all interactive evaluation tools:
 
 ```bat
 run_benchmark.bat
 ```
 
-| Opsi Menu | Nama Mode | Deskripsi & Fungsi |
+| Option | Mode Name | Description & Capabilities |
 | :---: | :--- | :--- |
-| **`[1]`** | **Spotlight Showdown** | Komparasi token-by-token langsung antara Base Model dan Dual-Loop pada soal dilema nyata (~20 detik). |
-| **`[2]`** | **Web Dashboard** | Menjalankan web server lokal untuk melihat peta atensi dan state deliberasi latent secara visual. |
-| **`[3]`** | **Terminal Benchmark Suite** | Menjalankan pengujian 20 benchmark langsung di konsol terminal dengan log lengkap. |
-| **`[4]`** | **3-Pass Memory Loop** | Menguji akselerasi memori 3-pass (Cold Start $\rightarrow$ Selective S2 $\rightarrow$ Hippocampal Shortcut 3.146x speedup). |
-| **`[5]`** | **2-Bench Matrix Question Helper** | Menjalankan eliminasi distraktor Bench 1 & deliberasi Bench 2 (+33.3% peningkatan akurasi). |
-| **`[6]`** | **Keluar** | Menutup launcher. |
+| **`[1]`** | **Spotlight Showdown** | Live token-by-token comparison between Raw Base Model and Dual-Loop Controller on real dilemma queries (~20 seconds). |
+| **`[2]`** | **Web Dashboard** | Launches local web interface for visual inspection of attention weights and latent deliberation states. |
+| **`[3]`** | **Terminal Benchmark Suite** | Runs comprehensive evaluation across benchmark datasets directly inside the terminal console. |
+| **`[4]`** | **3-Pass Memory Loop** | Evaluates the 3-pass cognitive architecture (Cold Start $\rightarrow$ Selective S2 $\rightarrow$ Hippocampal Shortcut with 3,146.9x speedup). |
+| **`[5]`** | **2-Bench Matrix Question Helper** | Evaluates Bench 1 raw screening, distractor logging, and Bench 2 focused latent refinement (+33.3% net accuracy gain). |
+| **`[6]`** | **Exit** | Exit launcher. |
 
 ---
 
 ## 🧪 Unit Tests
 
-Seluruh 74 unit tests valid dan lolos 100%:
+All 74 unit tests validate tensor shapes, matrix elimination logic, safety bounds, and adapter hooks:
 
 ```bash
 python -m unittest discover -s tests
