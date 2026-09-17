@@ -42,6 +42,19 @@ class TestDualLoopQwenAdapter(unittest.TestCase):
         self.assertGreater(summary["total_parameters"], summary["adapter_parameters"])
         model.remove_hook()
 
+    def test_universal_attach_dual_loop(self):
+        """Verify universal attach_dual_loop factory operates correctly."""
+        from dual_loop import attach_dual_loop, attach_dual_loop_to_model
+        model1 = attach_dual_loop(self.base_model, k_steps=3)
+        self.assertIsInstance(model1, DualLoopQwenModel)
+        self.assertEqual(model1.k_steps, 3)
+        model1.remove_hook()
+
+        model2 = attach_dual_loop_to_model(self.base_model, k_steps=1)
+        self.assertIsInstance(model2, DualLoopQwenModel)
+        self.assertEqual(model2.k_steps, 1)
+        model2.remove_hook()
+
     def test_freeze_backbone_peft(self):
         """Verify freeze_backbone keeps only adapter parameters trainable."""
         model = attach_dual_loop_to_qwen(self.base_model, k_steps=2)

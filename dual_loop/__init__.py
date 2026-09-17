@@ -21,13 +21,19 @@ from .verification import (
 from .matrix_helper import CognitiveMatrixHelper
 from .decoder import DualLoopTransformer
 from .adapters.latent_adapter import LatentDeliberationAdapter
-from .adapters.qwen_adapter import DualLoopQwenModel, attach_dual_loop_to_qwen
+from .adapters.qwen_adapter import (
+    DualLoopQwenModel,
+    DualLoopTransformerModel,
+    attach_dual_loop_to_qwen,
+    attach_dual_loop,
+    attach_dual_loop_to_model
+)
 
 import os
 import torch
 from typing import Optional
 
-__version__ = "2.2.0"
+__version__ = "2.2.1"
 
 def get_default_checkpoint_path() -> Optional[str]:
     """
@@ -86,7 +92,10 @@ __all__ = [
     "DualLoopTransformer",
     "LatentDeliberationAdapter",
     "DualLoopQwenModel",
+    "DualLoopTransformerModel",
     "attach_dual_loop_to_qwen",
+    "attach_dual_loop",
+    "attach_dual_loop_to_model",
     "get_default_checkpoint_path",
     "load_trained_checkpoint",
 ]

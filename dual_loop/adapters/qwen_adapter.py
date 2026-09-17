@@ -483,3 +483,20 @@ def attach_dual_loop_to_qwen(
             )
         return model
     return DualLoopQwenModel(model, layer_idx=layer_idx, k_steps=k_steps, **kwargs)
+
+
+def attach_dual_loop(
+    model: nn.Module,
+    layer_idx: Optional[int] = None,
+    k_steps: int = 2,
+    **kwargs
+) -> DualLoopQwenModel:
+    """
+    Universal factory to attach the Dual-Loop Cognitive Controller to ANY Transformer model
+    (Llama-3, Mistral, Qwen, Gemma, DeepSeek, Phi, etc.).
+    """
+    return attach_dual_loop_to_qwen(model, layer_idx=layer_idx, k_steps=k_steps, **kwargs)
+
+
+attach_dual_loop_to_model = attach_dual_loop
+DualLoopTransformerModel = DualLoopQwenModel
