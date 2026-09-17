@@ -8,6 +8,9 @@ for Transformer architectures.
 from .memory import CognitiveWorkingMemory
 from .halting import EntropyHaltingUnit, LearnedHaltingGate, DriftDiffusionHalting
 from .controller import RecurrentLatentController, TopKCapacityCrossAttention, LatentCritiqueRefinementUnit
+from .plasticity import PlasticFastWeightUnit
+from .evidential import EvidentialEpistemicGate
+from .open_concept import OpenConceptSynthesizer
 from .verification import (
     HypothesisVerificationGate,
     UncertaintySurpriseGate,
@@ -70,6 +73,9 @@ __all__ = [
     "RecurrentLatentController",
     "TopKCapacityCrossAttention",
     "LatentCritiqueRefinementUnit",
+    "PlasticFastWeightUnit",
+    "EvidentialEpistemicGate",
+    "OpenConceptSynthesizer",
     "HypothesisVerificationGate",
     "UncertaintySurpriseGate",
     "ContrastiveEvidenceAccumulator",

@@ -1,8 +1,9 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from typing import Optional, Tuple, List
+from typing import Optional, Tuple, List, Dict, Any
 from .halting import EntropyHaltingUnit, LearnedHaltingGate, DriftDiffusionHalting
+from .plasticity import PlasticFastWeightUnit
 
 class TopKCapacityCrossAttention(nn.Module):
     """
@@ -120,7 +121,10 @@ class RecurrentLatentController(nn.Module):
         use_ddm_halting: bool = False,
         ddm_theta_0: float = 3.0,
         ddm_gamma: float = 0.5,
-        ddm_min_theta: float = 0.5
+        ddm_min_theta: float = 0.5,
+        enable_plasticity: bool = True,
+        plastic_rank: int = 32,
+        plastic_lr: float = 0.15
     ):
         super().__init__()
         self.d_model = d_model
@@ -143,6 +147,15 @@ class RecurrentLatentController(nn.Module):
         # Metacognitive Critique Unit (Error Recognition & Self-Correction)
         self.enable_critique = enable_critique
         self.critique_unit = LatentCritiqueRefinementUnit(d_model) if enable_critique else None
+
+        # In-Situ Plastic Fast-Weight Unit (Autonomous Virtual Parameters)
+        self.enable_plasticity = enable_plasticity
+        self.plastic_unit = PlasticFastWeightUnit(
+            d_model=d_model,
+            rank=plastic_rank,
+            plastic_lr=plastic_lr
+        ) if enable_plasticity else None
+        self.last_plastic_telemetry: Dict[str, Any] = {}
 
         # Learned Adaptive Anchor Gate (Contraction Mapping for K >= 4 stabilization)
         self.anchor_gate = nn.Linear(d_model, 1)
@@ -192,6 +205,9 @@ class RecurrentLatentController(nn.Module):
         self.last_lambdas = []
         self.last_error_norms = []
         self.last_ddm_evidences = []
+        if self.plastic_unit is not None:
+            self.plastic_unit.reset_state()
+        self.last_plastic_telemetry = {}
 
     def initialize_thoughts(self, query_rep: torch.Tensor) -> torch.Tensor:
         """
@@ -212,7 +228,8 @@ class RecurrentLatentController(nn.Module):
         H_anchor: torch.Tensor,
         memory: torch.Tensor,
         H_prev: Optional[torch.Tensor] = None,
-        h_prev_primary: Optional[torch.Tensor] = None
+        h_prev_primary: Optional[torch.Tensor] = None,
+        u_epistemic: Optional[torch.Tensor] = None
     ) -> Tuple[torch.Tensor, Optional[torch.Tensor], Optional[torch.Tensor]]:
         """
         Executes a single recurrent step of outer loop deliberation.
@@ -224,6 +241,7 @@ class RecurrentLatentController(nn.Module):
             memory: [B, M, D] Working memory buffer (CWM).
             H_prev: [B, L_thought, D] Optional previous step thought representations.
             h_prev_primary: [B, D] Optional previous primary thought representation.
+            u_epistemic: Optional [B] Epistemic uncertainty vacuity from EvidentialEpistemicGate.
             
         Returns:
             H_next: [B, L_thought, D] Updated thought representations.
@@ -247,6 +265,17 @@ class RecurrentLatentController(nn.Module):
         else:
             err_norm = None
             H_updated = H + H_cross
+
+        # 3b. In-Situ Plastic Fast-Weight Virtual Parameter Adaptation (Self-learning under novelty)
+        if self.plastic_unit is not None:
+            raw_err = (H - H_cross)
+            delta_plastic, plastic_telem = self.plastic_unit(
+                thoughts=H,
+                discrepancy=raw_err,
+                u_epistemic=u_epistemic
+            )
+            H_updated = H_updated + delta_plastic
+            self.last_plastic_telemetry = plastic_telem
 
         # 4. Learned Adaptive Anchor Gate (Contraction Mapping: guarantees stability at K >= 4)
         alpha = torch.sigmoid(self.anchor_gate(H_updated)) # [B, L, 1]
@@ -282,7 +311,8 @@ class RecurrentLatentController(nn.Module):
         memory: torch.Tensor,
         k_steps: Optional[int] = None,
         dynamic_halting: bool = False,
-        return_aux: bool = False
+        return_aux: bool = False,
+        u_epistemic: Optional[torch.Tensor] = None
     ) -> Tuple[torch.Tensor, List[torch.Tensor], List[torch.Tensor]]:
         """
         Executes recurrent latent pondering.
@@ -293,6 +323,7 @@ class RecurrentLatentController(nn.Module):
             k_steps: Fixed number of ponder steps (overrides max_ponder_steps).
             dynamic_halting: If True, evaluates entropy to halt early.
             return_aux: If True, collects probe predictions for audit/training.
+            u_epistemic: Optional [B] Epistemic uncertainty vacuity.
             
         Returns:
             H_final: [B, L_thought, D] Final thought state.
@@ -321,7 +352,8 @@ class RecurrentLatentController(nn.Module):
                 H_anchor=H_anchor,
                 memory=memory,
                 H_prev=H_prev,
-                h_prev_primary=h_prev_primary
+                h_prev_primary=h_prev_primary,
+                u_epistemic=u_epistemic
             )
 
             if err_norm is not None:

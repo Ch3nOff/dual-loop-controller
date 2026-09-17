@@ -4,6 +4,8 @@ from typing import Optional, Tuple, Dict, Any, Union, List
 from ..controller import RecurrentLatentController
 from ..memory import CognitiveWorkingMemory
 from ..verification import HypothesisVerificationGate, UncertaintySurpriseGate, ContrastiveEvidenceAccumulator, DirectionalSafetyProjection, AdaptiveSurpriseThreshold
+from ..evidential import EvidentialEpistemicGate
+from ..open_concept import OpenConceptSynthesizer
 
 class LatentDeliberationAdapter(nn.Module):
     """
@@ -43,7 +45,14 @@ class LatentDeliberationAdapter(nn.Module):
         use_ddm_halting: bool = False,
         ddm_theta_0: float = 3.0,
         ddm_gamma: float = 0.5,
-        ddm_min_theta: float = 0.5
+        ddm_min_theta: float = 0.5,
+        enable_plasticity: bool = True,
+        plastic_rank: int = 32,
+        plastic_lr: float = 0.15,
+        use_evidential_gate: bool = True,
+        use_open_concept: bool = True,
+        tau_novelty: float = 0.40,
+        tau_unseen: float = 0.65
     ):
         super().__init__()
         self.d_model = d_model
@@ -55,6 +64,8 @@ class LatentDeliberationAdapter(nn.Module):
         self.use_hypothesis_verification = use_hypothesis_verification
         self.use_surprise_gate = use_surprise_gate
         self.use_contrastive_evidence = use_contrastive_evidence
+        self.use_evidential_gate = use_evidential_gate
+        self.use_open_concept = use_open_concept
         object.__setattr__(self, "_lm_head_ref", None)
         
         # Memory compressor
@@ -76,9 +87,31 @@ class LatentDeliberationAdapter(nn.Module):
             use_ddm_halting=use_ddm_halting,
             ddm_theta_0=ddm_theta_0,
             ddm_gamma=ddm_gamma,
-            ddm_min_theta=ddm_min_theta
+            ddm_min_theta=ddm_min_theta,
+            enable_plasticity=enable_plasticity,
+            plastic_rank=plastic_rank,
+            plastic_lr=plastic_lr
         )
         
+        # Evidential Epistemic Self-Recognition Gate (Dirichlet uncertainty decomposition)
+        if use_evidential_gate:
+            self.evidential_gate = EvidentialEpistemicGate(
+                d_model=d_model,
+                tau_novelty=tau_novelty,
+                tau_unseen=tau_unseen
+            )
+        else:
+            self.evidential_gate = None
+
+        # Open-Concept Continuous Manifold Synthesizer (Unprecedented concept expansion)
+        if use_open_concept:
+            self.open_concept_synthesizer = OpenConceptSynthesizer(
+                d_model=d_model,
+                tau_unseen=tau_unseen
+            )
+        else:
+            self.open_concept_synthesizer = None
+
         # Counterfactual Hypothesis-Testing & Conservative Verification Gate (Anti-Overthinking)
         if use_hypothesis_verification:
             self.hypothesis_gate = HypothesisVerificationGate(d_model=d_model)
@@ -204,13 +237,21 @@ class LatentDeliberationAdapter(nn.Module):
         # 2. Compress context into working memory (pass key_padding_mask - ARCH-05)
         memory = self.cwm(hidden_states, key_padding_mask=key_padding_mask) # [B, M, D]
         
-        # 3. Deliberate in latent space
+        # 2b. Evidential Epistemic Self-Recognition (Dirichlet vacuity of evidence)
+        evidential_telem = {}
+        vacuity_u = None
+        if self.evidential_gate is not None:
+            evidential_telem = self.evidential_gate(h=query_rep)
+            vacuity_u = evidential_telem.get("vacuity_u")
+
+        # 3. Deliberate in latent space (passing u_epistemic for in-situ plastic fast-weight adaptation)
         h_thought, aux, entropies = self.controller(
             query_rep=query_rep,
             memory=memory,
             k_steps=steps,
             dynamic_halting=dynamic_halting,
-            return_aux=True
+            return_aux=True,
+            u_epistemic=vacuity_u
         ) # [B, L_thought, D]
         
         # 4. Hypothesis Verification & Anti-Overthinking Gate
@@ -236,8 +277,21 @@ class LatentDeliberationAdapter(nn.Module):
                 contrastive_scores_list = contrastive_scores.detach().cpu().tolist()
                 # Contrastive refinement on top of trained deliberation projection
                 raw_delta = raw_delta + 0.1 * c_delta
+
+            # 5b. Open-Concept Manifold Synthesis (for unprecedented/unseen concepts)
+            concept_telem = {}
+            if self.open_concept_synthesizer is not None and vacuity_u is not None:
+                last_err = (h_thought[:, 0, :] - query_rep)
+                proto_c, concept_telem = self.open_concept_synthesizer(
+                    h_anchor=query_rep,
+                    discrepancy=last_err,
+                    vacuity_u=vacuity_u
+                )
+                if proto_c is not None and raw_delta is not None and proto_c.any():
+                    raw_delta = raw_delta + 0.15 * proto_c.squeeze(1)
         else:
             raw_delta = None
+            concept_telem = {}
 
         # 6. Task-Aware Uncertainty-Gated Bypass (Surprise Gate with Adaptive Threshold)
         surprise_gate_tensor = torch.ones(B, 1, device=hidden_states.device)
@@ -319,6 +373,9 @@ class LatentDeliberationAdapter(nn.Module):
             "ddm_evidences": [e.detach().cpu() for e in self.controller.last_ddm_evidences] if self.controller.last_ddm_evidences else [],
             "metacog_damping": [float(m) for m in kappa_metacog.reshape(-1).detach().cpu().tolist()],
             "directional_safety": {k: v.cpu().tolist() if isinstance(v, torch.Tensor) else v for k, v in safety_telemetry.items()} if safety_telemetry else {},
+            "epistemic_vacuity": [float(v) for v in vacuity_u.reshape(-1).detach().cpu().tolist()] if vacuity_u is not None else [],
+            "plastic_trace_norm": float(self.controller.plastic_unit.last_m_fast.norm().item()) if (self.controller.plastic_unit is not None and self.controller.plastic_unit.last_m_fast is not None) else 0.0,
+            "synthesized_concepts": concept_telem.get("synthesized_count", 0),
             "gate_scale": float(torch.tanh(self.gate_alpha).item()) if hasattr(self, "gate_alpha") else 1.0,
             "adapter_mode": self.adapter_mode,
             "bypassed": False
