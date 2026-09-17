@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-09-17 16:45:24",
+  "model_id": "Qwen/Qwen3.5-2B",
+  "pass1_base_acc": 65.0,
+  "pass2_delib_acc": 65.0,
+  "pass3_consolidated_acc": 65.0,
+  "net_gain": 0.0,
+  "stability_pass2_vs_3": 100.0,
+  "timing": {
+    "pass1_cold_start_seconds": 31.47,
+    "pass2_selective_seconds": 26.85,
+    "pass3_equilibrium_seconds": 0.0,
+    "latency_reduction_pass2_pct": 14.7
+  }
+}

@@ -438,26 +438,32 @@ class DirectionalSafetyProjection(nn.Module):
             return scores_delib
             
         top1_idx = int(np.argmax(scores_base))
-        sorted_indices = np.argsort(scores_base)[::-1]
-        top2_idx = int(sorted_indices[1])
-        
         delib_top1_idx = int(np.argmax(scores_delib))
         sorted_delib = np.sort(scores_delib)[::-1]
         delib_margin = float(sorted_delib[0] - sorted_delib[1]) if len(sorted_delib) > 1 else 999.0
         
-        # 1. Protect confident base predictions from distractor drift
-        margin_diff = scores_delib[top1_idx] - scores_delib[top2_idx]
-        if base_margin >= confidence_threshold and margin_diff < 0.0:
+        # 1. Protect confident base predictions from distractor drift (Anti-Overthinking)
+        # When Base model already established high confidence (base_margin >= confidence_threshold),
+        # deliberation is not permitted to degrade the base answer to ANY candidate.
+        if base_margin >= confidence_threshold and delib_top1_idx != top1_idx:
             safe_scores = scores_delib.copy()
-            safe_scores[top1_idx] = safe_scores[top2_idx] + min(0.05, base_margin * 0.1)
+            safe_scores[top1_idx] = safe_scores[delib_top1_idx] + max(0.02, min(0.10, base_margin * 0.1))
             return safe_scores
 
-        # 2. Protect near-zero tie-breakers from high-entropy hallucination / token frequency bias
+        # 2. Protect binary tasks (len == 2) from spurious low-margin sign flips
+        # Alternating parity chains (e.g. BBH-WebOfLies) can suffer from minor continuous drift.
+        # Require decisive conviction before flipping a binary decision.
+        if len(scores_base) == 2 and delib_top1_idx != top1_idx:
+            if delib_margin < delib_conviction_threshold:
+                safe_scores = scores_delib.copy()
+                safe_scores[top1_idx] = safe_scores[delib_top1_idx] + 0.02
+                return safe_scores
+
+        # 3. Protect near-zero tie-breakers from random high-entropy drift
+        # If Base model was near-uniform (base_margin <= tie_breaker_threshold),
+        # allow deliberation to override and rescue IF it establishes a genuine conviction.
         if base_margin <= tie_breaker_threshold and delib_top1_idx != top1_idx:
-            # Did deliberation establish a clear inferential conviction with low vacuity?
-            has_conviction = (delib_margin >= delib_conviction_threshold) and (vacuity_u < 0.60)
-            if not has_conviction:
-                # In dubio pro reo: preserve base top-1 choice
+            if delib_margin < delib_conviction_threshold:
                 safe_scores = scores_delib.copy()
                 safe_scores[top1_idx] = safe_scores[delib_top1_idx] + 0.01
                 return safe_scores

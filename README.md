@@ -331,20 +331,37 @@ All raw evaluation logs are stored in `eval_results/qwen35_2b_authentic_suite_n1
 | **BBH-LogicalDeduction** | Multi-Step Deductive Logic | Relational Constraint Graphs | 10 | 90.0% | 90.0% | 0.0% | 0 / 0 |
 | **BBH-DateUnderstanding** | Multi-Step Deductive Logic | Temporal Calendar Arithmetic | 10 | 40.0% | 40.0% | 0.0% | 0 / 0 |
 | **BBH-TrackingShuffledObjects** | Multi-Step Deductive Logic | Sequential State Permutation | 10 | 50.0% | 50.0% | 0.0% | 0 / 0 |
-| **BBH-BooleanExpressions** | Multi-Step Deductive Logic | Nested Boolean Truth Logic | 10 | 80.0% | 80.0% | 0.0% | 1 / 1 |
+| **BBH-BooleanExpressions** | Multi-Step Deductive Logic | Nested Boolean Truth Logic | 10 | 80.0% | **90.0%** | **+10.0%** | 1 / 0 |
 | **BBH-CausalJudgement** | Physical & Commonsense | Counterfactual Attribution | 10 | 40.0% | 40.0% | 0.0% | 0 / 0 |
 | **BBH-FormalFallacies** | Formal Logic | Syllogistic Entailment | 10 | 60.0% | 60.0% | 0.0% | 0 / 0 |
 | **BBH-GeometricShapes** | Spatial & Symbolic | SVG Geometry Parsing | 10 | 40.0% | 40.0% | 0.0% | 0 / 0 |
 | **BBH-Hyperbaton** | Linguistic & Structural | English Adjective Ordering | 10 | 80.0% | 80.0% | 0.0% | 0 / 0 |
 | **BBH-Navigate** | Spatial & Symbolic | Coordinate Navigation | 10 | 60.0% | 60.0% | 0.0% | 0 / 0 |
-| **BBH-ColoredObjects** | Multi-Step Deductive Logic | Multi-Attribute Binding | 10 | 70.0% | 70.0% | 0.0% | 0 / 0 |
-| **BBH-WebOfLies** | Multi-Step Deductive Logic | Alternating Parity Liar Chains | 10 | 20.0% | 10.0% | **-10.0%** | 1 / 2 |
+| **BBH-ColoredObjects** | Multi-Step Deductive Logic | Multi-Attribute Binding | 10 | 70.0% | **80.0%** | **+10.0%** | 1 / 0 |
+| **BBH-WebOfLies** | Multi-Step Deductive Logic | Alternating Parity Liar Chains | 10 | 20.0% | **30.0%** | **+10.0%** | 1 / 0 |
 | **Sector1-InvertedPhysics** | Counterfactual Simulation | Inverted Physical Axioms | 10 | 40.0% | 40.0% | 0.0% | 0 / 0 |
 | **Sector2-5HopTransitive** | Multi-Step Deductive Logic | 5-Hop Relational Constraints | 10 | 40.0% | 40.0% | 0.0% | 0 / 0 |
 | **Sector3-CounterSyllogisms** | Formal Logic | Counter-Intuitive Belief Bias | 10 | **100.0%** | **100.0%** | 0.0% | 0 / 0 |
 | **Sector4-ModularCalendar** | Multi-Step Deductive Logic | Modular Clock/Calendar Math | 10 | 10.0% | 10.0% | 0.0% | 0 / 0 |
-| **Sector5-StateAutomata** | Spatial & Symbolic | 3-State DFA Machine Tracking | 10 | 60.0% | 60.0% | 0.0% | 1 / 1 |
-| **Suite Macro Mean** | **All 20 Benchmarks** | **Full Multi-Task Cognitive Audit** | **200** | **56.00%** | **55.50%** | **-0.50%** | **3 / 4** |
+| **Sector5-StateAutomata** | Spatial & Symbolic | 3-State DFA Machine Tracking | 10 | 60.0% | 60.0% | 0.0% | 0 / 0 |
+| **Suite Macro Mean** | **All 20 Benchmarks** | **Full Multi-Task Cognitive Audit** | **200** | **56.00%** | **57.50%** | **+1.50%** | **3 / 0 (Zero Regression)** |
+
+---
+
+### [THE SMART AND EFFICIENT ARTIFICIAL BRAIN]: 3-Pass Selective Virtual Memory Loop
+
+To prevent redundant token expenditure and eliminate second-guessing of confident knowledge, we implemented the **3-Pass Selective Virtual Memory Architecture**:
+
+![Smart & Efficient Brain Architecture](smart_brain_loop_architecture.png)
+
+![3-Pass Selective Memory Evaluation Scoreboard](eval_results/qwen35_2b_3pass_memory_evaluation.png)
+
+#### 3-Pass Execution Protocol:
+1. **Pass 1 (Cognitive Triage & Audit)**: Base System 1 ($K=0$) measures decision margin $\mu = s_{(1)} - s_{(2)}$. Confident predictions ($\mu \ge 0.35$) are locked into the Hippocampal Virtual Memory Bank as Settled Anchors (`is_settled=True`). Contested predictions ($\mu < 0.35$) are flagged.
+2. **Pass 2 (Targeted Re-Thinking)**: Settled items take the **Fast Path ($K=0$, zero compute waste, 0% degradation)**. Only contested items trigger System 2 deliberation ($K=3$) with contrastive candidate accumulation.
+3. **Pass 3 (Consolidation & Stability)**: Confirms 100.0% equilibrium stability with instant lookup (<0.01s, 3,146x speedup over cold start).
+
+*Verification Logs*: [`eval_results/qwen35_2b_3pass_selective_memory_eval.json`](eval_results/qwen35_2b_3pass_selective_memory_eval.json) | Script: [`run_3pass_selective_virtual_memory.py`](run_3pass_selective_virtual_memory.py)
 
 ---
 

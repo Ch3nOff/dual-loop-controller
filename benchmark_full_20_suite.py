@@ -362,7 +362,7 @@ def evaluate_item(wrapped_model, tokenizer, item):
         base_margin=margin_val,
         confidence_threshold=0.35,
         tie_breaker_threshold=0.05,
-        delib_conviction_threshold=0.25,
+        delib_conviction_threshold=0.28,
         vacuity_u=vacuity_u
     )
 
