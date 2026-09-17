@@ -4,9 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dual-loop-controller"
-version = "2.2.2"
+version = "2.2.3"
 description = "A hardware-aligned, manifold-preserving latent deliberation framework for Transformers"
-readme = "README.md"
+readme = "README_PYPI.md"
 requires-python = ">=3.9"
 license = "MIT"
 authors = [
