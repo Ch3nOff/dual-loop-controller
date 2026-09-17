@@ -15,6 +15,9 @@ This document preserves the comprehensive empirical evaluation results and repro
 ### C. The Smart & Efficient Artificial Brain Architecture (3-Pass Loop)
 ![The Smart & Efficient Artificial Brain Architecture](smart_brain_loop_architecture.png)
 
+### D. Frontier Model Competitive Leaderboard & Pareto Efficiency
+![Frontier Competitive Leaderboard](eval_results/frontier_model_leaderboard.png)
+
 ---
 
 ## 2. Authentic 20-Benchmark Multi-Domain Macro Suite ($N=200$)

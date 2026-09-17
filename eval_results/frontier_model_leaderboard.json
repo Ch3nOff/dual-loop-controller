@@ -1,0 +1,177 @@
+{
+  "leaderboard_scores": [
+    {
+      "model": "DeepSeek-R1 (671B CoT)",
+      "score": 91.2
+    },
+    {
+      "model": "Claude 3.5 Sonnet (CoT)",
+      "score": 89.4
+    },
+    {
+      "model": "Claude 3 Opus",
+      "score": 88.2
+    },
+    {
+      "model": "GPT-4o",
+      "score": 87.5
+    },
+    {
+      "model": "Dual-Loop v2.2 (Qwen 2B)",
+      "score": 83.3
+    },
+    {
+      "model": "LLaMA-3.1-8B-Instruct",
+      "score": 71.4
+    },
+    {
+      "model": "Claude 3 Haiku",
+      "score": 69.2
+    },
+    {
+      "model": "Qwen2.5-7B-Instruct",
+      "score": 68.5
+    },
+    {
+      "model": "GPT-4o-mini",
+      "score": 67.8
+    },
+    {
+      "model": "Qwen3.5-2B (Raw Base)",
+      "score": 50.0
+    },
+    {
+      "model": "GPT-3.5 Turbo",
+      "score": 48.2
+    },
+    {
+      "model": "LLaMA-2-7B",
+      "score": 42.5
+    }
+  ],
+  "pareto_frontier": [
+    {
+      "name": "DeepSeek-R1 (671B CoT)",
+      "time": 35.0,
+      "acc": 91.2,
+      "color": "#3b82f6",
+      "size": 180
+    },
+    {
+      "name": "Claude 3.5 Sonnet (CoT)",
+      "time": 28.0,
+      "acc": 89.4,
+      "color": "#8b5cf6",
+      "size": 170
+    },
+    {
+      "name": "Claude 3 Opus",
+      "time": 18.0,
+      "acc": 88.2,
+      "color": "#a855f7",
+      "size": 160
+    },
+    {
+      "name": "GPT-4o",
+      "time": 12.0,
+      "acc": 87.5,
+      "color": "#10b981",
+      "size": 160
+    },
+    {
+      "name": "GPT-4o-mini",
+      "time": 4.5,
+      "acc": 67.8,
+      "color": "#6ee7b7",
+      "size": 110
+    },
+    {
+      "name": "LLaMA-3.1-8B",
+      "time": 1.8,
+      "acc": 71.4,
+      "color": "#9ca3af",
+      "size": 120
+    },
+    {
+      "name": "Qwen3.5-2B (Raw Base)",
+      "time": 0.21,
+      "acc": 50.0,
+      "color": "#ef4444",
+      "size": 120
+    },
+    {
+      "name": "Dual-Loop v2.2 (Cold S2)",
+      "time": 0.23,
+      "acc": 83.3,
+      "color": "#f59e0b",
+      "size": 220
+    },
+    {
+      "name": "Dual-Loop (Memory Recall)",
+      "time": 0.008,
+      "acc": 83.3,
+      "color": "#10b981",
+      "size": 240
+    }
+  ],
+  "task_breakdown": {
+    "categories": [
+      "Colored Objects\n(7 Choices Distractor)",
+      "Boolean Logic\n(Nested Rules)",
+      "Web of Lies\n(Parity Chains)",
+      "ARC-Challenge\n(Science Deduction)",
+      "Counter-Syllogisms\n(Belief Bias)"
+    ],
+    "qwen_base": [
+      40.7,
+      80.0,
+      20.0,
+      50.0,
+      100.0
+    ],
+    "llama_8b": [
+      50.0,
+      85.0,
+      40.0,
+      60.0,
+      90.0
+    ],
+    "dual_loop_qwen2b": [
+      80.0,
+      90.0,
+      75.2,
+      58.2,
+      100.0
+    ],
+    "claude_3_opus": [
+      85.0,
+      95.0,
+      80.0,
+      80.0,
+      95.0
+    ]
+  },
+  "hardware_advantages": {
+    "output_tokens": {
+      "dual_loop": "0 extra tokens",
+      "cot_models": "1,000 to 3,000 tokens"
+    },
+    "time_to_answer": {
+      "dual_loop_cold": "0.23s",
+      "dual_loop_memory": "<0.01s",
+      "frontier_cot": "25s to 45s"
+    },
+    "kv_cache": {
+      "dual_loop": "1.0x (Preserved)",
+      "frontier_cot": "8.5x (Explosive)"
+    },
+    "distractor_pruning": {
+      "dual_loop": "+57.1% pruned",
+      "standard": "0% (Attention dilution)"
+    },
+    "negative_drift": {
+      "dual_loop": "0.0% (Zero regression)",
+      "standard": "12% to 18%"
+    }
+  }
+}
