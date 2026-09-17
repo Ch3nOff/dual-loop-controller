@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 from typing import Optional, Tuple, Dict, Any, Union, List
 from ..controller import RecurrentLatentController
-from ..memory import CognitiveWorkingMemory
+from ..memory import CognitiveWorkingMemory, EpisodicMemoryBuffer
 from ..verification import HypothesisVerificationGate, UncertaintySurpriseGate, ContrastiveEvidenceAccumulator, DirectionalSafetyProjection, AdaptiveSurpriseThreshold
 from ..evidential import EvidentialEpistemicGate
 from ..open_concept import OpenConceptSynthesizer
@@ -161,6 +161,19 @@ class LatentDeliberationAdapter(nn.Module):
                 tau_base=0.005, gamma=0.05, H_ref=3.0
             )
 
+        # Persistent Episodic Meta-Cognitive Memory Bank (Hippocampal Consolidation)
+        self.episodic_memory = EpisodicMemoryBuffer(d_model=d_model)
+        self.continual_mode: bool = False
+
+    def set_continual_mode(self, enabled: bool = True, decay: float = 0.90):
+        """Enables continual learning across trials/runs without amnesia."""
+        self.continual_mode = enabled
+        self.controller.set_continual_mode(enabled=enabled, decay=decay)
+
+    def reset_state(self, force: bool = False):
+        """Resets controller mutable state (or soft decays if continual_mode=True)."""
+        self.controller.reset_state(force=force)
+
     def set_lm_head(self, lm_head: nn.Module):
         """Binds output projection for surprise gate AND directional safety projection."""
         object.__setattr__(self, "_lm_head_ref", lm_head)
@@ -174,7 +187,8 @@ class LatentDeliberationAdapter(nn.Module):
         query_idx: Union[int, torch.Tensor, List[int]] = -1,
         dynamic_halting: bool = False,
         key_padding_mask: Optional[torch.Tensor] = None,
-        candidate_embeds: Optional[Any] = None
+        candidate_embeds: Optional[Any] = None,
+        critique_vector: Optional[torch.Tensor] = None
     ) -> Tuple[torch.Tensor, Dict[str, Any]]:
         """
         Args:
@@ -184,6 +198,7 @@ class LatentDeliberationAdapter(nn.Module):
             dynamic_halting: Whether to halt pondering early upon entropy/latent convergence.
             key_padding_mask: Optional [B, SeqLen] boolean mask (True for padded positions).
             candidate_embeds: Optional multiple-choice candidate options embeddings for contrastive suppression.
+            critique_vector: Optional [B, D] counterfactual critique vector for autonomous self-correction.
         Returns:
             enhanced_states: [B, SeqLen', D] Modified hidden states for layer l+1.
             telemetry: Diagnostic information.
@@ -244,6 +259,16 @@ class LatentDeliberationAdapter(nn.Module):
             evidential_telem = self.evidential_gate(h=query_rep)
             vacuity_u = evidential_telem.get("vacuity_u")
 
+        # 2c. Self-Correction / Critique Falsification: nudge fast weights away from ambiguous prior attractor
+        critique_telem = {}
+        if critique_vector is not None and self.controller.plastic_unit is not None:
+            init_t = self.controller.initialize_thoughts(query_rep)
+            critique_telem = self.controller.plastic_unit.apply_critique_falsification(
+                thoughts=init_t,
+                critique_vector=critique_vector,
+                u_epistemic=vacuity_u
+            )
+
         # 3. Deliberate in latent space (passing u_epistemic for in-situ plastic fast-weight adaptation)
         h_thought, aux, entropies = self.controller(
             query_rep=query_rep,
@@ -276,7 +301,7 @@ class LatentDeliberationAdapter(nn.Module):
                 )
                 contrastive_scores_list = contrastive_scores.detach().cpu().tolist()
                 # Contrastive refinement on top of trained deliberation projection
-                raw_delta = raw_delta + 0.1 * c_delta
+                raw_delta = raw_delta + 0.35 * c_delta
 
             # 5b. Open-Concept Manifold Synthesis (for unprecedented/unseen concepts)
             concept_telem = {}

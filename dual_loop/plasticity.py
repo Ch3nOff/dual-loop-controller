@@ -59,11 +59,53 @@ class PlasticFastWeightUnit(nn.Module):
         # Instance state for in-situ memory trace (B, R, R)
         self.last_m_fast: Optional[torch.Tensor] = None
         self.last_update_norm: float = 0.0
+        self.continual_mode: bool = False
+        self.continual_decay: float = 0.90
 
-    def reset_state(self):
-        """Resets virtual parameters to prevent cross-request leakage."""
-        self.last_m_fast = None
-        self.last_update_norm = 0.0
+    def set_continual_mode(self, enabled: bool = True, decay: float = 0.90):
+        """Toggles continual learning mode across requests/trials."""
+        self.continual_mode = enabled
+        self.continual_decay = float(decay)
+
+    def reset_state(self, force: bool = False):
+        """Resets virtual parameters, or applies soft decay if in continual mode."""
+        if self.continual_mode and not force and self.last_m_fast is not None:
+            self.last_m_fast = self.last_m_fast * self.continual_decay
+            self.last_update_norm = 0.0
+        else:
+            self.last_m_fast = None
+            self.last_update_norm = 0.0
+
+    def apply_critique_falsification(
+        self,
+        thoughts: torch.Tensor,
+        critique_vector: torch.Tensor,
+        u_epistemic: Optional[torch.Tensor] = None,
+        anti_lr: float = 0.20
+    ) -> Dict[str, Any]:
+        """
+        Anti-Hebbian / Orthogonalizing perturbation to escape ambiguous local minima
+        discovered during Pass 1 uncertainty audits.
+        """
+        B, L, D = thoughts.shape
+        device = thoughts.device
+        dtype = thoughts.dtype
+        if critique_vector.dim() == 2:
+            critique_vector = critique_vector.unsqueeze(1).expand(-1, L, -1)
+            
+        u_k = F.gelu(self.proj_u(thoughts))
+        v_critique = self.norm_v(self.proj_v(critique_vector))
+        delta_m_critique = torch.bmm(v_critique.transpose(1, 2), u_k) / float(L)
+        
+        g_u = u_epistemic.reshape(B, 1, 1).to(device=device, dtype=dtype) if u_epistemic is not None else 1.0
+        anti_update = -anti_lr * g_u * delta_m_critique
+        
+        if self.last_m_fast is None:
+            self.last_m_fast = torch.zeros(B, self.rank, self.rank, device=device, dtype=dtype)
+        self.last_m_fast = self.last_m_fast + anti_update
+        m_norm = self.last_m_fast.norm(dim=(-2, -1), keepdim=True).clamp(min=1e-6)
+        self.last_m_fast = self.last_m_fast * torch.clamp(10.0 / m_norm, max=1.0)
+        return {"anti_update_norm": float(anti_update.norm().item())}
 
     def forward(
         self,

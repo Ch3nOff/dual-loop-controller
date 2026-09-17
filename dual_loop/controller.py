@@ -200,13 +200,18 @@ class RecurrentLatentController(nn.Module):
         else:
             self.audit_probe = None
 
-    def reset_state(self):
+    def set_continual_mode(self, enabled: bool = True, decay: float = 0.90):
+        """Toggles continual learning mode across requests/trials."""
+        if self.plastic_unit is not None:
+            self.plastic_unit.set_continual_mode(enabled=enabled, decay=decay)
+
+    def reset_state(self, force: bool = False):
         """Clear mutable instance telemetry state to prevent cross-request leakage (ARCH-02 / NEW-02)."""
         self.last_lambdas = []
         self.last_error_norms = []
         self.last_ddm_evidences = []
         if self.plastic_unit is not None:
-            self.plastic_unit.reset_state()
+            self.plastic_unit.reset_state(force=force)
         self.last_plastic_telemetry = {}
 
     def initialize_thoughts(self, query_rep: torch.Tensor) -> torch.Tensor:

@@ -53,3 +53,111 @@ class CognitiveWorkingMemory(nn.Module):
         slots = self.norm(q + attn_out)
         slots = self.norm_mlp(slots + self.mlp(slots))
         return slots
+
+
+class EpisodicMemoryBuffer(nn.Module):
+    """
+    Episodic Meta-Cognitive Memory Buffer (Hippocampal Consolidation).
+    
+    Maintains persistent memory traces across multiple encounters/trials:
+    - Stores key queries, final thought vectors, epistemic uncertainty u(x), decision margins,
+      and associative fast-weight matrices.
+    - Enables content-based associative recall (cosine similarity matching).
+    - Enables autonomous self-reflection and multi-pass improvement.
+    """
+    def __init__(self, d_model: int, capacity: int = 512, sim_threshold: float = 0.70):
+        super().__init__()
+        self.d_model = d_model
+        self.capacity = capacity
+        self.sim_threshold = sim_threshold
+        
+        self.keys: list = []
+        self.thoughts: list = []
+        self.vacuities: list = []
+        self.margins: list = []
+        self.fast_weights: list = []
+        self.metadata: list = []
+
+    def store(
+        self,
+        key: torch.Tensor,
+        thought: torch.Tensor,
+        vacuity_u: float,
+        margin: float,
+        m_fast: Optional[torch.Tensor] = None,
+        meta: Optional[dict] = None
+    ):
+        """Stores a completed deliberation episode into the episodic bank."""
+        if len(self.keys) >= self.capacity:
+            self.keys.pop(0)
+            self.thoughts.pop(0)
+            self.vacuities.pop(0)
+            self.margins.pop(0)
+            self.fast_weights.pop(0)
+            self.metadata.pop(0)
+            
+        k_rep = key.detach().squeeze(0) if key.dim() > 1 else key.detach()
+        t_rep = thought.detach().squeeze(0) if thought.dim() > 1 else thought.detach()
+        m_snap = m_fast.detach().clone() if m_fast is not None else None
+        
+        self.keys.append(k_rep.cpu())
+        self.thoughts.append(t_rep.cpu())
+        self.vacuities.append(float(vacuity_u))
+        self.margins.append(float(margin))
+        self.fast_weights.append(m_snap.cpu() if m_snap is not None else None)
+        self.metadata.append(meta or {})
+
+    def recall(
+        self,
+        query: torch.Tensor,
+        top_k: int = 1
+    ) -> list:
+        """
+        Recalls the most relevant past episodic deliberation traces for the given query.
+        Returns list of matched episodes with cosine similarity above threshold.
+        """
+        if not self.keys:
+            return []
+            
+        q_rep = query.detach().squeeze(0) if query.dim() > 1 else query.detach()
+        q_norm = torch.nn.functional.normalize(q_rep.unsqueeze(0).float().cpu(), p=2, dim=-1)
+        
+        k_stack = torch.stack(self.keys, dim=0).float() # [N, D]
+        k_norm = torch.nn.functional.normalize(k_stack, p=2, dim=-1)
+        
+        sims = torch.mm(q_norm, k_norm.t()).squeeze(0) # [N]
+        topk_vals, topk_inds = torch.topk(sims, k=min(top_k, len(self.keys)), dim=-1)
+        
+        results = []
+        inds = [topk_inds.item()] if topk_inds.dim() == 0 else topk_inds.tolist()
+        vals = [topk_vals.item()] if topk_vals.dim() == 0 else topk_vals.tolist()
+        for val, idx in zip(vals, inds):
+            if val >= self.sim_threshold:
+                results.append({
+                    "similarity": val,
+                    "thought": self.thoughts[idx].to(device=query.device, dtype=query.dtype),
+                    "vacuity_u": self.vacuities[idx],
+                    "margin": self.margins[idx],
+                    "m_fast": self.fast_weights[idx].to(device=query.device) if self.fast_weights[idx] is not None else None,
+                    "metadata": self.metadata[idx]
+                })
+        return results
+
+    def consolidate(self, decay_factor: float = 0.95):
+        """Decays fast-weights and updates memory traces."""
+        for i in range(len(self.fast_weights)):
+            if self.fast_weights[i] is not None:
+                self.fast_weights[i] = self.fast_weights[i] * decay_factor
+
+    def clear(self):
+        """Completely clears the episodic memory buffer."""
+        self.keys.clear()
+        self.thoughts.clear()
+        self.vacuities.clear()
+        self.margins.clear()
+        self.fast_weights.clear()
+        self.metadata.clear()
+
+    def __len__(self) -> int:
+        return len(self.keys)
+

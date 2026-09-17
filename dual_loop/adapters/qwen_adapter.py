@@ -209,13 +209,35 @@ class DualLoopQwenModel(nn.Module):
             query_idx=query_idx,
             dynamic_halting=self.dynamic_halting,
             key_padding_mask=key_padding_mask,
-            candidate_embeds=getattr(self, "_current_candidate_embeds", None)
+            candidate_embeds=getattr(self, "_current_candidate_embeds", None),
+            critique_vector=getattr(self, "_current_critique_vector", None)
         )
         self.last_telemetry = telemetry
 
         if is_tuple:
             return (enhanced,) + output[1:]
         return enhanced
+
+    def set_candidate_embeds(self, embeds: Optional[Any] = None):
+        """Sets candidate embeddings for joint contrastive distractor elimination."""
+        self._current_candidate_embeds = embeds
+
+    def set_critique_vector(self, vector: Optional[torch.Tensor] = None):
+        """Sets counterfactual critique vector for autonomous self-correction."""
+        self._current_critique_vector = vector
+
+    def set_continual_mode(self, enabled: bool = True, decay: float = 0.90):
+        """Enables continual learning across trials/runs without amnesia."""
+        self.adapter.set_continual_mode(enabled=enabled, decay=decay)
+
+    def reset_state(self, force: bool = False):
+        """Resets mutable state (or soft decays if in continual mode)."""
+        self.adapter.reset_state(force=force)
+
+    def clear_episodic_memory(self):
+        """Clears all stored episodic traces."""
+        if hasattr(self.adapter, "episodic_memory"):
+            self.adapter.episodic_memory.clear()
 
     def set_ponder_steps(self, k: int):
         """
