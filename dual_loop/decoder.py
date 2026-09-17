@@ -32,7 +32,11 @@ class DualLoopTransformer(nn.Module):
         enable_critique: bool = True,
         use_learned_halting: bool = False,
         lambda_prior: float = 0.5,
-        tau_halt: float = 0.75
+        tau_halt: float = 0.75,
+        use_ddm_halting: bool = False,
+        ddm_theta_0: float = 3.0,
+        ddm_gamma: float = 0.5,
+        ddm_min_theta: float = 0.5
     ):
         super().__init__()
         self.vocab_size = vocab_size
@@ -64,7 +68,11 @@ class DualLoopTransformer(nn.Module):
             enable_critique=enable_critique,
             use_learned_halting=use_learned_halting,
             lambda_prior=lambda_prior,
-            tau_halt=tau_halt
+            tau_halt=tau_halt,
+            use_ddm_halting=use_ddm_halting,
+            ddm_theta_0=ddm_theta_0,
+            ddm_gamma=ddm_gamma,
+            ddm_min_theta=ddm_min_theta
         )
         
         # 5. System 1: Inner Loop Decoder
@@ -221,9 +229,12 @@ class DualLoopTransformer(nn.Module):
                 if self.outer_loop.audit_probe is not None:
                     aux_logits_list.append(self.outer_loop.audit_probe(H[:, 0, :]))
                 
-                # 4. Per-sample halting: check halting criteria (learned halting gate or predictive entropy)
+                # 4. Per-sample halting: check halting criteria (learned halting gate, DDM halting, or predictive entropy)
                 if self.outer_loop.learned_halting_gate is not None and lam_k is not None and not self.training:
                     halt_decision = self.outer_loop.learned_halting_gate.should_halt_inference(lam_k)
+                    newly_halted = active_mask & halt_decision
+                elif getattr(self.outer_loop, 'ddm_halting', None) is not None and not self.training:
+                    halt_decision, ev_ddm, _ = self.outer_loop.ddm_halting.should_halt(logits_k, k)
                     newly_halted = active_mask & halt_decision
                 else:
                     newly_halted = active_mask & (ent_k <= thresh)
@@ -252,7 +263,8 @@ class DualLoopTransformer(nn.Module):
                 "steps_taken": steps_taken,
                 "effective_k": steps_taken.mean().item(),
                 "error_norms": error_norms_list,
-                "halting_lambdas": lambdas_list
+                "halting_lambdas": lambdas_list,
+                "ddm_evidences": [e.detach().cpu() for e in self.outer_loop.last_ddm_evidences] if getattr(self.outer_loop, 'last_ddm_evidences', None) else []
             }
             return final_logits, info
 

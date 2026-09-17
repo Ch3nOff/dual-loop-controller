@@ -261,7 +261,11 @@ Despite the scaling limits at small model regimes, the repository provides clean
 
 * **Cognitive Working Memory (`dual_loop/memory.py`)**: Compresses context into $M \ll N$ slots in GPU SRAM/L2 cache to avoid HBM memory bandwidth roundtrips.
 * **Top-K Capacity Routing (`dual_loop/controller.py`)**: Enforces static tensor shapes $[B, K_{\text{cap}}, D]$ to eliminate CUDA warp divergence (MoD-style).
-* **Calibrated Entropy Halting (`dual_loop/halting.py`)**: Adaptive stopping based on predictive uncertainty and convergence delta.
+* **Metacognitive Error-Refinement (`LatentCritiqueRefinementUnit` in `dual_loop/controller.py`)**: Computes context discrepancy $e_k = \text{LN}(H - H_{\text{cross}})$ and injects corrective critique updates into thoughts (learning from intermediate mistakes).
+* **Task-Aware Uncertainty-Gated Bypass (`UncertaintySurpriseGate` in `dual_loop/verification.py`)**: Calculates Jensen-Shannon Divergence ($D_{\text{JS}}[p_{\text{base}} \parallel p_{\text{delib}}]$) between pre- and post-deliberation distributions. Smoothly attenuates $\delta \to 0$ when $JSD < \tau_S$, preserving base intuition on commonsense physics/science (PIQA, OpenBookQA).
+* **Contrastive Distractor Suppression (`ContrastiveEvidenceAccumulator` in `dual_loop/verification.py`)**: Directs deliberation delta towards candidate options $\{c_1, \dots, c_n\}$ via latent cross-attention and cosine softmax scoring, converting undirected overthinking into focused contrastive comparison.
+* **Drift-Diffusion Model (DDM) Halting (`DriftDiffusionHalting` in `dual_loop/halting.py`)**: Evaluates top-1 vs. top-2 logit margin against a collapsing decision boundary $\theta_k = \text{clamp}(\theta_0(1 - k/K_{\max})^\gamma, \min=\theta_{\min})$, triggering instant halting ($k=1$) on decisive commonsense tasks.
+* **Hypothesis Verification Gate (`HypothesisVerificationGate` in `dual_loop/verification.py`)**: Treats deliberation as a controlled mental trial, checking evidence gain $\Delta_{\text{evidence}}$ before approving residual injection.
 * **Latent Deliberation Adapter (`dual_loop/adapters/latent_adapter.py`)**: A plug-and-play mid-network adapter for pretrained LLMs (e.g., Llama, Qwen).
 
 ## Mode Selection & Use Case Decision Guide: Which Mode is Best?

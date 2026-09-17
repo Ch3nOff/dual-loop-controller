@@ -3,6 +3,7 @@ import torch.nn as nn
 from typing import Optional, Tuple, Dict, Any, Union, List
 from ..controller import RecurrentLatentController
 from ..memory import CognitiveWorkingMemory
+from ..verification import HypothesisVerificationGate, UncertaintySurpriseGate, ContrastiveEvidenceAccumulator
 
 class LatentDeliberationAdapter(nn.Module):
     """
@@ -33,7 +34,16 @@ class LatentDeliberationAdapter(nn.Module):
         use_learned_halting: bool = False,
         use_hypothesis_verification: bool = True,
         lambda_prior: float = 0.5,
-        tau_halt: float = 0.75
+        tau_halt: float = 0.75,
+        use_surprise_gate: bool = True,
+        tau_surprise: float = 0.01,
+        surprise_temperature: float = 0.05,
+        use_contrastive_evidence: bool = True,
+        tau_contrast: float = 0.1,
+        use_ddm_halting: bool = False,
+        ddm_theta_0: float = 3.0,
+        ddm_gamma: float = 0.5,
+        ddm_min_theta: float = 0.5
     ):
         super().__init__()
         self.d_model = d_model
@@ -43,6 +53,8 @@ class LatentDeliberationAdapter(nn.Module):
         self.enable_critique = enable_critique
         self.use_learned_halting = use_learned_halting
         self.use_hypothesis_verification = use_hypothesis_verification
+        self.use_surprise_gate = use_surprise_gate
+        self.use_contrastive_evidence = use_contrastive_evidence
         
         # Memory compressor
         self.cwm = CognitiveWorkingMemory(d_model=d_model, num_slots=num_cwm_slots, n_heads=n_heads)
@@ -59,15 +71,39 @@ class LatentDeliberationAdapter(nn.Module):
             enable_critique=enable_critique,
             use_learned_halting=use_learned_halting,
             lambda_prior=lambda_prior,
-            tau_halt=tau_halt
+            tau_halt=tau_halt,
+            use_ddm_halting=use_ddm_halting,
+            ddm_theta_0=ddm_theta_0,
+            ddm_gamma=ddm_gamma,
+            ddm_min_theta=ddm_min_theta
         )
         
         # Counterfactual Hypothesis-Testing & Conservative Verification Gate (Anti-Overthinking)
         if use_hypothesis_verification:
-            from ..verification import HypothesisVerificationGate
             self.hypothesis_gate = HypothesisVerificationGate(d_model=d_model)
         else:
             self.hypothesis_gate = None
+
+        # Task-Aware Uncertainty-Gated Bypass (Surprise Gate based on JSD)
+        if use_surprise_gate:
+            self.surprise_gate = UncertaintySurpriseGate(
+                d_model=d_model,
+                tau_surprise=tau_surprise,
+                temperature=surprise_temperature,
+                vocab_size=vocab_size
+            )
+        else:
+            self.surprise_gate = None
+
+        # Contrastive Distractor Suppression in Latent Space
+        if use_contrastive_evidence:
+            self.contrastive_accumulator = ContrastiveEvidenceAccumulator(
+                d_model=d_model,
+                n_heads=n_heads,
+                tau_contrast=tau_contrast
+            )
+        else:
+            self.contrastive_accumulator = None
         
         if adapter_mode == "residual":
             self.residual_proj = nn.Sequential(
@@ -81,13 +117,19 @@ class LatentDeliberationAdapter(nn.Module):
             # ReZero learnable gate initialized to gate_alpha_init (stabilized residual injection)
             self.gate_alpha = nn.Parameter(torch.tensor([float(gate_alpha_init)]))
 
+    def set_lm_head(self, lm_head: nn.Module):
+        """Binds an output projection/lm_head for exact predictive surprise calculation."""
+        if self.surprise_gate is not None:
+            self.surprise_gate.set_lm_head(lm_head)
+
     def forward(
         self,
         hidden_states: torch.Tensor,
         k_steps: Optional[int] = None,
         query_idx: Union[int, torch.Tensor, List[int]] = -1,
         dynamic_halting: bool = False,
-        key_padding_mask: Optional[torch.Tensor] = None
+        key_padding_mask: Optional[torch.Tensor] = None,
+        candidate_embeds: Optional[Any] = None
     ) -> Tuple[torch.Tensor, Dict[str, Any]]:
         """
         Args:
@@ -96,6 +138,7 @@ class LatentDeliberationAdapter(nn.Module):
             query_idx: Position of the query/instruction token (int, or per-sample [B] Tensor/List).
             dynamic_halting: Whether to halt pondering early upon entropy/latent convergence.
             key_padding_mask: Optional [B, SeqLen] boolean mask (True for padded positions).
+            candidate_embeds: Optional multiple-choice candidate options embeddings for contrastive suppression.
         Returns:
             enhanced_states: [B, SeqLen', D] Modified hidden states for layer l+1.
             telemetry: Diagnostic information.
@@ -114,6 +157,10 @@ class LatentDeliberationAdapter(nn.Module):
                 "halting_lambdas": [],
                 "acceptance_beta": [],
                 "evidence_gain": [],
+                "surprise_gate": [],
+                "surprise_jsd": [],
+                "contrastive_scores": [],
+                "ddm_evidences": [],
                 "adapter_mode": self.adapter_mode,
                 "bypassed": True
             }
@@ -165,15 +212,37 @@ class LatentDeliberationAdapter(nn.Module):
             beta_gate = torch.ones(B, 1, 1, device=h_thought.device)
             v_telem = {}
 
-        # 5. Integrate into stream
+        # 5. Contrastive Option Distractor Suppression & Directional Delta
+        contrastive_scores_list = []
+        if candidate_embeds is not None and self.contrastive_accumulator is not None:
+            raw_delta, contrastive_scores = self.contrastive_accumulator(
+                thought=h_thought[:, 0, :],
+                candidate_embeds=candidate_embeds
+            )
+            contrastive_scores_list = contrastive_scores.detach().cpu().tolist()
+        elif self.adapter_mode == "residual":
+            raw_delta = self.residual_proj(h_thought[:, 0, :])
+        else:
+            raw_delta = None
+
+        # 6. Task-Aware Uncertainty-Gated Bypass (Surprise Gate)
+        surprise_gate_tensor = torch.ones(B, 1, device=hidden_states.device)
+        surprise_jsd_tensor = torch.zeros(B, device=hidden_states.device)
+        if self.surprise_gate is not None and self.adapter_mode == "residual" and raw_delta is not None:
+            surprise_gate_tensor, surprise_jsd_tensor = self.surprise_gate.compute_surprise_gate(
+                h_base=query_rep,
+                h_delib=query_rep + raw_delta
+            )
+
+        # 7. Integrate into stream
         if self.adapter_mode == "prefix":
             # Prepend thoughts as soft prefix: [B, L_thought + S, D]
             enhanced = torch.cat([h_thought, hidden_states], dim=1)
         elif self.adapter_mode == "residual":
             # Add thoughts as a ReZero-gated residual onto the query token
-            # beta_gate scales delta: if hypothesis is rejected (overthinking), delta -> 0!
+            # Gated jointly by beta_gate (hypothesis test) and surprise_gate (JSD bypass)
             scale = torch.tanh(self.gate_alpha)
-            delta = scale * beta_gate.reshape(B, 1) * self.residual_proj(h_thought[:, 0, :]) # [B, D]
+            delta = scale * surprise_gate_tensor * beta_gate.reshape(B, 1) * raw_delta # [B, D]
             enhanced = hidden_states.clone()
             if is_scalar_idx:
                 enhanced[:, idx_int:idx_int+1, :] = enhanced[:, idx_int:idx_int+1, :] + delta.unsqueeze(1)
@@ -191,6 +260,10 @@ class LatentDeliberationAdapter(nn.Module):
             "halting_lambdas": [l.detach().cpu() for l in self.controller.last_lambdas] if self.controller.last_lambdas else [],
             "acceptance_beta": [float(b) for b in beta_gate.reshape(-1).detach().cpu().tolist()] if self.hypothesis_gate is not None else [1.0] * B,
             "evidence_gain": [float(eg.item()) for eg in v_telem["evidence_gain"].cpu()] if "evidence_gain" in v_telem else [],
+            "surprise_gate": [float(g) for g in surprise_gate_tensor.reshape(-1).detach().cpu().tolist()],
+            "surprise_jsd": [float(j) for j in surprise_jsd_tensor.reshape(-1).detach().cpu().tolist()],
+            "contrastive_scores": contrastive_scores_list,
+            "ddm_evidences": [e.detach().cpu() for e in self.controller.last_ddm_evidences] if self.controller.last_ddm_evidences else [],
             "gate_scale": float(torch.tanh(self.gate_alpha).item()) if hasattr(self, "gate_alpha") else 1.0,
             "adapter_mode": self.adapter_mode,
             "bypassed": False

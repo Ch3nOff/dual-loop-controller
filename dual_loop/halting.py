@@ -281,3 +281,79 @@ class LearnedHaltingGate(nn.Module):
     def should_halt_inference(self, lambda_k: torch.Tensor) -> torch.Tensor:
         """Deterministic halting mask for inference (True for samples that halt)."""
         return lambda_k > self.tau_halt
+
+
+class DriftDiffusionHalting(nn.Module):
+    """
+    Drift-Diffusion Model (DDM) inspired halting criterion.
+    
+    Grounded in the Sequential Probability Ratio Test (Wald, 1945) and cognitive
+    neuroscience's evidence accumulation models (Ratcliff & McKoon, 2008).
+    
+    Maps the log-likelihood ratio (evidence margin) between top-1 and top-2 predictions:
+        x_k = logit_{top1}^{(k)} - logit_{top2}^{(k)}
+    to an evidence accumulation process with collapsing decision boundaries:
+        theta_k = theta_0 * (1 - k / K_max)^gamma
+        
+    For commonsense tasks (PIQA, OpenBookQA):
+        Evidence accumulates rapidly (high drift) -> |x_1| > theta_1 -> early halt at k=1.
+        Protects pre-trained intuitive representations from epistemic drift / overthinking.
+        
+    For complex reasoning tasks (AA-LCR, ARC-Challenge):
+        Evidence accumulates slowly (low drift) -> |x_k| < theta_k -> deliberates full steps.
+    """
+    def __init__(
+        self,
+        theta_0: float = 3.0,
+        gamma: float = 0.5,
+        k_max: int = 4,
+        min_theta: float = 0.5
+    ):
+        super().__init__()
+        self.theta_0 = nn.Parameter(torch.tensor(float(theta_0), dtype=torch.float32))
+        self.gamma = float(gamma)
+        self.k_max = int(k_max)
+        self.min_theta = float(min_theta)
+
+    def decision_boundary(self, k: int) -> torch.Tensor:
+        """
+        Collapsing decision boundary: starts strict, relaxes over time
+        as cognitive urgency increases.
+        """
+        progress = min(float(k), float(self.k_max)) / float(max(1, self.k_max))
+        urgency_factor = max(0.0, 1.0 - progress) ** self.gamma
+        boundary = torch.clamp(self.theta_0 * urgency_factor, min=self.min_theta)
+        return boundary
+
+    def compute_evidence(self, logits: torch.Tensor) -> torch.Tensor:
+        """
+        Log-likelihood ratio (margin) between top-1 and top-2 predictions.
+        
+        Args:
+            logits: [B, V] Prediction logits.
+        Returns:
+            evidence: [B] Evidence margin (positive: decisive, near-zero: uncertain).
+        """
+        if logits.size(-1) < 2:
+            return torch.zeros(logits.size(0), device=logits.device)
+        topk = torch.topk(logits, k=2, dim=-1)
+        evidence = topk.values[:, 0] - topk.values[:, 1]
+        return evidence
+
+    def should_halt(self, logits: torch.Tensor, k: int) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        """
+        Evaluates whether evidence has crossed the decision boundary at step k.
+        
+        Args:
+            logits: [B, V]
+            k: Current deliberation step index (1-indexed)
+            
+        Returns:
+            halt_mask: [B] Boolean mask (True for decisive samples)
+            evidence: [B] Evidence margin
+            boundary: scalar boundary tensor
+        """
+        evidence = self.compute_evidence(logits)
+        boundary = self.decision_boundary(k)
+        halt_mask = evidence.abs() > boundary
+        return halt_mask, evidence, boundary

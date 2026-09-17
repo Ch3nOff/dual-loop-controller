@@ -132,6 +132,13 @@ class DualLoopQwenModel(nn.Module):
             use_hypothesis_verification=use_hypothesis_verification,
             **adapter_kwargs
         )
+
+        # Automatically bind output vocabulary projection (lm_head) if accessible
+        lm_head = getattr(self.qwen, "lm_head", None)
+        if lm_head is None and hasattr(self.qwen, "get_output_embeddings"):
+            lm_head = self.qwen.get_output_embeddings()
+        if lm_head is not None:
+            self.adapter.set_lm_head(lm_head)
         
         # Register PyTorch forward hook on intermediate layer
         self._hook_handle = target_layer.register_forward_hook(self._hook_fn)
@@ -201,7 +208,8 @@ class DualLoopQwenModel(nn.Module):
             k_steps=self.k_steps,
             query_idx=query_idx,
             dynamic_halting=self.dynamic_halting,
-            key_padding_mask=key_padding_mask
+            key_padding_mask=key_padding_mask,
+            candidate_embeds=getattr(self, "_current_candidate_embeds", None)
         )
         self.last_telemetry = telemetry
 
@@ -238,10 +246,10 @@ class DualLoopQwenModel(nn.Module):
         Freezes base model parameters for parameter-efficient fine-tuning (PEFT).
         Only the Dual-Loop adapter parameters retain gradients.
         """
-        for param in self.qwen.parameters():
-            param.requires_grad = False
         for param in self.adapter.parameters():
             param.requires_grad = True
+        for param in self.qwen.parameters():
+            param.requires_grad = False
 
     def unfreeze_backbone(self):
         """Unfreezes all model parameters."""
@@ -394,6 +402,10 @@ class DualLoopQwenModel(nn.Module):
             self._hook_handle.remove()
             self._hook_handle = None
 
+    def set_candidate_embeds(self, embeds: Optional[Any] = None):
+        """Sets candidate embeddings for contrastive option scoring on multiple-choice questions."""
+        self._current_candidate_embeds = embeds
+
     def forward(self, *args, **kwargs):
         """Passes inputs directly through the base model, intercepted by the hook."""
         self.last_telemetry = {}
@@ -401,19 +413,27 @@ class DualLoopQwenModel(nn.Module):
         self._current_attention_mask = kwargs.get("attention_mask", None)
         if self._current_attention_mask is None and len(args) > 1 and isinstance(args[1], torch.Tensor):
             self._current_attention_mask = args[1]
+            
+        if "candidate_embeds" in kwargs:
+            self._current_candidate_embeds = kwargs.pop("candidate_embeds")
+            
         try:
             return self.qwen(*args, **kwargs)
         finally:
             self._current_attention_mask = None
+            self._current_candidate_embeds = None
 
     def generate(self, *args, **kwargs):
         """Autoregressive generation with Dual-Loop latent deliberation enabled."""
         self.last_telemetry = {}
         self._current_attention_mask = kwargs.get("attention_mask", None)
+        if "candidate_embeds" in kwargs:
+            self._current_candidate_embeds = kwargs.pop("candidate_embeds")
         try:
             return self.qwen.generate(*args, **kwargs)
         finally:
             self._current_attention_mask = None
+            self._current_candidate_embeds = None
 
     def __getattr__(self, name: str):
         """Transparently delegates undefined attributes/methods to the underlying model."""

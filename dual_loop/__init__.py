@@ -6,9 +6,9 @@ for Transformer architectures.
 """
 
 from .memory import CognitiveWorkingMemory
-from .halting import EntropyHaltingUnit, LearnedHaltingGate
+from .halting import EntropyHaltingUnit, LearnedHaltingGate, DriftDiffusionHalting
 from .controller import RecurrentLatentController, TopKCapacityCrossAttention, LatentCritiqueRefinementUnit
-from .verification import HypothesisVerificationGate
+from .verification import HypothesisVerificationGate, UncertaintySurpriseGate, ContrastiveEvidenceAccumulator
 from .decoder import DualLoopTransformer
 from .adapters.latent_adapter import LatentDeliberationAdapter
 from .adapters.qwen_adapter import DualLoopQwenModel, attach_dual_loop_to_qwen
@@ -60,10 +60,13 @@ __all__ = [
     "CognitiveWorkingMemory",
     "EntropyHaltingUnit",
     "LearnedHaltingGate",
+    "DriftDiffusionHalting",
     "RecurrentLatentController",
     "TopKCapacityCrossAttention",
     "LatentCritiqueRefinementUnit",
     "HypothesisVerificationGate",
+    "UncertaintySurpriseGate",
+    "ContrastiveEvidenceAccumulator",
     "DualLoopTransformer",
     "LatentDeliberationAdapter",
     "DualLoopQwenModel",

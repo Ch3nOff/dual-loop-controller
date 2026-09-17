@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from typing import Optional, Tuple, List
-from .halting import EntropyHaltingUnit, LearnedHaltingGate
+from .halting import EntropyHaltingUnit, LearnedHaltingGate, DriftDiffusionHalting
 
 class TopKCapacityCrossAttention(nn.Module):
     """
@@ -116,7 +116,11 @@ class RecurrentLatentController(nn.Module):
         enable_critique: bool = True,
         use_learned_halting: bool = False,
         lambda_prior: float = 0.5,
-        tau_halt: float = 0.75
+        tau_halt: float = 0.75,
+        use_ddm_halting: bool = False,
+        ddm_theta_0: float = 3.0,
+        ddm_gamma: float = 0.5,
+        ddm_min_theta: float = 0.5
     ):
         super().__init__()
         self.d_model = d_model
@@ -164,8 +168,18 @@ class RecurrentLatentController(nn.Module):
             vocab_size=vocab_size
         ) if use_learned_halting else None
 
+        # Drift-Diffusion Model (DDM) Halting with Collapsing Decision Boundary
+        self.use_ddm_halting = use_ddm_halting
+        self.ddm_halting = DriftDiffusionHalting(
+            theta_0=ddm_theta_0,
+            k_max=max_ponder_steps,
+            gamma=ddm_gamma,
+            min_theta=ddm_min_theta
+        ) if use_ddm_halting else None
+
         self.last_lambdas: List[torch.Tensor] = []
         self.last_error_norms: List[torch.Tensor] = []
+        self.last_ddm_evidences: List[torch.Tensor] = []
 
         # Optional auxiliary probe head
         if vocab_size is not None:
@@ -177,6 +191,7 @@ class RecurrentLatentController(nn.Module):
         """Clear mutable instance telemetry state to prevent cross-request leakage (ARCH-02 / NEW-02)."""
         self.last_lambdas = []
         self.last_error_norms = []
+        self.last_ddm_evidences = []
 
     def initialize_thoughts(self, query_rep: torch.Tensor) -> torch.Tensor:
         """
@@ -327,10 +342,16 @@ class RecurrentLatentController(nn.Module):
                 probe_out = self.audit_probe(h_primary) # Probe primary thought token
                 if return_aux or dynamic_halting:
                     aux_logits.append(probe_out)
+                    if self.ddm_halting is not None:
+                        halt_mask_ddm, ev_ddm, _ = self.ddm_halting.should_halt(probe_out, step + 1)
+                        self.last_ddm_evidences.append(ev_ddm)
+                        if dynamic_halting and not self.training and halt_mask_ddm.all():
+                            break
+
                     entropy = self.halting_unit.calculate_entropy(probe_out)
                     step_entropies.append(entropy)
 
-                    if self.learned_halting_gate is None and dynamic_halting and (entropy.mean().item() < self.halting_unit.entropy_threshold):
+                    if self.learned_halting_gate is None and not self.use_ddm_halting and dynamic_halting and (entropy.mean().item() < self.halting_unit.entropy_threshold):
                         # Batch has achieved confident consensus; early halt
                         break
             elif dynamic_halting and self.learned_halting_gate is None:
