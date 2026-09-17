@@ -317,6 +317,40 @@ All raw evaluation logs are stored in `eval_results/qwen35_2b_authentic_suite_n1
 
 ---
 
+### Comprehensive 20-Benchmark Multi-Domain Evaluation (N=200 Samples)
+
+*Source File*: [`eval_results/qwen35_2b_authentic_20_benchmarks.json`](eval_results/qwen35_2b_authentic_20_benchmarks.json) (Authentic PyTorch log-likelihood evaluation across 20 distinct benchmarks covering Standard QA, 11 Big-Bench Hard tasks, and 5 Novel Procedural Stress-Test sectors):
+
+![Comprehensive 20-Benchmark Empirical Scoreboard](authentic_20_benchmark_scoreboard.png)
+
+#### Direct Empirical Metrics across 20 Distinct Benchmarks
+
+| Benchmark Dataset | Category | Cognitive Domain | Samples | Base Acc ($K=0$) | Dual-Loop ($K=2$) | Delta ($\Delta$) | Rescued / Degraded |
+| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
+| **ARC-Easy** | Science & Facts | Elementary Science QA | 10 | 80.0% | 80.0% | 0.0% | 0 / 0 |
+| **ARC-Challenge** | Science & Facts | Deep Scientific Deduction | 10 | 50.0% | 50.0% | 0.0% | 0 / 0 |
+| **OpenBookQA** | Science & Facts | Multi-Hop Fact Chaining | 10 | 30.0% | 30.0% | 0.0% | 0 / 0 |
+| **PIQA** | Physical & Commonsense | Physical Commonsense Dynamics | 10 | 80.0% | 80.0% | 0.0% | 0 / 0 |
+| **BBH-LogicalDeduction** | Multi-Step Deductive Logic | Relational Constraint Graphs | 10 | 90.0% | 90.0% | 0.0% | 0 / 0 |
+| **BBH-DateUnderstanding** | Multi-Step Deductive Logic | Temporal Calendar Arithmetic | 10 | 40.0% | 40.0% | 0.0% | 0 / 0 |
+| **BBH-TrackingShuffledObjects** | Multi-Step Deductive Logic | Sequential State Permutation | 10 | 50.0% | 50.0% | 0.0% | 0 / 0 |
+| **BBH-BooleanExpressions** | Multi-Step Deductive Logic | Nested Boolean Truth Logic | 10 | 80.0% | 80.0% | 0.0% | 1 / 1 |
+| **BBH-CausalJudgement** | Physical & Commonsense | Counterfactual Attribution | 10 | 40.0% | 40.0% | 0.0% | 0 / 0 |
+| **BBH-FormalFallacies** | Formal Logic | Syllogistic Entailment | 10 | 60.0% | 60.0% | 0.0% | 0 / 0 |
+| **BBH-GeometricShapes** | Spatial & Symbolic | SVG Geometry Parsing | 10 | 40.0% | 40.0% | 0.0% | 0 / 0 |
+| **BBH-Hyperbaton** | Linguistic & Structural | English Adjective Ordering | 10 | 80.0% | 80.0% | 0.0% | 0 / 0 |
+| **BBH-Navigate** | Spatial & Symbolic | Coordinate Navigation | 10 | 60.0% | 60.0% | 0.0% | 0 / 0 |
+| **BBH-ColoredObjects** | Multi-Step Deductive Logic | Multi-Attribute Binding | 10 | 70.0% | 70.0% | 0.0% | 0 / 0 |
+| **BBH-WebOfLies** | Multi-Step Deductive Logic | Alternating Parity Liar Chains | 10 | 20.0% | 10.0% | **-10.0%** | 1 / 2 |
+| **Sector1-InvertedPhysics** | Counterfactual Simulation | Inverted Physical Axioms | 10 | 40.0% | 40.0% | 0.0% | 0 / 0 |
+| **Sector2-5HopTransitive** | Multi-Step Deductive Logic | 5-Hop Relational Constraints | 10 | 40.0% | 40.0% | 0.0% | 0 / 0 |
+| **Sector3-CounterSyllogisms** | Formal Logic | Counter-Intuitive Belief Bias | 10 | **100.0%** | **100.0%** | 0.0% | 0 / 0 |
+| **Sector4-ModularCalendar** | Multi-Step Deductive Logic | Modular Clock/Calendar Math | 10 | 10.0% | 10.0% | 0.0% | 0 / 0 |
+| **Sector5-StateAutomata** | Spatial & Symbolic | 3-State DFA Machine Tracking | 10 | 60.0% | 60.0% | 0.0% | 1 / 1 |
+| **Suite Macro Mean** | **All 20 Benchmarks** | **Full Multi-Task Cognitive Audit** | **200** | **56.00%** | **55.50%** | **-0.50%** | **3 / 4** |
+
+---
+
 ## Architectural Implementation
 
 Despite the scaling limits at small model regimes, the repository provides clean, production-grade PyTorch implementations of the core modules:
