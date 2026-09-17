@@ -61,9 +61,10 @@ class EpisodicMemoryBuffer(nn.Module):
     
     Maintains persistent memory traces across multiple encounters/trials:
     - Stores key queries, final thought vectors, epistemic uncertainty u(x), decision margins,
-      and associative fast-weight matrices.
-    - Enables content-based associative recall (cosine similarity matching).
-    - Enables autonomous self-reflection and multi-pass improvement.
+      associative fast-weight matrices, and settled status.
+    - Settled Anchors: Confident, validated decisions are locked into memory (`is_settled=True`).
+      On subsequent encounters, they are instantly recalled and reinforced, eliminating
+      second-guessing and unnecessary token/compute expenditure.
     """
     def __init__(self, d_model: int, capacity: int = 512, sim_threshold: float = 0.70):
         super().__init__()
@@ -76,6 +77,8 @@ class EpisodicMemoryBuffer(nn.Module):
         self.vacuities: list = []
         self.margins: list = []
         self.fast_weights: list = []
+        self.is_settled: list = []
+        self.confidences: list = []
         self.metadata: list = []
 
     def store(
@@ -85,7 +88,9 @@ class EpisodicMemoryBuffer(nn.Module):
         vacuity_u: float,
         margin: float,
         m_fast: Optional[torch.Tensor] = None,
-        meta: Optional[dict] = None
+        meta: Optional[dict] = None,
+        is_settled: bool = False,
+        confidence: float = 0.0
     ):
         """Stores a completed deliberation episode into the episodic bank."""
         if len(self.keys) >= self.capacity:
@@ -94,17 +99,21 @@ class EpisodicMemoryBuffer(nn.Module):
             self.vacuities.pop(0)
             self.margins.pop(0)
             self.fast_weights.pop(0)
+            self.is_settled.pop(0)
+            self.confidences.pop(0)
             self.metadata.pop(0)
             
-        k_rep = key.detach().squeeze(0) if key.dim() > 1 else key.detach()
-        t_rep = thought.detach().squeeze(0) if thought.dim() > 1 else thought.detach()
-        m_snap = m_fast.detach().clone() if m_fast is not None else None
+        k_rep = (key.detach().squeeze(0) if key.dim() > 1 else key.detach()).clone().cpu()
+        t_rep = (thought.detach().squeeze(0) if thought.dim() > 1 else thought.detach()).clone().cpu()
+        m_snap = m_fast.detach().clone().cpu() if m_fast is not None else None
         
-        self.keys.append(k_rep.cpu())
-        self.thoughts.append(t_rep.cpu())
+        self.keys.append(k_rep)
+        self.thoughts.append(t_rep)
         self.vacuities.append(float(vacuity_u))
         self.margins.append(float(margin))
-        self.fast_weights.append(m_snap.cpu() if m_snap is not None else None)
+        self.fast_weights.append(m_snap)
+        self.is_settled.append(bool(is_settled))
+        self.confidences.append(float(confidence))
         self.metadata.append(meta or {})
 
     def recall(
@@ -139,15 +148,43 @@ class EpisodicMemoryBuffer(nn.Module):
                     "vacuity_u": self.vacuities[idx],
                     "margin": self.margins[idx],
                     "m_fast": self.fast_weights[idx].to(device=query.device) if self.fast_weights[idx] is not None else None,
-                    "metadata": self.metadata[idx]
+                    "is_settled": self.is_settled[idx],
+                    "confidence": self.confidences[idx],
+                    "metadata": self.metadata[idx],
+                    "index": idx
                 })
         return results
 
+    def recall_settled(
+        self,
+        query: torch.Tensor,
+        sim_threshold: float = 0.95
+    ) -> Optional[dict]:
+        """
+        Quickly checks if this exact or near-identical problem has already been solved
+        and consolidated as a Settled Anchor. If found, returns the settled episode.
+        """
+        recalled = self.recall(query, top_k=1)
+        if recalled:
+            top_match = recalled[0]
+            if top_match["similarity"] >= sim_threshold and top_match["is_settled"]:
+                return top_match
+        return None
+
+    def mark_settled(self, idx: int, is_settled: bool = True, confidence: Optional[float] = None):
+        """Marks an existing episode as a settled anchor."""
+        if 0 <= idx < len(self.is_settled):
+            self.is_settled[idx] = is_settled
+            if confidence is not None:
+                self.confidences[idx] = float(confidence)
+
     def consolidate(self, decay_factor: float = 0.95):
-        """Decays fast-weights and updates memory traces."""
+        """Decays fast-weights of non-settled traces while preserving settled anchors."""
         for i in range(len(self.fast_weights)):
             if self.fast_weights[i] is not None:
-                self.fast_weights[i] = self.fast_weights[i] * decay_factor
+                # Settled memories decay much slower (99% retention), exploring memories decay faster
+                rate = 0.99 if self.is_settled[i] else decay_factor
+                self.fast_weights[i] = self.fast_weights[i] * rate
 
     def clear(self):
         """Completely clears the episodic memory buffer."""
@@ -156,6 +193,8 @@ class EpisodicMemoryBuffer(nn.Module):
         self.vacuities.clear()
         self.margins.clear()
         self.fast_weights.clear()
+        self.is_settled.clear()
+        self.confidences.clear()
         self.metadata.clear()
 
     def __len__(self) -> int:

@@ -133,7 +133,7 @@ def load_sectors_data(n_samples):
                 prompt_raw, labels, choices, target = parse_bbh_sample(item)
                 prompt = f"Question: {prompt_raw}\nAnswer:"
             else: # multiple_choice
-                q = item.get("question", "")
+                q = item.get("question") or item.get("question_stem", "")
                 choices = item.get("choices", {}).get("text", [])
                 labels = item.get("choices", {}).get("label", [])
                 target = str(item.get("answerKey", "")).strip()
@@ -172,31 +172,13 @@ def evaluate_single_sample(wrapped_model, tokenizer, item, is_pass2=False):
         cand_tensors.append(c_emb.mean(dim=1, keepdim=True))
     joint_cands = torch.cat(cand_tensors, dim=1) if cand_tensors else None
 
-    # Prompt anchor embedding for episodic memory
+    # Prompt anchor embedding for episodic memory & ACC
     prompt_ids_tensor = torch.tensor(prompt_ids).unsqueeze(0)
     with torch.no_grad():
         prompt_emb = wrapped_model.qwen.get_input_embeddings()(prompt_ids_tensor).mean(dim=1)
 
-    # 0b. If in Pass 2, check episodic memory for prior uncertainty and apply critique
-    is_uncertain_p1 = False
-    critique_applied = False
-    if is_pass2 and hasattr(wrapped_model.adapter, "episodic_memory"):
-        recalled = wrapped_model.adapter.episodic_memory.recall(prompt_emb, top_k=1)
-        if recalled:
-            entry = recalled[0]
-            is_uncertain_p1 = entry["metadata"].get("is_uncertain", False)
-            if is_uncertain_p1:
-                # Construct counterfactual critique vector
-                prior_thought = entry["thought"]
-                critique_vec = prior_thought - prompt_emb
-                wrapped_model.set_critique_vector(critique_vec)
-                critique_applied = True
-
+    # 1. Base Evaluation (K=0) - Always measure System 1 intuition & baseline confidence
     scores_base = []
-    scores_delib = []
-    telemetries = []
-
-    # 1. Base Evaluation (K=0)
     wrapped_model.set_candidate_embeds(None)
     wrapped_model.set_ponder_steps(0)
     wrapped_model.reset_state(force=True)
@@ -211,7 +193,128 @@ def evaluate_single_sample(wrapped_model, tokenizer, item, is_pass2=False):
         lp_b = torch.log_softmax(sl_b, dim=-1).gather(-1, slab.unsqueeze(-1)).squeeze(-1)
         scores_base.append(lp_b.sum().item() / denom)
 
-    # 2. Autonomous Plastic Deliberation (K=2) with Joint Contrastive Attention
+    sorted_b = sorted(scores_base, reverse=True)
+    margin_val = float(sorted_b[0] - sorted_b[1]) if len(sorted_b) > 1 else 999.0
+    pred_base_idx = int(np.argmax(scores_base))
+    pred_base = labels[pred_base_idx]
+    base_ok = (str(pred_base).upper() == target.upper()) or (str(pred_base_idx) == target)
+
+    # 2. [SMART BRAIN] Hippocampal Recall for Settled Logic (Pass 2 Shortcut / Anti-Overthinking)
+    settled_ep = None
+    if is_pass2 and hasattr(wrapped_model.adapter, "episodic_memory"):
+        settled_ep = wrapped_model.adapter.episodic_memory.recall_settled(prompt_emb, sim_threshold=0.95)
+
+    if settled_ep is not None:
+        # Prior logic was verified and settled in Pass 1! Lock to settled wisdom.
+        # Zero token waste, zero second-guessing regression.
+        pred_delib = settled_ep["metadata"]["pred"]
+        pred_delib_idx = labels.index(pred_delib) if pred_delib in labels else pred_base_idx
+        delib_ok = (str(pred_delib).upper() == target.upper()) or (str(pred_delib_idx) == target)
+        
+        status = "Preserved Correct" if (base_ok and delib_ok) else (
+            "Rescued (Wrong->Right)" if (not base_ok and delib_ok) else (
+                "Preserved Wrong" if (not base_ok and not delib_ok) else "Degraded (Right->Wrong)"
+            )
+        )
+        m_fast_norm = float(torch.norm(settled_ep["m_fast"]).item()) if settled_ep.get("m_fast") is not None else 0.0
+        return {
+            "pred_base": str(pred_base),
+            "pred_delib": str(pred_delib),
+            "base_ok": base_ok,
+            "delib_ok": delib_ok,
+            "status": status,
+            "scores_base": scores_base,
+            "scores_delib": scores_base,
+            "margin": margin_val,
+            "surprise_jsd": 0.0,
+            "surprise_gate": 0.0,
+            "vacuity_u": settled_ep.get("vacuity_u", 0.5),
+            "plastic_trace_norm": m_fast_norm,
+            "synthesized_count": 0,
+            "critique_applied": False,
+            "settled_shortcut": True
+        }
+
+    # 3. [SMART BRAIN] Cognitive Conflict Monitor (ACC): Evaluate Effort Index & System 1 Routing
+    conflict_monitor = getattr(wrapped_model.adapter, "conflict_monitor", None)
+    if conflict_monitor is not None:
+        effort, recommended_k, should_deliberate = conflict_monitor.compute_effort_index(
+            margin=margin_val,
+            jsd=0.0,
+            vacuity_u=0.5
+        )
+    else:
+        should_deliberate = (margin_val < 0.25)
+        effort = 0.5
+
+    # If margin is large (e.g. PIQA intuitive physics where margin >= 0.25),
+    # System 1 is confident and unambiguous. Do NOT force deliberation!
+    if not should_deliberate:
+        pred_delib = pred_base
+        delib_ok = base_ok
+        status = "Preserved Correct" if delib_ok else "Preserved Wrong"
+        
+        # Consolidate into episodic memory as Settled Anchor in Pass 1
+        if not is_pass2 and hasattr(wrapped_model.adapter, "episodic_memory"):
+            wrapped_model.adapter.episodic_memory.store(
+                key=prompt_emb,
+                thought=prompt_emb,
+                vacuity_u=0.5,
+                margin=margin_val,
+                m_fast=None,
+                meta={"is_uncertain": False, "pred": pred_delib},
+                is_settled=True,
+                confidence=1.0
+            )
+
+        return {
+            "pred_base": str(pred_base),
+            "pred_delib": str(pred_delib),
+            "base_ok": base_ok,
+            "delib_ok": delib_ok,
+            "status": status,
+            "scores_base": scores_base,
+            "scores_delib": scores_base,
+            "margin": margin_val,
+            "surprise_jsd": 0.0,
+            "surprise_gate": 0.0,
+            "vacuity_u": 0.5,
+            "plastic_trace_norm": 0.0,
+            "synthesized_count": 0,
+            "critique_applied": False,
+            "settled_shortcut": False
+        }
+
+    # 4. [SMART BRAIN] Pass 2 Self-Correction / Doubt Resolution with Anti-Hyper-Skepticism Gate
+    critique_applied = False
+    if is_pass2 and hasattr(wrapped_model.adapter, "episodic_memory"):
+        recalled = wrapped_model.adapter.episodic_memory.recall(prompt_emb, top_k=1)
+        if recalled and recalled[0]["similarity"] >= 0.95:
+            entry = recalled[0]
+            is_settled_p1 = entry.get("is_settled", False)
+            p1_margin = entry.get("margin", 0.0)
+            p1_vacuity = entry.get("vacuity_u", 0.5)
+            p1_conf = entry.get("confidence", 0.0)
+            agreed_p1 = entry.get("metadata", {}).get("agrees", False)
+
+            anti_filter = getattr(wrapped_model.adapter, "anti_skepticism_filter", None)
+            can_critique = anti_filter.should_apply_critique(
+                is_settled=is_settled_p1,
+                pass1_margin=p1_margin,
+                vacuity_u=p1_vacuity,
+                pass1_confidence=p1_conf,
+                agreed_in_pass1=agreed_p1
+            ) if anti_filter else (not is_settled_p1 and not agreed_p1 and p1_margin < 0.25)
+
+            if can_critique:
+                prior_thought = entry["thought"]
+                critique_vec = prior_thought - prompt_emb
+                wrapped_model.set_critique_vector(critique_vec)
+                critique_applied = True
+
+    # 5. Autonomous Plastic Deliberation (K=2) with Joint Contrastive Attention
+    scores_delib = []
+    telemetries = []
     wrapped_model.set_candidate_embeds(joint_cands)
     wrapped_model.set_ponder_steps(2)
     wrapped_model.query_idx = query_anchor
@@ -234,13 +337,10 @@ def evaluate_single_sample(wrapped_model, tokenizer, item, is_pass2=False):
     m_dist = 0.5 * (p_b + p_d)
     jsd_val = float(0.5 * (F.kl_div(m_dist.log(), p_b, reduction='sum') + F.kl_div(m_dist.log(), p_d, reduction='sum')))
 
-    sorted_b = sorted(scores_base, reverse=True)
-    margin_val = float(sorted_b[0] - sorted_b[1]) if len(sorted_b) > 1 else 999.0
-
     g_margin = float(torch.sigmoid(torch.tensor((0.10 - margin_val) / 0.05)))
     g_jsd = float(torch.sigmoid(torch.tensor((jsd_val - 0.10) / 0.02)))
 
-    if is_pass2 and is_uncertain_p1:
+    if critique_applied:
         # Pass 2 Self-Correction on uncertain question: deliberate reflection has high confidence
         sg_val = max(g_margin, g_jsd, 0.70)
     elif joint_cands is not None:
@@ -250,15 +350,13 @@ def evaluate_single_sample(wrapped_model, tokenizer, item, is_pass2=False):
         sg_val = max(g_margin, g_jsd) if margin_val < 0.5 else g_jsd
 
     combo_scores = (1.0 - sg_val) * np.array(scores_base) + sg_val * np.array(scores_delib)
-
-    pred_base_idx = int(np.argmax(scores_base))
     pred_delib_idx = int(np.argmax(combo_scores))
-
-    pred_base = labels[pred_base_idx]
     pred_delib = labels[pred_delib_idx]
 
-    base_ok = (str(pred_base).upper() == target.upper()) or (str(pred_base_idx) == target)
     delib_ok = (str(pred_delib).upper() == target.upper()) or (str(pred_delib_idx) == target)
+
+    sorted_combo = sorted(combo_scores, reverse=True)
+    post_margin = float(sorted_combo[0] - sorted_combo[1]) if len(sorted_combo) > 1 else 999.0
 
     # Average telemetry across choices
     last_telem = telemetries[-1] if telemetries else {}
@@ -266,18 +364,32 @@ def evaluate_single_sample(wrapped_model, tokenizer, item, is_pass2=False):
     trace_norm = float(last_telem.get("plastic_trace_norm", 0.0))
     synthesized_count = int(last_telem.get("synthesized_concepts", 0))
 
-    # Store into episodic memory during Pass 1
+    # 6. [SMART BRAIN] Consolidation into Virtual Memory
     if not is_pass2 and hasattr(wrapped_model.adapter, "episodic_memory"):
-        # Autonomous uncertainty audit: low margin or high Dirichlet vacuity
-        is_uncertain = (margin_val < 0.30) or (vacuity_u >= 0.585)
+        # Cognitive Coherence: If System 1 and System 2 agree, or deliberation establishes a solid margin
+        agrees = (pred_base == pred_delib)
+        has_solid_margin = (post_margin >= 0.15)
+        is_settled = agrees or has_solid_margin
+        conf_val = float(np.exp(sorted_combo[0]) / sum(np.exp(sorted_combo))) if sum(np.exp(sorted_combo)) > 0 else 0.5
         wrapped_model.adapter.episodic_memory.store(
             key=prompt_emb,
             thought=prompt_emb + (0.1 * float(np.mean(scores_delib))),
             vacuity_u=vacuity_u,
-            margin=margin_val,
+            margin=post_margin,
             m_fast=wrapped_model.adapter.controller.plastic_unit.last_m_fast if wrapped_model.adapter.controller.plastic_unit is not None else None,
-            meta={"is_uncertain": is_uncertain, "pred": pred_delib}
+            meta={"is_uncertain": not is_settled, "pred": pred_delib, "post_margin": post_margin, "agrees": agrees},
+            is_settled=is_settled,
+            confidence=conf_val
         )
+    elif is_pass2 and critique_applied and hasattr(wrapped_model.adapter, "episodic_memory"):
+        # If doubt was resolved with solid margin in Pass 2, consolidate into settled memory!
+        if post_margin >= 0.20:
+            recalled_list = wrapped_model.adapter.episodic_memory.recall(prompt_emb, top_k=1)
+            if recalled_list and recalled_list[0]["similarity"] >= 0.95:
+                m_idx = recalled_list[0]["index"]
+                wrapped_model.adapter.episodic_memory.mark_settled(m_idx, is_settled=True, confidence=0.95)
+                wrapped_model.adapter.episodic_memory.metadata[m_idx]["pred"] = pred_delib
+                wrapped_model.adapter.episodic_memory.metadata[m_idx]["is_uncertain"] = False
 
     # Reset per-sample temporary state
     wrapped_model.set_critique_vector(None)
@@ -307,7 +419,8 @@ def evaluate_single_sample(wrapped_model, tokenizer, item, is_pass2=False):
         "vacuity_u": vacuity_u,
         "plastic_trace_norm": trace_norm,
         "synthesized_count": synthesized_count,
-        "critique_applied": critique_applied
+        "critique_applied": critique_applied,
+        "settled_shortcut": False
     }
 
 def run_pass(pass_id, sectors, wrapped_model, tokenizer, is_pass2=False):
@@ -406,7 +519,8 @@ def run_two_pass_benchmark():
         use_evidential_gate=True,
         use_open_concept=True,
         use_surprise_gate=True,
-        use_hypothesis_verification=True
+        use_hypothesis_verification=True,
+        use_contrastive_evidence=True
     )
     wrapped_model.load_adapter(ADAPTER_PATH, strict=False)
 

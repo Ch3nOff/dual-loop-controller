@@ -3,7 +3,10 @@ import torch.nn as nn
 from typing import Optional, Tuple, Dict, Any, Union, List
 from ..controller import RecurrentLatentController
 from ..memory import CognitiveWorkingMemory, EpisodicMemoryBuffer
-from ..verification import HypothesisVerificationGate, UncertaintySurpriseGate, ContrastiveEvidenceAccumulator, DirectionalSafetyProjection, AdaptiveSurpriseThreshold
+from ..verification import (
+    HypothesisVerificationGate, UncertaintySurpriseGate, ContrastiveEvidenceAccumulator,
+    DirectionalSafetyProjection, AdaptiveSurpriseThreshold, CognitiveConflictMonitor, AntiHyperSkepticismFilter
+)
 from ..evidential import EvidentialEpistemicGate
 from ..open_concept import OpenConceptSynthesizer
 
@@ -164,6 +167,10 @@ class LatentDeliberationAdapter(nn.Module):
         # Persistent Episodic Meta-Cognitive Memory Bank (Hippocampal Consolidation)
         self.episodic_memory = EpisodicMemoryBuffer(d_model=d_model)
         self.continual_mode: bool = False
+        
+        # Unified Cognitive Architecture Components (ACC & Rational Filter)
+        self.conflict_monitor = CognitiveConflictMonitor()
+        self.anti_skepticism_filter = AntiHyperSkepticismFilter()
 
     def set_continual_mode(self, enabled: bool = True, decay: float = 0.90):
         """Enables continual learning across trials/runs without amnesia."""
@@ -262,12 +269,28 @@ class LatentDeliberationAdapter(nn.Module):
         # 2c. Self-Correction / Critique Falsification: nudge fast weights away from ambiguous prior attractor
         critique_telem = {}
         if critique_vector is not None and self.controller.plastic_unit is not None:
-            init_t = self.controller.initialize_thoughts(query_rep)
-            critique_telem = self.controller.plastic_unit.apply_critique_falsification(
-                thoughts=init_t,
-                critique_vector=critique_vector,
-                u_epistemic=vacuity_u
+            # Check if this query is already settled in memory to prevent hyper-skepticism
+            settled_ep = self.episodic_memory.recall_settled(query_rep, sim_threshold=0.85) if hasattr(self, "episodic_memory") else None
+            is_settled = (settled_ep is not None)
+            pass1_m = settled_ep.get("margin", 1.0) if settled_ep else 0.0
+            
+            vac_val = float(vacuity_u.mean().item()) if isinstance(vacuity_u, torch.Tensor) else 0.5
+            should_critique = self.anti_skepticism_filter.should_apply_critique(
+                is_settled=is_settled,
+                pass1_margin=pass1_m,
+                vacuity_u=vac_val
             )
+            
+            if should_critique:
+                init_t = self.controller.initialize_thoughts(query_rep)
+                critique_telem = self.controller.plastic_unit.apply_critique_falsification(
+                    thoughts=init_t,
+                    critique_vector=critique_vector,
+                    u_epistemic=vacuity_u
+                )
+                critique_telem["critique_blocked"] = False
+            else:
+                critique_telem["critique_blocked"] = True
 
         # 3. Deliberate in latent space (passing u_epistemic for in-situ plastic fast-weight adaptation)
         h_thought, aux, entropies = self.controller(

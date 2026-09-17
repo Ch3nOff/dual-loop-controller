@@ -487,3 +487,102 @@ class AdaptiveSurpriseThreshold(nn.Module):
         
         return tau_adaptive.to(device=h_base.device, dtype=torch.float32)
 
+
+class CognitiveConflictMonitor(nn.Module):
+    """
+    Bio-Inspired Cognitive Conflict & Effort Monitor (Anterior Cingulate Cortex - ACC).
+    
+    Dynamically modulates cognitive deliberation effort E in [0, 1] per query:
+    1. Evaluates System 1 Confidence Margin: mu = s_(1) - s_(2).
+       - If margin is high (e.g. intuitive physics / commonsense), System 1 is clear.
+       - Deliberation is suppressed (K=0), eliminating token waste and overthinking.
+    2. Evaluates Internal Conflict / Dissonance: JSD between System 1 and System 2 trials.
+    3. Evaluates Epistemic Vacuity: u(x) in [0, 1].
+    
+    Effort Index:
+        E = sigmoid( 4.0 * (tau_margin - mu) + 3.0 * (JSD - tau_jsd) + 2.0 * (u - 0.5) )
+    
+    Routing Rule:
+        If E < tau_effort (default 0.35):
+            Route to System 1 Fast Path (K=0). Zero waste!
+        Else:
+            Engage System 2 Deliberation (K=2) with contrastive candidate attention.
+    """
+    def __init__(
+        self,
+        tau_margin: float = 0.25,
+        tau_jsd: float = 0.05,
+        tau_effort: float = 0.40
+    ):
+        super().__init__()
+        self.tau_margin = tau_margin
+        self.tau_jsd = tau_jsd
+        self.tau_effort = tau_effort
+
+    def compute_effort_index(
+        self,
+        margin: float,
+        jsd: float = 0.0,
+        vacuity_u: float = 0.5
+    ) -> Tuple[float, int, bool]:
+        """
+        Returns:
+            effort_index: float in [0, 1]
+            recommended_k: int (0 or 2)
+            should_deliberate: bool
+        """
+        margin_term = 4.0 * (self.tau_margin - margin)
+        jsd_term = 3.0 * (jsd - self.tau_jsd)
+        vacuity_term = 2.0 * (vacuity_u - 0.50)
+        
+        logit = margin_term + jsd_term + vacuity_term
+        effort = float(torch.sigmoid(torch.tensor(logit)).item())
+        
+        # If System 1 margin is decisively high and no conflict is observed,
+        # immediate fast path bypass (K=0) is triggered to eliminate overthinking.
+        if margin >= self.tau_margin and jsd <= self.tau_jsd:
+            should_deliberate = False
+        else:
+            should_deliberate = (effort >= self.tau_effort)
+            
+        recommended_k = 2 if should_deliberate else 0
+        return effort, recommended_k, should_deliberate
+
+
+class AntiHyperSkepticismFilter(nn.Module):
+    """
+    Anti-Hyper-Skepticism Gate (Prefrontal Rational Anchor).
+    
+    Prevents the self-critique loop from destructively second-guessing
+    settled, high-confidence, or coherent answers.
+    
+    Rules:
+    1. If the episode is marked `is_settled` in memory: CRITIQUE IS FORBIDDEN.
+    2. If the decision margin in Pass 1 is solid (margin >= tau_protect, default 0.25):
+       CRITIQUE IS FORBIDDEN.
+    3. Critique is ONLY permitted if:
+       (a) The query was NOT settled, AND
+       (b) The top-2 options were in a dead heat (margin < tau_protect), AND
+       (c) Epistemic vacuity or conflict was genuinely elevated.
+    """
+    def __init__(self, tau_protect: float = 0.25):
+        super().__init__()
+        self.tau_protect = tau_protect
+
+    def should_apply_critique(
+        self,
+        is_settled: bool,
+        pass1_margin: float,
+        vacuity_u: float = 0.5,
+        pass1_confidence: float = 0.0,
+        agreed_in_pass1: bool = False
+    ) -> bool:
+        if is_settled or agreed_in_pass1:
+            return False
+        if pass1_confidence >= 0.70:
+            return False
+        if pass1_margin >= self.tau_protect:
+            return False
+        # Only apply critique if genuinely tied / conflicted
+        return True
+

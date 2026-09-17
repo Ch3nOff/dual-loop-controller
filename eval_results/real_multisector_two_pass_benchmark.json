@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-17 12:20:42",
+  "timestamp": "2026-09-17 14:41:46",
   "model_id": "Qwen/Qwen3.5-2B",
   "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
   "adapter_path": "dual_loop/checkpoints/adapter_model.safetensors",
@@ -15,8 +15,8 @@
       "delta": 10.0,
       "rescued_count": 1,
       "degraded_count": 0,
-      "mean_vacuity_u": 0.6028789401054382,
-      "mean_plastic_trace": 6.048805379867554,
+      "mean_vacuity_u": 0.5309686899185181,
+      "mean_plastic_trace": 1.83498272895813,
       "samples_log": [
         {
           "pred_base": "A",
@@ -31,18 +31,19 @@
             -2.648711681365967
           ],
           "scores_delib": [
-            -1.604543685913086,
-            -2.916153300892223,
-            -2.5615776909722223,
-            -2.492901563644409
+            -1.6372933387756348,
+            -2.729644775390625,
+            -2.6440071529812283,
+            -2.648711681365967
           ],
           "margin": 1.0067138142055936,
-          "surprise_jsd": 0.0012854784727096558,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.6101769208908081,
-          "plastic_trace_norm": 6.013294696807861,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 0,
           "sector": "ARC-Easy",
           "target": "A"
@@ -72,6 +73,7 @@
           "plastic_trace_norm": 6.283181190490723,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 1,
           "sector": "ARC-Easy",
           "target": "B"
@@ -89,18 +91,19 @@
             -5.520011901855469
           ],
           "scores_delib": [
-            -4.971295356750488,
-            -5.874331474304199,
-            -4.9454731941223145,
-            -3.53502623240153
+            -10.088460922241211,
+            -8.675990104675293,
+            -6.954151153564453,
+            -5.520011901855469
           ],
           "margin": 1.4341392517089844,
-          "surprise_jsd": 0.0454256534576416,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.6044591069221497,
-          "plastic_trace_norm": 6.113077640533447,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 2,
           "sector": "ARC-Easy",
           "target": "D"
@@ -118,18 +121,19 @@
             -5.899925231933594
           ],
           "scores_delib": [
-            -10.948341369628906,
-            -5.454310417175293,
-            -3.8126134872436523,
-            -1.1586956977844238
+            -12.30924129486084,
+            -10.491570472717285,
+            -7.444915771484375,
+            -5.899925231933594
           ],
           "margin": 1.5449905395507812,
-          "surprise_jsd": 0.015165399760007858,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.6008936166763306,
-          "plastic_trace_norm": 6.088423252105713,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 3,
           "sector": "ARC-Easy",
           "target": "D"
@@ -159,6 +163,7 @@
           "plastic_trace_norm": 6.137623310089111,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 4,
           "sector": "ARC-Easy",
           "target": "B"
@@ -176,18 +181,19 @@
             -2.698791821797689
           ],
           "scores_delib": [
-            -1.796356439590454,
-            -1.2074260711669922,
-            -0.9601409435272217,
-            -1.1068635781606038
+            -3.5672805309295654,
+            -3.1202940940856934,
+            -1.9225155512491863,
+            -2.698791821797689
           ],
           "margin": 0.7762762705485027,
-          "surprise_jsd": 0.01944556087255478,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5869656801223755,
-          "plastic_trace_norm": 5.695927143096924,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 5,
           "sector": "ARC-Easy",
           "target": "C"
@@ -217,6 +223,7 @@
           "plastic_trace_norm": 5.929022789001465,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 6,
           "sector": "ARC-Easy",
           "target": "A"
@@ -234,18 +241,19 @@
             -3.7938013076782227
           ],
           "scores_delib": [
-            -7.827444076538086,
-            -4.6370954513549805,
-            -0.1982271820306778,
-            -1.792267084121704
+            -7.344089984893799,
+            -4.381877422332764,
+            -2.049318790435791,
+            -3.7938013076782227
           ],
           "margin": 1.7444825172424316,
-          "surprise_jsd": 0.016391858458518982,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5916875004768372,
-          "plastic_trace_norm": 5.932361125946045,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 7,
           "sector": "ARC-Easy",
           "target": "C"
@@ -263,18 +271,19 @@
             -4.708803653717041
           ],
           "scores_delib": [
-            -5.796170711517334,
-            -6.79397439956665,
-            -0.7956656217575073,
-            -3.236646890640259
+            -6.182913780212402,
+            -6.421838760375977,
+            -3.9310712814331055,
+            -4.708803653717041
           ],
           "margin": 0.7777323722839355,
-          "surprise_jsd": 0.07223408669233322,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.6081777811050415,
-          "plastic_trace_norm": 6.002935409545898,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 8,
           "sector": "ARC-Easy",
           "target": "C"
@@ -292,18 +301,19 @@
             -2.9184080759684243
           ],
           "scores_delib": [
-            -1.0158500671386719,
-            -1.9450934727986653,
-            -2.2964420318603516,
-            -2.840555191040039
+            -1.273112376530965,
+            -2.014726161956787,
+            -2.539585908253988,
+            -2.9184080759684243
           ],
           "margin": 0.741613785425822,
-          "surprise_jsd": 0.0009093508124351501,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.6167418956756592,
-          "plastic_trace_norm": 6.29220724105835,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 9,
           "sector": "ARC-Easy",
           "target": "A"
@@ -318,8 +328,8 @@
       "delta": 10.0,
       "rescued_count": 1,
       "degraded_count": 0,
-      "mean_vacuity_u": 0.5965783894062042,
-      "mean_plastic_trace": 5.904596376419067,
+      "mean_vacuity_u": 0.5391262471675873,
+      "mean_plastic_trace": 2.3630994319915772,
       "samples_log": [
         {
           "pred_base": "C",
@@ -346,6 +356,7 @@
           "plastic_trace_norm": 5.8704729080200195,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 0,
           "sector": "ARC-Challenge",
           "target": "C"
@@ -363,18 +374,19 @@
             -4.148692321777344
           ],
           "scores_delib": [
-            -3.659956359863281,
-            -3.0318315505981444,
-            -5.161603927612305,
-            -3.384774017333984
+            -3.952993392944336,
+            -3.312805938720703,
+            -5.753437042236328,
+            -4.148692321777344
           ],
           "margin": 0.640187454223633,
-          "surprise_jsd": 0.005473420023918152,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.6017171144485474,
-          "plastic_trace_norm": 5.874941825866699,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 1,
           "sector": "ARC-Challenge",
           "target": "B"
@@ -404,6 +416,7 @@
           "plastic_trace_norm": 6.241549968719482,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 2,
           "sector": "ARC-Challenge",
           "target": "C"
@@ -421,18 +434,19 @@
             -2.311495780944824
           ],
           "scores_delib": [
-            -3.6074447631835938,
-            -4.926894505818685,
-            -2.3589583805629184,
-            -1.7064480781555176
+            -5.843999862670898,
+            -6.07447878519694,
+            -2.780778067452567,
+            -2.311495780944824
           ],
           "margin": 0.4692822865077426,
-          "surprise_jsd": 0.015111885964870453,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5847052335739136,
-          "plastic_trace_norm": 5.781006336212158,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 3,
           "sector": "ARC-Challenge",
           "target": "D"
@@ -462,6 +476,7 @@
           "plastic_trace_norm": 5.636673927307129,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 4,
           "sector": "ARC-Challenge",
           "target": "D"
@@ -479,18 +494,19 @@
             -4.290301132202148
           ],
           "scores_delib": [
-            -3.2197865380181208,
-            -4.496346791585286,
-            -2.252502202987671,
-            -3.0462505340576174
+            -4.01920912000868,
+            -5.7041670481363935,
+            -3.045720100402832,
+            -4.290301132202148
           ],
           "margin": 0.9734890196058483,
-          "surprise_jsd": 0.004504796117544174,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.6081907749176025,
-          "plastic_trace_norm": 6.2179365158081055,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 5,
           "sector": "ARC-Challenge",
           "target": "B"
@@ -520,6 +536,7 @@
           "plastic_trace_norm": 5.882297515869141,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 6,
           "sector": "ARC-Challenge",
           "target": "C"
@@ -537,18 +554,19 @@
             -2.6326658725738525
           ],
           "scores_delib": [
-            -1.7776464886135526,
-            -2.4245499202183316,
-            -1.6065841250949435,
-            -2.6178572177886963
+            -2.0462462107340493,
+            -2.7294442313058034,
+            -1.7184302012125652,
+            -2.6326658725738525
           ],
           "margin": 0.32781600952148415,
-          "surprise_jsd": 0.0013339370489120483,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5872244238853455,
-          "plastic_trace_norm": 5.722446918487549,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 7,
           "sector": "ARC-Challenge",
           "target": "C"
@@ -566,18 +584,19 @@
             -1.8643964767456054
           ],
           "scores_delib": [
-            -1.8659924098423548,
-            -2.55190552605523,
-            -2.52230347527398,
-            -1.8184844970703125
+            -2.1627423422677174,
+            -2.5247181786431208,
+            -3.022854487101237,
+            -1.8643964767456054
           ],
           "margin": 0.29834586552211206,
-          "surprise_jsd": 0.0041562095284461975,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5905624032020569,
-          "plastic_trace_norm": 5.808018207550049,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 8,
           "sector": "ARC-Challenge",
           "target": "B"
@@ -595,18 +614,19 @@
             -5.820776462554932
           ],
           "scores_delib": [
-            -1.5374385118484497,
-            -2.731691598892212,
-            -3.5892677307128906,
-            -3.691316604614258
+            -3.5412673950195312,
+            -4.459697723388672,
+            -5.78362512588501,
+            -5.820776462554932
           ],
           "margin": 0.9184303283691406,
-          "surprise_jsd": 0.002387784421443939,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.6021214723587036,
-          "plastic_trace_norm": 6.010619640350342,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 9,
           "sector": "ARC-Challenge",
           "target": "A"
@@ -616,13 +636,13 @@
     "OpenBookQA": {
       "domain": "Multi-Hop Fact Chaining",
       "samples": 10,
-      "base_acc": 20.0,
-      "delib_acc": 20.0,
+      "base_acc": 30.0,
+      "delib_acc": 30.0,
       "delta": 0.0,
       "rescued_count": 0,
       "degraded_count": 0,
-      "mean_vacuity_u": 0.5920645117759704,
-      "mean_plastic_trace": 5.666235733032226,
+      "mean_vacuity_u": 0.5090340971946716,
+      "mean_plastic_trace": 0.5932521820068359,
       "samples_log": [
         {
           "pred_base": "D",
@@ -631,53 +651,55 @@
           "delib_ok": false,
           "status": "Preserved Wrong",
           "scores_base": [
-            -6.6854143142700195,
-            -8.773500442504883,
-            -9.439716339111328,
-            -6.387608051300049
+            -5.788010120391846,
+            -6.535223007202148,
+            -8.33929443359375,
+            -5.282407283782959
           ],
           "scores_delib": [
-            -6.045488357543945,
-            -8.047293663024902,
-            -8.804417419433594,
-            -5.244993686676025
+            -5.788010120391846,
+            -6.535223007202148,
+            -8.33929443359375,
+            -5.282407283782959
           ],
-          "margin": 0.2978062629699707,
-          "surprise_jsd": 0.007337264716625214,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.592064619064331,
-          "plastic_trace_norm": 5.706115245819092,
+          "margin": 0.5056028366088867,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 0,
           "sector": "OpenBookQA",
           "target": "B"
         },
         {
           "pred_base": "B",
-          "pred_delib": "B",
+          "pred_delib": "D",
           "base_ok": false,
           "delib_ok": false,
           "status": "Preserved Wrong",
           "scores_base": [
-            -10.049914360046387,
-            -7.585325876871745,
-            -9.12673282623291,
-            -8.75455093383789
+            -10.91346549987793,
+            -7.3028310139973955,
+            -7.405397415161133,
+            -9.123968124389648
           ],
           "scores_delib": [
-            -6.678591251373291,
-            -5.097862243652344,
-            -7.71706485748291,
-            -5.78458309173584
+            -4.361209392547607,
+            -3.459893226623535,
+            -5.001029968261719,
+            -3.2847483158111572
           ],
-          "margin": 1.1692250569661455,
-          "surprise_jsd": 0.023814551532268524,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5920645594596863,
-          "plastic_trace_norm": 5.665215969085693,
+          "margin": 0.10256640116373728,
+          "surprise_jsd": 0.17120826244354248,
+          "surprise_gate": 0.9723586440086365,
+          "vacuity_u": 0.5903409719467163,
+          "plastic_trace_norm": 5.932521820068359,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 1,
           "sector": "OpenBookQA",
           "target": "A"
@@ -689,24 +711,25 @@
           "delib_ok": true,
           "status": "Preserved Correct",
           "scores_base": [
-            -12.320999145507812,
-            -9.342056274414062,
-            -8.181442896525065,
-            -11.908426284790039
+            -10.54976749420166,
+            -9.92009449005127,
+            -6.821575164794922,
+            -12.741936683654785
           ],
           "scores_delib": [
-            -11.673604965209961,
-            -9.722990989685059,
-            -6.434197743733724,
-            -9.070089340209961
+            -10.54976749420166,
+            -9.92009449005127,
+            -6.821575164794922,
+            -12.741936683654785
           ],
-          "margin": 1.160613377888998,
-          "surprise_jsd": 0.05318814516067505,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5920644402503967,
-          "plastic_trace_norm": 5.65103816986084,
+          "margin": 3.0985193252563477,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 2,
           "sector": "OpenBookQA",
           "target": "C"
@@ -718,25 +741,56 @@
           "delib_ok": false,
           "status": "Preserved Wrong",
           "scores_base": [
-            -7.655377388000488,
-            -7.035503387451172,
-            -8.94552993774414,
-            -8.260663032531738
+            -6.452857971191406,
+            -5.166319274902344,
+            -7.63482666015625,
+            -7.109699249267578
           ],
           "scores_delib": [
-            -7.481785297393799,
-            -6.999248504638672,
-            -8.156417846679688,
-            -8.02665901184082
+            -6.452857971191406,
+            -5.166319274902344,
+            -7.63482666015625,
+            -7.109699249267578
           ],
-          "margin": 0.6198740005493164,
-          "surprise_jsd": 0.005970530211925507,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.592064619064331,
-          "plastic_trace_norm": 5.7110772132873535,
+          "margin": 1.2865386962890621,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 3,
+          "sector": "OpenBookQA",
+          "target": "C"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -12.179611206054688,
+            -4.936639785766602,
+            -5.248122533162435,
+            -11.04481029510498
+          ],
+          "scores_delib": [
+            -12.179611206054688,
+            -4.936639785766602,
+            -5.248122533162435,
+            -11.04481029510498
+          ],
+          "margin": 0.31148274739583304,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 4,
           "sector": "OpenBookQA",
           "target": "C"
         },
@@ -747,53 +801,25 @@
           "delib_ok": true,
           "status": "Preserved Correct",
           "scores_base": [
-            -12.501176834106445,
-            -7.2114823659261065,
-            -6.4475752512613935,
-            -12.121472358703613
+            -7.383028030395508,
+            -9.748148918151855,
+            -6.133879661560059,
+            -7.8631792068481445
           ],
           "scores_delib": [
-            -11.924302101135254,
-            -5.211602528889974,
-            -5.829536437988281,
-            -11.087543487548828
+            -7.383028030395508,
+            -9.748148918151855,
+            -6.133879661560059,
+            -7.8631792068481445
           ],
-          "margin": 0.763907114664713,
-          "surprise_jsd": 0.05612209439277649,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5920644402503967,
-          "plastic_trace_norm": 5.665030002593994,
+          "margin": 1.2491483688354492,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
-          "idx": 4,
-          "sector": "OpenBookQA",
-          "target": "C"
-        },
-        {
-          "pred_base": "D",
-          "pred_delib": "D",
-          "base_ok": false,
-          "delib_ok": false,
-          "status": "Preserved Wrong",
-          "scores_base": [
-            -10.890868186950684,
-            -12.16261100769043,
-            -10.201108932495117,
-            -10.006412506103516
-          ],
-          "scores_delib": [
-            -10.804665565490723,
-            -11.703798294067383,
-            -10.480363845825195,
-            -9.045403480529785
-          ],
-          "margin": 0.19469642639160156,
-          "surprise_jsd": 0.035323768854141235,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5920644402503967,
-          "plastic_trace_norm": 5.642368793487549,
-          "synthesized_count": 0,
-          "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 5,
           "sector": "OpenBookQA",
           "target": "C"
@@ -805,24 +831,25 @@
           "delib_ok": false,
           "status": "Preserved Wrong",
           "scores_base": [
-            -10.932056427001953,
-            -11.637147903442383,
-            -12.538783073425293,
-            -7.707875728607178
+            -8.332518577575684,
+            -9.672367095947266,
+            -9.824934005737305,
+            -6.531421184539795
           ],
           "scores_delib": [
-            -10.197992324829102,
-            -12.125818252563477,
-            -14.04611873626709,
-            -7.364463806152344
+            -8.332518577575684,
+            -9.672367095947266,
+            -9.824934005737305,
+            -6.531421184539795
           ],
-          "margin": 3.2241806983947754,
-          "surprise_jsd": 0.0031938753090798855,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5920645594596863,
-          "plastic_trace_norm": 5.651226043701172,
+          "margin": 1.8010973930358887,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 6,
           "sector": "OpenBookQA",
           "target": "C"
@@ -834,53 +861,55 @@
           "delib_ok": false,
           "status": "Preserved Wrong",
           "scores_base": [
-            -10.748172760009766,
-            -9.956105550130209,
-            -6.045915603637695,
-            -8.867528915405273
+            -11.277555465698242,
+            -9.537480672200521,
+            -6.663217067718506,
+            -10.387002944946289
           ],
           "scores_delib": [
-            -10.643754005432129,
-            -9.188913981119791,
-            -5.726760387420654,
-            -8.688035011291504
+            -11.277555465698242,
+            -9.537480672200521,
+            -6.663217067718506,
+            -10.387002944946289
           ],
-          "margin": 2.821613311767578,
-          "surprise_jsd": 0.0007443297654390335,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5920645594596863,
-          "plastic_trace_norm": 5.670717239379883,
+          "margin": 2.8742636044820156,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 7,
           "sector": "OpenBookQA",
           "target": "B"
         },
         {
-          "pred_base": "A",
-          "pred_delib": "A",
-          "base_ok": false,
-          "delib_ok": false,
-          "status": "Preserved Wrong",
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
           "scores_base": [
-            -6.507928371429443,
-            -7.527378559112549,
-            -7.213557720184326,
-            -6.933518886566162
+            -14.036415100097656,
+            -16.057941436767578,
+            -14.957284927368164,
+            -13.195505142211914
           ],
           "scores_delib": [
-            -8.698047637939453,
-            -9.461104393005371,
-            -9.124151229858398,
-            -9.703410148620605
+            -14.036415100097656,
+            -16.057941436767578,
+            -14.957284927368164,
+            -13.195505142211914
           ],
-          "margin": 0.42559051513671875,
-          "surprise_jsd": 0.011793769896030426,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5920644402503967,
-          "plastic_trace_norm": 5.648186206817627,
+          "margin": 0.8409099578857422,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 8,
           "sector": "OpenBookQA",
           "target": "D"
@@ -892,24 +921,25 @@
           "delib_ok": false,
           "status": "Preserved Wrong",
           "scores_base": [
-            -7.2655158042907715,
-            -10.614239692687988,
-            -13.682662963867188,
-            -10.81579875946045
+            -5.6176438331604,
+            -7.539070129394531,
+            -13.076446533203125,
+            -9.552483558654785
           ],
           "scores_delib": [
-            -6.674649238586426,
-            -9.502559661865234,
-            -13.575277328491211,
-            -11.42469310760498
+            -5.6176438331604,
+            -7.539070129394531,
+            -13.076446533203125,
+            -9.552483558654785
           ],
-          "margin": 3.348723888397217,
-          "surprise_jsd": 0.004143584053963423,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5920644402503967,
-          "plastic_trace_norm": 5.6513824462890625,
+          "margin": 1.9214262962341309,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 9,
           "sector": "OpenBookQA",
           "target": "B"
@@ -920,12 +950,12 @@
       "domain": "Physical Commonsense",
       "samples": 10,
       "base_acc": 80.0,
-      "delib_acc": 70.0,
-      "delta": -10.0,
+      "delib_acc": 80.0,
+      "delta": 0.0,
       "rescued_count": 0,
-      "degraded_count": 1,
-      "mean_vacuity_u": 0.5964859545230865,
-      "mean_plastic_trace": 3.601023054122925,
+      "degraded_count": 0,
+      "mean_vacuity_u": 0.5378811955451965,
+      "mean_plastic_trace": 1.4378807306289674,
       "samples_log": [
         {
           "pred_base": "0",
@@ -948,31 +978,33 @@
           "plastic_trace_norm": 3.653369426727295,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 0,
           "sector": "PIQA",
           "target": "0"
         },
         {
           "pred_base": "1",
-          "pred_delib": "0",
+          "pred_delib": "1",
           "base_ok": true,
-          "delib_ok": false,
-          "status": "Degraded (Right->Wrong)",
+          "delib_ok": true,
+          "status": "Preserved Correct",
           "scores_base": [
             -6.08168093363444,
             -5.709845352172851
           ],
           "scores_delib": [
-            -5.103837013244629,
-            -5.7547119140625
+            -6.08168093363444,
+            -5.709845352172851
           ],
           "margin": 0.371835581461589,
-          "surprise_jsd": 0.03149877488613129,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.594925582408905,
-          "plastic_trace_norm": 3.577007293701172,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 1,
           "sector": "PIQA",
           "target": "1"
@@ -988,16 +1020,17 @@
             -4.00491205851237
           ],
           "scores_delib": [
-            -2.1084612528483073,
-            -3.113780975341797
+            -2.7340494791666665,
+            -4.00491205851237
           ],
           "margin": 1.2708625793457036,
-          "surprise_jsd": 0.00161723792552948,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.6059468388557434,
-          "plastic_trace_norm": 3.6966938972473145,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 2,
           "sector": "PIQA",
           "target": "1"
@@ -1023,6 +1056,7 @@
           "plastic_trace_norm": 3.5972800254821777,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 3,
           "sector": "PIQA",
           "target": "1"
@@ -1038,16 +1072,17 @@
             -3.9297419461337
           ],
           "scores_delib": [
-            -2.9703181873668325,
-            -3.4566834189675073
+            -3.4111758145419033,
+            -3.9297419461337
           ],
           "margin": 0.5185661315917969,
-          "surprise_jsd": 3.0443072319030762e-05,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.6008725166320801,
-          "plastic_trace_norm": 3.5862793922424316,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 4,
           "sector": "PIQA",
           "target": "0"
@@ -1063,16 +1098,17 @@
             -3.662750667995877
           ],
           "scores_delib": [
-            -3.643983629014757,
-            -2.9747077094184027
+            -4.270686255560981,
+            -3.662750667995877
           ],
           "margin": 0.607935587565104,
-          "surprise_jsd": 0.00010636448860168457,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5926432013511658,
-          "plastic_trace_norm": 3.5509681701660156,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 5,
           "sector": "PIQA",
           "target": "1"
@@ -1088,16 +1124,17 @@
             -2.6016299907977762
           ],
           "scores_delib": [
-            -2.981039083228921,
-            -2.6965822073129506
+            -2.873079983693249,
+            -2.6016299907977762
           ],
           "margin": 0.27144999289547256,
-          "surprise_jsd": 5.260109901428223e-06,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5861364603042603,
-          "plastic_trace_norm": 3.514514207839966,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 6,
           "sector": "PIQA",
           "target": "1"
@@ -1113,16 +1150,17 @@
             -3.0125659942626952
           ],
           "scores_delib": [
-            -1.5870230538504464,
-            -2.8703556060791016
+            -1.5732841491699219,
+            -3.0125659942626952
           ],
           "margin": 1.4392818450927733,
-          "surprise_jsd": 0.0004934743046760559,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.6055229902267456,
-          "plastic_trace_norm": 3.705960273742676,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 7,
           "sector": "PIQA",
           "target": "0"
@@ -1148,6 +1186,7 @@
           "plastic_trace_norm": 3.582806348800659,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 8,
           "sector": "PIQA",
           "target": "0"
@@ -1173,6 +1212,7 @@
           "plastic_trace_norm": 3.545351505279541,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 9,
           "sector": "PIQA",
           "target": "0"
@@ -1187,8 +1227,8 @@
       "delta": 0.0,
       "rescued_count": 1,
       "degraded_count": 1,
-      "mean_vacuity_u": 0.5798118412494659,
-      "mean_plastic_trace": 7.292924594879151,
+      "mean_vacuity_u": 0.5719133913516998,
+      "mean_plastic_trace": 6.5612975597381595,
       "samples_log": [
         {
           "pred_base": "B",
@@ -1219,6 +1259,7 @@
           "plastic_trace_norm": 7.368529319763184,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 0,
           "sector": "BBH-DateUnderstanding",
           "target": "B"
@@ -1252,6 +1293,7 @@
           "plastic_trace_norm": 7.2918381690979,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 1,
           "sector": "BBH-DateUnderstanding",
           "target": "A"
@@ -1271,20 +1313,21 @@
             -1.5286183790727095
           ],
           "scores_delib": [
-            -1.0565122257579456,
-            -0.8925987590443004,
-            -0.556499567898837,
-            -1.1320066452026367,
-            -1.1827633597634055,
-            -1.244146000255238
+            -1.3722313967618076,
+            -1.2020438801158557,
+            -0.891282775185325,
+            -1.4140344966541638,
+            -1.4735665754838423,
+            -1.5286183790727095
           ],
           "margin": 0.3107611049305308,
-          "surprise_jsd": 4.99039888381958e-05,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5789844989776611,
-          "plastic_trace_norm": 7.316270351409912,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 2,
           "sector": "BBH-DateUnderstanding",
           "target": "B"
@@ -1318,6 +1361,7 @@
           "plastic_trace_norm": 7.222986221313477,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 3,
           "sector": "BBH-DateUnderstanding",
           "target": "E"
@@ -1351,6 +1395,7 @@
           "plastic_trace_norm": 7.2877397537231445,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 4,
           "sector": "BBH-DateUnderstanding",
           "target": "B"
@@ -1384,6 +1429,7 @@
           "plastic_trace_norm": 7.391109943389893,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 5,
           "sector": "BBH-DateUnderstanding",
           "target": "B"
@@ -1417,6 +1463,7 @@
           "plastic_trace_norm": 7.274413585662842,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 6,
           "sector": "BBH-DateUnderstanding",
           "target": "A"
@@ -1450,6 +1497,7 @@
           "plastic_trace_norm": 7.204029560089111,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 7,
           "sector": "BBH-DateUnderstanding",
           "target": "B"
@@ -1483,6 +1531,7 @@
           "plastic_trace_norm": 7.2775421142578125,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 8,
           "sector": "BBH-DateUnderstanding",
           "target": "D"
@@ -1516,6 +1565,7 @@
           "plastic_trace_norm": 7.2947869300842285,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": false,
           "idx": 9,
           "sector": "BBH-DateUnderstanding",
           "target": "B"
@@ -1525,12 +1575,12 @@
     "macro_summary": {
       "pass_id": 1,
       "total_samples": 50,
-      "base_accuracy": 54.0,
-      "delib_accuracy": 56.00000000000001,
-      "delta": 2.0,
+      "base_accuracy": 56.00000000000001,
+      "delib_accuracy": 60.0,
+      "delta": 4.0,
       "total_rescued": 3,
-      "total_degraded": 2,
-      "elapsed_seconds": 158.16
+      "total_degraded": 1,
+      "elapsed_seconds": 114.45
     }
   },
   "pass2_results": {
@@ -1542,8 +1592,8 @@
       "delta": 10.0,
       "rescued_count": 1,
       "degraded_count": 0,
-      "mean_vacuity_u": 0.6028789401054382,
-      "mean_plastic_trace": 6.551609802246094,
+      "mean_vacuity_u": 0.5309686899185181,
+      "mean_plastic_trace": 1.8166328430175782,
       "samples_log": [
         {
           "pred_base": "A",
@@ -1558,18 +1608,19 @@
             -2.648711681365967
           ],
           "scores_delib": [
-            -1.604504903157552,
-            -2.916095733642578,
-            -2.5614842308892145,
-            -2.492790937423706
+            -1.6372933387756348,
+            -2.729644775390625,
+            -2.6440071529812283,
+            -2.648711681365967
           ],
           "margin": 1.0067138142055936,
-          "surprise_jsd": 0.0012858659029006958,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.6101769208908081,
-          "plastic_trace_norm": 6.55691385269165,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 0,
           "sector": "ARC-Easy",
           "target": "A"
@@ -1587,18 +1638,19 @@
             -3.9925657908121743
           ],
           "scores_delib": [
-            -3.139488935470581,
-            -2.771958589553833,
-            -3.088165521621704,
-            -3.101705551147461
+            -3.973599433898926,
+            -3.9971046447753906,
+            -4.087376594543457,
+            -3.9925657908121743
           ],
           "margin": 0.01896635691324855,
-          "surprise_jsd": 0.00298309326171875,
-          "surprise_gate": 0.8348879218101501,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
           "vacuity_u": 0.6143220663070679,
-          "plastic_trace_norm": 6.802003860473633,
+          "plastic_trace_norm": 6.2203497886657715,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 1,
           "sector": "ARC-Easy",
           "target": "B"
@@ -1616,18 +1668,19 @@
             -5.520011901855469
           ],
           "scores_delib": [
-            -4.97163200378418,
-            -5.874399185180664,
-            -4.945562362670898,
-            -3.535198211669922
+            -10.088460922241211,
+            -8.675990104675293,
+            -6.954151153564453,
+            -5.520011901855469
           ],
           "margin": 1.4341392517089844,
-          "surprise_jsd": 0.04541802406311035,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.6044591069221497,
-          "plastic_trace_norm": 6.49258279800415,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 2,
           "sector": "ARC-Easy",
           "target": "D"
@@ -1645,18 +1698,19 @@
             -5.899925231933594
           ],
           "scores_delib": [
-            -10.948832511901855,
-            -5.454092025756836,
-            -3.812593460083008,
-            -1.158556580543518
+            -12.30924129486084,
+            -10.491570472717285,
+            -7.444915771484375,
+            -5.899925231933594
           ],
           "margin": 1.5449905395507812,
-          "surprise_jsd": 0.015167925506830215,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.6008936166763306,
-          "plastic_trace_norm": 6.605093002319336,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 3,
           "sector": "ARC-Easy",
           "target": "D"
@@ -1674,18 +1728,19 @@
             -3.7177330017089845
           ],
           "scores_delib": [
-            -3.2572313036237444,
-            -2.6825650533040366,
-            -3.1755213737487793,
-            -3.121711540222168
+            -4.374351501464844,
+            -3.50492435031467,
+            -3.9025464057922363,
+            -3.7177330017089845
           ],
           "margin": 0.21280865139431437,
-          "surprise_jsd": 0.003615736961364746,
-          "surprise_gate": 0.7,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
           "vacuity_u": 0.6058270931243896,
-          "plastic_trace_norm": 6.592911243438721,
+          "plastic_trace_norm": 6.076246738433838,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 4,
           "sector": "ARC-Easy",
           "target": "B"
@@ -1703,18 +1758,19 @@
             -2.698791821797689
           ],
           "scores_delib": [
-            -1.796146273612976,
-            -1.2071831226348877,
-            -0.9602682590484619,
-            -1.1068189938863118
+            -3.5672805309295654,
+            -3.1202940940856934,
+            -1.9225155512491863,
+            -2.698791821797689
           ],
           "margin": 0.7762762705485027,
-          "surprise_jsd": 0.019459806382656097,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.5869656801223755,
-          "plastic_trace_norm": 6.167987823486328,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 5,
           "sector": "ARC-Easy",
           "target": "C"
@@ -1732,18 +1788,19 @@
             -4.787769317626953
           ],
           "scores_delib": [
-            -1.695646047592163,
-            -1.4654240608215332,
-            -2.383192443847656,
-            -3.947571563720703
+            -3.1734609603881836,
+            -2.9989912509918213,
+            -3.532011795043945,
+            -4.787769317626953
           ],
           "margin": 0.1744697093963623,
-          "surprise_jsd": 0.004646036773920059,
-          "surprise_gate": 0.7,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
           "vacuity_u": 0.5895377397537231,
-          "plastic_trace_norm": 6.451481819152832,
+          "plastic_trace_norm": 5.869731903076172,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 6,
           "sector": "ARC-Easy",
           "target": "A"
@@ -1761,18 +1818,19 @@
             -3.7938013076782227
           ],
           "scores_delib": [
-            -7.827876091003418,
-            -4.637298107147217,
-            -0.19815951585769653,
-            -1.7929424047470093
+            -7.344089984893799,
+            -4.381877422332764,
+            -2.049318790435791,
+            -3.7938013076782227
           ],
           "margin": 1.7444825172424316,
-          "surprise_jsd": 0.016389422118663788,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.5916875004768372,
-          "plastic_trace_norm": 6.554243564605713,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 7,
           "sector": "ARC-Easy",
           "target": "C"
@@ -1790,18 +1848,19 @@
             -4.708803653717041
           ],
           "scores_delib": [
-            -5.79550838470459,
-            -6.792798042297363,
-            -0.7951687574386597,
-            -3.235743284225464
+            -6.182913780212402,
+            -6.421838760375977,
+            -3.9310712814331055,
+            -4.708803653717041
           ],
           "margin": 0.7777323722839355,
-          "surprise_jsd": 0.07221659272909164,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.6081777811050415,
-          "plastic_trace_norm": 6.506947040557861,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 8,
           "sector": "ARC-Easy",
           "target": "C"
@@ -1819,18 +1878,19 @@
             -2.9184080759684243
           ],
           "scores_delib": [
-            -1.0158835252126057,
-            -1.9451770782470703,
-            -2.2964868545532227,
-            -2.8406219482421875
+            -1.273112376530965,
+            -2.014726161956787,
+            -2.539585908253988,
+            -2.9184080759684243
           ],
           "margin": 0.741613785425822,
-          "surprise_jsd": 0.0009098649024963379,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.6167418956756592,
-          "plastic_trace_norm": 6.785933017730713,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 9,
           "sector": "ARC-Easy",
           "target": "A"
@@ -1841,19 +1901,19 @@
       "domain": "Deep Scientific Reasoning",
       "samples": 10,
       "base_acc": 50.0,
-      "delib_acc": 50.0,
-      "delta": 0.0,
+      "delib_acc": 60.0,
+      "delta": 10.0,
       "rescued_count": 1,
-      "degraded_count": 1,
-      "mean_vacuity_u": 0.5965783894062042,
-      "mean_plastic_trace": 6.338989686965943,
+      "degraded_count": 0,
+      "mean_vacuity_u": 0.5391262471675873,
+      "mean_plastic_trace": 2.3970644950866697,
       "samples_log": [
         {
           "pred_base": "C",
-          "pred_delib": "D",
+          "pred_delib": "C",
           "base_ok": true,
-          "delib_ok": false,
-          "status": "Degraded (Right->Wrong)",
+          "delib_ok": true,
+          "status": "Preserved Correct",
           "scores_base": [
             -3.0848897298177085,
             -3.8034439086914062,
@@ -1861,18 +1921,19 @@
             -3.0777130126953125
           ],
           "scores_delib": [
-            -2.8280372619628906,
-            -3.34326662336077,
-            -2.5735795157296315,
-            -2.4702227456229076
+            -3.0848897298177085,
+            -3.8034439086914062,
+            -2.9398277827671597,
+            -3.0777130126953125
           ],
           "margin": 0.13788522992815277,
-          "surprise_jsd": 0.0023024678230285645,
-          "surprise_gate": 0.7,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
           "vacuity_u": 0.5950249433517456,
-          "plastic_trace_norm": 6.48504114151001,
+          "plastic_trace_norm": 5.811768054962158,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 0,
           "sector": "ARC-Challenge",
           "target": "C"
@@ -1890,18 +1951,19 @@
             -4.148692321777344
           ],
           "scores_delib": [
-            -3.6599620819091796,
-            -3.0319080352783203,
-            -5.161475753784179,
-            -3.3847171783447267
+            -3.952993392944336,
+            -3.312805938720703,
+            -5.753437042236328,
+            -4.148692321777344
           ],
           "margin": 0.640187454223633,
-          "surprise_jsd": 0.005476251244544983,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.6017171144485474,
-          "plastic_trace_norm": 6.39396333694458,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 1,
           "sector": "ARC-Challenge",
           "target": "B"
@@ -1919,18 +1981,19 @@
             -2.2011135949028864
           ],
           "scores_delib": [
-            -3.1637516021728516,
-            -1.4148818254470825,
-            -1.581345558166504,
-            -1.954630109998915
+            -3.419440984725952,
+            -1.583982229232788,
+            -1.7470527648925782,
+            -2.2011135949028864
           ],
           "margin": 0.16307053565979013,
-          "surprise_jsd": 0.0001671910285949707,
-          "surprise_gate": 0.7,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
           "vacuity_u": 0.6142653822898865,
-          "plastic_trace_norm": 6.668544769287109,
+          "plastic_trace_norm": 6.179134845733643,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 2,
           "sector": "ARC-Challenge",
           "target": "C"
@@ -1948,18 +2011,19 @@
             -2.311495780944824
           ],
           "scores_delib": [
-            -3.6074447631835938,
-            -4.926894505818685,
-            -2.3589583805629184,
-            -1.7064480781555176
+            -5.843999862670898,
+            -6.07447878519694,
+            -2.780778067452567,
+            -2.311495780944824
           ],
           "margin": 0.4692822865077426,
-          "surprise_jsd": 0.015111885964870453,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5847052335739136,
-          "plastic_trace_norm": 5.781006336212158,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 3,
           "sector": "ARC-Challenge",
           "target": "D"
@@ -1977,18 +2041,19 @@
             -2.699368158976237
           ],
           "scores_delib": [
-            -3.08567019871303,
-            -1.5845780806107954,
-            -1.5498593070290305,
-            -2.6564714113871255
+            -3.299396242414202,
+            -1.7481084303422407,
+            -1.7394872145219282,
+            -2.699368158976237
           ],
           "margin": 0.0086212158203125,
-          "surprise_jsd": 0.00031306594610214233,
-          "surprise_gate": 0.8614726662635803,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
           "vacuity_u": 0.5816580653190613,
-          "plastic_trace_norm": 6.10472297668457,
+          "plastic_trace_norm": 5.580307960510254,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 4,
           "sector": "ARC-Challenge",
           "target": "D"
@@ -2006,18 +2071,19 @@
             -4.290301132202148
           ],
           "scores_delib": [
-            -3.2198170555962458,
-            -4.496410687764485,
-            -2.2524852752685547,
-            -3.046232223510742
+            -4.01920912000868,
+            -5.7041670481363935,
+            -3.045720100402832,
+            -4.290301132202148
           ],
           "margin": 0.9734890196058483,
-          "surprise_jsd": 0.00450475886464119,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.6081907749176025,
-          "plastic_trace_norm": 6.597932815551758,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 5,
           "sector": "ARC-Challenge",
           "target": "B"
@@ -2047,6 +2113,7 @@
           "plastic_trace_norm": 6.3994340896606445,
           "synthesized_count": 0,
           "critique_applied": true,
+          "settled_shortcut": false,
           "idx": 6,
           "sector": "ARC-Challenge",
           "target": "C"
@@ -2064,18 +2131,19 @@
             -2.6326658725738525
           ],
           "scores_delib": [
-            -1.777600606282552,
-            -2.4244556427001953,
-            -1.6065188513861761,
-            -2.6178395748138428
+            -2.0462462107340493,
+            -2.7294442313058034,
+            -1.7184302012125652,
+            -2.6326658725738525
           ],
           "margin": 0.32781600952148415,
-          "surprise_jsd": 0.0013342201709747314,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.5872244238853455,
-          "plastic_trace_norm": 6.170045852661133,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 7,
           "sector": "ARC-Challenge",
           "target": "C"
@@ -2093,18 +2161,19 @@
             -1.8643964767456054
           ],
           "scores_delib": [
-            -1.8659470421927316,
-            -2.5519326527913413,
-            -2.5222901238335504,
-            -1.8184782028198243
+            -2.1627423422677174,
+            -2.5247181786431208,
+            -3.022854487101237,
+            -1.8643964767456054
           ],
           "margin": 0.29834586552211206,
-          "surprise_jsd": 0.004156872630119324,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.5905624032020569,
-          "plastic_trace_norm": 6.3074750900268555,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 8,
           "sector": "ARC-Challenge",
           "target": "B"
@@ -2122,18 +2191,19 @@
             -5.820776462554932
           ],
           "scores_delib": [
-            -1.537527084350586,
-            -2.7317819595336914,
-            -3.589465618133545,
-            -3.6914069652557373
+            -3.5412673950195312,
+            -4.459697723388672,
+            -5.78362512588501,
+            -5.820776462554932
           ],
           "margin": 0.9184303283691406,
-          "surprise_jsd": 0.0023873373866081238,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.6021214723587036,
-          "plastic_trace_norm": 6.4817304611206055,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 9,
           "sector": "ARC-Challenge",
           "target": "A"
@@ -2143,13 +2213,13 @@
     "OpenBookQA": {
       "domain": "Multi-Hop Fact Chaining",
       "samples": 10,
-      "base_acc": 20.0,
-      "delib_acc": 10.0,
-      "delta": -10.0,
+      "base_acc": 30.0,
+      "delib_acc": 30.0,
+      "delta": 0.0,
       "rescued_count": 0,
-      "degraded_count": 1,
-      "mean_vacuity_u": 0.5920645117759704,
-      "mean_plastic_trace": 6.1199873924255375,
+      "degraded_count": 0,
+      "mean_vacuity_u": 0.5090340971946716,
+      "mean_plastic_trace": 0.6479139804840088,
       "samples_log": [
         {
           "pred_base": "D",
@@ -2158,53 +2228,55 @@
           "delib_ok": false,
           "status": "Preserved Wrong",
           "scores_base": [
-            -6.6854143142700195,
-            -8.773500442504883,
-            -9.439716339111328,
-            -6.387608051300049
+            -5.788010120391846,
+            -6.535223007202148,
+            -8.33929443359375,
+            -5.282407283782959
           ],
           "scores_delib": [
-            -6.0452656745910645,
-            -8.048759460449219,
-            -8.804467010498048,
-            -5.245226860046387
+            -5.788010120391846,
+            -6.535223007202148,
+            -8.33929443359375,
+            -5.282407283782959
           ],
-          "margin": 0.2978062629699707,
-          "surprise_jsd": 0.007328703999519348,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.592064619064331,
-          "plastic_trace_norm": 6.134613513946533,
+          "margin": 0.5056028366088867,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 0,
           "sector": "OpenBookQA",
           "target": "B"
         },
         {
           "pred_base": "B",
-          "pred_delib": "B",
+          "pred_delib": "D",
           "base_ok": false,
           "delib_ok": false,
           "status": "Preserved Wrong",
           "scores_base": [
-            -10.049914360046387,
-            -7.585325876871745,
-            -9.12673282623291,
-            -8.75455093383789
+            -10.91346549987793,
+            -7.3028310139973955,
+            -7.405397415161133,
+            -9.123968124389648
           ],
           "scores_delib": [
-            -6.680331707000732,
-            -5.0995299021403,
-            -7.719183444976807,
-            -5.786289691925049
+            -4.36117696762085,
+            -3.4599024454752603,
+            -5.001230239868164,
+            -3.284663200378418
           ],
-          "margin": 1.1692250569661455,
-          "surprise_jsd": 0.023819778114557266,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.5920645594596863,
-          "plastic_trace_norm": 6.12054443359375,
+          "margin": 0.10256640116373728,
+          "surprise_jsd": 0.1712268888950348,
+          "surprise_gate": 0.9723836779594421,
+          "vacuity_u": 0.5903409719467163,
+          "plastic_trace_norm": 6.479139804840088,
           "synthesized_count": 0,
           "critique_applied": true,
+          "settled_shortcut": false,
           "idx": 1,
           "sector": "OpenBookQA",
           "target": "A"
@@ -2216,24 +2288,25 @@
           "delib_ok": true,
           "status": "Preserved Correct",
           "scores_base": [
-            -12.320999145507812,
-            -9.342056274414062,
-            -8.181442896525065,
-            -11.908426284790039
+            -10.54976749420166,
+            -9.92009449005127,
+            -6.821575164794922,
+            -12.741936683654785
           ],
           "scores_delib": [
-            -11.674530029296875,
-            -9.722740173339844,
-            -6.4352773030598955,
-            -9.070738792419434
+            -10.54976749420166,
+            -9.92009449005127,
+            -6.821575164794922,
+            -12.741936683654785
           ],
-          "margin": 1.160613377888998,
-          "surprise_jsd": 0.05316125601530075,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.5920644402503967,
-          "plastic_trace_norm": 6.112062454223633,
+          "margin": 3.0985193252563477,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 2,
           "sector": "OpenBookQA",
           "target": "C"
@@ -2245,82 +2318,85 @@
           "delib_ok": false,
           "status": "Preserved Wrong",
           "scores_base": [
-            -7.655377388000488,
-            -7.035503387451172,
-            -8.94552993774414,
-            -8.260663032531738
+            -6.452857971191406,
+            -5.166319274902344,
+            -7.63482666015625,
+            -7.109699249267578
           ],
           "scores_delib": [
-            -7.481868743896484,
-            -6.999517822265625,
-            -8.15630874633789,
-            -8.026849746704102
+            -6.452857971191406,
+            -5.166319274902344,
+            -7.63482666015625,
+            -7.109699249267578
           ],
-          "margin": 0.6198740005493164,
-          "surprise_jsd": 0.00597701221704483,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.592064619064331,
-          "plastic_trace_norm": 6.139954566955566,
+          "margin": 1.2865386962890621,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 3,
           "sector": "OpenBookQA",
           "target": "C"
         },
         {
-          "pred_base": "C",
+          "pred_base": "B",
           "pred_delib": "B",
-          "base_ok": true,
+          "base_ok": false,
           "delib_ok": false,
-          "status": "Degraded (Right->Wrong)",
+          "status": "Preserved Wrong",
           "scores_base": [
-            -12.501176834106445,
-            -7.2114823659261065,
-            -6.4475752512613935,
-            -12.121472358703613
+            -12.179611206054688,
+            -4.936639785766602,
+            -5.248122533162435,
+            -11.04481029510498
           ],
           "scores_delib": [
-            -11.924463272094727,
-            -5.2127259572347,
-            -5.829724629720052,
-            -11.085733413696289
+            -12.179611206054688,
+            -4.936639785766602,
+            -5.248122533162435,
+            -11.04481029510498
           ],
-          "margin": 0.763907114664713,
-          "surprise_jsd": 0.056049153208732605,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.5920644402503967,
-          "plastic_trace_norm": 6.117815971374512,
+          "margin": 0.31148274739583304,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 4,
           "sector": "OpenBookQA",
           "target": "C"
         },
         {
-          "pred_base": "D",
-          "pred_delib": "D",
-          "base_ok": false,
-          "delib_ok": false,
-          "status": "Preserved Wrong",
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
           "scores_base": [
-            -10.890868186950684,
-            -12.16261100769043,
-            -10.201108932495117,
-            -10.006412506103516
+            -7.383028030395508,
+            -9.748148918151855,
+            -6.133879661560059,
+            -7.8631792068481445
           ],
           "scores_delib": [
-            -10.805211067199707,
-            -11.70472240447998,
-            -10.480794906616211,
-            -9.046133995056152
+            -7.383028030395508,
+            -9.748148918151855,
+            -6.133879661560059,
+            -7.8631792068481445
           ],
-          "margin": 0.19469642639160156,
-          "surprise_jsd": 0.03530921787023544,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.5920644402503967,
-          "plastic_trace_norm": 6.1114044189453125,
+          "margin": 1.2491483688354492,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 5,
           "sector": "OpenBookQA",
           "target": "C"
@@ -2332,24 +2408,25 @@
           "delib_ok": false,
           "status": "Preserved Wrong",
           "scores_base": [
-            -10.932056427001953,
-            -11.637147903442383,
-            -12.538783073425293,
-            -7.707875728607178
+            -8.332518577575684,
+            -9.672367095947266,
+            -9.824934005737305,
+            -6.531421184539795
           ],
           "scores_delib": [
-            -10.197527885437012,
-            -12.127214431762695,
-            -14.046313285827637,
-            -7.364548683166504
+            -8.332518577575684,
+            -9.672367095947266,
+            -9.824934005737305,
+            -6.531421184539795
           ],
-          "margin": 3.2241806983947754,
-          "surprise_jsd": 0.0031992115546017885,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.5920645594596863,
-          "plastic_trace_norm": 6.113707542419434,
+          "margin": 1.8010973930358887,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 6,
           "sector": "OpenBookQA",
           "target": "C"
@@ -2361,53 +2438,55 @@
           "delib_ok": false,
           "status": "Preserved Wrong",
           "scores_base": [
-            -10.748172760009766,
-            -9.956105550130209,
-            -6.045915603637695,
-            -8.867528915405273
+            -11.277555465698242,
+            -9.537480672200521,
+            -6.663217067718506,
+            -10.387002944946289
           ],
           "scores_delib": [
-            -10.643803596496582,
-            -9.188841501871744,
-            -5.7274603843688965,
-            -8.68808650970459
+            -11.277555465698242,
+            -9.537480672200521,
+            -6.663217067718506,
+            -10.387002944946289
           ],
-          "margin": 2.821613311767578,
-          "surprise_jsd": 0.0007451754063367844,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.5920645594596863,
-          "plastic_trace_norm": 6.122534275054932,
+          "margin": 2.8742636044820156,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 7,
           "sector": "OpenBookQA",
           "target": "B"
         },
         {
-          "pred_base": "A",
-          "pred_delib": "A",
-          "base_ok": false,
-          "delib_ok": false,
-          "status": "Preserved Wrong",
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
           "scores_base": [
-            -6.507928371429443,
-            -7.527378559112549,
-            -7.213557720184326,
-            -6.933518886566162
+            -14.036415100097656,
+            -16.057941436767578,
+            -14.957284927368164,
+            -13.195505142211914
           ],
           "scores_delib": [
-            -8.696496963500977,
-            -9.460588455200195,
-            -9.123428344726562,
-            -9.70274829864502
+            -14.036415100097656,
+            -16.057941436767578,
+            -14.957284927368164,
+            -13.195505142211914
           ],
-          "margin": 0.42559051513671875,
-          "surprise_jsd": 0.011791802942752838,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.5920644402503967,
-          "plastic_trace_norm": 6.113501071929932,
+          "margin": 0.8409099578857422,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 8,
           "sector": "OpenBookQA",
           "target": "D"
@@ -2419,24 +2498,25 @@
           "delib_ok": false,
           "status": "Preserved Wrong",
           "scores_base": [
-            -7.2655158042907715,
-            -10.614239692687988,
-            -13.682662963867188,
-            -10.81579875946045
+            -5.6176438331604,
+            -7.539070129394531,
+            -13.076446533203125,
+            -9.552483558654785
           ],
           "scores_delib": [
-            -6.6746015548706055,
-            -9.501737594604492,
-            -13.575078964233398,
-            -11.426084518432617
+            -5.6176438331604,
+            -7.539070129394531,
+            -13.076446533203125,
+            -9.552483558654785
           ],
-          "margin": 3.348723888397217,
-          "surprise_jsd": 0.004152890294790268,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.5920644402503967,
-          "plastic_trace_norm": 6.113735675811768,
+          "margin": 1.9214262962341309,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 9,
           "sector": "OpenBookQA",
           "target": "B"
@@ -2447,12 +2527,12 @@
       "domain": "Physical Commonsense",
       "samples": 10,
       "base_acc": 80.0,
-      "delib_acc": 70.0,
-      "delta": -10.0,
+      "delib_acc": 80.0,
+      "delta": 0.0,
       "rescued_count": 0,
-      "degraded_count": 1,
-      "mean_vacuity_u": 0.5964859545230865,
-      "mean_plastic_trace": 3.827162170410156,
+      "degraded_count": 0,
+      "mean_vacuity_u": 0.5378811955451965,
+      "mean_plastic_trace": 1.423501968383789,
       "samples_log": [
         {
           "pred_base": "0",
@@ -2465,41 +2545,43 @@
             -2.7461954065271326
           ],
           "scores_delib": [
-            -2.594021565205342,
-            -2.7863451983477616
+            -2.585995648358319,
+            -2.7461954065271326
           ],
           "margin": 0.1601997581688135,
-          "surprise_jsd": 3.2007694244384766e-05,
-          "surprise_gate": 0.7,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
           "vacuity_u": 0.5964941382408142,
-          "plastic_trace_norm": 3.91833233833313,
+          "plastic_trace_norm": 3.616835832595825,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 0,
           "sector": "PIQA",
           "target": "0"
         },
         {
           "pred_base": "1",
-          "pred_delib": "0",
+          "pred_delib": "1",
           "base_ok": true,
-          "delib_ok": false,
-          "status": "Degraded (Right->Wrong)",
+          "delib_ok": true,
+          "status": "Preserved Correct",
           "scores_base": [
             -6.08168093363444,
             -5.709845352172851
           ],
           "scores_delib": [
-            -5.103780110677083,
-            -5.7547248840332035
+            -6.08168093363444,
+            -5.709845352172851
           ],
           "margin": 0.371835581461589,
-          "surprise_jsd": 0.03150284290313721,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.594925582408905,
-          "plastic_trace_norm": 3.7683794498443604,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 1,
           "sector": "PIQA",
           "target": "1"
@@ -2515,16 +2597,17 @@
             -4.00491205851237
           ],
           "scores_delib": [
-            -2.1085276285807293,
-            -3.113835334777832
+            -2.7340494791666665,
+            -4.00491205851237
           ],
           "margin": 1.2708625793457036,
-          "surprise_jsd": 0.0016173943877220154,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.6059468388557434,
-          "plastic_trace_norm": 3.96340012550354,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 2,
           "sector": "PIQA",
           "target": "1"
@@ -2540,16 +2623,17 @@
             -4.123823928833008
           ],
           "scores_delib": [
-            -3.5380718231201174,
-            -3.6109832763671874
+            -3.963889312744141,
+            -4.123823928833008
           ],
           "margin": 0.15993461608886683,
-          "surprise_jsd": 0.0002357959747314453,
-          "surprise_gate": 0.7,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
           "vacuity_u": 0.596123456954956,
-          "plastic_trace_norm": 3.850877523422241,
+          "plastic_trace_norm": 3.561307430267334,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 3,
           "sector": "PIQA",
           "target": "1"
@@ -2565,16 +2649,17 @@
             -3.9297419461337
           ],
           "scores_delib": [
-            -2.9704430320046167,
-            -3.456857507879084
+            -3.4111758145419033,
+            -3.9297419461337
           ],
           "margin": 0.5185661315917969,
-          "surprise_jsd": 3.038346767425537e-05,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.6008725166320801,
-          "plastic_trace_norm": 3.756201982498169,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 4,
           "sector": "PIQA",
           "target": "0"
@@ -2590,16 +2675,17 @@
             -3.662750667995877
           ],
           "scores_delib": [
-            -3.644046359592014,
-            -2.974805619981554
+            -4.270686255560981,
+            -3.662750667995877
           ],
           "margin": 0.607935587565104,
-          "surprise_jsd": 0.00010626018047332764,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.5926432013511658,
-          "plastic_trace_norm": 3.7879436016082764,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 5,
           "sector": "PIQA",
           "target": "1"
@@ -2615,16 +2701,17 @@
             -2.6016299907977762
           ],
           "scores_delib": [
-            -2.9810658580852003,
-            -2.696610083946815
+            -2.873079983693249,
+            -2.6016299907977762
           ],
           "margin": 0.27144999289547256,
-          "surprise_jsd": 5.170702934265137e-06,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.5861364603042603,
-          "plastic_trace_norm": 3.6968278884887695,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 6,
           "sector": "PIQA",
           "target": "1"
@@ -2640,16 +2727,17 @@
             -3.0125659942626952
           ],
           "scores_delib": [
-            -1.586996350969587,
-            -2.8703102111816405
+            -1.5732841491699219,
+            -3.0125659942626952
           ],
           "margin": 1.4392818450927733,
-          "surprise_jsd": 0.0004936009645462036,
-          "surprise_gate": 0.7,
-          "vacuity_u": 0.6055229902267456,
-          "plastic_trace_norm": 3.9795053005218506,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 7,
           "sector": "PIQA",
           "target": "0"
@@ -2665,16 +2753,17 @@
             -2.4335744380950928
           ],
           "scores_delib": [
-            -2.2481045722961426,
-            -2.3360683917999268
+            -2.3369667530059814,
+            -2.4335744380950928
           ],
           "margin": 0.09660768508911133,
-          "surprise_jsd": 2.3245811462402344e-06,
-          "surprise_gate": 0.7,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
           "vacuity_u": 0.5883649587631226,
-          "plastic_trace_norm": 3.8205831050872803,
+          "plastic_trace_norm": 3.546978235244751,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 8,
           "sector": "PIQA",
           "target": "0"
@@ -2690,16 +2779,17 @@
             -3.099469926622179
           ],
           "scores_delib": [
-            -2.362472322252062,
-            -2.566600375705295
+            -2.9193992614746094,
+            -3.099469926622179
           ],
           "margin": 0.18007066514756964,
-          "surprise_jsd": 1.7896294593811035e-05,
-          "surprise_gate": 0.7,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
           "vacuity_u": 0.5978294014930725,
-          "plastic_trace_norm": 3.7295703887939453,
+          "plastic_trace_norm": 3.5098981857299805,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 9,
           "sector": "PIQA",
           "target": "0"
@@ -2714,8 +2804,8 @@
       "delta": 0.0,
       "rescued_count": 1,
       "degraded_count": 1,
-      "mean_vacuity_u": 0.5798118412494659,
-      "mean_plastic_trace": 7.72171049118042,
+      "mean_vacuity_u": 0.5719133913516998,
+      "mean_plastic_trace": 6.669176626205444,
       "samples_log": [
         {
           "pred_base": "B",
@@ -2732,20 +2822,21 @@
             -1.2847324718128552
           ],
           "scores_delib": [
-            -0.3843404163013805,
-            -0.3358369307084517,
-            -0.5625526254827325,
-            -0.5650927803733132,
-            -1.361956856467507,
-            -1.06434457952326
+            -0.6809240254488859,
+            -0.5921463532881304,
+            -0.8946037292480469,
+            -0.8171327764337714,
+            -1.574703736738725,
+            -1.2847324718128552
           ],
           "margin": 0.0887776721607555,
-          "surprise_jsd": 0.0001855790615081787,
-          "surprise_gate": 0.7,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
           "vacuity_u": 0.5861445069313049,
-          "plastic_trace_norm": 7.742155075073242,
+          "plastic_trace_norm": 7.294844627380371,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 0,
           "sector": "BBH-DateUnderstanding",
           "target": "B"
@@ -2765,20 +2856,21 @@
             -0.9362034364180132
           ],
           "scores_delib": [
-            -0.5726863254200328,
-            -0.43749432130293414,
-            -0.586724107915705,
-            -1.7313123182816939,
-            -1.7328818928111682,
-            -0.8216334256258878
+            -0.7911370884288441,
+            -0.6501600092107599,
+            -0.7723794416947798,
+            -1.9119427420876243,
+            -1.957328276200728,
+            -0.9362034364180132
           ],
           "margin": 0.1222194324840199,
-          "surprise_jsd": 0.0001760721206665039,
-          "surprise_gate": 0.7,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
           "vacuity_u": 0.5759702324867249,
-          "plastic_trace_norm": 7.7252116203308105,
+          "plastic_trace_norm": 7.218919277191162,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 1,
           "sector": "BBH-DateUnderstanding",
           "target": "A"
@@ -2798,20 +2890,21 @@
             -1.5286183790727095
           ],
           "scores_delib": [
-            -1.0565122257579456,
-            -0.8925987590443004,
-            -0.556499567898837,
-            -1.1320066452026367,
-            -1.1827633597634055,
-            -1.244146000255238
+            -1.3722313967618076,
+            -1.2020438801158557,
+            -0.891282775185325,
+            -1.4140344966541638,
+            -1.4735665754838423,
+            -1.5286183790727095
           ],
           "margin": 0.3107611049305308,
-          "surprise_jsd": 4.99039888381958e-05,
-          "surprise_gate": 0.4,
-          "vacuity_u": 0.5789844989776611,
-          "plastic_trace_norm": 7.316270351409912,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
           "synthesized_count": 0,
           "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 2,
           "sector": "BBH-DateUnderstanding",
           "target": "B"
@@ -2831,20 +2924,21 @@
             -1.3056135177612305
           ],
           "scores_delib": [
-            -0.9102394797585227,
-            -1.1914297450672497,
-            -1.1712041334672407,
-            -0.9793706373734907,
-            -0.6590957208113237,
-            -1.0892390337857334
+            -0.9987545013427734,
+            -1.3608782508156516,
+            -1.421796972101385,
+            -1.2384173653342507,
+            -0.9081761620261453,
+            -1.3056135177612305
           ],
           "margin": 0.09057833931662818,
-          "surprise_jsd": 0.0004954636096954346,
-          "surprise_gate": 0.7,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
           "vacuity_u": 0.5741099119186401,
-          "plastic_trace_norm": 7.733733177185059,
+          "plastic_trace_norm": 7.150757312774658,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 3,
           "sector": "BBH-DateUnderstanding",
           "target": "E"
@@ -2864,20 +2958,21 @@
             -0.763435883955522
           ],
           "scores_delib": [
-            -1.1249839609319514,
-            -0.3976172533902255,
-            -0.7239147966558283,
-            -0.4355517734180797,
-            -1.0403301065618342,
-            -0.5582286661321466
+            -1.4203310879794033,
+            -0.6876050775701349,
+            -0.9739213423295454,
+            -0.7038097815080122,
+            -1.3690203753384678,
+            -0.763435883955522
           ],
           "margin": 0.01620470393787732,
-          "surprise_jsd": 0.00017636269330978394,
-          "surprise_gate": 0.8423616290092468,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
           "vacuity_u": 0.5785449743270874,
-          "plastic_trace_norm": 7.779665470123291,
+          "plastic_trace_norm": 7.214862823486328,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 4,
           "sector": "BBH-DateUnderstanding",
           "target": "B"
@@ -2911,6 +3006,7 @@
           "plastic_trace_norm": 7.990164756774902,
           "synthesized_count": 0,
           "critique_applied": true,
+          "settled_shortcut": false,
           "idx": 5,
           "sector": "BBH-DateUnderstanding",
           "target": "B"
@@ -2930,20 +3026,21 @@
             -0.9731372486461293
           ],
           "scores_delib": [
-            -0.8969541896473278,
-            -0.8398015282370828,
-            -0.8352205970070579,
-            -0.9230039769952948,
-            -0.8279583670876243,
-            -0.6524750102650035
+            -1.1420855955644087,
+            -1.0819468931718306,
+            -1.0950130115855823,
+            -1.166367530822754,
+            -1.0772849863225764,
+            -0.9731372486461293
           ],
           "margin": 0.10414773767644714,
-          "surprise_jsd": 0.00010664761066436768,
-          "surprise_gate": 0.7,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
           "vacuity_u": 0.5868958234786987,
-          "plastic_trace_norm": 7.7926716804504395,
+          "plastic_trace_norm": 7.201670169830322,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 6,
           "sector": "BBH-DateUnderstanding",
           "target": "A"
@@ -2963,20 +3060,21 @@
             -1.1457935680042615
           ],
           "scores_delib": [
-            -1.6697998046875,
-            -0.34482368555935944,
-            -0.6196432547135786,
-            -0.9147476716475054,
-            -0.22955630042336203,
-            -0.9844049973921343
+            -1.867060574618253,
+            -0.5882944627241655,
+            -0.8960742950439453,
+            -1.0592568137428977,
+            -0.4453361251137473,
+            -1.1457935680042615
           ],
           "margin": 0.1429583376104182,
-          "surprise_jsd": 0.0002397000789642334,
-          "surprise_gate": 0.7,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
           "vacuity_u": 0.5736808180809021,
-          "plastic_trace_norm": 7.648675441741943,
+          "plastic_trace_norm": 7.1319899559021,
           "synthesized_count": 0,
-          "critique_applied": true,
+          "critique_applied": false,
+          "settled_shortcut": true,
           "idx": 7,
           "sector": "BBH-DateUnderstanding",
           "target": "B"
@@ -3010,6 +3108,7 @@
           "plastic_trace_norm": 7.739197254180908,
           "synthesized_count": 0,
           "critique_applied": true,
+          "settled_shortcut": false,
           "idx": 8,
           "sector": "BBH-DateUnderstanding",
           "target": "D"
@@ -3043,6 +3142,7 @@
           "plastic_trace_norm": 7.749360084533691,
           "synthesized_count": 0,
           "critique_applied": true,
+          "settled_shortcut": false,
           "idx": 9,
           "sector": "BBH-DateUnderstanding",
           "target": "B"
@@ -3052,21 +3152,21 @@
     "macro_summary": {
       "pass_id": 2,
       "total_samples": 50,
-      "base_accuracy": 54.0,
-      "delib_accuracy": 52.0,
-      "delta": -2.0,
+      "base_accuracy": 56.00000000000001,
+      "delib_accuracy": 60.0,
+      "delta": 4.0,
       "total_rescued": 3,
-      "total_degraded": 4,
-      "elapsed_seconds": 154.45
+      "total_degraded": 1,
+      "elapsed_seconds": 78.6
     }
   },
   "comparative_audit": {
-    "overall_agreement_pct": 96.0,
-    "pass1_macro_acc": 56.00000000000001,
-    "pass2_macro_acc": 52.0,
-    "base_macro_acc": 54.0,
-    "macro_delta_p1": 2.0,
-    "macro_delta_p2": -2.0,
+    "overall_agreement_pct": 100.0,
+    "pass1_macro_acc": 60.0,
+    "pass2_macro_acc": 60.0,
+    "base_macro_acc": 56.00000000000001,
+    "macro_delta_p1": 4.0,
+    "macro_delta_p2": 4.0,
     "total_self_corrected": 0,
     "sector_breakdown": {
       "ARC-Easy": {
@@ -3083,67 +3183,67 @@
         "self_corrected_in_p2": 0,
         "degraded_p1": 0,
         "degraded_p2": 0,
-        "mean_u_p1": 0.6028789401054382,
-        "mean_u_p2": 0.6028789401054382,
-        "mean_trace_p1": 6.048805379867554,
-        "mean_trace_p2": 6.551609802246094
+        "mean_u_p1": 0.5309686899185181,
+        "mean_u_p2": 0.5309686899185181,
+        "mean_trace_p1": 1.83498272895813,
+        "mean_trace_p2": 1.8166328430175782
       },
       "ARC-Challenge": {
         "domain": "Deep Scientific Reasoning",
         "samples": 10,
         "base_acc": 50.0,
         "pass1_delib_acc": 60.0,
-        "pass2_delib_acc": 50.0,
-        "pass1_vs_pass2_agreement": 90.0,
+        "pass2_delib_acc": 60.0,
+        "pass1_vs_pass2_agreement": 100.0,
         "delta_p1": 10.0,
-        "delta_p2": 0.0,
+        "delta_p2": 10.0,
         "rescued_p1": 1,
         "rescued_p2": 1,
         "self_corrected_in_p2": 0,
         "degraded_p1": 0,
-        "degraded_p2": 1,
-        "mean_u_p1": 0.5965783894062042,
-        "mean_u_p2": 0.5965783894062042,
-        "mean_trace_p1": 5.904596376419067,
-        "mean_trace_p2": 6.338989686965943
+        "degraded_p2": 0,
+        "mean_u_p1": 0.5391262471675873,
+        "mean_u_p2": 0.5391262471675873,
+        "mean_trace_p1": 2.3630994319915772,
+        "mean_trace_p2": 2.3970644950866697
       },
       "OpenBookQA": {
         "domain": "Multi-Hop Fact Chaining",
         "samples": 10,
-        "base_acc": 20.0,
-        "pass1_delib_acc": 20.0,
-        "pass2_delib_acc": 10.0,
-        "pass1_vs_pass2_agreement": 90.0,
+        "base_acc": 30.0,
+        "pass1_delib_acc": 30.0,
+        "pass2_delib_acc": 30.0,
+        "pass1_vs_pass2_agreement": 100.0,
         "delta_p1": 0.0,
-        "delta_p2": -10.0,
+        "delta_p2": 0.0,
         "rescued_p1": 0,
         "rescued_p2": 0,
         "self_corrected_in_p2": 0,
         "degraded_p1": 0,
-        "degraded_p2": 1,
-        "mean_u_p1": 0.5920645117759704,
-        "mean_u_p2": 0.5920645117759704,
-        "mean_trace_p1": 5.666235733032226,
-        "mean_trace_p2": 6.1199873924255375
+        "degraded_p2": 0,
+        "mean_u_p1": 0.5090340971946716,
+        "mean_u_p2": 0.5090340971946716,
+        "mean_trace_p1": 0.5932521820068359,
+        "mean_trace_p2": 0.6479139804840088
       },
       "PIQA": {
         "domain": "Physical Commonsense",
         "samples": 10,
         "base_acc": 80.0,
-        "pass1_delib_acc": 70.0,
-        "pass2_delib_acc": 70.0,
+        "pass1_delib_acc": 80.0,
+        "pass2_delib_acc": 80.0,
         "pass1_vs_pass2_agreement": 100.0,
-        "delta_p1": -10.0,
-        "delta_p2": -10.0,
+        "delta_p1": 0.0,
+        "delta_p2": 0.0,
         "rescued_p1": 0,
         "rescued_p2": 0,
         "self_corrected_in_p2": 0,
-        "degraded_p1": 1,
-        "degraded_p2": 1,
-        "mean_u_p1": 0.5964859545230865,
-        "mean_u_p2": 0.5964859545230865,
-        "mean_trace_p1": 3.601023054122925,
-        "mean_trace_p2": 3.827162170410156
+        "degraded_p1": 0,
+        "degraded_p2": 0,
+        "mean_u_p1": 0.5378811955451965,
+        "mean_u_p2": 0.5378811955451965,
+        "mean_trace_p1": 1.4378807306289674,
+        "mean_trace_p2": 1.423501968383789
       },
       "BBH-DateUnderstanding": {
         "domain": "Temporal Logic & Arithmetic",
@@ -3159,10 +3259,10 @@
         "self_corrected_in_p2": 0,
         "degraded_p1": 1,
         "degraded_p2": 1,
-        "mean_u_p1": 0.5798118412494659,
-        "mean_u_p2": 0.5798118412494659,
-        "mean_trace_p1": 7.292924594879151,
-        "mean_trace_p2": 7.72171049118042
+        "mean_u_p1": 0.5719133913516998,
+        "mean_u_p2": 0.5719133913516998,
+        "mean_trace_p1": 6.5612975597381595,
+        "mean_trace_p2": 6.669176626205444
       }
     }
   }
