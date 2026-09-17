@@ -4,6 +4,8 @@ from typing import Optional, Tuple, Dict, Any
 
 from .memory import CognitiveWorkingMemory
 from .controller import RecurrentLatentController
+from .evidential import EvidentialEpistemicGate
+from .open_concept import OpenConceptSynthesizer
 
 class DualLoopTransformer(nn.Module):
     """
@@ -36,7 +38,14 @@ class DualLoopTransformer(nn.Module):
         use_ddm_halting: bool = False,
         ddm_theta_0: float = 3.0,
         ddm_gamma: float = 0.5,
-        ddm_min_theta: float = 0.5
+        ddm_min_theta: float = 0.5,
+        enable_plasticity: bool = True,
+        plastic_rank: int = 32,
+        plastic_lr: float = 0.15,
+        use_evidential_gate: bool = True,
+        use_open_concept: bool = True,
+        tau_novelty: float = 0.40,
+        tau_unseen: float = 0.65
     ):
         super().__init__()
         self.vocab_size = vocab_size
@@ -72,8 +81,26 @@ class DualLoopTransformer(nn.Module):
             use_ddm_halting=use_ddm_halting,
             ddm_theta_0=ddm_theta_0,
             ddm_gamma=ddm_gamma,
-            ddm_min_theta=ddm_min_theta
+            ddm_min_theta=ddm_min_theta,
+            enable_plasticity=enable_plasticity,
+            plastic_rank=plastic_rank,
+            plastic_lr=plastic_lr
         )
+        
+        # Evidential Epistemic Gate (Subjective Logic Dirichlet decomposition)
+        self.use_evidential_gate = use_evidential_gate
+        self.evidential_gate = EvidentialEpistemicGate(
+            d_model=d_model,
+            tau_novelty=tau_novelty,
+            tau_unseen=tau_unseen
+        ) if use_evidential_gate else None
+
+        # Open-Concept Prototype Synthesizer (Unprecedented / Non-Vocabulary continuous vectors)
+        self.use_open_concept = use_open_concept
+        self.open_concept_synthesizer = OpenConceptSynthesizer(
+            d_model=d_model,
+            tau_unseen=tau_unseen
+        ) if use_open_concept else None
         
         # 5. System 1: Inner Loop Decoder
         dec_layer = nn.TransformerEncoderLayer(d_model, n_heads, d_ff, batch_first=True, norm_first=True)
@@ -175,6 +202,13 @@ class DualLoopTransformer(nn.Module):
         # Clear outer loop mutable instance state at forward entry (ARCH-02 / NEW-02)
         self.outer_loop.reset_state()
 
+        # 1b. Evidential Epistemic Self-Recognition (Dirichlet vacuity decomposition)
+        evidential_telem = {}
+        vacuity_u = None
+        if getattr(self, "evidential_gate", None) is not None:
+            evidential_telem = self.evidential_gate(h=query_rep)
+            vacuity_u = evidential_telem.get("vacuity_u")
+
         max_k = self.outer_loop.max_ponder_steps if k_steps is None else k_steps
         
         # =====================================================================
@@ -206,7 +240,8 @@ class DualLoopTransformer(nn.Module):
                     H_anchor=H_anchor,
                     memory=cwm_memory,
                     H_prev=H_prev,
-                    h_prev_primary=h_prev_primary
+                    h_prev_primary=h_prev_primary,
+                    u_epistemic=vacuity_u
                 )
 
                 if err_norm is not None:
@@ -256,6 +291,15 @@ class DualLoopTransformer(nn.Module):
             self.outer_loop.last_lambdas = lambdas_list
             self.outer_loop.last_error_norms = error_norms_list
 
+            concept_telem_a = {}
+            if getattr(self, "open_concept_synthesizer", None) is not None and vacuity_u is not None:
+                last_err_a = (H[:, 0, :] - query_rep)
+                _, concept_telem_a = self.open_concept_synthesizer(
+                    h_anchor=query_rep,
+                    discrepancy=last_err_a,
+                    vacuity_u=vacuity_u
+                )
+
             info = {
                 "aux_logits": aux_logits_list,
                 "step_entropies": step_entropies_list,
@@ -264,7 +308,10 @@ class DualLoopTransformer(nn.Module):
                 "effective_k": steps_taken.mean().item(),
                 "error_norms": error_norms_list,
                 "halting_lambdas": lambdas_list,
-                "ddm_evidences": [e.detach().cpu() for e in self.outer_loop.last_ddm_evidences] if getattr(self.outer_loop, 'last_ddm_evidences', None) else []
+                "ddm_evidences": [e.detach().cpu() for e in self.outer_loop.last_ddm_evidences] if getattr(self.outer_loop, 'last_ddm_evidences', None) else [],
+                "epistemic_vacuity": [float(v) for v in vacuity_u.reshape(-1).detach().cpu().tolist()] if vacuity_u is not None else [],
+                "plastic_trace_norm": float(self.outer_loop.plastic_unit.last_m_fast.norm().item()) if (getattr(self.outer_loop, "plastic_unit", None) is not None and self.outer_loop.plastic_unit.last_m_fast is not None) else 0.0,
+                "synthesized_concepts": concept_telem_a.get("synthesized_count", 0)
             }
             return final_logits, info
 
@@ -276,8 +323,20 @@ class DualLoopTransformer(nn.Module):
             memory=cwm_memory,
             k_steps=k_steps,
             dynamic_halting=False,
-            return_aux=return_aux
+            return_aux=return_aux,
+            u_epistemic=vacuity_u
         ) # [B, L_thought, D]
+
+        concept_telem_b = {}
+        if getattr(self, "open_concept_synthesizer", None) is not None and vacuity_u is not None:
+            last_err_b = (h_thought[:, 0, :] - query_rep)
+            proto_c, concept_telem_b = self.open_concept_synthesizer(
+                h_anchor=query_rep,
+                discrepancy=last_err_b,
+                vacuity_u=vacuity_u
+            )
+            if proto_c is not None and proto_c.any():
+                h_thought = torch.cat([proto_c, h_thought], dim=1)
         
         fused_sequence = torch.cat([h_thought, ctx], dim=1)
         tot_len = fused_sequence.size(1)
@@ -292,6 +351,9 @@ class DualLoopTransformer(nn.Module):
             "steps_taken": torch.full((B,), float(max_k), dtype=torch.float, device=input_ids.device),
             "effective_k": float(max_k),
             "error_norms": self.outer_loop.last_error_norms,
-            "halting_lambdas": self.outer_loop.last_lambdas
+            "halting_lambdas": self.outer_loop.last_lambdas,
+            "epistemic_vacuity": [float(v) for v in vacuity_u.reshape(-1).detach().cpu().tolist()] if vacuity_u is not None else [],
+            "plastic_trace_norm": float(self.outer_loop.plastic_unit.last_m_fast.norm().item()) if (getattr(self.outer_loop, "plastic_unit", None) is not None and self.outer_loop.plastic_unit.last_m_fast is not None) else 0.0,
+            "synthesized_concepts": concept_telem_b.get("synthesized_count", 0)
         }
         return final_logits, info

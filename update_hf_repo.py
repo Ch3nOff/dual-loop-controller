@@ -127,6 +127,13 @@ api.upload_file(
     repo_id=REPO_ID
 )
 
+print("[*] Uploading autonomous_plasticity_benchmark.png...")
+api.upload_file(
+    path_or_fileobj="autonomous_plasticity_benchmark.png",
+    path_in_repo="autonomous_plasticity_benchmark.png",
+    repo_id=REPO_ID
+)
+
 print("[*] Uploading README.md...")
 api.upload_file(
     path_or_fileobj="hf_model_card.md",

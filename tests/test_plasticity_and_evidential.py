@@ -151,5 +151,36 @@ class TestPlasticityAndEvidential(unittest.TestCase):
         self.assertEqual(len(telem["epistemic_vacuity"]), self.B)
         self.assertFalse(torch.isnan(enhanced).any())
 
+    def test_dualloop_transformer_with_plasticity(self):
+        """Verify DualLoopTransformer operates seamlessly with evidential gate and fast-weight plasticity."""
+        from dual_loop.decoder import DualLoopTransformer
+        model = DualLoopTransformer(
+            vocab_size=100,
+            d_model=self.D,
+            n_heads=2,
+            d_ff=self.D * 2,
+            num_thought_tokens=self.L,
+            num_cwm_slots=4,
+            max_ponder_steps=2,
+            enable_plasticity=True,
+            use_evidential_gate=True,
+            use_open_concept=True
+        )
+        input_ids = torch.randint(0, 100, (self.B, self.S))
+        
+        # Test PATH B (Static)
+        logits_b, info_b = model(input_ids, k_steps=2, dynamic_halting=False)
+        self.assertEqual(logits_b.shape, (self.B, 100))
+        self.assertIn("epistemic_vacuity", info_b)
+        self.assertIn("plastic_trace_norm", info_b)
+        self.assertIn("synthesized_concepts", info_b)
+        
+        # Test PATH A (Dynamic)
+        logits_a, info_a = model(input_ids, k_steps=2, dynamic_halting=True)
+        self.assertEqual(logits_a.shape, (self.B, 100))
+        self.assertIn("epistemic_vacuity", info_a)
+        self.assertIn("plastic_trace_norm", info_a)
+        self.assertIn("synthesized_concepts", info_a)
+
 if __name__ == "__main__":
     unittest.main()

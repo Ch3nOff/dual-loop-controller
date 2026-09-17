@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-09-17 11:44:52",
+  "checkpoint_used": "C:\\Users\\Matthew Chen\\Documents\\X-Star\\checkpoint_trained_dualloop.pt",
+  "architecture": {
+    "d_model": 64,
+    "plastic_rank": 16,
+    "plastic_lr": 0.25,
+    "tau_novelty": 0.4,
+    "tau_unseen": 0.65
+  },
+  "epistemic_calibration": {
+    "mean_u_in_distribution": 0.4187644273042679,
+    "mean_u_partial_shift": 0.4384326231479645,
+    "mean_u_black_swan": 0.8873679774999619,
+    "novelty_rate_partial_shift": 75.0,
+    "unseen_rate_black_swan": 100.0,
+    "subjective_logic_conservation_rate": 1.0
+  },
+  "plastic_fast_weight_dynamics": {
+    "k_steps": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "mean_trace_norm_id": [
+      0.0,
+      0.2794951415061951,
+      0.38429524064064025,
+      0.4565713378787041,
+      0.5131429839134216,
+      0.5678238490223885
+    ],
+    "mean_trace_norm_black_swan": [
+      0.0,
+      0.5978825956583023,
+      0.8397234559059144,
+      1.0062007462978364,
+      1.1168825459480285,
+      1.2319862508773805
+    ],
+    "plastic_adaptation_gain": 2.169658923871444
+  },
+  "open_concept_synthesis": {
+    "prototypes_synthesized": 100,
+    "mean_cosine_anchor_alignment": 0.902232825756073,
+    "mean_pairwise_diversity": 0.021799277514219284
+  },
+  "comparative_benchmark": {
+    "Base System 1 (K=0)": {
+      "acc_in_distribution": 33.000001311302185,
+      "loss_in_distribution": 2.026400089263916,
+      "acc_black_swan": 10.999999940395355,
+      "loss_black_swan": 3.321841239929199,
+      "vacuity_id": 0.5903085035085678,
+      "vacuity_black_swan": 0.5909707152843475,
+      "plastic_trace_norm_id": 0.0,
+      "plastic_trace_norm_black_swan": 0.0,
+      "synthesized_concepts_total": 0
+    },
+    "Static Deliberation (K=2, Static)": {
+      "acc_in_distribution": 27.000001072883606,
+      "loss_in_distribution": 1.9029357433319092,
+      "acc_black_swan": 15.000000596046448,
+      "loss_black_swan": 3.259650468826294,
+      "vacuity_id": 0.5903085035085678,
+      "vacuity_black_swan": 0.5909707152843475,
+      "plastic_trace_norm_id": 0.0,
+      "plastic_trace_norm_black_swan": 0.0,
+      "synthesized_concepts_total": 0
+    },
+    "Autonomous Plastic Deliberation (K=2, Plastic+Concept)": {
+      "acc_in_distribution": 31.00000023841858,
+      "loss_in_distribution": 1.9044221639633179,
+      "acc_black_swan": 14.000000059604645,
+      "loss_black_swan": 3.2506656646728516,
+      "vacuity_id": 0.5903085035085678,
+      "vacuity_black_swan": 0.5909707152843475,
+      "plastic_trace_norm_id": 11.333308219909668,
+      "plastic_trace_norm_black_swan": 11.280434608459473,
+      "synthesized_concepts_total": 0
+    }
+  }
+}
