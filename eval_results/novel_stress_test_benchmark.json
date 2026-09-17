@@ -1,0 +1,4789 @@
+{
+  "timestamp": "2026-09-17 14:54:28",
+  "model_id": "Qwen/Qwen3.5-2B",
+  "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+  "adapter_path": "dual_loop/checkpoints/adapter_model.safetensors",
+  "pass1": {
+    "Inverted-Physics": {
+      "domain": "Counterfactual Axiomatic Physics",
+      "samples": 10,
+      "base_acc": 40.0,
+      "delib_acc": 40.0,
+      "delta": 0.0,
+      "rescued_count": 0,
+      "degraded_count": 0,
+      "mean_vacuity_u": 0.5319053411483765,
+      "mean_plastic_trace": 0.9836776733398438,
+      "samples_log": [
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.4128795970569958,
+            -1.529267744584517,
+            -2.626769595675998,
+            -3.6034281253814697
+          ],
+          "scores_delib": [
+            -1.1523033488880505,
+            -1.270481976595792,
+            -2.2972085740831165,
+            -3.516789197921753
+          ],
+          "margin": 0.11638814752752125,
+          "surprise_jsd": 0.00024821609258651733,
+          "surprise_gate": 0.41878506541252136,
+          "vacuity_u": 0.6092593669891357,
+          "plastic_trace_norm": 3.3294715881347656,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 0,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.4480972290039062,
+            -2.415167201649059,
+            -2.064874458312988,
+            -3.0016028664328833
+          ],
+          "scores_delib": [
+            -1.4480972290039062,
+            -2.415167201649059,
+            -2.064874458312988,
+            -3.0016028664328833
+          ],
+          "margin": 0.6167772293090819,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 1,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.031574010848999,
+            -3.645982469831194,
+            -1.7124220132827759,
+            -3.7927041734967912
+          ],
+          "scores_delib": [
+            -3.031574010848999,
+            -3.645982469831194,
+            -1.7124220132827759,
+            -3.7927041734967912
+          ],
+          "margin": 1.3191519975662231,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 2,
+          "sector": "Inverted-Physics",
+          "target": "C"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.598431428273519,
+            -1.9763174057006836,
+            -3.7415148417154946,
+            -1.8997759819030762
+          ],
+          "scores_delib": [
+            -2.3665237426757812,
+            -1.6354438066482544,
+            -3.3289527893066406,
+            -1.5817660093307495
+          ],
+          "margin": 0.07654142379760742,
+          "surprise_jsd": 0.0002665296196937561,
+          "surprise_gate": 0.6151876449584961,
+          "vacuity_u": 0.6051450371742249,
+          "plastic_trace_norm": 3.226231336593628,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 3,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.7083566188812256,
+            -2.7602051628960504,
+            -3.7369327545166016,
+            -1.8129411844106822
+          ],
+          "scores_delib": [
+            -2.7083566188812256,
+            -2.7602051628960504,
+            -3.7369327545166016,
+            -1.8129411844106822
+          ],
+          "margin": 0.8954154344705434,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 4,
+          "sector": "Inverted-Physics",
+          "target": "A"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.798787752787272,
+            -3.3488090515136717,
+            -2.1984999974568686,
+            -3.5498053232828775
+          ],
+          "scores_delib": [
+            -2.798787752787272,
+            -3.3488090515136717,
+            -2.1984999974568686,
+            -3.5498053232828775
+          ],
+          "margin": 0.6002877553304033,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 5,
+          "sector": "Inverted-Physics",
+          "target": "C"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.671958605448405,
+            -2.551356315612793,
+            -4.0012866973876955,
+            -3.3050789303249783
+          ],
+          "scores_delib": [
+            -1.8125842412312825,
+            -1.7378807067871094,
+            -3.291281890869141,
+            -2.880566702948676
+          ],
+          "margin": 0.12060228983561183,
+          "surprise_jsd": 0.002772115170955658,
+          "surprise_gate": 0.4,
+          "vacuity_u": 0.604649007320404,
+          "plastic_trace_norm": 3.281073808670044,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 6,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.455624989100865,
+            -1.8126330375671387,
+            -3.2726329456676138,
+            -3.4068853590223522
+          ],
+          "scores_delib": [
+            -2.455624989100865,
+            -1.8126330375671387,
+            -3.2726329456676138,
+            -3.4068853590223522
+          ],
+          "margin": 0.6429919515337263,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 7,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -3.0254378848605685,
+            -3.100500742594401,
+            -2.3048350994403544,
+            -3.73057614839994
+          ],
+          "scores_delib": [
+            -3.0254378848605685,
+            -3.100500742594401,
+            -2.3048350994403544,
+            -3.73057614839994
+          ],
+          "margin": 0.7206027854202142,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 8,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.9582056999206543,
+            -1.3253066804673936,
+            -2.523468255996704,
+            -3.1409263610839844
+          ],
+          "scores_delib": [
+            -2.9582056999206543,
+            -1.3253066804673936,
+            -2.523468255996704,
+            -3.1409263610839844
+          ],
+          "margin": 1.1981615755293105,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 9,
+          "sector": "Inverted-Physics",
+          "target": "C"
+        }
+      ]
+    },
+    "5Hop-TransitiveDeduction": {
+      "domain": "Complex Relational Constraint Graph",
+      "samples": 10,
+      "base_acc": 40.0,
+      "delib_acc": 40.0,
+      "delta": 0.0,
+      "rescued_count": 0,
+      "degraded_count": 0,
+      "mean_vacuity_u": 0.533340060710907,
+      "mean_plastic_trace": 0.9864649534225464,
+      "samples_log": [
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -8.189531326293945,
+            -4.531406879425049,
+            -5.557082653045654,
+            -2.3981056213378906
+          ],
+          "scores_delib": [
+            -8.189531326293945,
+            -4.531406879425049,
+            -5.557082653045654,
+            -2.3981056213378906
+          ],
+          "margin": 2.133301258087158,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 0,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "C"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -5.857952117919922,
+            -5.2809295654296875,
+            -4.975380897521973,
+            -4.468016624450684
+          ],
+          "scores_delib": [
+            -5.857952117919922,
+            -5.2809295654296875,
+            -4.975380897521973,
+            -4.468016624450684
+          ],
+          "margin": 0.5073642730712891,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 1,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -4.694101810455322,
+            -1.3565980195999146,
+            -7.007325649261475,
+            -3.1698696613311768
+          ],
+          "scores_delib": [
+            -4.694101810455322,
+            -1.3565980195999146,
+            -7.007325649261475,
+            -3.1698696613311768
+          ],
+          "margin": 1.8132716417312622,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 2,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "B"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.547147274017334,
+            -3.0812106132507324,
+            -2.38893985748291,
+            -2.2049663066864014
+          ],
+          "scores_delib": [
+            -1.1615698337554932,
+            -0.9446107745170593,
+            -0.9378266930580139,
+            -0.4190775156021118
+          ],
+          "margin": 0.1839735507965088,
+          "surprise_jsd": 0.008993193507194519,
+          "surprise_gate": 0.4,
+          "vacuity_u": 0.6086583137512207,
+          "plastic_trace_norm": 3.273069143295288,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 3,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "D"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -3.2273879051208496,
+            -1.1703333854675293,
+            -2.1015631357828775,
+            -1.376213550567627
+          ],
+          "scores_delib": [
+            -0.6979423761367798,
+            -0.5347534418106079,
+            -0.5709754625956217,
+            -0.7207648754119873
+          ],
+          "margin": 0.20588016510009766,
+          "surprise_jsd": 0.049938105046749115,
+          "surprise_gate": 0.4,
+          "vacuity_u": 0.6101807951927185,
+          "plastic_trace_norm": 3.3036422729492188,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 4,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "C"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.3543032010396323,
+            -3.0101656913757324,
+            -8.791911125183105,
+            -5.981146335601807
+          ],
+          "scores_delib": [
+            -2.3543032010396323,
+            -3.0101656913757324,
+            -8.791911125183105,
+            -5.981146335601807
+          ],
+          "margin": 0.6558624903361001,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 5,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "C"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -8.269020080566406,
+            -4.681997299194336,
+            -5.146880626678467,
+            -3.168731927871704
+          ],
+          "scores_delib": [
+            -8.269020080566406,
+            -4.681997299194336,
+            -5.146880626678467,
+            -3.168731927871704
+          ],
+          "margin": 1.5132653713226318,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 6,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "D"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.0532288551330566,
+            -2.8672261238098145,
+            -2.1950671672821045,
+            -4.196308135986328
+          ],
+          "scores_delib": [
+            -0.8109458088874817,
+            -0.8393376469612122,
+            -0.44556862115859985,
+            -1.5741314888000488
+          ],
+          "margin": 0.14183831214904785,
+          "surprise_jsd": 0.01961147040128708,
+          "surprise_gate": 0.4,
+          "vacuity_u": 0.6145614981651306,
+          "plastic_trace_norm": 3.287938117980957,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 7,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "B"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -1.2962230443954468,
+            -2.509638547897339,
+            -2.2691731452941895,
+            -2.716169595718384
+          ],
+          "scores_delib": [
+            -1.2962230443954468,
+            -2.509638547897339,
+            -2.2691731452941895,
+            -2.716169595718384
+          ],
+          "margin": 0.9729501008987427,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 8,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "A"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.849078416824341,
+            -1.5084258715311687,
+            -8.744128227233887,
+            -2.3199920654296875
+          ],
+          "scores_delib": [
+            -2.849078416824341,
+            -1.5084258715311687,
+            -8.744128227233887,
+            -2.3199920654296875
+          ],
+          "margin": 0.8115661938985188,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 9,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "A"
+        }
+      ]
+    },
+    "CounterIntuitive-Syllogism": {
+      "domain": "Belief Bias Formal Entailment",
+      "samples": 10,
+      "base_acc": 100.0,
+      "delib_acc": 100.0,
+      "delta": 0.0,
+      "rescued_count": 0,
+      "degraded_count": 0,
+      "mean_vacuity_u": 0.5,
+      "mean_plastic_trace": 0.0,
+      "samples_log": [
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.561680793762207,
+            -0.2568949222564697,
+            -3.883122444152832,
+            -2.8692681789398193
+          ],
+          "scores_delib": [
+            -2.561680793762207,
+            -0.2568949222564697,
+            -3.883122444152832,
+            -2.8692681789398193
+          ],
+          "margin": 2.304785871505737,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 0,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -1.4086581865946453,
+            -0.5133459568023682,
+            -3.2942191532679965,
+            -2.9693770938449435
+          ],
+          "scores_delib": [
+            -1.4086581865946453,
+            -0.5133459568023682,
+            -3.2942191532679965,
+            -2.9693770938449435
+          ],
+          "margin": 0.8953122297922771,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 1,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.2947528839111326,
+            -0.375984615749783,
+            -3.1649642520480685,
+            -0.7236989140510559
+          ],
+          "scores_delib": [
+            -3.2947528839111326,
+            -0.375984615749783,
+            -3.1649642520480685,
+            -0.7236989140510559
+          ],
+          "margin": 0.34771429830127293,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 2,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.1898448944091795,
+            -3.471738542829241,
+            -0.3986285754612514,
+            -3.1835689544677734
+          ],
+          "scores_delib": [
+            -2.1898448944091795,
+            -3.471738542829241,
+            -0.3986285754612514,
+            -3.1835689544677734
+          ],
+          "margin": 1.791216318947928,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 3,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "C"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.4785352434430803,
+            -0.9053433282034737,
+            -4.668727111816406,
+            -4.414443697248187
+          ],
+          "scores_delib": [
+            -2.4785352434430803,
+            -0.9053433282034737,
+            -4.668727111816406,
+            -4.414443697248187
+          ],
+          "margin": 1.5731919152396066,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 4,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.1751475863986545,
+            -0.3754954934120178,
+            -2.56318998336792,
+            -5.607990809849331
+          ],
+          "scores_delib": [
+            -2.1751475863986545,
+            -0.3754954934120178,
+            -2.56318998336792,
+            -5.607990809849331
+          ],
+          "margin": 1.7996520929866366,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 5,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.257247712877062,
+            -0.6258604867117745,
+            -3.316318300035265,
+            -1.0988273620605469
+          ],
+          "scores_delib": [
+            -2.257247712877062,
+            -0.6258604867117745,
+            -3.316318300035265,
+            -1.0988273620605469
+          ],
+          "margin": 0.47296687534877235,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 6,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.4887548174176897,
+            -0.5668755531311035,
+            -3.1288497231223364,
+            -3.072908401489258
+          ],
+          "scores_delib": [
+            -2.4887548174176897,
+            -0.5668755531311035,
+            -3.1288497231223364,
+            -3.072908401489258
+          ],
+          "margin": 1.921879264286586,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 7,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.9728065066867404,
+            -0.7976615905761719,
+            -3.385914993286133,
+            -3.812760216849191
+          ],
+          "scores_delib": [
+            -2.9728065066867404,
+            -0.7976615905761719,
+            -3.385914993286133,
+            -3.812760216849191
+          ],
+          "margin": 2.1751449161105683,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 8,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.26643795437283,
+            -2.8211774826049805,
+            -5.620016733805339,
+            -4.699496587117513
+          ],
+          "scores_delib": [
+            -3.26643795437283,
+            -2.8211774826049805,
+            -5.620016733805339,
+            -4.699496587117513
+          ],
+          "margin": 0.44526047176784944,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 9,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        }
+      ]
+    },
+    "Modular-TemporalWarping": {
+      "domain": "Multi-Step Modular Arithmetic",
+      "samples": 10,
+      "base_acc": 10.0,
+      "delib_acc": 10.0,
+      "delta": 0.0,
+      "rescued_count": 0,
+      "degraded_count": 0,
+      "mean_vacuity_u": 0.5565736353397369,
+      "mean_plastic_trace": 1.6745532989501952,
+      "samples_log": [
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.055921792984009,
+            -2.043104410171509,
+            -2.1668336391448975,
+            -1.7691823244094849
+          ],
+          "scores_delib": [
+            -2.055921792984009,
+            -2.043104410171509,
+            -2.1668336391448975,
+            -1.7691823244094849
+          ],
+          "margin": 0.2739220857620239,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 0,
+          "sector": "Modular-TemporalWarping",
+          "target": "A"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.2013115882873535,
+            -2.1705856323242188,
+            -1.740999698638916,
+            -2.0956482887268066
+          ],
+          "scores_delib": [
+            -2.2013115882873535,
+            -2.1705856323242188,
+            -1.740999698638916,
+            -2.0956482887268066
+          ],
+          "margin": 0.3546485900878906,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 1,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "B",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.6994565725326538,
+            -1.6409196853637695,
+            -1.5836865901947021,
+            -1.7583205699920654
+          ],
+          "scores_delib": [
+            -1.3017044067382812,
+            -0.9040080904960632,
+            -1.0897492170333862,
+            -1.2736917734146118
+          ],
+          "margin": 0.05723309516906738,
+          "surprise_jsd": 0.002101808786392212,
+          "surprise_gate": 0.7016857266426086,
+          "vacuity_u": 0.6100582480430603,
+          "plastic_trace_norm": 3.321855306625366,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 2,
+          "sector": "Modular-TemporalWarping",
+          "target": "A"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.2658588886260986,
+            -1.579698085784912,
+            -1.824158787727356,
+            -1.7500091791152954
+          ],
+          "scores_delib": [
+            -1.2658588886260986,
+            -1.579698085784912,
+            -1.824158787727356,
+            -1.7500091791152954
+          ],
+          "margin": 0.3138391971588135,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 3,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -1.6853103637695312,
+            -1.6624006032943726,
+            -1.9304050207138062,
+            -1.8283132314682007
+          ],
+          "scores_delib": [
+            -1.2794140577316284,
+            -1.2168397903442383,
+            -1.3921059370040894,
+            -1.1821547746658325
+          ],
+          "margin": 0.02290976047515869,
+          "surprise_jsd": 0.001097559928894043,
+          "surprise_gate": 0.8237269520759583,
+          "vacuity_u": 0.6091588139533997,
+          "plastic_trace_norm": 3.335054397583008,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 4,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.1889758110046387,
+            -2.214247941970825,
+            -2.1353721618652344,
+            -2.078579902648926
+          ],
+          "scores_delib": [
+            -1.2711328268051147,
+            -1.2791491746902466,
+            -1.2360608577728271,
+            -1.1689982414245605
+          ],
+          "margin": 0.056792259216308594,
+          "surprise_jsd": 2.0995736122131348e-05,
+          "surprise_gate": 0.7035279870033264,
+          "vacuity_u": 0.6095531582832336,
+          "plastic_trace_norm": 3.363072156906128,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 5,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.6566119194030762,
+            -1.587480902671814,
+            -1.586909532546997,
+            -1.2152512073516846
+          ],
+          "scores_delib": [
+            -1.6566119194030762,
+            -1.587480902671814,
+            -1.586909532546997,
+            -1.2152512073516846
+          ],
+          "margin": 0.3716583251953125,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 6,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.4999979734420776,
+            -1.408145546913147,
+            -1.3268632888793945,
+            -1.5094047784805298
+          ],
+          "scores_delib": [
+            -1.151881217956543,
+            -1.0446457862854004,
+            -1.0143227577209473,
+            -1.1641085147857666
+          ],
+          "margin": 0.08128225803375244,
+          "surprise_jsd": 4.6133995056152344e-05,
+          "surprise_gate": 0.5925108194351196,
+          "vacuity_u": 0.629336416721344,
+          "plastic_trace_norm": 3.337757110595703,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 7,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.023916482925415,
+            -2.1085500717163086,
+            -1.699049472808838,
+            -2.0332112312316895
+          ],
+          "scores_delib": [
+            -2.023916482925415,
+            -2.1085500717163086,
+            -1.699049472808838,
+            -2.0332112312316895
+          ],
+          "margin": 0.32486701011657715,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 8,
+          "sector": "Modular-TemporalWarping",
+          "target": "A"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.7760014533996582,
+            -1.8359566926956177,
+            -1.9176172018051147,
+            -1.7942181825637817
+          ],
+          "scores_delib": [
+            -0.8212377429008484,
+            -0.9113534688949585,
+            -1.0819439888000488,
+            -0.7892780900001526
+          ],
+          "margin": 0.018216729164123535,
+          "surprise_jsd": 0.0004489719867706299,
+          "surprise_gate": 0.8369442820549011,
+          "vacuity_u": 0.6076297163963318,
+          "plastic_trace_norm": 3.387794017791748,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 9,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        }
+      ]
+    },
+    "FiniteState-Automata": {
+      "domain": "Deterministic Latent State Machine",
+      "samples": 10,
+      "base_acc": 60.0,
+      "delib_acc": 40.0,
+      "delta": -20.0,
+      "rescued_count": 0,
+      "degraded_count": 2,
+      "mean_vacuity_u": 0.5779107689857483,
+      "mean_plastic_trace": 2.336503338813782,
+      "samples_log": [
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.332092761993408,
+            -3.3639235496520996,
+            -3.331116199493408,
+            -8.291903813680014
+          ],
+          "scores_delib": [
+            -1.0895686149597168,
+            -0.5135113000869751,
+            -0.40425238013267517,
+            -8.140141169230143
+          ],
+          "margin": 0.0009765625,
+          "surprise_jsd": 0.01086235698312521,
+          "surprise_gate": 0.8787311315536499,
+          "vacuity_u": 0.6145771741867065,
+          "plastic_trace_norm": 3.3554930686950684,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 0,
+          "sector": "FiniteState-Automata",
+          "target": "C"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": false,
+          "status": "Degraded (Right->Wrong)",
+          "scores_base": [
+            -3.351454496383667,
+            -3.4371535778045654,
+            -3.3600871562957764,
+            -8.348328272501627
+          ],
+          "scores_delib": [
+            -1.0203067064285278,
+            -0.5427306294441223,
+            -0.3949440121650696,
+            -8.235016504923502
+          ],
+          "margin": 0.008632659912109375,
+          "surprise_jsd": 0.009657266549766064,
+          "surprise_gate": 0.8614453077316284,
+          "vacuity_u": 0.6144624352455139,
+          "plastic_trace_norm": 3.3492393493652344,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 1,
+          "sector": "FiniteState-Automata",
+          "target": "A"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -3.3649017810821533,
+            -3.3630411624908447,
+            -3.3498947620391846,
+            -8.233402252197266
+          ],
+          "scores_delib": [
+            -1.1373542547225952,
+            -0.5198678374290466,
+            -0.37231743335723877,
+            -8.140424092610678
+          ],
+          "margin": 0.013146400451660156,
+          "surprise_jsd": 0.012190280482172966,
+          "surprise_gate": 0.8503147959709167,
+          "vacuity_u": 0.6136171817779541,
+          "plastic_trace_norm": 3.339014768600464,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 2,
+          "sector": "FiniteState-Automata",
+          "target": "A"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": false,
+          "status": "Degraded (Right->Wrong)",
+          "scores_base": [
+            -3.222799777984619,
+            -3.399172306060791,
+            -3.2657837867736816,
+            -8.28692372639974
+          ],
+          "scores_delib": [
+            -0.913133978843689,
+            -0.662461519241333,
+            -0.33352068066596985,
+            -8.293123881022135
+          ],
+          "margin": 0.0429840087890625,
+          "surprise_jsd": 0.008825432509183884,
+          "surprise_gate": 0.7577384114265442,
+          "vacuity_u": 0.6137629747390747,
+          "plastic_trace_norm": 3.3389625549316406,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 3,
+          "sector": "FiniteState-Automata",
+          "target": "A"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -3.304429531097412,
+            -3.3304009437561035,
+            -3.241565227508545,
+            -8.310754776000977
+          ],
+          "scores_delib": [
+            -1.0885989665985107,
+            -0.5783872008323669,
+            -0.3424645960330963,
+            -8.238152821858725
+          ],
+          "margin": 0.06286430358886719,
+          "surprise_jsd": 0.010140756145119667,
+          "surprise_gate": 0.6775890588760376,
+          "vacuity_u": 0.6140393018722534,
+          "plastic_trace_norm": 3.3440592288970947,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 4,
+          "sector": "FiniteState-Automata",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.56429123878479,
+            -3.3703787326812744,
+            -3.1245110034942627,
+            -4.263779640197754
+          ],
+          "scores_delib": [
+            -1.5196940898895264,
+            -0.6096052527427673,
+            -0.3125348389148712,
+            -2.439804792404175
+          ],
+          "margin": 0.24586772918701172,
+          "surprise_jsd": 0.016220837831497192,
+          "surprise_gate": 0.4,
+          "vacuity_u": 0.604354739189148,
+          "plastic_trace_norm": 3.3188085556030273,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 5,
+          "sector": "FiniteState-Automata",
+          "target": "C"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.4745614528656006,
+            -3.280634641647339,
+            -3.1265790462493896,
+            -4.152340888977051
+          ],
+          "scores_delib": [
+            -1.6664718389511108,
+            -0.37658268213272095,
+            -0.47687050700187683,
+            -2.360032320022583
+          ],
+          "margin": 0.15405559539794922,
+          "surprise_jsd": 0.023717068135738373,
+          "surprise_gate": 0.4,
+          "vacuity_u": 0.6042938828468323,
+          "plastic_trace_norm": 3.319455862045288,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 6,
+          "sector": "FiniteState-Automata",
+          "target": "C"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -3.5480313301086426,
+            -3.4074931144714355,
+            -3.082388401031494,
+            -4.249138355255127
+          ],
+          "scores_delib": [
+            -3.5480313301086426,
+            -3.4074931144714355,
+            -3.082388401031494,
+            -4.249138355255127
+          ],
+          "margin": 0.3251047134399414,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 7,
+          "sector": "FiniteState-Automata",
+          "target": "A"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -4.720858097076416,
+            -6.546571254730225,
+            -5.656519412994385,
+            -7.452657222747803
+          ],
+          "scores_delib": [
+            -4.720858097076416,
+            -6.546571254730225,
+            -5.656519412994385,
+            -7.452657222747803
+          ],
+          "margin": 0.9356613159179688,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 8,
+          "sector": "FiniteState-Automata",
+          "target": "B"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -4.897648334503174,
+            -6.390243053436279,
+            -5.436911106109619,
+            -7.0966877937316895
+          ],
+          "scores_delib": [
+            -4.897648334503174,
+            -6.390243053436279,
+            -5.436911106109619,
+            -7.0966877937316895
+          ],
+          "margin": 0.5392627716064453,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": false,
+          "idx": 9,
+          "sector": "FiniteState-Automata",
+          "target": "A"
+        }
+      ]
+    },
+    "macro_summary": {
+      "pass_id": 1,
+      "total_samples": 50,
+      "base_accuracy": 50.0,
+      "delib_accuracy": 46.0,
+      "delta": -4.0,
+      "total_rescued": 0,
+      "total_degraded": 2,
+      "elapsed_seconds": 157.0
+    }
+  },
+  "pass2": {
+    "Inverted-Physics": {
+      "domain": "Counterfactual Axiomatic Physics",
+      "samples": 10,
+      "base_acc": 40.0,
+      "delib_acc": 40.0,
+      "delta": 0.0,
+      "rescued_count": 0,
+      "degraded_count": 0,
+      "mean_vacuity_u": 0.5319053411483765,
+      "mean_plastic_trace": 0.973840880393982,
+      "samples_log": [
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.4128795970569958,
+            -1.529267744584517,
+            -2.626769595675998,
+            -3.6034281253814697
+          ],
+          "scores_delib": [
+            -1.4128795970569958,
+            -1.529267744584517,
+            -2.626769595675998,
+            -3.6034281253814697
+          ],
+          "margin": 0.11638814752752125,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6092593669891357,
+          "plastic_trace_norm": 3.2961771488189697,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 0,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.4480972290039062,
+            -2.415167201649059,
+            -2.064874458312988,
+            -3.0016028664328833
+          ],
+          "scores_delib": [
+            -1.4480972290039062,
+            -2.415167201649059,
+            -2.064874458312988,
+            -3.0016028664328833
+          ],
+          "margin": 0.6167772293090819,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 1,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.031574010848999,
+            -3.645982469831194,
+            -1.7124220132827759,
+            -3.7927041734967912
+          ],
+          "scores_delib": [
+            -3.031574010848999,
+            -3.645982469831194,
+            -1.7124220132827759,
+            -3.7927041734967912
+          ],
+          "margin": 1.3191519975662231,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 2,
+          "sector": "Inverted-Physics",
+          "target": "C"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.598431428273519,
+            -1.9763174057006836,
+            -3.7415148417154946,
+            -1.8997759819030762
+          ],
+          "scores_delib": [
+            -2.598431428273519,
+            -1.9763174057006836,
+            -3.7415148417154946,
+            -1.8997759819030762
+          ],
+          "margin": 0.07654142379760742,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6051450371742249,
+          "plastic_trace_norm": 3.1939690113067627,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 3,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.7083566188812256,
+            -2.7602051628960504,
+            -3.7369327545166016,
+            -1.8129411844106822
+          ],
+          "scores_delib": [
+            -2.7083566188812256,
+            -2.7602051628960504,
+            -3.7369327545166016,
+            -1.8129411844106822
+          ],
+          "margin": 0.8954154344705434,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 4,
+          "sector": "Inverted-Physics",
+          "target": "A"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.798787752787272,
+            -3.3488090515136717,
+            -2.1984999974568686,
+            -3.5498053232828775
+          ],
+          "scores_delib": [
+            -2.798787752787272,
+            -3.3488090515136717,
+            -2.1984999974568686,
+            -3.5498053232828775
+          ],
+          "margin": 0.6002877553304033,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 5,
+          "sector": "Inverted-Physics",
+          "target": "C"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.671958605448405,
+            -2.551356315612793,
+            -4.0012866973876955,
+            -3.3050789303249783
+          ],
+          "scores_delib": [
+            -2.671958605448405,
+            -2.551356315612793,
+            -4.0012866973876955,
+            -3.3050789303249783
+          ],
+          "margin": 0.12060228983561183,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.604649007320404,
+          "plastic_trace_norm": 3.248262643814087,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 6,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.455624989100865,
+            -1.8126330375671387,
+            -3.2726329456676138,
+            -3.4068853590223522
+          ],
+          "scores_delib": [
+            -2.455624989100865,
+            -1.8126330375671387,
+            -3.2726329456676138,
+            -3.4068853590223522
+          ],
+          "margin": 0.6429919515337263,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 7,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -3.0254378848605685,
+            -3.100500742594401,
+            -2.3048350994403544,
+            -3.73057614839994
+          ],
+          "scores_delib": [
+            -3.0254378848605685,
+            -3.100500742594401,
+            -2.3048350994403544,
+            -3.73057614839994
+          ],
+          "margin": 0.7206027854202142,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 8,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.9582056999206543,
+            -1.3253066804673936,
+            -2.523468255996704,
+            -3.1409263610839844
+          ],
+          "scores_delib": [
+            -2.9582056999206543,
+            -1.3253066804673936,
+            -2.523468255996704,
+            -3.1409263610839844
+          ],
+          "margin": 1.1981615755293105,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 9,
+          "sector": "Inverted-Physics",
+          "target": "C"
+        }
+      ]
+    },
+    "5Hop-TransitiveDeduction": {
+      "domain": "Complex Relational Constraint Graph",
+      "samples": 10,
+      "base_acc": 40.0,
+      "delib_acc": 40.0,
+      "delta": 0.0,
+      "rescued_count": 0,
+      "degraded_count": 0,
+      "mean_vacuity_u": 0.533340060710907,
+      "mean_plastic_trace": 1.027541446685791,
+      "samples_log": [
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -8.189531326293945,
+            -4.531406879425049,
+            -5.557082653045654,
+            -2.3981056213378906
+          ],
+          "scores_delib": [
+            -8.189531326293945,
+            -4.531406879425049,
+            -5.557082653045654,
+            -2.3981056213378906
+          ],
+          "margin": 2.133301258087158,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 0,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "C"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -5.857952117919922,
+            -5.2809295654296875,
+            -4.975380897521973,
+            -4.468016624450684
+          ],
+          "scores_delib": [
+            -5.857952117919922,
+            -5.2809295654296875,
+            -4.975380897521973,
+            -4.468016624450684
+          ],
+          "margin": 0.5073642730712891,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 1,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -4.694101810455322,
+            -1.3565980195999146,
+            -7.007325649261475,
+            -3.1698696613311768
+          ],
+          "scores_delib": [
+            -4.694101810455322,
+            -1.3565980195999146,
+            -7.007325649261475,
+            -3.1698696613311768
+          ],
+          "margin": 1.8132716417312622,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 2,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "B"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.547147274017334,
+            -3.0812106132507324,
+            -2.38893985748291,
+            -2.2049663066864014
+          ],
+          "scores_delib": [
+            -2.547147274017334,
+            -3.0812106132507324,
+            -2.38893985748291,
+            -2.2049663066864014
+          ],
+          "margin": 0.1839735507965088,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6086583137512207,
+          "plastic_trace_norm": 3.2403383255004883,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 3,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "D"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -3.2273879051208496,
+            -1.1703333854675293,
+            -2.1015631357828775,
+            -1.376213550567627
+          ],
+          "scores_delib": [
+            -3.2273879051208496,
+            -1.1703333854675293,
+            -2.1015631357828775,
+            -1.376213550567627
+          ],
+          "margin": 0.20588016510009766,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6101807951927185,
+          "plastic_trace_norm": 3.2706055641174316,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 4,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "C"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.3543032010396323,
+            -3.0101656913757324,
+            -8.791911125183105,
+            -5.981146335601807
+          ],
+          "scores_delib": [
+            -2.3543032010396323,
+            -3.0101656913757324,
+            -8.791911125183105,
+            -5.981146335601807
+          ],
+          "margin": 0.6558624903361001,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 5,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "C"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -8.269020080566406,
+            -4.681997299194336,
+            -5.146880626678467,
+            -3.168731927871704
+          ],
+          "scores_delib": [
+            -8.269020080566406,
+            -4.681997299194336,
+            -5.146880626678467,
+            -3.168731927871704
+          ],
+          "margin": 1.5132653713226318,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 6,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "D"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.0532288551330566,
+            -2.8672261238098145,
+            -2.1950671672821045,
+            -4.196308135986328
+          ],
+          "scores_delib": [
+            -0.8110138773918152,
+            -0.8393961191177368,
+            -0.4455159604549408,
+            -1.574079990386963
+          ],
+          "margin": 0.14183831214904785,
+          "surprise_jsd": 0.01961396262049675,
+          "surprise_gate": 0.7,
+          "vacuity_u": 0.6145614981651306,
+          "plastic_trace_norm": 3.7644705772399902,
+          "synthesized_count": 0,
+          "critique_applied": true,
+          "settled_shortcut": false,
+          "idx": 7,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "B"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -1.2962230443954468,
+            -2.509638547897339,
+            -2.2691731452941895,
+            -2.716169595718384
+          ],
+          "scores_delib": [
+            -1.2962230443954468,
+            -2.509638547897339,
+            -2.2691731452941895,
+            -2.716169595718384
+          ],
+          "margin": 0.9729501008987427,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 8,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "A"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.849078416824341,
+            -1.5084258715311687,
+            -8.744128227233887,
+            -2.3199920654296875
+          ],
+          "scores_delib": [
+            -2.849078416824341,
+            -1.5084258715311687,
+            -8.744128227233887,
+            -2.3199920654296875
+          ],
+          "margin": 0.8115661938985188,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 9,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "A"
+        }
+      ]
+    },
+    "CounterIntuitive-Syllogism": {
+      "domain": "Belief Bias Formal Entailment",
+      "samples": 10,
+      "base_acc": 100.0,
+      "delib_acc": 100.0,
+      "delta": 0.0,
+      "rescued_count": 0,
+      "degraded_count": 0,
+      "mean_vacuity_u": 0.5,
+      "mean_plastic_trace": 0.0,
+      "samples_log": [
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.561680793762207,
+            -0.2568949222564697,
+            -3.883122444152832,
+            -2.8692681789398193
+          ],
+          "scores_delib": [
+            -2.561680793762207,
+            -0.2568949222564697,
+            -3.883122444152832,
+            -2.8692681789398193
+          ],
+          "margin": 2.304785871505737,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 0,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -1.4086581865946453,
+            -0.5133459568023682,
+            -3.2942191532679965,
+            -2.9693770938449435
+          ],
+          "scores_delib": [
+            -1.4086581865946453,
+            -0.5133459568023682,
+            -3.2942191532679965,
+            -2.9693770938449435
+          ],
+          "margin": 0.8953122297922771,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 1,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.2947528839111326,
+            -0.375984615749783,
+            -3.1649642520480685,
+            -0.7236989140510559
+          ],
+          "scores_delib": [
+            -3.2947528839111326,
+            -0.375984615749783,
+            -3.1649642520480685,
+            -0.7236989140510559
+          ],
+          "margin": 0.34771429830127293,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 2,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.1898448944091795,
+            -3.471738542829241,
+            -0.3986285754612514,
+            -3.1835689544677734
+          ],
+          "scores_delib": [
+            -2.1898448944091795,
+            -3.471738542829241,
+            -0.3986285754612514,
+            -3.1835689544677734
+          ],
+          "margin": 1.791216318947928,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 3,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "C"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.4785352434430803,
+            -0.9053433282034737,
+            -4.668727111816406,
+            -4.414443697248187
+          ],
+          "scores_delib": [
+            -2.4785352434430803,
+            -0.9053433282034737,
+            -4.668727111816406,
+            -4.414443697248187
+          ],
+          "margin": 1.5731919152396066,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 4,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.1751475863986545,
+            -0.3754954934120178,
+            -2.56318998336792,
+            -5.607990809849331
+          ],
+          "scores_delib": [
+            -2.1751475863986545,
+            -0.3754954934120178,
+            -2.56318998336792,
+            -5.607990809849331
+          ],
+          "margin": 1.7996520929866366,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 5,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.257247712877062,
+            -0.6258604867117745,
+            -3.316318300035265,
+            -1.0988273620605469
+          ],
+          "scores_delib": [
+            -2.257247712877062,
+            -0.6258604867117745,
+            -3.316318300035265,
+            -1.0988273620605469
+          ],
+          "margin": 0.47296687534877235,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 6,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.4887548174176897,
+            -0.5668755531311035,
+            -3.1288497231223364,
+            -3.072908401489258
+          ],
+          "scores_delib": [
+            -2.4887548174176897,
+            -0.5668755531311035,
+            -3.1288497231223364,
+            -3.072908401489258
+          ],
+          "margin": 1.921879264286586,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 7,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.9728065066867404,
+            -0.7976615905761719,
+            -3.385914993286133,
+            -3.812760216849191
+          ],
+          "scores_delib": [
+            -2.9728065066867404,
+            -0.7976615905761719,
+            -3.385914993286133,
+            -3.812760216849191
+          ],
+          "margin": 2.1751449161105683,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 8,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.26643795437283,
+            -2.8211774826049805,
+            -5.620016733805339,
+            -4.699496587117513
+          ],
+          "scores_delib": [
+            -3.26643795437283,
+            -2.8211774826049805,
+            -5.620016733805339,
+            -4.699496587117513
+          ],
+          "margin": 0.44526047176784944,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 9,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        }
+      ]
+    },
+    "Modular-TemporalWarping": {
+      "domain": "Multi-Step Modular Arithmetic",
+      "samples": 10,
+      "base_acc": 10.0,
+      "delib_acc": 10.0,
+      "delta": 0.0,
+      "rescued_count": 0,
+      "degraded_count": 0,
+      "mean_vacuity_u": 0.5565736353397369,
+      "mean_plastic_trace": 1.7435497283935546,
+      "samples_log": [
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.055921792984009,
+            -2.043104410171509,
+            -2.1668336391448975,
+            -1.7691823244094849
+          ],
+          "scores_delib": [
+            -2.055921792984009,
+            -2.043104410171509,
+            -2.1668336391448975,
+            -1.7691823244094849
+          ],
+          "margin": 0.2739220857620239,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 0,
+          "sector": "Modular-TemporalWarping",
+          "target": "A"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.2013115882873535,
+            -2.1705856323242188,
+            -1.740999698638916,
+            -2.0956482887268066
+          ],
+          "scores_delib": [
+            -2.2013115882873535,
+            -2.1705856323242188,
+            -1.740999698638916,
+            -2.0956482887268066
+          ],
+          "margin": 0.3546485900878906,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 1,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "B",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.6994565725326538,
+            -1.6409196853637695,
+            -1.5836865901947021,
+            -1.7583205699920654
+          ],
+          "scores_delib": [
+            -1.30172860622406,
+            -0.9040243029594421,
+            -1.0897735357284546,
+            -1.273720383644104
+          ],
+          "margin": 0.05723309516906738,
+          "surprise_jsd": 0.0021019428968429565,
+          "surprise_gate": 0.7016857266426086,
+          "vacuity_u": 0.6100582480430603,
+          "plastic_trace_norm": 3.7141053676605225,
+          "synthesized_count": 0,
+          "critique_applied": true,
+          "settled_shortcut": false,
+          "idx": 2,
+          "sector": "Modular-TemporalWarping",
+          "target": "A"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.2658588886260986,
+            -1.579698085784912,
+            -1.824158787727356,
+            -1.7500091791152954
+          ],
+          "scores_delib": [
+            -1.2658588886260986,
+            -1.579698085784912,
+            -1.824158787727356,
+            -1.7500091791152954
+          ],
+          "margin": 0.3138391971588135,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 3,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -1.6853103637695312,
+            -1.6624006032943726,
+            -1.9304050207138062,
+            -1.8283132314682007
+          ],
+          "scores_delib": [
+            -1.6853103637695312,
+            -1.6624006032943726,
+            -1.9304050207138062,
+            -1.8283132314682007
+          ],
+          "margin": 0.02290976047515869,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6091588139533997,
+          "plastic_trace_norm": 3.301703691482544,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 4,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.1889758110046387,
+            -2.214247941970825,
+            -2.1353721618652344,
+            -2.078579902648926
+          ],
+          "scores_delib": [
+            -2.1889758110046387,
+            -2.214247941970825,
+            -2.1353721618652344,
+            -2.078579902648926
+          ],
+          "margin": 0.056792259216308594,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6095531582832336,
+          "plastic_trace_norm": 3.329441785812378,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 5,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.6566119194030762,
+            -1.587480902671814,
+            -1.586909532546997,
+            -1.2152512073516846
+          ],
+          "scores_delib": [
+            -1.6566119194030762,
+            -1.587480902671814,
+            -1.586909532546997,
+            -1.2152512073516846
+          ],
+          "margin": 0.3716583251953125,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 6,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.4999979734420776,
+            -1.408145546913147,
+            -1.3268632888793945,
+            -1.5094047784805298
+          ],
+          "scores_delib": [
+            -1.4999979734420776,
+            -1.408145546913147,
+            -1.3268632888793945,
+            -1.5094047784805298
+          ],
+          "margin": 0.08128225803375244,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.629336416721344,
+          "plastic_trace_norm": 3.304379463195801,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 7,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.023916482925415,
+            -2.1085500717163086,
+            -1.699049472808838,
+            -2.0332112312316895
+          ],
+          "scores_delib": [
+            -2.023916482925415,
+            -2.1085500717163086,
+            -1.699049472808838,
+            -2.0332112312316895
+          ],
+          "margin": 0.32486701011657715,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 8,
+          "sector": "Modular-TemporalWarping",
+          "target": "A"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.7760014533996582,
+            -1.8359566926956177,
+            -1.9176172018051147,
+            -1.7942181825637817
+          ],
+          "scores_delib": [
+            -0.8212353587150574,
+            -0.9113531112670898,
+            -1.0819472074508667,
+            -0.7892693877220154
+          ],
+          "margin": 0.018216729164123535,
+          "surprise_jsd": 0.00044906139373779297,
+          "surprise_gate": 0.8369442820549011,
+          "vacuity_u": 0.6076297163963318,
+          "plastic_trace_norm": 3.7858669757843018,
+          "synthesized_count": 0,
+          "critique_applied": true,
+          "settled_shortcut": false,
+          "idx": 9,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        }
+      ]
+    },
+    "FiniteState-Automata": {
+      "domain": "Deterministic Latent State Machine",
+      "samples": 10,
+      "base_acc": 60.0,
+      "delib_acc": 40.0,
+      "delta": -20.0,
+      "rescued_count": 0,
+      "degraded_count": 2,
+      "mean_vacuity_u": 0.5779107689857483,
+      "mean_plastic_trace": 2.3627819776535035,
+      "samples_log": [
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.332092761993408,
+            -3.3639235496520996,
+            -3.331116199493408,
+            -8.291903813680014
+          ],
+          "scores_delib": [
+            -3.332092761993408,
+            -3.3639235496520996,
+            -3.331116199493408,
+            -8.291903813680014
+          ],
+          "margin": 0.0009765625,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6145771741867065,
+          "plastic_trace_norm": 3.3219380378723145,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 0,
+          "sector": "FiniteState-Automata",
+          "target": "C"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": false,
+          "status": "Degraded (Right->Wrong)",
+          "scores_base": [
+            -3.351454496383667,
+            -3.4371535778045654,
+            -3.3600871562957764,
+            -8.348328272501627
+          ],
+          "scores_delib": [
+            -1.0203042030334473,
+            -0.5427103042602539,
+            -0.39494451880455017,
+            -8.234907786051432
+          ],
+          "margin": 0.008632659912109375,
+          "surprise_jsd": 0.009657398797571659,
+          "surprise_gate": 0.8614453077316284,
+          "vacuity_u": 0.6144624352455139,
+          "plastic_trace_norm": 3.812183380126953,
+          "synthesized_count": 0,
+          "critique_applied": true,
+          "settled_shortcut": false,
+          "idx": 1,
+          "sector": "FiniteState-Automata",
+          "target": "A"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -3.3649017810821533,
+            -3.3630411624908447,
+            -3.3498947620391846,
+            -8.233402252197266
+          ],
+          "scores_delib": [
+            -3.3649017810821533,
+            -3.3630411624908447,
+            -3.3498947620391846,
+            -8.233402252197266
+          ],
+          "margin": 0.013146400451660156,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6136171817779541,
+          "plastic_trace_norm": 3.305624485015869,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 2,
+          "sector": "FiniteState-Automata",
+          "target": "A"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": false,
+          "status": "Degraded (Right->Wrong)",
+          "scores_base": [
+            -3.222799777984619,
+            -3.399172306060791,
+            -3.2657837867736816,
+            -8.28692372639974
+          ],
+          "scores_delib": [
+            -3.222799777984619,
+            -3.399172306060791,
+            -3.2657837867736816,
+            -8.28692372639974
+          ],
+          "margin": 0.0429840087890625,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6137629747390747,
+          "plastic_trace_norm": 3.3055732250213623,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 3,
+          "sector": "FiniteState-Automata",
+          "target": "A"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -3.304429531097412,
+            -3.3304009437561035,
+            -3.241565227508545,
+            -8.310754776000977
+          ],
+          "scores_delib": [
+            -3.304429531097412,
+            -3.3304009437561035,
+            -3.241565227508545,
+            -8.310754776000977
+          ],
+          "margin": 0.06286430358886719,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6140393018722534,
+          "plastic_trace_norm": 3.3106188774108887,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 4,
+          "sector": "FiniteState-Automata",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.56429123878479,
+            -3.3703787326812744,
+            -3.1245110034942627,
+            -4.263779640197754
+          ],
+          "scores_delib": [
+            -3.56429123878479,
+            -3.3703787326812744,
+            -3.1245110034942627,
+            -4.263779640197754
+          ],
+          "margin": 0.24586772918701172,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.604354739189148,
+          "plastic_trace_norm": 3.2856204509735107,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 5,
+          "sector": "FiniteState-Automata",
+          "target": "C"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.4745614528656006,
+            -3.280634641647339,
+            -3.1265790462493896,
+            -4.152340888977051
+          ],
+          "scores_delib": [
+            -3.4745614528656006,
+            -3.280634641647339,
+            -3.1265790462493896,
+            -4.152340888977051
+          ],
+          "margin": 0.15405559539794922,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6042938828468323,
+          "plastic_trace_norm": 3.2862613201141357,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 6,
+          "sector": "FiniteState-Automata",
+          "target": "C"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -3.5480313301086426,
+            -3.4074931144714355,
+            -3.082388401031494,
+            -4.249138355255127
+          ],
+          "scores_delib": [
+            -3.5480313301086426,
+            -3.4074931144714355,
+            -3.082388401031494,
+            -4.249138355255127
+          ],
+          "margin": 0.3251047134399414,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 7,
+          "sector": "FiniteState-Automata",
+          "target": "A"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -4.720858097076416,
+            -6.546571254730225,
+            -5.656519412994385,
+            -7.452657222747803
+          ],
+          "scores_delib": [
+            -4.720858097076416,
+            -6.546571254730225,
+            -5.656519412994385,
+            -7.452657222747803
+          ],
+          "margin": 0.9356613159179688,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 8,
+          "sector": "FiniteState-Automata",
+          "target": "B"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -4.897648334503174,
+            -6.390243053436279,
+            -5.436911106109619,
+            -7.0966877937316895
+          ],
+          "scores_delib": [
+            -4.897648334503174,
+            -6.390243053436279,
+            -5.436911106109619,
+            -7.0966877937316895
+          ],
+          "margin": 0.5392627716064453,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 9,
+          "sector": "FiniteState-Automata",
+          "target": "A"
+        }
+      ]
+    },
+    "macro_summary": {
+      "pass_id": 2,
+      "total_samples": 50,
+      "base_accuracy": 50.0,
+      "delib_accuracy": 46.0,
+      "delta": -4.0,
+      "total_rescued": 0,
+      "total_degraded": 2,
+      "elapsed_seconds": 112.55
+    }
+  },
+  "pass3": {
+    "Inverted-Physics": {
+      "domain": "Counterfactual Axiomatic Physics",
+      "samples": 10,
+      "base_acc": 40.0,
+      "delib_acc": 40.0,
+      "delta": 0.0,
+      "rescued_count": 0,
+      "degraded_count": 0,
+      "mean_vacuity_u": 0.5319053411483765,
+      "mean_plastic_trace": 0.9641024589538574,
+      "samples_log": [
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.4128795970569958,
+            -1.529267744584517,
+            -2.626769595675998,
+            -3.6034281253814697
+          ],
+          "scores_delib": [
+            -1.4128795970569958,
+            -1.529267744584517,
+            -2.626769595675998,
+            -3.6034281253814697
+          ],
+          "margin": 0.11638814752752125,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6092593669891357,
+          "plastic_trace_norm": 3.2632153034210205,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 0,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.4480972290039062,
+            -2.415167201649059,
+            -2.064874458312988,
+            -3.0016028664328833
+          ],
+          "scores_delib": [
+            -1.4480972290039062,
+            -2.415167201649059,
+            -2.064874458312988,
+            -3.0016028664328833
+          ],
+          "margin": 0.6167772293090819,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 1,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.031574010848999,
+            -3.645982469831194,
+            -1.7124220132827759,
+            -3.7927041734967912
+          ],
+          "scores_delib": [
+            -3.031574010848999,
+            -3.645982469831194,
+            -1.7124220132827759,
+            -3.7927041734967912
+          ],
+          "margin": 1.3191519975662231,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 2,
+          "sector": "Inverted-Physics",
+          "target": "C"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.598431428273519,
+            -1.9763174057006836,
+            -3.7415148417154946,
+            -1.8997759819030762
+          ],
+          "scores_delib": [
+            -2.598431428273519,
+            -1.9763174057006836,
+            -3.7415148417154946,
+            -1.8997759819030762
+          ],
+          "margin": 0.07654142379760742,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6051450371742249,
+          "plastic_trace_norm": 3.162029266357422,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 3,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.7083566188812256,
+            -2.7602051628960504,
+            -3.7369327545166016,
+            -1.8129411844106822
+          ],
+          "scores_delib": [
+            -2.7083566188812256,
+            -2.7602051628960504,
+            -3.7369327545166016,
+            -1.8129411844106822
+          ],
+          "margin": 0.8954154344705434,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 4,
+          "sector": "Inverted-Physics",
+          "target": "A"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.798787752787272,
+            -3.3488090515136717,
+            -2.1984999974568686,
+            -3.5498053232828775
+          ],
+          "scores_delib": [
+            -2.798787752787272,
+            -3.3488090515136717,
+            -2.1984999974568686,
+            -3.5498053232828775
+          ],
+          "margin": 0.6002877553304033,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 5,
+          "sector": "Inverted-Physics",
+          "target": "C"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.671958605448405,
+            -2.551356315612793,
+            -4.0012866973876955,
+            -3.3050789303249783
+          ],
+          "scores_delib": [
+            -2.671958605448405,
+            -2.551356315612793,
+            -4.0012866973876955,
+            -3.3050789303249783
+          ],
+          "margin": 0.12060228983561183,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.604649007320404,
+          "plastic_trace_norm": 3.215780019760132,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 6,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.455624989100865,
+            -1.8126330375671387,
+            -3.2726329456676138,
+            -3.4068853590223522
+          ],
+          "scores_delib": [
+            -2.455624989100865,
+            -1.8126330375671387,
+            -3.2726329456676138,
+            -3.4068853590223522
+          ],
+          "margin": 0.6429919515337263,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 7,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -3.0254378848605685,
+            -3.100500742594401,
+            -2.3048350994403544,
+            -3.73057614839994
+          ],
+          "scores_delib": [
+            -3.0254378848605685,
+            -3.100500742594401,
+            -2.3048350994403544,
+            -3.73057614839994
+          ],
+          "margin": 0.7206027854202142,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 8,
+          "sector": "Inverted-Physics",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.9582056999206543,
+            -1.3253066804673936,
+            -2.523468255996704,
+            -3.1409263610839844
+          ],
+          "scores_delib": [
+            -2.9582056999206543,
+            -1.3253066804673936,
+            -2.523468255996704,
+            -3.1409263610839844
+          ],
+          "margin": 1.1981615755293105,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 9,
+          "sector": "Inverted-Physics",
+          "target": "C"
+        }
+      ]
+    },
+    "5Hop-TransitiveDeduction": {
+      "domain": "Complex Relational Constraint Graph",
+      "samples": 10,
+      "base_acc": 40.0,
+      "delib_acc": 40.0,
+      "delta": 0.0,
+      "rescued_count": 0,
+      "degraded_count": 0,
+      "mean_vacuity_u": 0.533340060710907,
+      "mean_plastic_trace": 0.9538140535354614,
+      "samples_log": [
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -8.189531326293945,
+            -4.531406879425049,
+            -5.557082653045654,
+            -2.3981056213378906
+          ],
+          "scores_delib": [
+            -8.189531326293945,
+            -4.531406879425049,
+            -5.557082653045654,
+            -2.3981056213378906
+          ],
+          "margin": 2.133301258087158,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 0,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "C"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -5.857952117919922,
+            -5.2809295654296875,
+            -4.975380897521973,
+            -4.468016624450684
+          ],
+          "scores_delib": [
+            -5.857952117919922,
+            -5.2809295654296875,
+            -4.975380897521973,
+            -4.468016624450684
+          ],
+          "margin": 0.5073642730712891,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 1,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -4.694101810455322,
+            -1.3565980195999146,
+            -7.007325649261475,
+            -3.1698696613311768
+          ],
+          "scores_delib": [
+            -4.694101810455322,
+            -1.3565980195999146,
+            -7.007325649261475,
+            -3.1698696613311768
+          ],
+          "margin": 1.8132716417312622,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 2,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "B"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.547147274017334,
+            -3.0812106132507324,
+            -2.38893985748291,
+            -2.2049663066864014
+          ],
+          "scores_delib": [
+            -2.547147274017334,
+            -3.0812106132507324,
+            -2.38893985748291,
+            -2.2049663066864014
+          ],
+          "margin": 0.1839735507965088,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6086583137512207,
+          "plastic_trace_norm": 3.207935094833374,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 3,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "D"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -3.2273879051208496,
+            -1.1703333854675293,
+            -2.1015631357828775,
+            -1.376213550567627
+          ],
+          "scores_delib": [
+            -3.2273879051208496,
+            -1.1703333854675293,
+            -2.1015631357828775,
+            -1.376213550567627
+          ],
+          "margin": 0.20588016510009766,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6101807951927185,
+          "plastic_trace_norm": 3.2378997802734375,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 4,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "C"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.3543032010396323,
+            -3.0101656913757324,
+            -8.791911125183105,
+            -5.981146335601807
+          ],
+          "scores_delib": [
+            -2.3543032010396323,
+            -3.0101656913757324,
+            -8.791911125183105,
+            -5.981146335601807
+          ],
+          "margin": 0.6558624903361001,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 5,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "C"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -8.269020080566406,
+            -4.681997299194336,
+            -5.146880626678467,
+            -3.168731927871704
+          ],
+          "scores_delib": [
+            -8.269020080566406,
+            -4.681997299194336,
+            -5.146880626678467,
+            -3.168731927871704
+          ],
+          "margin": 1.5132653713226318,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 6,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "D"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.0532288551330566,
+            -2.8672261238098145,
+            -2.1950671672821045,
+            -4.196308135986328
+          ],
+          "scores_delib": [
+            -2.0532288551330566,
+            -2.8672261238098145,
+            -2.1950671672821045,
+            -4.196308135986328
+          ],
+          "margin": 0.14183831214904785,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6145614981651306,
+          "plastic_trace_norm": 3.0923056602478027,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 7,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "B"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -1.2962230443954468,
+            -2.509638547897339,
+            -2.2691731452941895,
+            -2.716169595718384
+          ],
+          "scores_delib": [
+            -1.2962230443954468,
+            -2.509638547897339,
+            -2.2691731452941895,
+            -2.716169595718384
+          ],
+          "margin": 0.9729501008987427,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 8,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "A"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.849078416824341,
+            -1.5084258715311687,
+            -8.744128227233887,
+            -2.3199920654296875
+          ],
+          "scores_delib": [
+            -2.849078416824341,
+            -1.5084258715311687,
+            -8.744128227233887,
+            -2.3199920654296875
+          ],
+          "margin": 0.8115661938985188,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 9,
+          "sector": "5Hop-TransitiveDeduction",
+          "target": "A"
+        }
+      ]
+    },
+    "CounterIntuitive-Syllogism": {
+      "domain": "Belief Bias Formal Entailment",
+      "samples": 10,
+      "base_acc": 100.0,
+      "delib_acc": 100.0,
+      "delta": 0.0,
+      "rescued_count": 0,
+      "degraded_count": 0,
+      "mean_vacuity_u": 0.5,
+      "mean_plastic_trace": 0.0,
+      "samples_log": [
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.561680793762207,
+            -0.2568949222564697,
+            -3.883122444152832,
+            -2.8692681789398193
+          ],
+          "scores_delib": [
+            -2.561680793762207,
+            -0.2568949222564697,
+            -3.883122444152832,
+            -2.8692681789398193
+          ],
+          "margin": 2.304785871505737,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 0,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -1.4086581865946453,
+            -0.5133459568023682,
+            -3.2942191532679965,
+            -2.9693770938449435
+          ],
+          "scores_delib": [
+            -1.4086581865946453,
+            -0.5133459568023682,
+            -3.2942191532679965,
+            -2.9693770938449435
+          ],
+          "margin": 0.8953122297922771,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 1,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.2947528839111326,
+            -0.375984615749783,
+            -3.1649642520480685,
+            -0.7236989140510559
+          ],
+          "scores_delib": [
+            -3.2947528839111326,
+            -0.375984615749783,
+            -3.1649642520480685,
+            -0.7236989140510559
+          ],
+          "margin": 0.34771429830127293,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 2,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.1898448944091795,
+            -3.471738542829241,
+            -0.3986285754612514,
+            -3.1835689544677734
+          ],
+          "scores_delib": [
+            -2.1898448944091795,
+            -3.471738542829241,
+            -0.3986285754612514,
+            -3.1835689544677734
+          ],
+          "margin": 1.791216318947928,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 3,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "C"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.4785352434430803,
+            -0.9053433282034737,
+            -4.668727111816406,
+            -4.414443697248187
+          ],
+          "scores_delib": [
+            -2.4785352434430803,
+            -0.9053433282034737,
+            -4.668727111816406,
+            -4.414443697248187
+          ],
+          "margin": 1.5731919152396066,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 4,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.1751475863986545,
+            -0.3754954934120178,
+            -2.56318998336792,
+            -5.607990809849331
+          ],
+          "scores_delib": [
+            -2.1751475863986545,
+            -0.3754954934120178,
+            -2.56318998336792,
+            -5.607990809849331
+          ],
+          "margin": 1.7996520929866366,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 5,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.257247712877062,
+            -0.6258604867117745,
+            -3.316318300035265,
+            -1.0988273620605469
+          ],
+          "scores_delib": [
+            -2.257247712877062,
+            -0.6258604867117745,
+            -3.316318300035265,
+            -1.0988273620605469
+          ],
+          "margin": 0.47296687534877235,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 6,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.4887548174176897,
+            -0.5668755531311035,
+            -3.1288497231223364,
+            -3.072908401489258
+          ],
+          "scores_delib": [
+            -2.4887548174176897,
+            -0.5668755531311035,
+            -3.1288497231223364,
+            -3.072908401489258
+          ],
+          "margin": 1.921879264286586,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 7,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -2.9728065066867404,
+            -0.7976615905761719,
+            -3.385914993286133,
+            -3.812760216849191
+          ],
+          "scores_delib": [
+            -2.9728065066867404,
+            -0.7976615905761719,
+            -3.385914993286133,
+            -3.812760216849191
+          ],
+          "margin": 2.1751449161105683,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 8,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.26643795437283,
+            -2.8211774826049805,
+            -5.620016733805339,
+            -4.699496587117513
+          ],
+          "scores_delib": [
+            -3.26643795437283,
+            -2.8211774826049805,
+            -5.620016733805339,
+            -4.699496587117513
+          ],
+          "margin": 0.44526047176784944,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 9,
+          "sector": "CounterIntuitive-Syllogism",
+          "target": "B"
+        }
+      ]
+    },
+    "Modular-TemporalWarping": {
+      "domain": "Multi-Step Modular Arithmetic",
+      "samples": 10,
+      "base_acc": 10.0,
+      "delib_acc": 10.0,
+      "delta": 0.0,
+      "rescued_count": 0,
+      "degraded_count": 0,
+      "mean_vacuity_u": 0.5565736353397369,
+      "mean_plastic_trace": 1.7336142539978028,
+      "samples_log": [
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.055921792984009,
+            -2.043104410171509,
+            -2.1668336391448975,
+            -1.7691823244094849
+          ],
+          "scores_delib": [
+            -2.055921792984009,
+            -2.043104410171509,
+            -2.1668336391448975,
+            -1.7691823244094849
+          ],
+          "margin": 0.2739220857620239,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 0,
+          "sector": "Modular-TemporalWarping",
+          "target": "A"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.2013115882873535,
+            -2.1705856323242188,
+            -1.740999698638916,
+            -2.0956482887268066
+          ],
+          "scores_delib": [
+            -2.2013115882873535,
+            -2.1705856323242188,
+            -1.740999698638916,
+            -2.0956482887268066
+          ],
+          "margin": 0.3546485900878906,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 1,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "B",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.6994565725326538,
+            -1.6409196853637695,
+            -1.5836865901947021,
+            -1.7583205699920654
+          ],
+          "scores_delib": [
+            -1.30172860622406,
+            -0.9040243029594421,
+            -1.0897735357284546,
+            -1.273720383644104
+          ],
+          "margin": 0.05723309516906738,
+          "surprise_jsd": 0.0021019428968429565,
+          "surprise_gate": 0.7016857266426086,
+          "vacuity_u": 0.6100582480430603,
+          "plastic_trace_norm": 3.7141053676605225,
+          "synthesized_count": 0,
+          "critique_applied": true,
+          "settled_shortcut": false,
+          "idx": 2,
+          "sector": "Modular-TemporalWarping",
+          "target": "A"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.2658588886260986,
+            -1.579698085784912,
+            -1.824158787727356,
+            -1.7500091791152954
+          ],
+          "scores_delib": [
+            -1.2658588886260986,
+            -1.579698085784912,
+            -1.824158787727356,
+            -1.7500091791152954
+          ],
+          "margin": 0.3138391971588135,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 3,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "B",
+          "pred_delib": "B",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -1.6853103637695312,
+            -1.6624006032943726,
+            -1.9304050207138062,
+            -1.8283132314682007
+          ],
+          "scores_delib": [
+            -1.6853103637695312,
+            -1.6624006032943726,
+            -1.9304050207138062,
+            -1.8283132314682007
+          ],
+          "margin": 0.02290976047515869,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6091588139533997,
+          "plastic_trace_norm": 3.2686867713928223,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 4,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.1889758110046387,
+            -2.214247941970825,
+            -2.1353721618652344,
+            -2.078579902648926
+          ],
+          "scores_delib": [
+            -2.1889758110046387,
+            -2.214247941970825,
+            -2.1353721618652344,
+            -2.078579902648926
+          ],
+          "margin": 0.056792259216308594,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6095531582832336,
+          "plastic_trace_norm": 3.296147584915161,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 5,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "D",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.6566119194030762,
+            -1.587480902671814,
+            -1.586909532546997,
+            -1.2152512073516846
+          ],
+          "scores_delib": [
+            -1.6566119194030762,
+            -1.587480902671814,
+            -1.586909532546997,
+            -1.2152512073516846
+          ],
+          "margin": 0.3716583251953125,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 6,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.4999979734420776,
+            -1.408145546913147,
+            -1.3268632888793945,
+            -1.5094047784805298
+          ],
+          "scores_delib": [
+            -1.4999979734420776,
+            -1.408145546913147,
+            -1.3268632888793945,
+            -1.5094047784805298
+          ],
+          "margin": 0.08128225803375244,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.629336416721344,
+          "plastic_trace_norm": 3.2713358402252197,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 7,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -2.023916482925415,
+            -2.1085500717163086,
+            -1.699049472808838,
+            -2.0332112312316895
+          ],
+          "scores_delib": [
+            -2.023916482925415,
+            -2.1085500717163086,
+            -1.699049472808838,
+            -2.0332112312316895
+          ],
+          "margin": 0.32486701011657715,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 8,
+          "sector": "Modular-TemporalWarping",
+          "target": "A"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "D",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -1.7760014533996582,
+            -1.8359566926956177,
+            -1.9176172018051147,
+            -1.7942181825637817
+          ],
+          "scores_delib": [
+            -0.8212353587150574,
+            -0.9113531112670898,
+            -1.0819472074508667,
+            -0.7892693877220154
+          ],
+          "margin": 0.018216729164123535,
+          "surprise_jsd": 0.00044906139373779297,
+          "surprise_gate": 0.8369442820549011,
+          "vacuity_u": 0.6076297163963318,
+          "plastic_trace_norm": 3.7858669757843018,
+          "synthesized_count": 0,
+          "critique_applied": true,
+          "settled_shortcut": false,
+          "idx": 9,
+          "sector": "Modular-TemporalWarping",
+          "target": "B"
+        }
+      ]
+    },
+    "FiniteState-Automata": {
+      "domain": "Deterministic Latent State Machine",
+      "samples": 10,
+      "base_acc": 60.0,
+      "delib_acc": 40.0,
+      "delta": -20.0,
+      "rescued_count": 0,
+      "degraded_count": 2,
+      "mean_vacuity_u": 0.5779107689857483,
+      "mean_plastic_trace": 2.3429662704467775,
+      "samples_log": [
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.332092761993408,
+            -3.3639235496520996,
+            -3.331116199493408,
+            -8.291903813680014
+          ],
+          "scores_delib": [
+            -3.332092761993408,
+            -3.3639235496520996,
+            -3.331116199493408,
+            -8.291903813680014
+          ],
+          "margin": 0.0009765625,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6145771741867065,
+          "plastic_trace_norm": 3.2887184619903564,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 0,
+          "sector": "FiniteState-Automata",
+          "target": "C"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": false,
+          "status": "Degraded (Right->Wrong)",
+          "scores_base": [
+            -3.351454496383667,
+            -3.4371535778045654,
+            -3.3600871562957764,
+            -8.348328272501627
+          ],
+          "scores_delib": [
+            -1.0203042030334473,
+            -0.5427103042602539,
+            -0.39494451880455017,
+            -8.234907786051432
+          ],
+          "margin": 0.008632659912109375,
+          "surprise_jsd": 0.009657398797571659,
+          "surprise_gate": 0.8614453077316284,
+          "vacuity_u": 0.6144624352455139,
+          "plastic_trace_norm": 3.812183380126953,
+          "synthesized_count": 0,
+          "critique_applied": true,
+          "settled_shortcut": false,
+          "idx": 1,
+          "sector": "FiniteState-Automata",
+          "target": "A"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -3.3649017810821533,
+            -3.3630411624908447,
+            -3.3498947620391846,
+            -8.233402252197266
+          ],
+          "scores_delib": [
+            -3.3649017810821533,
+            -3.3630411624908447,
+            -3.3498947620391846,
+            -8.233402252197266
+          ],
+          "margin": 0.013146400451660156,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6136171817779541,
+          "plastic_trace_norm": 3.2725682258605957,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 2,
+          "sector": "FiniteState-Automata",
+          "target": "A"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": false,
+          "status": "Degraded (Right->Wrong)",
+          "scores_base": [
+            -3.222799777984619,
+            -3.399172306060791,
+            -3.2657837867736816,
+            -8.28692372639974
+          ],
+          "scores_delib": [
+            -3.222799777984619,
+            -3.399172306060791,
+            -3.2657837867736816,
+            -8.28692372639974
+          ],
+          "margin": 0.0429840087890625,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6137629747390747,
+          "plastic_trace_norm": 3.272517204284668,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 3,
+          "sector": "FiniteState-Automata",
+          "target": "A"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -3.304429531097412,
+            -3.3304009437561035,
+            -3.241565227508545,
+            -8.310754776000977
+          ],
+          "scores_delib": [
+            -3.304429531097412,
+            -3.3304009437561035,
+            -3.241565227508545,
+            -8.310754776000977
+          ],
+          "margin": 0.06286430358886719,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6140393018722534,
+          "plastic_trace_norm": 3.277512550354004,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 4,
+          "sector": "FiniteState-Automata",
+          "target": "B"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.56429123878479,
+            -3.3703787326812744,
+            -3.1245110034942627,
+            -4.263779640197754
+          ],
+          "scores_delib": [
+            -3.56429123878479,
+            -3.3703787326812744,
+            -3.1245110034942627,
+            -4.263779640197754
+          ],
+          "margin": 0.24586772918701172,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.604354739189148,
+          "plastic_trace_norm": 3.2527642250061035,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 5,
+          "sector": "FiniteState-Automata",
+          "target": "C"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -3.4745614528656006,
+            -3.280634641647339,
+            -3.1265790462493896,
+            -4.152340888977051
+          ],
+          "scores_delib": [
+            -3.4745614528656006,
+            -3.280634641647339,
+            -3.1265790462493896,
+            -4.152340888977051
+          ],
+          "margin": 0.15405559539794922,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.6042938828468323,
+          "plastic_trace_norm": 3.2533986568450928,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 6,
+          "sector": "FiniteState-Automata",
+          "target": "C"
+        },
+        {
+          "pred_base": "C",
+          "pred_delib": "C",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -3.5480313301086426,
+            -3.4074931144714355,
+            -3.082388401031494,
+            -4.249138355255127
+          ],
+          "scores_delib": [
+            -3.5480313301086426,
+            -3.4074931144714355,
+            -3.082388401031494,
+            -4.249138355255127
+          ],
+          "margin": 0.3251047134399414,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 7,
+          "sector": "FiniteState-Automata",
+          "target": "A"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": false,
+          "delib_ok": false,
+          "status": "Preserved Wrong",
+          "scores_base": [
+            -4.720858097076416,
+            -6.546571254730225,
+            -5.656519412994385,
+            -7.452657222747803
+          ],
+          "scores_delib": [
+            -4.720858097076416,
+            -6.546571254730225,
+            -5.656519412994385,
+            -7.452657222747803
+          ],
+          "margin": 0.9356613159179688,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 8,
+          "sector": "FiniteState-Automata",
+          "target": "B"
+        },
+        {
+          "pred_base": "A",
+          "pred_delib": "A",
+          "base_ok": true,
+          "delib_ok": true,
+          "status": "Preserved Correct",
+          "scores_base": [
+            -4.897648334503174,
+            -6.390243053436279,
+            -5.436911106109619,
+            -7.0966877937316895
+          ],
+          "scores_delib": [
+            -4.897648334503174,
+            -6.390243053436279,
+            -5.436911106109619,
+            -7.0966877937316895
+          ],
+          "margin": 0.5392627716064453,
+          "surprise_jsd": 0.0,
+          "surprise_gate": 0.0,
+          "vacuity_u": 0.5,
+          "plastic_trace_norm": 0.0,
+          "synthesized_count": 0,
+          "critique_applied": false,
+          "settled_shortcut": true,
+          "idx": 9,
+          "sector": "FiniteState-Automata",
+          "target": "A"
+        }
+      ]
+    },
+    "macro_summary": {
+      "pass_id": 3,
+      "total_samples": 50,
+      "base_accuracy": 50.0,
+      "delib_accuracy": 46.0,
+      "delta": -4.0,
+      "total_rescued": 0,
+      "total_degraded": 2,
+      "elapsed_seconds": 109.12
+    }
+  },
+  "summary_table": {
+    "Inverted-Physics": {
+      "domain": "Counterfactual Axiomatic Physics",
+      "base_acc": 40.0,
+      "pass1_acc": 40.0,
+      "pass2_acc": 40.0,
+      "pass3_acc": 40.0,
+      "delta_p1": 0.0,
+      "delta_p2": 0.0,
+      "delta_p3": 0.0
+    },
+    "5Hop-TransitiveDeduction": {
+      "domain": "Complex Relational Constraint Graph",
+      "base_acc": 40.0,
+      "pass1_acc": 40.0,
+      "pass2_acc": 40.0,
+      "pass3_acc": 40.0,
+      "delta_p1": 0.0,
+      "delta_p2": 0.0,
+      "delta_p3": 0.0
+    },
+    "CounterIntuitive-Syllogism": {
+      "domain": "Belief Bias Formal Entailment",
+      "base_acc": 100.0,
+      "pass1_acc": 100.0,
+      "pass2_acc": 100.0,
+      "pass3_acc": 100.0,
+      "delta_p1": 0.0,
+      "delta_p2": 0.0,
+      "delta_p3": 0.0
+    },
+    "Modular-TemporalWarping": {
+      "domain": "Multi-Step Modular Arithmetic",
+      "base_acc": 10.0,
+      "pass1_acc": 10.0,
+      "pass2_acc": 10.0,
+      "pass3_acc": 10.0,
+      "delta_p1": 0.0,
+      "delta_p2": 0.0,
+      "delta_p3": 0.0
+    },
+    "FiniteState-Automata": {
+      "domain": "Deterministic Latent State Machine",
+      "base_acc": 60.0,
+      "pass1_acc": 40.0,
+      "pass2_acc": 40.0,
+      "pass3_acc": 40.0,
+      "delta_p1": -20.0,
+      "delta_p2": -20.0,
+      "delta_p3": -20.0
+    }
+  }
+}
