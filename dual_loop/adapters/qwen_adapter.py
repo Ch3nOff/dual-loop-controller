@@ -144,6 +144,8 @@ class DualLoopQwenModel(nn.Module):
         lm_head = getattr(self.qwen, "lm_head", None)
         if lm_head is None and hasattr(self.qwen, "get_output_embeddings"):
             lm_head = self.qwen.get_output_embeddings()
+        if lm_head is None and hasattr(self.qwen, "transformer") and hasattr(self.qwen.transformer, "output_layer"):
+            lm_head = self.qwen.transformer.output_layer
         if lm_head is not None:
             self.adapter.set_lm_head(lm_head)
         
@@ -253,6 +255,10 @@ class DualLoopQwenModel(nn.Module):
         k>=1: System 2 latent deliberation.
         """
         self.k_steps = max(0, int(k))
+
+    def set_query_index(self, idx: Union[int, torch.Tensor, list]):
+        """Sets target query token position for deliberation anchoring."""
+        self.query_idx = idx
 
     def set_confidence_threshold(self, threshold: Optional[float] = None):
         """

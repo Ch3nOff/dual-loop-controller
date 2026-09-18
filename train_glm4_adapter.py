@@ -114,6 +114,9 @@ def train_glm4():
     parser.add_argument("--load_in_4bit", action="store_true", help="Use bitsandbytes 4-bit quantization")
     parser.add_argument("--layer_idx", type=int, default=20, help="Hook layer (midpoint for 40-layer GLM-4)")
     parser.add_argument("--bottleneck_dim", type=int, default=1024, help="Bottleneck latent dimension (e.g. 1024 for 8GB VRAM, 0 to disable)")
+    parser.add_argument("--cpu_offload", action="store_true", default=True, help="Force CPU offload/execution (recommended for constrained VRAM)")
+    parser.add_argument("--from_config", action="store_true", help="Instantiate native GLM-4 architecture from config (skips 18GB download for instant testing)")
+    parser.add_argument("--num_layers", type=int, default=0, help="Override layer count for rapid prototyping (e.g. 4 or 8)")
     parser.add_argument("--epochs", type=int, default=3)
     parser.add_argument("--lr", type=float, default=2e-4)
     parser.add_argument("--batch_size", type=int, default=1)
@@ -124,12 +127,12 @@ def train_glm4():
     print(f"DUAL-LOOP COGNITIVE CONTROLLER: TRAINING PIPELINE FOR {args.model_id}")
     print("=" * 80)
 
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    print(f"[*] Compute Device: {device}")
+    device = "cpu" if args.cpu_offload or not torch.cuda.is_available() else "cuda"
+    print(f"[*] Compute Device: {device} (CPU Offload: {args.cpu_offload})")
 
-    # Quantization Config
+    # Quantization Config (only if on CUDA with bitsandbytes)
     quant_kwargs = {}
-    if args.load_in_4bit:
+    if args.load_in_4bit and device == "cuda":
         try:
             from transformers import BitsAndBytesConfig
             quant_kwargs["quantization_config"] = BitsAndBytesConfig(
@@ -142,18 +145,40 @@ def train_glm4():
         except ImportError:
             print("[!] Warning: bitsandbytes not installed. Loading in standard precision.")
 
-    print(f"[*] Loading Tokenizer & Model: {args.model_id}...")
+    print(f"[*] Loading Tokenizer & Config: {args.model_id}...")
     tokenizer = AutoTokenizer.from_pretrained(args.model_id, trust_remote_code=True)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
-    model = AutoModelForCausalLM.from_pretrained(
-        args.model_id,
-        trust_remote_code=True,
-        torch_dtype=torch.bfloat16 if device == "cuda" else torch.float32,
-        device_map="auto" if device == "cuda" else "cpu",
-        **quant_kwargs
-    )
+    config = AutoConfig.from_pretrained(args.model_id, trust_remote_code=True)
+    # Patch modern transformers config compatibility
+    if not hasattr(config, "max_length"):
+        config.max_length = getattr(config, "seq_length", 8192)
+    if not hasattr(config, "use_cache"):
+        config.use_cache = False
+
+    if args.num_layers > 0:
+        config.num_layers = args.num_layers
+        if args.layer_idx >= args.num_layers:
+            args.layer_idx = args.num_layers // 2
+
+    if args.from_config:
+        print(f"[*] Instantiating {config.model_type} architecture directly from config ({config.num_layers} layers, D={config.hidden_size})...")
+        model = AutoModelForCausalLM.from_config(
+            config,
+            trust_remote_code=True,
+            empty_init=False
+        ).to(dtype=torch.float32 if device == "cpu" else torch.bfloat16)
+    else:
+        print(f"[*] Loading Pretrained Model Weights for {args.model_id}...")
+        model = AutoModelForCausalLM.from_pretrained(
+            args.model_id,
+            config=config,
+            trust_remote_code=True,
+            torch_dtype=torch.bfloat16 if device == "cuda" else torch.float32,
+            device_map="auto" if device == "cuda" else "cpu",
+            **quant_kwargs
+        )
 
     # Freeze base model
     for p in model.parameters():
