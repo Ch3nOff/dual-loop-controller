@@ -421,6 +421,15 @@ class DualLoopQwenModel(nn.Module):
                         f"standards, arbitrary code execution via weights_only=False is strictly prohibited. Error: {e}"
                     ) from e
             
+        # Normalize keys: strip 'adapter.' prefix if saved from DualLoop model wrapper
+        cleaned_state_dict = {}
+        for k, v in state_dict.items():
+            if k.startswith("adapter."):
+                cleaned_state_dict[k[len("adapter."):]] = v
+            else:
+                cleaned_state_dict[k] = v
+        state_dict = cleaned_state_dict
+
         # Allow missing gate_alpha for backward compatibility with un-gated checkpoints
         if "gate_alpha" not in state_dict and hasattr(self.adapter, "gate_alpha"):
             state_dict["gate_alpha"] = self.adapter.gate_alpha.data.clone()

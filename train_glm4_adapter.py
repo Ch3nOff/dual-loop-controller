@@ -105,8 +105,24 @@ def get_demo_samples():
         {
             "prompt_text": "Question: Evaluate the nested expression: True AND (NOT (False OR True)).\nAnswer:",
             "target_text": "False."
+        },
+        {
+            "prompt_text": "Question: Today is Monday. What day of the week will it be in exactly 10 days?\nAnswer:",
+            "target_text": "Thursday."
+        },
+        {
+            "prompt_text": "Question: If you take 3 steps forward, turn right, and take 4 steps forward, are you facing east or north?\nAnswer:",
+            "target_text": "East."
+        },
+        {
+            "prompt_text": "Question: On the table there is a red block, a green cup, and a red plate. Which objects are red?\nAnswer:",
+            "target_text": "The block and the plate."
+        },
+        {
+            "prompt_text": "Question: Which process allows green plants to convert solar energy into chemical energy?\nAnswer:",
+            "target_text": "Photosynthesis."
         }
-    ] * 20  # 80 training samples
+    ] * 10  # 80 balanced multi-domain samples
 
 def train_glm4():
     parser = argparse.ArgumentParser(description="Train Dual-Loop Controller on GLM-4-9B")
@@ -121,6 +137,7 @@ def train_glm4():
     parser.add_argument("--lr", type=float, default=2e-4)
     parser.add_argument("--batch_size", type=int, default=1)
     parser.add_argument("--output_dir", type=str, default="checkpoints/glm4_adapter")
+    parser.add_argument("--resume_from_checkpoint", type=str, default="", help="Resume training from existing safetensors checkpoint")
     args = parser.parse_args()
 
     print("=" * 80)
@@ -169,6 +186,16 @@ def train_glm4():
             trust_remote_code=True,
             empty_init=False
         ).to(dtype=torch.float32 if device == "cpu" else torch.bfloat16)
+        # Ensure proper weight initialization for ChatGLM layers (avoid uninitialized/zero memory)
+        torch.manual_seed(42)
+        for name, p in model.named_parameters():
+            if 'layernorm' in name.lower() or 'rmsnorm' in name.lower():
+                if 'weight' in name: nn.init.ones_(p)
+                elif 'bias' in name: nn.init.zeros_(p)
+            elif 'weight' in name and p.dim() >= 2:
+                nn.init.normal_(p, mean=0.0, std=0.02)
+            elif 'bias' in name:
+                nn.init.zeros_(p)
     else:
         print(f"[*] Loading Pretrained Model Weights for {args.model_id}...")
         model = AutoModelForCausalLM.from_pretrained(
@@ -200,6 +227,11 @@ def train_glm4():
         enable_plasticity=True,
         use_evidential_gate=True
     )
+
+    if args.resume_from_checkpoint and os.path.exists(args.resume_from_checkpoint):
+        print(f"[*] Resuming adapter weights from {args.resume_from_checkpoint}...")
+        wrapped_model.load_adapter(args.resume_from_checkpoint, strict=False)
+        print("[+] Checkpoint loaded successfully!")
 
     summary = wrapped_model.get_parameter_summary()
     adapter_params = [p for p in wrapped_model.adapter.parameters() if p.requires_grad]
