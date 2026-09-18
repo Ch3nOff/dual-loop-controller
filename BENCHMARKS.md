@@ -17,6 +17,24 @@ This document preserves the comprehensive empirical evaluation results and repro
 
 ---
 
+## 🔬 Scientific Evaluation Standards & Publication Integrity Principles
+
+To maintain rigorous scientific credibility and avoid deceptive evaluation charts, this project strictly adheres to three principles:
+
+1. **Empirical Ground Truth for Dual-Loop**:
+   - Every reported number originates from raw, reproducible evaluation logs containing per-sample log-likelihoods, predicted tokens, and execution timestamps on the frozen base backbone (`Qwen/Qwen3.5-2B`).
+   - Sample sizes must be reported explicitly ($N=200$ across 20 tasks, $N=40$ for harness subsets, $N=6$ for qualitative dilemma demonstrations), acknowledging that small $N$ carries non-negligible standard error ($\text{SE} \approx \pm 7\text{--}8\%$).
+
+2. **Rigorous Standards for External Peer Comparisons**:
+   - Comparing different models on a single chart requires the **exact same evaluation harness, identical prompt templates, identical few-shot settings, and identical test splits**.
+   - Aggregating numbers from disparate publications or leaderboards evaluated under different conditions into a single comparative bar chart is scientifically flawed and strictly prohibited in this repository.
+
+3. **Transparent Recognition of Resource Constraints**:
+   - Evaluating multi-hundred-billion parameter commercial frontier models across identical standardized test suites requires enterprise-scale API budgets and massive GPU clusters that are beyond the realistic resources of open-source solo development.
+   - **Acknowledging this boundary is not a failure — it is standard scientific honesty.** Rather than concocting speculative comparison charts, this project restricts its quantitative claims strictly to **paired differential ablation**: measuring the exact, verifiable delta produced by the Dual-Loop adapter against its identical frozen base model.
+
+---
+
 ## 2. Authentic 20-Benchmark Multi-Domain Macro Suite ($N=200$)
 
 *Source File*: [`eval_results/qwen35_2b_authentic_20_benchmarks.json`](eval_results/qwen35_2b_authentic_20_benchmarks.json) | Test Harness: [`benchmark_full_20_suite.py`](benchmark_full_20_suite.py)

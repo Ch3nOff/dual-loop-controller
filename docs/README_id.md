@@ -76,7 +76,15 @@ graph TD
 
 ---
 
+## 🔬 Standar Evaluasi Ilmiah & Prinsip Integritas Publikasi
 
+Untuk menjaga kredibilitas ilmiah dan menghindari klaim yang menyesatkan:
+
+1. **Data Riil Empiris**: Seluruh metrik Dual-Loop wajib bersumber dari log kalkulasi PyTorch nyata dan probabilitas log-likelihood pada backbone beku `Qwen/Qwen3.5-2B` ($D=2048$, Layer 11 hook).
+2. **Keterbatasan Evaluasi Model Luar**: Perbandingan lintas model dengan model komersial tertutup (seperti GPT-4o, Claude 3 Opus, DeepSeek-R1) mustahil dibuat kredibel tanpa environment uji, prompt template, dan split data yang 100% identik.
+3. **Pengakuan Transparan Kapasitas Riset**: Mengakui keterbatasan sumber daya solo developer dalam menjalankan ribuan uji coba model raksasa adalah etika ilmiah yang wajar dan penting. Sebagai gantinya, proyek ini **secara tegas menolak membuat chart perbandingan klaim lintas model frontier**, dan berfokus penuh pada **evaluasi diferensial berpasangan (paired ablation)**: mengukur dampak riil adapter terhadap model dasarnya sendiri.
+
+---
 
 ## 🚀 Benchmark Terbaru: 2-Bench Cognitive Matrix Helper
 

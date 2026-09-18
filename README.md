@@ -83,7 +83,15 @@ How does the Dual-Loop Controller evolve across generations, and what sets the l
 | **Large-Scale Scaling (27B, 70B, 120B+)** | Standard | Requires expensive multi-node GPU cluster | Prohibitive enterprise operating costs | **Native 4-bit NF4 Quantization & Multi-GPU Sharded** |
 ---
 
+## 🔬 Scientific Evaluation Standards & Integrity Principles
 
+To uphold strict scientific integrity and avoid misleading claims:
+
+1. **Empirical Ground Truth**: All Dual-Loop metrics originate from genuine PyTorch forward passes and log-likelihood evaluations on frozen `Qwen/Qwen3.5-2B` ($D=2048$, Layer 11 hook).
+2. **Honest Baseline Scoping**: Cross-model comparisons with commercial frontier models (e.g., GPT-4o, Claude 3 Opus, DeepSeek-R1) cannot be standardized credibly without running identical prompts and benchmark splits across hundreds of gigabytes of model weights.
+3. **Resource Transparency**: Acknowledging that local open-source testing cannot execute frontier-scale API benchmarks is an essential scientific boundary. Rather than publishing speculative cross-model charts, evaluation in this repository is strictly restricted to **paired differential ablation** against the identical frozen base model.
+
+---
 
 ## 🚀 Latest Empirical Benchmark: 2-Bench Cognitive Matrix Helper (v2.2 Milestone)
 
