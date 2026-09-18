@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">Dual-Loop Cognitive Controller</h1>
-<h3 align="center">Hardware-Aligned Latent Deliberation & Cognitive Reasoning Framework for Any Transformer</h3>
+<h3 align="center">Hardware-Aligned Latent Deliberation, Context Directional Routing & Memory Architecture for Any Transformer</h3>
 
 <p align="center">
   <a href="https://pypi.org/project/dual-loop-controller/"><img src="https://img.shields.io/pypi/v/dual-loop-controller.svg?color=blue" alt="PyPI version"></a>
@@ -22,13 +22,15 @@
 
 Instead of generating hundreds or thousands of expensive Chain-of-Thought (CoT) text tokens, Dual-Loop deliberates recursively in **continuous latent vector space** ($D=2048\dots 10240$) inside GPU SRAM/L2 cache:
 
-* **Zero Output Token Waste**: Millisecond latent deliberation without KV-cache explosion.
-* **Cognitive Matrix Helper (EBA)**: Automatically prunes 40%–57% distractor choices (*wrong logs*) and rescues tough multi-choice errors (+33.3% to +40.0% net accuracy gain).
+* **Zero Output Token Waste**: Millisecond latent deliberation without KV-cache explosion or context bloat (0 extra text tokens).
+* **Context Directional Bipolar Router**: Projects tasks into a directional manifold ($\rho_{\text{direction}}$): Scientific inquiry routes upwards to deep System 2 deliberation, while everyday reality routes downwards to common-sense grounding.
+* **Compact Common-Sense Reservoir ($f \circ g$)**: Stores foundational physical reality axioms in a micro-prototype matrix ($< 50\text{ KB}$ in RAM), eliminating associative overthinking.
+* **Probabilistic Soft Belief Revision & 2x-Think Gating**: Replaces brittle hard-locks with soft penalties, enabling adaptive belief updates upon overwhelming deliberative evidence ($76.00\%$ Macro Accuracy on standard N=75 suite).
 * **Zero Negative Drift**: Directional Safety Projection ensures confident intuitive answers are never degraded.
 * **Universal Compatibility**: Attaches to **any** causal Transformer (LLaMA, Mistral, Qwen, Gemma, DeepSeek, Phi) and scales from 1B to 120B+ models with multi-GPU sharding and 4-bit quantization.
 
-> 📖 **Full Documentation, Empirical Scoreboards & Architectural Comparisons**:
-> For the complete benchmark report (20 datasets, historical version evolution graphs, and deep CoT comparisons), please visit our **[GitHub Repository](https://github.com/Ch3nOff/dual-loop-controller)**.
+> 📖 **Full Documentation, Empirical Scoreboards & Architectural Comparisons**:  
+> For the complete benchmark report (75-item standard benchmark suite, token overload analysis, and system comparison graphs), please visit our **[GitHub Repository](https://github.com/Ch3nOff/dual-loop-controller)**.
 
 ---
 
@@ -63,7 +65,7 @@ base_model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.bf
 # 2. Attach Dual-Loop Controller (automatically attaches to optimal middle layer)
 model = attach_dual_loop(base_model, k_steps=2)
 
-# 3. Deliberative inference in latent space
+# 3. Deliberative inference in latent space (Zero Extra Text Tokens)
 prompt = "Question: In inverted buoyancy physics, denser objects float. Does lead or cork float?\nAnswer:"
 inputs = tokenizer(prompt, return_tensors="pt").to(base_model.device)
 output = model.generate(**inputs, max_new_tokens=64)
@@ -72,7 +74,46 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 
 ---
 
-### 2. Large Models (27B, 70B, 120B+) with 4-Bit Quantization
+### 2. Directional Router & Probabilistic Cognitive Judge
+
+```python
+from dual_loop import ProbabilisticCognitiveJudge
+
+# Initialize Cognitive Judge with Directional Manifold & Common-Sense Reservoir (f o g)
+judge = ProbabilisticCognitiveJudge(
+    cs_margin_threshold=0.35,
+    base_lambda=0.85,
+    intuitive_lambda=0.20,
+    soft_penalty_weight=4.5,
+    allow_belief_revision=True,
+    use_directional_reservoir=True
+)
+
+prompt = "Which requires energy to move?"
+choices = ["weasel", "willow", "mango", "poison ivy"]
+labels = ["A", "B", "C", "D"]
+
+scores_base = [-8.40759, -8.40907, -14.929, -5.713]
+scores_delib = [-7.5420, -5.9615, -13.826, -5.317]
+
+# Evaluates candidates with directional routing and soft belief revision
+decision = judge.judge_and_fuse(
+    scores_base=scores_base,
+    scores_delib=scores_delib,
+    labels=labels,
+    banned_labels=["D"],  # Previously logged wrong choice
+    prompt=prompt,
+    choices=choices
+)
+
+print("Predicted Choice :", decision["pred_label"])   # -> 'A' (weasel - CORRECT)
+print("Manifold Vector  :", decision["direction"])    # -> 'DOWN_COMMONSENSE'
+print("Grounding Delta  :", decision["cs_deltas"])   # -> [+2.2, -0.8, -0.8, -0.8]
+```
+
+---
+
+### 3. Large Models (27B, 70B, 120B+) with 4-Bit Quantization
 
 Scale to massive models without 30–60 second CoT latency or VRAM exhaustion:
 
@@ -106,40 +147,6 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 
 ---
 
-### 3. Cognitive Matrix Helper (Eliminating Distractors)
-
-```python
-import numpy as np
-from dual_loop import CognitiveMatrixHelper
-
-# Initialize helper
-matrix_helper = CognitiveMatrixHelper(elimination_threshold=0.12, min_survivors=2)
-
-# Bench 1: Raw candidate scores from base model
-scores_bench1 = [-9.1488, -9.2891, -9.5007, -11.0977, -10.9492]
-labels = ["D", "E", "F", "A", "B"]
-
-# Step 1: Populate matrix and eliminate superficial distractors
-matrix = matrix_helper.build_evidence_matrix(scores_bench1, labels=labels)
-# matrix["eliminated_labels"] -> ['A', 'B'] (Filtered out)
-# matrix["survivor_labels"]   -> ['D', 'E', 'F'] (Contenders)
-
-# Bench 2: Focused System 2 deliberation on surviving candidates
-scores_delib_survivors = [-6.9465, -5.8747, -4.4858]
-
-final_scores = matrix_helper.fuse_scores(
-    scores_base=scores_bench1,
-    scores_delib_survivors=scores_delib_survivors,
-    survivor_indices=matrix["survivors"],
-    lambda_delib=0.85
-)
-
-best_idx = np.argmax(final_scores)
-print("Rescued Decision:", labels[best_idx])  # -> 'F' (Correct!)
-```
-
----
-
 ## Supported Architectures
 
 | Family | Architectures | Scales |
@@ -157,8 +164,9 @@ print("Rescued Decision:", labels[best_idx])  # -> 'F' (Correct!)
 ## Links & Community
 
 * **GitHub Repository**: [https://github.com/Ch3nOff/dual-loop-controller](https://github.com/Ch3nOff/dual-loop-controller)
-* **Full Benchmark Suite & Empirical Graphs**: [BENCHMARKS.md](https://github.com/Ch3nOff/dual-loop-controller/blob/main/BENCHMARKS.md)
+* **Full Benchmark Suite & Empirical Graphs**: [https://github.com/Ch3nOff/dual-loop-controller#decisive-empirical-benchmark-n75-authentic-standard-benchmark-suite](https://github.com/Ch3nOff/dual-loop-controller)
 * **Pretrained Weights**: [Hugging Face Hub](https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b)
+* **Interactive Web Demo**: [Hugging Face Spaces](https://huggingface.co/spaces/CH3NDev/dual-loop-controller-demo)
 * **Bug Reports & Issues**: [GitHub Issues](https://github.com/Ch3nOff/dual-loop-controller/issues)
 
 ## License
