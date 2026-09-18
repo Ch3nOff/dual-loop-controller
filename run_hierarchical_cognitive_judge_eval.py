@@ -225,7 +225,9 @@ def run_evaluation():
                 scores_base=scores_base,
                 scores_delib=scores_delib_all,
                 labels=labels,
-                banned_labels=[]
+                banned_labels=[],
+                prompt=prompt,
+                choices=choices
             )
             pred_judge_cold_idx = judge_cold["pred_idx"]
             pred_judge_cold = judge_cold["pred_label"]
@@ -261,12 +263,14 @@ def run_evaluation():
             pred_prev = labels[pred_prev_idx]
             prev_ok = (pred_prev_idx == target_idx)
 
-            # 2C. New Dual-Loop x Hierarchical Cognitive Judge (Soft penalty & 2x-think gating)
+            # 2C. New Dual-Loop x Hierarchical Cognitive Judge (Directional Reservoir f o g & 2x-think gating)
             judge_active = cognitive_judge.judge_and_fuse(
                 scores_base=scores_base,
                 scores_delib=scores_delib_all,
                 labels=labels,
-                banned_labels=banned_logs
+                banned_labels=banned_logs,
+                prompt=prompt,
+                choices=choices
             )
             pred_judge_active_idx = judge_active["pred_idx"]
             pred_judge_active = judge_active["pred_label"]
@@ -292,7 +296,10 @@ def run_evaluation():
                     "pred_dl_prev": pred_prev, "dl_prev_ok": prev_ok,
                     "pred_judge_active": pred_judge_active, "judge_active_ok": judge_active_ok,
                     "effective_lambda": round(judge_active["effective_lambda"], 3),
-                    "is_belief_revision": judge_active["is_belief_revision"]
+                    "is_belief_revision": judge_active["is_belief_revision"],
+                    "direction": judge_active.get("direction", "N/A"),
+                    "rho": round(judge_active.get("rho", 0.0), 3),
+                    "alpha_cs": round(judge_active.get("alpha_cs", 0.0), 3)
                 }
             })
 
@@ -400,7 +407,7 @@ def plot_results(data, output_png):
     ax_b.set_facecolor("#1e293b")
     r4 = ax_b.bar(x - width, m2_base, width, label="Base x Wrong Log", color="#f59e0b", edgecolor="#fbbf24")
     r5 = ax_b.bar(x, m2_prev, width, label="DL Prev Baseline", color="#a855f7", edgecolor="#c084fc")
-    r6 = ax_b.bar(x + width, m2_judge, width, label="DL x Hierarchical Judge (New)", color="#06b6d4", edgecolor="#22d3ee")
+    r6 = ax_b.bar(x + width, m2_judge, width, label="DL x Directional Reservoir (f o g)", color="#06b6d4", edgecolor="#22d3ee")
     ax_b.set_title("B. Test 2: Wrong Log Active Benchmark (Adaptive Memory Session)", fontsize=11, fontweight="bold", color="#f8fafc", pad=10)
     ax_b.set_ylabel("Accuracy (%)", fontsize=10, color="#cbd5e1")
     ax_b.set_xticks(x)
@@ -415,13 +422,13 @@ def plot_results(data, output_png):
                 ax_b.annotate(f"{h:.1f}%", xy=(rect.get_x() + rect.get_width()/2, h), xytext=(0, 2),
                               textcoords="offset points", ha="center", va="bottom", fontsize=8, color=col, fontweight="bold")
 
-    # Panel C: Direct Side-by-Side Comparison: DL Prev vs DL Hierarchical Judge
+    # Panel C: Direct Side-by-Side Comparison: DL Prev vs DL Directional Reservoir
     ax_c = axes[1, 0]
     ax_c.set_facecolor("#1e293b")
     c_width = 0.35
     rc1 = ax_c.bar(x - c_width/2, m2_prev, c_width, label="DL Prev Baseline (72.0% Macro)", color="#a855f7", edgecolor="#c084fc")
-    rc2 = ax_c.bar(x + c_width/2, m2_judge, c_width, label="DL x Hierarchical Judge (New)", color="#06b6d4", edgecolor="#22d3ee")
-    ax_c.set_title("C. Head-to-Head: Previous Baseline vs Hierarchical Judge", fontsize=11, fontweight="bold", color="#f8fafc", pad=10)
+    rc2 = ax_c.bar(x + c_width/2, m2_judge, c_width, label="DL x Directional Reservoir (f o g)", color="#06b6d4", edgecolor="#22d3ee")
+    ax_c.set_title("C. Head-to-Head: Previous Baseline vs DL x Directional Reservoir", fontsize=11, fontweight="bold", color="#f8fafc", pad=10)
     ax_c.set_ylabel("Accuracy (%)", fontsize=10, color="#cbd5e1")
     ax_c.set_xticks(x)
     ax_c.set_xticklabels(b_keys, fontsize=9, color="#f1f5f9")
@@ -444,7 +451,7 @@ def plot_results(data, output_png):
         ["Base Qwen3.5-2B", f"{data['macro_summary']['mode1_cold_start']['base_acc']}%", f"{data['macro_summary']['mode2_wronglog_active']['base_re_acc']}%", f"+{round(data['macro_summary']['mode2_wronglog_active']['base_re_acc'] - data['macro_summary']['mode1_cold_start']['base_acc'], 1)}%"],
         ["Dual-Loop Normal (K=2)", f"{data['macro_summary']['mode1_cold_start']['normal_acc']}%", f"{data['macro_summary']['mode1_cold_start']['normal_acc']}%", "0.0% (Static)"],
         ["Dual-Loop Prev Baseline", f"{data['macro_summary']['mode1_cold_start']['base_acc']}%", f"{data['macro_summary']['mode2_wronglog_active']['dl_prev_acc']}%", f"+{round(data['macro_summary']['mode2_wronglog_active']['dl_prev_acc'] - data['macro_summary']['mode1_cold_start']['base_acc'], 1)}%"],
-        ["DL x Hierarchical Judge (New)", f"{data['macro_summary']['mode1_cold_start']['judge_acc']}%", f"{data['macro_summary']['mode2_wronglog_active']['judge_active_acc']}%", f"+{round(data['macro_summary']['mode2_wronglog_active']['judge_active_acc'] - data['macro_summary']['mode1_cold_start']['judge_acc'], 1)}%"]
+        ["DL x Directional Reservoir (f o g)", f"{data['macro_summary']['mode1_cold_start']['judge_acc']}%", f"{data['macro_summary']['mode2_wronglog_active']['judge_active_acc']}%", f"+{round(data['macro_summary']['mode2_wronglog_active']['judge_active_acc'] - data['macro_summary']['mode1_cold_start']['judge_acc'], 1)}%"]
     ]
     col_labels = ["Configuration", "Mode 1 (Cold-Start)", "Mode 2 (WrongLog)", "Net Gain"]
 

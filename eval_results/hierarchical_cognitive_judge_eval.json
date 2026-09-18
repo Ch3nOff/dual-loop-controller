@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-09-18 12:21:15",
+  "timestamp": "2026-09-18 12:55:32",
   "model": "Qwen/Qwen3.5-2B",
   "samples_per_task": 25,
   "total_samples": 75,
-  "elapsed_seconds": 210.57,
+  "elapsed_seconds": 217.24,
   "macro_summary": {
     "total_samples": 75,
     "mode1_cold_start": {
@@ -14,7 +14,7 @@
     "mode2_wronglog_active": {
       "base_re_acc": 68.0,
       "dl_prev_acc": 69.33,
-      "judge_active_acc": 73.33
+      "judge_active_acc": 76.0
     }
   },
   "benchmarks": {
@@ -23,7 +23,7 @@
       "mode1_cold_start": {
         "base_acc": 72.0,
         "normal_acc": 76.0,
-        "judge_acc": 84.0
+        "judge_acc": 80.0
       },
       "mode2_wronglog_active": {
         "base_re_acc": 72.0,
@@ -53,7 +53,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -78,7 +81,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -86,24 +92,29 @@
           "q_key": "cc1276423769",
           "prompt": "Question: Vertebrata are characterized by the presence of what?\nAnswer...",
           "target": "B",
-          "banned_logs": [],
+          "banned_logs": [
+            "A"
+          ],
           "mode1_cold_start": {
             "pred_base": "A",
             "base_ok": false,
             "pred_normal": "A",
             "normal_ok": false,
-            "pred_judge": "B",
-            "judge_ok": true
+            "pred_judge": "A",
+            "judge_ok": false
           },
           "mode2_wronglog_active": {
-            "pred_base_re": "A",
+            "pred_base_re": "C",
             "base_re_ok": false,
             "pred_dl_prev": "B",
             "dl_prev_ok": true,
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.85,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -128,7 +139,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -153,7 +167,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -178,7 +195,10 @@
             "pred_judge_active": "D",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "UP_SCIENTIFIC",
+            "rho": 1.456,
+            "alpha_cs": 0.008
           }
         },
         {
@@ -203,7 +223,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -228,7 +251,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -253,7 +279,10 @@
             "pred_judge_active": "D",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -278,7 +307,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -303,7 +335,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -330,7 +365,10 @@
             "pred_judge_active": "D",
             "judge_active_ok": false,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -355,7 +393,10 @@
             "pred_judge_active": "D",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -380,7 +421,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -405,7 +449,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -430,7 +477,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -457,7 +507,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": false,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -482,7 +535,10 @@
             "pred_judge_active": "D",
             "judge_active_ok": true,
             "effective_lambda": 0.206,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -507,7 +563,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.687,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -532,7 +591,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -559,7 +621,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.85,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -584,7 +649,10 @@
             "pred_judge_active": "D",
             "judge_active_ok": true,
             "effective_lambda": 0.85,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "UP_SCIENTIFIC",
+            "rho": 1.39,
+            "alpha_cs": 0.01
           }
         },
         {
@@ -609,7 +677,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -634,7 +705,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -661,7 +735,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": false,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "UP_SCIENTIFIC",
+            "rho": 1.456,
+            "alpha_cs": 0.008
           }
         }
       ]
@@ -671,12 +748,12 @@
       "mode1_cold_start": {
         "base_acc": 48.0,
         "normal_acc": 48.0,
-        "judge_acc": 52.0
+        "judge_acc": 56.0
       },
       "mode2_wronglog_active": {
         "base_re_acc": 68.0,
         "dl_prev_acc": 72.0,
-        "judge_active_acc": 72.0
+        "judge_active_acc": 76.0
       },
       "samples": [
         {
@@ -701,7 +778,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.439,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "UP_SCIENTIFIC",
+            "rho": 1.456,
+            "alpha_cs": 0.008
           }
         },
         {
@@ -726,7 +806,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -753,7 +836,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "UP_SCIENTIFIC",
+            "rho": 1.39,
+            "alpha_cs": 0.01
           }
         },
         {
@@ -778,7 +864,10 @@
             "pred_judge_active": "D",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -805,7 +894,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": false,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -832,7 +924,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": false,
             "effective_lambda": 0.233,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -857,7 +952,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.746,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -882,7 +980,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.203,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "UP_SCIENTIFIC",
+            "rho": 1.456,
+            "alpha_cs": 0.008
           }
         },
         {
@@ -890,26 +991,27 @@
           "q_key": "7e289e3ceb78",
           "prompt": "Question: Farmers in Wyoming were concerned because some of their chic...",
           "target": "B",
-          "banned_logs": [
-            "D"
-          ],
+          "banned_logs": [],
           "mode1_cold_start": {
             "pred_base": "D",
             "base_ok": false,
             "pred_normal": "D",
             "normal_ok": false,
-            "pred_judge": "D",
-            "judge_ok": false
+            "pred_judge": "B",
+            "judge_ok": true
           },
           "mode2_wronglog_active": {
-            "pred_base_re": "A",
+            "pred_base_re": "D",
             "base_re_ok": false,
-            "pred_dl_prev": "A",
+            "pred_dl_prev": "D",
             "dl_prev_ok": false,
-            "pred_judge_active": "A",
-            "judge_active_ok": false,
-            "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "pred_judge_active": "B",
+            "judge_active_ok": true,
+            "effective_lambda": 0.214,
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -934,7 +1036,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -959,7 +1064,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.207,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "UP_SCIENTIFIC",
+            "rho": 1.456,
+            "alpha_cs": 0.008
           }
         },
         {
@@ -984,7 +1092,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": true,
             "effective_lambda": 0.515,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1011,7 +1122,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": false,
             "effective_lambda": 0.216,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "UP_SCIENTIFIC",
+            "rho": 1.39,
+            "alpha_cs": 0.01
           }
         },
         {
@@ -1038,7 +1152,10 @@
             "pred_judge_active": "D",
             "judge_active_ok": false,
             "effective_lambda": 0.267,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1065,7 +1182,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "UP_SCIENTIFIC",
+            "rho": 1.456,
+            "alpha_cs": 0.008
           }
         },
         {
@@ -1090,7 +1210,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": true,
             "effective_lambda": 0.252,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "UP_SCIENTIFIC",
+            "rho": 0.807,
+            "alpha_cs": 0.064
           }
         },
         {
@@ -1117,7 +1240,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1142,7 +1268,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.296,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1167,7 +1296,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": true,
             "effective_lambda": 0.239,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1194,7 +1326,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": false,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1221,7 +1356,10 @@
             "pred_judge_active": "D",
             "judge_active_ok": false,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "UP_SCIENTIFIC",
+            "rho": 0.505,
+            "alpha_cs": 0.157
           }
         },
         {
@@ -1246,7 +1384,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "UP_SCIENTIFIC",
+            "rho": 1.633,
+            "alpha_cs": 0.004
           }
         },
         {
@@ -1273,7 +1414,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1298,7 +1442,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "UP_SCIENTIFIC",
+            "rho": 1.015,
+            "alpha_cs": 0.033
           }
         },
         {
@@ -1325,7 +1472,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         }
       ]
@@ -1340,7 +1490,7 @@
       "mode2_wronglog_active": {
         "base_re_acc": 64.0,
         "dl_prev_acc": 44.0,
-        "judge_active_acc": 60.0
+        "judge_active_acc": 64.0
       },
       "samples": [
         {
@@ -1367,7 +1517,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": false,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1394,7 +1547,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": false,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1419,7 +1575,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1446,7 +1605,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": false,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1473,7 +1635,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1498,7 +1663,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "UP_SCIENTIFIC",
+            "rho": 1.456,
+            "alpha_cs": 0.008
           }
         },
         {
@@ -1525,7 +1693,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": false,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1552,7 +1723,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1577,7 +1751,10 @@
             "pred_judge_active": "D",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "UP_SCIENTIFIC",
+            "rho": 1.456,
+            "alpha_cs": 0.008
           }
         },
         {
@@ -1604,7 +1781,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1631,7 +1811,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1658,7 +1841,10 @@
             "pred_judge_active": "B",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1683,7 +1869,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1710,7 +1899,10 @@
             "pred_judge_active": "D",
             "judge_active_ok": false,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1737,7 +1929,10 @@
             "pred_judge_active": "D",
             "judge_active_ok": false,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1762,7 +1957,10 @@
             "pred_judge_active": "D",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1789,7 +1987,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1816,7 +2017,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1840,10 +2044,13 @@
             "base_re_ok": true,
             "pred_dl_prev": "B",
             "dl_prev_ok": false,
-            "pred_judge_active": "B",
-            "judge_active_ok": false,
+            "pred_judge_active": "A",
+            "judge_active_ok": true,
             "effective_lambda": 0.845,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1870,7 +2077,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": false,
             "effective_lambda": 0.261,
-            "is_belief_revision": true
+            "is_belief_revision": true,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1895,7 +2105,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": -0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1920,7 +2133,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": true,
             "effective_lambda": 0.24,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1945,7 +2161,10 @@
             "pred_judge_active": "A",
             "judge_active_ok": true,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1972,7 +2191,10 @@
             "pred_judge_active": "C",
             "judge_active_ok": false,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         },
         {
@@ -1999,7 +2221,10 @@
             "pred_judge_active": "D",
             "judge_active_ok": false,
             "effective_lambda": 0.2,
-            "is_belief_revision": false
+            "is_belief_revision": false,
+            "direction": "DOWN_COMMONSENSE",
+            "rho": 0.0,
+            "alpha_cs": 0.5
           }
         }
       ]

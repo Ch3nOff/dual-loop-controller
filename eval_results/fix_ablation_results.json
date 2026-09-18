@@ -1,0 +1,32 @@
+{
+  "SciQ": {
+    "base_cold": 18,
+    "dl_normal_cold": 19,
+    "dl_matrix_cold": 18,
+    "base_re": 19,
+    "dl_prev_unshielded": 24,
+    "dl_fix_a": 20,
+    "dl_fix_b": 20,
+    "dl_fix_c": 20
+  },
+  "ARC-Challenge": {
+    "base_cold": 12,
+    "dl_normal_cold": 12,
+    "dl_matrix_cold": 12,
+    "base_re": 17,
+    "dl_prev_unshielded": 19,
+    "dl_fix_a": 18,
+    "dl_fix_b": 18,
+    "dl_fix_c": 18
+  },
+  "OpenBookQA": {
+    "base_cold": 8,
+    "dl_normal_cold": 8,
+    "dl_matrix_cold": 8,
+    "base_re": 16,
+    "dl_prev_unshielded": 11,
+    "dl_fix_a": 15,
+    "dl_fix_b": 15,
+    "dl_fix_c": 15
+  }
+}
