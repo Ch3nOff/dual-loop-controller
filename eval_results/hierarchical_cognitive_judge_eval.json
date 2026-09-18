@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-09-18 11:37:15",
+  "timestamp": "2026-09-18 11:46:00",
   "model": "Qwen/Qwen3.5-2B",
   "samples_per_task": 25,
   "total_samples": 75,
-  "elapsed_seconds": 219.41,
+  "elapsed_seconds": 211.59,
   "macro_summary": {
     "total_samples": 75,
     "mode1_cold_start": {
@@ -14,7 +14,7 @@
     "mode2_wronglog_active": {
       "base_re_acc": 69.33,
       "dl_prev_acc": 69.33,
-      "judge_active_acc": 70.67
+      "judge_active_acc": 72.0
     }
   },
   "benchmarks": {
@@ -28,7 +28,7 @@
       "mode2_wronglog_active": {
         "base_re_acc": 76.0,
         "dl_prev_acc": 92.0,
-        "judge_active_acc": 80.0
+        "judge_active_acc": 84.0
       },
       "samples": [
         {
@@ -558,8 +558,8 @@
             "base_re_ok": false,
             "pred_dl_prev": "B",
             "dl_prev_ok": true,
-            "pred_judge_active": "D",
-            "judge_active_ok": false,
+            "pred_judge_active": "B",
+            "judge_active_ok": true,
             "effective_lambda": 0.2,
             "is_belief_revision": false
           }

@@ -136,16 +136,9 @@ class ProbabilisticCognitiveJudge:
 
             fused[i] = c_val
 
-        # Stage 4: Common-Sense Decisive Protection
+        # Stage 4: Probabilistic Decision (No 100% hard-locks; decisions flow from fused scores)
         pred_idx = int(np.argmax(fused))
-
-        # Check if the highest fused score is a banned candidate that staged a Belief Revision:
         is_belief_revision = labels[pred_idx] in banned_labels_set
-
-        # If common sense was decisive and deliberation did NOT stage a valid belief revision,
-        # ensure intuitive top candidate is chosen
-        if is_decisive and not is_belief_revision:
-            pred_idx = top_idx
 
         return {
             "pred_idx": pred_idx,
