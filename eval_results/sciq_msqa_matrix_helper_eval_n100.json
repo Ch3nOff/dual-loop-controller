@@ -1,0 +1,3320 @@
+{
+  "timestamp": "2026-09-18 09:32:50",
+  "benchmark": "allenai/sciq",
+  "category": "Science Question Answering (MSQA)",
+  "split": "test",
+  "total_samples": 100,
+  "total_elapsed_seconds": 304.9,
+  "base_accuracy": 69.0,
+  "deliberation_accuracy": 72.0,
+  "matrix_helper_accuracy": 79.0,
+  "delib_delta": 3.0,
+  "matrix_delta": 10.0,
+  "delib_rescued": 3,
+  "delib_degraded": 0,
+  "matrix_rescued": 13,
+  "matrix_degraded": 3,
+  "avg_options_pruned_per_item": 1.97,
+  "samples_log": [
+    {
+      "idx": 0,
+      "question": "Compounds that are capable of accepting electrons, such as o 2 or f2, are called what?",
+      "target": "B",
+      "target_text": "oxidants",
+      "choices": [
+        "antioxidants",
+        "oxidants",
+        "residues",
+        "Oxygen"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 2.86
+    },
+    {
+      "idx": 1,
+      "question": "What term in biotechnology means a genetically exact copy of an organism?",
+      "target": "A",
+      "target_text": "clone",
+      "choices": [
+        "clone",
+        "phenotype",
+        "adult",
+        "male"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "A",
+      "pred_delib": "A",
+      "pred_matrix": "A",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "B"
+      ],
+      "eliminated_labels": [
+        "C",
+        "D"
+      ],
+      "elapsed_seconds": 2.744
+    },
+    {
+      "idx": 2,
+      "question": "Vertebrata are characterized by the presence of what?",
+      "target": "B",
+      "target_text": "backbone",
+      "choices": [
+        "Muscles",
+        "backbone",
+        "Thumbs",
+        "Bones"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "A",
+      "pred_delib": "A",
+      "pred_matrix": "A",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "A",
+        "C"
+      ],
+      "eliminated_labels": [
+        "B",
+        "D"
+      ],
+      "elapsed_seconds": 2.778
+    },
+    {
+      "idx": 3,
+      "question": "What is the height above or below sea level called?",
+      "target": "B",
+      "target_text": "elevation",
+      "choices": [
+        "depth",
+        "elevation",
+        "variation",
+        "latitude"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 2.711
+    },
+    {
+      "idx": 4,
+      "question": "Ice cores, varves and what else indicate the environmental conditions at the time of their creation?",
+      "target": "A",
+      "target_text": "tree rings",
+      "choices": [
+        "tree rings",
+        "fossils",
+        "mountain ranges",
+        "magma"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "A",
+      "pred_delib": "A",
+      "pred_matrix": "A",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "C"
+      ],
+      "eliminated_labels": [
+        "B",
+        "D"
+      ],
+      "elapsed_seconds": 2.766
+    },
+    {
+      "idx": 5,
+      "question": "What chemical signals in plants control different processes?",
+      "target": "D",
+      "target_text": "plant hormones",
+      "choices": [
+        "Human Hormones",
+        "nitrogen hormones",
+        "produce hormones",
+        "plant hormones"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "D"
+      ],
+      "eliminated_labels": [
+        "B",
+        "C"
+      ],
+      "elapsed_seconds": 2.698
+    },
+    {
+      "idx": 6,
+      "question": "Meiosis is part of the process of gametogenesis, which is the production of what?",
+      "target": "B",
+      "target_text": "sperm and eggs",
+      "choices": [
+        "sperm only",
+        "sperm and eggs",
+        "chromosomes",
+        "egg only"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "B"
+      ],
+      "eliminated_labels": [
+        "C",
+        "D"
+      ],
+      "elapsed_seconds": 2.831
+    },
+    {
+      "idx": 7,
+      "question": "Which type of tree is dominant in temperate forests?",
+      "target": "A",
+      "target_text": "deciduous",
+      "choices": [
+        "deciduous",
+        "fungus",
+        "vines",
+        "shrubs"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "A",
+      "pred_delib": "A",
+      "pred_matrix": "A",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "D"
+      ],
+      "eliminated_labels": [
+        "B",
+        "C"
+      ],
+      "elapsed_seconds": 2.688
+    },
+    {
+      "idx": 8,
+      "question": "What kind of viscosity is found in long-chain hydrocarbons?",
+      "target": "D",
+      "target_text": "highly viscous",
+      "choices": [
+        "intense viscosity",
+        "increased viscosity",
+        "low viscosity",
+        "highly viscous"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "C",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "B"
+      ],
+      "elapsed_seconds": 2.803
+    },
+    {
+      "idx": 9,
+      "question": "Ionic compounds have strong electrostatic attractions between oppositely charged ions in this?",
+      "target": "B",
+      "target_text": "regular array",
+      "choices": [
+        "incorrect array",
+        "regular array",
+        "occasional array",
+        "normal array"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 2.813
+    },
+    {
+      "idx": 10,
+      "question": "About how tall can mid-ocean ridges be?",
+      "target": "B",
+      "target_text": "about 2 km",
+      "choices": [
+        "about 2 meters",
+        "about 2 km",
+        "about 2 feet",
+        "2 inches"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "B"
+      ],
+      "eliminated_labels": [
+        "C",
+        "D"
+      ],
+      "elapsed_seconds": 2.758
+    },
+    {
+      "idx": 11,
+      "question": "What are by far the most common type of invertebrate?",
+      "target": "C",
+      "target_text": "insects",
+      "choices": [
+        "spiders",
+        "crustaceans",
+        "insects",
+        "corals"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 2.928
+    },
+    {
+      "idx": 12,
+      "question": "What do waves deposit to form sandbars and barrier islands?",
+      "target": "D",
+      "target_text": "sediments",
+      "choices": [
+        "glaciers",
+        "organisms",
+        "magma",
+        "sediments"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 2.832
+    },
+    {
+      "idx": 13,
+      "question": "Penis, testes, and epididymis are organs in what system?",
+      "target": "B",
+      "target_text": "male reproductive system",
+      "choices": [
+        "virus reproductive system\u200b",
+        "male reproductive system",
+        "plant reproductive system\u200b",
+        "female reproductive system\u200b"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 2.933
+    },
+    {
+      "idx": 14,
+      "question": "Only about one percent of plants have lost what ability, turning them into consumers and even predators, instead of producers?",
+      "target": "C",
+      "target_text": "photosynthesis",
+      "choices": [
+        "growth",
+        "rooting",
+        "photosynthesis",
+        "flowering"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "C",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "B"
+      ],
+      "elapsed_seconds": 2.989
+    },
+    {
+      "idx": 15,
+      "question": "How does a neon light produce visible light?",
+      "target": "B",
+      "target_text": "electroluminescence",
+      "choices": [
+        "mitosis",
+        "electroluminescence",
+        "luminescence",
+        "radiation"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 2.722
+    },
+    {
+      "idx": 16,
+      "question": "The bird ancestor that lived in trees developed what feature commonly associated with birds?",
+      "target": "A",
+      "target_text": "wings",
+      "choices": [
+        "wings",
+        "beaks",
+        "webbed feet",
+        "tails"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 3.041
+    },
+    {
+      "idx": 17,
+      "question": "What do most living things use to make atp from glucose?",
+      "target": "D",
+      "target_text": "oxygen",
+      "choices": [
+        "enzymes",
+        "carbon",
+        "nitrogen",
+        "oxygen"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "A",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "A",
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "C"
+      ],
+      "elapsed_seconds": 3.336
+    },
+    {
+      "idx": 18,
+      "question": "What are the two most common silicates?",
+      "target": "C",
+      "target_text": "feldspar and quartz",
+      "choices": [
+        "Olivine and quartz",
+        "Micas\t and quartz",
+        "feldspar and quartz",
+        "Micas\t and feldspar"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "A",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": false,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "C"
+      ],
+      "eliminated_labels": [
+        "B",
+        "D"
+      ],
+      "elapsed_seconds": 3.128
+    },
+    {
+      "idx": 19,
+      "question": "What term means the amount of water vapor in the air?",
+      "target": "B",
+      "target_text": "humidity",
+      "choices": [
+        "ambient",
+        "humidity",
+        "pressure",
+        "temperature"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 3.024
+    },
+    {
+      "idx": 20,
+      "question": "Paracrine signals move by what method through the extracellular matrix?",
+      "target": "B",
+      "target_text": "diffusion",
+      "choices": [
+        "deposition",
+        "diffusion",
+        "osmosis",
+        "transfusion"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "C",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "B"
+      ],
+      "elapsed_seconds": 3.151
+    },
+    {
+      "idx": 21,
+      "question": "Presence of a cell wall, large central vacuole, and organelles called plastids distinguish what type of cell?",
+      "target": "D",
+      "target_text": "plant",
+      "choices": [
+        "animal",
+        "heterotroph",
+        "reproductive",
+        "plant"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "D",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 3.3
+    },
+    {
+      "idx": 22,
+      "question": "What happens when mammals raise their hair with tiny muscles in the skin?",
+      "target": "C",
+      "target_text": "goosebumps",
+      "choices": [
+        "bleeding",
+        "balding",
+        "goosebumps",
+        "bruising"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 3.09
+    },
+    {
+      "idx": 23,
+      "question": "What are people with osteoporosis at increased risk of?",
+      "target": "B",
+      "target_text": "bone fractures",
+      "choices": [
+        "senility",
+        "bone fractures",
+        "growth spurt",
+        "epilepsy"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "B"
+      ],
+      "eliminated_labels": [
+        "C",
+        "D"
+      ],
+      "elapsed_seconds": 3.216
+    },
+    {
+      "idx": 24,
+      "question": "Where is energy stored in a chemical substance?",
+      "target": "D",
+      "target_text": "between atoms",
+      "choices": [
+        "inside atoms",
+        "in molecules",
+        "on the surface",
+        "between atoms"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 3.047
+    },
+    {
+      "idx": 25,
+      "question": "By the year 2050, 25 percent of the population of the united states will be 60 years of age or older. the cdc estimates that 80 percent of those 60 years and older have one or more chronic disease associated with deficiencies of this?",
+      "target": "D",
+      "target_text": "immune system",
+      "choices": [
+        "respiratory system",
+        "blood vessels",
+        "cardiovascular system",
+        "immune system"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "C",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "B"
+      ],
+      "elapsed_seconds": 5.2
+    },
+    {
+      "idx": 26,
+      "question": "Upon death of an organism, during composition, what returns to the soil as ammonium ions?",
+      "target": "B",
+      "target_text": "nitrogen",
+      "choices": [
+        "hydrogen",
+        "nitrogen",
+        "calcium",
+        "potasium"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "B",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 3.201
+    },
+    {
+      "idx": 27,
+      "question": "Most insects reproduce quickly and through what type of reproduction?",
+      "target": "C",
+      "target_text": "sexual reproduction",
+      "choices": [
+        "photosynthesis",
+        "asexual reproduction",
+        "sexual reproduction",
+        "spores"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 3.107
+    },
+    {
+      "idx": 28,
+      "question": "Digestion of proteins begins with acids in what organ?",
+      "target": "A",
+      "target_text": "stomach",
+      "choices": [
+        "stomach",
+        "liver",
+        "colon",
+        "brain"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "A",
+      "pred_delib": "A",
+      "pred_matrix": "A",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "B"
+      ],
+      "eliminated_labels": [
+        "C",
+        "D"
+      ],
+      "elapsed_seconds": 3.038
+    },
+    {
+      "idx": 29,
+      "question": "Many species of rotifers exhibit haplodiploidy, which is a method of what?",
+      "target": "A",
+      "target_text": "gender determination",
+      "choices": [
+        "gender determination",
+        "respiration",
+        "digestion",
+        "circulation"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "A",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "B"
+      ],
+      "eliminated_labels": [
+        "C",
+        "D"
+      ],
+      "elapsed_seconds": 3.166
+    },
+    {
+      "idx": 30,
+      "question": "What is the most abundant metal of the earth's crust?",
+      "target": "B",
+      "target_text": "aluminum",
+      "choices": [
+        "calcium",
+        "aluminum",
+        "copper",
+        "magnetite"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "B",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 3.084
+    },
+    {
+      "idx": 31,
+      "question": "What is the term for the total kinetic energy of moving particles of matter?",
+      "target": "C",
+      "target_text": "thermal energy",
+      "choices": [
+        "Newton's energy",
+        "mechanical energy",
+        "thermal energy",
+        "heavy energy"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 3.096
+    },
+    {
+      "idx": 32,
+      "question": "What part of the eye allows light to enter?",
+      "target": "B",
+      "target_text": "pupil",
+      "choices": [
+        "iris",
+        "pupil",
+        "eyelid",
+        "retina"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "B",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 3.18
+    },
+    {
+      "idx": 33,
+      "question": "The body cannot sustain for very long the bursts of energy mediated by epinephrine and norepinephrine, hormones associated with what stress response?",
+      "target": "C",
+      "target_text": "fight-or-flight",
+      "choices": [
+        "sink-or-swim",
+        "do-or-die",
+        "fight-or-flight",
+        "fainting"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 3.41
+    },
+    {
+      "idx": 34,
+      "question": "What system enters the brain stem and influences activity in the cerebellum, spinal cord, and cerebral cortex?",
+      "target": "B",
+      "target_text": "vestibular system",
+      "choices": [
+        "ventrical system",
+        "vestibular system",
+        "vasculature system",
+        "lipids system"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 3.265
+    },
+    {
+      "idx": 35,
+      "question": "In what type of animals may a body cavity be present or absent?",
+      "target": "D",
+      "target_text": "triploblastic",
+      "choices": [
+        "nonvascular",
+        "vertebrate",
+        "bicellular",
+        "triploblastic"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 3.113
+    },
+    {
+      "idx": 36,
+      "question": "Chemical reactions involve a transfer of heat energy. measured in what?",
+      "target": "D",
+      "target_text": "joules",
+      "choices": [
+        "amps",
+        "amperes",
+        "thermals",
+        "joules"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 3.092
+    },
+    {
+      "idx": 37,
+      "question": "Trees and shrubs are example of what type of plant?",
+      "target": "D",
+      "target_text": "perennials",
+      "choices": [
+        "grasses",
+        "biennial",
+        "annuals",
+        "perennials"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "D"
+      ],
+      "eliminated_labels": [
+        "B",
+        "C"
+      ],
+      "elapsed_seconds": 3.137
+    },
+    {
+      "idx": 38,
+      "question": "The products of what process are needed for cellular respiration, and vice versa?",
+      "target": "D",
+      "target_text": "photosynthesis",
+      "choices": [
+        "spermatogenesis",
+        "circulation",
+        "digestion",
+        "photosynthesis"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "D"
+      ],
+      "eliminated_labels": [
+        "B",
+        "C"
+      ],
+      "elapsed_seconds": 3.136
+    },
+    {
+      "idx": 39,
+      "question": "Most fungi get organic compounds from what?",
+      "target": "A",
+      "target_text": "dead organisms",
+      "choices": [
+        "dead organisms",
+        "living organisms",
+        "inorganic material",
+        "carnivorous organisms"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "B",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 3.161
+    },
+    {
+      "idx": 40,
+      "question": "How do very massive stars end their lives?",
+      "target": "B",
+      "target_text": "become red supergiants",
+      "choices": [
+        "consumed by black hole",
+        "become red supergiants",
+        "explode",
+        "become super novas"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "B"
+      ],
+      "eliminated_labels": [
+        "C",
+        "D"
+      ],
+      "elapsed_seconds": 3.072
+    },
+    {
+      "idx": 41,
+      "question": "Pairs of nitrogenous bases are attached to each other by?",
+      "target": "D",
+      "target_text": "hydrogen bonds",
+      "choices": [
+        "ionic bonds",
+        "potassium bonds",
+        "magnetism",
+        "hydrogen bonds"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "D"
+      ],
+      "eliminated_labels": [
+        "B",
+        "C"
+      ],
+      "elapsed_seconds": 3.181
+    },
+    {
+      "idx": 42,
+      "question": "Rupture can cause fragments of what to travel via the bloodstream and become lodged in other arteries?",
+      "target": "C",
+      "target_text": "plaque",
+      "choices": [
+        "white blood cells",
+        "enamel",
+        "plaque",
+        "red blood cells"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "A",
+        "D"
+      ],
+      "eliminated_labels": [
+        "B",
+        "C"
+      ],
+      "elapsed_seconds": 3.223
+    },
+    {
+      "idx": 43,
+      "question": "The strength of a base depends on the concentration of _______ it produces when dissolved in water?",
+      "target": "C",
+      "target_text": "hydroxide ions",
+      "choices": [
+        "combustion ions",
+        "calcium ions",
+        "hydroxide ions",
+        "monoxide ions"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 3.164
+    },
+    {
+      "idx": 44,
+      "question": "The overall voltage of the battery is therefore the sum of ________ of the individual cells.",
+      "target": "D",
+      "target_text": "voltages",
+      "choices": [
+        "weights",
+        "currents",
+        "resistances",
+        "voltages"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "C",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "B"
+      ],
+      "elapsed_seconds": 3.154
+    },
+    {
+      "idx": 45,
+      "question": "Organisms that live deep in the ocean must be able to withstand what?",
+      "target": "B",
+      "target_text": "extreme water pressure",
+      "choices": [
+        "the sun",
+        "extreme water pressure",
+        "significant water pressure",
+        "tsunamis"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": false,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "C"
+      ],
+      "elapsed_seconds": 3.517
+    },
+    {
+      "idx": 46,
+      "question": "Which system are the brain and spinal cord apart of?",
+      "target": "D",
+      "target_text": "central nervous system",
+      "choices": [
+        "limbic system",
+        "cerebral cortex",
+        "large nervous system",
+        "central nervous system"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "D"
+      ],
+      "eliminated_labels": [
+        "B",
+        "C"
+      ],
+      "elapsed_seconds": 3.149
+    },
+    {
+      "idx": 47,
+      "question": "What are biochemical catalysts that speed up biochemical reactions?",
+      "target": "C",
+      "target_text": "enzymes",
+      "choices": [
+        "polymers",
+        "inhibitor",
+        "enzymes",
+        "metabolites"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "C"
+      ],
+      "eliminated_labels": [
+        "B",
+        "D"
+      ],
+      "elapsed_seconds": 3.365
+    },
+    {
+      "idx": 48,
+      "question": "What process can cause harmful alleles to become fixed?",
+      "target": "C",
+      "target_text": "genetic drift",
+      "choices": [
+        "mutation",
+        "migration",
+        "genetic drift",
+        "natural selection"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "C",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "B"
+      ],
+      "elapsed_seconds": 3.033
+    },
+    {
+      "idx": 49,
+      "question": "What record shows that dinosaurs originated 200-250 million years ago?",
+      "target": "B",
+      "target_text": "fossil record",
+      "choices": [
+        "biological record",
+        "fossil record",
+        "species record",
+        "ancient record"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "B"
+      ],
+      "eliminated_labels": [
+        "C",
+        "D"
+      ],
+      "elapsed_seconds": 2.943
+    },
+    {
+      "idx": 50,
+      "question": "What instrument is used to make very sensitive mass measurements in a laboratory, usually in grams?",
+      "target": "D",
+      "target_text": "analytical balance",
+      "choices": [
+        "scale",
+        "speedometer",
+        "thermometer",
+        "analytical balance"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 2.915
+    },
+    {
+      "idx": 51,
+      "question": "What is the purpose of bright colors on a flower's petals?",
+      "target": "C",
+      "target_text": "to attract pollinators",
+      "choices": [
+        "to absorb light",
+        "to attract a mate",
+        "to attract pollinators",
+        "to distract predators"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 2.987
+    },
+    {
+      "idx": 52,
+      "question": "Collateral ganglia controls organs in which cavity in the body?",
+      "target": "D",
+      "target_text": "abdominal",
+      "choices": [
+        "cranial",
+        "cardiac",
+        "pelvic",
+        "abdominal"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "A",
+      "pred_delib": "A",
+      "pred_matrix": "A",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "A",
+        "B"
+      ],
+      "eliminated_labels": [
+        "C",
+        "D"
+      ],
+      "elapsed_seconds": 2.773
+    },
+    {
+      "idx": 53,
+      "question": "A bee will sometimes do a dance to tell other bees in the hive where to find what?",
+      "target": "D",
+      "target_text": "food",
+      "choices": [
+        "enemies",
+        "water",
+        "honey",
+        "food"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "C",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "B"
+      ],
+      "elapsed_seconds": 3.137
+    },
+    {
+      "idx": 54,
+      "question": "The lens focuses light on the retina , which covers the back of the inside of the eye. the retina has light-sensing photoreceptor cells called?",
+      "target": "A",
+      "target_text": "rods and cones",
+      "choices": [
+        "rods and cones",
+        "tubes and rods",
+        "holes and cones",
+        "cones and tubes"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "A",
+      "pred_delib": "A",
+      "pred_matrix": "A",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "B"
+      ],
+      "eliminated_labels": [
+        "C",
+        "D"
+      ],
+      "elapsed_seconds": 3.226
+    },
+    {
+      "idx": 55,
+      "question": "Temperature, water, soil, and air are examples of nonliving factors of an ecosystem, also termed what?",
+      "target": "B",
+      "target_text": "abiotic factors",
+      "choices": [
+        "diverse factors",
+        "abiotic factors",
+        "nucleic factors",
+        "conditional factors"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 3.151
+    },
+    {
+      "idx": 56,
+      "question": "Ibuprofen and albuterol are examples of drugs whose _________ have different effects.",
+      "target": "A",
+      "target_text": "enantiomers",
+      "choices": [
+        "enantiomers",
+        "misnomers",
+        "nanoparticles",
+        "analogous"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "A",
+      "pred_delib": "A",
+      "pred_matrix": "A",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "B"
+      ],
+      "eliminated_labels": [
+        "C",
+        "D"
+      ],
+      "elapsed_seconds": 2.874
+    },
+    {
+      "idx": 57,
+      "question": "Although magma once filled our moon's craters, what is thought to have ended there over a billion years ago?",
+      "target": "C",
+      "target_text": "volcanic activity",
+      "choices": [
+        "oceanic activity",
+        "mineral activity",
+        "volcanic activity",
+        "deserts activity"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "C"
+      ],
+      "eliminated_labels": [
+        "B",
+        "D"
+      ],
+      "elapsed_seconds": 3.011
+    },
+    {
+      "idx": 58,
+      "question": "Sensory nerves carry nerve impulses from sensory receptors to what system?",
+      "target": "D",
+      "target_text": "central nervous",
+      "choices": [
+        "ENDOCRINE SYSTEM",
+        "IRCULATORY SYSTEM",
+        "MUSCULAR SYSTEM",
+        "central nervous"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "A",
+      "pred_delib": "A",
+      "pred_matrix": "A",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "A",
+        "C"
+      ],
+      "eliminated_labels": [
+        "B",
+        "D"
+      ],
+      "elapsed_seconds": 2.795
+    },
+    {
+      "idx": 59,
+      "question": "Which kind of muscle regulates air flow in lungs?",
+      "target": "D",
+      "target_text": "smooth",
+      "choices": [
+        "striated",
+        "alveoli",
+        "vascular",
+        "smooth"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "D",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 2.749
+    },
+    {
+      "idx": 60,
+      "question": "What type of bonds are formed by the side-to-side overlap of p orbitals?",
+      "target": "D",
+      "target_text": "pi bonds",
+      "choices": [
+        "omega bonds",
+        "theta bonds",
+        "sigma bonds",
+        "pi bonds"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "C",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "B"
+      ],
+      "elapsed_seconds": 2.827
+    },
+    {
+      "idx": 61,
+      "question": "On what day of the cycle does ovulation usually occur?",
+      "target": "A",
+      "target_text": "14th",
+      "choices": [
+        "14th",
+        "1st",
+        "17th",
+        "7th"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "A",
+      "pred_delib": "A",
+      "pred_matrix": "A",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "C"
+      ],
+      "eliminated_labels": [
+        "B",
+        "D"
+      ],
+      "elapsed_seconds": 2.908
+    },
+    {
+      "idx": 62,
+      "question": "The majority of animals belong to what category, characterized by the lack of a backbone?",
+      "target": "B",
+      "target_text": "invertebrate",
+      "choices": [
+        "nematode",
+        "invertebrate",
+        "arthropod",
+        "vertebrate"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "B",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 2.877
+    },
+    {
+      "idx": 63,
+      "question": "What is another name for the vertebral column?",
+      "target": "A",
+      "target_text": "backbone",
+      "choices": [
+        "backbone",
+        "brain stem",
+        "pillar",
+        "nerve column"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 2.769
+    },
+    {
+      "idx": 64,
+      "question": "The temperature at which a substance melts is called its what point?",
+      "target": "C",
+      "target_text": "melting",
+      "choices": [
+        "boiling",
+        "change",
+        "melting",
+        "freezing"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "C"
+      ],
+      "eliminated_labels": [
+        "B",
+        "D"
+      ],
+      "elapsed_seconds": 2.726
+    },
+    {
+      "idx": 65,
+      "question": "Oogenesis, which is gametogenesis in females, begins with what type of ste cells?",
+      "target": "D",
+      "target_text": "ovarian",
+      "choices": [
+        "secretion",
+        "uterian",
+        "digestive",
+        "ovarian"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 2.818
+    },
+    {
+      "idx": 66,
+      "question": "Humans are among the most versatile of mammals with what type of diet?",
+      "target": "B",
+      "target_text": "omnivore",
+      "choices": [
+        "vegetarian",
+        "omnivore",
+        "carnivore",
+        "herbivore"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 2.789
+    },
+    {
+      "idx": 67,
+      "question": "Solute potential is also called osmotic potential because solutes affect the direction of what?",
+      "target": "D",
+      "target_text": "osmosis",
+      "choices": [
+        "permeability",
+        "electrolysis",
+        "electrolysis",
+        "osmosis"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "D"
+      ],
+      "eliminated_labels": [
+        "B",
+        "C"
+      ],
+      "elapsed_seconds": 2.905
+    },
+    {
+      "idx": 68,
+      "question": "Newton\u2019s second law of what is more than a definition; it is a relationship among acceleration, force, and mass?",
+      "target": "C",
+      "target_text": "motion",
+      "choices": [
+        "gravity",
+        "change",
+        "motion",
+        "interference"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "C"
+      ],
+      "eliminated_labels": [
+        "B",
+        "D"
+      ],
+      "elapsed_seconds": 2.938
+    },
+    {
+      "idx": 69,
+      "question": "What is the physical transformation of an insect moving through stages of life?",
+      "target": "A",
+      "target_text": "metamorphosis",
+      "choices": [
+        "metamorphosis",
+        "parthenogenesis",
+        "Growth and Development",
+        "Transition"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "A",
+      "pred_delib": "A",
+      "pred_matrix": "A",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "B"
+      ],
+      "eliminated_labels": [
+        "C",
+        "D"
+      ],
+      "elapsed_seconds": 2.78
+    },
+    {
+      "idx": 70,
+      "question": "When equal amounts of a strong acid such as hydrochloric acid are mixed with a strong base such as sodium hydroxide, the result is what kind of solution?",
+      "target": "D",
+      "target_text": "a neutral one",
+      "choices": [
+        "a thermodynamic one",
+        "a economical one",
+        "a lateral one",
+        "a neutral one"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "D"
+      ],
+      "eliminated_labels": [
+        "B",
+        "C"
+      ],
+      "elapsed_seconds": 3.253
+    },
+    {
+      "idx": 71,
+      "question": "What are fast moving rivers of air that are going in opposite directions called?",
+      "target": "B",
+      "target_text": "jet streams",
+      "choices": [
+        "cause streams",
+        "jet streams",
+        "air streams",
+        "burst streams"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 2.89
+    },
+    {
+      "idx": 72,
+      "question": "Nephrons, renal tubules and the loop of henle are part of the process of blood filtration by what organs?",
+      "target": "D",
+      "target_text": "kidneys",
+      "choices": [
+        "bladder",
+        "liver",
+        "lungs",
+        "kidneys"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 2.979
+    },
+    {
+      "idx": 73,
+      "question": "Fungi, such as black bread mold (rhizopus nigricans), have haploid-dominant what?",
+      "target": "A",
+      "target_text": "life cycles",
+      "choices": [
+        "life cycles",
+        "mutations",
+        "birth cycles",
+        "gene pools"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "A",
+      "pred_delib": "A",
+      "pred_matrix": "A",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "D"
+      ],
+      "eliminated_labels": [
+        "B",
+        "C"
+      ],
+      "elapsed_seconds": 3.122
+    },
+    {
+      "idx": 74,
+      "question": "The electrode at which oxidation occurs is called?",
+      "target": "D",
+      "target_text": "the anode",
+      "choices": [
+        "diode",
+        "calomel",
+        "cathode",
+        "the anode"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "C",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "B"
+      ],
+      "elapsed_seconds": 2.806
+    },
+    {
+      "idx": 75,
+      "question": "There are about 6200 known species of what?",
+      "target": "C",
+      "target_text": "amphibians",
+      "choices": [
+        "mammals",
+        "primates",
+        "amphibians",
+        "reptiles"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "B",
+        "C",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A"
+      ],
+      "elapsed_seconds": 3.149
+    },
+    {
+      "idx": 76,
+      "question": "The lens and other parts of the eye work together to focus a real image on what eye structure?",
+      "target": "B",
+      "target_text": "retina",
+      "choices": [
+        "pupil",
+        "retina",
+        "iris",
+        "cornea"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "B",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 2.883
+    },
+    {
+      "idx": 77,
+      "question": "What is required to move or change matter from one state to another?",
+      "target": "B",
+      "target_text": "energy",
+      "choices": [
+        "evolution",
+        "energy",
+        "gravity",
+        "food"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 2.812
+    },
+    {
+      "idx": 78,
+      "question": "A food web can be broken up into what further subdivision that usually has a few links in it?",
+      "target": "A",
+      "target_text": "food chain",
+      "choices": [
+        "food chain",
+        "food pyramid",
+        "oxygen chain",
+        "water chain"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "A",
+      "pred_delib": "A",
+      "pred_matrix": "A",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "B"
+      ],
+      "eliminated_labels": [
+        "C",
+        "D"
+      ],
+      "elapsed_seconds": 2.874
+    },
+    {
+      "idx": 79,
+      "question": "What living species of bird is considered the  largest of the raptors?",
+      "target": "D",
+      "target_text": "golden eagles",
+      "choices": [
+        "pteradactyl",
+        "California condor",
+        "peregrine falcon",
+        "golden eagles"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 2.932
+    },
+    {
+      "idx": 80,
+      "question": "What contains positive protons and neutral neutrons?",
+      "target": "B",
+      "target_text": "nucleus",
+      "choices": [
+        "electrons",
+        "nucleus",
+        "epidermis",
+        "ions"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "B",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 3.035
+    },
+    {
+      "idx": 81,
+      "question": "Horny ridges on the jaws serve the same function as what, for turtles?",
+      "target": "D",
+      "target_text": "teeth",
+      "choices": [
+        "hairs",
+        "taste buds",
+        "skin",
+        "teeth"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "D",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 3.184
+    },
+    {
+      "idx": 82,
+      "question": "Natural gas is the predominately made up of?",
+      "target": "D",
+      "target_text": "methane",
+      "choices": [
+        "hydrogen",
+        "carbon",
+        "sulfur",
+        "methane"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "D"
+      ],
+      "eliminated_labels": [
+        "B",
+        "C"
+      ],
+      "elapsed_seconds": 3.098
+    },
+    {
+      "idx": 83,
+      "question": "Which  organs control the amount of water, ions, and other substances in the blood by excreting more or less of them in urine?",
+      "target": "B",
+      "target_text": "kidneys",
+      "choices": [
+        "tongue",
+        "kidneys",
+        "lungs",
+        "ears"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 3.397
+    },
+    {
+      "idx": 84,
+      "question": "What unit of measurement is defined to be the number of atoms in 12g of carbon-12?",
+      "target": "D",
+      "target_text": "one mole",
+      "choices": [
+        "one quark",
+        "one ohm",
+        "one joule",
+        "one mole"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "C",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "B"
+      ],
+      "elapsed_seconds": 3.277
+    },
+    {
+      "idx": 85,
+      "question": "What involves sensing and focusing light from people and objects?",
+      "target": "A",
+      "target_text": "vision",
+      "choices": [
+        "vision",
+        "sensory perception",
+        "projection",
+        "echolocation"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "A",
+      "pred_matrix": "D",
+      "base_ok": false,
+      "delib_ok": true,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 3.043
+    },
+    {
+      "idx": 86,
+      "question": "What is a therian mammal in which the embryo is born at an early, immature stage?",
+      "target": "B",
+      "target_text": "a marsupial",
+      "choices": [
+        "bat",
+        "a marsupial",
+        "rodent",
+        "carnivore"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "C"
+      ],
+      "eliminated_labels": [
+        "A",
+        "D"
+      ],
+      "elapsed_seconds": 3.201
+    },
+    {
+      "idx": 87,
+      "question": "What are fungi which feed on living cells called?",
+      "target": "D",
+      "target_text": "parasitic",
+      "choices": [
+        "symbiotic",
+        "predatory",
+        "static",
+        "parasitic"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "D"
+      ],
+      "eliminated_labels": [
+        "B",
+        "C"
+      ],
+      "elapsed_seconds": 3.066
+    },
+    {
+      "idx": 88,
+      "question": "What rock group offers the richest source of fossils?",
+      "target": "C",
+      "target_text": "sedimentary",
+      "choices": [
+        "geode",
+        "metamorphic",
+        "sedimentary",
+        "igneous"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "C",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "B"
+      ],
+      "elapsed_seconds": 3.025
+    },
+    {
+      "idx": 89,
+      "question": "What is the diffusion of water through a semipermeable membrane down its concentration gradient",
+      "target": "D",
+      "target_text": "osmosis",
+      "choices": [
+        "nutrients",
+        "Permable",
+        "mirrors",
+        "osmosis"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 3.126
+    },
+    {
+      "idx": 90,
+      "question": "Isotopes are named for their number of protons plus what?",
+      "target": "D",
+      "target_text": "neutrons",
+      "choices": [
+        "electrons",
+        "isomers",
+        "nuclei",
+        "neutrons"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 3.097
+    },
+    {
+      "idx": 91,
+      "question": "Movements in the mantle cause the plates to move over time in a process called what?",
+      "target": "C",
+      "target_text": "continental drift",
+      "choices": [
+        "continental shift",
+        "boundary drift",
+        "continental drift",
+        "continental expansion"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "C",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "B"
+      ],
+      "elapsed_seconds": 3.283
+    },
+    {
+      "idx": 92,
+      "question": "In phyisics, what is considered to be the rotational version of force?",
+      "target": "D",
+      "target_text": "torque",
+      "choices": [
+        "work",
+        "pressure",
+        "energy",
+        "torque"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "C",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "B"
+      ],
+      "elapsed_seconds": 3.139
+    },
+    {
+      "idx": 93,
+      "question": "Skeletal muscles are attached to the skeleton by tough connective tissues called what?",
+      "target": "A",
+      "target_text": "tendons",
+      "choices": [
+        "tendons",
+        "fibers",
+        "cords",
+        "veins"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "A",
+      "pred_delib": "A",
+      "pred_matrix": "A",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "B"
+      ],
+      "eliminated_labels": [
+        "C",
+        "D"
+      ],
+      "elapsed_seconds": 3.118
+    },
+    {
+      "idx": 94,
+      "question": "What is the ability to see called?",
+      "target": "A",
+      "target_text": "vision",
+      "choices": [
+        "vision",
+        "smell",
+        "hearing",
+        "thought"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "A",
+      "pred_delib": "A",
+      "pred_matrix": "A",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "C"
+      ],
+      "eliminated_labels": [
+        "B",
+        "D"
+      ],
+      "elapsed_seconds": 3.009
+    },
+    {
+      "idx": 95,
+      "question": "Which two major innovations allowed seed plants to reproduce in the absence of water?",
+      "target": "C",
+      "target_text": "seed and pollen",
+      "choices": [
+        "root and pollen",
+        "bee and pollen",
+        "seed and pollen",
+        "salt and pollen"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "C"
+      ],
+      "eliminated_labels": [
+        "B",
+        "D"
+      ],
+      "elapsed_seconds": 3.16
+    },
+    {
+      "idx": 96,
+      "question": "Water can be broken down into hydrogen and oxygen gases by the addition of what?",
+      "target": "D",
+      "target_text": "energy",
+      "choices": [
+        "mineral",
+        "demand",
+        "motion",
+        "energy"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "D",
+      "pred_delib": "D",
+      "pred_matrix": "D",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "A",
+        "D"
+      ],
+      "eliminated_labels": [
+        "B",
+        "C"
+      ],
+      "elapsed_seconds": 3.089
+    },
+    {
+      "idx": 97,
+      "question": "What anatomical feature is shared by all chordates?",
+      "target": "D",
+      "target_text": "notochord",
+      "choices": [
+        "botachord",
+        "laxchord",
+        "isochord",
+        "notochord"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "D",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "C",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "B"
+      ],
+      "elapsed_seconds": 3.107
+    },
+    {
+      "idx": 98,
+      "question": "With wavelengths from 400-700 nm, what kind of light represents only a very small portion of the spectrum?",
+      "target": "A",
+      "target_text": "visible light",
+      "choices": [
+        "visible light",
+        "invisible light",
+        "ultraviolet light",
+        "sunlight"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "C",
+      "pred_delib": "C",
+      "pred_matrix": "C",
+      "base_ok": false,
+      "delib_ok": false,
+      "matrix_ok": false,
+      "survivor_labels": [
+        "A",
+        "C"
+      ],
+      "eliminated_labels": [
+        "B",
+        "D"
+      ],
+      "elapsed_seconds": 3.298
+    },
+    {
+      "idx": 99,
+      "question": "In humans, the only haploid cells are what reproductive cells?",
+      "target": "B",
+      "target_text": "sperm and egg",
+      "choices": [
+        "dna and egg",
+        "sperm and egg",
+        "uteral and sperm",
+        "sperm and dna"
+      ],
+      "labels": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "pred_base": "B",
+      "pred_delib": "B",
+      "pred_matrix": "B",
+      "base_ok": true,
+      "delib_ok": true,
+      "matrix_ok": true,
+      "survivor_labels": [
+        "B",
+        "D"
+      ],
+      "eliminated_labels": [
+        "A",
+        "C"
+      ],
+      "elapsed_seconds": 3.102
+    }
+  ]
+}
