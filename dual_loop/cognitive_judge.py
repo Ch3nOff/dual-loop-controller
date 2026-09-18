@@ -23,13 +23,17 @@ class ProbabilisticCognitiveJudge:
         base_lambda: float = 0.85,
         intuitive_lambda: float = 0.20,
         soft_penalty_weight: float = 4.5,
-        allow_belief_revision: bool = True
+        allow_belief_revision: bool = True,
+        polynomial_power: float = 2.0,
+        inversion_conviction_threshold: float = 2.2
     ):
         self.cs_margin_threshold = cs_margin_threshold
         self.base_lambda = base_lambda
         self.intuitive_lambda = intuitive_lambda
         self.soft_penalty_weight = soft_penalty_weight
         self.allow_belief_revision = allow_belief_revision
+        self.polynomial_power = polynomial_power
+        self.inversion_conviction_threshold = inversion_conviction_threshold
 
     def assess_common_sense_margin(
         self,
@@ -72,17 +76,12 @@ class ProbabilisticCognitiveJudge:
         deliberation_entropy: Optional[float] = None
     ) -> float:
         """
-        Dynamically computes the deliberation weight lambda:
-        - If intuitive common-sense is decisive (e.g. margin >= threshold), set low lambda
-          to avoid overthinking on simple common-sense questions.
-        - If margin is narrow (ambiguity or multihop science reasoning), escalate to high lambda.
+        Dynamically computes the deliberation weight lambda using polynomial modulation:
+        Decays smoothly with a polynomial curve as margin grows.
         """
-        if is_decisive:
-            return self.intuitive_lambda
-
-        # Smooth scaling between intuitive_lambda and base_lambda based on margin
-        scale = np.clip(1.0 - (margin / max(1e-4, self.cs_margin_threshold)), 0.0, 1.0)
-        eff_lambda = self.intuitive_lambda + scale * (self.base_lambda - self.intuitive_lambda)
+        ratio = float(np.clip(margin / max(1e-4, self.cs_margin_threshold), 0.0, 1.0))
+        decay = float((1.0 - ratio) ** self.polynomial_power)
+        eff_lambda = self.intuitive_lambda + decay * (self.base_lambda - self.intuitive_lambda)
         return float(eff_lambda)
 
     def judge_and_fuse(
@@ -94,17 +93,8 @@ class ProbabilisticCognitiveJudge:
         confidence_map: Optional[Dict[str, float]] = None
     ) -> Dict[str, Any]:
         """
-        Executes hierarchical judging, soft belief penalty application, and score fusion.
-
-        Args:
-            scores_base: Raw likelihoods from System 1.
-            scores_delib: Deliberation likelihoods from System 2.
-            labels: List of candidate labels (['A', 'B', 'C', 'D']).
-            banned_labels: Labels recorded in wrong log bank.
-            confidence_map: Optional per-label penalty weights (defaults to soft_penalty_weight).
-
-        Returns:
-            Dict containing predicted index, predicted label, effective lambda, and fused scores.
+        Executes hierarchical judging, polynomial modulation, inverse deliberative fallback,
+        and soft belief score fusion.
         """
         s_base = np.array(scores_base, dtype=np.float32)
         s_delib = np.array(scores_delib, dtype=np.float32)
@@ -116,8 +106,20 @@ class ProbabilisticCognitiveJudge:
         # Stage 1: Assess Common-Sense Margin on unbanned candidates
         margin, top_idx, is_decisive = self.assess_common_sense_margin(s_base, banned_indices)
 
-        # Stage 2: Determine Adaptive Deliberation Lambda (2x-Think Gating)
+        # Stage 2: Polynomial Adaptive Lambda Modulation
         eff_lambda = self.compute_adaptive_lambda(margin, is_decisive)
+
+        # Stage 3: Deliberative Inversion Fallback (Sistem Invers Balik ke Asisten)
+        # If the Assistant (Deliberation) has an overwhelming conviction on a different candidate:
+        unbanned_indices = [i for i in range(n) if i not in banned_indices]
+        inversion_triggered = False
+        if unbanned_indices:
+            top_delib_idx = max(unbanned_indices, key=lambda i: s_delib[i])
+            if top_delib_idx != top_idx:
+                delib_conviction = float(s_delib[top_delib_idx] - s_delib[top_idx])
+                if delib_conviction >= self.inversion_conviction_threshold:
+                    eff_lambda = self.base_lambda
+                    inversion_triggered = True
 
         # Stage 3: Soft Penalties & Score Fusion (Anti-Hardlock)
         fused = np.zeros(n, dtype=np.float32)

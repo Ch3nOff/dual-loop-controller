@@ -1,20 +1,20 @@
 {
-  "timestamp": "2026-09-18 11:46:00",
+  "timestamp": "2026-09-18 12:21:15",
   "model": "Qwen/Qwen3.5-2B",
   "samples_per_task": 25,
   "total_samples": 75,
-  "elapsed_seconds": 211.59,
+  "elapsed_seconds": 210.57,
   "macro_summary": {
     "total_samples": 75,
     "mode1_cold_start": {
       "base_acc": 50.67,
       "normal_acc": 52.0,
-      "judge_acc": 53.33
+      "judge_acc": 56.0
     },
     "mode2_wronglog_active": {
-      "base_re_acc": 69.33,
+      "base_re_acc": 68.0,
       "dl_prev_acc": 69.33,
-      "judge_active_acc": 72.0
+      "judge_active_acc": 73.33
     }
   },
   "benchmarks": {
@@ -23,12 +23,12 @@
       "mode1_cold_start": {
         "base_acc": 72.0,
         "normal_acc": 76.0,
-        "judge_acc": 76.0
+        "judge_acc": 84.0
       },
       "mode2_wronglog_active": {
-        "base_re_acc": 76.0,
+        "base_re_acc": 72.0,
         "dl_prev_acc": 92.0,
-        "judge_active_acc": 84.0
+        "judge_active_acc": 88.0
       },
       "samples": [
         {
@@ -86,25 +86,23 @@
           "q_key": "cc1276423769",
           "prompt": "Question: Vertebrata are characterized by the presence of what?\nAnswer...",
           "target": "B",
-          "banned_logs": [
-            "A"
-          ],
+          "banned_logs": [],
           "mode1_cold_start": {
             "pred_base": "A",
             "base_ok": false,
             "pred_normal": "A",
             "normal_ok": false,
-            "pred_judge": "A",
-            "judge_ok": false
+            "pred_judge": "B",
+            "judge_ok": true
           },
           "mode2_wronglog_active": {
-            "pred_base_re": "C",
+            "pred_base_re": "A",
             "base_re_ok": false,
             "pred_dl_prev": "B",
             "dl_prev_ok": true,
-            "pred_judge_active": "C",
-            "judge_active_ok": false,
-            "effective_lambda": 0.2,
+            "pred_judge_active": "B",
+            "judge_active_ok": true,
+            "effective_lambda": 0.85,
             "is_belief_revision": false
           }
         },
@@ -483,7 +481,7 @@
             "dl_prev_ok": false,
             "pred_judge_active": "D",
             "judge_active_ok": true,
-            "effective_lambda": 0.26,
+            "effective_lambda": 0.206,
             "is_belief_revision": false
           }
         },
@@ -508,7 +506,7 @@
             "dl_prev_ok": true,
             "pred_judge_active": "C",
             "judge_active_ok": true,
-            "effective_lambda": 0.763,
+            "effective_lambda": 0.687,
             "is_belief_revision": false
           }
         },
@@ -560,7 +558,7 @@
             "dl_prev_ok": true,
             "pred_judge_active": "B",
             "judge_active_ok": true,
-            "effective_lambda": 0.2,
+            "effective_lambda": 0.85,
             "is_belief_revision": false
           }
         },
@@ -569,25 +567,23 @@
           "q_key": "e0ac1cb6c991",
           "prompt": "Question: Presence of a cell wall, large central vacuole, and organell...",
           "target": "D",
-          "banned_logs": [
-            "B"
-          ],
+          "banned_logs": [],
           "mode1_cold_start": {
             "pred_base": "B",
             "base_ok": false,
             "pred_normal": "B",
             "normal_ok": false,
-            "pred_judge": "B",
-            "judge_ok": false
+            "pred_judge": "D",
+            "judge_ok": true
           },
           "mode2_wronglog_active": {
-            "pred_base_re": "D",
-            "base_re_ok": true,
+            "pred_base_re": "B",
+            "base_re_ok": false,
             "pred_dl_prev": "D",
             "dl_prev_ok": true,
             "pred_judge_active": "D",
             "judge_active_ok": true,
-            "effective_lambda": 0.2,
+            "effective_lambda": 0.85,
             "is_belief_revision": false
           }
         },
@@ -704,7 +700,7 @@
             "dl_prev_ok": false,
             "pred_judge_active": "C",
             "judge_active_ok": true,
-            "effective_lambda": 0.594,
+            "effective_lambda": 0.439,
             "is_belief_revision": false
           }
         },
@@ -835,7 +831,7 @@
             "dl_prev_ok": false,
             "pred_judge_active": "A",
             "judge_active_ok": false,
-            "effective_lambda": 0.347,
+            "effective_lambda": 0.233,
             "is_belief_revision": false
           }
         },
@@ -860,7 +856,7 @@
             "dl_prev_ok": true,
             "pred_judge_active": "C",
             "judge_active_ok": true,
-            "effective_lambda": 0.796,
+            "effective_lambda": 0.746,
             "is_belief_revision": false
           }
         },
@@ -885,7 +881,7 @@
             "dl_prev_ok": true,
             "pred_judge_active": "C",
             "judge_active_ok": true,
-            "effective_lambda": 0.241,
+            "effective_lambda": 0.203,
             "is_belief_revision": false
           }
         },
@@ -962,7 +958,7 @@
             "dl_prev_ok": true,
             "pred_judge_active": "B",
             "judge_active_ok": true,
-            "effective_lambda": 0.268,
+            "effective_lambda": 0.207,
             "is_belief_revision": false
           }
         },
@@ -987,7 +983,7 @@
             "dl_prev_ok": true,
             "pred_judge_active": "A",
             "judge_active_ok": true,
-            "effective_lambda": 0.652,
+            "effective_lambda": 0.515,
             "is_belief_revision": false
           }
         },
@@ -1014,7 +1010,7 @@
             "dl_prev_ok": false,
             "pred_judge_active": "A",
             "judge_active_ok": false,
-            "effective_lambda": 0.302,
+            "effective_lambda": 0.216,
             "is_belief_revision": false
           }
         },
@@ -1041,7 +1037,7 @@
             "dl_prev_ok": false,
             "pred_judge_active": "D",
             "judge_active_ok": false,
-            "effective_lambda": 0.408,
+            "effective_lambda": 0.267,
             "is_belief_revision": false
           }
         },
@@ -1093,7 +1089,7 @@
             "dl_prev_ok": true,
             "pred_judge_active": "A",
             "judge_active_ok": true,
-            "effective_lambda": 0.384,
+            "effective_lambda": 0.252,
             "is_belief_revision": false
           }
         },
@@ -1145,7 +1141,7 @@
             "dl_prev_ok": true,
             "pred_judge_active": "B",
             "judge_active_ok": true,
-            "effective_lambda": 0.45,
+            "effective_lambda": 0.296,
             "is_belief_revision": false
           }
         },
@@ -1170,7 +1166,7 @@
             "dl_prev_ok": true,
             "pred_judge_active": "A",
             "judge_active_ok": true,
-            "effective_lambda": 0.359,
+            "effective_lambda": 0.239,
             "is_belief_revision": false
           }
         },
@@ -1846,7 +1842,7 @@
             "dl_prev_ok": false,
             "pred_judge_active": "B",
             "judge_active_ok": false,
-            "effective_lambda": 0.847,
+            "effective_lambda": 0.845,
             "is_belief_revision": false
           }
         },
@@ -1873,7 +1869,7 @@
             "dl_prev_ok": false,
             "pred_judge_active": "C",
             "judge_active_ok": false,
-            "effective_lambda": 0.399,
+            "effective_lambda": 0.261,
             "is_belief_revision": true
           }
         },
@@ -1923,7 +1919,7 @@
             "dl_prev_ok": true,
             "pred_judge_active": "A",
             "judge_active_ok": true,
-            "effective_lambda": 0.362,
+            "effective_lambda": 0.24,
             "is_belief_revision": false
           }
         },
