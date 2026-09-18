@@ -6,13 +6,16 @@ This document preserves the comprehensive empirical evaluation results and repro
 
 ## 1. High-Resolution Empirical Scoreboards
 
-### A. Comprehensive 20-Benchmark Scoreboard ($N=200$ Samples)
+### A. Authentic Multi-Benchmark Evaluation ($N=100$) & Cognitive Matrix Helper
+![Authentic Multi-Benchmark Evaluation](authentic_multibenchmark_matrix_graph.png)
+
+### B. Comprehensive 20-Benchmark Scoreboard ($N=200$ Samples)
 ![Comprehensive 20-Benchmark Empirical Scoreboard](authentic_20_benchmark_scoreboard.png)
 
-### B. Historical Architecture Evolution Across Versions
+### C. Historical Architecture Evolution Across Versions
 ![Dual-Loop Historical Evolution](eval_results/architecture_version_evolution.png)
 
-### C. The Smart & Efficient Artificial Brain Architecture (3-Pass Loop)
+### D. The Smart & Efficient Artificial Brain Architecture (3-Pass Loop)
 ![The Smart & Efficient Artificial Brain Architecture](smart_brain_loop_architecture.png)
 
 ---
@@ -35,7 +38,29 @@ To maintain rigorous scientific credibility and avoid deceptive evaluation chart
 
 ---
 
-## 2. Authentic 20-Benchmark Multi-Domain Macro Suite ($N=200$)
+## 2. Authentic Multi-Benchmark Evaluation ($N=100$ Samples Per Task)
+
+To ensure statistical confidence and rule out small-$N$ noise, empirical tests were executed on 100 consecutive items from the standard test splits of **AI2 ARC-Challenge** and **AllenAI SciQ (Science QA / MSQA)**.
+
+* **Audit Logs**:
+  * ARC-Challenge ($N=100$): [`eval_results/arc_challenge_authentic_eval_n100.json`](eval_results/arc_challenge_authentic_eval_n100.json)
+  * SciQ MSQA ($N=100$): [`eval_results/sciq_msqa_matrix_helper_eval_n100.json`](eval_results/sciq_msqa_matrix_helper_eval_n100.json)
+* **Test Harnesses**: [`run_authentic_arc_eval.py`](run_authentic_arc_eval.py) & [`run_msqa_and_matrix_eval.py`](run_msqa_and_matrix_eval.py)
+
+### Multi-Benchmark Quantitative Summary
+
+| Benchmark Dataset | Split | Samples ($N$) | Base Model ($K=0$) | Dual-Loop Deliberation ($K=2$) | Dual-Loop + Cognitive Matrix Helper | Net Delta ($\Delta$) | Rescued / Degraded | Statistical Significance |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **AllenAI SciQ** (MSQA) | `test` | 100 | 69.00% (69/100) | 72.00% (72/100) | **79.00% (79/100)** | **+10.00%** | **13 Rescued / 3 Degraded** | **$p = 0.0245$ ($p < 0.05$ Significant)** |
+| **AI2 ARC-Challenge** | `test` | 100 | 44.00% (44/100) | 47.00% (47/100) | **48.00% (48/100)** | **+4.00%** | **7 Rescued / 3 Degraded** | $p = 0.3438$ |
+
+### Cognitive Matrix Helper Dynamics
+* **Distractor Pruning Ratio**: An average of **1.97 spurious choices per question** are pruned in Bench 1 (**49.3% candidate space reduction**), isolating System 2 cross-attention exclusively to high-conviction contenders.
+* **Safety vs Deliberation**: Pure Dual-Loop latent deliberation without matrix pruning achieves **0.0% degradation (0 degraded)** across both datasets, preserving 100% of already-correct answers. Enabling Cognitive Matrix Helper aggressively rescues challenging questions (+10.0% on SciQ, 13 rescued) with a slight trade-off of 3 degradations on extreme edge cases where the correct answer was eliminated in Bench 1.
+
+---
+
+## 3. Authentic 20-Benchmark Multi-Domain Macro Suite ($N=200$)
 
 *Source File*: [`eval_results/qwen35_2b_authentic_20_benchmarks.json`](eval_results/qwen35_2b_authentic_20_benchmarks.json) | Test Harness: [`benchmark_full_20_suite.py`](benchmark_full_20_suite.py)
 
@@ -65,7 +90,7 @@ To maintain rigorous scientific credibility and avoid deceptive evaluation chart
 
 ---
 
-## 3. 2-Bench Matrix Question Helper Evaluation (v2.2 Milestone)
+## 4. 2-Bench Matrix Question Helper Evaluation (v2.2 Milestone)
 *Source File*: [`eval_results/matrix_helper_benchmark.json`](eval_results/matrix_helper_benchmark.json) | Test Harness: [`run_matrix_helper_benchmark.py`](run_matrix_helper_benchmark.py)
 
 | # | Task & Domain | Candidates | Bench 1 (Raw Base) | Matrix Elimination Breakdown | Bench 2 (Dual Loop) | Status / Verdict |
@@ -80,7 +105,7 @@ To maintain rigorous scientific credibility and avoid deceptive evaluation chart
 
 ---
 
-## 4. 3-Pass Selective Virtual Memory Evaluation
+## 5. 3-Pass Selective Virtual Memory Evaluation
 *Source File*: [`eval_results/qwen35_2b_3pass_selective_memory_eval.json`](eval_results/qwen35_2b_3pass_selective_memory_eval.json) | Test Harness: [`run_3pass_selective_virtual_memory.py`](run_3pass_selective_virtual_memory.py)
 
 | Evaluation Pass | Execution Mode | Accuracy | Compute Allocation | Wall-Clock Time | Speedup vs Cold Start | Cognitive Status |
@@ -91,18 +116,22 @@ To maintain rigorous scientific credibility and avoid deceptive evaluation chart
 
 ---
 
-## 5. How to Reproduce All Benchmarks
+## 6. How to Reproduce All Benchmarks
 
 ```bash
 # 1. Run Head-to-Head Spotlight Showdown (Fastest ~20s)
 python compare_head_to_head.py
 
-# 2. Run 2-Bench Matrix Question Helper Evaluation
+# 2. Run Authentic Large-Sample N=100 Benchmarks (ARC-Challenge & SciQ MSQA)
+python run_authentic_arc_eval.py
+python run_msqa_and_matrix_eval.py
+
+# 3. Run 2-Bench Matrix Question Helper Evaluation
 python run_matrix_helper_benchmark.py
 
-# 3. Run Full 20-Benchmark Suite
+# 4. Run Full 20-Benchmark Suite
 python benchmark_full_20_suite.py
 
-# 4. Run 3-Pass Selective Memory Evaluation
+# 5. Run 3-Pass Selective Memory Evaluation
 python run_3pass_selective_virtual_memory.py
 ```

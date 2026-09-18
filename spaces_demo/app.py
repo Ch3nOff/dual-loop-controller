@@ -422,6 +422,14 @@ Dual-Loop Deliberation Engine operating on frozen `Qwen/Qwen3.5-2B` ($D=2048$, L
                 gr.Image(img_arch, label="Smart Brain Architecture (3-Pass Loop)")
 
             gr.Markdown("""
+### Authentic Multi-Benchmark Evaluation ($N=100$ Per Task) & Cognitive Matrix Helper
+Live PyTorch forward passes on frozen Qwen3.5-2B across ARC-Challenge and SciQ MSQA.
+""")
+            img_multibench = get_img("authentic_multibenchmark_matrix_graph.png")
+            if img_multibench:
+                gr.Image(img_multibench, label="Authentic Multi-Benchmark & Cognitive Matrix Helper (N=100)")
+
+            gr.Markdown("""
 ### Verified Empirical Benchmarks (Authentic N=200 Multi-Task Suite)
 Zero synthetic estimates — authentic PyTorch forward passes on frozen Qwen3.5-2B.
 """)

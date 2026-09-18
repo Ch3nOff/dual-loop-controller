@@ -143,6 +143,28 @@ The following evaluation demonstrates the mechanism on **BBH-ColoredObjects (7 c
 
 ---
 
+## 📊 Authentic Multi-Benchmark Evaluation ($N=100$ Per Task): ARC-Challenge & SciQ MSQA
+
+To validate the framework beyond small-sample qualitative demonstrations, empirical tests were executed on 100 consecutive items from the standard test splits of **AI2 ARC-Challenge** and **AllenAI SciQ (Science QA / MSQA)** on the authentic frozen `Qwen/Qwen3.5-2B` model.
+
+![Authentic Multi-Benchmark Evaluation](authentic_multibenchmark_matrix_graph.png)
+
+### Multi-Benchmark Quantitative Scoreboard
+
+| Benchmark Dataset | Split | Samples ($N$) | Base Model ($K=0$) | Dual-Loop Deliberation ($K=2$) | Dual-Loop + Cognitive Matrix Helper | Net Delta ($\Delta$) | Rescued / Degraded | Statistical Significance |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **AllenAI SciQ** (MSQA) | `test` | 100 | 69.00% (69/100) | 72.00% (72/100) | **79.00% (79/100)** | **+10.00%** | **13 Rescued / 3 Degraded** | **$p = 0.0245$ (Significant, $p < 0.05$)** |
+| **AI2 ARC-Challenge** | `test` | 100 | 44.00% (44/100) | 47.00% (47/100) | **48.00% (48/100)** | **+4.00%** | **7 Rescued / 3 Degraded** | $p = 0.3438$ |
+
+* **Empirical Raw Logs**:
+  * ARC-Challenge ($N=100$): [`eval_results/arc_challenge_authentic_eval_n100.json`](eval_results/arc_challenge_authentic_eval_n100.json)
+  * SciQ MSQA ($N=100$): [`eval_results/sciq_msqa_matrix_helper_eval_n100.json`](eval_results/sciq_msqa_matrix_helper_eval_n100.json)
+* **Key Observations**:
+  * **System 2 Deliberation Safety**: Pure latent deliberation ($K=2$) without candidate pruning achieves **0% degradation (0 degraded)** across both benchmarks (3 rescued, 0 degraded in each), upholding zero negative drift on confident predictions.
+  * **Cognitive Matrix Helper Synergy**: In SciQ, the Cognitive Matrix Helper eliminates an average of **1.97 spurious choices per question (49.3% candidate space reduction)**, unlocking an impressive **+10.00% accuracy jump (69% $\rightarrow$ 79%)** by shielding System 2 cross-attention from distractor noise.
+
+---
+
 ## 📈 Historical Architecture Version Evolution
 
 ![Historical Architecture Version Evolution](eval_results/architecture_version_evolution.png)

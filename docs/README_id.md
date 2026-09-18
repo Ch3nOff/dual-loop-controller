@@ -100,6 +100,28 @@ Untuk menjaga kredibilitas ilmiah dan menghindari klaim yang menyesatkan:
 
 ---
 
+## 📊 Evaluasi Multi-Benchmark Otentik Skala Besar ($N=100$ Per Task): ARC-Challenge & SciQ MSQA
+
+Untuk membuktikan performa di luar sampel kualitatif kecil, pengujian empiris dijalankan secara langsung pada masing-masing 100 sampel berurutan dari split uji resmi **AI2 ARC-Challenge** dan **AllenAI SciQ (Science QA / MSQA)** menggunakan model dasar beku `Qwen/Qwen3.5-2B`.
+
+![Evaluasi Multi-Benchmark Otentik](../authentic_multibenchmark_matrix_graph.png)
+
+### Tabel Skor Kuantitatif Multi-Benchmark
+
+| Dataset Benchmark | Split | Sampel ($N$) | Base Model ($K=0$) | Dual-Loop Deliberasi ($K=2$) | Dual-Loop + Cognitive Matrix Helper | Delta Bersih ($\Delta$) | Soal Terselamatkan / Terdegradasi | Signifikansi Statistik |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **AllenAI SciQ** (MSQA) | `test` | 100 | 69.00% (69/100) | 72.00% (72/100) | **79.00% (79/100)** | **+10.00%** | **13 Terselamatkan / 3 Terdegradasi** | **$p = 0.0245$ (Signifikan, $p < 0.05$)** |
+| **AI2 ARC-Challenge** | `test` | 100 | 44.00% (44/100) | 47.00% (47/100) | **48.00% (48/100)** | **+4.00%** | **7 Terselamatkan / 3 Terdegradasi** | $p = 0.3438$ |
+
+* **Log Data Riil**:
+  * ARC-Challenge ($N=100$): [`eval_results/arc_challenge_authentic_eval_n100.json`](../eval_results/arc_challenge_authentic_eval_n100.json)
+  * SciQ MSQA ($N=100$): [`eval_results/sciq_msqa_matrix_helper_eval_n100.json`](../eval_results/sciq_msqa_matrix_helper_eval_n100.json)
+* **Dinamika Utama**:
+  * **Keamanan Deliberasi Murni**: Dual-Loop laten murni ($K=2$) menghasilkan **0% degradasi** pada kedua pengujian (masing-masing 3 terselamatkan, 0 terdegradasi), menjaga stabilitas penuh tanpa regresi.
+  * **Sinergi Cognitive Matrix Helper**: Pada SciQ, Cognitive Matrix Helper memangkas rata-rata **1.97 opsi distraktor per soal (rasio pemangkasan 49.3%)**, mendongkrak akurasi sebesar **+10.00% (69% $\rightarrow$ 79%)** dengan mengisolasi cross-attention System 2 dari distraktor yang mengecoh.
+
+---
+
 ## 💻 Contoh Penggunaan Singkat
 
 ```python

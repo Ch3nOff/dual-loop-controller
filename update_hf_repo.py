@@ -18,8 +18,11 @@ required_files = [
     ("eval_results/architecture_version_evolution.png", "architecture_version_evolution.png"),
     ("authentic_20_benchmark_scoreboard.png", "authentic_20_benchmark_scoreboard.png"),
     ("smart_brain_loop_architecture.png", "smart_brain_loop_architecture.png"),
+    ("authentic_multibenchmark_matrix_graph.png", "authentic_multibenchmark_matrix_graph.png"),
     ("eval_results/matrix_helper_benchmark.json", "eval_results/matrix_helper_benchmark.json"),
     ("eval_results/qwen35_2b_authentic_20_benchmarks.json", "eval_results/qwen35_2b_authentic_20_benchmarks.json"),
+    ("eval_results/arc_challenge_authentic_eval_n100.json", "eval_results/arc_challenge_authentic_eval_n100.json"),
+    ("eval_results/sciq_msqa_matrix_helper_eval_n100.json", "eval_results/sciq_msqa_matrix_helper_eval_n100.json"),
     (".eval_results/ai2_arc.yaml", ".eval_results/ai2_arc.yaml"),
     (".eval_results/openbookqa.yaml", ".eval_results/openbookqa.yaml"),
     (".eval_results/piqa.yaml", ".eval_results/piqa.yaml"),
@@ -50,3 +53,16 @@ for local_path, repo_path in required_files:
 
 print(f"\n[+] SUCCESS: All latest model weights, configs, benchmark graphs, and model card are live on Hugging Face Hub:")
 print(f"    https://huggingface.co/{REPO_ID}")
+
+# Synchronize Space
+SPACE_ID = "CH3NDev/dual-loop-controller-demo"
+print(f"\n[*] Uploading spaces_demo to Space {SPACE_ID}...")
+try:
+    api.upload_folder(
+        folder_path="spaces_demo",
+        repo_id=SPACE_ID,
+        repo_type="space"
+    )
+    print(f"[+] Successfully synchronized Space: https://huggingface.co/spaces/{SPACE_ID}")
+except Exception as e:
+    print(f"[!] Error synchronizing Space: {e}")
