@@ -1,0 +1,1866 @@
+{
+  "timestamp": "2026-09-18 10:31:49",
+  "model": "Qwen/Qwen3.5-2B",
+  "samples_per_task": 25,
+  "total_samples": 75,
+  "elapsed_seconds": 210.9,
+  "macro_summary": {
+    "total_samples": 75,
+    "mode1_cold_start": {
+      "base_accuracy": 50.67,
+      "dualloop_normal_accuracy": 50.67,
+      "dualloop_wronglog_accuracy": 50.67
+    },
+    "mode2_wronglog_active": {
+      "base_accuracy": 69.33,
+      "dualloop_normal_accuracy": 50.67,
+      "dualloop_wronglog_accuracy": 72.0
+    }
+  },
+  "benchmarks": {
+    "SciQ": {
+      "n_samples": 25,
+      "mode1_cold_start": {
+        "base_accuracy": 72.0,
+        "dualloop_normal_accuracy": 76.0,
+        "dualloop_wronglog_accuracy": 72.0
+      },
+      "mode2_wronglog_active": {
+        "base_re_accuracy": 76.0,
+        "dualloop_normal_re_accuracy": 76.0,
+        "dualloop_wronglog_accuracy": 88.0
+      },
+      "sample_details": [
+        {
+          "idx": 0,
+          "q_key": "2025051f5d26",
+          "prompt": "Question: Compounds that are capable of accepting electrons, such as o...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": true,
+            "pred_normal": "B",
+            "normal_ok": true,
+            "pred_matrix": "B",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 1,
+          "q_key": "9d31168e2832",
+          "prompt": "Question: What term in biotechnology means a genetically exact copy of...",
+          "target": "A",
+          "mode1_cold_start": {
+            "pred_base": "A",
+            "base_ok": true,
+            "pred_normal": "A",
+            "normal_ok": true,
+            "pred_matrix": "A",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": true,
+            "pred_normal_re": "A",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 2,
+          "q_key": "cc1276423769",
+          "prompt": "Question: Vertebrata are characterized by the presence of what?\nAnswer...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "A",
+            "base_ok": false,
+            "pred_normal": "A",
+            "normal_ok": false,
+            "pred_matrix": "A",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "A"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": false,
+            "pred_normal_re": "A",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "D",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 3,
+          "q_key": "2004aac9365d",
+          "prompt": "Question: What is the height above or below sea level called?\nAnswer:...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": true,
+            "pred_normal": "B",
+            "normal_ok": true,
+            "pred_matrix": "B",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 4,
+          "q_key": "2fc232eeb491",
+          "prompt": "Question: Ice cores, varves and what else indicate the environmental c...",
+          "target": "A",
+          "mode1_cold_start": {
+            "pred_base": "A",
+            "base_ok": true,
+            "pred_normal": "A",
+            "normal_ok": true,
+            "pred_matrix": "A",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": true,
+            "pred_normal_re": "A",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 5,
+          "q_key": "27ccbcdce6e8",
+          "prompt": "Question: What chemical signals in plants control different processes?...",
+          "target": "D",
+          "mode1_cold_start": {
+            "pred_base": "D",
+            "base_ok": true,
+            "pred_normal": "D",
+            "normal_ok": true,
+            "pred_matrix": "D",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": true,
+            "pred_normal_re": "D",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "D",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 6,
+          "q_key": "85684e156fef",
+          "prompt": "Question: Meiosis is part of the process of gametogenesis, which is th...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": true,
+            "pred_normal": "B",
+            "normal_ok": true,
+            "pred_matrix": "B",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 7,
+          "q_key": "af32056e738d",
+          "prompt": "Question: Which type of tree is dominant in temperate forests?\nAnswer:...",
+          "target": "A",
+          "mode1_cold_start": {
+            "pred_base": "A",
+            "base_ok": true,
+            "pred_normal": "A",
+            "normal_ok": true,
+            "pred_matrix": "A",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": true,
+            "pred_normal_re": "A",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 8,
+          "q_key": "135efc56b933",
+          "prompt": "Question: What kind of viscosity is found in long-chain hydrocarbons?\n...",
+          "target": "D",
+          "mode1_cold_start": {
+            "pred_base": "D",
+            "base_ok": true,
+            "pred_normal": "D",
+            "normal_ok": true,
+            "pred_matrix": "D",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": true,
+            "pred_normal_re": "D",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "D",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 9,
+          "q_key": "3cb000799a67",
+          "prompt": "Question: Ionic compounds have strong electrostatic attractions betwee...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": true,
+            "pred_normal": "B",
+            "normal_ok": true,
+            "pred_matrix": "B",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 10,
+          "q_key": "dbdb5e3c80e1",
+          "prompt": "Question: About how tall can mid-ocean ridges be?\nAnswer:...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": true,
+            "pred_normal": "B",
+            "normal_ok": true,
+            "pred_matrix": "B",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 11,
+          "q_key": "050956a817d3",
+          "prompt": "Question: What are by far the most common type of invertebrate?\nAnswer...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": false,
+            "pred_normal": "B",
+            "normal_ok": false,
+            "pred_matrix": "B",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "B"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": false,
+            "pred_normal_re": "B",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 12,
+          "q_key": "2bda7ea8b118",
+          "prompt": "Question: What do waves deposit to form sandbars and barrier islands?\n...",
+          "target": "D",
+          "mode1_cold_start": {
+            "pred_base": "D",
+            "base_ok": true,
+            "pred_normal": "D",
+            "normal_ok": true,
+            "pred_matrix": "D",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": true,
+            "pred_normal_re": "D",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "D",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 13,
+          "q_key": "927520811ed3",
+          "prompt": "Question: Penis, testes, and epididymis are organs in what system?\nAns...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": true,
+            "pred_normal": "B",
+            "normal_ok": true,
+            "pred_matrix": "B",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 14,
+          "q_key": "94c4e158cc51",
+          "prompt": "Question: Only about one percent of plants have lost what ability, tur...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "C",
+            "base_ok": true,
+            "pred_normal": "C",
+            "normal_ok": true,
+            "pred_matrix": "C",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": true,
+            "pred_normal_re": "C",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 15,
+          "q_key": "e38b341c76cd",
+          "prompt": "Question: How does a neon light produce visible light?\nAnswer:...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": true,
+            "pred_normal": "B",
+            "normal_ok": true,
+            "pred_matrix": "B",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 16,
+          "q_key": "f543bc4c787c",
+          "prompt": "Question: The bird ancestor that lived in trees developed what feature...",
+          "target": "A",
+          "mode1_cold_start": {
+            "pred_base": "C",
+            "base_ok": false,
+            "pred_normal": "C",
+            "normal_ok": false,
+            "pred_matrix": "C",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "C"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": false,
+            "pred_normal_re": "C",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 17,
+          "q_key": "aed4cfed36c7",
+          "prompt": "Question: What do most living things use to make atp from glucose?\nAns...",
+          "target": "D",
+          "mode1_cold_start": {
+            "pred_base": "D",
+            "base_ok": true,
+            "pred_normal": "D",
+            "normal_ok": true,
+            "pred_matrix": "A",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "A"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": true,
+            "pred_normal_re": "D",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "D",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 18,
+          "q_key": "5858f94f3014",
+          "prompt": "Question: What are the two most common silicates?\nAnswer:...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "A",
+            "base_ok": false,
+            "pred_normal": "C",
+            "normal_ok": true,
+            "pred_matrix": "C",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": false,
+            "pred_normal_re": "C",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 19,
+          "q_key": "95072cd9d4d7",
+          "prompt": "Question: What term means the amount of water vapor in the air?\nAnswer...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": true,
+            "pred_normal": "B",
+            "normal_ok": true,
+            "pred_matrix": "B",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 20,
+          "q_key": "ba386dd04458",
+          "prompt": "Question: Paracrine signals move by what method through the extracellu...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "C",
+            "base_ok": false,
+            "pred_normal": "C",
+            "normal_ok": false,
+            "pred_matrix": "C",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "C"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": false,
+            "pred_normal_re": "C",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 21,
+          "q_key": "e0ac1cb6c991",
+          "prompt": "Question: Presence of a cell wall, large central vacuole, and organell...",
+          "target": "D",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": false,
+            "pred_normal": "B",
+            "normal_ok": false,
+            "pred_matrix": "B",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "B"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "D",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 22,
+          "q_key": "7ab45c33e6ff",
+          "prompt": "Question: What happens when mammals raise their hair with tiny muscles...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "C",
+            "base_ok": true,
+            "pred_normal": "C",
+            "normal_ok": true,
+            "pred_matrix": "C",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": true,
+            "pred_normal_re": "C",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 23,
+          "q_key": "a67e7dcb43a8",
+          "prompt": "Question: What are people with osteoporosis at increased risk of?\nAnsw...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": true,
+            "pred_normal": "B",
+            "normal_ok": true,
+            "pred_matrix": "B",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 24,
+          "q_key": "ee4b00bdbda5",
+          "prompt": "Question: Where is energy stored in a chemical substance?\nAnswer:...",
+          "target": "D",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": false,
+            "pred_normal": "B",
+            "normal_ok": false,
+            "pred_matrix": "B",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "B"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": false,
+            "pred_normal_re": "B",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": false
+          }
+        }
+      ]
+    },
+    "ARC-Challenge": {
+      "n_samples": 25,
+      "mode1_cold_start": {
+        "base_accuracy": 48.0,
+        "dualloop_normal_accuracy": 44.0,
+        "dualloop_wronglog_accuracy": 48.0
+      },
+      "mode2_wronglog_active": {
+        "base_re_accuracy": 68.0,
+        "dualloop_normal_re_accuracy": 44.0,
+        "dualloop_wronglog_accuracy": 76.0
+      },
+      "sample_details": [
+        {
+          "idx": 0,
+          "q_key": "872d0a171248",
+          "prompt": "Question: An astronomer observes that a planet rotates faster after a ...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "C",
+            "base_ok": true,
+            "pred_normal": "D",
+            "normal_ok": false,
+            "pred_matrix": "D",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "D"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": true,
+            "pred_normal_re": "D",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 1,
+          "q_key": "7e1ce5dddc54",
+          "prompt": "Question: A group of engineers wanted to know how different building d...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": true,
+            "pred_normal": "B",
+            "normal_ok": true,
+            "pred_matrix": "B",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 2,
+          "q_key": "49eba7c3ce2f",
+          "prompt": "Question: The end result in the process of photosynthesis is the produ...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": false,
+            "pred_normal": "B",
+            "normal_ok": false,
+            "pred_matrix": "B",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "B"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 3,
+          "q_key": "a90caeca26d4",
+          "prompt": "Question: A physicist wants to determine the speed a car must reach to...",
+          "target": "D",
+          "mode1_cold_start": {
+            "pred_base": "D",
+            "base_ok": true,
+            "pred_normal": "D",
+            "normal_ok": true,
+            "pred_matrix": "D",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": true,
+            "pred_normal_re": "D",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "D",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 4,
+          "q_key": "a43bf4580972",
+          "prompt": "Question: An astronaut drops a 1.0 kg object and a 5.0 kg object on th...",
+          "target": "D",
+          "mode1_cold_start": {
+            "pred_base": "C",
+            "base_ok": false,
+            "pred_normal": "C",
+            "normal_ok": false,
+            "pred_matrix": "C",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "C"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": false,
+            "pred_normal_re": "C",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 5,
+          "q_key": "9770f20c6466",
+          "prompt": "Question: Devil facial tumor disease (DFTD) is a disease that is decim...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "C",
+            "base_ok": false,
+            "pred_normal": "C",
+            "normal_ok": false,
+            "pred_matrix": "C",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "C"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": false,
+            "pred_normal_re": "C",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "D",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 6,
+          "q_key": "ebe9ef13dc31",
+          "prompt": "Question: A type of small mammal from the mountain regions of the west...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "D",
+            "base_ok": false,
+            "pred_normal": "D",
+            "normal_ok": false,
+            "pred_matrix": "C",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": false,
+            "pred_normal_re": "D",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 7,
+          "q_key": "f1914fa71509",
+          "prompt": "Question: Petrified palm trees are found in sedimentary rock near glac...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "C",
+            "base_ok": true,
+            "pred_normal": "C",
+            "normal_ok": true,
+            "pred_matrix": "C",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": true,
+            "pred_normal_re": "C",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 8,
+          "q_key": "7e289e3ceb78",
+          "prompt": "Question: Farmers in Wyoming were concerned because some of their chic...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "D",
+            "base_ok": false,
+            "pred_normal": "D",
+            "normal_ok": false,
+            "pred_matrix": "D",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "D"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": false,
+            "pred_normal_re": "D",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 9,
+          "q_key": "b76b00291772",
+          "prompt": "Question: Copper is an element that is used in electrical wires. What ...",
+          "target": "A",
+          "mode1_cold_start": {
+            "pred_base": "A",
+            "base_ok": true,
+            "pred_normal": "A",
+            "normal_ok": true,
+            "pred_matrix": "A",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": true,
+            "pred_normal_re": "A",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 10,
+          "q_key": "89c29e1b0e12",
+          "prompt": "Question: According to cell classification, prokaryotic cells are sepa...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": true,
+            "pred_normal": "B",
+            "normal_ok": true,
+            "pred_matrix": "B",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 11,
+          "q_key": "404b7305a3a9",
+          "prompt": "Question: Which statement best describes the effect of the Sun on the ...",
+          "target": "A",
+          "mode1_cold_start": {
+            "pred_base": "A",
+            "base_ok": true,
+            "pred_normal": "A",
+            "normal_ok": true,
+            "pred_matrix": "A",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": true,
+            "pred_normal_re": "A",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 12,
+          "q_key": "169d4127ffb3",
+          "prompt": "Question: The morning temperature in a city is 41\u00b0F. If a sunny, mild ...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": false,
+            "pred_normal": "B",
+            "normal_ok": false,
+            "pred_matrix": "B",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "B"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": false,
+            "pred_normal_re": "B",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 13,
+          "q_key": "9b00aca63a6b",
+          "prompt": "Question: A class plans an investigation to see which brand of light b...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": false,
+            "pred_normal": "B",
+            "normal_ok": false,
+            "pred_matrix": "B",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "B"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": false,
+            "pred_normal_re": "B",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "D",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 14,
+          "q_key": "aa85cf6572b7",
+          "prompt": "Question: Which of these gases is the most abundant greenhouse gas in ...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "D",
+            "base_ok": false,
+            "pred_normal": "D",
+            "normal_ok": false,
+            "pred_matrix": "D",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "D"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": true,
+            "pred_normal_re": "D",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 15,
+          "q_key": "70b316928ecf",
+          "prompt": "Question: At which temperature does water freeze?\nAnswer:...",
+          "target": "A",
+          "mode1_cold_start": {
+            "pred_base": "A",
+            "base_ok": true,
+            "pred_normal": "A",
+            "normal_ok": true,
+            "pred_matrix": "A",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": true,
+            "pred_normal_re": "A",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 16,
+          "q_key": "a063f91ab61d",
+          "prompt": "Question: Fossil bones and teeth of dinosaurs have been researched for...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": false,
+            "pred_normal": "B",
+            "normal_ok": false,
+            "pred_matrix": "B",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "B"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 17,
+          "q_key": "cf13a7b18582",
+          "prompt": "Question: Molly was making iced tea by putting tea bags in boiling wat...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": true,
+            "pred_normal": "B",
+            "normal_ok": true,
+            "pred_matrix": "B",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 18,
+          "q_key": "ef4973f5c933",
+          "prompt": "Question: Logging companies cut trees in a forest and send the trees t...",
+          "target": "A",
+          "mode1_cold_start": {
+            "pred_base": "A",
+            "base_ok": true,
+            "pred_normal": "A",
+            "normal_ok": true,
+            "pred_matrix": "A",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": true,
+            "pred_normal_re": "A",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 19,
+          "q_key": "894f0ff898ea",
+          "prompt": "Question: It was once thought that living organisms could come from no...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "D",
+            "base_ok": false,
+            "pred_normal": "D",
+            "normal_ok": false,
+            "pred_matrix": "D",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "D"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": false,
+            "pred_normal_re": "D",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 20,
+          "q_key": "caf5cd5643f8",
+          "prompt": "Question: Cells take in food for energy. The part of the cell that aid...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "C",
+            "base_ok": false,
+            "pred_normal": "C",
+            "normal_ok": false,
+            "pred_matrix": "C",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "C"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": false,
+            "pred_normal_re": "C",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 21,
+          "q_key": "2647580aa3b7",
+          "prompt": "Question: When an electric current is passed through water (H_{2}O) us...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": true,
+            "pred_normal": "B",
+            "normal_ok": true,
+            "pred_matrix": "B",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 22,
+          "q_key": "59b512ffa39f",
+          "prompt": "Question: Which is a fact about penguins?\nAnswer:...",
+          "target": "A",
+          "mode1_cold_start": {
+            "pred_base": "C",
+            "base_ok": false,
+            "pred_normal": "C",
+            "normal_ok": false,
+            "pred_matrix": "C",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "C"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": true,
+            "pred_normal_re": "C",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 23,
+          "q_key": "d414b9ba9926",
+          "prompt": "Question: A glass of water at 110\u00b0F is placed in a room next to a glas...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "C",
+            "base_ok": true,
+            "pred_normal": "C",
+            "normal_ok": true,
+            "pred_matrix": "C",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": true,
+            "pred_normal_re": "C",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 24,
+          "q_key": "e70eccf843cc",
+          "prompt": "Question: Snow, rain, hail, and fog are all forms of\nAnswer:...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "D",
+            "base_ok": false,
+            "pred_normal": "D",
+            "normal_ok": false,
+            "pred_matrix": "D",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "D"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "D",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        }
+      ]
+    },
+    "OpenBookQA": {
+      "n_samples": 25,
+      "mode1_cold_start": {
+        "base_accuracy": 32.0,
+        "dualloop_normal_accuracy": 32.0,
+        "dualloop_wronglog_accuracy": 32.0
+      },
+      "mode2_wronglog_active": {
+        "base_re_accuracy": 64.0,
+        "dualloop_normal_re_accuracy": 32.0,
+        "dualloop_wronglog_accuracy": 52.0
+      },
+      "sample_details": [
+        {
+          "idx": 0,
+          "q_key": "978fe2424fef",
+          "prompt": "Question: A person wants to start saving money so that they can afford...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "D",
+            "base_ok": false,
+            "pred_normal": "D",
+            "normal_ok": false,
+            "pred_matrix": "D",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "D"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": false,
+            "pred_normal_re": "D",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 1,
+          "q_key": "9a4311c43d14",
+          "prompt": "Question: There is most likely going to be fog around:\nAnswer:...",
+          "target": "A",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": false,
+            "pred_normal": "B",
+            "normal_ok": false,
+            "pred_matrix": "B",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "B"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": false,
+            "pred_normal_re": "B",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "D",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 2,
+          "q_key": "e4384e9f7b3b",
+          "prompt": "Question: Predators eat\nAnswer:...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "C",
+            "base_ok": true,
+            "pred_normal": "C",
+            "normal_ok": true,
+            "pred_matrix": "C",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": true,
+            "pred_normal_re": "C",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 3,
+          "q_key": "504ac58d3963",
+          "prompt": "Question: Oak tree seeds are planted and a sidewalk is paved right nex...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": false,
+            "pred_normal": "B",
+            "normal_ok": false,
+            "pred_matrix": "B",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "B"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": false,
+            "pred_normal_re": "B",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 4,
+          "q_key": "ec03c1e1f5cf",
+          "prompt": "Question: An electric car runs on electricity via\nAnswer:...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": false,
+            "pred_normal": "B",
+            "normal_ok": false,
+            "pred_matrix": "B",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "B"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 5,
+          "q_key": "6a2ca131e6ab",
+          "prompt": "Question: As the rain forest is deforested the atmosphere will increas...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "C",
+            "base_ok": true,
+            "pred_normal": "C",
+            "normal_ok": true,
+            "pred_matrix": "C",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": true,
+            "pred_normal_re": "C",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 6,
+          "q_key": "938c29bc19e4",
+          "prompt": "Question: an electric car contains a motor that runs on\nAnswer:...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "D",
+            "base_ok": false,
+            "pred_normal": "D",
+            "normal_ok": false,
+            "pred_matrix": "D",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "D"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": false,
+            "pred_normal_re": "D",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 7,
+          "q_key": "8f6ef026b1cd",
+          "prompt": "Question: The middle of the day usually involves the bright star neare...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "C",
+            "base_ok": false,
+            "pred_normal": "C",
+            "normal_ok": false,
+            "pred_matrix": "C",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "C"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "C",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 8,
+          "q_key": "ecf02a57e924",
+          "prompt": "Question: The summer solstice in the northern hemisphere is four month...",
+          "target": "D",
+          "mode1_cold_start": {
+            "pred_base": "D",
+            "base_ok": true,
+            "pred_normal": "D",
+            "normal_ok": true,
+            "pred_matrix": "D",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": true,
+            "pred_normal_re": "D",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "D",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 9,
+          "q_key": "cd21c31e7af6",
+          "prompt": "Question: The main component in dirt is\nAnswer:...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "A",
+            "base_ok": false,
+            "pred_normal": "A",
+            "normal_ok": false,
+            "pred_matrix": "A",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "A"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "A",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 10,
+          "q_key": "ce4944f2b92b",
+          "prompt": "Question: It's easier for human's to survive in:\nAnswer:...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": false,
+            "pred_normal": "B",
+            "normal_ok": false,
+            "pred_matrix": "B",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "B"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 11,
+          "q_key": "40aa86d62ead",
+          "prompt": "Question: A cactus stem is used to store\nAnswer:...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "D",
+            "base_ok": false,
+            "pred_normal": "D",
+            "normal_ok": false,
+            "pred_matrix": "D",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "D"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "B",
+            "base_re_ok": true,
+            "pred_normal_re": "D",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 12,
+          "q_key": "e6803efc344c",
+          "prompt": "Question: A red-tailed hawk is searching for prey. It is most likely t...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "C",
+            "base_ok": true,
+            "pred_normal": "C",
+            "normal_ok": true,
+            "pred_matrix": "C",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": true,
+            "pred_normal_re": "C",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 13,
+          "q_key": "c3ce352479d5",
+          "prompt": "Question: The chance of wildfires is increased by\nAnswer:...",
+          "target": "A",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": false,
+            "pred_normal": "B",
+            "normal_ok": false,
+            "pred_matrix": "B",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "B"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": false,
+            "pred_normal_re": "B",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "D",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 14,
+          "q_key": "cc4c16fb0b81",
+          "prompt": "Question: A positive effect of burning biofuel is\nAnswer:...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": false,
+            "pred_normal": "B",
+            "normal_ok": false,
+            "pred_matrix": "B",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "B"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": false,
+            "pred_normal_re": "B",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "D",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 15,
+          "q_key": "4a07fa3a7383",
+          "prompt": "Question: As gasoline costs rise, alternative fuels are being used, wh...",
+          "target": "D",
+          "mode1_cold_start": {
+            "pred_base": "D",
+            "base_ok": true,
+            "pred_normal": "D",
+            "normal_ok": true,
+            "pred_matrix": "D",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": true,
+            "pred_normal_re": "D",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "D",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 16,
+          "q_key": "38d72f2ccee0",
+          "prompt": "Question: A person wants to be able to have more natural power in thei...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "A",
+            "base_ok": false,
+            "pred_normal": "A",
+            "normal_ok": false,
+            "pred_matrix": "A",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "A"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": true,
+            "pred_normal_re": "A",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 17,
+          "q_key": "4d7df2d78528",
+          "prompt": "Question: A Mola Mola might live where?\nAnswer:...",
+          "target": "C",
+          "mode1_cold_start": {
+            "pred_base": "B",
+            "base_ok": false,
+            "pred_normal": "B",
+            "normal_ok": false,
+            "pred_matrix": "B",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "B"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": true,
+            "pred_normal_re": "B",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 18,
+          "q_key": "dfcce53d77d8",
+          "prompt": "Question: Which requires energy to move?\nAnswer:...",
+          "target": "A",
+          "mode1_cold_start": {
+            "pred_base": "D",
+            "base_ok": false,
+            "pred_normal": "D",
+            "normal_ok": false,
+            "pred_matrix": "D",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "D"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": true,
+            "pred_normal_re": "D",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "B",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 19,
+          "q_key": "5a02b2898a73",
+          "prompt": "Question: An animal that only eats plants is a\nAnswer:...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "C",
+            "base_ok": false,
+            "pred_normal": "C",
+            "normal_ok": false,
+            "pred_matrix": "C",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "C"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": false,
+            "pred_normal_re": "C",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "D",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 20,
+          "q_key": "ddeae2ec4a84",
+          "prompt": "Question: There was a lot more water vapor in the air when we went on ...",
+          "target": "A",
+          "mode1_cold_start": {
+            "pred_base": "A",
+            "base_ok": true,
+            "pred_normal": "A",
+            "normal_ok": true,
+            "pred_matrix": "A",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": true,
+            "pred_normal_re": "A",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 21,
+          "q_key": "ef8bf69d3a47",
+          "prompt": "Question: An example of conservation is avoiding the use of\nAnswer:...",
+          "target": "A",
+          "mode1_cold_start": {
+            "pred_base": "A",
+            "base_ok": true,
+            "pred_normal": "A",
+            "normal_ok": true,
+            "pred_matrix": "A",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": true,
+            "pred_normal_re": "A",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 22,
+          "q_key": "e597d0acce8a",
+          "prompt": "Question: What can feathers on Spheniscidae be used for?\nAnswer:...",
+          "target": "A",
+          "mode1_cold_start": {
+            "pred_base": "A",
+            "base_ok": true,
+            "pred_normal": "A",
+            "normal_ok": true,
+            "pred_matrix": "A",
+            "matrix_ok": true
+          },
+          "wrong_logs": [],
+          "mode2_wronglog_active": {
+            "pred_base_re": "A",
+            "base_re_ok": true,
+            "pred_normal_re": "A",
+            "normal_re_ok": true,
+            "pred_dualloop_wronglog": "A",
+            "dualloop_wronglog_ok": true
+          }
+        },
+        {
+          "idx": 23,
+          "q_key": "28cc980ed8c4",
+          "prompt": "Question: Overpopulation can cause\nAnswer:...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "A",
+            "base_ok": false,
+            "pred_normal": "A",
+            "normal_ok": false,
+            "pred_matrix": "A",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "A"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "C",
+            "base_re_ok": false,
+            "pred_normal_re": "A",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "C",
+            "dualloop_wronglog_ok": false
+          }
+        },
+        {
+          "idx": 24,
+          "q_key": "2c25b146c219",
+          "prompt": "Question: Shining a light through a diamond can\nAnswer:...",
+          "target": "B",
+          "mode1_cold_start": {
+            "pred_base": "A",
+            "base_ok": false,
+            "pred_normal": "A",
+            "normal_ok": false,
+            "pred_matrix": "A",
+            "matrix_ok": false
+          },
+          "wrong_logs": [
+            "A"
+          ],
+          "mode2_wronglog_active": {
+            "pred_base_re": "D",
+            "base_re_ok": false,
+            "pred_normal_re": "A",
+            "normal_re_ok": false,
+            "pred_dualloop_wronglog": "D",
+            "dualloop_wronglog_ok": false
+          }
+        }
+      ]
+    }
+  }
+}
