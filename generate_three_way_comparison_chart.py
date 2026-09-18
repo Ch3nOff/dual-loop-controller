@@ -9,7 +9,7 @@ fig = plt.figure(figsize=(18, 12), dpi=300)
 fig.patch.set_facecolor('#0f172a')
 
 # Load benchmark data
-json_path = "eval_results/qwen35_2b_three_way_comparison.json"
+json_path = "eval_results/archive_deprecated/qwen35_2b_three_way_comparison.json"
 with open(json_path, "r", encoding="utf-8") as f:
     data = json.load(f)
 
@@ -166,7 +166,7 @@ fig.suptitle('Dual-Loop Cognitive Controller: Authentic Tripartite Empirical Ben
 
 plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 
-out_img1 = "eval_results/qwen35_2b_three_way_comparison.png"
+out_img1 = "eval_results/archive_deprecated/qwen35_2b_three_way_comparison.png"
 out_img2 = r"C:\Users\Matthew Chen\.gemini\antigravity\brain\19bea55e-42a6-476a-af5b-9c25391e2be9\qwen35_2b_three_way_comparison.png"
 
 plt.savefig(out_img1, dpi=300, facecolor=fig.get_facecolor())

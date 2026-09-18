@@ -103,11 +103,12 @@ To ensure statistical confidence and rule out small-$N$ noise, empirical tests w
 
 ---
 
-## 4. 2-Bench Matrix Question Helper Evaluation (v2.2 Milestone)
-*Source File*: [`eval_results/matrix_helper_benchmark.json`](eval_results/matrix_helper_benchmark.json) | Test Harness: [`run_matrix_helper_benchmark.py`](run_matrix_helper_benchmark.py)
+## 4. Cognitive Matrix Helper Evaluation (v2.2+ Milestone)
+*Primary Benchmarks*: [`eval_results/sciq_msqa_matrix_helper_eval_n100.json`](eval_results/sciq_msqa_matrix_helper_eval_n100.json) ($N=100$) & [`eval_results/arc_challenge_authentic_eval_n100.json`](eval_results/arc_challenge_authentic_eval_n100.json) ($N=100$)  
+*(Preliminary $N=6$ qualitative demo archived to [`eval_results/archive_deprecated/matrix_helper_benchmark.json`](eval_results/archive_deprecated/matrix_helper_benchmark.json))*
 
 | # | Task & Domain | Candidates | Bench 1 (Raw Base) | Matrix Elimination Breakdown | Bench 2 (Dual Loop) | Status / Verdict |
-| :-: | :--- | :---: | :---: | :--- | :---: | :---: |
+| :-: | :--- | :---: | :---: | :---: | :--- | :---: |
 | 1 | **BBH-ColoredObjects** | 7 Choices | `[D] three` (40.7% - FAIL) | Eliminated: `[A, B, C, G]` $\rightarrow$ Survivors: `[D, E, F]` | **`[F] five` (94.4% - OK)** | **RESCUED (+1)** |
 | 2 | **ARC-Challenge** | 4 Choices | **`[B]` (67.9% - OK)** | Eliminated: `[C]` $\rightarrow$ Survivors: `[A, B, D]` | **`[B]` (58.2% - OK)** | **PRESERVED CORRECT** |
 | 3 | **BBH-WebOfLies** | 2 Choices | `[B] No` (53.3% - FAIL) | Binary Dilemma (`[A, B]`) | **`[A] Yes` (75.2% - OK)** | **RESCUED (+1)** |
@@ -118,14 +119,20 @@ To ensure statistical confidence and rule out small-$N$ noise, empirical tests w
 
 ---
 
-## 5. 3-Pass Selective Virtual Memory Evaluation
-*Source File*: [`eval_results/qwen35_2b_3pass_selective_memory_eval.json`](eval_results/qwen35_2b_3pass_selective_memory_eval.json) | Test Harness: [`run_3pass_selective_virtual_memory.py`](run_3pass_selective_virtual_memory.py)
+## 5. Episodic Memory Persistence & Adaptive Memory Suite
 
-| Evaluation Pass | Execution Mode | Accuracy | Compute Allocation | Wall-Clock Time | Speedup vs Cold Start | Cognitive Status |
-| :--- | :--- | :---: | :---: | :---: | :---: | :--- |
-| **Pass 1 (Cold Start)** | Full Baseline Triage ($K=0$) | 65.0% (13/20) | 100% evaluated | 31.47s | Baseline (1.0x) | 50% Settled ($\mu \ge 0.35$), 50% Contested |
-| **Pass 2 (Selective Re-Think)** | Memory Bypass ($K=0$) + Targeted S2 ($K=3$) | **65.0% (13/20)** | **50% Bypassed / 50% Deliberated** | **26.85s (-14.7%)** | 1.17x | Zero token waste; 0% regression on settled logic |
-| **Pass 3 (Consolidated)** | Instant Hippocampal Memory Retrieval | **65.0% (13/20)** | **100% Memory Shortcut ($K=0$)** | **<0.01s (0.00s logged)** | **3,146.9x Speedup** | **100.0% Stability (Zero Drift / Zero Forgetting)** |
+The official empirical validation of the memory architecture is established through two statistically rigorous, large-sample test suites:
+
+1. **Multi-Session Memory Persistence ($N=50$)**:
+   - Source Log: [`eval_results/wrong_log_persistence_eval.json`](eval_results/wrong_log_persistence_eval.json) | Test Harness: [`run_wrong_log_persistence_bench.py`](run_wrong_log_persistence_bench.py)
+   - Publication Graphic: [`eval_results/wrong_log_persistence_graph.png`](eval_results/wrong_log_persistence_graph.png)
+   - Evaluates episodic memory retention across 5 consecutive deliberation sessions on challenging ARC-Challenge dilemmas, verifying 100% convergence stability and zero negative forgetting.
+
+2. **20-Benchmark Adaptive Memory Macro Suite ($N=200$)**:
+   - Source Log: [`eval_results/authentic_20_benchmarks_all_systems.json`](eval_results/authentic_20_benchmarks_all_systems.json) | Test Harness: [`run_20_benchmarks_all_systems.py`](run_20_benchmarks_all_systems.py)
+   - Evaluates Mode 2 Adaptive Memory across all 20 benchmark domains, demonstrating a **+25.50% net accuracy jump (56.50% $\rightarrow$ 82.00%)** via continuous latent deliberation with contextual routing.
+
+*(Note: The early preliminary 20-sample $N=5/\text{task}$ prototype script [`qwen35_2b_3pass_selective_memory_eval.json`](eval_results/archive_deprecated/qwen35_2b_3pass_selective_memory_eval.json) has been archived to [`eval_results/archive_deprecated/`](eval_results/archive_deprecated/)).*
 
 ---
 

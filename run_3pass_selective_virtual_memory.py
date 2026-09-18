@@ -28,7 +28,7 @@ from dual_loop.verification import DirectionalSafetyProjection
 MODEL_ID = "Qwen/Qwen3.5-2B"
 REVISION = "15852e8c16360a2fea060d615a32b45270f8a8fc"
 ADAPTER_PATH = "dual_loop/checkpoints/adapter_model.safetensors"
-OUTPUT_JSON = "eval_results/qwen35_2b_3pass_selective_memory_eval.json"
+OUTPUT_JSON = "eval_results/archive_deprecated/qwen35_2b_3pass_selective_memory_eval.json"
 
 def set_seed(seed=42):
     np.random.seed(seed)

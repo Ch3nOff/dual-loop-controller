@@ -16,11 +16,11 @@ import matplotlib.gridspec as gridspec
 from matplotlib.patches import FancyBboxPatch
 
 ARTIFACT_DIR = r"C:\Users\Matthew Chen\.gemini\antigravity\brain\19bea55e-42a6-476a-af5b-9c25391e2be9"
-OUTPUT_PNG = "eval_results/qwen35_2b_3pass_memory_evaluation.png"
+OUTPUT_PNG = "eval_results/archive_deprecated/qwen35_2b_3pass_memory_evaluation.png"
 ARTIFACT_PNG = os.path.join(ARTIFACT_DIR, "qwen35_2b_3pass_memory_evaluation.png")
 
 def plot_results():
-    with open("eval_results/qwen35_2b_3pass_selective_memory_eval.json", "r") as f:
+    with open("eval_results/archive_deprecated/qwen35_2b_3pass_selective_memory_eval.json", "r") as f:
         data = json.load(f)
 
     fig = plt.figure(figsize=(18, 10), dpi=150)

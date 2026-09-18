@@ -45,7 +45,7 @@ RESET = "\033[0m"
 MODEL_ID = "Qwen/Qwen3.5-2B"
 REVISION = "15852e8c16360a2fea060d615a32b45270f8a8fc"
 ADAPTER_PATH = "dual_loop/checkpoints/adapter_model.safetensors"
-OUTPUT_JSON = "eval_results/matrix_helper_benchmark.json"
+OUTPUT_JSON = "eval_results/archive_deprecated/matrix_helper_benchmark.json"
 
 def build_benchmark_dataset():
     """Builds a curated, multi-domain multi-choice reasoning evaluation suite."""

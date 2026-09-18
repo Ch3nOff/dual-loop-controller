@@ -27,7 +27,7 @@ from dual_loop import attach_dual_loop_to_qwen
 MODEL_ID = "Qwen/Qwen3.5-2B"
 REVISION = "15852e8c16360a2fea060d615a32b45270f8a8fc"
 ADAPTER_PATH = "dual_loop/checkpoints/qwen35_2b_deliberation_adapter.pt"
-OUTPUT_DIR = "eval_results"
+OUTPUT_DIR = "eval_results/archive_deprecated"
 JSON_OUTPUT = os.path.join(OUTPUT_DIR, "qwen35_2b_three_way_comparison.json")
 SAMPLES_PER_TASK = 20  # 20 samples per task x 4 tasks = 80 real questions evaluated authentically
 

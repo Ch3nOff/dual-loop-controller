@@ -1,10 +1,10 @@
 import json
 import numpy as np
 
-with open('eval_results/eval_results_1789538565.json', 'r', encoding='utf-8') as f:
+with open('eval_results/archive_deprecated/eval_results_1789538565.json', 'r', encoding='utf-8') as f:
     base_data = json.load(f)
 
-with open('eval_results/eval_results_1789538521.json', 'r', encoding='utf-8') as f:
+with open('eval_results/archive_deprecated/eval_results_1789538521.json', 'r', encoding='utf-8') as f:
     loop_data = json.load(f)
 
 base_samples = base_data['samples']['arc_easy']

@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
 AUTHTEST_JSON = "eval_results/qwen35_2b_authentic_suite_n160.json"
-BASE_JSON = "eval_results/qwen35_2b_full_base_k0.json"
-LOOP_JSON = "eval_results/qwen35_2b_full_dualloop_k2.json"
+BASE_JSON = "eval_results/archive_deprecated/qwen35_2b_full_base_k0.json"
+LOOP_JSON = "eval_results/archive_deprecated/qwen35_2b_full_dualloop_k2.json"
 OUTPUT_PNG = "full_benchmark_scoreboard.png"
 TASKS = ["ARC-Easy", "ARC-Challenge", "OpenBookQA", "PIQA"]
 

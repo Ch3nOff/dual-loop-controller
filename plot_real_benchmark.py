@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
 # Load authentic evaluation files
-with open('eval_results/eval_results_1789538565.json', 'r', encoding='utf-8') as f:
+with open('eval_results/archive_deprecated/eval_results_1789538565.json', 'r', encoding='utf-8') as f:
     base_data = json.load(f)
 
-with open('eval_results/eval_results_1789538521.json', 'r', encoding='utf-8') as f:
+with open('eval_results/archive_deprecated/eval_results_1789538521.json', 'r', encoding='utf-8') as f:
     loop_data = json.load(f)
 
 base_res = base_data['results']['arc_easy']
