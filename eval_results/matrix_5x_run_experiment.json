@@ -1,0 +1,682 @@
+{
+  "timestamp": "2026-09-18 09:54:47",
+  "total_samples": 30,
+  "total_elapsed_seconds": 219.03,
+  "base_accuracy": 63.33,
+  "standard_matrix": {
+    "accuracy": 63.33,
+    "rescued": 0,
+    "degraded": 0,
+    "delta": 0.0
+  },
+  "improved_matrix": {
+    "accuracy": 66.67,
+    "rescued": 1,
+    "degraded": 0,
+    "delta": 3.33
+  },
+  "5_pass_progressive_deliberation": {
+    "1": {
+      "accuracy": 73.33,
+      "rescued": 4,
+      "degraded": 1,
+      "delta": 10.0
+    },
+    "2": {
+      "accuracy": 73.33,
+      "rescued": 4,
+      "degraded": 1,
+      "delta": 10.0
+    },
+    "3": {
+      "accuracy": 73.33,
+      "rescued": 4,
+      "degraded": 1,
+      "delta": 10.0
+    },
+    "4": {
+      "accuracy": 73.33,
+      "rescued": 4,
+      "degraded": 1,
+      "delta": 10.0
+    },
+    "5": {
+      "accuracy": 73.33,
+      "rescued": 4,
+      "degraded": 1,
+      "delta": 10.0
+    }
+  },
+  "sample_details": [
+    {
+      "idx": 0,
+      "question": "Compounds that are capable of accepting electrons, such as o 2 or f2, are called what?",
+      "target": "B",
+      "target_text": "oxidants",
+      "base_ok": true,
+      "pred_base": "B",
+      "margin_base": 1.2044353485107422,
+      "pred_std_matrix": "B",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "B",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "B",
+        "2": "B",
+        "3": "B",
+        "4": "B",
+        "5": "B"
+      },
+      "elapsed_seconds": 7.06
+    },
+    {
+      "idx": 1,
+      "question": "What term in biotechnology means a genetically exact copy of an organism?",
+      "target": "A",
+      "target_text": "clone",
+      "base_ok": true,
+      "pred_base": "A",
+      "margin_base": 3.9145798683166504,
+      "pred_std_matrix": "A",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "A",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "A",
+        "2": "A",
+        "3": "A",
+        "4": "A",
+        "5": "A"
+      },
+      "elapsed_seconds": 6.78
+    },
+    {
+      "idx": 2,
+      "question": "Vertebrata are characterized by the presence of what?",
+      "target": "B",
+      "target_text": "backbone",
+      "base_ok": false,
+      "pred_base": "A",
+      "margin_base": 1.7183785438537598,
+      "pred_std_matrix": "A",
+      "std_matrix_ok": false,
+      "pred_improved_matrix": "A",
+      "improved_matrix_ok": false,
+      "pass_predictions": {
+        "1": "A",
+        "2": "A",
+        "3": "A",
+        "4": "A",
+        "5": "A"
+      },
+      "elapsed_seconds": 6.83
+    },
+    {
+      "idx": 3,
+      "question": "What is the height above or below sea level called?",
+      "target": "B",
+      "target_text": "elevation",
+      "base_ok": true,
+      "pred_base": "B",
+      "margin_base": 4.678182125091553,
+      "pred_std_matrix": "B",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "B",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "B",
+        "2": "B",
+        "3": "B",
+        "4": "B",
+        "5": "B"
+      },
+      "elapsed_seconds": 6.93
+    },
+    {
+      "idx": 4,
+      "question": "Ice cores, varves and what else indicate the environmental conditions at the time of their creation?",
+      "target": "A",
+      "target_text": "tree rings",
+      "base_ok": true,
+      "pred_base": "A",
+      "margin_base": 1.724355697631836,
+      "pred_std_matrix": "A",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "A",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "A",
+        "2": "A",
+        "3": "A",
+        "4": "A",
+        "5": "A"
+      },
+      "elapsed_seconds": 7.06
+    },
+    {
+      "idx": 5,
+      "question": "What chemical signals in plants control different processes?",
+      "target": "D",
+      "target_text": "plant hormones",
+      "base_ok": true,
+      "pred_base": "D",
+      "margin_base": 2.091313362121582,
+      "pred_std_matrix": "D",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "D",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "D",
+        "2": "D",
+        "3": "D",
+        "4": "D",
+        "5": "D"
+      },
+      "elapsed_seconds": 6.79
+    },
+    {
+      "idx": 6,
+      "question": "Meiosis is part of the process of gametogenesis, which is the production of what?",
+      "target": "B",
+      "target_text": "sperm and eggs",
+      "base_ok": true,
+      "pred_base": "B",
+      "margin_base": 4.587921619415283,
+      "pred_std_matrix": "B",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "B",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "B",
+        "2": "B",
+        "3": "B",
+        "4": "B",
+        "5": "B"
+      },
+      "elapsed_seconds": 7.25
+    },
+    {
+      "idx": 7,
+      "question": "Which type of tree is dominant in temperate forests?",
+      "target": "A",
+      "target_text": "deciduous",
+      "base_ok": true,
+      "pred_base": "A",
+      "margin_base": 3.0507569313049316,
+      "pred_std_matrix": "A",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "A",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "A",
+        "2": "A",
+        "3": "A",
+        "4": "A",
+        "5": "A"
+      },
+      "elapsed_seconds": 6.82
+    },
+    {
+      "idx": 8,
+      "question": "What kind of viscosity is found in long-chain hydrocarbons?",
+      "target": "D",
+      "target_text": "highly viscous",
+      "base_ok": true,
+      "pred_base": "D",
+      "margin_base": 1.4566545486450195,
+      "pred_std_matrix": "D",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "D",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "D",
+        "2": "D",
+        "3": "D",
+        "4": "D",
+        "5": "D"
+      },
+      "elapsed_seconds": 6.93
+    },
+    {
+      "idx": 9,
+      "question": "Ionic compounds have strong electrostatic attractions between oppositely charged ions in this?",
+      "target": "B",
+      "target_text": "regular array",
+      "base_ok": true,
+      "pred_base": "B",
+      "margin_base": 2.1122374534606934,
+      "pred_std_matrix": "B",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "B",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "B",
+        "2": "B",
+        "3": "B",
+        "4": "B",
+        "5": "B"
+      },
+      "elapsed_seconds": 7.01
+    },
+    {
+      "idx": 10,
+      "question": "About how tall can mid-ocean ridges be?",
+      "target": "B",
+      "target_text": "about 2 km",
+      "base_ok": true,
+      "pred_base": "B",
+      "margin_base": 0.6351931095123291,
+      "pred_std_matrix": "B",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "B",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "B",
+        "2": "B",
+        "3": "B",
+        "4": "B",
+        "5": "B"
+      },
+      "elapsed_seconds": 7.08
+    },
+    {
+      "idx": 11,
+      "question": "What are by far the most common type of invertebrate?",
+      "target": "C",
+      "target_text": "insects",
+      "base_ok": false,
+      "pred_base": "B",
+      "margin_base": 2.8119349479675293,
+      "pred_std_matrix": "B",
+      "std_matrix_ok": false,
+      "pred_improved_matrix": "B",
+      "improved_matrix_ok": false,
+      "pass_predictions": {
+        "1": "B",
+        "2": "B",
+        "3": "B",
+        "4": "B",
+        "5": "B"
+      },
+      "elapsed_seconds": 6.99
+    },
+    {
+      "idx": 12,
+      "question": "What do waves deposit to form sandbars and barrier islands?",
+      "target": "D",
+      "target_text": "sediments",
+      "base_ok": true,
+      "pred_base": "D",
+      "margin_base": 9.254220485687256,
+      "pred_std_matrix": "D",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "D",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "D",
+        "2": "D",
+        "3": "D",
+        "4": "D",
+        "5": "D"
+      },
+      "elapsed_seconds": 6.93
+    },
+    {
+      "idx": 13,
+      "question": "Penis, testes, and epididymis are organs in what system?",
+      "target": "B",
+      "target_text": "male reproductive system",
+      "base_ok": true,
+      "pred_base": "B",
+      "margin_base": 2.589362144470215,
+      "pred_std_matrix": "B",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "B",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "B",
+        "2": "B",
+        "3": "B",
+        "4": "B",
+        "5": "B"
+      },
+      "elapsed_seconds": 7.08
+    },
+    {
+      "idx": 14,
+      "question": "Only about one percent of plants have lost what ability, turning them into consumers and even predators, instead of producers?",
+      "target": "C",
+      "target_text": "photosynthesis",
+      "base_ok": true,
+      "pred_base": "C",
+      "margin_base": 6.408679962158203,
+      "pred_std_matrix": "C",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "C",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "C",
+        "2": "C",
+        "3": "C",
+        "4": "C",
+        "5": "C"
+      },
+      "elapsed_seconds": 7.35
+    },
+    {
+      "idx": 15,
+      "question": "How does a neon light produce visible light?",
+      "target": "B",
+      "target_text": "electroluminescence",
+      "base_ok": true,
+      "pred_base": "B",
+      "margin_base": 1.6888857523600267,
+      "pred_std_matrix": "B",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "B",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "B",
+        "2": "B",
+        "3": "B",
+        "4": "B",
+        "5": "B"
+      },
+      "elapsed_seconds": 6.95
+    },
+    {
+      "idx": 16,
+      "question": "The bird ancestor that lived in trees developed what feature commonly associated with birds?",
+      "target": "A",
+      "target_text": "wings",
+      "base_ok": false,
+      "pred_base": "C",
+      "margin_base": 1.1794573465983071,
+      "pred_std_matrix": "C",
+      "std_matrix_ok": false,
+      "pred_improved_matrix": "C",
+      "improved_matrix_ok": false,
+      "pass_predictions": {
+        "1": "C",
+        "2": "C",
+        "3": "C",
+        "4": "C",
+        "5": "C"
+      },
+      "elapsed_seconds": 7.01
+    },
+    {
+      "idx": 17,
+      "question": "What do most living things use to make atp from glucose?",
+      "target": "D",
+      "target_text": "oxygen",
+      "base_ok": true,
+      "pred_base": "D",
+      "margin_base": 0.3175840377807617,
+      "pred_std_matrix": "D",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "D",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "A",
+        "2": "A",
+        "3": "A",
+        "4": "A",
+        "5": "A"
+      },
+      "elapsed_seconds": 9.2
+    },
+    {
+      "idx": 18,
+      "question": "What are the two most common silicates?",
+      "target": "C",
+      "target_text": "feldspar and quartz",
+      "base_ok": false,
+      "pred_base": "A",
+      "margin_base": 0.047045135498046786,
+      "pred_std_matrix": "A",
+      "std_matrix_ok": false,
+      "pred_improved_matrix": "C",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "C",
+        "2": "C",
+        "3": "C",
+        "4": "C",
+        "5": "C"
+      },
+      "elapsed_seconds": 6.92
+    },
+    {
+      "idx": 19,
+      "question": "What term means the amount of water vapor in the air?",
+      "target": "B",
+      "target_text": "humidity",
+      "base_ok": true,
+      "pred_base": "B",
+      "margin_base": 5.065155029296875,
+      "pred_std_matrix": "B",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "B",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "B",
+        "2": "B",
+        "3": "B",
+        "4": "B",
+        "5": "B"
+      },
+      "elapsed_seconds": 6.99
+    },
+    {
+      "idx": 20,
+      "question": "Paracrine signals move by what method through the extracellular matrix?",
+      "target": "B",
+      "target_text": "diffusion",
+      "base_ok": false,
+      "pred_base": "C",
+      "margin_base": 4.757503191630045,
+      "pred_std_matrix": "C",
+      "std_matrix_ok": false,
+      "pred_improved_matrix": "C",
+      "improved_matrix_ok": false,
+      "pass_predictions": {
+        "1": "C",
+        "2": "C",
+        "3": "C",
+        "4": "C",
+        "5": "C"
+      },
+      "elapsed_seconds": 6.94
+    },
+    {
+      "idx": 21,
+      "question": "Presence of a cell wall, large central vacuole, and organelles called plastids distinguish what type of cell?",
+      "target": "D",
+      "target_text": "plant",
+      "base_ok": false,
+      "pred_base": "B",
+      "margin_base": 0.9224538803100586,
+      "pred_std_matrix": "B",
+      "std_matrix_ok": false,
+      "pred_improved_matrix": "B",
+      "improved_matrix_ok": false,
+      "pass_predictions": {
+        "1": "D",
+        "2": "D",
+        "3": "D",
+        "4": "D",
+        "5": "D"
+      },
+      "elapsed_seconds": 7.32
+    },
+    {
+      "idx": 22,
+      "question": "What happens when mammals raise their hair with tiny muscles in the skin?",
+      "target": "C",
+      "target_text": "goosebumps",
+      "base_ok": true,
+      "pred_base": "C",
+      "margin_base": 3.3988351821899414,
+      "pred_std_matrix": "C",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "C",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "C",
+        "2": "C",
+        "3": "C",
+        "4": "C",
+        "5": "C"
+      },
+      "elapsed_seconds": 7.41
+    },
+    {
+      "idx": 23,
+      "question": "What are people with osteoporosis at increased risk of?",
+      "target": "B",
+      "target_text": "bone fractures",
+      "base_ok": true,
+      "pred_base": "B",
+      "margin_base": 2.720372200012207,
+      "pred_std_matrix": "B",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "B",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "B",
+        "2": "B",
+        "3": "B",
+        "4": "B",
+        "5": "B"
+      },
+      "elapsed_seconds": 7.11
+    },
+    {
+      "idx": 24,
+      "question": "Where is energy stored in a chemical substance?",
+      "target": "D",
+      "target_text": "between atoms",
+      "base_ok": false,
+      "pred_base": "B",
+      "margin_base": 1.4510103861490888,
+      "pred_std_matrix": "B",
+      "std_matrix_ok": false,
+      "pred_improved_matrix": "B",
+      "improved_matrix_ok": false,
+      "pass_predictions": {
+        "1": "B",
+        "2": "B",
+        "3": "B",
+        "4": "B",
+        "5": "B"
+      },
+      "elapsed_seconds": 6.92
+    },
+    {
+      "idx": 25,
+      "question": "By the year 2050, 25 percent of the population of the united states will be 60 years of age or older. the cdc estimates that 80 percent of those 60 years and older have one or more chronic disease associated with deficiencies of this?",
+      "target": "D",
+      "target_text": "immune system",
+      "base_ok": false,
+      "pred_base": "C",
+      "margin_base": 0.22299766540527344,
+      "pred_std_matrix": "C",
+      "std_matrix_ok": false,
+      "pred_improved_matrix": "C",
+      "improved_matrix_ok": false,
+      "pass_predictions": {
+        "1": "C",
+        "2": "C",
+        "3": "C",
+        "4": "C",
+        "5": "C"
+      },
+      "elapsed_seconds": 11.19
+    },
+    {
+      "idx": 26,
+      "question": "Upon death of an organism, during composition, what returns to the soil as ammonium ions?",
+      "target": "B",
+      "target_text": "nitrogen",
+      "base_ok": false,
+      "pred_base": "D",
+      "margin_base": 0.7363050778706866,
+      "pred_std_matrix": "D",
+      "std_matrix_ok": false,
+      "pred_improved_matrix": "D",
+      "improved_matrix_ok": false,
+      "pass_predictions": {
+        "1": "B",
+        "2": "B",
+        "3": "B",
+        "4": "B",
+        "5": "B"
+      },
+      "elapsed_seconds": 7.49
+    },
+    {
+      "idx": 27,
+      "question": "Most insects reproduce quickly and through what type of reproduction?",
+      "target": "C",
+      "target_text": "sexual reproduction",
+      "base_ok": false,
+      "pred_base": "B",
+      "margin_base": 1.0209361712137859,
+      "pred_std_matrix": "B",
+      "std_matrix_ok": false,
+      "pred_improved_matrix": "B",
+      "improved_matrix_ok": false,
+      "pass_predictions": {
+        "1": "B",
+        "2": "B",
+        "3": "B",
+        "4": "B",
+        "5": "B"
+      },
+      "elapsed_seconds": 7.59
+    },
+    {
+      "idx": 28,
+      "question": "Digestion of proteins begins with acids in what organ?",
+      "target": "A",
+      "target_text": "stomach",
+      "base_ok": true,
+      "pred_base": "A",
+      "margin_base": 0.6408424377441406,
+      "pred_std_matrix": "A",
+      "std_matrix_ok": true,
+      "pred_improved_matrix": "A",
+      "improved_matrix_ok": true,
+      "pass_predictions": {
+        "1": "A",
+        "2": "A",
+        "3": "A",
+        "4": "A",
+        "5": "A"
+      },
+      "elapsed_seconds": 7.4
+    },
+    {
+      "idx": 29,
+      "question": "Many species of rotifers exhibit haplodiploidy, which is a method of what?",
+      "target": "A",
+      "target_text": "gender determination",
+      "base_ok": false,
+      "pred_base": "B",
+      "margin_base": 0.4249415397644043,
+      "pred_std_matrix": "B",
+      "std_matrix_ok": false,
+      "pred_improved_matrix": "B",
+      "improved_matrix_ok": false,
+      "pass_predictions": {
+        "1": "A",
+        "2": "A",
+        "3": "A",
+        "4": "A",
+        "5": "A"
+      },
+      "elapsed_seconds": 7.7
+    }
+  ]
+}

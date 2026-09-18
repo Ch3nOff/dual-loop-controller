@@ -1,0 +1,1541 @@
+{
+  "timestamp": "2026-09-18 10:11:51",
+  "model": "Qwen/Qwen3.5-2B",
+  "samples_per_task": 15,
+  "total_tasks": 4,
+  "total_samples": 60,
+  "benchmarks": {
+    "OpenBookQA": {
+      "n_samples": 15,
+      "base_accuracy": 26.67,
+      "passes": {
+        "1": {
+          "accuracy": 26.67,
+          "delta": 0.0,
+          "rescued": 0,
+          "degraded": 0
+        },
+        "2": {
+          "accuracy": 26.67,
+          "delta": 0.0,
+          "rescued": 0,
+          "degraded": 0
+        },
+        "3": {
+          "accuracy": 26.67,
+          "delta": 0.0,
+          "rescued": 0,
+          "degraded": 0
+        },
+        "4": {
+          "accuracy": 26.67,
+          "delta": 0.0,
+          "rescued": 0,
+          "degraded": 0
+        },
+        "5": {
+          "accuracy": 26.67,
+          "delta": 0.0,
+          "rescued": 0,
+          "degraded": 0
+        }
+      },
+      "sample_details": [
+        {
+          "idx": 0,
+          "prompt": "Question: A person wants to start saving money so that they can afford a nice va...",
+          "target": "B",
+          "pred_base": "D",
+          "base_ok": false,
+          "margin_base": 0.506,
+          "pass_predictions": {
+            "1": "D",
+            "2": "D",
+            "3": "D",
+            "4": "D",
+            "5": "D"
+          },
+          "survivor_labels": [
+            "A",
+            "D"
+          ],
+          "eliminated_labels": [
+            "B",
+            "C"
+          ]
+        },
+        {
+          "idx": 1,
+          "prompt": "Question: There is most likely going to be fog around:\nAnswer:...",
+          "target": "A",
+          "pred_base": "B",
+          "base_ok": false,
+          "margin_base": 0.103,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "B",
+            "C"
+          ],
+          "eliminated_labels": [
+            "A",
+            "D"
+          ]
+        },
+        {
+          "idx": 2,
+          "prompt": "Question: Predators eat\nAnswer:...",
+          "target": "C",
+          "pred_base": "C",
+          "base_ok": true,
+          "margin_base": 3.099,
+          "pass_predictions": {
+            "1": "C",
+            "2": "C",
+            "3": "C",
+            "4": "C",
+            "5": "C"
+          },
+          "survivor_labels": [
+            "B",
+            "C"
+          ],
+          "eliminated_labels": [
+            "A",
+            "D"
+          ]
+        },
+        {
+          "idx": 3,
+          "prompt": "Question: Oak tree seeds are planted and a sidewalk is paved right next to that ...",
+          "target": "C",
+          "pred_base": "B",
+          "base_ok": false,
+          "margin_base": 1.287,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "idx": 4,
+          "prompt": "Question: An electric car runs on electricity via\nAnswer:...",
+          "target": "C",
+          "pred_base": "B",
+          "base_ok": false,
+          "margin_base": 0.311,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "B",
+            "C"
+          ],
+          "eliminated_labels": [
+            "A",
+            "D"
+          ]
+        },
+        {
+          "idx": 5,
+          "prompt": "Question: As the rain forest is deforested the atmosphere will increase with\nAns...",
+          "target": "C",
+          "pred_base": "C",
+          "base_ok": true,
+          "margin_base": 1.249,
+          "pass_predictions": {
+            "1": "C",
+            "2": "C",
+            "3": "C",
+            "4": "C",
+            "5": "C"
+          },
+          "survivor_labels": [
+            "A",
+            "C"
+          ],
+          "eliminated_labels": [
+            "B",
+            "D"
+          ]
+        },
+        {
+          "idx": 6,
+          "prompt": "Question: an electric car contains a motor that runs on\nAnswer:...",
+          "target": "C",
+          "pred_base": "D",
+          "base_ok": false,
+          "margin_base": 1.801,
+          "pass_predictions": {
+            "1": "D",
+            "2": "D",
+            "3": "D",
+            "4": "D",
+            "5": "D"
+          },
+          "survivor_labels": [
+            "A",
+            "D"
+          ],
+          "eliminated_labels": [
+            "B",
+            "C"
+          ]
+        },
+        {
+          "idx": 7,
+          "prompt": "Question: The middle of the day usually involves the bright star nearest to the ...",
+          "target": "B",
+          "pred_base": "C",
+          "base_ok": false,
+          "margin_base": 2.874,
+          "pass_predictions": {
+            "1": "C",
+            "2": "C",
+            "3": "C",
+            "4": "C",
+            "5": "C"
+          },
+          "survivor_labels": [
+            "B",
+            "C"
+          ],
+          "eliminated_labels": [
+            "A",
+            "D"
+          ]
+        },
+        {
+          "idx": 8,
+          "prompt": "Question: The summer solstice in the northern hemisphere is four months before\nA...",
+          "target": "D",
+          "pred_base": "D",
+          "base_ok": true,
+          "margin_base": 0.841,
+          "pass_predictions": {
+            "1": "D",
+            "2": "D",
+            "3": "D",
+            "4": "D",
+            "5": "D"
+          },
+          "survivor_labels": [
+            "A",
+            "D"
+          ],
+          "eliminated_labels": [
+            "B",
+            "C"
+          ]
+        },
+        {
+          "idx": 9,
+          "prompt": "Question: The main component in dirt is\nAnswer:...",
+          "target": "B",
+          "pred_base": "A",
+          "base_ok": false,
+          "margin_base": 1.921,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "idx": 10,
+          "prompt": "Question: It's easier for human's to survive in:\nAnswer:...",
+          "target": "C",
+          "pred_base": "B",
+          "base_ok": false,
+          "margin_base": 3.952,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "B",
+            "C"
+          ],
+          "eliminated_labels": [
+            "A",
+            "D"
+          ]
+        },
+        {
+          "idx": 11,
+          "prompt": "Question: A cactus stem is used to store\nAnswer:...",
+          "target": "B",
+          "pred_base": "D",
+          "base_ok": false,
+          "margin_base": 1.361,
+          "pass_predictions": {
+            "1": "D",
+            "2": "D",
+            "3": "D",
+            "4": "D",
+            "5": "D"
+          },
+          "survivor_labels": [
+            "B",
+            "D"
+          ],
+          "eliminated_labels": [
+            "A",
+            "C"
+          ]
+        },
+        {
+          "idx": 12,
+          "prompt": "Question: A red-tailed hawk is searching for prey. It is most likely to swoop do...",
+          "target": "C",
+          "pred_base": "C",
+          "base_ok": true,
+          "margin_base": 0.924,
+          "pass_predictions": {
+            "1": "C",
+            "2": "C",
+            "3": "C",
+            "4": "C",
+            "5": "C"
+          },
+          "survivor_labels": [
+            "A",
+            "C"
+          ],
+          "eliminated_labels": [
+            "B",
+            "D"
+          ]
+        },
+        {
+          "idx": 13,
+          "prompt": "Question: The chance of wildfires is increased by\nAnswer:...",
+          "target": "A",
+          "pred_base": "B",
+          "base_ok": false,
+          "margin_base": 1.676,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "B",
+            "D"
+          ],
+          "eliminated_labels": [
+            "A",
+            "C"
+          ]
+        },
+        {
+          "idx": 14,
+          "prompt": "Question: A positive effect of burning biofuel is\nAnswer:...",
+          "target": "C",
+          "pred_base": "B",
+          "base_ok": false,
+          "margin_base": 1.022,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "B",
+            "D"
+          ],
+          "eliminated_labels": [
+            "A",
+            "C"
+          ]
+        }
+      ]
+    },
+    "BBH-WebOfLies": {
+      "n_samples": 15,
+      "base_accuracy": 26.67,
+      "passes": {
+        "1": {
+          "accuracy": 20.0,
+          "delta": -6.67,
+          "rescued": 2,
+          "degraded": 3
+        },
+        "2": {
+          "accuracy": 20.0,
+          "delta": -6.67,
+          "rescued": 2,
+          "degraded": 3
+        },
+        "3": {
+          "accuracy": 20.0,
+          "delta": -6.67,
+          "rescued": 2,
+          "degraded": 3
+        },
+        "4": {
+          "accuracy": 20.0,
+          "delta": -6.67,
+          "rescued": 2,
+          "degraded": 3
+        },
+        "5": {
+          "accuracy": 20.0,
+          "delta": -6.67,
+          "rescued": 2,
+          "degraded": 3
+        }
+      },
+      "sample_details": [
+        {
+          "idx": 0,
+          "prompt": "Question: Question: Sherrie tells the truth. Vernell says Sherrie tells the trut...",
+          "target": "B",
+          "pred_base": "A",
+          "base_ok": false,
+          "margin_base": 0.208,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": []
+        },
+        {
+          "idx": 1,
+          "prompt": "Question: Question: Kristian lies. Sherrie says Kristian lies. Delbert says Sher...",
+          "target": "B",
+          "pred_base": "B",
+          "base_ok": true,
+          "margin_base": 0.083,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": []
+        },
+        {
+          "idx": 2,
+          "prompt": "Question: Question: Vina tells the truth. Helene says Vina lies. Kandi says Hele...",
+          "target": "B",
+          "pred_base": "A",
+          "base_ok": false,
+          "margin_base": 0.234,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": []
+        },
+        {
+          "idx": 3,
+          "prompt": "Question: Question: Christie tells the truth. Ka says Christie tells the truth. ...",
+          "target": "B",
+          "pred_base": "A",
+          "base_ok": false,
+          "margin_base": 0.064,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": []
+        },
+        {
+          "idx": 4,
+          "prompt": "Question: Question: Tamika lies. Raymond says Tamika tells the truth. Willian sa...",
+          "target": "A",
+          "pred_base": "B",
+          "base_ok": false,
+          "margin_base": 0.209,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": []
+        },
+        {
+          "idx": 5,
+          "prompt": "Question: Question: Vernell tells the truth. Kandi says Vernell tells the truth....",
+          "target": "B",
+          "pred_base": "A",
+          "base_ok": false,
+          "margin_base": 0.264,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": []
+        },
+        {
+          "idx": 6,
+          "prompt": "Question: Question: Shalonda lies. Teressa says Shalonda tells the truth. Tamika...",
+          "target": "B",
+          "pred_base": "B",
+          "base_ok": true,
+          "margin_base": 0.082,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": []
+        },
+        {
+          "idx": 7,
+          "prompt": "Question: Question: Jim lies. Crista says Jim lies. Vernell says Crista tells th...",
+          "target": "A",
+          "pred_base": "B",
+          "base_ok": false,
+          "margin_base": 0.067,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": []
+        },
+        {
+          "idx": 8,
+          "prompt": "Question: Question: Fletcher tells the truth. Conception says Fletcher tells the...",
+          "target": "B",
+          "pred_base": "A",
+          "base_ok": false,
+          "margin_base": 0.077,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": []
+        },
+        {
+          "idx": 9,
+          "prompt": "Question: Question: Rashida tells the truth. Jim says Rashida lies. Alejandro sa...",
+          "target": "B",
+          "pred_base": "A",
+          "base_ok": false,
+          "margin_base": 0.043,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": []
+        },
+        {
+          "idx": 10,
+          "prompt": "Question: Question: Jerry lies. Millicent says Jerry tells the truth. Sal says M...",
+          "target": "A",
+          "pred_base": "B",
+          "base_ok": false,
+          "margin_base": 0.038,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": []
+        },
+        {
+          "idx": 11,
+          "prompt": "Question: Question: Audrie lies. Conception says Audrie lies. Teressa says Conce...",
+          "target": "B",
+          "pred_base": "B",
+          "base_ok": true,
+          "margin_base": 0.125,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": []
+        },
+        {
+          "idx": 12,
+          "prompt": "Question: Question: Millie tells the truth. Millicent says Millie lies. Phoebe s...",
+          "target": "A",
+          "pred_base": "A",
+          "base_ok": true,
+          "margin_base": 0.356,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": []
+        },
+        {
+          "idx": 13,
+          "prompt": "Question: Question: Inga tells the truth. Shenna says Inga lies. Rashida says Sh...",
+          "target": "B",
+          "pred_base": "A",
+          "base_ok": false,
+          "margin_base": 0.192,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": []
+        },
+        {
+          "idx": 14,
+          "prompt": "Question: Question: Amberly lies. Shenna says Amberly tells the truth. Willian s...",
+          "target": "B",
+          "pred_base": "A",
+          "base_ok": false,
+          "margin_base": 0.004,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": []
+        }
+      ]
+    },
+    "BBH-DateUnderstanding": {
+      "n_samples": 15,
+      "base_accuracy": 40.0,
+      "passes": {
+        "1": {
+          "accuracy": 40.0,
+          "delta": 0.0,
+          "rescued": 1,
+          "degraded": 1
+        },
+        "2": {
+          "accuracy": 40.0,
+          "delta": 0.0,
+          "rescued": 1,
+          "degraded": 1
+        },
+        "3": {
+          "accuracy": 40.0,
+          "delta": 0.0,
+          "rescued": 1,
+          "degraded": 1
+        },
+        "4": {
+          "accuracy": 40.0,
+          "delta": 0.0,
+          "rescued": 1,
+          "degraded": 1
+        },
+        "5": {
+          "accuracy": 40.0,
+          "delta": 0.0,
+          "rescued": 1,
+          "degraded": 1
+        }
+      },
+      "sample_details": [
+        {
+          "idx": 0,
+          "prompt": "Question: Today is Christmas Eve of 1937. What is the date tomorrow in MM/DD/YYY...",
+          "target": "B",
+          "pred_base": "B",
+          "base_ok": true,
+          "margin_base": 0.089,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "eliminated_labels": [
+            "E",
+            "F"
+          ]
+        },
+        {
+          "idx": 1,
+          "prompt": "Question: In the UK, people usually put the day before the month when formatting...",
+          "target": "A",
+          "pred_base": "B",
+          "base_ok": false,
+          "margin_base": 0.122,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "A",
+            "B",
+            "C",
+            "F"
+          ],
+          "eliminated_labels": [
+            "D",
+            "E"
+          ]
+        },
+        {
+          "idx": 2,
+          "prompt": "Question: Jane and John married on Jan 2, 1958. It is their 5-year anniversary t...",
+          "target": "B",
+          "pred_base": "C",
+          "base_ok": false,
+          "margin_base": 0.311,
+          "pass_predictions": {
+            "1": "C",
+            "2": "C",
+            "3": "C",
+            "4": "C",
+            "5": "C"
+          },
+          "survivor_labels": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "eliminated_labels": [
+            "E",
+            "F"
+          ]
+        },
+        {
+          "idx": 3,
+          "prompt": "Question: Jane scheduled 3 apointments with 5 poeple for tomorrow (Tue, 7/9/1972...",
+          "target": "E",
+          "pred_base": "E",
+          "base_ok": true,
+          "margin_base": 0.091,
+          "pass_predictions": {
+            "1": "E",
+            "2": "E",
+            "3": "E",
+            "4": "E",
+            "5": "E"
+          },
+          "survivor_labels": [
+            "A",
+            "D",
+            "E",
+            "F"
+          ],
+          "eliminated_labels": [
+            "B",
+            "C"
+          ]
+        },
+        {
+          "idx": 4,
+          "prompt": "Question: Today's meeting is rescheduled to 11 am tomorrow, 10/16/1924. What is ...",
+          "target": "B",
+          "pred_base": "B",
+          "base_ok": true,
+          "margin_base": 0.016,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "B",
+            "C",
+            "D",
+            "F"
+          ],
+          "eliminated_labels": [
+            "A",
+            "E"
+          ]
+        },
+        {
+          "idx": 5,
+          "prompt": "Question: Jane visits the bookstore on the 16th of each month starting from the ...",
+          "target": "B",
+          "pred_base": "A",
+          "base_ok": false,
+          "margin_base": 0.011,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F"
+          ],
+          "eliminated_labels": []
+        },
+        {
+          "idx": 6,
+          "prompt": "Question: On May 9th, 2017 Jane bought 40 eggs. She ate one per day. Today she r...",
+          "target": "A",
+          "pred_base": "F",
+          "base_ok": false,
+          "margin_base": 0.104,
+          "pass_predictions": {
+            "1": "F",
+            "2": "F",
+            "3": "F",
+            "4": "F",
+            "5": "F"
+          },
+          "survivor_labels": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F"
+          ],
+          "eliminated_labels": []
+        },
+        {
+          "idx": 7,
+          "prompt": "Question: Tomorrow is 11/12/2019. What is the date yesterday in MM/DD/YYYY?\nAnsw...",
+          "target": "B",
+          "pred_base": "E",
+          "base_ok": false,
+          "margin_base": 0.143,
+          "pass_predictions": {
+            "1": "E",
+            "2": "E",
+            "3": "E",
+            "4": "E",
+            "5": "E"
+          },
+          "survivor_labels": [
+            "B",
+            "C",
+            "E"
+          ],
+          "eliminated_labels": [
+            "A",
+            "D",
+            "F"
+          ]
+        },
+        {
+          "idx": 8,
+          "prompt": "Question: Jane thinks today is 6/18/2019, but John thinks today is 6/19/2019. Ja...",
+          "target": "D",
+          "pred_base": "D",
+          "base_ok": true,
+          "margin_base": 0.038,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "eliminated_labels": [
+            "A",
+            "F"
+          ]
+        },
+        {
+          "idx": 9,
+          "prompt": "Question: The first day of 2019 is a Tuesday, and today is the first Monday of 2...",
+          "target": "B",
+          "pred_base": "C",
+          "base_ok": false,
+          "margin_base": 0.018,
+          "pass_predictions": {
+            "1": "C",
+            "2": "C",
+            "3": "C",
+            "4": "C",
+            "5": "C"
+          },
+          "survivor_labels": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "F"
+          ],
+          "eliminated_labels": [
+            "E"
+          ]
+        },
+        {
+          "idx": 10,
+          "prompt": "Question: Yesterday was 12/31/1929. Today could not be 12/32/1929 because Decemb...",
+          "target": "C",
+          "pred_base": "D",
+          "base_ok": false,
+          "margin_base": 0.487,
+          "pass_predictions": {
+            "1": "D",
+            "2": "D",
+            "3": "D",
+            "4": "D",
+            "5": "D"
+          },
+          "survivor_labels": [
+            "C",
+            "D"
+          ],
+          "eliminated_labels": [
+            "A",
+            "B",
+            "E",
+            "F"
+          ]
+        },
+        {
+          "idx": 11,
+          "prompt": "Question: Today is Apr 10, 1985. Jane's appointment will be 3 days later. What i...",
+          "target": "B",
+          "pred_base": "B",
+          "base_ok": true,
+          "margin_base": 0.231,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "B",
+            "D",
+            "E"
+          ],
+          "eliminated_labels": [
+            "A",
+            "C",
+            "F"
+          ]
+        },
+        {
+          "idx": 12,
+          "prompt": "Question: Jane quited her job on Mar 20, 2020. 176 days have passed since then. ...",
+          "target": "E",
+          "pred_base": "B",
+          "base_ok": false,
+          "margin_base": 0.005,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B",
+            "C",
+            "E"
+          ],
+          "eliminated_labels": [
+            "D"
+          ]
+        },
+        {
+          "idx": 13,
+          "prompt": "Question: Today is the palindrome day of 2020, because the MMDDYYYY format of th...",
+          "target": "B",
+          "pred_base": "C",
+          "base_ok": false,
+          "margin_base": 0.034,
+          "pass_predictions": {
+            "1": "C",
+            "2": "C",
+            "3": "C",
+            "4": "C",
+            "5": "C"
+          },
+          "survivor_labels": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "F"
+          ],
+          "eliminated_labels": [
+            "E"
+          ]
+        },
+        {
+          "idx": 14,
+          "prompt": "Question: Tomorrow is 11/12/2019. What is the date one week from today in MM/DD/...",
+          "target": "B",
+          "pred_base": "B",
+          "base_ok": true,
+          "margin_base": 0.707,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": [
+            "C",
+            "D",
+            "E",
+            "F"
+          ]
+        }
+      ]
+    },
+    "ARC-Challenge": {
+      "n_samples": 15,
+      "base_accuracy": 46.67,
+      "passes": {
+        "1": {
+          "accuracy": 46.67,
+          "delta": 0.0,
+          "rescued": 1,
+          "degraded": 1
+        },
+        "2": {
+          "accuracy": 46.67,
+          "delta": 0.0,
+          "rescued": 1,
+          "degraded": 1
+        },
+        "3": {
+          "accuracy": 46.67,
+          "delta": 0.0,
+          "rescued": 1,
+          "degraded": 1
+        },
+        "4": {
+          "accuracy": 46.67,
+          "delta": 0.0,
+          "rescued": 1,
+          "degraded": 1
+        },
+        "5": {
+          "accuracy": 46.67,
+          "delta": 0.0,
+          "rescued": 1,
+          "degraded": 1
+        }
+      },
+      "sample_details": [
+        {
+          "idx": 0,
+          "prompt": "Question: An astronomer observes that a planet rotates faster after a meteorite ...",
+          "target": "C",
+          "pred_base": "C",
+          "base_ok": true,
+          "margin_base": 0.138,
+          "pass_predictions": {
+            "1": "D",
+            "2": "D",
+            "3": "D",
+            "4": "D",
+            "5": "D"
+          },
+          "survivor_labels": [
+            "A",
+            "C",
+            "D"
+          ],
+          "eliminated_labels": [
+            "B"
+          ]
+        },
+        {
+          "idx": 1,
+          "prompt": "Question: A group of engineers wanted to know how different building designs wou...",
+          "target": "B",
+          "pred_base": "B",
+          "base_ok": true,
+          "margin_base": 0.64,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "A",
+            "B",
+            "D"
+          ],
+          "eliminated_labels": [
+            "C"
+          ]
+        },
+        {
+          "idx": 2,
+          "prompt": "Question: The end result in the process of photosynthesis is the production of s...",
+          "target": "C",
+          "pred_base": "B",
+          "base_ok": false,
+          "margin_base": 0.163,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "B",
+            "C",
+            "D"
+          ],
+          "eliminated_labels": [
+            "A"
+          ]
+        },
+        {
+          "idx": 3,
+          "prompt": "Question: A physicist wants to determine the speed a car must reach to jump over...",
+          "target": "D",
+          "pred_base": "D",
+          "base_ok": true,
+          "margin_base": 0.469,
+          "pass_predictions": {
+            "1": "D",
+            "2": "D",
+            "3": "D",
+            "4": "D",
+            "5": "D"
+          },
+          "survivor_labels": [
+            "C",
+            "D"
+          ],
+          "eliminated_labels": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "idx": 4,
+          "prompt": "Question: An astronaut drops a 1.0 kg object and a 5.0 kg object on the Moon. Bo...",
+          "target": "D",
+          "pred_base": "C",
+          "base_ok": false,
+          "margin_base": 0.009,
+          "pass_predictions": {
+            "1": "C",
+            "2": "C",
+            "3": "C",
+            "4": "C",
+            "5": "C"
+          },
+          "survivor_labels": [
+            "B",
+            "C"
+          ],
+          "eliminated_labels": [
+            "A",
+            "D"
+          ]
+        },
+        {
+          "idx": 5,
+          "prompt": "Question: Devil facial tumor disease (DFTD) is a disease that is decimating the ...",
+          "target": "B",
+          "pred_base": "C",
+          "base_ok": false,
+          "margin_base": 0.973,
+          "pass_predictions": {
+            "1": "C",
+            "2": "C",
+            "3": "C",
+            "4": "C",
+            "5": "C"
+          },
+          "survivor_labels": [
+            "A",
+            "C"
+          ],
+          "eliminated_labels": [
+            "B",
+            "D"
+          ]
+        },
+        {
+          "idx": 6,
+          "prompt": "Question: A type of small mammal from the mountain regions of the western United...",
+          "target": "C",
+          "pred_base": "D",
+          "base_ok": false,
+          "margin_base": 0.029,
+          "pass_predictions": {
+            "1": "C",
+            "2": "C",
+            "3": "C",
+            "4": "C",
+            "5": "C"
+          },
+          "survivor_labels": [
+            "B",
+            "C",
+            "D"
+          ],
+          "eliminated_labels": [
+            "A"
+          ]
+        },
+        {
+          "idx": 7,
+          "prompt": "Question: Petrified palm trees are found in sedimentary rock near glaciers. The ...",
+          "target": "C",
+          "pred_base": "C",
+          "base_ok": true,
+          "margin_base": 0.328,
+          "pass_predictions": {
+            "1": "C",
+            "2": "C",
+            "3": "C",
+            "4": "C",
+            "5": "C"
+          },
+          "survivor_labels": [
+            "A",
+            "C"
+          ],
+          "eliminated_labels": [
+            "B",
+            "D"
+          ]
+        },
+        {
+          "idx": 8,
+          "prompt": "Question: Farmers in Wyoming were concerned because some of their chickens were ...",
+          "target": "B",
+          "pred_base": "D",
+          "base_ok": false,
+          "margin_base": 0.298,
+          "pass_predictions": {
+            "1": "D",
+            "2": "D",
+            "3": "D",
+            "4": "D",
+            "5": "D"
+          },
+          "survivor_labels": [
+            "A",
+            "B",
+            "D"
+          ],
+          "eliminated_labels": [
+            "C"
+          ]
+        },
+        {
+          "idx": 9,
+          "prompt": "Question: Copper is an element that is used in electrical wires. What is the sma...",
+          "target": "A",
+          "pred_base": "A",
+          "base_ok": true,
+          "margin_base": 0.918,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "idx": 10,
+          "prompt": "Question: According to cell classification, prokaryotic cells are separated from...",
+          "target": "B",
+          "pred_base": "B",
+          "base_ok": true,
+          "margin_base": 0.314,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "A",
+            "B",
+            "C"
+          ],
+          "eliminated_labels": [
+            "D"
+          ]
+        },
+        {
+          "idx": 11,
+          "prompt": "Question: Which statement best describes the effect of the Sun on the oceans?\nAn...",
+          "target": "A",
+          "pred_base": "A",
+          "base_ok": true,
+          "margin_base": 0.106,
+          "pass_predictions": {
+            "1": "A",
+            "2": "A",
+            "3": "A",
+            "4": "A",
+            "5": "A"
+          },
+          "survivor_labels": [
+            "A",
+            "C"
+          ],
+          "eliminated_labels": [
+            "B",
+            "D"
+          ]
+        },
+        {
+          "idx": 12,
+          "prompt": "Question: The morning temperature in a city is 41\u00b0F. If a sunny, mild day is for...",
+          "target": "C",
+          "pred_base": "B",
+          "base_ok": false,
+          "margin_base": 0.536,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "A",
+            "B"
+          ],
+          "eliminated_labels": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "idx": 13,
+          "prompt": "Question: A class plans an investigation to see which brand of light bulb lasts ...",
+          "target": "C",
+          "pred_base": "B",
+          "base_ok": false,
+          "margin_base": 0.154,
+          "pass_predictions": {
+            "1": "B",
+            "2": "B",
+            "3": "B",
+            "4": "B",
+            "5": "B"
+          },
+          "survivor_labels": [
+            "B",
+            "C",
+            "D"
+          ],
+          "eliminated_labels": [
+            "A"
+          ]
+        },
+        {
+          "idx": 14,
+          "prompt": "Question: Which of these gases is the most abundant greenhouse gas in the lower ...",
+          "target": "C",
+          "pred_base": "D",
+          "base_ok": false,
+          "margin_base": 0.796,
+          "pass_predictions": {
+            "1": "D",
+            "2": "D",
+            "3": "D",
+            "4": "D",
+            "5": "D"
+          },
+          "survivor_labels": [
+            "C",
+            "D"
+          ],
+          "eliminated_labels": [
+            "A",
+            "B"
+          ]
+        }
+      ]
+    }
+  },
+  "error_learning_summary": {
+    "total_failed_in_base": 39,
+    "attempts_solved": {
+      "1": 0,
+      "2": 24,
+      "3": 7,
+      "4": 7
+    },
+    "solved_on_attempt_2": 24,
+    "solved_on_attempt_3": 7,
+    "solved_on_attempt_4": 7,
+    "cumulative_solved_pct": {
+      "attempt_1": 0.0,
+      "attempt_2": 61.5,
+      "attempt_3": 79.5,
+      "attempt_4": 97.4
+    }
+  }
+}
