@@ -54,7 +54,7 @@ from dual_loop.verification import DirectionalSafetyProjection
 MODEL_ID = "Qwen/Qwen3.5-2B"
 REVISION = "15852e8c16360a2fea060d615a32b45270f8a8fc"
 ADAPTER_PATH = "dual_loop/checkpoints/adapter_model.safetensors"
-OUTPUT_DIR = "eval_results"
+OUTPUT_DIR = "eval_results/archive_deprecated"
 OUTPUT_JSON = os.path.join(OUTPUT_DIR, "qwen35_2b_authentic_20_benchmarks.json")
 OUTPUT_PNG = "authentic_20_benchmark_scoreboard.png"
 

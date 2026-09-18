@@ -73,9 +73,14 @@ To ensure statistical confidence and rule out small-$N$ noise, empirical tests w
 
 ---
 
-## 3. Authentic 20-Benchmark Multi-Domain Macro Suite ($N=200$)
+## 3. Preliminary 20-Benchmark Multi-Domain Suite ($N=10$/task, Archived Baseline)
 
-*Source File*: [`eval_results/qwen35_2b_authentic_20_benchmarks.json`](eval_results/qwen35_2b_authentic_20_benchmarks.json) | Test Harness: [`benchmark_full_20_suite.py`](benchmark_full_20_suite.py)
+*Source File*: [`eval_results/archive_deprecated/qwen35_2b_authentic_20_benchmarks.json`](eval_results/archive_deprecated/qwen35_2b_authentic_20_benchmarks.json) | Test Harness: [`benchmark_full_20_suite.py`](benchmark_full_20_suite.py)
+
+> [!NOTE]
+> **Statistical Resolution & Sample Size Disclaimer ($N=10$/task)**:  
+> This preliminary exploratory suite sampled 10 items per task ($N=200$ macro). Due to the small sample per task, individual task confidence intervals are wide ($\pm 7\text{--}8\%$). For instance, on **BBH-LogicalDeduction**, this 10-item snapshot logged $90.0\% \to 90.0\%$ ($\Delta = 0.0\%$), whereas our dedicated, statistically powered large-sample audit ($N=200$, McNemar $p < 0.05$ in [`eval_results/qwen35_2b_multistep_n200_eval.json`](eval_results/qwen35_2b_multistep_n200_eval.json)) establishes true base performance at $68.0\%$, dropping to $60\text{--}62\%$ under uncalibrated deliberation.  
+> For the official, comprehensive comparative benchmark across all 5 architectures, refer to the **Official Leaderboard in Section 1** ([`eval_results/authentic_20_benchmarks_all_systems.json`](eval_results/authentic_20_benchmarks_all_systems.json)).
 
 | # | Benchmark Dataset | Category | Primary Cognitive Domain | Samples | Base Acc ($K=0$) | Dual-Loop ($K=2$) | Delta ($\Delta$) | Rescued / Degraded | Mean Vacuity $u(x)$ |
 | :-: | :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |

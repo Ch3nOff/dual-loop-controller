@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from dual_loop.verification import DirectionalSafetyProjection
 
-INPUT_JSON = "eval_results/qwen35_2b_authentic_20_benchmarks.json"
+INPUT_JSON = "eval_results/archive_deprecated/qwen35_2b_authentic_20_benchmarks.json"
 OUTPUT_PNG = "authentic_20_benchmark_scoreboard.png"
 ARTIFACT_PNG = r"C:\Users\Matthew Chen\.gemini\antigravity\brain\19bea55e-42a6-476a-af5b-9c25391e2be9\authentic_20_benchmark_scoreboard.png"
 

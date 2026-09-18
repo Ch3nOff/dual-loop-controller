@@ -26,7 +26,7 @@ required_files = [
     ("eval_results/underperforming_benchmarks_5x_run.json", "eval_results/underperforming_benchmarks_5x_run.json"),
     ("eval_results/wrong_log_persistence_eval.json", "eval_results/wrong_log_persistence_eval.json"),
     ("eval_results/hierarchical_cognitive_judge_eval.json", "eval_results/hierarchical_cognitive_judge_eval.json"),
-    ("eval_results/qwen35_2b_authentic_20_benchmarks.json", "eval_results/qwen35_2b_authentic_20_benchmarks.json"),
+    ("eval_results/archive_deprecated/qwen35_2b_authentic_20_benchmarks.json", "eval_results/archive_deprecated/qwen35_2b_authentic_20_benchmarks.json"),
     ("eval_results/arc_challenge_authentic_eval_n100.json", "eval_results/arc_challenge_authentic_eval_n100.json"),
     ("eval_results/sciq_msqa_matrix_helper_eval_n100.json", "eval_results/sciq_msqa_matrix_helper_eval_n100.json"),
     ("eval_results/novel_stress_test_benchmark.json", "eval_results/novel_stress_test_benchmark.json"),
