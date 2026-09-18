@@ -1,0 +1,2845 @@
+{
+  "timestamp": "2026-09-18 13:39:44",
+  "model_id": "Qwen/Qwen3.5-2B",
+  "elapsed_seconds": 29.35,
+  "macro_summary": {
+    "total_benchmarks": 20,
+    "total_samples": 200,
+    "mode1_cold_start": {
+      "base_acc": 56.0,
+      "dl_normal_acc": 55.5,
+      "dl_matrix_acc": 54.5,
+      "dl_judge_acc": 56.0,
+      "dl_reservoir_v23_acc": 56.5
+    },
+    "mode2_adaptive_memory": {
+      "base_re_acc": 82.5,
+      "dl_prev_acc": 78.0,
+      "dl_matrix_acc": 78.0,
+      "dl_judge_acc": 81.0,
+      "dl_reservoir_v23_acc": 82.0
+    }
+  },
+  "benchmarks": {
+    "ARC-Easy": {
+      "category": "Science & Facts",
+      "domain": "Elementary Science QA",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 8,
+        "dl_normal": 9,
+        "dl_matrix": 9,
+        "dl_judge": 9,
+        "dl_reservoir_v23": 9
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 9,
+        "dl_prev": 10,
+        "dl_matrix": 10,
+        "dl_judge": 10,
+        "dl_reservoir_v23": 10
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.456
+        },
+        {
+          "idx": 1,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 2,
+          "target": "D",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "D",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.456
+        },
+        {
+          "idx": 3,
+          "target": "D",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "D",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 4,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.456
+        },
+        {
+          "idx": 5,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.456
+        },
+        {
+          "idx": 6,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 7,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.456
+        },
+        {
+          "idx": 8,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 9,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        }
+      ]
+    },
+    "ARC-Challenge": {
+      "category": "Science & Facts",
+      "domain": "Complex Science Reasoning",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 5,
+        "dl_normal": 5,
+        "dl_matrix": 5,
+        "dl_judge": 6,
+        "dl_reservoir_v23": 7
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 7,
+        "dl_prev": 6,
+        "dl_matrix": 6,
+        "dl_judge": 7,
+        "dl_reservoir_v23": 8
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.456
+        },
+        {
+          "idx": 1,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 2,
+          "target": "C",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.39
+        },
+        {
+          "idx": 3,
+          "target": "D",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "D",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 4,
+          "target": "D",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 5,
+          "target": "B",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 6,
+          "target": "C",
+          "pred_base": "D",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 7,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.456
+        },
+        {
+          "idx": 8,
+          "target": "B",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 9,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        }
+      ]
+    },
+    "OpenBookQA": {
+      "category": "Science & Facts",
+      "domain": "Multi-Hop Fact Chaining",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 3,
+        "dl_normal": 3,
+        "dl_matrix": 3,
+        "dl_judge": 3,
+        "dl_reservoir_v23": 3
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 6,
+        "dl_prev": 5,
+        "dl_matrix": 5,
+        "dl_judge": 6,
+        "dl_reservoir_v23": 6
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "B",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 1,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 2,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 3,
+          "target": "C",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 4,
+          "target": "C",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 5,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.456
+        },
+        {
+          "idx": 6,
+          "target": "C",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 7,
+          "target": "B",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 8,
+          "target": "D",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "D",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.456
+        },
+        {
+          "idx": 9,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        }
+      ]
+    },
+    "PIQA": {
+      "category": "Physical & Commonsense",
+      "domain": "Physical Dynamics Intuition",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 8,
+        "dl_normal": 8,
+        "dl_matrix": 7,
+        "dl_judge": 8,
+        "dl_reservoir_v23": 8
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 10,
+        "dl_prev": 9,
+        "dl_matrix": 9,
+        "dl_judge": 10,
+        "dl_reservoir_v23": 10
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 1,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "A",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 2,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 3,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 4,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 5,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 6,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 7,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 8,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 9,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        }
+      ]
+    },
+    "BBH-LogicalDeduction": {
+      "category": "Multi-Step Deductive Logic",
+      "domain": "Transitive Relational Ordering",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 9,
+        "dl_normal": 9,
+        "dl_matrix": 9,
+        "dl_judge": 9,
+        "dl_reservoir_v23": 9
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 10,
+        "dl_prev": 10,
+        "dl_matrix": 10,
+        "dl_judge": 10,
+        "dl_reservoir_v23": 10
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 1,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 2,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 3,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 4,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 5,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 6,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 7,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 8,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 9,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        }
+      ]
+    },
+    "BBH-DateUnderstanding": {
+      "category": "Multi-Step Deductive Logic",
+      "domain": "Calendar Temporal Deduction",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 4,
+        "dl_normal": 4,
+        "dl_matrix": 4,
+        "dl_judge": 4,
+        "dl_reservoir_v23": 4
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 8,
+        "dl_prev": 7,
+        "dl_matrix": 7,
+        "dl_judge": 7,
+        "dl_reservoir_v23": 7
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 1,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 2,
+          "target": "B",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 3,
+          "target": "E",
+          "pred_base": "E",
+          "pred_normal": "E",
+          "pred_matrix": "E",
+          "pred_judge": "E",
+          "pred_reservoir_v23": "E",
+          "pred_m2_reservoir_v23": "E",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 4,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 5,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 6,
+          "target": "A",
+          "pred_base": "F",
+          "pred_normal": "F",
+          "pred_matrix": "F",
+          "pred_judge": "F",
+          "pred_reservoir_v23": "F",
+          "pred_m2_reservoir_v23": "E",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 7,
+          "target": "B",
+          "pred_base": "E",
+          "pred_normal": "E",
+          "pred_matrix": "E",
+          "pred_judge": "E",
+          "pred_reservoir_v23": "E",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 8,
+          "target": "D",
+          "pred_base": "D",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 9,
+          "target": "B",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "F",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        }
+      ]
+    },
+    "BBH-TrackingShuffledObjects": {
+      "category": "Multi-Step Deductive Logic",
+      "domain": "State Permutation Tracking",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 5,
+        "dl_normal": 5,
+        "dl_matrix": 5,
+        "dl_judge": 5,
+        "dl_reservoir_v23": 5
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 9,
+        "dl_prev": 8,
+        "dl_matrix": 8,
+        "dl_judge": 9,
+        "dl_reservoir_v23": 9
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 1,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 2,
+          "target": "C",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 3,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 4,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 5,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 6,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 7,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 8,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 9,
+          "target": "C",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        }
+      ]
+    },
+    "BBH-BooleanExpressions": {
+      "category": "Multi-Step Deductive Logic",
+      "domain": "Boolean Circuit Evaluation",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 8,
+        "dl_normal": 8,
+        "dl_matrix": 7,
+        "dl_judge": 9,
+        "dl_reservoir_v23": 9
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 10,
+        "dl_prev": 8,
+        "dl_matrix": 8,
+        "dl_judge": 10,
+        "dl_reservoir_v23": 10
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 1,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 2,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 3,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 4,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "B",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 5,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 6,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 7,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 8,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 9,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        }
+      ]
+    },
+    "BBH-CausalJudgement": {
+      "category": "Physical & Commonsense",
+      "domain": "Causal Disambiguation",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 4,
+        "dl_normal": 4,
+        "dl_matrix": 4,
+        "dl_judge": 4,
+        "dl_reservoir_v23": 4
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 10,
+        "dl_prev": 10,
+        "dl_matrix": 10,
+        "dl_judge": 10,
+        "dl_reservoir_v23": 10
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 1,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 2,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 3,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 4,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 5,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 6,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 7,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 8,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 9,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        }
+      ]
+    },
+    "BBH-FormalFallacies": {
+      "category": "Formal Logic",
+      "domain": "Syllogistic Fallacy Detection",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 6,
+        "dl_normal": 6,
+        "dl_matrix": 6,
+        "dl_judge": 6,
+        "dl_reservoir_v23": 6
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 10,
+        "dl_prev": 10,
+        "dl_matrix": 10,
+        "dl_judge": 10,
+        "dl_reservoir_v23": 10
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 1,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 2,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 3,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 4,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 5,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 6,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 7,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 8,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 9,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        }
+      ]
+    },
+    "BBH-GeometricShapes": {
+      "category": "Spatial & Symbolic",
+      "domain": "Geometric SVG Representation",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 4,
+        "dl_normal": 5,
+        "dl_matrix": 5,
+        "dl_judge": 4,
+        "dl_reservoir_v23": 4
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 6,
+        "dl_prev": 6,
+        "dl_matrix": 6,
+        "dl_judge": 5,
+        "dl_reservoir_v23": 5
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "B",
+          "pred_base": "G",
+          "pred_normal": "G",
+          "pred_matrix": "C",
+          "pred_judge": "G",
+          "pred_reservoir_v23": "G",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 1,
+          "target": "J",
+          "pred_base": "G",
+          "pred_normal": "G",
+          "pred_matrix": "C",
+          "pred_judge": "G",
+          "pred_reservoir_v23": "G",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 2,
+          "target": "K",
+          "pred_base": "K",
+          "pred_normal": "K",
+          "pred_matrix": "K",
+          "pred_judge": "K",
+          "pred_reservoir_v23": "K",
+          "pred_m2_reservoir_v23": "K",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 3,
+          "target": "E",
+          "pred_base": "B",
+          "pred_normal": "H",
+          "pred_matrix": "C",
+          "pred_judge": "H",
+          "pred_reservoir_v23": "H",
+          "pred_m2_reservoir_v23": "H",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 4,
+          "target": "K",
+          "pred_base": "K",
+          "pred_normal": "K",
+          "pred_matrix": "K",
+          "pred_judge": "K",
+          "pred_reservoir_v23": "K",
+          "pred_m2_reservoir_v23": "K",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 5,
+          "target": "C",
+          "pred_base": "G",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "G",
+          "pred_reservoir_v23": "G",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 6,
+          "target": "J",
+          "pred_base": "G",
+          "pred_normal": "G",
+          "pred_matrix": "C",
+          "pred_judge": "G",
+          "pred_reservoir_v23": "G",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 7,
+          "target": "C",
+          "pred_base": "G",
+          "pred_normal": "G",
+          "pred_matrix": "G",
+          "pred_judge": "G",
+          "pred_reservoir_v23": "G",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 8,
+          "target": "K",
+          "pred_base": "K",
+          "pred_normal": "K",
+          "pred_matrix": "K",
+          "pred_judge": "K",
+          "pred_reservoir_v23": "K",
+          "pred_m2_reservoir_v23": "K",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 9,
+          "target": "G",
+          "pred_base": "G",
+          "pred_normal": "G",
+          "pred_matrix": "G",
+          "pred_judge": "G",
+          "pred_reservoir_v23": "G",
+          "pred_m2_reservoir_v23": "G",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        }
+      ]
+    },
+    "BBH-Hyperbaton": {
+      "category": "Linguistic & Structural",
+      "domain": "Adjective Ordering Constraint",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 8,
+        "dl_normal": 7,
+        "dl_matrix": 7,
+        "dl_judge": 8,
+        "dl_reservoir_v23": 8
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 10,
+        "dl_prev": 9,
+        "dl_matrix": 9,
+        "dl_judge": 10,
+        "dl_reservoir_v23": 10
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 1,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 2,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 3,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 4,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 5,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 6,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 7,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 8,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 9,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        }
+      ]
+    },
+    "BBH-Navigate": {
+      "category": "Spatial & Symbolic",
+      "domain": "Spatial Trajectory Simulation",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 6,
+        "dl_normal": 6,
+        "dl_matrix": 6,
+        "dl_judge": 6,
+        "dl_reservoir_v23": 6
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 10,
+        "dl_prev": 10,
+        "dl_matrix": 10,
+        "dl_judge": 10,
+        "dl_reservoir_v23": 10
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 1,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 2,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 3,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 4,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 5,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 6,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 7,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 8,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 9,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        }
+      ]
+    },
+    "BBH-ColoredObjects": {
+      "category": "Multi-Step Deductive Logic",
+      "domain": "Multi-Attribute Set Intersection",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 7,
+        "dl_normal": 8,
+        "dl_matrix": 9,
+        "dl_judge": 7,
+        "dl_reservoir_v23": 7
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 8,
+        "dl_prev": 8,
+        "dl_matrix": 8,
+        "dl_judge": 8,
+        "dl_reservoir_v23": 9
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "D",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "D",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 1,
+          "target": "Q",
+          "pred_base": "Q",
+          "pred_normal": "Q",
+          "pred_matrix": "Q",
+          "pred_judge": "Q",
+          "pred_reservoir_v23": "Q",
+          "pred_m2_reservoir_v23": "Q",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 2,
+          "target": "I",
+          "pred_base": "I",
+          "pred_normal": "I",
+          "pred_matrix": "I",
+          "pred_judge": "I",
+          "pred_reservoir_v23": "I",
+          "pred_m2_reservoir_v23": "I",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.456
+        },
+        {
+          "idx": 3,
+          "target": "D",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "D",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 4,
+          "target": "B",
+          "pred_base": "I",
+          "pred_normal": "I",
+          "pred_matrix": "I",
+          "pred_judge": "I",
+          "pred_reservoir_v23": "I",
+          "pred_m2_reservoir_v23": "L",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.456
+        },
+        {
+          "idx": 5,
+          "target": "F",
+          "pred_base": "D",
+          "pred_normal": "G",
+          "pred_matrix": "F",
+          "pred_judge": "G",
+          "pred_reservoir_v23": "G",
+          "pred_m2_reservoir_v23": "F",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 6,
+          "target": "L",
+          "pred_base": "L",
+          "pred_normal": "L",
+          "pred_matrix": "L",
+          "pred_judge": "L",
+          "pred_reservoir_v23": "L",
+          "pred_m2_reservoir_v23": "L",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 7,
+          "target": "K",
+          "pred_base": "K",
+          "pred_normal": "K",
+          "pred_matrix": "K",
+          "pred_judge": "K",
+          "pred_reservoir_v23": "K",
+          "pred_m2_reservoir_v23": "K",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.456
+        },
+        {
+          "idx": 8,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 9,
+          "target": "E",
+          "pred_base": "B",
+          "pred_normal": "E",
+          "pred_matrix": "E",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "E",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        }
+      ]
+    },
+    "BBH-WebOfLies": {
+      "category": "Multi-Step Deductive Logic",
+      "domain": "Multi-Agent Boolean Parity",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 2,
+        "dl_normal": 2,
+        "dl_matrix": 2,
+        "dl_judge": 1,
+        "dl_reservoir_v23": 1
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 10,
+        "dl_prev": 8,
+        "dl_matrix": 8,
+        "dl_judge": 8,
+        "dl_reservoir_v23": 8
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 1,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 2,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 3,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 4,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 5,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 6,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 7,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 8,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 9,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        }
+      ]
+    },
+    "Sector1-InvertedPhysics": {
+      "category": "Counterfactual Simulation",
+      "domain": "Inverted Physical Axioms",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 4,
+        "dl_normal": 4,
+        "dl_matrix": 4,
+        "dl_judge": 4,
+        "dl_reservoir_v23": 4
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 8,
+        "dl_prev": 9,
+        "dl_matrix": 9,
+        "dl_judge": 9,
+        "dl_reservoir_v23": 9
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 1,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.456
+        },
+        {
+          "idx": 2,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.283
+        },
+        {
+          "idx": 3,
+          "target": "B",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.633
+        },
+        {
+          "idx": 4,
+          "target": "A",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 5,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 6,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.33
+        },
+        {
+          "idx": 7,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 8,
+          "target": "B",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.456
+        },
+        {
+          "idx": 9,
+          "target": "C",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 1.33
+        }
+      ]
+    },
+    "Sector2-5HopTransitive": {
+      "category": "Multi-Step Deductive Logic",
+      "domain": "6-Entity Relational Constraint Graph",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 4,
+        "dl_normal": 4,
+        "dl_matrix": 4,
+        "dl_judge": 4,
+        "dl_reservoir_v23": 4
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 4,
+        "dl_prev": 6,
+        "dl_matrix": 6,
+        "dl_judge": 4,
+        "dl_reservoir_v23": 4
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "C",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 1,
+          "target": "B",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "C",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 2,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 3,
+          "target": "D",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "D",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 4,
+          "target": "C",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "D",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 5,
+          "target": "C",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 6,
+          "target": "D",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "D",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 7,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 8,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 9,
+          "target": "A",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "D",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        }
+      ]
+    },
+    "Sector3-CounterSyllogisms": {
+      "category": "Formal Logic",
+      "domain": "Belief-Bias Stress-Test",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 10,
+        "dl_normal": 10,
+        "dl_matrix": 10,
+        "dl_judge": 10,
+        "dl_reservoir_v23": 10
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 10,
+        "dl_prev": 10,
+        "dl_matrix": 10,
+        "dl_judge": 10,
+        "dl_reservoir_v23": 10
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 1,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 2,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 3,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 4,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 5,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 6,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 7,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": -0.0
+        },
+        {
+          "idx": 8,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 9,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "UP_SCIENTIFIC",
+          "rho": 0.219
+        }
+      ]
+    },
+    "Sector4-ModularCalendar": {
+      "category": "Multi-Step Deductive Logic",
+      "domain": "Cyclic Modular Arithmetic",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 1,
+        "dl_normal": 1,
+        "dl_matrix": 1,
+        "dl_judge": 1,
+        "dl_reservoir_v23": 1
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 4,
+        "dl_prev": 3,
+        "dl_matrix": 3,
+        "dl_judge": 4,
+        "dl_reservoir_v23": 4
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "A",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 1,
+          "target": "B",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 2,
+          "target": "A",
+          "pred_base": "C",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 3,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "A",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 4,
+          "target": "B",
+          "pred_base": "B",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "B",
+          "pred_reservoir_v23": "B",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 5,
+          "target": "B",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 6,
+          "target": "B",
+          "pred_base": "D",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 7,
+          "target": "B",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 8,
+          "target": "A",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 9,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "D",
+          "pred_matrix": "D",
+          "pred_judge": "D",
+          "pred_reservoir_v23": "D",
+          "pred_m2_reservoir_v23": "D",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        }
+      ]
+    },
+    "Sector5-StateAutomata": {
+      "category": "Spatial & Symbolic",
+      "domain": "3-State Machine Latent Execution",
+      "samples": 10,
+      "mode1_cold_start": {
+        "base": 6,
+        "dl_normal": 3,
+        "dl_matrix": 2,
+        "dl_judge": 4,
+        "dl_reservoir_v23": 4
+      },
+      "mode2_adaptive_memory": {
+        "base_re": 6,
+        "dl_prev": 4,
+        "dl_matrix": 4,
+        "dl_judge": 5,
+        "dl_reservoir_v23": 5
+      },
+      "item_details": [
+        {
+          "idx": 0,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 1,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 2,
+          "target": "A",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 3,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 4,
+          "target": "B",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 5,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 6,
+          "target": "C",
+          "pred_base": "C",
+          "pred_normal": "B",
+          "pred_matrix": "B",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 7,
+          "target": "A",
+          "pred_base": "C",
+          "pred_normal": "C",
+          "pred_matrix": "C",
+          "pred_judge": "C",
+          "pred_reservoir_v23": "C",
+          "pred_m2_reservoir_v23": "B",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 8,
+          "target": "B",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "C",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "C",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        },
+        {
+          "idx": 9,
+          "target": "A",
+          "pred_base": "A",
+          "pred_normal": "A",
+          "pred_matrix": "C",
+          "pred_judge": "A",
+          "pred_reservoir_v23": "A",
+          "pred_m2_reservoir_v23": "A",
+          "direction": "DOWN_COMMONSENSE",
+          "rho": 0.0
+        }
+      ]
+    }
+  }
+}

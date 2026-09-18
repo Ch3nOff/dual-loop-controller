@@ -34,7 +34,10 @@ required_files = [
     (".eval_results/piqa.yaml", ".eval_results/piqa.yaml"),
     (".eval_results/bbh.yaml", ".eval_results/bbh.yaml"),
     (".eval_results/matrix_helper.yaml", ".eval_results/matrix_helper.yaml"),
-    (".eval_results/macro_20_benchmarks.yaml", ".eval_results/macro_20_benchmarks.yaml")
+    (".eval_results/macro_20_benchmarks.yaml", ".eval_results/macro_20_benchmarks.yaml"),
+    ("authentic_20_benchmarks_all_systems.png", "authentic_20_benchmarks_all_systems.png"),
+    ("eval_results/authentic_20_benchmarks_all_systems.json", "eval_results/authentic_20_benchmarks_all_systems.json"),
+    ("eval_results/authentic_20_benchmarks_all_systems.png", "eval_results/authentic_20_benchmarks_all_systems.png")
 ]
 
 # Optional legacy checkpoint files if present
