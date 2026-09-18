@@ -22,12 +22,17 @@ def _find_transformer_layers(model: nn.Module) -> nn.ModuleList:
     # 3. Base model direct (e.g. Qwen2Model.layers)
     if hasattr(model, "layers"):
         return model.layers
-    # 4. GPT-style transformer architectures
+    # 4. GLM / ChatGLM architectures (e.g. ChatGLMForConditionalGeneration.transformer.encoder.layers)
+    if hasattr(model, "transformer") and hasattr(model.transformer, "encoder") and hasattr(model.transformer.encoder, "layers"):
+        return model.transformer.encoder.layers
+    if hasattr(model, "encoder") and hasattr(model.encoder, "layers"):
+        return model.encoder.layers
+    # 5. GPT-style transformer architectures
     if hasattr(model, "transformer") and hasattr(model.transformer, "h"):
         return model.transformer.h
     raise AttributeError(
         "Could not automatically locate transformer layers in the provided model. "
-        "Expected `model.model.language_model.layers`, `model.model.layers`, `model.layers`, or `model.transformer.h`."
+        "Expected `model.model.language_model.layers`, `model.model.layers`, `model.transformer.encoder.layers`, `model.layers`, or `model.transformer.h`."
     )
 
 
