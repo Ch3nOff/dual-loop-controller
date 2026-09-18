@@ -76,58 +76,7 @@ graph TD
 
 ---
 
-## 🌐 Leaderboard Resmi Hugging Face & Audit Data Asli (Non-Prediktif)
 
-Skor benchmark resmi yang diambil langsung dari leaderboard resmi Hugging Face ([`TIGER-Lab/MMLU-Pro`](https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro), [`openai/gsm8k`](https://huggingface.co/datasets/openai/gsm8k), dan [`OpenEvals/leaderboard-data`](https://huggingface.co/datasets/OpenEvals/leaderboard-data)) melalui API resmi Hugging Face. **100% data riil — bukan prediksi.**
-
-![Leaderboard Resmi Hugging Face](../eval_results/hf_official_leaderboard_comparison.png)
-
-### 📊 Posisi Leaderboard di Hugging Face Hub
-
-| Benchmark Dataset Resmi | Jumlah Model Terindeks | Model Teratas & Skor | Qwen/Qwen3.5-2B Base | Dual-Loop Qwen3.5-2B | Keunggulan Riil |
-| :--- | :---: | :--- | :---: | :---: | :--- |
-| **MMLU-Pro** (`TIGER-Lab/MMLU-Pro`) | 140 model | `MiniMax-M2.1` (**88.0%**) | 55.3% | **56.8%** | **+11.8% di atas Qwen2.5-7B (45.0%)**, mengungguli Qwen2.5-3B (43.7%) |
-| **GSM8K** (`openai/gsm8k`) | 18 model | `MiMo-V2.5-Pro` (**99.6%**) | Baseline Triage | **83.3%** | **+3.4% di atas Qwen2-7B (79.9%)**, 0 token bloat |
-| **2-Bench Matrix Dilemma** | 6 jebakan multi-opsi | Human Baseline (50.0%) | 50.0% | **83.3%** | **+33.3% Peningkatan Akurasi**, 40%–57% distraktor dibuang |
-| **Macro Suite Autentik** ($N=200$) | 20 benchmark independen| Qwen Base (56.0%) | 56.0% | **57.5%** | **3 Diselamatkan / 0 Degradasi (Garansi 0.0% Negative Drift)** |
-
----
-
-## 🏆 Leaderboard AI Kompetitif: Perbandingan Lintas Model
-
-Bagaimana performa Dual-Loop Cognitive Controller jika dibandingkan dengan model-model lain—mulai dari model berukuran kecil, menengah, hingga model frontier seperti **Claude 3 Opus**, **GPT-4o**, dan **DeepSeek-R1**?
-
-![Leaderboard AI Kompetitif](../eval_results/frontier_model_leaderboard.png)
-
-### Matriks Peringkat & Efisiensi Model
-
-| Model | Ukuran Parameter | Paradigma Penalaran | Ekstra Token Output | Waktu Jawab (Latency) | Akurasi Dilema Makro (%) | Ketahanan Distraktor |
-| :--- | :---: | :--- | :---: | :---: | :---: | :---: |
-| **DeepSeek-R1** | 671B (MoE) | Large-Scale RL CoT | +2.300 token | 35.0s | **91.2%** | Tinggi (92/100) |
-| **Claude 3.5 Sonnet (CoT)** | Frontier | Discrete Scratchpad CoT | +1.450 token | 28.0s | **89.4%** | Tinggi (90/100) |
-| **Claude 3 Opus** | Frontier | Autoregressive + Dense S2 | +650 token | 18.0s | **88.2%** | Tinggi (88/100) |
-| **GPT-4o** | Frontier | Autoregressive Standard | +700 token | 12.0s | **87.5%** | Tinggi (88/100) |
-| **Dual-Loop v2.2 (Qwen 2B)** | **1.88B (Lokal)** | **Latent Deliberation + Matrix Helper** | **0 token ekstra** | **0.23s (Cold)** | **83.3%** | **Sangat Tinggi (95/100)** |
-| **LLaMA-3.1-8B-Instruct** | 8.03B | Instruction Fine-Tuned | 0 token | 1.8s | **71.4%** | Sedang (58/100) |
-| **Claude 3 Haiku** | ~20B | Distilled Ringan | 0 token | 3.8s | **69.2%** | Sedang (55/100) |
-| **Qwen2.5-7B-Instruct** | 7.61B | Instruction Fine-Tuned | 0 token | 3.2s | **68.5%** | Sedang (52/100) |
-| **GPT-4o-mini** | ~8B | Distilled Ringan | 0 token | 4.5s | **67.8%** | Sedang (50/100) |
-| **Qwen3.5-2B (Raw Base)** | 1.88B | Frozen Causal LM | 0 token | 0.21s | **50.0%** | Rendah (35/100) |
-| **GPT-3.5 Turbo** | ~20B | Dense Autoregressive | 0 token | 2.8s | **48.2%** | Rendah (32/100) |
-| **LLaMA-2-7B** | 6.74B | Frozen Causal LM | 0 token | 1.2s | **42.5%** | Rendah (28/100) |
-| **Dual-Loop Memory Recall** | **1.88B (Lokal)** | **Hippocampal Episodic Shortcut** | **0 token ekstra** | **<0.01s (0 FLOPs)** | **83.3%** | **Sangat Tinggi (95/100)** |
-
-### 🎯 Di Mana Saja Dual-Loop Unggul?
-1. **Melompati Kelas Parameter (Punching 4x Above Its Weight)**:
-   Model lokal **1.88B parameter** yang dipasangi Dual-Loop mencapai **83.3%** akurasi makro, melampaui model 8B penuh (LLaMA-3.1-8B di 71.4%, Qwen2.5-7B di 68.5%) dan mendekati model komersial teratas (**Claude 3 Opus di 88.2%**, **GPT-4o di 87.5%**).
-2. **Ketahanan Super Terhadap Distraktor (Tversky Elimination-by-Aspects)**:
-   Pada jebakan 7 opsi seperti BBH-ColoredObjects, Cognitive Matrix Helper membuang 40%–57% opsi palsu di Bench 1, memungkinkan Bench 2 meraih akurasi **80.0% – 94.4%**, menyamai atau melampaui Claude 3 Opus (85.0%).
-3. **100x Lebih Cepat Tanpa Token Bloat**:
-   Model reasoning CoT butuh 25–45 detik untuk memuntahkan ribuan token teks. Dual-Loop berdeliberasi di ruang latent vektor GPU SRAM, selesai dalam **0.23 detik** tanpa token CoT yang menguras VRAM.
-4. **Shortcut Memori Instan 3.146x**:
-   Memori Episodik Hippocampal mengingat rute logika yang pernah diselesaikan hanya dalam **<0.01 detik** (percepatan **3.146,9x** dengan 0 FLOPs tambahan).
-
----
 
 ## 🚀 Benchmark Terbaru: 2-Bench Cognitive Matrix Helper
 

@@ -406,10 +406,10 @@ Standard LLMs suffer from complete amnesia between inference calls, requiring ex
                 outputs=mem_output
             )
 
-        with gr.TabItem("🏆 Frontier Leaderboard & Architecture"):
+        with gr.TabItem("🏛️ Architecture & Verified Benchmarks"):
             gr.Markdown("""
-### Frontier Competitive Leaderboard & Technical Advantage Audit
-Evaluated on authentic `Qwen/Qwen3.5-2B` backbone ($D=2048$, Layer 11 hook) vs. Small, Mid-Tier, and Frontier AI Models.
+### Architectural Blueprint: The Smart & Efficient Artificial Brain
+Dual-Loop Deliberation Engine operating on frozen `Qwen/Qwen3.5-2B` ($D=2048$, Layer 11 Hook).
 """)
             def get_img(fname):
                 for p in [fname, os.path.join("spaces_demo", fname), os.path.join("eval_results", fname)]:
@@ -417,20 +417,21 @@ Evaluated on authentic `Qwen/Qwen3.5-2B` backbone ($D=2048$, Layer 11 hook) vs. 
                         return p
                 return None
 
-            img_hf_board = get_img("hf_official_leaderboard_comparison.png")
-            if img_hf_board:
-                gr.Image(img_hf_board, label="Official Hugging Face Leaderboard & Multi-Task Comparison")
-
-            img_board = get_img("frontier_model_leaderboard.png")
-            if img_board:
-                gr.Image(img_board, label="Frontier Competitive Leaderboard")
-
-            gr.Markdown("""
-### Architectural Blueprint: The Smart & Efficient Artificial Brain
-""")
             img_arch = get_img("smart_brain_loop_architecture.png")
             if img_arch:
-                gr.Image(img_arch, label="Smart Brain Architecture")
+                gr.Image(img_arch, label="Smart Brain Architecture (3-Pass Loop)")
+
+            gr.Markdown("""
+### Verified Empirical Benchmarks (Authentic N=200 Multi-Task Suite)
+Zero synthetic estimates — authentic PyTorch forward passes on frozen Qwen3.5-2B.
+""")
+            img_bench = get_img("authentic_20_benchmark_scoreboard.png")
+            if img_bench:
+                gr.Image(img_bench, label="Authentic 20-Benchmark Scoreboard (N=200)")
+
+            img_evol = get_img("architecture_version_evolution.png")
+            if img_evol:
+                gr.Image(img_evol, label="Architecture Version Evolution")
 
     gr.Markdown("""
 ---

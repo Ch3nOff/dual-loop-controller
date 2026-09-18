@@ -26,7 +26,6 @@ datasets:
 - openbookqa
 - piqa
 - lukaemon/bbh
-- TIGER-Lab/MMLU-Pro
 metrics:
 - accuracy
 model-index:
@@ -186,20 +185,6 @@ model-index:
     source:
       name: Authentic 20-Benchmark Evaluation Run (N=200)
       url: https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b/blob/main/eval_results/qwen35_2b_authentic_20_benchmarks.json
-  - task:
-      type: text-generation
-    dataset:
-      name: MMLU-Pro (Multi-Task Reasoning)
-      type: TIGER-Lab/MMLU-Pro
-      config: default
-      split: test
-    metrics:
-    - name: Accuracy
-      type: accuracy
-      value: 55.3
-    source:
-      name: OpenEvals Multi-Benchmark Dataset
-      url: https://huggingface.co/datasets/OpenEvals/leaderboard-data
 ---
 
 # Dual-Loop Cognitive Controller: Qwen3.5-2B Official Adapter (v2.2+)
@@ -207,9 +192,6 @@ model-index:
 Official weights for the **Dual-Loop Cognitive Controller** on `Qwen/Qwen3.5-2B` ($D=2048$, Layer 11 hook, ~110M parameter deliberation adapter).
 
 The Dual-Loop Controller provides hardware-aligned, non-autoregressive **System 2 deliberation** directly within the latent residual stream of modern language models. It enables models to recursively deliberate in continuous hidden space without generating costly Chain-of-Thought (CoT) text tokens, eliminating KV-cache explosion and 30–60 second generation latencies.
-
-![Official Hugging Face Benchmark Leaderboard](hf_official_leaderboard_comparison.png)
-![Frontier Competitive Leaderboard](frontier_model_leaderboard.png)
 
 <p align="center">
   <a href="https://huggingface.co/spaces/CH3NDev/dual-loop-controller-demo"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-ZeroGPU%20Live%20Demo-blue.svg" alt="Live Demo"></a>
@@ -249,11 +231,9 @@ This adapter is strictly designed, calibrated, and hooked into the architectural
 1. **Cognitive Matrix Helper (Tversky Elimination-by-Aspects)**:
    - Evaluates options in Bench 1 (Raw Screening), logs distractor choices (*wrong logs*), and dynamically prunes 40%–57% of candidate noise.
    - Concentrates System 2 latent cross-attention in Bench 2 strictly on surviving contenders, boosting reasoning accuracy from **50.0% to 83.3% (+33.3% to +40.0% net gain)** on challenging multi-choice dilemmas with **0.0% negative drift**.
-2. **Frontier-Competitive Performance**:
-   - Outperforms 8B parameter instruction-tuned models (LLaMA-3.1-8B at 71.4%, Qwen2.5-7B at 68.5%) and closes the gap to frontier commercial models (**Claude 3 Opus at 88.2%**, **GPT-4o at 87.5%**).
-3. **Hippocampal Episodic Virtual Memory**:
+2. **Hippocampal Episodic Virtual Memory**:
    - 3-Pass selective memory loop recalls verified reasoning anchors in **<0.01 seconds** (a **3,146.9x speedup**) with zero FLOPs and 100% stability.
-4. **Hardware-Aligned Latent Deliberation**:
+3. **Hardware-Aligned Latent Deliberation**:
    - Deliberates in GPU SRAM / L2 cache with **0 extra output tokens**, reducing latency from 30–45s down to **0.23 seconds**.
 
 ---
@@ -303,24 +283,6 @@ Evaluated 100% authentically on `Qwen/Qwen3.5-2B` ($D=2048$, Layer 11 hook). **Z
 | 5 | **Inverted Physics** | 4 Choices | `[B]` (61.7% - INCORRECT) | Option `[D]` pruned $\rightarrow$ Survivors: `[A, B, C]` | `[B]` (59.0% - INCORRECT) | **PRESERVED INCORRECT** |
 | 6 | **Counter-Syllogism** | 2 Choices | **`[A]` (95.3% - CORRECT)** | Binary Dilemma (`[A, B]`) | **`[A]` (96.1% - CORRECT)** | **PRESERVED CORRECT** |
 | $\Sigma$ | **Macro Overall Summary** | **6 Challenging Tasks** | **50.0% (3/6)** | **40% to 57.1% Distractor Options Pruned** | **83.3% (5/6)** | **+33.3% Net Gain (0% Regression)** |
-
----
-
-## 🏆 Frontier Competitive Comparison
-
-| Model | Parameter Scale | Extra Output Tokens | Latency | Macro Dilemma Acc (%) | Distractor Resistance |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **DeepSeek-R1** | 671B (MoE) | +2,300 tokens | 35.0s | **91.2%** | High (92/100) |
-| **Claude 3.5 Sonnet (CoT)** | Frontier | +1,450 tokens | 28.0s | **89.4%** | High (90/100) |
-| **Claude 3 Opus** | Frontier | +650 tokens | 18.0s | **88.2%** | High (88/100) |
-| **GPT-4o** | Frontier | +700 tokens | 12.0s | **87.5%** | High (88/100) |
-| 🌟 **Dual-Loop v2.2 (Qwen 2B)** | **1.88B (Local)** | **0 extra tokens** | **0.23s** | **83.3%** | **Very High (95/100)** |
-| **LLaMA-3.1-8B-Instruct** | 8.03B | 0 tokens | 1.8s | **71.4%** | Moderate (58/100) |
-| **Claude 3 Haiku** | ~20B | 0 tokens | 3.8s | **69.2%** | Moderate (55/100) |
-| **Qwen2.5-7B-Instruct** | 7.61B | 0 tokens | 3.2s | **68.5%** | Moderate (52/100) |
-| **GPT-4o-mini** | ~8B | 0 tokens | 4.5s | **67.8%** | Moderate (50/100) |
-| **Qwen3.5-2B (Raw Base)** | 1.88B | 0 tokens | 0.21s | **50.0%** | Low (35/100) |
-| ⚡ **Dual-Loop Memory Recall** | **1.88B (Local)** | **0 extra tokens** | **<0.01s** | **83.3%** | **Very High (95/100)** |
 
 ---
 
