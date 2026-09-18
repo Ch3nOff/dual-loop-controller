@@ -175,16 +175,22 @@ class CognitiveMatrixHelper:
         scores_delib_survivors: Union[List[float], np.ndarray],
         survivor_indices: np.ndarray,
         lambda_delib: float = 0.85,
-        eliminated_fill_value: float = -1e9
+        eliminated_fill_value: float = -1e9,
+        soft_penalty: bool = False,
+        soft_penalty_val: float = -4.5
     ) -> np.ndarray:
         """
         Merges Bench 1 log-likelihoods with Bench 2 deliberation scores on surviving candidates.
-        Eliminated candidates are assigned eliminated_fill_value (-inf).
+        Eliminated candidates are assigned eliminated_fill_value (-inf) or a soft penalty
+        (allowing belief revision upon strong evidence).
         """
         s_base = np.array(scores_base, dtype=np.float32)
         s_delib_surv = np.array(scores_delib_survivors, dtype=np.float32)
 
-        final_scores = np.full_like(s_base, fill_value=eliminated_fill_value)
+        if soft_penalty:
+            final_scores = s_base + soft_penalty_val
+        else:
+            final_scores = np.full_like(s_base, fill_value=eliminated_fill_value)
 
         for local_idx, orig_idx in enumerate(survivor_indices):
             # Convex combination on surviving candidates

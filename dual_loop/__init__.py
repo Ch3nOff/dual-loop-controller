@@ -19,6 +19,7 @@ from .verification import (
     AdaptiveSurpriseThreshold
 )
 from .matrix_helper import CognitiveMatrixHelper
+from .cognitive_judge import ProbabilisticCognitiveJudge
 from .decoder import DualLoopTransformer
 from .adapters.latent_adapter import LatentDeliberationAdapter
 from .adapters.qwen_adapter import (
