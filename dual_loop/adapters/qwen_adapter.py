@@ -69,6 +69,7 @@ class DualLoopQwenModel(nn.Module):
         enable_critique: bool = True,
         use_learned_halting: bool = False,
         use_hypothesis_verification: bool = True,
+        bottleneck_dim: Optional[int] = None,
         **adapter_kwargs
     ):
         super().__init__()
@@ -122,7 +123,7 @@ class DualLoopQwenModel(nn.Module):
         self.enabled = True
         self.last_telemetry: Dict[str, Any] = {}
         
-        # Instantiate plug-and-play adapter
+        # Instantiate plug-and-play adapter (with optional bottleneck compression)
         self.adapter = LatentDeliberationAdapter(
             d_model=self.hidden_size,
             n_heads=getattr(cfg, "num_attention_heads", 8) if cfg else 8,
@@ -135,6 +136,7 @@ class DualLoopQwenModel(nn.Module):
             enable_critique=enable_critique,
             use_learned_halting=use_learned_halting,
             use_hypothesis_verification=use_hypothesis_verification,
+            bottleneck_dim=bottleneck_dim,
             **adapter_kwargs
         )
 
@@ -299,6 +301,8 @@ class DualLoopQwenModel(nn.Module):
             "trainable_ratio_pct": round(ratio, 3),
             "target_layer_idx": self.layer_idx,
             "hidden_size": self.hidden_size,
+            "bottleneck_dim": getattr(self.adapter, "bottleneck_dim", None),
+            "d_inner": getattr(self.adapter, "d_inner", self.hidden_size),
             "k_steps": self.k_steps,
             "adapter_mode": self.adapter.adapter_mode
         }
@@ -474,6 +478,7 @@ def attach_dual_loop_to_qwen(
     model: nn.Module,
     layer_idx: Optional[int] = None,
     k_steps: int = 2,
+    bottleneck_dim: Optional[int] = None,
     **kwargs
 ) -> DualLoopQwenModel:
     """
@@ -487,20 +492,28 @@ def attach_dual_loop_to_qwen(
                 "Call remove_hook() before attaching to a different layer."
             )
         return model
-    return DualLoopQwenModel(model, layer_idx=layer_idx, k_steps=k_steps, **kwargs)
+    return DualLoopQwenModel(model, layer_idx=layer_idx, k_steps=k_steps, bottleneck_dim=bottleneck_dim, **kwargs)
 
 
 def attach_dual_loop(
     model: nn.Module,
     layer_idx: Optional[int] = None,
     k_steps: int = 2,
+    bottleneck_dim: Optional[int] = None,
     **kwargs
 ) -> DualLoopQwenModel:
     """
     Universal factory to attach the Dual-Loop Cognitive Controller to ANY Transformer model
-    (Llama-3, Mistral, Qwen, Gemma, DeepSeek, Phi, etc.).
+    (Llama-3, Mistral, Qwen, Gemma, DeepSeek, GLM-4, Phi, etc.).
+    
+    Args:
+        model: Hugging Face or PyTorch Transformer model.
+        layer_idx: Decoder layer index to hook (defaults to midpoint L // 2).
+        k_steps: Number of recurrent latent deliberation steps (0 for System 1 bypass).
+        bottleneck_dim: Optional compressed latent dimension (e.g. 1024 or 512 for large
+                        backbones D=4096 like GLM-4 or LLaMA-3 to train on 8GB VRAM).
     """
-    return attach_dual_loop_to_qwen(model, layer_idx=layer_idx, k_steps=k_steps, **kwargs)
+    return attach_dual_loop_to_qwen(model, layer_idx=layer_idx, k_steps=k_steps, bottleneck_dim=bottleneck_dim, **kwargs)
 
 
 attach_dual_loop_to_model = attach_dual_loop

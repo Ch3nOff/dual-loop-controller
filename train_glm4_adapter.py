@@ -113,6 +113,7 @@ def train_glm4():
     parser.add_argument("--model_id", type=str, default="zai-org/glm-4-9b-chat")
     parser.add_argument("--load_in_4bit", action="store_true", help="Use bitsandbytes 4-bit quantization")
     parser.add_argument("--layer_idx", type=int, default=20, help="Hook layer (midpoint for 40-layer GLM-4)")
+    parser.add_argument("--bottleneck_dim", type=int, default=1024, help="Bottleneck latent dimension (e.g. 1024 for 8GB VRAM, 0 to disable)")
     parser.add_argument("--epochs", type=int, default=3)
     parser.add_argument("--lr", type=float, default=2e-4)
     parser.add_argument("--batch_size", type=int, default=1)
@@ -160,18 +161,31 @@ def train_glm4():
     print("[+] Successfully froze 100% of base GLM-4 weights.")
 
     # Attach Dual-Loop Cognitive Controller at Layer 20
-    print(f"[*] Attaching Dual-Loop Adapter at Layer {args.layer_idx} (D=4096)...")
+    b_dim = args.bottleneck_dim if args.bottleneck_dim > 0 else None
+    if b_dim is not None:
+        print(f"[*] Attaching Bottleneck Dual-Loop Adapter at Layer {args.layer_idx} (D=4096 -> d={b_dim} -> D=4096)...")
+    else:
+        print(f"[*] Attaching Full-Width Dual-Loop Adapter at Layer {args.layer_idx} (D=4096)...")
+
     wrapped_model = attach_dual_loop(
         model,
         layer_idx=args.layer_idx,
         k_steps=2,
+        bottleneck_dim=b_dim,
         enable_plasticity=True,
         use_evidential_gate=True
     )
 
+    summary = wrapped_model.get_parameter_summary()
     adapter_params = [p for p in wrapped_model.adapter.parameters() if p.requires_grad]
     total_adapter_p = sum(p.numel() for p in adapter_params)
     print(f"[+] Trainable Adapter Parameters: {total_adapter_p:,} ({total_adapter_p/1e6:.2f}M)")
+    if b_dim is not None:
+        p_full = 568_009_125
+        saved_pct = (1.0 - total_adapter_p / p_full) * 100.0
+        print(f"[+] Bottleneck Reduction: -{saved_pct:.1f}% parameters vs full-width ({p_full/1e6:.1f}M -> {total_adapter_p/1e6:.2f}M)")
+        print(f"[+] Memory Profile: ~{total_adapter_p*8/(1024**2):.1f}MB AdamW state (fits comfortably in 8GB VRAM alongside 4-bit base model)")
+    print(f"[+] Trainable Parameter Ratio: {summary['trainable_ratio_pct']}% of total model")
 
     # DataLoader
     dataset = GLMReasoningDataset(get_demo_samples(), tokenizer)

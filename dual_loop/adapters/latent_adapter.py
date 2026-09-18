@@ -55,7 +55,8 @@ class LatentDeliberationAdapter(nn.Module):
         use_evidential_gate: bool = True,
         use_open_concept: bool = True,
         tau_novelty: float = 0.40,
-        tau_unseen: float = 0.65
+        tau_unseen: float = 0.65,
+        bottleneck_dim: Optional[int] = None
     ):
         super().__init__()
         self.d_model = d_model
@@ -71,14 +72,40 @@ class LatentDeliberationAdapter(nn.Module):
         self.use_open_concept = use_open_concept
         object.__setattr__(self, "_lm_head_ref", None)
         
-        # Memory compressor
-        self.cwm = CognitiveWorkingMemory(d_model=d_model, num_slots=num_cwm_slots, n_heads=n_heads)
+        # Bottleneck Latent Deliberation: down-project d_model -> d_inner for compact System 2
+        # deliberation, then up-project back to d_model for residual injection.
+        if bottleneck_dim is not None and int(bottleneck_dim) < d_model:
+            self.bottleneck_dim = int(bottleneck_dim)
+            self.d_inner = int(bottleneck_dim)
+            self.down_proj = nn.Linear(d_model, self.d_inner)
+            self.up_proj = nn.Linear(self.d_inner, d_model)
+            nn.init.normal_(self.down_proj.weight, std=0.02)
+            nn.init.zeros_(self.down_proj.bias)
+            # Crucial PEFT property: initialize up_proj to zeros so that at initial state,
+            # deliberation delta is zero (preserving base model behavior until trained)
+            nn.init.zeros_(self.up_proj.weight)
+            nn.init.zeros_(self.up_proj.bias)
+        else:
+            self.bottleneck_dim = None
+            self.d_inner = d_model
+            self.down_proj = None
+            self.up_proj = None
+
+        # Ensure head count divides inner dimension cleanly
+        inner_heads = n_heads
+        if self.d_inner % inner_heads != 0:
+            divisors = [h for h in [16, 8, 4, 2, 1] if self.d_inner % h == 0]
+            inner_heads = divisors[0] if divisors else 1
+        self.inner_heads = inner_heads
         
-        # System 2 recurrent controller operating natively in d_model
+        # Memory compressor
+        self.cwm = CognitiveWorkingMemory(d_model=self.d_inner, num_slots=num_cwm_slots, n_heads=self.inner_heads)
+        
+        # System 2 recurrent controller operating natively in d_inner
         self.controller = RecurrentLatentController(
-            d_model=d_model,
-            n_heads=n_heads,
-            d_ff=d_model * 2,
+            d_model=self.d_inner,
+            n_heads=self.inner_heads,
+            d_ff=self.d_inner * 2,
             num_thought_tokens=num_thought_tokens,
             max_ponder_steps=max_ponder_steps,
             capacity_factor=capacity_factor,
@@ -99,7 +126,7 @@ class LatentDeliberationAdapter(nn.Module):
         # Evidential Epistemic Self-Recognition Gate (Dirichlet uncertainty decomposition)
         if use_evidential_gate:
             self.evidential_gate = EvidentialEpistemicGate(
-                d_model=d_model,
+                d_model=self.d_inner,
                 tau_novelty=tau_novelty,
                 tau_unseen=tau_unseen
             )
@@ -109,7 +136,7 @@ class LatentDeliberationAdapter(nn.Module):
         # Open-Concept Continuous Manifold Synthesizer (Unprecedented concept expansion)
         if use_open_concept:
             self.open_concept_synthesizer = OpenConceptSynthesizer(
-                d_model=d_model,
+                d_model=self.d_inner,
                 tau_unseen=tau_unseen
             )
         else:
@@ -117,11 +144,11 @@ class LatentDeliberationAdapter(nn.Module):
 
         # Counterfactual Hypothesis-Testing & Conservative Verification Gate (Anti-Overthinking)
         if use_hypothesis_verification:
-            self.hypothesis_gate = HypothesisVerificationGate(d_model=d_model)
+            self.hypothesis_gate = HypothesisVerificationGate(d_model=self.d_inner)
         else:
             self.hypothesis_gate = None
 
-        # Task-Aware Uncertainty-Gated Bypass (Surprise Gate based on JSD)
+        # Task-Aware Uncertainty-Gated Bypass (Surprise Gate based on JSD, evaluates native d_model via lm_head)
         if use_surprise_gate:
             self.surprise_gate = UncertaintySurpriseGate(
                 d_model=d_model,
@@ -135,8 +162,8 @@ class LatentDeliberationAdapter(nn.Module):
         # Contrastive Distractor Suppression in Latent Space
         if use_contrastive_evidence:
             self.contrastive_accumulator = ContrastiveEvidenceAccumulator(
-                d_model=d_model,
-                n_heads=n_heads,
+                d_model=self.d_inner,
+                n_heads=self.inner_heads,
                 tau_contrast=tau_contrast
             )
         else:
@@ -144,9 +171,9 @@ class LatentDeliberationAdapter(nn.Module):
         
         if adapter_mode == "residual":
             self.residual_proj = nn.Sequential(
-                nn.Linear(d_model, d_model),
+                nn.Linear(self.d_inner, self.d_inner),
                 nn.Tanh(),
-                nn.Linear(d_model, d_model)
+                nn.Linear(self.d_inner, self.d_inner)
             )
             # Small scale initialization to stabilize residual injection
             nn.init.normal_(self.residual_proj[-1].weight, std=0.01)
@@ -256,21 +283,29 @@ class LatentDeliberationAdapter(nn.Module):
             query_rep = hidden_states[batch_idx, idx_tensor, :] # [B, D]
             is_scalar_idx = False
         
+        # 1b. Project to inner manifold if bottleneck is active
+        if self.down_proj is not None:
+            h_inner = self.down_proj(hidden_states)
+            query_rep_inner = self.down_proj(query_rep)
+        else:
+            h_inner = hidden_states
+            query_rep_inner = query_rep
+
         # 2. Compress context into working memory (pass key_padding_mask - ARCH-05)
-        memory = self.cwm(hidden_states, key_padding_mask=key_padding_mask) # [B, M, D]
+        memory = self.cwm(h_inner, key_padding_mask=key_padding_mask) # [B, M, d_inner]
         
         # 2b. Evidential Epistemic Self-Recognition (Dirichlet vacuity of evidence)
         evidential_telem = {}
         vacuity_u = None
         if self.evidential_gate is not None:
-            evidential_telem = self.evidential_gate(h=query_rep)
+            evidential_telem = self.evidential_gate(h=query_rep_inner)
             vacuity_u = evidential_telem.get("vacuity_u")
 
         # 2c. Self-Correction / Critique Falsification: nudge fast weights away from ambiguous prior attractor
         critique_telem = {}
         if critique_vector is not None and self.controller.plastic_unit is not None:
             # Check if this query is already settled in memory to prevent hyper-skepticism
-            settled_ep = self.episodic_memory.recall_settled(query_rep, sim_threshold=0.85) if hasattr(self, "episodic_memory") else None
+            settled_ep = self.episodic_memory.recall_settled(query_rep_inner, sim_threshold=0.85) if hasattr(self, "episodic_memory") else None
             is_settled = (settled_ep is not None)
             pass1_m = settled_ep.get("margin", 1.0) if settled_ep else 0.0
             
@@ -282,10 +317,11 @@ class LatentDeliberationAdapter(nn.Module):
             )
             
             if should_critique:
-                init_t = self.controller.initialize_thoughts(query_rep)
+                init_t = self.controller.initialize_thoughts(query_rep_inner)
+                crit_vec_inner = self.down_proj(critique_vector) if (self.down_proj is not None and critique_vector.size(-1) == self.d_model) else critique_vector
                 critique_telem = self.controller.plastic_unit.apply_critique_falsification(
                     thoughts=init_t,
-                    critique_vector=critique_vector,
+                    critique_vector=crit_vec_inner,
                     u_epistemic=vacuity_u
                 )
                 critique_telem["critique_blocked"] = False
@@ -294,19 +330,19 @@ class LatentDeliberationAdapter(nn.Module):
 
         # 3. Deliberate in latent space (passing u_epistemic for in-situ plastic fast-weight adaptation)
         h_thought, aux, entropies = self.controller(
-            query_rep=query_rep,
+            query_rep=query_rep_inner,
             memory=memory,
             k_steps=steps,
             dynamic_halting=dynamic_halting,
             return_aux=True,
             u_epistemic=vacuity_u
-        ) # [B, L_thought, D]
+        ) # [B, L_thought, d_inner]
         
         # 4. Hypothesis Verification & Anti-Overthinking Gate
         if self.hypothesis_gate is not None:
             h_thought, beta_gate, v_telem = self.hypothesis_gate(
                 thoughts=h_thought,
-                query_rep=query_rep,
+                query_rep=query_rep_inner,
                 memory=memory
             )
         else:
@@ -316,28 +352,35 @@ class LatentDeliberationAdapter(nn.Module):
         # 5. Contrastive Option Distractor Suppression & Directional Delta
         contrastive_scores_list = []
         if self.adapter_mode == "residual":
-            raw_delta = self.residual_proj(h_thought[:, 0, :])
+            inner_delta = self.residual_proj(h_thought[:, 0, :])
             if candidate_embeds is not None and self.contrastive_accumulator is not None:
+                cand_inner = self.down_proj(candidate_embeds) if (self.down_proj is not None and candidate_embeds.size(-1) == self.d_model) else candidate_embeds
                 c_delta, contrastive_scores = self.contrastive_accumulator(
                     thought=h_thought[:, 0, :],
-                    candidate_embeds=candidate_embeds,
-                    query_anchor=query_rep
+                    candidate_embeds=cand_inner,
+                    query_anchor=query_rep_inner
                 )
                 contrastive_scores_list = contrastive_scores.detach().cpu().tolist()
                 # Contrastive refinement on top of trained deliberation projection
-                raw_delta = raw_delta + 0.35 * c_delta
+                inner_delta = inner_delta + 0.35 * c_delta
 
             # 5b. Open-Concept Manifold Synthesis (for unprecedented/unseen concepts)
             concept_telem = {}
             if self.open_concept_synthesizer is not None and vacuity_u is not None:
-                last_err = (h_thought[:, 0, :] - query_rep)
+                last_err = (h_thought[:, 0, :] - query_rep_inner)
                 proto_c, concept_telem = self.open_concept_synthesizer(
-                    h_anchor=query_rep,
+                    h_anchor=query_rep_inner,
                     discrepancy=last_err,
                     vacuity_u=vacuity_u
                 )
-                if proto_c is not None and raw_delta is not None and proto_c.any():
-                    raw_delta = raw_delta + 0.15 * proto_c.squeeze(1)
+                if proto_c is not None and inner_delta is not None and proto_c.any():
+                    inner_delta = inner_delta + 0.15 * proto_c.squeeze(1)
+
+            # Project inner delta back to d_model if bottleneck is active
+            if self.up_proj is not None:
+                raw_delta = self.up_proj(inner_delta)
+            else:
+                raw_delta = inner_delta
         else:
             raw_delta = None
             concept_telem = {}
@@ -391,7 +434,11 @@ class LatentDeliberationAdapter(nn.Module):
         # 9. Integrate into stream
         if self.adapter_mode == "prefix":
             # Prepend thoughts as soft prefix: [B, L_thought + S, D]
-            enhanced = torch.cat([h_thought, hidden_states], dim=1)
+            if self.up_proj is not None:
+                h_thought_out = self.up_proj(h_thought)
+            else:
+                h_thought_out = h_thought
+            enhanced = torch.cat([h_thought_out, hidden_states], dim=1)
         elif self.adapter_mode == "residual":
             # Add thoughts as a ReZero-gated residual onto the query token
             # Gated jointly by beta_gate (hypothesis test), surprise_gate (JSD bypass),
@@ -432,6 +479,8 @@ class LatentDeliberationAdapter(nn.Module):
             "plastic_trace_norm": float(self.controller.plastic_unit.last_m_fast.norm().item()) if (self.controller.plastic_unit is not None and self.controller.plastic_unit.last_m_fast is not None) else 0.0,
             "synthesized_concepts": concept_telem.get("synthesized_count", 0),
             "gate_scale": float(torch.tanh(self.gate_alpha).item()) if hasattr(self, "gate_alpha") else 1.0,
+            "bottleneck_dim": self.bottleneck_dim,
+            "d_inner": self.d_inner,
             "adapter_mode": self.adapter_mode,
             "bypassed": False
         }
