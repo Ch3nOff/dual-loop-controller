@@ -1,0 +1,1750 @@
+{
+  "timestamp": "2026-09-18 10:21:44",
+  "benchmark": "allenai/openbookqa",
+  "split": "test",
+  "n_samples": 25,
+  "session_accuracies": {
+    "1": 32.0,
+    "2": 64.0,
+    "3": 72.0,
+    "4": 100.0,
+    "5": 100.0
+  },
+  "persistence_accuracy_session_6a": 100.0,
+  "reset_accuracy_session_6b": 32.0,
+  "total_wrong_logs_stored": {
+    "1": 17,
+    "2": 26,
+    "3": 33,
+    "4": 33,
+    "5": 33
+  },
+  "session_1_cold_start": 32.0,
+  "session_final_accuracy": 100.0,
+  "net_memory_gain": 68.0,
+  "session_details": {
+    "1": [
+      {
+        "idx": 0,
+        "q_key": "b723a9396f28",
+        "target": "B",
+        "prediction": "D",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 1,
+        "q_key": "d43a7aaa8f14",
+        "target": "A",
+        "prediction": "B",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 2,
+        "q_key": "948c0d2b5b43",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 3,
+        "q_key": "162aec64afee",
+        "target": "C",
+        "prediction": "B",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 4,
+        "q_key": "f76aefbdc54c",
+        "target": "C",
+        "prediction": "B",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 5,
+        "q_key": "0c83d7a8e659",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 6,
+        "q_key": "29b3af1fa5e2",
+        "target": "C",
+        "prediction": "D",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 7,
+        "q_key": "3a390719e210",
+        "target": "B",
+        "prediction": "C",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "C"
+        ],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 8,
+        "q_key": "8d86661c4492",
+        "target": "D",
+        "prediction": "D",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 9,
+        "q_key": "9d2fab1de912",
+        "target": "B",
+        "prediction": "A",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "A"
+        ],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 10,
+        "q_key": "a1413b470319",
+        "target": "C",
+        "prediction": "B",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 11,
+        "q_key": "a13ffd88e1e4",
+        "target": "B",
+        "prediction": "D",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "D"
+        ],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 12,
+        "q_key": "7b2809d72cb4",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 13,
+        "q_key": "59ae4be99973",
+        "target": "A",
+        "prediction": "B",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 14,
+        "q_key": "391d81f82c10",
+        "target": "C",
+        "prediction": "B",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 15,
+        "q_key": "6a480126a5a0",
+        "target": "D",
+        "prediction": "D",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 16,
+        "q_key": "ca4d632d8d98",
+        "target": "C",
+        "prediction": "A",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "A"
+        ],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 17,
+        "q_key": "40e5b66ef230",
+        "target": "C",
+        "prediction": "B",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 18,
+        "q_key": "802869705c37",
+        "target": "A",
+        "prediction": "D",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 19,
+        "q_key": "92f222fd1909",
+        "target": "B",
+        "prediction": "C",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "C"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "idx": 20,
+        "q_key": "63a069b9b19e",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 21,
+        "q_key": "1fec920e2b0c",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 22,
+        "q_key": "d7976b0b8a98",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 23,
+        "q_key": "a56ba8e4253f",
+        "target": "B",
+        "prediction": "A",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "A"
+        ],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 24,
+        "q_key": "7394d80ceb00",
+        "target": "B",
+        "prediction": "A",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "A"
+        ],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      }
+    ],
+    "2": [
+      {
+        "idx": 0,
+        "q_key": "b723a9396f28",
+        "target": "B",
+        "prediction": "A",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "A",
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 1,
+        "q_key": "d43a7aaa8f14",
+        "target": "A",
+        "prediction": "C",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "B",
+          "C"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "idx": 2,
+        "q_key": "948c0d2b5b43",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 3,
+        "q_key": "162aec64afee",
+        "target": "C",
+        "prediction": "A",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "A",
+          "B"
+        ],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 4,
+        "q_key": "f76aefbdc54c",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "idx": 5,
+        "q_key": "0c83d7a8e659",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 6,
+        "q_key": "29b3af1fa5e2",
+        "target": "C",
+        "prediction": "A",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "A",
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 7,
+        "q_key": "3a390719e210",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "C"
+        ],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 8,
+        "q_key": "8d86661c4492",
+        "target": "D",
+        "prediction": "D",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 9,
+        "q_key": "9d2fab1de912",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A"
+        ],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 10,
+        "q_key": "a1413b470319",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 11,
+        "q_key": "a13ffd88e1e4",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "D"
+        ],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 12,
+        "q_key": "7b2809d72cb4",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 13,
+        "q_key": "59ae4be99973",
+        "target": "A",
+        "prediction": "D",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "B",
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 14,
+        "q_key": "391d81f82c10",
+        "target": "C",
+        "prediction": "D",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "B",
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 15,
+        "q_key": "6a480126a5a0",
+        "target": "D",
+        "prediction": "D",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 16,
+        "q_key": "ca4d632d8d98",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "idx": 17,
+        "q_key": "40e5b66ef230",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "idx": 18,
+        "q_key": "802869705c37",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 19,
+        "q_key": "92f222fd1909",
+        "target": "B",
+        "prediction": "D",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "C",
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 20,
+        "q_key": "63a069b9b19e",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 21,
+        "q_key": "1fec920e2b0c",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 22,
+        "q_key": "d7976b0b8a98",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 23,
+        "q_key": "a56ba8e4253f",
+        "target": "B",
+        "prediction": "C",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "A",
+          "C"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "idx": 24,
+        "q_key": "7394d80ceb00",
+        "target": "B",
+        "prediction": "D",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "A",
+          "D"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      }
+    ],
+    "3": [
+      {
+        "idx": 0,
+        "q_key": "b723a9396f28",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A",
+          "D"
+        ],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 1,
+        "q_key": "d43a7aaa8f14",
+        "target": "A",
+        "prediction": "D",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "B",
+          "C",
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 2,
+        "q_key": "948c0d2b5b43",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 3,
+        "q_key": "162aec64afee",
+        "target": "C",
+        "prediction": "D",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "A",
+          "B",
+          "D"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "idx": 4,
+        "q_key": "f76aefbdc54c",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "idx": 5,
+        "q_key": "0c83d7a8e659",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 6,
+        "q_key": "29b3af1fa5e2",
+        "target": "C",
+        "prediction": "B",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "A",
+          "B",
+          "D"
+        ],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 7,
+        "q_key": "3a390719e210",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "C"
+        ],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 8,
+        "q_key": "8d86661c4492",
+        "target": "D",
+        "prediction": "D",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 9,
+        "q_key": "9d2fab1de912",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A"
+        ],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 10,
+        "q_key": "a1413b470319",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 11,
+        "q_key": "a13ffd88e1e4",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "D"
+        ],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 12,
+        "q_key": "7b2809d72cb4",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 13,
+        "q_key": "59ae4be99973",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B",
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 14,
+        "q_key": "391d81f82c10",
+        "target": "C",
+        "prediction": "A",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "A",
+          "B",
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 15,
+        "q_key": "6a480126a5a0",
+        "target": "D",
+        "prediction": "D",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 16,
+        "q_key": "ca4d632d8d98",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "idx": 17,
+        "q_key": "40e5b66ef230",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "idx": 18,
+        "q_key": "802869705c37",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 19,
+        "q_key": "92f222fd1909",
+        "target": "B",
+        "prediction": "A",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "A",
+          "C",
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 20,
+        "q_key": "63a069b9b19e",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 21,
+        "q_key": "1fec920e2b0c",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 22,
+        "q_key": "d7976b0b8a98",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 23,
+        "q_key": "a56ba8e4253f",
+        "target": "B",
+        "prediction": "D",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "A",
+          "C",
+          "D"
+        ],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 24,
+        "q_key": "7394d80ceb00",
+        "target": "B",
+        "prediction": "C",
+        "is_correct": false,
+        "eliminated_wrong_logs": [
+          "A",
+          "C",
+          "D"
+        ],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      }
+    ],
+    "4": [
+      {
+        "idx": 0,
+        "q_key": "b723a9396f28",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A",
+          "D"
+        ],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 1,
+        "q_key": "d43a7aaa8f14",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B",
+          "C",
+          "D"
+        ],
+        "survivor_labels": [
+          "A"
+        ]
+      },
+      {
+        "idx": 2,
+        "q_key": "948c0d2b5b43",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 3,
+        "q_key": "162aec64afee",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A",
+          "B",
+          "D"
+        ],
+        "survivor_labels": [
+          "C"
+        ]
+      },
+      {
+        "idx": 4,
+        "q_key": "f76aefbdc54c",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "idx": 5,
+        "q_key": "0c83d7a8e659",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 6,
+        "q_key": "29b3af1fa5e2",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A",
+          "B",
+          "D"
+        ],
+        "survivor_labels": [
+          "C"
+        ]
+      },
+      {
+        "idx": 7,
+        "q_key": "3a390719e210",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "C"
+        ],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 8,
+        "q_key": "8d86661c4492",
+        "target": "D",
+        "prediction": "D",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 9,
+        "q_key": "9d2fab1de912",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A"
+        ],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 10,
+        "q_key": "a1413b470319",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 11,
+        "q_key": "a13ffd88e1e4",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "D"
+        ],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 12,
+        "q_key": "7b2809d72cb4",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 13,
+        "q_key": "59ae4be99973",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B",
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 14,
+        "q_key": "391d81f82c10",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A",
+          "B",
+          "D"
+        ],
+        "survivor_labels": [
+          "C"
+        ]
+      },
+      {
+        "idx": 15,
+        "q_key": "6a480126a5a0",
+        "target": "D",
+        "prediction": "D",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 16,
+        "q_key": "ca4d632d8d98",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "idx": 17,
+        "q_key": "40e5b66ef230",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "idx": 18,
+        "q_key": "802869705c37",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 19,
+        "q_key": "92f222fd1909",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A",
+          "C",
+          "D"
+        ],
+        "survivor_labels": [
+          "B"
+        ]
+      },
+      {
+        "idx": 20,
+        "q_key": "63a069b9b19e",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 21,
+        "q_key": "1fec920e2b0c",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 22,
+        "q_key": "d7976b0b8a98",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 23,
+        "q_key": "a56ba8e4253f",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A",
+          "C",
+          "D"
+        ],
+        "survivor_labels": [
+          "B"
+        ]
+      },
+      {
+        "idx": 24,
+        "q_key": "7394d80ceb00",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A",
+          "C",
+          "D"
+        ],
+        "survivor_labels": [
+          "B"
+        ]
+      }
+    ],
+    "5": [
+      {
+        "idx": 0,
+        "q_key": "b723a9396f28",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A",
+          "D"
+        ],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 1,
+        "q_key": "d43a7aaa8f14",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B",
+          "C",
+          "D"
+        ],
+        "survivor_labels": [
+          "A"
+        ]
+      },
+      {
+        "idx": 2,
+        "q_key": "948c0d2b5b43",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 3,
+        "q_key": "162aec64afee",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A",
+          "B",
+          "D"
+        ],
+        "survivor_labels": [
+          "C"
+        ]
+      },
+      {
+        "idx": 4,
+        "q_key": "f76aefbdc54c",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "idx": 5,
+        "q_key": "0c83d7a8e659",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 6,
+        "q_key": "29b3af1fa5e2",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A",
+          "B",
+          "D"
+        ],
+        "survivor_labels": [
+          "C"
+        ]
+      },
+      {
+        "idx": 7,
+        "q_key": "3a390719e210",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "C"
+        ],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 8,
+        "q_key": "8d86661c4492",
+        "target": "D",
+        "prediction": "D",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 9,
+        "q_key": "9d2fab1de912",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A"
+        ],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 10,
+        "q_key": "a1413b470319",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 11,
+        "q_key": "a13ffd88e1e4",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "D"
+        ],
+        "survivor_labels": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "idx": 12,
+        "q_key": "7b2809d72cb4",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 13,
+        "q_key": "59ae4be99973",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B",
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "idx": 14,
+        "q_key": "391d81f82c10",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A",
+          "B",
+          "D"
+        ],
+        "survivor_labels": [
+          "C"
+        ]
+      },
+      {
+        "idx": 15,
+        "q_key": "6a480126a5a0",
+        "target": "D",
+        "prediction": "D",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "B",
+          "D"
+        ]
+      },
+      {
+        "idx": 16,
+        "q_key": "ca4d632d8d98",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "idx": 17,
+        "q_key": "40e5b66ef230",
+        "target": "C",
+        "prediction": "C",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "B"
+        ],
+        "survivor_labels": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "idx": 18,
+        "q_key": "802869705c37",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "D"
+        ],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 19,
+        "q_key": "92f222fd1909",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A",
+          "C",
+          "D"
+        ],
+        "survivor_labels": [
+          "B"
+        ]
+      },
+      {
+        "idx": 20,
+        "q_key": "63a069b9b19e",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "D"
+        ]
+      },
+      {
+        "idx": 21,
+        "q_key": "1fec920e2b0c",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 22,
+        "q_key": "d7976b0b8a98",
+        "target": "A",
+        "prediction": "A",
+        "is_correct": true,
+        "eliminated_wrong_logs": [],
+        "survivor_labels": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "idx": 23,
+        "q_key": "a56ba8e4253f",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A",
+          "C",
+          "D"
+        ],
+        "survivor_labels": [
+          "B"
+        ]
+      },
+      {
+        "idx": 24,
+        "q_key": "7394d80ceb00",
+        "target": "B",
+        "prediction": "B",
+        "is_correct": true,
+        "eliminated_wrong_logs": [
+          "A",
+          "C",
+          "D"
+        ],
+        "survivor_labels": [
+          "B"
+        ]
+      }
+    ]
+  }
+}

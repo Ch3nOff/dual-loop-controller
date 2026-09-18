@@ -32,13 +32,35 @@ class CognitiveMatrixHelper:
         self.default_temperature = default_temperature
         self.elimination_threshold = elimination_threshold
         self.min_survivors = min_survivors
+        self.wrong_log_bank: Dict[str, set] = {}
+
+    def register_wrong_choice(self, query_key: str, choice_label: str) -> None:
+        """
+        Registers an empirically refuted candidate choice into the persistent Wrong Log bank.
+        Future encounters with this query_key will automatically eliminate this choice.
+        """
+        k = str(query_key).strip()
+        if k not in self.wrong_log_bank:
+            self.wrong_log_bank[k] = set()
+        self.wrong_log_bank[k].add(str(choice_label).strip())
+
+    def get_wrong_choices(self, query_key: str) -> List[str]:
+        """Retrieves list of permanently eliminated choices for a given query."""
+        k = str(query_key).strip()
+        return sorted(list(self.wrong_log_bank.get(k, set())))
+
+    def clear_wrong_logs(self) -> None:
+        """Clears all stored wrong logs."""
+        self.wrong_log_bank.clear()
 
     def build_evidence_matrix(
         self,
         scores_base: Union[List[float], np.ndarray, torch.Tensor],
         labels: Optional[List[str]] = None,
         temperature: Optional[float] = None,
-        elim_threshold: Optional[float] = None
+        elim_threshold: Optional[float] = None,
+        query_key: Optional[str] = None,
+        banned_labels: Optional[List[str]] = None
     ) -> Dict[str, Any]:
         """
         Builds the Evidence & Elimination Matrix from Bench 1 raw log-likelihood scores.
@@ -48,18 +70,11 @@ class CognitiveMatrixHelper:
             labels: Optional choice labels (e.g. ['A', 'B', 'C', 'D']).
             temperature: Softmax temperature for probability calculation.
             elim_threshold: Minimum probability to avoid elimination.
+            query_key: Optional identifier to retrieve persistent wrong logs.
+            banned_labels: Optional list of labels to force into elimination.
 
         Returns:
-            Dict containing:
-                - 'scores': Raw scores array.
-                - 'probs': Softmax probabilities array.
-                - 'elim_mask': Boolean array where True indicates eliminated distractor.
-                - 'survivors': Integer indices of non-eliminated candidates.
-                - 'eliminated_labels': List of labels for eliminated candidates.
-                - 'survivor_labels': List of labels for surviving candidates.
-                - 'top1_idx': Index of predicted choice in Bench 1.
-                - 'margin': Score gap between top-1 and top-2 candidate.
-                - 'entropy': Predictive entropy of candidate distribution.
+            Dict containing scores, probabilities, survivors, and wrong logs.
         """
         if isinstance(scores_base, torch.Tensor):
             s_arr = scores_base.detach().cpu().float().numpy()
@@ -69,6 +84,13 @@ class CognitiveMatrixHelper:
         n_cands = len(s_arr)
         if labels is None:
             labels = [chr(65 + i) for i in range(n_cands)]
+
+        # Collect all banned labels (from query_key bank + explicit banned_labels)
+        all_banned = set()
+        if query_key is not None:
+            all_banned.update(self.get_wrong_choices(query_key))
+        if banned_labels is not None:
+            all_banned.update(banned_labels)
 
         temp = temperature if temperature is not None else self.default_temperature
         tau_elim = elim_threshold if elim_threshold is not None else self.elimination_threshold
@@ -87,20 +109,30 @@ class CognitiveMatrixHelper:
         sorted_scores = s_arr[sorted_indices]
         margin = float(sorted_scores[0] - sorted_scores[1]) if n_cands > 1 else 999.0
 
-        # Elimination logic (Eliminate wrong logs)
-        if n_cands > self.min_survivors:
-            # Ensure at least min_survivors survive
-            second_highest_prob = probs[sorted_indices[self.min_survivors - 1]]
+        # Elimination logic (Eliminate wrong logs + low-probability distractors)
+        elim_mask = np.zeros(n_cands, dtype=bool)
+
+        # 1. Force eliminate all banned wrong logs
+        for i, lbl in enumerate(labels):
+            if lbl in all_banned:
+                elim_mask[i] = True
+
+        # 2. Probability threshold elimination on non-banned candidates
+        unbanned_indices = [i for i in range(n_cands) if not elim_mask[i]]
+        if len(unbanned_indices) > self.min_survivors:
+            # Sort unbanned by score
+            unbanned_sorted = sorted(unbanned_indices, key=lambda idx: s_arr[idx], reverse=True)
+            second_highest_prob = probs[unbanned_sorted[min(len(unbanned_sorted)-1, self.min_survivors - 1)]]
             effective_cutoff = min(tau_elim, float(second_highest_prob))
-            elim_mask = probs < effective_cutoff
-            survivors = np.where(~elim_mask)[0]
-            if len(survivors) < self.min_survivors:
-                survivors = sorted_indices[:self.min_survivors]
-                elim_mask = np.ones(n_cands, dtype=bool)
-                elim_mask[survivors] = False
-        else:
-            elim_mask = np.zeros(n_cands, dtype=bool)
-            survivors = np.arange(n_cands)
+            for i in unbanned_indices:
+                if probs[i] < effective_cutoff:
+                    elim_mask[i] = True
+
+        survivors = np.where(~elim_mask)[0]
+        # Safety fallback: Always ensure at least 1 survivor remains
+        if len(survivors) == 0:
+            survivors = np.array([sorted_indices[0]], dtype=int)
+            elim_mask[sorted_indices[0]] = False
 
         survivors = np.sort(survivors)
         eliminated_indices = np.where(elim_mask)[0]

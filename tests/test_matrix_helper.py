@@ -65,5 +65,38 @@ class TestCognitiveMatrixHelper(unittest.TestCase):
         # Survivor 1 (Choice B) should now have highest score
         self.assertEqual(np.argmax(fused), 1)
 
+    def test_wrong_log_bank_persistence(self):
+        q_id = "test_question_123"
+        # Initially no wrong logs
+        self.assertEqual(self.helper.get_wrong_choices(q_id), [])
+
+        # Register wrong choice "A"
+        self.helper.register_wrong_choice(q_id, "A")
+        self.assertEqual(self.helper.get_wrong_choices(q_id), ["A"])
+
+        scores = [0.0, -1.0, -2.0, -3.0]
+        labels = ["A", "B", "C", "D"]
+        # In scores, "A" has the highest score (0.0), but it was logged as wrong!
+        matrix = self.helper.build_evidence_matrix(scores, labels=labels, query_key=q_id)
+        # "A" must be eliminated because it is in the wrong log bank!
+        self.assertIn("A", matrix["eliminated_labels"])
+        self.assertNotIn("A", matrix["survivor_labels"])
+
+        # Register second wrong choice "B"
+        self.helper.register_wrong_choice(q_id, "B")
+        self.assertEqual(self.helper.get_wrong_choices(q_id), ["A", "B"])
+
+        matrix2 = self.helper.build_evidence_matrix(scores, labels=labels, query_key=q_id)
+        self.assertIn("A", matrix2["eliminated_labels"])
+        self.assertIn("B", matrix2["eliminated_labels"])
+        self.assertNotIn("A", matrix2["survivor_labels"])
+        self.assertNotIn("B", matrix2["survivor_labels"])
+        # Remaining survivors must be C and D
+        self.assertListEqual(matrix2["survivor_labels"], ["C", "D"])
+
+        # Clear wrong logs
+        self.helper.clear_wrong_logs()
+        self.assertEqual(self.helper.get_wrong_choices(q_id), [])
+
 if __name__ == "__main__":
     unittest.main()
