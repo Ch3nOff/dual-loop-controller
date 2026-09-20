@@ -56,7 +56,12 @@ class LatentDeliberationAdapter(nn.Module):
         use_open_concept: bool = True,
         tau_novelty: float = 0.40,
         tau_unseen: float = 0.65,
-        bottleneck_dim: Optional[int] = None
+        bottleneck_dim: Optional[int] = None,
+        enable_homeostasis: bool = False,
+        enable_nullspace_projection: bool = False,
+        enable_mdl_selection: bool = False,
+        enable_functorial_mapping: bool = False,
+        enable_brain_sandbox: bool = False
     ):
         super().__init__()
         self.d_model = d_model
@@ -137,7 +142,8 @@ class LatentDeliberationAdapter(nn.Module):
         if use_open_concept:
             self.open_concept_synthesizer = OpenConceptSynthesizer(
                 d_model=self.d_inner,
-                tau_unseen=tau_unseen
+                tau_unseen=tau_unseen,
+                enable_nullspace_projection=enable_nullspace_projection
             )
         else:
             self.open_concept_synthesizer = None
@@ -199,6 +205,40 @@ class LatentDeliberationAdapter(nn.Module):
         self.conflict_monitor = CognitiveConflictMonitor()
         self.anti_skepticism_filter = AntiHyperSkepticismFilter()
 
+        # Biological Homeostasis & Active Inference
+        self.enable_homeostasis = enable_homeostasis
+        if enable_homeostasis:
+            from ..homeostasis import ActiveInferencePolicyRouter
+            self.homeostasis_router = ActiveInferencePolicyRouter(d_model=self.d_inner)
+        else:
+            self.homeostasis_router = None
+
+        # Orthogonal Nullspace Projection
+        self.enable_nullspace_projection = enable_nullspace_projection
+        if enable_nullspace_projection:
+            from ..nullspace_engine import OrthogonalNullspaceProjector
+            self.nullspace_projector = OrthogonalNullspaceProjector(d_model=self.d_inner)
+        else:
+            self.nullspace_projector = None
+
+        # Neuro-Symbolic MDL Selector
+        self.enable_mdl_selection = enable_mdl_selection
+        if enable_mdl_selection:
+            from ..mdl_selector import NeuroSymbolicMDLSelector
+            self.mdl_selector = NeuroSymbolicMDLSelector(d_model=self.d_inner)
+        else:
+            self.mdl_selector = None
+
+        # Functorial Cross-Domain Mapper
+        self.enable_functorial_mapping = enable_functorial_mapping
+        if enable_functorial_mapping:
+            from ..functorial_engine import FunctorialCrossDomainMapper
+            self.functorial_mapper = FunctorialCrossDomainMapper(d_model=self.d_inner, num_slots=num_cwm_slots)
+        else:
+            self.functorial_mapper = None
+
+        self.enable_brain_sandbox = enable_brain_sandbox
+
     def set_continual_mode(self, enabled: bool = True, decay: float = 0.90):
         """Enables continual learning across trials/runs without amnesia."""
         self.continual_mode = enabled
@@ -239,6 +279,26 @@ class LatentDeliberationAdapter(nn.Module):
         """
         steps = self.max_ponder_steps if k_steps is None else k_steps
         
+        homeostasis_telem = {}
+        if self.enable_homeostasis and self.homeostasis_router is not None:
+            B_cur, S_cur, _ = hidden_states.shape
+            is_streaming = (S_cur == 1)
+            approx_u = 0.50
+            if self.evidential_gate is not None:
+                q_fast = hidden_states[:, -1, :]
+                q_fast_in = self.down_proj(q_fast) if self.down_proj is not None else q_fast
+                ev_fast = self.evidential_gate(h=q_fast_in)
+                if "vacuity_u" in ev_fast and ev_fast["vacuity_u"] is not None:
+                    approx_u = float(ev_fast["vacuity_u"].mean().item())
+            h_eval = self.down_proj(hidden_states) if self.down_proj is not None else hidden_states
+            effective_steps, homeostasis_telem = self.homeostasis_router.select_policy(
+                h_current=h_eval,
+                vacuity_u=approx_u,
+                is_token_streaming=is_streaming,
+                base_k_steps=steps
+            )
+            steps = effective_steps
+
         # Zero pondering steps: exact identity bypass (System 1 mode)
         if steps == 0:
             self.controller.reset_state()
@@ -256,6 +316,7 @@ class LatentDeliberationAdapter(nn.Module):
                 "contrastive_scores": [],
                 "ddm_evidences": [],
                 "adapter_mode": self.adapter_mode,
+                "homeostasis": homeostasis_telem,
                 "bypassed": True
             }
             return hidden_states, telemetry
@@ -338,6 +399,15 @@ class LatentDeliberationAdapter(nn.Module):
             u_epistemic=vacuity_u
         ) # [B, L_thought, d_inner]
         
+        # 3b. Neuro-Symbolic MDL Selection & Functorial Relational Mapping
+        mdl_telem = {}
+        if self.enable_mdl_selection and self.mdl_selector is not None:
+            _, mdl_telem = self.mdl_selector.score_candidate(h_thought, memory)
+            
+        functorial_telem = {}
+        if self.enable_functorial_mapping and self.functorial_mapper is not None:
+            _, functorial_telem = self.functorial_mapper(memory, query_rep_inner)
+
         # 4. Hypothesis Verification & Anti-Overthinking Gate
         if self.hypothesis_gate is not None:
             h_thought, beta_gate, v_telem = self.hypothesis_gate(
@@ -364,14 +434,15 @@ class LatentDeliberationAdapter(nn.Module):
                 # Contrastive refinement on top of trained deliberation projection
                 inner_delta = inner_delta + 0.35 * c_delta
 
-            # 5b. Open-Concept Manifold Synthesis (for unprecedented/unseen concepts)
+            # 5b. Open-Concept Manifold Synthesis (for unprecedented/unseen concepts with Nullspace projection)
             concept_telem = {}
             if self.open_concept_synthesizer is not None and vacuity_u is not None:
                 last_err = (h_thought[:, 0, :] - query_rep_inner)
                 proto_c, concept_telem = self.open_concept_synthesizer(
                     h_anchor=query_rep_inner,
                     discrepancy=last_err,
-                    vacuity_u=vacuity_u
+                    vacuity_u=vacuity_u,
+                    basis_memory=memory
                 )
                 if proto_c is not None and inner_delta is not None and proto_c.any():
                     inner_delta = inner_delta + 0.15 * proto_c.squeeze(1)
@@ -482,6 +553,9 @@ class LatentDeliberationAdapter(nn.Module):
             "bottleneck_dim": self.bottleneck_dim,
             "d_inner": self.d_inner,
             "adapter_mode": self.adapter_mode,
+            "homeostasis": homeostasis_telem,
+            "mdl_telemetry": mdl_telem,
+            "functorial_telemetry": functorial_telem,
             "bypassed": False
         }
         return enhanced, telemetry

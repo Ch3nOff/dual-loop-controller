@@ -276,6 +276,33 @@ class DualLoopQwenModel(nn.Module):
         """Disables adapter (reverts directly to pure base model)."""
         self.enabled = False
 
+    def set_homeostasis(self, enabled: bool = True):
+        """Enables or disables biological homeostatic drive-reduction and active inference policy routing."""
+        self.adapter.enable_homeostasis = enabled
+        if enabled and self.adapter.homeostasis_router is None:
+            from ..homeostasis import ActiveInferencePolicyRouter
+            self.adapter.homeostasis_router = ActiveInferencePolicyRouter(d_model=self.adapter.d_inner)
+
+    def set_nullspace_projection(self, enabled: bool = True):
+        """Enables or disables orthogonal nullspace synthesis (Gram-Schmidt projection)."""
+        self.adapter.enable_nullspace_projection = enabled
+        if enabled and self.adapter.nullspace_projector is None:
+            from ..nullspace_engine import OrthogonalNullspaceProjector
+            self.adapter.nullspace_projector = OrthogonalNullspaceProjector(d_model=self.adapter.d_inner)
+        if self.adapter.open_concept_synthesizer is not None:
+            self.adapter.open_concept_synthesizer.enable_nullspace_projection = enabled
+            if enabled and self.adapter.open_concept_synthesizer.nullspace_projector is None:
+                from ..nullspace_engine import OrthogonalNullspaceProjector
+                self.adapter.open_concept_synthesizer.nullspace_projector = OrthogonalNullspaceProjector(d_model=self.adapter.d_inner)
+
+    def set_brain_sandbox(self, enabled: bool = True):
+        """Enables or disables the 4-stage Brain Sandbox planner for complex coding/scripts."""
+        self.adapter.enable_brain_sandbox = enabled
+
+    def get_physiological_telemetry(self) -> Dict[str, Any]:
+        """Returns the latest homeostatic state and active inference policy metrics."""
+        return self.last_telemetry.get("homeostasis", {})
+
     def freeze_backbone(self):
         """
         Freezes base model parameters for parameter-efficient fine-tuning (PEFT).

@@ -11,6 +11,10 @@ from .controller import RecurrentLatentController, TopKCapacityCrossAttention, L
 from .plasticity import PlasticFastWeightUnit
 from .evidential import EvidentialEpistemicGate
 from .open_concept import OpenConceptSynthesizer
+from .homeostasis import HomeostaticDriveEngine, ActiveInferencePolicyRouter
+from .nullspace_engine import OrthogonalNullspaceProjector
+from .functorial_engine import FunctorialCrossDomainMapper
+from .mdl_selector import NeuroSymbolicMDLSelector
 from .verification import (
     HypothesisVerificationGate,
     UncertaintySurpriseGate,

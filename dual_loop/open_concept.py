@@ -27,11 +27,13 @@ class OpenConceptSynthesizer(nn.Module):
     def __init__(
         self,
         d_model: int,
-        tau_unseen: float = 0.65
+        tau_unseen: float = 0.65,
+        enable_nullspace_projection: bool = False
     ):
         super().__init__()
         self.d_model = d_model
         self.tau_unseen = float(tau_unseen)
+        self.enable_nullspace_projection = enable_nullspace_projection
         
         # Prototype synthesis projection
         self.proto_net = nn.Sequential(
@@ -41,6 +43,12 @@ class OpenConceptSynthesizer(nn.Module):
         )
         self.norm_proto = nn.LayerNorm(d_model)
         
+        if self.enable_nullspace_projection:
+            from .nullspace_engine import OrthogonalNullspaceProjector
+            self.nullspace_projector = OrthogonalNullspaceProjector(d_model=d_model)
+        else:
+            self.nullspace_projector = None
+        
         # Initialize final layer with small scale
         nn.init.normal_(self.proto_net[-1].weight, std=0.02)
         nn.init.zeros_(self.proto_net[-1].bias)
@@ -49,7 +57,8 @@ class OpenConceptSynthesizer(nn.Module):
         self,
         h_anchor: torch.Tensor,
         discrepancy: torch.Tensor,
-        vacuity_u: torch.Tensor
+        vacuity_u: torch.Tensor,
+        basis_memory: Optional[torch.Tensor] = None
     ) -> Tuple[Optional[torch.Tensor], Dict[str, Any]]:
         """
         Synthesizes a continuous semantic prototype if vacuity exceeds threshold.
@@ -58,6 +67,7 @@ class OpenConceptSynthesizer(nn.Module):
             h_anchor: [B, D] or [B, 1, D] Base query representation.
             discrepancy: [B, D] or [B, 1, D] Metacognitive critique discrepancy vector.
             vacuity_u: [B] Epistemic vacuity score in [0, 1].
+            basis_memory: Optional [B, M, D] existing memory slots for orthogonal nullspace projection.
             
         Returns:
             prototype: Optional [B, 1, D] Synthesized prototype vector, or None if u < tau_unseen.
@@ -79,11 +89,18 @@ class OpenConceptSynthesizer(nn.Module):
             return None, {
                 "synthesized_count": 0,
                 "prototype_norm": 0.0,
-                "is_active": False
+                "is_active": False,
+                "nullspace_telemetry": {}
             }
             
         # Synthesize prototype vector: c* = LayerNorm(h_anchor + W(e))
         delta_c = self.proto_net(discrepancy) # [B, 1, D]
+        
+        nullspace_telem = {}
+        if self.nullspace_projector is not None and basis_memory is not None:
+            # Purify delta_c to lie strictly in the orthogonal nullspace of basis_memory
+            delta_c, nullspace_telem = self.nullspace_projector(delta_c, basis_memory)
+            
         c_star = self.norm_proto(h_anchor + delta_c) # [B, 1, D]
         
         # Apply mask: only samples that exceed tau_unseen retain the synthesized concept
@@ -93,7 +110,8 @@ class OpenConceptSynthesizer(nn.Module):
         telemetry = {
             "synthesized_count": int(mask_unseen.sum().item()),
             "prototype_norm": float(c_star_gated.norm().item()),
-            "is_active": True
+            "is_active": True,
+            "nullspace_telemetry": nullspace_telem
         }
         
         return c_star_gated, telemetry
