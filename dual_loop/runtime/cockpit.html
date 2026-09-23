@@ -927,6 +927,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             messages: [{ role: "user", content: prompt }],
+            max_tokens: 512,
             stream: false
           })
         });

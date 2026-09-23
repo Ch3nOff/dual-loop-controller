@@ -316,9 +316,11 @@ async def chat_completions(req: ChatCompletionRequest):
                 )
             inputs = engine_state.tokenizer(formatted_prompt, return_tensors="pt").to(device)
 
-            # Bound tokens on CPU for fast responsive generation
-            cpu_token_limit = 128 if device.type == "cpu" else 256
-            max_tokens_to_gen = min(req.max_tokens or cpu_token_limit, cpu_token_limit)
+            # Configure generation token limits (default 512, allowed up to 2048)
+            default_token_limit = 512
+            max_allowed = 2048
+            requested_tokens = req.max_tokens if req.max_tokens is not None else default_token_limit
+            max_tokens_to_gen = min(max(requested_tokens, 16), max_allowed)
 
             with torch.no_grad():
                 outputs = engine_state.model.qwen.generate(
