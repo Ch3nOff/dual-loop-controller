@@ -46,6 +46,10 @@ llm = [
     "accelerate>=0.28.0,<2.0.0",
 ]
 
+[project.scripts]
+dual-loop = "dual_loop.cli:main"
+hadl = "dual_loop.cli:main"
+
 [project.urls]
 Homepage = "https://github.com/Ch3nOff/dual-loop-controller"
 Repository = "https://github.com/Ch3nOff/dual-loop-controller.git"

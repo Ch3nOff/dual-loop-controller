@@ -294,7 +294,231 @@ Ablating the maximum confidence ceiling $c_{max} \in \{1.00, 0.98, 0.95, 0.90\}$
 
 ---
 
-## 7. Conclusion
+## 7. Technical Command Reference & CLI Ecosystem
+
+To ensure full reproducibility and operational readiness across research labs and production pipelines, the `dual-loop-controller` package provides a unified command-line interface (CLI), modular benchmarking scripts, training entrypoints, and programmatic APIs.
+
+### 7.1 Package Installation & Environment Provisioning
+
+The framework is published on the Python Package Index (PyPI) and can be installed across standard, accelerated, and developer profiles:
+
+```bash
+# 1. Standard production installation (core neural engines & telemetry)
+pip install dual-loop-controller
+
+# 2. Upgrade to latest release (v2.4.0)
+pip install --upgrade dual-loop-controller
+
+# 3. Installation with Large Language Model dependencies (transformers, accelerate)
+pip install dual-loop-controller[llm]
+
+# 4. Installation with developer & compilation dependencies (build, twine)
+pip install dual-loop-controller[dev]
+
+# 5. Editable source installation from GitHub
+git clone https://github.com/Ch3nOff/dual-loop-controller.git
+cd dual-loop-controller
+pip install -e .
+```
+
+---
+
+### 7.2 Unified Command-Line Interface (`dual-loop` / `hadl`)
+
+Version 2.4.0 introduces the `dual-loop` (aliased as `hadl` or `python -m dual_loop`) console interface for rapid diagnostics, testing, and sandboxed validation:
+
+| Command | Arguments / Flags | Description |
+| :--- | :--- | :--- |
+| `dual-loop info` | `--version`, `-v` | Prints system diagnostics, PyTorch version, active CUDA status, and component topology. |
+| `dual-loop verify-sandbox` | `<code> [--mode eval\|exec\|syntax]` | Executes code or boolean logic inside the isolated deterministic execution sandbox with restricted builtins. |
+| `dual-loop daemon-step` | `[--slots N] [--d-model D]` | Triggers a single offline autonomous contemplation cycle (scans contradictions, runs Popperian self-play, executes sandbox challenge, modulates energy, and projects to nullspace). |
+| `dual-loop benchmark` | `--suite <plasticity\|comprehensive\|qwen\|halting>` | Runs authentic PyTorch in-memory empirical evaluation suites and generates telemetry logs. |
+| `dual-loop test` | `[-v / --verbose]` | Discovers and executes all 109 automated unit tests across the framework. |
+
+#### CLI Usage Examples:
+```bash
+# Verify environment and loaded engines
+dual-loop info
+
+# Test truth evaluation in deterministic sandbox (returns exit code 0 if verified)
+dual-loop verify-sandbox "1 == 1" --mode eval
+
+# Test falsification of deceptive assertions (returns exit code 1 if refuted)
+dual-loop verify-sandbox "1 == 2" --mode eval
+
+# Execute an assertion script with custom invariants
+dual-loop verify-sandbox "def check(): assert 2 + 2 == 4\ncheck()" --mode exec
+
+# Run a simulated offline curiosity daemon cycle
+dual-loop daemon-step --slots 6 --d-model 128
+
+# Execute Epistemic Calibration & Continual Plasticity benchmark
+dual-loop benchmark --suite plasticity
+```
+
+---
+
+### 7.3 Empirical Benchmark Execution Commands
+
+The experimental results reported in Section 4 can be reproduced via dedicated benchmark modules:
+
+```bash
+# 1. Epistemic Calibration & Continual Plasticity Benchmark Suite (AEMP-2026, N=740)
+# Evaluates ECDR, PFR (with deterministic sandbox execution), LCII (10 domains), and ALTS
+python -m dual_loop.benchmarks.epistemic_plasticity_benchmark
+# Logs output to: eval_results/epistemic_plasticity_benchmark.json
+# Visual output: epistemic_plasticity_benchmark_graph.png
+
+# 2. Comprehensive 20-Task Cognitive Reasoning Suite
+python -m dual_loop.benchmarks.comprehensive_suite
+
+# 3. Multi-Turn Qwen Reasoning Benchmark
+python -m dual_loop.benchmarks.benchmark_qwen_reasoning
+
+# 4. Latency, Halting, and Energy Modulation Audit
+python -m dual_loop.benchmarks.halting_audit
+
+# 5. Autonomous Curiosity & Initiative Benchmark
+python -m dual_loop.benchmarks.initiative_benchmark
+
+# 6. Relational Graph Reasoning Benchmark
+python -m dual_loop.benchmarks.graph_reasoning
+```
+
+---
+
+### 7.4 Model Fine-Tuning & Adapter Compilation Commands
+
+To attach and fine-tune HADL deliberation adapters onto open-weights Transformer architectures:
+
+```bash
+# 1. Train Qwen-3.5-2B Interception Adapter (Interception Layer L_mid = 12)
+python train_qwen_adapter.py \
+    --base_model "Qwen/Qwen3.5-2B" \
+    --interception_layer 12 \
+    --epochs 5 \
+    --lr 2e-4 \
+    --batch_size 4
+
+# 2. Train GLM-4 Interception Adapter (THUDM/glm-4-9b-chat)
+python train_glm4_adapter.py \
+    --base_model "THUDM/glm-4-9b-chat" \
+    --epochs 5
+
+# 3. Train Deliberation Adapter from Scratch (Synthetic continuous deliberation)
+python train_deliberation_adapter.py \
+    --d_model 2048 \
+    --k_steps 2 \
+    --lr 1e-4
+
+# 4. Train Dual-Loop Core Transformer with Contrastive Loss
+python train.py \
+    --epochs 35 \
+    --hops 3 \
+    --k_steps 3
+```
+
+---
+
+### 7.5 Real-Time Comparative Evaluation & Live Dashboard
+
+```bash
+# 1. Head-to-Head Comparative Inference (Base Model vs Legacy vs HADL v2.4.0)
+python compare_head_to_head.py --tasks sciq,arc_c,obqa
+
+# 2. Real-Time Token Generation & Syntax Integrity Streaming Profiler
+python benchmark_realtime.py --model "Qwen/Qwen3.5-2B" --stream
+
+# 3. Launch Live Telemetry Broadcast Dashboard (FastAPI / Uvicorn on http://127.0.0.1:8000)
+.\run_live_benchmark.bat
+# Or manually via uvicorn:
+uvicorn live_benchmark:app --host 127.0.0.1 --port 8000 --reload
+```
+
+---
+
+### 7.6 Visualization & Architecture Asset Generation
+
+```bash
+# 1. Synthesize Master System Architecture Blueprint (hadl_v24_system_architecture.png)
+python generate_hadl_v24_diagram.py
+
+# 2. Render Comprehensive 4-Panel Benchmark Scorecard (comprehensive_v24_benchmark_matrix.png)
+python generate_comprehensive_benchmark_matrix.py
+```
+
+---
+
+### 7.7 Programmatic Python API Reference
+
+```python
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from dual_loop import (
+    attach_dual_loop_to_model,
+    AutonomousDaemonController,
+    EpistemicHumilityModule,
+    PopperianSelfPlayEngine,
+    OrthogonalNullspaceProjector,
+    AllostaticEnergyModulator,
+    NeuroSymbolicMDLSelector,
+    FunctorialCrossDomainMapper
+)
+
+# 1. Attach HADL Adapter to Frozen HuggingFace Model
+tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen3.5-2B")
+base_model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen3.5-2B", torch_dtype=torch.float32)
+hadl_model = attach_dual_loop_to_model(base_model, interception_layer=12, d_model=2048)
+
+# 2. Run Quiescent Offline Contemplation Cycle
+daemon = AutonomousDaemonController(d_model=2048)
+memory_slots = torch.randn(8, 2048)
+step_telemetry = daemon.run_daemon_step(memory_slots)
+print(f"Anomalies resolved: {step_telemetry['anomalies_resolved']}")
+print(f"Sandbox diagnostic: {step_telemetry['sandbox_diagnostic']}")
+
+# 3. Safe Deterministic Ground-Truth Sandbox Execution
+is_valid, msg = PopperianSelfPlayEngine.verify_sandbox(
+    code_or_expression="assert 2 + 2 == 4",
+    test_condition="exec"
+)
+
+# 4. Orthogonal Nullspace Memory Projection
+nullspace = OrthogonalNullspaceProjector(d_model=2048)
+new_representation = torch.randn(1, 2048)
+prior_basis = torch.randn(4, 2048)
+v_ortho, telem = nullspace(new_representation, prior_basis)
+assert telem["is_strictly_orthogonal"] == True
+
+# 5. Consolidated Allostatic Energy Modulation
+modulator = AllostaticEnergyModulator(d_model=2048)
+modulated_delta, allo_telem = modulator(
+    raw_delta=torch.randn(1, 16, 2048),
+    scale=torch.tensor([[0.8]]),
+    surprise_gate=torch.tensor([[0.7]]),
+    beta_gate=torch.tensor([[0.6]])
+)
+```
+
+---
+
+### 7.8 Automated Unit Testing & Quality Verification
+
+```bash
+# Run all 109 unit tests across all cognitive modules
+python -m unittest discover -s tests -p "test_*.py"
+
+# Targeted subsystem unit tests
+python -m unittest tests.test_curiosity_daemon
+python -m unittest tests.test_nullspace_engine
+python -m unittest tests.test_functorial_mdl
+python -m unittest tests.test_plasticity_and_evidential
+python -m unittest tests.test_qwen_adapter
+```
+
+---
+
+## 8. Conclusion
 
 We presented the **Homeostatic Autopoietic Dual-Loop Controller (HADL v2.4.0)**, an open-source cognitive architecture that decouples deliberation from the autoregressive token clock. By pruning multiplicative gate cascades into a consolidated allostatic energy potential, HADL maintains 96.6% signal strength and guarantees sub-5ms fast-path latency. With an autonomous background curiosity daemon, Popperian self-play falsification, epistemic humility bounding, and orthogonal nullspace memory, HADL achieves record-setting reasoning performance (76.00% macro accuracy) with zero token waste and zero catastrophic forgetting.
 
