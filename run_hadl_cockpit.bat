@@ -27,20 +27,22 @@ echo   [2] Launch with GLM-4-9B (d=1024 Bottleneck Adapter)
 echo   [3] Launch in Instant Fast Mode (Zero Wait Demo Engine)
 echo   [4] Package and Publish GLM-4 Adapter to Hugging Face Hub
 echo   [5] Package and Publish Qwen Adapter to Hugging Face Hub
-echo   [6] Exit
+echo   [6] Install / Upgrade PyTorch with CUDA (Enable RTX GPU Acceleration)
+echo   [7] Exit
 echo.
 set "OPTION=1"
-set /p "OPTION=Enter choice [1-6, default=1]: "
+set /p "OPTION=Enter choice [1-7, default=1]: "
 
 if "%OPTION%"=="1" goto RUN_QWEN
 if "%OPTION%"=="2" goto RUN_GLM4
 if "%OPTION%"=="3" goto RUN_MOCK
 if "%OPTION%"=="4" goto PUB_GLM
 if "%OPTION%"=="5" goto PUB_QWEN
-if "%OPTION%"=="6" goto QUIT
+if "%OPTION%"=="6" goto INSTALL_CUDA
+if "%OPTION%"=="7" goto QUIT
 
 echo.
-echo [!] Invalid selection: %OPTION%. Please choose 1, 2, 3, 4, 5, or 6.
+echo [!] Invalid selection: %OPTION%. Please choose 1, 2, 3, 4, 5, 6, or 7.
 pause
 goto MENU
 
@@ -108,6 +110,20 @@ echo ===========================================================================
 echo [*] Packaging Qwen Adapter Bundle for Hugging Face Hub...
 echo ===============================================================================
 "%PYTHON_EXEC%" -m dual_loop.cli publish-hf --model-type qwen
+echo.
+pause
+goto MENU
+
+:INSTALL_CUDA
+echo.
+echo ===============================================================================
+echo [*] Installing / Upgrading PyTorch with CUDA cu126 (RTX GPU Acceleration)...
+echo [*] This will enable full GPU compute on NVIDIA RTX graphics cards.
+echo ===============================================================================
+"%PYTHON_EXEC%" -m pip install --upgrade torch --index-url https://download.pytorch.org/whl/cu126
+echo.
+echo [*] Testing CUDA availability...
+"%PYTHON_EXEC%" -c "import torch; print('CUDA Available:', torch.cuda.is_available()); print('Device:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU only')"
 echo.
 pause
 goto MENU

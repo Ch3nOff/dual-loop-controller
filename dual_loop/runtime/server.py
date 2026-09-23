@@ -84,6 +84,7 @@ class ChatCompletionRequest(BaseModel):
     max_tokens: Optional[int] = 512
     temperature: Optional[float] = 0.7
     k_steps: Optional[int] = None
+    system_prompt: Optional[str] = None
 
 
 # Helpers
@@ -173,12 +174,19 @@ async def serve_cockpit_ui():
 @app.get("/health")
 @app.get("/v1/health")
 async def health_check():
-    """System health check and engine telemetry status."""
+    cuda_avail = torch.cuda.is_available()
+    device_name = torch.cuda.get_device_name(0) if cuda_avail else "CPU"
+    vram_used = round(torch.cuda.memory_allocated(0) / (1024**2), 1) if cuda_avail else 0.0
+    vram_total = round(torch.cuda.get_device_properties(0).total_memory / (1024**2), 1) if cuda_avail else 0.0
     return {
         "status": "healthy",
         "engine": "HADL Dual-Loop Controller v2.4.0",
         "model_loaded": engine_state.model is not None,
         "model_id": engine_state.detection_result.model_id if engine_state.detection_result else "mock-backbone",
+        "cuda_available": cuda_avail,
+        "device": device_name,
+        "vram_used_mb": vram_used,
+        "vram_total_mb": vram_total,
         "uptime_seconds": time.time() - getattr(engine_state, "_start_time", time.time()),
         "idle_daemon_running": engine_state.daemon_running,
     }
@@ -222,7 +230,17 @@ async def list_models():
 @app.get("/v1/telemetry")
 async def get_telemetry():
     """Real-time engine telemetry snapshot."""
-    return engine_state.latest_telemetry
+    telem = dict(engine_state.latest_telemetry)
+    cuda_avail = torch.cuda.is_available()
+    telem["cuda_available"] = cuda_avail
+    telem["device"] = torch.cuda.get_device_name(0) if cuda_avail else "CPU"
+    if cuda_avail:
+        telem["vram_used_mb"] = round(torch.cuda.memory_allocated(0) / (1024**2), 1)
+        telem["vram_total_mb"] = round(torch.cuda.get_device_properties(0).total_memory / (1024**2), 1)
+    else:
+        telem["vram_used_mb"] = 0.0
+        telem["vram_total_mb"] = 0.0
+    return telem
 
 
 @app.get("/v1/dream/feed")
@@ -299,14 +317,18 @@ async def chat_completions(req: ChatCompletionRequest):
             
             # Format conversational prompt using tokenizer's chat template
             msgs = []
+            sys_prompt = req.system_prompt or "You are HADL, a helpful, intelligent, and concise AI reasoning assistant."
             has_system = any(m.role == "system" for m in req.messages)
             if not has_system:
                 msgs.append({
                     "role": "system",
-                    "content": "You are HADL, a helpful, intelligent, and concise AI reasoning assistant."
+                    "content": sys_prompt
                 })
             for m in req.messages:
-                msgs.append({"role": m.role, "content": m.content})
+                if m.role == "system" and req.system_prompt:
+                    msgs.append({"role": "system", "content": req.system_prompt})
+                else:
+                    msgs.append({"role": m.role, "content": m.content})
 
             if hasattr(engine_state.tokenizer, "apply_chat_template") and engine_state.tokenizer.chat_template:
                 formatted_prompt = engine_state.tokenizer.apply_chat_template(
@@ -375,6 +397,48 @@ async def chat_completions(req: ChatCompletionRequest):
                 f"({k_steps} langkah deliberasi, stabilitas energi: {float(engine_state.latest_telemetry['allostatic_energy']):.3f}) "
                 f"sehingga bernalar tanpa membuang token teks ekstra.\n\n"
                 f"Silakan ajukan pertanyaan penalaran atau pengujian kode!"
+            )
+        elif any(w in low for w in ["html", "artifact", "app", "game", "calculator", "kalkulator", "widget", "svg"]):
+            generated_text = (
+                f"Tentu! Berikut adalah contoh interaktif **HADL Cognitive Artifact** yang langsung bisa di-preview di Artifact Stage sebelah kanan:\n\n"
+                f"```html\n"
+                f"<!DOCTYPE html>\n"
+                f"<html lang=\"en\">\n"
+                f"<head>\n"
+                f"  <meta charset=\"UTF-8\">\n"
+                f"  <title>HADL Interactive Counter & Calculator</title>\n"
+                f"  <style>\n"
+                f"    body {{ font-family: -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: #0b1329; color: #fff; }}\n"
+                f"    .card {{ background: #132247; padding: 2rem; border-radius: 16px; border: 1px solid #38bdf8; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }}\n"
+                f"    h2 {{ color: #38bdf8; margin-top: 0; }}\n"
+                f"    .display {{ font-size: 3rem; font-weight: bold; margin: 1.5rem 0; color: #10b981; font-family: monospace; }}\n"
+                f"    .btn-row {{ display: flex; gap: 0.75rem; justify-content: center; }}\n"
+                f"    button {{ background: #0284c7; border: none; color: white; padding: 0.75rem 1.5rem; font-size: 1.1rem; border-radius: 8px; cursor: pointer; transition: 0.2s; }}\n"
+                f"    button:hover {{ background: #0369a1; transform: scale(1.05); }}\n"
+                f"  </style>\n"
+                f"</head>\n"
+                f"<body>\n"
+                f"  <div class=\"card\">\n"
+                f"    <h2>⚡ HADL Live Interactive Widget</h2>\n"
+                f"    <p>Powered by System 2 Latent Deliberation</p>\n"
+                f"    <div class=\"display\" id=\"count\">0</div>\n"
+                f"    <div class=\"btn-row\">\n"
+                f"      <button onclick=\"update(-1)\">-1</button>\n"
+                f"      <button onclick=\"update(0)\">Reset</button>\n"
+                f"      <button onclick=\"update(1)\">+1</button>\n"
+                f"    </div>\n"
+                f"  </div>\n"
+                f"  <script>\n"
+                f"    let c = 0;\n"
+                f"    function update(d) {{\n"
+                f"      if (d === 0) c = 0; else c += d;\n"
+                f"      document.getElementById('count').textContent = c;\n"
+                f"    }}\n"
+                f"  </script>\n"
+                f"</body>\n"
+                f"</html>\n"
+                f"```\n\n"
+                f"Silakan klik tombol **Live Preview ↗** pada kartu di atas untuk berinteraksi langsung!"
             )
         else:
             generated_text = (

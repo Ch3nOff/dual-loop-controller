@@ -28,14 +28,15 @@
       padding: 0;
     }
 
-    body {
+    html, body {
+      height: 100vh;
+      max-height: 100vh;
+      overflow: hidden;
       background-color: var(--bg-canvas);
       color: var(--text-main);
       font-family: var(--font-sans);
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
       background-image: 
         radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
         radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.06) 0%, transparent 45%);
@@ -43,22 +44,22 @@
 
     /* Top Navigation Header */
     header {
+      height: 56px;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.85rem 1.5rem;
-      background: rgba(8, 14, 28, 0.85);
+      padding: 0 1.25rem;
+      background: rgba(8, 14, 28, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--bg-panel-border);
-      position: sticky;
-      top: 0;
-      z-index: 50;
+      z-index: 40;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.85rem;
+      gap: 0.75rem;
     }
 
     .brand-logo {
@@ -70,13 +71,13 @@
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: #fff;
       box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
     }
 
     .brand-title {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       background: linear-gradient(90deg, #f1f5f9, #38bdf8);
@@ -85,13 +86,13 @@
     }
 
     .brand-subtitle {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.08em;
     }
 
-    .header-badges {
+    .header-actions {
       display: flex;
       align-items: center;
       gap: 0.75rem;
@@ -103,7 +104,7 @@
       gap: 0.4rem;
       padding: 0.25rem 0.65rem;
       border-radius: 9999px;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 500;
       border: 1px solid transparent;
     }
@@ -140,28 +141,54 @@
       50% { opacity: 0.4; transform: scale(0.85); }
     }
 
-    /* Main Container Layout */
-    .cockpit-container {
-      display: grid;
-      grid-template-columns: 1fr 390px;
-      flex: 1;
-      height: calc(100vh - 58px);
-      overflow: hidden;
+    .btn-header {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--bg-panel-border);
+      border-radius: 8px;
+      color: var(--text-main);
+      padding: 0.35rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
     }
 
-    /* Left: Chat & Reasoning Stage */
+    .btn-header:hover {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: var(--accent-cyan);
+      color: #fff;
+    }
+
+    /* Main Container Layout (Completely Isolated Viewport) */
+    .cockpit-container {
+      flex: 1;
+      height: calc(100vh - 56px);
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* 1. Left Section: Chat & Latent Mind HUD */
     .chat-section {
+      flex: 1;
+      min-width: 380px;
+      height: 100%;
       display: flex;
       flex-direction: column;
-      height: 100%;
+      overflow: hidden;
       border-right: 1px solid var(--bg-panel-border);
       position: relative;
     }
 
     /* Latent Mind HUD Banner (Zero-Token Visualizer) */
     .latent-mind-hud {
-      padding: 0.85rem 1.25rem;
-      background: rgba(11, 18, 33, 0.9);
+      height: 44px;
+      flex-shrink: 0;
+      padding: 0 1.25rem;
+      background: rgba(11, 18, 33, 0.95);
       border-bottom: 1px solid var(--bg-panel-border);
       display: flex;
       align-items: center;
@@ -170,9 +197,9 @@
     }
 
     .hud-title {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
       color: var(--text-muted);
       display: flex;
       align-items: center;
@@ -193,35 +220,55 @@
 
     .metric-val {
       font-family: var(--font-mono);
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 700;
       color: var(--accent-cyan);
     }
 
     .metric-lbl {
-      font-size: 0.68rem;
+      font-size: 0.62rem;
       color: var(--text-dim);
     }
 
-    /* Chat Messages Stream */
+    /* Chat Messages Stream (Isolated Scroll Context) */
     .chat-messages {
       flex: 1;
       overflow-y: auto;
+      overflow-x: hidden;
       padding: 1.25rem;
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      scroll-behavior: smooth;
+    }
+
+    /* Custom Scrollbar for Isolated Containers */
+    .chat-messages::-webkit-scrollbar,
+    .cockpit-sidebar::-webkit-scrollbar,
+    .artifact-code-body::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .chat-messages::-webkit-scrollbar-thumb,
+    .cockpit-sidebar::-webkit-scrollbar-thumb,
+    .artifact-code-body::-webkit-scrollbar-thumb {
+      background: rgba(56, 189, 248, 0.2);
+      border-radius: 4px;
+    }
+    .chat-messages::-webkit-scrollbar-thumb:hover,
+    .cockpit-sidebar::-webkit-scrollbar-thumb:hover {
+      background: rgba(56, 189, 248, 0.4);
     }
 
     .message {
       display: flex;
       flex-direction: column;
-      max-width: 88%;
-      animation: fadeIn 0.25s ease-out;
+      max-width: 85%;
+      animation: fadeIn 0.2s ease-out;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -235,16 +282,18 @@
     }
 
     .message-bubble {
-      padding: 0.9rem 1.15rem;
+      padding: 0.85rem 1.15rem;
       border-radius: 12px;
-      font-size: 0.92rem;
-      line-height: 1.55;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      word-break: break-word;
     }
 
     .message.user .message-bubble {
       background: linear-gradient(135deg, #0284c7, #0369a1);
-      color: #ffffff;
+      color: #fff;
       border-bottom-right-radius: 3px;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
     }
 
     .message.assistant .message-bubble {
@@ -257,13 +306,13 @@
 
     /* Deliberation Trace Card */
     .deliberation-box {
-      margin-bottom: 0.75rem;
-      padding: 0.65rem 0.85rem;
+      margin-bottom: 0.65rem;
+      padding: 0.55rem 0.8rem;
       border-radius: 8px;
-      background: rgba(14, 23, 42, 0.9);
+      background: rgba(14, 23, 42, 0.95);
       border-left: 3px solid var(--accent-cyan);
       font-family: var(--font-mono);
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       color: var(--text-muted);
     }
 
@@ -272,14 +321,76 @@
       justify-content: space-between;
       color: var(--accent-cyan);
       font-weight: 600;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.25rem;
     }
 
     .deliberation-box .trace-meta {
       display: flex;
-      gap: 1rem;
-      font-size: 0.72rem;
+      gap: 0.85rem;
+      font-size: 0.7rem;
       color: var(--text-dim);
+    }
+
+    /* Inline Artifact Card */
+    .artifact-card-inline {
+      margin: 0.75rem 0;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--accent-cyan);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.15);
+    }
+
+    .artifact-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .artifact-icon-box {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #0ea5e9, #a855f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .artifact-card-title {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #fff;
+    }
+
+    .artifact-card-desc {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .artifact-btn-open {
+      background: linear-gradient(135deg, #0284c7, #10b981);
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: transform 0.15s;
+    }
+
+    .artifact-btn-open:hover {
+      transform: translateY(-1px);
     }
 
     /* Code Block Formatting */
@@ -287,25 +398,26 @@
       background: #050811;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 8px;
-      padding: 0.85rem;
+      padding: 0.75rem;
       overflow-x: auto;
-      margin: 0.65rem 0;
+      margin: 0.5rem 0;
       font-family: var(--font-mono);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: #38bdf8;
     }
 
     /* Chat Input Bar */
     .chat-input-bar {
-      padding: 1rem 1.25rem;
+      padding: 0.75rem 1.25rem;
       background: rgba(8, 14, 28, 0.95);
       border-top: 1px solid var(--bg-panel-border);
       backdrop-filter: blur(12px);
+      flex-shrink: 0;
     }
 
     .input-form {
       display: flex;
-      gap: 0.75rem;
+      gap: 0.65rem;
       position: relative;
     }
 
@@ -314,12 +426,12 @@
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid var(--bg-panel-border);
       border-radius: 10px;
-      padding: 0.75rem 1rem;
+      padding: 0.65rem 1rem;
       color: var(--text-main);
       font-family: var(--font-sans);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       resize: none;
-      height: 48px;
+      height: 44px;
       line-height: 1.4;
       outline: none;
       transition: border-color 0.2s;
@@ -337,7 +449,7 @@
       padding: 0 1.25rem;
       color: #fff;
       font-weight: 600;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -356,29 +468,169 @@
       transform: none;
     }
 
-    /* Right: Cognitive Telemetry Cockpit Sidebar */
-    .cockpit-sidebar {
-      background: rgba(9, 15, 30, 0.8);
-      backdrop-filter: blur(16px);
-      overflow-y: auto;
-      padding: 1.25rem;
+    /* 2. Middle Section: Artifact Live Preview & Code Drawer */
+    .artifact-section {
+      width: 0;
+      min-width: 0;
+      overflow: hidden;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      background: #080d1a;
+      border-right: 1px solid var(--bg-panel-border);
+      position: relative;
+    }
+
+    .artifact-section.open {
+      width: 52%;
+      min-width: 460px;
+    }
+
+    .artifact-header {
+      height: 48px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      background: rgba(14, 23, 42, 0.98);
+      border-bottom: 1px solid var(--bg-panel-border);
+    }
+
+    .artifact-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .artifact-title-text {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .artifact-type-tag {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-cyan);
+      font-weight: 700;
+    }
+
+    .artifact-nav-tabs {
+      display: flex;
+      background: rgba(15, 23, 42, 0.8);
+      padding: 2px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .artifact-tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.25rem 0.65rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.15s;
+    }
+
+    .artifact-tab-btn.active {
+      background: var(--accent-cyan);
+      color: #050811;
+      font-weight: 700;
+    }
+
+    .artifact-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .artifact-icon-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.75rem;
+      transition: all 0.15s;
+    }
+
+    .artifact-icon-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .artifact-content-stage {
+      flex: 1;
+      height: calc(100% - 48px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    #artifact-preview-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #ffffff;
+    }
+
+    .artifact-code-body {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      padding: 1rem;
+      background: #050811;
+      display: none;
+    }
+
+    .artifact-code-body pre {
+      margin: 0;
+      border: none;
+      background: transparent;
+      padding: 0;
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
+    /* 3. Right Section: Cognitive Telemetry Cockpit Sidebar (Isolated Scroll) */
+    .cockpit-sidebar {
+      width: 360px;
+      flex-shrink: 0;
+      height: 100%;
+      background: rgba(9, 15, 30, 0.85);
+      backdrop-filter: blur(16px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
 
     .card {
       background: var(--bg-panel);
       border: 1px solid var(--bg-panel-border);
       border-radius: 12px;
-      padding: 1rem;
+      padding: 0.9rem;
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.65rem;
     }
 
     .card-title {
-      font-size: 0.8rem;
+      font-size: 0.76rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--text-muted);
@@ -387,15 +639,47 @@
       justify-content: space-between;
     }
 
+    /* Hardware Specs & Architecture Inspector */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .spec-item {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 6px;
+      padding: 0.45rem 0.6rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .spec-lbl {
+      font-size: 0.62rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    .spec-val {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     /* Allostatic Energy Meter */
     .energy-gauge {
       display: flex;
       flex-direction: column;
-      gap: 0.45rem;
+      gap: 0.4rem;
     }
 
     .gauge-bar-bg {
-      height: 10px;
+      height: 8px;
       background: rgba(30, 41, 59, 0.8);
       border-radius: 9999px;
       overflow: hidden;
@@ -413,7 +697,7 @@
     .gauge-labels {
       display: flex;
       justify-content: space-between;
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       color: var(--text-dim);
       font-family: var(--font-mono);
     }
@@ -422,15 +706,15 @@
     .shield-status {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      padding: 0.65rem 0.85rem;
+      gap: 0.65rem;
+      padding: 0.6rem 0.75rem;
       border-radius: 8px;
       background: rgba(16, 185, 129, 0.08);
       border: 1px solid rgba(16, 185, 129, 0.25);
     }
 
     .shield-icon {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
     }
 
     .shield-text {
@@ -439,13 +723,13 @@
     }
 
     .shield-title {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
       color: var(--accent-emerald);
     }
 
     .shield-desc {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       color: var(--text-muted);
     }
 
@@ -459,159 +743,297 @@
     .memory-slot {
       aspect-ratio: 1;
       border-radius: 6px;
-      background: rgba(15, 23, 42, 0.9);
       border: 1px solid rgba(56, 189, 248, 0.2);
+      background: rgba(15, 23, 42, 0.8);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--accent-cyan);
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .memory-slot.active {
-      background: rgba(56, 189, 248, 0.15);
-      border-color: var(--accent-cyan);
-      box-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      position: relative;
     }
 
     .memory-slot.ortho-zero {
-      border-color: var(--accent-emerald);
+      border-color: rgba(16, 185, 129, 0.4);
       color: var(--accent-emerald);
     }
 
-    /* Background Dreaming / Curiosity Daemon Feed */
+    .memory-slot.active {
+      background: rgba(16, 185, 129, 0.12);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+    }
+
+    /* Curiosity Daemon Feed */
     .dreaming-feed {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      max-height: 220px;
+      max-height: 180px;
       overflow-y: auto;
     }
 
     .dream-item {
-      padding: 0.55rem 0.7rem;
+      padding: 0.5rem 0.65rem;
       border-radius: 6px;
-      background: rgba(14, 23, 42, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      font-size: 0.73rem;
-      line-height: 1.4;
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
+      background: rgba(15, 23, 42, 0.6);
+      border-left: 2px solid var(--accent-purple);
+      font-size: 0.7rem;
     }
 
     .dream-item-header {
       display: flex;
       justify-content: space-between;
       color: var(--accent-purple);
-      font-family: var(--font-mono);
       font-weight: 600;
+      margin-bottom: 0.2rem;
     }
 
     .dream-item-content {
       color: var(--text-muted);
+      line-height: 1.35;
     }
 
     .daemon-ctrl-btn {
       width: 100%;
       background: rgba(168, 85, 247, 0.15);
       border: 1px solid rgba(168, 85, 247, 0.35);
-      color: #d8b4fe;
+      color: #e9d5ff;
       border-radius: 8px;
-      padding: 0.5rem;
+      padding: 0.45rem;
       font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 0.4rem;
+      transition: all 0.2s;
     }
 
     .daemon-ctrl-btn:hover {
-      background: rgba(168, 85, 247, 0.25);
+      background: rgba(168, 85, 247, 0.28);
+      color: #fff;
     }
 
-    /* API Endpoint Copy Card */
-    .api-badge-card {
-      padding: 0.75rem;
-      border-radius: 8px;
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      font-size: 0.72rem;
+    /* Settings Modal Dialog */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(3, 7, 18, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .settings-dialog {
+      width: 90%;
+      max-width: 600px;
+      background: #0a1020;
+      border: 1px solid var(--bg-panel-border);
+      border-radius: 14px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
+      animation: modalZoom 0.2s ease-out;
     }
 
-    .api-code {
-      font-family: var(--font-mono);
-      color: var(--accent-cyan);
-      background: #020617;
-      padding: 0.35rem 0.5rem;
-      border-radius: 4px;
-      word-break: break-all;
+    @keyframes modalZoom {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
 
-    /* Scrollbar styling */
-    ::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
+    .modal-header {
+      padding: 1rem 1.25rem;
+      background: rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid var(--bg-panel-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    ::-webkit-scrollbar-track {
+
+    .modal-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .modal-close-btn {
       background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.1rem;
     }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(56, 189, 248, 0.2);
-      border-radius: 4px;
+
+    .modal-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+      max-height: 75vh;
+      overflow-y: auto;
     }
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(56, 189, 248, 0.4);
+
+    .setting-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .setting-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .setting-desc {
+      font-size: 0.68rem;
+      color: var(--text-dim);
+    }
+
+    .setting-textarea {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--bg-panel-border);
+      border-radius: 8px;
+      padding: 0.65rem;
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      line-height: 1.4;
+      resize: vertical;
+      outline: none;
+    }
+
+    .setting-textarea:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    .preset-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.3rem;
+    }
+
+    .preset-chip {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.68rem;
+      color: var(--accent-cyan);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .preset-chip:hover {
+      background: rgba(56, 189, 248, 0.25);
+    }
+
+    .range-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .range-input {
+      flex: 1;
+      accent-color: var(--accent-cyan);
+      cursor: pointer;
+    }
+
+    .modal-footer {
+      padding: 0.85rem 1.25rem;
+      background: rgba(15, 23, 42, 0.9);
+      border-top: 1px solid var(--bg-panel-border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.65rem;
+    }
+
+    .btn-secondary {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+      padding: 0.45rem 1rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7, #10b981);
+      border: none;
+      color: #fff;
+      padding: 0.45rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Header Navigation -->
+  <!-- Top Application Header -->
   <header>
     <div class="brand">
       <div class="brand-logo">H</div>
       <div>
         <div class="brand-title">HADL Cognitive Runtime Cockpit</div>
-        <div class="brand-subtitle">Autopoietic Dual-Loop Engine v2.4.0</div>
+        <div class="brand-subtitle">Autopoietic Dual-Loop Controller &bull; v2.4.0</div>
       </div>
     </div>
 
-    <div class="header-badges">
-      <div class="badge badge-emerald" id="model-badge">
+    <div class="header-actions">
+      <!-- Active Device Indicator -->
+      <div class="badge badge-cyan" id="device-badge">
         <span class="pulse-dot"></span>
-        <span id="detected-model-label">Auto-Detecting...</span>
+        <span id="detected-device-label">Detecting Hardware...</span>
       </div>
-      <div class="badge badge-cyan" id="adapter-badge">
-        <span>Adapter:</span>
-        <span id="adapter-status-label">Active</span>
+
+      <!-- Model Indicator -->
+      <div class="badge badge-emerald" id="model-badge">
+        <span id="detected-model-label">Loading Backbone...</span>
       </div>
-      <div class="badge badge-purple">
-        <span>Idle Daemon:</span>
-        <span id="daemon-state-label">Contemplating</span>
-      </div>
+
+      <!-- Artifact Stage Toggle Button -->
+      <button class="btn-header" id="toggle-artifact-stage-btn" title="Toggle Artifact Live Preview">
+        <span>⚡ Artifacts</span>
+      </button>
+
+      <!-- Settings & System Customization Button -->
+      <button class="btn-header" id="open-settings-btn" title="Cognitive Settings & System Prompt">
+        <span>⚙ Settings</span>
+      </button>
     </div>
   </header>
 
-  <!-- Main Cockpit Viewport -->
+  <!-- Main Viewport (Isolated Flex Layout) -->
   <main class="cockpit-container">
     
-    <!-- Left Section: Interactive Chat & Latent Reasoning Stage -->
+    <!-- 1. Left: Interactive Chat Stage -->
     <section class="chat-section">
       
-      <!-- Latent Mind HUD Banner (Zero-Token Visualizer) -->
+      <!-- Latent Mind HUD Banner -->
       <div class="latent-mind-hud">
         <div class="hud-title">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"></circle>
             <polyline points="12 6 12 12 16 14"></polyline>
           </svg>
@@ -620,11 +1042,11 @@
         <div class="hud-metrics">
           <div class="metric-item">
             <span class="metric-val" id="hud-latency">3.76 &mu;s</span>
-            <span class="metric-lbl">Fast-Path Bypass</span>
+            <span class="metric-lbl">Fast Bypass (&pi;<sub>0</sub>)</span>
           </div>
           <div class="metric-item">
             <span class="metric-val" style="color: var(--accent-emerald);" id="hud-tokens-saved">+0 tok</span>
-            <span class="metric-lbl">Context Bloat</span>
+            <span class="metric-lbl">Token Bloat</span>
           </div>
           <div class="metric-item">
             <span class="metric-val" style="color: var(--accent-amber);" id="hud-k-steps">k=2</span>
@@ -633,16 +1055,16 @@
         </div>
       </div>
 
-      <!-- Live Chat Messages Stream -->
+      <!-- Live Chat Messages Stream (Independent Scrolling) -->
       <div class="chat-messages" id="chat-stream">
         <div class="message assistant">
           <div class="message-bubble">
             <strong>Welcome to HADL Cognitive Cockpit.</strong>
-            <p style="margin-top: 0.4rem; color: var(--text-muted);">
-              Unlike passive autoregressive runners (Codex, Antigravity, Ollama), this runtime features continuous internal latent deliberation, autonomous idle memory consolidation, and mathematically guaranteed zero catastrophic forgetting.
+            <p style="margin-top: 0.35rem; color: var(--text-muted); font-size: 0.85rem;">
+              Unlike passive autoregressive runners (Codex, Antigravity, Ollama), this runtime features continuous internal latent deliberation, autonomous idle memory consolidation, and live interactive Artifacts.
             </p>
-            <p style="margin-top: 0.4rem; font-size: 0.8rem; color: var(--accent-cyan);">
-              &bull; Type any prompt below to watch the Latent Deliberation engine solve it with 0 token bloat.
+            <p style="margin-top: 0.35rem; font-size: 0.78rem; color: var(--accent-cyan);">
+              &bull; Type any prompt below to chat, solve complex logic, or ask for an interactive web app / artifact!
             </p>
           </div>
         </div>
@@ -655,13 +1077,13 @@
             type="text" 
             class="prompt-textarea" 
             id="prompt-input" 
-            placeholder="Ask a complex reasoning or coding problem..." 
+            placeholder="Tanyakan analisis logika, kode, atau minta buatkan web app / artifact interaktif..." 
             autocomplete="off"
             required
           />
           <button type="submit" class="send-btn" id="send-btn">
             <span>Infer</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="22" y1="2" x2="11" y2="13"></line>
               <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
             </svg>
@@ -671,8 +1093,82 @@
 
     </section>
 
-    <!-- Right Section: Cognitive Telemetry Cockpit Sidebar -->
+    <!-- 2. Middle: Artifact Stage & Live Preview Engine (Split View) -->
+    <section class="artifact-section" id="artifact-drawer">
+      <div class="artifact-header">
+        <div class="artifact-title-group">
+          <span class="artifact-type-tag" id="artifact-tag">HTML</span>
+          <span class="artifact-title-text" id="artifact-active-title">Interactive Preview</span>
+        </div>
+
+        <div class="artifact-nav-tabs">
+          <button class="artifact-tab-btn active" id="tab-preview-btn">Live Preview</button>
+          <button class="artifact-tab-btn" id="tab-code-btn">Code</button>
+        </div>
+
+        <div class="artifact-controls">
+          <button class="artifact-icon-btn" id="artifact-refresh-btn" title="Reload Preview">&#x21bb;</button>
+          <button class="artifact-icon-btn" id="artifact-copy-btn" title="Copy Code">&#x2398;</button>
+          <button class="artifact-icon-btn" id="artifact-download-btn" title="Download File">&#x21a7;</button>
+          <button class="artifact-icon-btn" id="artifact-close-btn" title="Close Artifact Drawer">&#x2715;</button>
+        </div>
+      </div>
+
+      <div class="artifact-content-stage">
+        <!-- Live Sandboxed Iframe Preview -->
+        <iframe id="artifact-preview-frame" sandbox="allow-scripts allow-modals allow-forms"></iframe>
+        
+        <!-- Source Code View -->
+        <div class="artifact-code-body" id="artifact-code-view">
+          <pre><code id="artifact-code-text"></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Right: Cognitive Telemetry Cockpit Sidebar (Independent Scrolling) -->
     <aside class="cockpit-sidebar">
+
+      <!-- Active System & Hardware Specs -->
+      <div class="card">
+        <div class="card-title">
+          <span>Hardware & System Specs</span>
+          <span class="badge badge-cyan" id="gpu-active-badge">Active</span>
+        </div>
+        <div class="specs-grid">
+          <div class="spec-item">
+            <span class="spec-lbl">Compute Device</span>
+            <span class="spec-val" id="spec-device">Detecting...</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-lbl">VRAM Allocated</span>
+            <span class="spec-val" id="spec-vram">0.0 MB</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-lbl">Dual-Loop Hook</span>
+            <span class="spec-val" id="spec-hook">Layer 11 (Mid)</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-lbl">Bottleneck Dim</span>
+            <span class="spec-val" id="spec-bottleneck">d=1024</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HADL System Architecture (The 6 Pillars) -->
+      <div class="card">
+        <div class="card-title">
+          <span>HADL Cognitive Architecture</span>
+          <span style="color: var(--accent-emerald); font-size: 0.7rem;">6 Systems</span>
+        </div>
+        <div style="font-size: 0.72rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+          <div><strong style="color: var(--accent-cyan);">&pi;<sub>0</sub> Fast Bypass:</strong> 3.76 &mu;s latency, 0 token bloat</div>
+          <div><strong style="color: var(--accent-amber);">&pi;<sub>1</sub> Deliberation Adapter:</strong> Recurrent latent pondering</div>
+          <div><strong style="color: #38bdf8;">Allostatic Drive:</strong> Energy regulation &Gamma; &in; [0.40, 0.95]</div>
+          <div><strong style="color: var(--accent-emerald);">Epistemic Humility:</strong> Dirichlet vacuity u &bull; Conf c &le; 0.95</div>
+          <div><strong style="color: #60a5fa;">Nullspace Memory:</strong> 0.000000 catastrophic forgetting</div>
+          <div><strong style="color: var(--accent-purple);">Curiosity Daemon:</strong> Autonomous idle consolidation</div>
+        </div>
+      </div>
 
       <!-- Allostatic Energy & Homeostasis -->
       <div class="card">
@@ -723,9 +1219,6 @@
           <div class="memory-slot ortho-zero">M<sub>6</sub></div>
           <div class="memory-slot ortho-zero">M<sub>7</sub></div>
         </div>
-        <div style="font-size: 0.68rem; color: var(--text-dim); text-align: center;">
-          QR Projection: x<sub>&perp;</sub> = x &minus; Q(Q<sup>T</sup>x) ensures zero catastrophic forgetting
-        </div>
       </div>
 
       <!-- Autonomous Dreaming & Curiosity Daemon Feed -->
@@ -737,20 +1230,11 @@
         <div class="dreaming-feed" id="dream-feed">
           <div class="dream-item">
             <div class="dream-item-header">
-              <span>Cycle #41 &bull; Falsification</span>
+              <span>Cycle #1 &bull; Falsification</span>
               <span>12.4 ms</span>
             </div>
             <div class="dream-item-content">
-              Contradiction resolved between slot M<sub>0</sub> and M<sub>1</sub> via AST sandbox assertion check.
-            </div>
-          </div>
-          <div class="dream-item">
-            <div class="dream-item-header">
-              <span>Cycle #40 &bull; Consolidation</span>
-              <span>9.1 ms</span>
-            </div>
-            <div class="dream-item-content">
-              Projected hypothesis into orthogonal nullspace with 0.000000 basis leakage.
+              Contradiction resolved in AST sandbox with 0.000000 basis leakage.
             </div>
           </div>
         </div>
@@ -759,21 +1243,102 @@
         </button>
       </div>
 
-      <!-- OpenAI REST API Compatibility Info -->
-      <div class="api-badge-card">
-        <span style="color: var(--text-muted); font-weight: 600;">OpenAI-Compatible Endpoint:</span>
-        <div class="api-code" id="api-endpoint-text">POST /v1/chat/completions</div>
-        <span style="color: var(--text-dim); font-size: 0.65rem;">
-          Compatible with Cursor, VS Code, LangChain, & Open WebUI.
-        </span>
-      </div>
-
     </aside>
 
   </main>
 
-  <!-- Client-side Logic -->
+  <!-- Settings & Customization Modal -->
+  <div class="modal-backdrop" id="settings-modal">
+    <div class="settings-dialog">
+      <div class="modal-header">
+        <div class="modal-title">⚙ Cognitive Engine Settings &amp; System Prompt</div>
+        <button class="modal-close-btn" id="close-settings-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Editable System Prompt -->
+        <div class="setting-group">
+          <div class="setting-label">
+            <span>System Prompt</span>
+            <span style="color: var(--accent-cyan); font-size: 0.7rem;">Active Persona</span>
+          </div>
+          <div class="setting-desc">Instruksi fondasi yang mengatur kepribadian, gaya penalaran, dan kapabilitas asisten.</div>
+          <textarea class="setting-textarea" id="setting-system-prompt" rows="4"></textarea>
+          
+          <!-- Preset Chips -->
+          <div class="preset-chips">
+            <span class="preset-chip" data-preset="default">Default HADL</span>
+            <span class="preset-chip" data-preset="artifacts">Web App &amp; Artifact Engineer</span>
+            <span class="preset-chip" data-preset="logic">Deep Math &amp; Logic Analyst</span>
+            <span class="preset-chip" data-preset="indo">Indonesian Conversationalist</span>
+          </div>
+        </div>
+
+        <!-- Ponder Steps (k) -->
+        <div class="setting-group">
+          <div class="setting-label">
+            <span>Ponder Steps (k)</span>
+            <span id="label-k-steps" style="color: var(--accent-amber); font-family: var(--font-mono);">k=2 (Deliberation)</span>
+          </div>
+          <div class="setting-desc">Jumlah langkah rekursi penalaran internal di ruang laten sebelum men-generate teks.</div>
+          <div class="range-row">
+            <input type="range" class="range-input" id="setting-k-steps" min="0" max="4" step="1" value="2" />
+          </div>
+        </div>
+
+        <!-- Max Tokens -->
+        <div class="setting-group">
+          <div class="setting-label">
+            <span>Max Generation Tokens</span>
+            <span id="label-max-tokens" style="color: var(--accent-cyan); font-family: var(--font-mono);">512 tokens</span>
+          </div>
+          <div class="setting-desc">Batas maksimal kuota token teks yang di-generate. Atur lebih tinggi untuk kode &amp; penjelasan panjang.</div>
+          <div class="range-row">
+            <input type="range" class="range-input" id="setting-max-tokens" min="128" max="2048" step="64" value="512" />
+          </div>
+        </div>
+
+        <!-- Temperature -->
+        <div class="setting-group">
+          <div class="setting-label">
+            <span>Sampling Temperature</span>
+            <span id="label-temperature" style="color: var(--accent-emerald); font-family: var(--font-mono);">0.70</span>
+          </div>
+          <div class="setting-desc">Tingkat kreativitas (0.0 = deterministik ketat untuk matematika/koding, 0.8+ = kreatif).</div>
+          <div class="range-row">
+            <input type="range" class="range-input" id="setting-temperature" min="0.0" max="1.5" step="0.05" value="0.70" />
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btn-reset-settings">Reset Defaults</button>
+        <button class="btn-primary" id="btn-save-settings">Save &amp; Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive JavaScript Engine -->
   <script>
+    // State & Storage Defaults
+    const DEFAULT_CONFIG = {
+      systemPrompt: "You are HADL, a helpful, intelligent, and concise AI reasoning assistant. When asked to create apps, games, tools, or diagrams, output complete self-contained HTML/CSS/JavaScript or SVG code blocks so the user can preview them live in the Artifact Stage.",
+      kSteps: 2,
+      maxTokens: 512,
+      temperature: 0.7
+    };
+
+    let userConfig = { ...DEFAULT_CONFIG };
+
+    // Load from LocalStorage
+    try {
+      const saved = localStorage.getItem("hadl_cockpit_config");
+      if (saved) {
+        userConfig = { ...DEFAULT_CONFIG, ...JSON.parse(saved) };
+      }
+    } catch (e) {}
+
+    // DOM Elements
     const chatStream = document.getElementById("chat-stream");
     const chatForm = document.getElementById("chat-form");
     const promptInput = document.getElementById("prompt-input");
@@ -781,9 +1346,231 @@
     const triggerDreamBtn = document.getElementById("trigger-dream-btn");
     const dreamFeed = document.getElementById("dream-feed");
     const epiphaniesCount = document.getElementById("epiphanies-count");
+    
+    // Artifact Drawer DOM
+    const artifactDrawer = document.getElementById("artifact-drawer");
+    const artifactTag = document.getElementById("artifact-tag");
+    const artifactActiveTitle = document.getElementById("artifact-active-title");
+    const tabPreviewBtn = document.getElementById("tab-preview-btn");
+    const tabCodeBtn = document.getElementById("tab-code-btn");
+    const artifactPreviewFrame = document.getElementById("artifact-preview-frame");
+    const artifactCodeView = document.getElementById("artifact-code-view");
+    const artifactCodeText = document.getElementById("artifact-code-text");
+    const artifactCopyBtn = document.getElementById("artifact-copy-btn");
+    const artifactDownloadBtn = document.getElementById("artifact-download-btn");
+    const artifactRefreshBtn = document.getElementById("artifact-refresh-btn");
+    const artifactCloseBtn = document.getElementById("artifact-close-btn");
+    const toggleArtifactStageBtn = document.getElementById("toggle-artifact-stage-btn");
 
-    // Fetch initial model metadata and telemetry
-    async function initCockpit() {
+    // Settings Modal DOM
+    const settingsModal = document.getElementById("settings-modal");
+    const openSettingsBtn = document.getElementById("open-settings-btn");
+    const closeSettingsBtn = document.getElementById("close-settings-btn");
+    const settingSystemPrompt = document.getElementById("setting-system-prompt");
+    const settingKSteps = document.getElementById("setting-k-steps");
+    const labelKSteps = document.getElementById("label-k-steps");
+    const settingMaxTokens = document.getElementById("setting-max-tokens");
+    const labelMaxTokens = document.getElementById("label-max-tokens");
+    const settingTemperature = document.getElementById("setting-temperature");
+    const labelTemperature = document.getElementById("label-temperature");
+    const btnSaveSettings = document.getElementById("btn-save-settings");
+    const btnResetSettings = document.getElementById("btn-reset-settings");
+
+    let currentArtifact = {
+      type: "html",
+      title: "Interactive Preview",
+      code: ""
+    };
+
+    // System Prompt Presets
+    const PRESETS = {
+      default: "You are HADL, a helpful, intelligent, and concise AI reasoning assistant.",
+      artifacts: "You are HADL, an expert frontend engineer and creative developer. When asked to build apps, tools, games, UI components, or diagrams, write complete, self-contained HTML/CSS/JS or SVG artifacts ready for immediate live preview.",
+      logic: "You are HADL, a rigorous mathematical and logical deduction engine. Break down problems step-by-step with formal proof traces and zero hallucinations.",
+      indo: "Kamu adalah HADL, asisten kecerdasan kognitif berbahasa Indonesia yang cerdas, ramah, dan solutif dalam pemecahan masalah logika, kode, dan konseptual."
+    };
+
+    // Initialize UI on load
+    function initCockpit() {
+      applyConfigToInputs();
+      fetchServerStatus();
+      fetchDreamFeed();
+      initTelemetryStream();
+    }
+
+    function applyConfigToInputs() {
+      settingSystemPrompt.value = userConfig.systemPrompt;
+      settingKSteps.value = userConfig.kSteps;
+      updateKStepsLabel(userConfig.kSteps);
+      settingMaxTokens.value = userConfig.maxTokens;
+      labelMaxTokens.textContent = `${userConfig.maxTokens} tokens`;
+      settingTemperature.value = userConfig.temperature;
+      labelTemperature.textContent = parseFloat(userConfig.temperature).toFixed(2);
+      document.getElementById("hud-k-steps").textContent = `k=${userConfig.kSteps}`;
+    }
+
+    function updateKStepsLabel(val) {
+      const v = parseInt(val, 10);
+      let desc = "Deliberation";
+      if (v === 0) desc = "Fast Bypass (\u03c0\u2080)";
+      else if (v === 1) desc = "Light Ponder";
+      else if (v === 2) desc = "Standard Deliberation";
+      else if (v === 3) desc = "Deep Sandbox";
+      else if (v >= 4) desc = "Popperian Verification";
+      labelKSteps.textContent = `k=${v} (${desc})`;
+    }
+
+    // Modal Events
+    openSettingsBtn.addEventListener("click", () => {
+      applyConfigToInputs();
+      settingsModal.classList.add("active");
+    });
+
+    closeSettingsBtn.addEventListener("click", () => {
+      settingsModal.classList.remove("active");
+    });
+
+    settingsModal.addEventListener("click", (e) => {
+      if (e.target === settingsModal) settingsModal.classList.remove("active");
+    });
+
+    settingKSteps.addEventListener("input", (e) => {
+      updateKStepsLabel(e.target.value);
+    });
+
+    settingMaxTokens.addEventListener("input", (e) => {
+      labelMaxTokens.textContent = `${e.target.value} tokens`;
+    });
+
+    settingTemperature.addEventListener("input", (e) => {
+      labelTemperature.textContent = parseFloat(e.target.value).toFixed(2);
+    });
+
+    document.querySelectorAll(".preset-chip").forEach(chip => {
+      chip.addEventListener("click", () => {
+        const pKey = chip.getAttribute("data-preset");
+        if (PRESETS[pKey]) {
+          settingSystemPrompt.value = PRESETS[pKey];
+        }
+      });
+    });
+
+    btnResetSettings.addEventListener("click", () => {
+      userConfig = { ...DEFAULT_CONFIG };
+      applyConfigToInputs();
+    });
+
+    btnSaveSettings.addEventListener("click", () => {
+      userConfig.systemPrompt = settingSystemPrompt.value.trim() || DEFAULT_CONFIG.systemPrompt;
+      userConfig.kSteps = parseInt(settingKSteps.value, 10);
+      userConfig.maxTokens = parseInt(settingMaxTokens.value, 10);
+      userConfig.temperature = parseFloat(settingTemperature.value);
+      localStorage.setItem("hadl_cockpit_config", JSON.stringify(userConfig));
+      document.getElementById("hud-k-steps").textContent = `k=${userConfig.kSteps}`;
+      settingsModal.classList.remove("active");
+    });
+
+    // Artifact Navigation & Actions
+    function openArtifact(type, title, code) {
+      currentArtifact = { type, title, code };
+      artifactTag.textContent = type.toUpperCase();
+      artifactActiveTitle.textContent = title;
+      artifactCodeText.textContent = code;
+
+      // Render live inside sandboxed iframe
+      renderIframePreview(type, code);
+
+      // Switch to preview tab by default
+      showPreviewTab();
+      artifactDrawer.classList.add("open");
+    }
+
+    function renderIframePreview(type, code) {
+      if (type.toLowerCase() === "svg") {
+        const htmlDoc = `<!DOCTYPE html><html><head><style>body{margin:0;display:flex;align-items:center;justify-content:center;height:100vh;background:#0d1117;color:#fff;overflow:hidden;}</style></head><body>${code}</body></html>`;
+        artifactPreviewFrame.srcdoc = htmlDoc;
+      } else if (type.toLowerCase() === "html") {
+        artifactPreviewFrame.srcdoc = code;
+      } else if (type.toLowerCase() === "javascript" || type.toLowerCase() === "js") {
+        const htmlDoc = `<!DOCTYPE html><html><head><meta charset="utf-8"/><style>body{font-family:sans-serif;padding:1.5rem;background:#0d1117;color:#f1f5f9;}pre{background:#161b22;padding:1rem;border-radius:8px;}</style></head><body><h3>JavaScript Console Output:</h3><pre id="log"></pre><script>const _log=document.getElementById('log');console.log=(...a)=>{_log.textContent+=a.join(' ')+'\\n';};try{${code}}catch(e){console.log('Error: '+e.message);}<\/script></body></html>`;
+        artifactPreviewFrame.srcdoc = htmlDoc;
+      } else {
+        const safeCode = code.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        artifactPreviewFrame.srcdoc = `<!DOCTYPE html><html><head><style>body{font-family:monospace;padding:1.5rem;background:#0d1117;color:#38bdf8;white-space:pre-wrap;}</style></head><body>${safeCode}</body></html>`;
+      }
+    }
+
+    function showPreviewTab() {
+      tabPreviewBtn.classList.add("active");
+      tabCodeBtn.classList.remove("active");
+      artifactPreviewFrame.style.display = "block";
+      artifactCodeView.style.display = "none";
+    }
+
+    function showCodeTab() {
+      tabCodeBtn.classList.add("active");
+      tabPreviewBtn.classList.remove("active");
+      artifactPreviewFrame.style.display = "none";
+      artifactCodeView.style.display = "block";
+    }
+
+    tabPreviewBtn.addEventListener("click", showPreviewTab);
+    tabCodeBtn.addEventListener("click", showCodeTab);
+
+    artifactCloseBtn.addEventListener("click", () => {
+      artifactDrawer.classList.remove("open");
+    });
+
+    toggleArtifactStageBtn.addEventListener("click", () => {
+      artifactDrawer.classList.toggle("open");
+    });
+
+    artifactRefreshBtn.addEventListener("click", () => {
+      if (currentArtifact.code) {
+        renderIframePreview(currentArtifact.type, currentArtifact.code);
+      }
+    });
+
+    artifactCopyBtn.addEventListener("click", async () => {
+      if (currentArtifact.code) {
+        await navigator.clipboard.writeText(currentArtifact.code);
+        artifactCopyBtn.textContent = "\u2713";
+        setTimeout(() => { artifactCopyBtn.innerHTML = "&#x2398;"; }, 1500);
+      }
+    });
+
+    artifactDownloadBtn.addEventListener("click", () => {
+      if (!currentArtifact.code) return;
+      const ext = currentArtifact.type.toLowerCase() === "svg" ? "svg" : (currentArtifact.type.toLowerCase() === "html" ? "html" : "txt");
+      const blob = new Blob([currentArtifact.code], { type: "text/plain;charset=utf-8" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `hadl_artifact.${ext}`;
+      a.click();
+    });
+
+    // Hardware & Server Telemetry
+    async function fetchServerStatus() {
+      try {
+        const res = await fetch("/health");
+        if (res.ok) {
+          const d = await res.json();
+          const dev = d.device || (d.cuda_available ? "NVIDIA RTX GPU" : "CPU");
+          document.getElementById("detected-device-label").textContent = dev;
+          document.getElementById("spec-device").textContent = dev;
+          
+          if (d.cuda_available) {
+            document.getElementById("spec-vram").textContent = `${d.vram_used_mb} / ${d.vram_total_mb} MB`;
+            document.getElementById("gpu-active-badge").textContent = "CUDA Active";
+            document.getElementById("gpu-active-badge").className = "badge badge-emerald";
+          } else {
+            document.getElementById("spec-vram").textContent = "Host RAM";
+            document.getElementById("gpu-active-badge").textContent = "CPU Mode";
+            document.getElementById("gpu-active-badge").className = "badge badge-cyan";
+          }
+        }
+      } catch (e) {}
+
       try {
         const res = await fetch("/v1/models");
         if (res.ok) {
@@ -791,16 +1578,12 @@
           const m = data.models ? data.models[0] : null;
           if (m) {
             document.getElementById("detected-model-label").textContent = `${m.family} (${m.id || "Loaded"})`;
-            document.getElementById("adapter-status-label").textContent = m.adapter_loaded ? "Loaded" : "Injected";
+            if (m.bottleneck) {
+              document.getElementById("spec-bottleneck").textContent = `d=${m.bottleneck}`;
+            }
           }
         }
-      } catch (err) {
-        console.warn("Using offline / standalone metadata defaults");
-        document.getElementById("detected-model-label").textContent = "HADL v2.4.0 Engine";
-      }
-
-      fetchDreamFeed();
-      initTelemetryStream();
+      } catch (err) {}
     }
 
     // Connect to WebSockets for live telemetry
@@ -821,7 +1604,6 @@
           setTimeout(initTelemetryStream, 3000);
         };
       } catch (e) {
-        // Fallback to polling
         setInterval(pollTelemetry, 3000);
       }
     }
@@ -847,10 +1629,10 @@
       if (data.vacuity !== undefined && data.confidence !== undefined) {
         const u = parseFloat(data.vacuity).toFixed(3);
         const c = parseFloat(data.confidence).toFixed(3);
-        document.getElementById("shield-desc").textContent = `Dirichlet vacuity u=${u} • Conf c=${c} ≤ 0.95`;
+        document.getElementById("shield-desc").textContent = `Dirichlet vacuity u=${u} \u2022 Conf c=${c} \u2264 0.95`;
       }
-      if (data.daemon_state) {
-        document.getElementById("daemon-state-label").textContent = data.daemon_state;
+      if (data.vram_used_mb !== undefined && data.vram_total_mb !== undefined && data.vram_total_mb > 0) {
+        document.getElementById("spec-vram").textContent = `${data.vram_used_mb} / ${data.vram_total_mb} MB`;
       }
     }
 
@@ -877,34 +1659,29 @@
             <span>${(item.cycle_latency_ms || 11.2).toFixed(1)} ms</span>
           </div>
           <div class="dream-item-content">
-            ${item.summary || (item.contradictions_detected > 0 
-              ? `Resolved ${item.anomalies_resolved} latent contradiction(s) in sandbox.` 
-              : `Consolidated memory slots with 0.000000 basis leakage.`)}
+            ${item.summary || "Consolidated memory slots with 0.000000 basis leakage."}
           </div>
         `;
         dreamFeed.appendChild(div);
       });
     }
 
-    // Trigger on-demand dreaming step
     triggerDreamBtn.addEventListener("click", async () => {
       triggerDreamBtn.disabled = true;
       triggerDreamBtn.innerHTML = "<span>Simulating Curiosity Cycle...</span>";
       try {
         const res = await fetch("/v1/dream", { method: "POST" });
         if (res.ok) {
-          const step = await res.json();
           fetchDreamFeed();
         }
       } catch (e) {
-        console.error(e);
       } finally {
         triggerDreamBtn.disabled = false;
         triggerDreamBtn.innerHTML = "<span>Trigger Contemplation Cycle</span>";
       }
     });
 
-    // Handle Chat Form Submit
+    // Chat Message Handling with ISOLATED Smart Scroll
     chatForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const prompt = promptInput.value.trim();
@@ -913,13 +1690,13 @@
       promptInput.value = "";
       sendBtn.disabled = true;
 
-      // Add user message to UI
+      // Add user message
       appendMessage("user", prompt);
 
       // Create assistant container
       const assistantMessageDiv = createAssistantMessagePlaceholder();
       chatStream.appendChild(assistantMessageDiv);
-      chatStream.scrollTop = chatStream.scrollHeight;
+      smartScrollChatToBottom();
 
       try {
         const response = await fetch("/v1/chat/completions", {
@@ -927,7 +1704,10 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             messages: [{ role: "user", content: prompt }],
-            max_tokens: 512,
+            system_prompt: userConfig.systemPrompt,
+            k_steps: userConfig.kSteps,
+            max_tokens: userConfig.maxTokens,
+            temperature: userConfig.temperature,
             stream: false
           })
         });
@@ -950,9 +1730,16 @@
       } finally {
         sendBtn.disabled = false;
         promptInput.focus();
-        chatStream.scrollTop = chatStream.scrollHeight;
+        smartScrollChatToBottom();
       }
     });
+
+    // Smart Scroll: ONLY scrolls the chat stream, NEVER the outer window or sidebar!
+    function smartScrollChatToBottom() {
+      if (chatStream) {
+        chatStream.scrollTop = chatStream.scrollHeight;
+      }
+    }
 
     function appendMessage(role, text) {
       const msg = document.createElement("div");
@@ -962,7 +1749,7 @@
       bubble.textContent = text;
       msg.appendChild(bubble);
       chatStream.appendChild(msg);
-      chatStream.scrollTop = chatStream.scrollHeight;
+      smartScrollChatToBottom();
     }
 
     function createAssistantMessagePlaceholder() {
@@ -987,14 +1774,40 @@
 
     function populateAssistantMessage(container, content, telem) {
       const bubble = container.querySelector(".message-bubble");
-      const kSteps = telem.k_steps !== undefined ? telem.k_steps : 2;
-      const policy = telem.policy || "pi_1_deliberation";
+      const kSteps = telem.k_steps !== undefined ? telem.k_steps : userConfig.kSteps;
       const energy = (telem.allostatic_energy || 0.782).toFixed(3);
       const latency = (telem.latency_ms || 4.2).toFixed(2);
 
       let policyLabel = "Pondering (Active Inference)";
       if (kSteps === 0) policyLabel = "Fast Streaming Bypass";
       else if (kSteps > 2) policyLabel = "Popperian Sandbox Verification";
+
+      // Detect Artifact Code Blocks (HTML, SVG, JS, Python, Markdown)
+      const artifactMatch = extractArtifact(content);
+
+      let artifactHTML = "";
+      if (artifactMatch) {
+        artifactHTML = `
+          <div class="artifact-card-inline">
+            <div class="artifact-card-meta">
+              <div class="artifact-icon-box">\u26a1</div>
+              <div>
+                <div class="artifact-card-title">${artifactMatch.title}</div>
+                <div class="artifact-card-desc">${artifactMatch.type.toUpperCase()} &bull; Interactive Artifact Ready</div>
+              </div>
+            </div>
+            <button class="artifact-btn-open" onclick="triggerArtifactPreview('${artifactMatch.type}', '${artifactMatch.title}')">
+              <span>Live Preview \u2197</span>
+            </button>
+          </div>
+        `;
+        // Store on window object for easy callback
+        window._latestArtifact = artifactMatch;
+        // Auto-open live preview for interactive widgets
+        if (artifactMatch.type === "html" || artifactMatch.type === "svg") {
+          openArtifact(artifactMatch.type, artifactMatch.title, artifactMatch.code);
+        }
+      }
 
       bubble.innerHTML = `
         <div class="deliberation-box">
@@ -1009,12 +1822,35 @@
             <span>Nullspace: 0.000000</span>
           </div>
         </div>
+        ${artifactHTML}
         <div class="response-body">${formatMarkdown(content)}</div>
       `;
     }
 
+    // Window helper to trigger preview from inline card
+    window.triggerArtifactPreview = function(type, title) {
+      if (window._latestArtifact) {
+        openArtifact(window._latestArtifact.type, window._latestArtifact.title, window._latestArtifact.code);
+      }
+    };
+
+    function extractArtifact(text) {
+      const codeBlockRegex = /```(html|svg|javascript|js|python|css|markdown)[\r\n]([\s\S]*?)```/i;
+      const match = text.match(codeBlockRegex);
+      if (match) {
+        const lang = match[1].toLowerCase();
+        const code = match[2].trim();
+        let title = "Interactive Component";
+        if (lang === "html") title = "Web Application & Widget";
+        else if (lang === "svg") title = "Vector Graphic Art";
+        else if (lang === "javascript" || lang === "js") title = "Interactive Script";
+        else if (lang === "python") title = "Python Script";
+        return { type: lang, title: title, code: code };
+      }
+      return null;
+    }
+
     function formatMarkdown(text) {
-      // Basic markdown styling for code and bold
       let formatted = text
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -1031,7 +1867,6 @@
       return formatted;
     }
 
-    // Initialize on page load
     window.addEventListener("DOMContentLoaded", initCockpit);
   </script>
 </body>
