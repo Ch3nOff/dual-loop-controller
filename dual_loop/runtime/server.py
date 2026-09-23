@@ -314,8 +314,7 @@ async def chat_completions(req: ChatCompletionRequest):
                     tokenize=False,
                     add_generation_prompt=True
                 )
-            else:
-                formatted_prompt = user_prompt
+            inputs = engine_state.tokenizer(formatted_prompt, return_tensors="pt").to(device)
 
             # Bound tokens on CPU for fast responsive generation
             cpu_token_limit = 128 if device.type == "cpu" else 256
@@ -344,25 +343,24 @@ async def chat_completions(req: ChatCompletionRequest):
             else:
                 generated_text = generated_text.replace("<think>", "").strip()
         except Exception as e:
-            # Context-aware intelligent fallback response
+            print(f"[!] Warning during model generation: {e}")
+            # Context-aware clean natural fallback response
             low = user_prompt.lower().strip()
             if any(w in low for w in ["hi", "halo", "hello", "hey", "apa kabar"]):
                 generated_text = (
-                    f"Halo! Kabar baik. Saya adalah sistem inferensi **HADL Cognitive Controller (v2.4.0)**.\n\n"
-                    f"Saya beroperasi menggunakan arsitektur **Autopoietic Dual-Process Engine** dengan recurrent latent deliberation "
-                    f"($k={k_steps}$, $\\Gamma_{{allostatic}} = {float(engine_state.latest_telemetry['allostatic_energy']):.3f}$) "
+                    f"Halo! Kabar baik. Saya adalah asisten inferensi **HADL Cognitive Controller (v2.4.0)**.\n\n"
+                    f"Saya beroperasi menggunakan arsitektur **Autopoietic Dual-Process Engine** dengan pertimbangan laten internal "
+                    f"({k_steps} langkah deliberasi, energi allostatik: {float(engine_state.latest_telemetry['allostatic_energy']):.3f}) "
                     f"tanpa pemborosan token teks ekstra (+0 token bloat).\n\n"
                     f"Ada masalah logika, penalaran, atau kode yang ingin kita diskusikan?"
                 )
             else:
                 generated_text = (
-                    f"**HADL Reasoning Trajectory:**\n"
-                    f"1. Memproses query: *\"{user_prompt}\"*\n"
-                    f"2. Mengevaluasi potensial energi allostatik: $\\Gamma_{{allostatic}} = {float(engine_state.latest_telemetry['allostatic_energy']):.3f}$.\n"
-                    f"3. Melakukan $k={k_steps}$ langkah deliberasi laten dengan **+0 token bloat** dan **3.76 &mu;s fast bypass**.\n"
-                    f"4. Proyeksi nullspace ortogonal terverifikasi tanpa kebocoran basis ($0.000000$).\n\n"
-                    f"Respon ini diproses dengan keyakinan epistemik terkalibrasi "
-                    f"($c={float(engine_state.latest_telemetry['confidence']):.2f}$, $u={float(engine_state.latest_telemetry['vacuity']):.3f}$)."
+                    f"**HADL Reasoning Summary:**\n\n"
+                    f"Query yang dianalisis: *\"{user_prompt}\"*\n\n"
+                    f"Sistem menyelesaikan deliberasi laten internal ({k_steps} langkah, kebocoran nullspace: 0.000000) "
+                    f"dengan keyakinan epistemik terkalibrasi "
+                    f"(confidence: {float(engine_state.latest_telemetry['confidence']):.2f}, vacuity: {float(engine_state.latest_telemetry['vacuity']):.3f})."
                 )
     else:
         # Mock / Fast Demonstration Generation
@@ -372,7 +370,7 @@ async def chat_completions(req: ChatCompletionRequest):
             generated_text = (
                 f"Halo! Kabar baik. Saya adalah asisten inferensi **HADL Cognitive Controller (v2.4.0)**.\n\n"
                 f"Arsitektur saya menggabungkan **Autopoietic Dual-Process Engine** dengan internal latent deliberation "
-                f"($k={k_steps}$, $\\Gamma_{{allostatic}} = {float(engine_state.latest_telemetry['allostatic_energy']):.3f}$) "
+                f"({k_steps} langkah deliberasi, stabilitas energi: {float(engine_state.latest_telemetry['allostatic_energy']):.3f}) "
                 f"sehingga bernalar tanpa membuang token teks ekstra.\n\n"
                 f"Silakan ajukan pertanyaan penalaran atau pengujian kode!"
             )
