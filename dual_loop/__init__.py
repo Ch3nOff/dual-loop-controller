@@ -116,6 +116,17 @@ __all__ = [
     "attach_dual_loop_to_qwen",
     "attach_dual_loop",
     "attach_dual_loop_to_model",
+    "attach_dual_loop_to_glm4",
+    "attach_dual_loop_to_glm",
     "get_default_checkpoint_path",
     "load_trained_checkpoint",
 ]
+
+def auto_attach_hadl(*args, **kwargs):
+    from .runtime.detector import auto_attach_hadl as _fn
+    return _fn(*args, **kwargs)
+
+def start_server(*args, **kwargs):
+    from .runtime.server import start_server as _fn
+    return _fn(*args, **kwargs)
+
