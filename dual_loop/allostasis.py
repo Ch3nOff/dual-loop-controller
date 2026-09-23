@@ -121,12 +121,13 @@ class AllostaticEnergyModulator(nn.Module):
         # 3. Allostatic Modulation Gate Gamma in [0, 1]
         gamma_allostatic = torch.sigmoid(E_allo / self.temperature)
         
-        # 4. Modulate raw delta
-        modulated_delta = gamma_allostatic * raw_delta
+        # 4. Modulate raw delta with ReZero learned residual magnitude
+        modulated_delta = gamma_allostatic * scale_val * raw_delta
         
         telemetry = {
             "gamma_allostatic": gamma_allostatic.detach().cpu().squeeze(-1).tolist(),
             "energy_potential": E_allo.detach().cpu().squeeze(-1).tolist(),
+            "scale": scale_val.detach().cpu().squeeze(-1).tolist(),
             "pruned_gate_active": True
         }
         
