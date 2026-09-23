@@ -117,10 +117,10 @@ goto MENU
 :INSTALL_CUDA
 echo.
 echo ===============================================================================
-echo [*] Installing / Upgrading PyTorch with CUDA cu126 (RTX GPU Acceleration)...
+echo [*] Installing / Upgrading PyTorch with CUDA cu130 (RTX 50-Series Blackwell)...
 echo [*] This will enable full GPU compute on NVIDIA RTX graphics cards.
 echo ===============================================================================
-"%PYTHON_EXEC%" -m pip install --upgrade torch --index-url https://download.pytorch.org/whl/cu126
+"%PYTHON_EXEC%" -m pip install --upgrade torch --index-url https://download.pytorch.org/whl/cu130
 echo.
 echo [*] Testing CUDA availability...
 "%PYTHON_EXEC%" -c "import torch; print('CUDA Available:', torch.cuda.is_available()); print('Device:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU only')"
