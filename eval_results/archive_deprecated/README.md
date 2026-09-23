@@ -27,7 +27,7 @@
 ealtime_benchmark_results.json** | Scratch timing probe | Unreferenced intermediate run without item details. | [../side_by_side_wronglog_eval.json](../side_by_side_wronglog_eval.json) |
 | **lended_eval_n20.json** | 20-item blended exploration | Small exploratory sample without significance testing. | [../authentic_20_benchmarks_all_systems.json](../authentic_20_benchmarks_all_systems.json) |
 | **matrix_5x_run_experiment.json** | Intermediate 5x matrix exploration | Replaced by full side-by-side wrong-log persistence runs. | [../side_by_side_wronglog_eval.json](../side_by_side_wronglog_eval.json) |
-| **eval_results_1789538521.json / ...565.json** | Raw lm-eval dumps | Redundant unindexed harness dumps. | [../arc_challenge_authentic_eval_n100.json](../arc_challenge_authentic_eval_n100.json) |
-| **qwen35_2b_base_k0.json / ...dualloop_k2.json** | Redundant lm-eval outputs | Duplicate copies of the harness raw dumps. | [../authentic_20_benchmarks_all_systems.json](../authentic_20_benchmarks_all_systems.json) |
-| **qwen35_2b_full_base_k0.json / ...dualloop_k2.json** | Uncompressed lm-eval dumps | Superseded by structured, verifiable JSON logs with per-sample tracking. | [../authentic_20_benchmarks_all_systems.json](../authentic_20_benchmarks_all_systems.json) |
 | **system_comparison_graph.png / comprehensive_dual_loop_behavior.png** | Early iteration charts | Early design draft charts replaced by high-resolution publication graphs. | [../authentic_20_benchmarks_all_systems.png](../authentic_20_benchmarks_all_systems.png) |
+| **images/** | Historical diagram & plot artifacts | Superseded by v2.4.0 visual assets (`hadl_v24_system_architecture.png`, `comprehensive_v24_benchmark_matrix.png`). | Root / README |
+| **scripts/** | Historical exploratory run & plotting scripts | Superseded by v2.4.0 unified benchmark suite in `dual_loop/benchmarks/`. | `dual_loop/benchmarks/` |
+
