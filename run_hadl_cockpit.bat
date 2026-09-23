@@ -22,36 +22,53 @@ echo [*] Working Directory : %~dp0
 echo [*] Python Interpreter: %PYTHON_EXEC%
 echo.
 echo Select an option:
-echo   [1] Launch Cockpit with Auto-Detected Backbone and Adapter
-echo   [2] Launch Cockpit in Instant Fast Mode (Zero-Download Engine)
-echo   [3] Package and Publish GLM-4 Adapter to Hugging Face Hub
-echo   [4] Package and Publish Qwen Adapter to Hugging Face Hub
-echo   [5] Exit
+echo   [1] Launch with Qwen-3.5-2B (Complete Weights in Cache + Trained Adapter) [RECOMMENDED]
+echo   [2] Launch with GLM-4-9B (d=1024 Bottleneck Adapter)
+echo   [3] Launch in Instant Fast Mode (Zero Wait Demo Engine)
+echo   [4] Package and Publish GLM-4 Adapter to Hugging Face Hub
+echo   [5] Package and Publish Qwen Adapter to Hugging Face Hub
+echo   [6] Exit
 echo.
 set "OPTION=1"
-set /p "OPTION=Enter choice [1-5, default=1]: "
+set /p "OPTION=Enter choice [1-6, default=1]: "
 
-if "%OPTION%"=="1" goto RUN_AUTO
-if "%OPTION%"=="2" goto RUN_MOCK
-if "%OPTION%"=="3" goto PUB_GLM
-if "%OPTION%"=="4" goto PUB_QWEN
-if "%OPTION%"=="5" goto QUIT
+if "%OPTION%"=="1" goto RUN_QWEN
+if "%OPTION%"=="2" goto RUN_GLM4
+if "%OPTION%"=="3" goto RUN_MOCK
+if "%OPTION%"=="4" goto PUB_GLM
+if "%OPTION%"=="5" goto PUB_QWEN
+if "%OPTION%"=="6" goto QUIT
 
 echo.
-echo [!] Invalid selection: %OPTION%. Please choose 1, 2, 3, 4, or 5.
+echo [!] Invalid selection: %OPTION%. Please choose 1, 2, 3, 4, 5, or 6.
 pause
 goto MENU
 
-:RUN_AUTO
+:RUN_QWEN
 echo.
 echo ===============================================================================
-echo [*] Initializing HADL Runtime Server...
-echo [*] Auto-detecting model architecture and loading adapter weights...
+echo [*] Initializing HADL Runtime Server with Qwen-3.5-2B + Deliberation Adapter...
 echo [*] UI Dashboard will open at: http://127.0.0.1:8000/
 echo [*] Press Ctrl+C in this window anytime to stop the server.
 echo ===============================================================================
 start "" cmd /c "timeout /t 4 /nobreak >nul & start http://127.0.0.1:8000"
-"%PYTHON_EXEC%" -m dual_loop.cli serve --host 127.0.0.1 --port 8000
+"%PYTHON_EXEC%" -m dual_loop.cli serve --model Qwen/Qwen3.5-2B --host 127.0.0.1 --port 8000
+echo.
+echo ===============================================================================
+echo [*] Server process stopped.
+echo ===============================================================================
+pause
+goto MENU
+
+:RUN_GLM4
+echo.
+echo ===============================================================================
+echo [*] Initializing HADL Runtime Server with GLM-4-9B Bottleneck Adapter...
+echo [*] UI Dashboard will open at: http://127.0.0.1:8000/
+echo [*] Press Ctrl+C in this window anytime to stop the server.
+echo ===============================================================================
+start "" cmd /c "timeout /t 4 /nobreak >nul & start http://127.0.0.1:8000"
+"%PYTHON_EXEC%" -m dual_loop.cli serve --model zai-org/glm-4-9b-chat --bottleneck-dim 1024 --host 127.0.0.1 --port 8000
 echo.
 echo ===============================================================================
 echo [*] Server process stopped.

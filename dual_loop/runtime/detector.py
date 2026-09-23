@@ -54,9 +54,14 @@ def detect_architecture_family(model_or_config: Any) -> str:
     cls_name = type(model_or_config).__name__.lower()
     config = getattr(model_or_config, "config", model_or_config)
     
-    model_type = getattr(config, "model_type", "").lower() if config else ""
-    archs = getattr(config, "architectures", []) if config else []
-    arch_str = " ".join(archs).lower()
+    model_type = str(getattr(config, "model_type", "") or "").lower()
+    raw_archs = getattr(config, "architectures", []) if config else []
+    if isinstance(raw_archs, (list, tuple)):
+        arch_str = " ".join([str(a) for a in raw_archs]).lower()
+    elif raw_archs:
+        arch_str = str(raw_archs).lower()
+    else:
+        arch_str = ""
 
     combined = f"{cls_name} {model_type} {arch_str}"
     
