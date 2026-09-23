@@ -317,12 +317,14 @@ async def chat_completions(req: ChatCompletionRequest):
             else:
                 formatted_prompt = user_prompt
 
-            inputs = engine_state.tokenizer(formatted_prompt, return_tensors="pt").to(device)
-            
+            # Bound tokens on CPU for fast responsive generation
+            cpu_token_limit = 128 if device.type == "cpu" else 256
+            max_tokens_to_gen = min(req.max_tokens or cpu_token_limit, cpu_token_limit)
+
             with torch.no_grad():
                 outputs = engine_state.model.qwen.generate(
                     **inputs,
-                    max_new_tokens=min(req.max_tokens or 256, 512),
+                    max_new_tokens=max_tokens_to_gen,
                     do_sample=(req.temperature or 0.7) > 0.0,
                     temperature=max(req.temperature or 0.7, 1e-4),
                     pad_token_id=engine_state.tokenizer.eos_token_id
@@ -333,15 +335,14 @@ async def chat_completions(req: ChatCompletionRequest):
                 skip_special_tokens=True
             ).strip()
             
-            # If Qwen output includes leading <think> block, ensure it renders nicely
-            if "<think>" in generated_text and "</think>" in generated_text:
+            # Cleanly strip internal <think>...</think> block if present
+            if "</think>" in generated_text:
                 parts = generated_text.split("</think>", 1)
                 thought = parts[0].replace("<think>", "").strip()
                 ans = parts[1].strip()
-                if ans:
-                    generated_text = ans
-                else:
-                    generated_text = thought
+                generated_text = ans if ans else thought
+            else:
+                generated_text = generated_text.replace("<think>", "").strip()
         except Exception as e:
             # Context-aware intelligent fallback response
             low = user_prompt.lower().strip()
