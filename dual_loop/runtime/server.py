@@ -296,7 +296,28 @@ async def chat_completions(req: ChatCompletionRequest):
     ):
         try:
             device = next(engine_state.model.parameters()).device
-            inputs = engine_state.tokenizer(user_prompt, return_tensors="pt").to(device)
+            
+            # Format conversational prompt using tokenizer's chat template
+            msgs = []
+            has_system = any(m.role == "system" for m in req.messages)
+            if not has_system:
+                msgs.append({
+                    "role": "system",
+                    "content": "You are HADL, a helpful, intelligent, and concise AI reasoning assistant."
+                })
+            for m in req.messages:
+                msgs.append({"role": m.role, "content": m.content})
+
+            if hasattr(engine_state.tokenizer, "apply_chat_template") and engine_state.tokenizer.chat_template:
+                formatted_prompt = engine_state.tokenizer.apply_chat_template(
+                    msgs,
+                    tokenize=False,
+                    add_generation_prompt=True
+                )
+            else:
+                formatted_prompt = user_prompt
+
+            inputs = engine_state.tokenizer(formatted_prompt, return_tensors="pt").to(device)
             
             with torch.no_grad():
                 outputs = engine_state.model.qwen.generate(
@@ -311,6 +332,16 @@ async def chat_completions(req: ChatCompletionRequest):
                 outputs[0][inputs["input_ids"].shape[1]:],
                 skip_special_tokens=True
             ).strip()
+            
+            # If Qwen output includes leading <think> block, ensure it renders nicely
+            if "<think>" in generated_text and "</think>" in generated_text:
+                parts = generated_text.split("</think>", 1)
+                thought = parts[0].replace("<think>", "").strip()
+                ans = parts[1].strip()
+                if ans:
+                    generated_text = ans
+                else:
+                    generated_text = thought
         except Exception as e:
             # Context-aware intelligent fallback response
             low = user_prompt.lower().strip()
