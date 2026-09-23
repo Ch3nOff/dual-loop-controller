@@ -36,32 +36,32 @@ flowchart TD
     subgraph UserInference ["1. Online User Fast-Path Inference (Clock: Sub-5ms)"]
         In["User Query Tokens x_t"] --> EarlyLayers["Early Transformer Layers (1 to L-1)"]
         EarlyLayers --> Hook["Mid-Layer Interception Hook (L_mid)"]
-        Hook --> FristonRouter{"Friston Active Inference Router\nMinimizes Free Energy G(π)"}
-        FristonRouter -->|π₀: u < 0.65 (Fluent Stream)| Bypass["Streaming Bypass (7.8 μs)"]
-        FristonRouter -->|π₁: 0.65 ≤ u < 0.85 (Check)| FastCheck["Fast Evidential Verification"]
-        FristonRouter -->|π₂: u ≥ 0.85 (Complex)| BrainSandbox["4-Stage Brain Sandbox Deliberation"]
+        Hook --> FristonRouter{"Friston Active Inference Router<br/>Minimizes Free Energy G(pi)"}
+        FristonRouter -->|"pi_0: u &lt; 0.65 (Fluent Stream)"| Bypass["Streaming Bypass (7.8 us)"]
+        FristonRouter -->|"pi_1: 0.65 &le; u &lt; 0.85 (Check)"| FastCheck["Fast Evidential Verification"]
+        FristonRouter -->|"pi_2: u &ge; 0.85 (Complex)"| BrainSandbox["4-Stage Brain Sandbox Deliberation"]
         
-        Bypass --> Allostasis["Allostatic Energy Modulator (Gate Pruning)\nΓ_allostatic = σ(E_allo / τ)"]
+        Bypass --> Allostasis["Allostatic Energy Modulator (Gate Pruning)<br/>Gamma_allostatic = sigma(E_allo / tau)"]
         FastCheck --> Allostasis
         BrainSandbox --> Allostasis
         
-        Allostasis --> LateLayers["Later Layers & LM Head"]
+        Allostasis --> LateLayers["Later Layers and LM Head"]
         LateLayers --> Output["High-Fidelity Output Token Stream"]
     end
 
     subgraph AutonomousDaemon ["2. Autonomous Background Daemon (Decoupled Idle Clock)"]
         IdleDetect["System Idle Detection"] --> ScanMemory["Scan Episodic Memory Bank"]
-        ScanMemory --> DetectContradiction["Detect Latent Contradictions & Ignorance\n||h_i + h_j - h_joint|| > τ"]
+        ScanMemory --> DetectContradiction["Detect Latent Contradictions and Ignorance<br/>Norm(h_i + h_j - h_joint) &gt; tau"]
         
-        DetectContradiction --> PopperianSelfPlay["Popperian Red Team Self-Play\nProposer (φ) vs Falsifier (ψ)"]
-        PopperianSelfPlay --> SandboxTruth["Deterministic Sandbox Verification\n(Code Syntax & Logic Invariant Gate)"]
+        DetectContradiction --> PopperianSelfPlay["Popperian Red Team Self-Play<br/>Proposer vs Falsifier"]
+        PopperianSelfPlay --> SandboxTruth["Deterministic Sandbox Verification<br/>Code Syntax and Logic Invariant Gate"]
         
-        SandboxTruth --> EpistemicHumility["Epistemic Humility Module\nBounded c ≤ 0.95 | L_overconf = I_error * (c / (1 - c))²"]
-        EpistemicHumility --> NullspaceProj["Orthogonal Nullspace Projection\nv_ortho = (I - B(Bᵀ B)⁻¹ Bᵀ) v  (v ⟂ Basis)"]
-        NullspaceProj --> MemoryBank[("Episodic Memory Bank\nZero Retroactive Interference")]
+        SandboxTruth --> EpistemicHumility["Epistemic Humility Module<br/>Bounded c &le; 0.95, Asymmetric Arrogance Penalty"]
+        EpistemicHumility --> NullspaceProj["Orthogonal Nullspace Projection<br/>v_ortho is orthogonal to Basis"]
+        NullspaceProj --> MemoryBank[("Episodic Memory Bank<br/>Zero Retroactive Interference")]
     end
     
-    Hook -.->|"Instant Fingerprint Match (<0.01s)"| MemoryBank
+    Hook -.->|"Instant Fingerprint Match (&lt;0.01s)"| MemoryBank
 ```
 
 ---

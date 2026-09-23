@@ -41,32 +41,32 @@ flowchart TD
     subgraph InferensiPengguna ["1. Jalur Inferensi Cepat Pengguna (Sub-5ms)"]
         In["Token Prompt Pengguna x_t"] --> EarlyLayers["Lapisan Awal Transformer (1 .. L-1)"]
         EarlyLayers --> Hook["Interception Hook Lapisan Tengah (L_mid)"]
-        Hook --> FristonRouter{"Active Inference Policy Router\n(Minimasi Energi Bebas Ekspektasi G)"}
-        FristonRouter -->|π₀: u < 0.65 (Lancar)| Bypass["Streaming Bypass (7.8 μs)"]
-        FristonRouter -->|π₁: 0.65 ≤ u < 0.85 (Verifikasi)| FastCheck["Fast Evidential Verification"]
-        FristonRouter -->|π₂: u ≥ 0.85 (Kompleks)| BrainSandbox["4-Stage Brain Sandbox Deliberation"]
+        Hook --> FristonRouter{"Active Inference Policy Router<br/>Minimasi Energi Bebas Ekspektasi G"}
+        FristonRouter -->|"pi_0: u &lt; 0.65 (Lancar)"| Bypass["Streaming Bypass (7.8 us)"]
+        FristonRouter -->|"pi_1: 0.65 &le; u &lt; 0.85 (Verifikasi)"| FastCheck["Fast Evidential Verification"]
+        FristonRouter -->|"pi_2: u &ge; 0.85 (Kompleks)"| BrainSandbox["4-Stage Brain Sandbox Deliberation"]
         
-        Bypass --> Allostasis["Allostatic Energy Modulator (Gate Pruning)\nΓ_allostatic = σ(E_allo / τ)"]
+        Bypass --> Allostasis["Allostatic Energy Modulator (Gate Pruning)<br/>Gamma_allostatic = sigma(E_allo / tau)"]
         FastCheck --> Allostasis
         BrainSandbox --> Allostasis
         
-        Allostasis --> LateLayers["Lapisan Akhir & LM Head"]
+        Allostasis --> LateLayers["Lapisan Akhir dan LM Head"]
         LateLayers --> Output["Aliran Token Output Berfidelitas Tinggi"]
     end
 
-    subgraph DaemonOtonom ["2. Background Daemon Otonom (Mode Idle Tanpa Membebani Pengguna)"]
+    subgraph DaemonOtonom ["2. Background Daemon Otonom (Mode Idle)"]
         IdleDetect["Deteksi Sistem Idle"] --> ScanMemory["Pindai Memori Episodik"]
-        ScanMemory --> DetectContradiction["Deteksi Kontradiksi Laten & Kebodohan\n||h_i + h_j - h_joint|| > τ"]
+        ScanMemory --> DetectContradiction["Deteksi Kontradiksi Laten dan Kebodohan<br/>Norm(h_i + h_j - h_joint) &gt; tau"]
         
-        DetectContradiction --> PopperianSelfPlay["Popperian Red Team Self-Play\nProposer (φ) vs Falsifier (ψ)"]
-        PopperianSelfPlay --> SandboxTruth["Deterministic Sandbox Verification\n(Validasi Sintaksis & Logika Nyata)"]
+        DetectContradiction --> PopperianSelfPlay["Popperian Red Team Self-Play<br/>Proposer vs Falsifier"]
+        PopperianSelfPlay --> SandboxTruth["Deterministic Sandbox Verification<br/>Validasi Sintaksis dan Logika Nyata"]
         
-        SandboxTruth --> EpistemicHumility["Epistemic Humility Module\nBatas c ≤ 0.95 | L_overconf = I_error * (c / (1 - c))²"]
-        EpistemicHumility --> NullspaceProj["Proyeksi Nullspace Ortogonal\nv_ortho = (I - B(Bᵀ B)⁻¹ Bᵀ) v  (v ⟂ Basis)"]
-        NullspaceProj --> MemoryBank[("Bank Memori Episodik\nNol Interferensi Retroaktif")]
+        SandboxTruth --> EpistemicHumility["Epistemic Humility Module<br/>Batas c &le; 0.95, Penalti Arogansi Asimetris"]
+        EpistemicHumility --> NullspaceProj["Proyeksi Nullspace Ortogonal<br/>v_ortho tegak lurus Basis"]
+        NullspaceProj --> MemoryBank[("Bank Memori Episodik<br/>Nol Interferensi Retroaktif")]
     end
     
-    Hook -.->|"Pencocokan Sidik Jari Cepat (<0.01s)"| MemoryBank
+    Hook -.->|"Pencocokan Sidik Jari Cepat (&lt;0.01s)"| MemoryBank
 ```
 
 ---
