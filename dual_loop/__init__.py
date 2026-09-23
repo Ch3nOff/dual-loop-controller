@@ -13,6 +13,13 @@ from .evidential import EvidentialEpistemicGate
 from .open_concept import OpenConceptSynthesizer
 from .homeostasis import HomeostaticDriveEngine, ActiveInferencePolicyRouter
 from .nullspace_engine import OrthogonalNullspaceProjector
+from .allostasis import AllostaticEnergyModulator
+from .curiosity_daemon import (
+    EpistemicHumilityModule,
+    IntrinsicCuriosityModule,
+    PopperianSelfPlayEngine,
+    AutonomousDaemonController
+)
 from .functorial_engine import FunctorialCrossDomainMapper
 from .mdl_selector import NeuroSymbolicMDLSelector
 from .verification import (
@@ -39,7 +46,7 @@ import os
 import torch
 from typing import Optional
 
-__version__ = "2.3.0"
+__version__ = "2.4.0"
 
 def get_default_checkpoint_path() -> Optional[str]:
     """
@@ -97,6 +104,11 @@ __all__ = [
     "CognitiveMatrixHelper",
     "DualLoopTransformer",
     "LatentDeliberationAdapter",
+    "AllostaticEnergyModulator",
+    "EpistemicHumilityModule",
+    "IntrinsicCuriosityModule",
+    "PopperianSelfPlayEngine",
+    "AutonomousDaemonController",
     "DualLoopQwenModel",
     "DualLoopTransformerModel",
     "attach_dual_loop_to_qwen",

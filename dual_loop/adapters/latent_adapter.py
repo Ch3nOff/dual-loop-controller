@@ -61,7 +61,8 @@ class LatentDeliberationAdapter(nn.Module):
         enable_nullspace_projection: bool = False,
         enable_mdl_selection: bool = False,
         enable_functorial_mapping: bool = False,
-        enable_brain_sandbox: bool = False
+        enable_brain_sandbox: bool = False,
+        enable_allostatic_modulation: bool = True
     ):
         super().__init__()
         self.d_model = d_model
@@ -238,6 +239,12 @@ class LatentDeliberationAdapter(nn.Module):
             self.functorial_mapper = None
 
         self.enable_brain_sandbox = enable_brain_sandbox
+        self.enable_allostatic_modulation = enable_allostatic_modulation
+        if enable_allostatic_modulation:
+            from ..allostasis import AllostaticEnergyModulator
+            self.allostatic_modulator = AllostaticEnergyModulator(d_model=self.d_inner)
+        else:
+            self.allostatic_modulator = None
 
     def set_continual_mode(self, enabled: bool = True, decay: float = 0.90):
         """Enables continual learning across trials/runs without amnesia."""
@@ -503,6 +510,7 @@ class LatentDeliberationAdapter(nn.Module):
             kappa_metacog = torch.ones(B, 1, device=hidden_states.device)
 
         # 9. Integrate into stream
+        allo_telem = {}
         if self.adapter_mode == "prefix":
             # Prepend thoughts as soft prefix: [B, L_thought + S, D]
             if self.up_proj is not None:
@@ -516,13 +524,29 @@ class LatentDeliberationAdapter(nn.Module):
             # and kappa_metacog (metacognitive error-reflection convergence)
             # Directional safety already applied above to raw_delta
             scale = torch.tanh(self.gate_alpha)
-            # Epistemic Vacuity Gating Modulation (Subjective Logic Epistemic Modesty)
-            if vacuity_u is not None:
-                vac_t = vacuity_u.to(device=hidden_states.device, dtype=hidden_states.dtype)
-                eta_epistemic = torch.clamp(1.0 - torch.clamp(vac_t - 0.50, min=0.0) / 0.50, min=0.20, max=1.0).view(B, 1)
+            allo_telem = {}
+            if self.enable_allostatic_modulation and self.allostatic_modulator is not None:
+                # Unified Allostatic Energy Modulation (pruned single-kernel gate in energy logit space)
+                d_drift = discrepancy_drift.unsqueeze(-1) if 'discrepancy_drift' in locals() else None
+                vac_t = vacuity_u.view(B, 1) if vacuity_u is not None else None
+                b_gate = beta_gate.reshape(B, 1) if beta_gate is not None else None
+                delta, allo_telem = self.allostatic_modulator(
+                    raw_delta=raw_delta,
+                    scale=scale,
+                    surprise_gate=surprise_gate_tensor,
+                    beta_gate=b_gate,
+                    drift_penalty=d_drift,
+                    vacuity_u=vac_t
+                )
             else:
-                eta_epistemic = 1.0
-            delta = scale * surprise_gate_tensor * beta_gate.reshape(B, 1) * kappa_metacog * eta_epistemic * raw_delta # [B, D]
+                # Legacy 5-gate multiplicative cascade fallback
+                if vacuity_u is not None:
+                    vac_t = vacuity_u.to(device=hidden_states.device, dtype=hidden_states.dtype)
+                    eta_epistemic = torch.clamp(1.0 - torch.clamp(vac_t - 0.50, min=0.0) / 0.50, min=0.20, max=1.0).view(B, 1)
+                else:
+                    eta_epistemic = 1.0
+                delta = scale * surprise_gate_tensor * beta_gate.reshape(B, 1) * kappa_metacog * eta_epistemic * raw_delta # [B, D]
+                allo_telem = {"pruned_gate_active": False}
             enhanced = hidden_states.clone()
             if is_scalar_idx:
                 enhanced[:, idx_int:idx_int+1, :] = enhanced[:, idx_int:idx_int+1, :] + delta.unsqueeze(1)
@@ -554,6 +578,7 @@ class LatentDeliberationAdapter(nn.Module):
             "d_inner": self.d_inner,
             "adapter_mode": self.adapter_mode,
             "homeostasis": homeostasis_telem,
+            "allostasis": allo_telem,
             "mdl_telemetry": mdl_telem,
             "functorial_telemetry": functorial_telem,
             "bypassed": False

@@ -75,6 +75,7 @@ class DualLoopQwenModel(nn.Module):
         enable_brain_sandbox: bool = True,
         enable_mdl_selection: bool = True,
         enable_functorial_mapping: bool = True,
+        enable_allostatic_modulation: bool = True,
         **adapter_kwargs
     ):
         super().__init__()
@@ -147,6 +148,7 @@ class DualLoopQwenModel(nn.Module):
             enable_brain_sandbox=enable_brain_sandbox,
             enable_mdl_selection=enable_mdl_selection,
             enable_functorial_mapping=enable_functorial_mapping,
+            enable_allostatic_modulation=enable_allostatic_modulation,
             **adapter_kwargs
         )
 
@@ -308,6 +310,34 @@ class DualLoopQwenModel(nn.Module):
     def set_brain_sandbox(self, enabled: bool = True):
         """Enables or disables the 4-stage Brain Sandbox planner for complex coding/scripts."""
         self.adapter.enable_brain_sandbox = enabled
+
+    def set_allostatic_modulation(self, enabled: bool = True):
+        """Enables or disables consolidated allostatic energy modulation (gate pruning)."""
+        self.adapter.enable_allostatic_modulation = enabled
+        if enabled and self.adapter.allostatic_modulator is None:
+            from ..allostasis import AllostaticEnergyModulator
+            self.adapter.allostatic_modulator = AllostaticEnergyModulator(d_model=self.adapter.d_inner)
+
+    def run_curiosity_daemon_step(self, action_vector: Optional[torch.Tensor] = None) -> Dict[str, Any]:
+        """Executes an autonomous background curiosity and self-play step on episodic memory."""
+        if not hasattr(self, "_curiosity_daemon") or self._curiosity_daemon is None:
+            from ..curiosity_daemon import AutonomousDaemonController
+            try:
+                device = next(self.adapter.parameters()).device
+            except StopIteration:
+                device = torch.device("cpu")
+            self._curiosity_daemon = AutonomousDaemonController(d_model=self.hidden_size, device=device)
+            
+        # Retrieve current episodic memory slots if present
+        if hasattr(self.adapter, "episodic_memory") and getattr(self.adapter.episodic_memory, "num_episodes", 0) > 0:
+            slots = self.adapter.episodic_memory.get_all_anchors()
+        else:
+            try:
+                device = next(self.adapter.parameters()).device
+            except StopIteration:
+                device = torch.device("cpu")
+            slots = torch.randn(4, self.hidden_size, device=device)
+        return self._curiosity_daemon.run_daemon_step(slots, action_vector=action_vector)
 
     def get_physiological_telemetry(self) -> Dict[str, Any]:
         """Returns the latest homeostatic state and active inference policy metrics."""
@@ -553,6 +583,7 @@ def attach_dual_loop_to_qwen(
     enable_brain_sandbox: bool = True,
     enable_mdl_selection: bool = True,
     enable_functorial_mapping: bool = True,
+    enable_allostatic_modulation: bool = True,
     **kwargs
 ) -> DualLoopQwenModel:
     """
@@ -576,6 +607,7 @@ def attach_dual_loop_to_qwen(
         enable_brain_sandbox=enable_brain_sandbox,
         enable_mdl_selection=enable_mdl_selection,
         enable_functorial_mapping=enable_functorial_mapping,
+        enable_allostatic_modulation=enable_allostatic_modulation,
         **kwargs
     )
 
@@ -590,6 +622,7 @@ def attach_dual_loop(
     enable_brain_sandbox: bool = True,
     enable_mdl_selection: bool = True,
     enable_functorial_mapping: bool = True,
+    enable_allostatic_modulation: bool = True,
     **kwargs
 ) -> DualLoopQwenModel:
     """
@@ -613,6 +646,7 @@ def attach_dual_loop(
         enable_brain_sandbox=enable_brain_sandbox,
         enable_mdl_selection=enable_mdl_selection,
         enable_functorial_mapping=enable_functorial_mapping,
+        enable_allostatic_modulation=enable_allostatic_modulation,
         **kwargs
     )
 
