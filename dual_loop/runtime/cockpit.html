@@ -1290,11 +1290,11 @@
         <div class="setting-group">
           <div class="setting-label">
             <span>Max Generation Tokens</span>
-            <span id="label-max-tokens" style="color: var(--accent-cyan); font-family: var(--font-mono);">512 tokens</span>
+            <span id="label-max-tokens" style="color: var(--accent-cyan); font-family: var(--font-mono);">2048 tokens</span>
           </div>
-          <div class="setting-desc">Batas maksimal kuota token teks yang di-generate. Atur lebih tinggi untuk kode &amp; penjelasan panjang.</div>
+          <div class="setting-desc">Batas maksimal kuota token teks yang di-generate (256 - 4096). Disarankan 2048+ untuk kode HTML/CSS/JS dan web app lengkap.</div>
           <div class="range-row">
-            <input type="range" class="range-input" id="setting-max-tokens" min="128" max="2048" step="64" value="512" />
+            <input type="range" class="range-input" id="setting-max-tokens" min="256" max="4096" step="128" value="2048" />
           </div>
         </div>
 
@@ -1324,7 +1324,7 @@
     const DEFAULT_CONFIG = {
       systemPrompt: "You are HADL, a helpful, intelligent, and concise AI reasoning assistant. When asked to create apps, games, tools, or diagrams, output complete self-contained HTML/CSS/JavaScript or SVG code blocks so the user can preview them live in the Artifact Stage.",
       kSteps: 2,
-      maxTokens: 512,
+      maxTokens: 2048,
       temperature: 0.7
     };
 
@@ -1334,7 +1334,11 @@
     try {
       const saved = localStorage.getItem("hadl_cockpit_config");
       if (saved) {
-        userConfig = { ...DEFAULT_CONFIG, ...JSON.parse(saved) };
+        const parsed = JSON.parse(saved);
+        if (parsed.maxTokens === 512 || !parsed.maxTokens) {
+          parsed.maxTokens = 2048;
+        }
+        userConfig = { ...DEFAULT_CONFIG, ...parsed };
       }
     } catch (e) {}
 
@@ -1834,18 +1838,69 @@
       }
     };
 
+    function autoRepairHtml(code) {
+      let repaired = code.trim();
+      const openStyle = (repaired.match(/<style[^>]*>/gi) || []).length;
+      const closeStyle = (repaired.match(/<\/style>/gi) || []).length;
+      if (openStyle > closeStyle) repaired += "\n</style>";
+
+      const openScript = (repaired.match(/<script[^>]*>/gi) || []).length;
+      const closeScript = (repaired.match(/<\/script>/gi) || []).length;
+      if (openScript > closeScript) repaired += "\n<\/script>";
+
+      if (/<body[^>]*>/i.test(repaired) && !/<\/body>/i.test(repaired)) repaired += "\n</body>";
+      if (/<html[^>]*>/i.test(repaired) && !/<\/html>/i.test(repaired)) repaired += "\n</html>";
+      return repaired;
+    }
+
     function extractArtifact(text) {
-      const codeBlockRegex = /```(html|svg|javascript|js|python|css|markdown)[\r\n]([\s\S]*?)```/i;
-      const match = text.match(codeBlockRegex);
+      if (!text) return null;
+      // 1. Try standard complete closed markdown block
+      let regexClosed = /```(html|svg|javascript|js|python|css|markdown)[\r\n]([\s\S]*?)```/i;
+      let match = text.match(regexClosed);
+      let isTruncated = false;
+
+      // 2. If not closed, check for open block up to end of string (resilient to cutoff)
+      if (!match) {
+        let regexOpen = /```(html|svg|javascript|js|python|css|markdown)[\r\n]([\s\S]+)$/i;
+        match = text.match(regexOpen);
+        if (match) isTruncated = true;
+      }
+
+      // 3. Fallback: check if text itself looks like raw HTML (e.g. starts with <!DOCTYPE html> or <html>)
+      if (!match) {
+        const rawHtmlMatch = text.match(/(<!DOCTYPE html[\s\S]*>|<html[\s\S]*>)/i);
+        if (rawHtmlMatch) {
+          const startIdx = text.indexOf(rawHtmlMatch[0]);
+          let rawCode = text.slice(startIdx).trim();
+          rawCode = rawCode.replace(/```+$/, '');
+          return {
+            type: "html",
+            title: "Web Application & Widget",
+            code: autoRepairHtml(rawCode),
+            truncated: false
+          };
+        }
+      }
+
       if (match) {
         const lang = match[1].toLowerCase();
-        const code = match[2].trim();
+        let code = match[2].trim();
         let title = "Interactive Component";
         if (lang === "html") title = "Web Application & Widget";
         else if (lang === "svg") title = "Vector Graphic Art";
         else if (lang === "javascript" || lang === "js") title = "Interactive Script";
         else if (lang === "python") title = "Python Script";
-        return { type: lang, title: title, code: code };
+        else if (lang === "css") title = "Stylesheet";
+        else if (lang === "markdown") title = "Document";
+
+        if (lang === "html") {
+          code = autoRepairHtml(code);
+        } else if (lang === "svg" && !code.includes("</svg>")) {
+          code = code + "\n</svg>";
+        }
+
+        return { type: lang, title: title, code: code, truncated: isTruncated };
       }
       return null;
     }
@@ -1856,8 +1911,10 @@
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
       
-      // Code blocks
+      // Code blocks (closed)
       formatted = formatted.replace(/```([a-z]*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+      // Code blocks (unclosed at end of message)
+      formatted = formatted.replace(/```([a-z]*)\n([\s\S]+)$/g, '<pre><code>$2</code></pre>');
       // Inline code
       formatted = formatted.replace(/`([^`]+)`/g, '<code style="color: var(--accent-cyan);">$1</code>');
       // Bold

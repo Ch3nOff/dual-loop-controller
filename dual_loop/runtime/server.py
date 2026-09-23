@@ -81,7 +81,7 @@ class ChatCompletionRequest(BaseModel):
     model: Optional[str] = "hadl-v24-autopoietic"
     messages: List[ChatMessage]
     stream: Optional[bool] = False
-    max_tokens: Optional[int] = 512
+    max_tokens: Optional[int] = 2048
     temperature: Optional[float] = 0.7
     k_steps: Optional[int] = None
     system_prompt: Optional[str] = None
@@ -338,19 +338,20 @@ async def chat_completions(req: ChatCompletionRequest):
                 )
             inputs = engine_state.tokenizer(formatted_prompt, return_tensors="pt").to(device)
 
-            # Configure generation token limits (default 512, allowed up to 2048)
-            default_token_limit = 512
-            max_allowed = 2048
+            # Configure generation token limits (default 2048, allowed up to 4096 on RTX 5060)
+            default_token_limit = 2048
+            max_allowed = 4096
             requested_tokens = req.max_tokens if req.max_tokens is not None else default_token_limit
             max_tokens_to_gen = min(max(requested_tokens, 16), max_allowed)
 
+            pad_id = getattr(engine_state.tokenizer, "pad_token_id", None) or getattr(engine_state.tokenizer, "eos_token_id", None)
             with torch.no_grad():
                 outputs = engine_state.model.qwen.generate(
                     **inputs,
                     max_new_tokens=max_tokens_to_gen,
                     do_sample=(req.temperature or 0.7) > 0.0,
                     temperature=max(req.temperature or 0.7, 1e-4),
-                    pad_token_id=engine_state.tokenizer.eos_token_id
+                    pad_token_id=pad_id
                 )
             # Decode generated output
             generated_text = engine_state.tokenizer.decode(
@@ -398,7 +399,93 @@ async def chat_completions(req: ChatCompletionRequest):
                 f"sehingga bernalar tanpa membuang token teks ekstra.\n\n"
                 f"Silakan ajukan pertanyaan penalaran atau pengujian kode!"
             )
-        elif any(w in low for w in ["html", "artifact", "app", "game", "calculator", "kalkulator", "widget", "svg"]):
+        elif any(w in low for w in ["calculator", "kalkulator"]):
+            generated_text = (
+                f"Tentu! Berikut adalah script HTML aplikasi **Kalkulator Ilmiah Interaktif** lengkap dengan visual glassmorphism modern dan fungsi matematika yang langsung aktif di Artifact Stage:\n\n"
+                f"```html\n"
+                f"<!DOCTYPE html>\n"
+                f"<html lang=\"id\">\n"
+                f"<head>\n"
+                f"  <meta charset=\"UTF-8\">\n"
+                f"  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+                f"  <title>HADL Scientific Calculator</title>\n"
+                f"  <style>\n"
+                f"    * {{ box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }}\n"
+                f"    body {{ display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #070b19; color: #f8fafc; padding: 1rem; }}\n"
+                f"    .calc-card {{ background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 20px; padding: 1.5rem; width: 100%; max-width: 360px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); backdrop-filter: blur(16px); }}\n"
+                f"    .header {{ font-size: 0.85rem; font-weight: 600; color: #38bdf8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; display: flex; justify-content: space-between; }}\n"
+                f"    .display-screen {{ background: #020617; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem; text-align: right; margin-bottom: 1.25rem; }}\n"
+                f"    .prev-calc {{ font-size: 0.85rem; color: #64748b; min-height: 1.2rem; font-family: monospace; overflow: hidden; }}\n"
+                f"    .curr-calc {{ font-size: 2rem; font-weight: 700; color: #10b981; font-family: monospace; overflow-x: auto; white-space: nowrap; }}\n"
+                f"    .keypad {{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }}\n"
+                f"    button {{ background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.06); color: #e2e8f0; font-size: 1.1rem; font-weight: 500; border-radius: 10px; padding: 0.85rem 0.5rem; cursor: pointer; transition: 0.15s; }}\n"
+                f"    button:hover {{ background: rgba(56, 189, 248, 0.2); border-color: #38bdf8; transform: translateY(-1px); }}\n"
+                f"    button.op {{ background: rgba(2, 132, 199, 0.2); color: #38bdf8; font-weight: 600; }}\n"
+                f"    button.fn {{ background: rgba(168, 85, 247, 0.2); color: #c084fc; font-size: 0.95rem; }}\n"
+                f"    button.clear {{ background: rgba(239, 68, 68, 0.2); color: #f87171; }}\n"
+                f"    button.equal {{ background: #0284c7; color: #fff; font-weight: 700; grid-column: span 2; }}\n"
+                f"    button.equal:hover {{ background: #0369a1; }}\n"
+                f"  </style>\n"
+                f"</head>\n"
+                f"<body>\n"
+                f"  <div class=\"calc-card\">\n"
+                f"    <div class=\"header\"><span>HADL Scientific</span><span>RAD</span></div>\n"
+                f"    <div class=\"display-screen\">\n"
+                f"      <div class=\"prev-calc\" id=\"prev\"></div>\n"
+                f"      <div class=\"curr-calc\" id=\"curr\">0</div>\n"
+                f"    </div>\n"
+                f"    <div class=\"keypad\">\n"
+                f"      <button class=\"fn\" onclick=\"addFn('Math.sin(')\">sin</button>\n"
+                f"      <button class=\"fn\" onclick=\"addFn('Math.cos(')\">cos</button>\n"
+                f"      <button class=\"fn\" onclick=\"addFn('Math.tan(')\">tan</button>\n"
+                f"      <button class=\"clear\" onclick=\"clearAll()\">AC</button>\n"
+                f"      <button class=\"fn\" onclick=\"addFn('Math.sqrt(')\">\u221a</button>\n"
+                f"      <button class=\"fn\" onclick=\"addOp('**')\">x^y</button>\n"
+                f"      <button class=\"fn\" onclick=\"addFn('Math.log10(')\">log</button>\n"
+                f"      <button class=\"op\" onclick=\"addOp('/')\">\u00f7</button>\n"
+                f"      <button onclick=\"addNum('7')\">7</button>\n"
+                f"      <button onclick=\"addNum('8')\">8</button>\n"
+                f"      <button onclick=\"addNum('9')\">9</button>\n"
+                f"      <button class=\"op\" onclick=\"addOp('*')\">&times;</button>\n"
+                f"      <button onclick=\"addNum('4')\">4</button>\n"
+                f"      <button onclick=\"addNum('5')\">5</button>\n"
+                f"      <button onclick=\"addNum('6')\">6</button>\n"
+                f"      <button class=\"op\" onclick=\"addOp('-')\">&minus;</button>\n"
+                f"      <button onclick=\"addNum('1')\">1</button>\n"
+                f"      <button onclick=\"addNum('2')\">2</button>\n"
+                f"      <button onclick=\"addNum('3')\">3</button>\n"
+                f"      <button class=\"op\" onclick=\"addOp('+')\">+</button>\n"
+                f"      <button onclick=\"addNum('0')\">0</button>\n"
+                f"      <button onclick=\"addNum('.')\">.</button>\n"
+                f"      <button class=\"equal\" onclick=\"calc()\">=</button>\n"
+                f"    </div>\n"
+                f"  </div>\n"
+                f"  <script>\n"
+                f"    let expr = '';\n"
+                f"    const curr = document.getElementById('curr');\n"
+                f"    const prev = document.getElementById('prev');\n"
+                f"    function addNum(n) {{ expr += n; curr.textContent = expr; }}\n"
+                f"    function addOp(op) {{ expr += op; curr.textContent = expr; }}\n"
+                f"    function addFn(fn) {{ expr += fn; curr.textContent = expr; }}\n"
+                f"    function clearAll() {{ expr = ''; curr.textContent = '0'; prev.textContent = ''; }}\n"
+                f"    function calc() {{\n"
+                f"      try {{\n"
+                f"        prev.textContent = expr + ' =';\n"
+                f"        const res = eval(expr);\n"
+                f"        expr = String(res);\n"
+                f"        curr.textContent = res;\n"
+                f"      }} catch (e) {{\n"
+                f"        curr.textContent = 'Error';\n"
+                f"        expr = '';\n"
+                f"      }}\n"
+                f"    }}\n"
+                f"  </script>\n"
+                f"</body>\n"
+                f"</html>\n"
+                f"```\n\n"
+                f"Silakan klik tombol **Live Preview ↗** pada kartu di atas untuk berinteraksi langsung!"
+            )
+        elif any(w in low for w in ["html", "artifact", "app", "game", "widget", "svg"]):
             generated_text = (
                 f"Tentu! Berikut adalah contoh interaktif **HADL Cognitive Artifact** yang langsung bisa di-preview di Artifact Stage sebelah kanan:\n\n"
                 f"```html\n"
