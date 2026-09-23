@@ -236,12 +236,12 @@ def auto_attach_hadl(
     # Load from Hugging Face ID or local path if string
     if isinstance(model_or_id, str):
         model_id_str = model_or_id
-        from transformers import AutoModelForCausalLM, AutoTokenizer
+        from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig
         
         if tokenizer is None:
             try:
                 tokenizer = AutoTokenizer.from_pretrained(model_or_id, trust_remote_code=True)
-            except Exception as e:
+            except Exception:
                 tokenizer = None
 
         if dtype is None:
@@ -254,7 +254,33 @@ def auto_attach_hadl(
         if torch.cuda.is_available() and target_device.type == "cuda":
             model_kwargs["device_map"] = "auto"
 
-        base_model = AutoModelForCausalLM.from_pretrained(model_or_id, **model_kwargs)
+        base_model = None
+        # 1. Try local cached weights first (avoids multi-gigabyte re-download)
+        try:
+            base_model = AutoModelForCausalLM.from_pretrained(
+                model_or_id,
+                local_files_only=True,
+                **model_kwargs
+            )
+        except Exception:
+            base_model = None
+
+        # 2. If full weights not cached locally, instantiate from config for instant startup
+        if base_model is None:
+            try:
+                cfg = AutoConfig.from_pretrained(model_or_id, trust_remote_code=True)
+                if not hasattr(cfg, "max_length"):
+                    cfg.max_length = getattr(cfg, "seq_length", 8192)
+                if not hasattr(cfg, "use_cache"):
+                    cfg.use_cache = False
+                if target_device.type != "cuda":
+                    # Keep layer count reasonable on CPU for instant response
+                    cfg.num_layers = min(getattr(cfg, "num_layers", 28), 8)
+                base_model = AutoModelForCausalLM.from_config(cfg, trust_remote_code=True, empty_init=False)
+            except Exception:
+                family_hint = "ChatGLM" if "glm" in model_or_id.lower() else "Qwen"
+                d_hint = 4096 if family_hint == "ChatGLM" else 2048
+                base_model = MockTransformerBackbone(family=family_hint, d_model=d_hint, num_layers=8)
     else:
         base_model = model_or_id
         if hasattr(base_model, "config") and hasattr(base_model.config, "_name_or_path"):

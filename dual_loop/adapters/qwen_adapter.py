@@ -526,6 +526,8 @@ class DualLoopQwenModel(nn.Module):
             pass
         return file_to_load
 
+    load_adapter_weights = load_adapter
+
     def remove_hook(self):
         """Cleanly detaches the forward hook from the underlying model."""
         if hasattr(self, "_hook_handle") and self._hook_handle is not None:
