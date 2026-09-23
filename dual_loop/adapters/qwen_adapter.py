@@ -70,6 +70,11 @@ class DualLoopQwenModel(nn.Module):
         use_learned_halting: bool = False,
         use_hypothesis_verification: bool = True,
         bottleneck_dim: Optional[int] = None,
+        enable_homeostasis: bool = True,
+        enable_nullspace_projection: bool = True,
+        enable_brain_sandbox: bool = True,
+        enable_mdl_selection: bool = True,
+        enable_functorial_mapping: bool = True,
         **adapter_kwargs
     ):
         super().__init__()
@@ -137,6 +142,11 @@ class DualLoopQwenModel(nn.Module):
             use_learned_halting=use_learned_halting,
             use_hypothesis_verification=use_hypothesis_verification,
             bottleneck_dim=bottleneck_dim,
+            enable_homeostasis=enable_homeostasis,
+            enable_nullspace_projection=enable_nullspace_projection,
+            enable_brain_sandbox=enable_brain_sandbox,
+            enable_mdl_selection=enable_mdl_selection,
+            enable_functorial_mapping=enable_functorial_mapping,
             **adapter_kwargs
         )
 
@@ -392,6 +402,23 @@ class DualLoopQwenModel(nn.Module):
                 if os.path.isfile(c):
                     file_to_load = c
                     break
+        # 2b. Check local models directory for repo basename match (e.g. models/dual-loop-qwen3.5-2b)
+        if file_to_load is None:
+            base_name = os.path.basename(load_path)
+            for search_dir in [
+                os.path.join("models", base_name),
+                os.path.join(".", "models", base_name),
+                os.path.join("..", "models", base_name),
+                os.path.join(r"C:\Users\Matthew Chen\Documents\bench\models", base_name),
+            ]:
+                if os.path.isdir(search_dir):
+                    for fname in ["adapter_model.safetensors", "qwen35_2b_adapter.pt", "adapter.pt"]:
+                        cand = os.path.join(search_dir, fname)
+                        if os.path.isfile(cand):
+                            file_to_load = cand
+                            break
+                    if file_to_load is not None:
+                        break
         # 3. Hugging Face Hub repository
         if file_to_load is None:
             try:
@@ -521,6 +548,11 @@ def attach_dual_loop_to_qwen(
     layer_idx: Optional[int] = None,
     k_steps: int = 2,
     bottleneck_dim: Optional[int] = None,
+    enable_homeostasis: bool = True,
+    enable_nullspace_projection: bool = True,
+    enable_brain_sandbox: bool = True,
+    enable_mdl_selection: bool = True,
+    enable_functorial_mapping: bool = True,
     **kwargs
 ) -> DualLoopQwenModel:
     """
@@ -534,7 +566,18 @@ def attach_dual_loop_to_qwen(
                 "Call remove_hook() before attaching to a different layer."
             )
         return model
-    return DualLoopQwenModel(model, layer_idx=layer_idx, k_steps=k_steps, bottleneck_dim=bottleneck_dim, **kwargs)
+    return DualLoopQwenModel(
+        model,
+        layer_idx=layer_idx,
+        k_steps=k_steps,
+        bottleneck_dim=bottleneck_dim,
+        enable_homeostasis=enable_homeostasis,
+        enable_nullspace_projection=enable_nullspace_projection,
+        enable_brain_sandbox=enable_brain_sandbox,
+        enable_mdl_selection=enable_mdl_selection,
+        enable_functorial_mapping=enable_functorial_mapping,
+        **kwargs
+    )
 
 
 def attach_dual_loop(
@@ -542,6 +585,11 @@ def attach_dual_loop(
     layer_idx: Optional[int] = None,
     k_steps: int = 2,
     bottleneck_dim: Optional[int] = None,
+    enable_homeostasis: bool = True,
+    enable_nullspace_projection: bool = True,
+    enable_brain_sandbox: bool = True,
+    enable_mdl_selection: bool = True,
+    enable_functorial_mapping: bool = True,
     **kwargs
 ) -> DualLoopQwenModel:
     """
@@ -555,7 +603,18 @@ def attach_dual_loop(
         bottleneck_dim: Optional compressed latent dimension (e.g. 1024 or 512 for large
                         backbones D=4096 like GLM-4 or LLaMA-3 to train on 8GB VRAM).
     """
-    return attach_dual_loop_to_qwen(model, layer_idx=layer_idx, k_steps=k_steps, bottleneck_dim=bottleneck_dim, **kwargs)
+    return attach_dual_loop_to_qwen(
+        model,
+        layer_idx=layer_idx,
+        k_steps=k_steps,
+        bottleneck_dim=bottleneck_dim,
+        enable_homeostasis=enable_homeostasis,
+        enable_nullspace_projection=enable_nullspace_projection,
+        enable_brain_sandbox=enable_brain_sandbox,
+        enable_mdl_selection=enable_mdl_selection,
+        enable_functorial_mapping=enable_functorial_mapping,
+        **kwargs
+    )
 
 
 attach_dual_loop_to_model = attach_dual_loop
