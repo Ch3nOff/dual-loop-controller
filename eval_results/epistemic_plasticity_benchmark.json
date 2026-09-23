@@ -1,7 +1,14 @@
 {
-  "timestamp": "2026-09-23 12:22:53",
+  "timestamp": "2026-09-23 13:03:07",
   "version": "2.4.0",
-  "total_elapsed_seconds": 0.876,
+  "total_samples": 740,
+  "total_elapsed_seconds": 1.195,
+  "execution_metadata": {
+    "device": "CPU",
+    "pytorch_version": "2.14.0+cpu",
+    "d_model": 256,
+    "deterministic_sandbox": "Deterministic Python execution with restricted safe builtins"
+  },
   "ecdr": {
     "num_samples": 100,
     "base": {
@@ -22,7 +29,409 @@
       "overconfident_error_rate": 0.0,
       "mean_confidence": 0.621,
       "mean_vacuity": 0.428
-    }
+    },
+    "sample_logs": [
+      {
+        "sample_id": "ECDR-000",
+        "is_adversarial": false,
+        "true_label": 0,
+        "base": {
+          "prediction": 0,
+          "confidence": 0.9958,
+          "is_correct": true
+        },
+        "hadl_v24": {
+          "prediction": 0,
+          "confidence": 0.8484,
+          "vacuity": 0.2015,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-001",
+        "is_adversarial": false,
+        "true_label": 2,
+        "base": {
+          "prediction": 0,
+          "confidence": 0.9955,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 2,
+          "confidence": 0.806,
+          "vacuity": 0.2508,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-002",
+        "is_adversarial": false,
+        "true_label": 1,
+        "base": {
+          "prediction": 3,
+          "confidence": 0.8631,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 1,
+          "confidence": 0.8446,
+          "vacuity": 0.2055,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-003",
+        "is_adversarial": false,
+        "true_label": 0,
+        "base": {
+          "prediction": 2,
+          "confidence": 0.8826,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 0,
+          "confidence": 0.8139,
+          "vacuity": 0.2442,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-004",
+        "is_adversarial": false,
+        "true_label": 2,
+        "base": {
+          "prediction": 2,
+          "confidence": 0.9848,
+          "is_correct": true
+        },
+        "hadl_v24": {
+          "prediction": 2,
+          "confidence": 0.8374,
+          "vacuity": 0.2148,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-005",
+        "is_adversarial": false,
+        "true_label": 1,
+        "base": {
+          "prediction": 1,
+          "confidence": 0.8404,
+          "is_correct": true
+        },
+        "hadl_v24": {
+          "prediction": 1,
+          "confidence": 0.8259,
+          "vacuity": 0.2289,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-006",
+        "is_adversarial": false,
+        "true_label": 2,
+        "base": {
+          "prediction": 1,
+          "confidence": 0.9999,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 2,
+          "confidence": 0.8181,
+          "vacuity": 0.2373,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-007",
+        "is_adversarial": false,
+        "true_label": 1,
+        "base": {
+          "prediction": 0,
+          "confidence": 0.9847,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 1,
+          "confidence": 0.8128,
+          "vacuity": 0.2459,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-008",
+        "is_adversarial": false,
+        "true_label": 3,
+        "base": {
+          "prediction": 3,
+          "confidence": 1.0,
+          "is_correct": true
+        },
+        "hadl_v24": {
+          "prediction": 3,
+          "confidence": 0.8023,
+          "vacuity": 0.2601,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-009",
+        "is_adversarial": false,
+        "true_label": 2,
+        "base": {
+          "prediction": 3,
+          "confidence": 0.9989,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 2,
+          "confidence": 0.7945,
+          "vacuity": 0.2673,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-010",
+        "is_adversarial": false,
+        "true_label": 2,
+        "base": {
+          "prediction": 2,
+          "confidence": 0.5215,
+          "is_correct": true
+        },
+        "hadl_v24": {
+          "prediction": 2,
+          "confidence": 0.7953,
+          "vacuity": 0.2636,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-011",
+        "is_adversarial": false,
+        "true_label": 1,
+        "base": {
+          "prediction": 2,
+          "confidence": 0.981,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 1,
+          "confidence": 0.8345,
+          "vacuity": 0.2188,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-012",
+        "is_adversarial": false,
+        "true_label": 3,
+        "base": {
+          "prediction": 0,
+          "confidence": 0.7944,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 3,
+          "confidence": 0.8334,
+          "vacuity": 0.2207,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-013",
+        "is_adversarial": false,
+        "true_label": 2,
+        "base": {
+          "prediction": 0,
+          "confidence": 0.6826,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 2,
+          "confidence": 0.8306,
+          "vacuity": 0.2231,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-014",
+        "is_adversarial": false,
+        "true_label": 3,
+        "base": {
+          "prediction": 0,
+          "confidence": 0.9974,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 3,
+          "confidence": 0.8274,
+          "vacuity": 0.2285,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-015",
+        "is_adversarial": false,
+        "true_label": 3,
+        "base": {
+          "prediction": 3,
+          "confidence": 0.9991,
+          "is_correct": true
+        },
+        "hadl_v24": {
+          "prediction": 3,
+          "confidence": 0.7897,
+          "vacuity": 0.2725,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-016",
+        "is_adversarial": false,
+        "true_label": 2,
+        "base": {
+          "prediction": 3,
+          "confidence": 0.999,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 2,
+          "confidence": 0.7986,
+          "vacuity": 0.2638,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-017",
+        "is_adversarial": false,
+        "true_label": 0,
+        "base": {
+          "prediction": 1,
+          "confidence": 1.0,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 0,
+          "confidence": 0.7932,
+          "vacuity": 0.2688,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-018",
+        "is_adversarial": false,
+        "true_label": 1,
+        "base": {
+          "prediction": 3,
+          "confidence": 1.0,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 1,
+          "confidence": 0.8306,
+          "vacuity": 0.2219,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-019",
+        "is_adversarial": false,
+        "true_label": 2,
+        "base": {
+          "prediction": 1,
+          "confidence": 0.5094,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 2,
+          "confidence": 0.8316,
+          "vacuity": 0.2218,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-020",
+        "is_adversarial": false,
+        "true_label": 3,
+        "base": {
+          "prediction": 0,
+          "confidence": 0.9928,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 3,
+          "confidence": 0.8106,
+          "vacuity": 0.2501,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-021",
+        "is_adversarial": false,
+        "true_label": 1,
+        "base": {
+          "prediction": 3,
+          "confidence": 0.5551,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 1,
+          "confidence": 0.8256,
+          "vacuity": 0.2296,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-022",
+        "is_adversarial": false,
+        "true_label": 2,
+        "base": {
+          "prediction": 2,
+          "confidence": 0.8523,
+          "is_correct": true
+        },
+        "hadl_v24": {
+          "prediction": 2,
+          "confidence": 0.8409,
+          "vacuity": 0.2097,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-023",
+        "is_adversarial": false,
+        "true_label": 1,
+        "base": {
+          "prediction": 0,
+          "confidence": 0.9951,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 1,
+          "confidence": 0.8377,
+          "vacuity": 0.2116,
+          "is_correct": true
+        }
+      },
+      {
+        "sample_id": "ECDR-024",
+        "is_adversarial": false,
+        "true_label": 1,
+        "base": {
+          "prediction": 2,
+          "confidence": 0.9355,
+          "is_correct": false
+        },
+        "hadl_v24": {
+          "prediction": 1,
+          "confidence": 0.8347,
+          "vacuity": 0.2164,
+          "is_correct": true
+        }
+      }
+    ]
   },
   "pfr": {
     "num_assertions": 30,
@@ -38,7 +447,369 @@
       "false_acceptance_rate": 0.0,
       "falsification_precision": 100.0,
       "falsified_count": 15
-    }
+    },
+    "assertion_logs": [
+      {
+        "assertion_id": "FL-01",
+        "name": "Water boiling at 100C on Mt Everest (P=0.33atm)",
+        "code_tested": "assert round(100.0, 1) == 71.0, 'Water boils at 100C on Mt Everest'",
+        "is_ground_truth": false,
+        "surface_similarity": 0.8605,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": true,
+        "sandbox_valid": false,
+        "sandbox_diagnostic": "Falsified in sandbox: AssertionError (Water boils at 100C on Mt Everest)"
+      },
+      {
+        "assertion_id": "FL-02",
+        "name": "Even prime multiplicity",
+        "code_tested": "primes = [2, 4, 6]\ndef is_prime(n):\n    return n > 1 and all(n % d != 0 for d in range(2, n))\nassert all(is_prime(p) for p in primes), '4 and 6 are prime'",
+        "is_ground_truth": false,
+        "surface_similarity": 0.8544,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": true,
+        "sandbox_valid": false,
+        "sandbox_diagnostic": "Falsified in sandbox: AssertionError (4 and 6 are prime)"
+      },
+      {
+        "assertion_id": "FL-03",
+        "name": "Degenerate collinear triangle",
+        "code_tested": "a, b, c = 2, 3, 6\nassert a + b > c, 'Collinear triangle violates inequality'",
+        "is_ground_truth": false,
+        "surface_similarity": 0.8494,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": true,
+        "sandbox_valid": false,
+        "sandbox_diagnostic": "Falsified in sandbox: AssertionError (Collinear triangle violates inequality)"
+      },
+      {
+        "assertion_id": "FL-04",
+        "name": "Perpetual motion heat flow (cold to hot spontaneous)",
+        "code_tested": "t_hot, t_cold = 350.0, 290.0\nassert (t_cold - t_hot) > 0, 'Heat flows spontaneously from cold to hot'",
+        "is_ground_truth": false,
+        "surface_similarity": 0.861,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": true,
+        "sandbox_valid": false,
+        "sandbox_diagnostic": "Falsified in sandbox: AssertionError (Heat flows spontaneously from cold to hot)"
+      },
+      {
+        "assertion_id": "FL-05",
+        "name": "Super-elastic kinetic energy creation",
+        "code_tested": "k_init, k_final = 10.0, 50.0\nassert k_final <= k_init, 'Free energy generated without external work'",
+        "is_ground_truth": false,
+        "surface_similarity": 0.8704,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": true,
+        "sandbox_valid": false,
+        "sandbox_diagnostic": "Falsified in sandbox: AssertionError (Free energy generated without external work)"
+      },
+      {
+        "assertion_id": "FL-06",
+        "name": "Ice denser than water claim",
+        "code_tested": "rho_water, rho_ice = 1000.0, 917.0\nassert rho_ice > rho_water, 'Ice sinks in water'",
+        "is_ground_truth": false,
+        "surface_similarity": 0.8542,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": true,
+        "sandbox_valid": false,
+        "sandbox_diagnostic": "Falsified in sandbox: AssertionError (Ice sinks in water)"
+      },
+      {
+        "assertion_id": "FL-07",
+        "name": "Mutual assertion contradiction",
+        "code_tested": "P = True\nassert (P and (not P)), 'Both P and not P are simultaneously true'",
+        "is_ground_truth": false,
+        "surface_similarity": 0.8742,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": true,
+        "sandbox_valid": false,
+        "sandbox_diagnostic": "Falsified in sandbox: AssertionError (Both P and not P are simultaneously true)"
+      },
+      {
+        "assertion_id": "FL-08",
+        "name": "False De Morgan distributive",
+        "code_tested": "A, B = True, False\nassert (not (A and B)) == ((not A) and (not B)), 'Invalid De Morgan distribution'",
+        "is_ground_truth": false,
+        "surface_similarity": 0.8593,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": true,
+        "sandbox_valid": false,
+        "sandbox_diagnostic": "Falsified in sandbox: AssertionError (Invalid De Morgan distribution)"
+      },
+      {
+        "assertion_id": "FL-09",
+        "name": "Inverted gravitational potential",
+        "code_tested": "g, m, h1, h2 = 9.8, 10.0, 100.0, 50.0\nassert (m*g*h2) > (m*g*h1), 'Higher height has lower potential energy'",
+        "is_ground_truth": false,
+        "surface_similarity": 0.8654,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": true,
+        "sandbox_valid": false,
+        "sandbox_diagnostic": "Falsified in sandbox: AssertionError (Higher height has lower potential energy)"
+      },
+      {
+        "assertion_id": "FL-10",
+        "name": "Isochoric pressure decrease under heating",
+        "code_tested": "T1, T2 = 300.0, 600.0\nassert (T2 / T1) < 1.0, 'Pressure decreases under isochoric heating'",
+        "is_ground_truth": false,
+        "surface_similarity": 0.8559,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": true,
+        "sandbox_valid": false,
+        "sandbox_diagnostic": "Falsified in sandbox: AssertionError (Pressure decreases under isochoric heating)"
+      },
+      {
+        "assertion_id": "FL-11",
+        "name": "Mismatched DNA base pair",
+        "code_tested": "pair = {'A': 'C', 'G': 'T'}\nassert pair['A'] == 'T', 'Adenine pairs with Cytosine'",
+        "is_ground_truth": false,
+        "surface_similarity": 0.8704,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": true,
+        "sandbox_valid": false,
+        "sandbox_diagnostic": "Falsified in sandbox: AssertionError (Adenine pairs with Cytosine)"
+      },
+      {
+        "assertion_id": "FL-12",
+        "name": "Linear kinetic energy scaling",
+        "code_tested": "m, v = 4.0, 3.0\nassert (m * v) == 18.0, 'Kinetic energy is linear in velocity'",
+        "is_ground_truth": false,
+        "surface_similarity": 0.8635,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": true,
+        "sandbox_valid": false,
+        "sandbox_diagnostic": "Falsified in sandbox: AssertionError (Kinetic energy is linear in velocity)"
+      },
+      {
+        "assertion_id": "FL-13",
+        "name": "Inverse Ohm's law",
+        "code_tested": "V, I = 12.0, 3.0\nassert (I / V) == 4.0, 'Resistance equals Current over Voltage'",
+        "is_ground_truth": false,
+        "surface_similarity": 0.8468,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": true,
+        "sandbox_valid": false,
+        "sandbox_diagnostic": "Falsified in sandbox: AssertionError (Resistance equals Current over Voltage)"
+      },
+      {
+        "assertion_id": "FL-14",
+        "name": "Singular matrix invertible",
+        "code_tested": "det = 0.0\nassert det != 0.0, 'Singular matrix with zero determinant is invertible'",
+        "is_ground_truth": false,
+        "surface_similarity": 0.8409,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": true,
+        "sandbox_valid": false,
+        "sandbox_diagnostic": "Falsified in sandbox: AssertionError (Singular matrix with zero determinant is invertible)"
+      },
+      {
+        "assertion_id": "FL-15",
+        "name": "Sound faster in air than steel",
+        "code_tested": "v_steel, v_air = 5000.0, 343.0\nassert v_air > v_steel, 'Sound propagates faster in air than steel'",
+        "is_ground_truth": false,
+        "surface_similarity": 0.8465,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": true,
+        "sandbox_valid": false,
+        "sandbox_diagnostic": "Falsified in sandbox: AssertionError (Sound propagates faster in air than steel)"
+      },
+      {
+        "assertion_id": "AX-01",
+        "name": "Water boiling point at 1 atm",
+        "code_tested": "assert round(100.0, 1) == 100.0",
+        "is_ground_truth": true,
+        "surface_similarity": 1.0,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": false,
+        "sandbox_valid": true,
+        "sandbox_diagnostic": "Verified in sandbox: script executed and all assertions passed"
+      },
+      {
+        "assertion_id": "AX-02",
+        "name": "Even prime uniqueness",
+        "code_tested": "primes = [2, 3, 5, 7]\nassert [p for p in primes if p % 2 == 0] == [2]",
+        "is_ground_truth": true,
+        "surface_similarity": 1.0,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": false,
+        "sandbox_valid": true,
+        "sandbox_diagnostic": "Verified in sandbox: script executed and all assertions passed"
+      },
+      {
+        "assertion_id": "AX-03",
+        "name": "Triangle inequality",
+        "code_tested": "a, b, c = 3, 4, 5\nassert a + b > c and a + c > b and b + c > a",
+        "is_ground_truth": true,
+        "surface_similarity": 1.0,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": false,
+        "sandbox_valid": true,
+        "sandbox_diagnostic": "Verified in sandbox: script executed and all assertions passed"
+      },
+      {
+        "assertion_id": "AX-04",
+        "name": "Thermodynamics heat flow",
+        "code_tested": "t_hot, t_cold = 350.0, 290.0\nassert (t_hot - t_cold) > 0",
+        "is_ground_truth": true,
+        "surface_similarity": 1.0,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": false,
+        "sandbox_valid": true,
+        "sandbox_diagnostic": "Verified in sandbox: script executed and all assertions passed"
+      },
+      {
+        "assertion_id": "AX-05",
+        "name": "Conservation of momentum",
+        "code_tested": "m1, v1, m2, v2 = 2.0, 3.0, 3.0, -2.0\np_init = m1*v1 + m2*v2\nassert abs(p_init) == 0.0",
+        "is_ground_truth": true,
+        "surface_similarity": 1.0,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": false,
+        "sandbox_valid": true,
+        "sandbox_diagnostic": "Verified in sandbox: script executed and all assertions passed"
+      },
+      {
+        "assertion_id": "AX-06",
+        "name": "Archimedes buoyancy",
+        "code_tested": "rho_water, rho_ice = 1000.0, 917.0\nassert rho_water > rho_ice",
+        "is_ground_truth": true,
+        "surface_similarity": 1.0,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": false,
+        "sandbox_valid": true,
+        "sandbox_diagnostic": "Verified in sandbox: script executed and all assertions passed"
+      },
+      {
+        "assertion_id": "AX-07",
+        "name": "Non-contradiction axiom",
+        "code_tested": "P = True\nassert not (P and (not P))",
+        "is_ground_truth": true,
+        "surface_similarity": 1.0,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": false,
+        "sandbox_valid": true,
+        "sandbox_diagnostic": "Verified in sandbox: script executed and all assertions passed"
+      },
+      {
+        "assertion_id": "AX-08",
+        "name": "De Morgan's law",
+        "code_tested": "A, B = True, False\nassert (not (A and B)) == ((not A) or (not B))",
+        "is_ground_truth": true,
+        "surface_similarity": 1.0,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": false,
+        "sandbox_valid": true,
+        "sandbox_diagnostic": "Verified in sandbox: script executed and all assertions passed"
+      },
+      {
+        "assertion_id": "AX-09",
+        "name": "Gravitational potential ordering",
+        "code_tested": "g, m, h1, h2 = 9.8, 10.0, 100.0, 50.0\nassert (m*g*h1) > (m*g*h2)",
+        "is_ground_truth": true,
+        "surface_similarity": 1.0,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": false,
+        "sandbox_valid": true,
+        "sandbox_diagnostic": "Verified in sandbox: script executed and all assertions passed"
+      },
+      {
+        "assertion_id": "AX-10",
+        "name": "Ideal gas pressure-volume",
+        "code_tested": "P1, V1, P2, V2 = 1.0, 10.0, 2.0, 5.0\nassert (P1 * V1) == (P2 * V2)",
+        "is_ground_truth": true,
+        "surface_similarity": 1.0,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": false,
+        "sandbox_valid": true,
+        "sandbox_diagnostic": "Verified in sandbox: script executed and all assertions passed"
+      },
+      {
+        "assertion_id": "AX-11",
+        "name": "DNA base pairing rule",
+        "code_tested": "pair = {'A': 'T', 'G': 'C'}\nassert pair['A'] == 'T' and pair['G'] == 'C'",
+        "is_ground_truth": true,
+        "surface_similarity": 1.0,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": false,
+        "sandbox_valid": true,
+        "sandbox_diagnostic": "Verified in sandbox: script executed and all assertions passed"
+      },
+      {
+        "assertion_id": "AX-12",
+        "name": "Kinetic energy scaling",
+        "code_tested": "m, v = 4.0, 3.0\nassert (0.5 * m * v**2) == 18.0",
+        "is_ground_truth": true,
+        "surface_similarity": 1.0,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": false,
+        "sandbox_valid": true,
+        "sandbox_diagnostic": "Verified in sandbox: script executed and all assertions passed"
+      },
+      {
+        "assertion_id": "AX-13",
+        "name": "Ohm's law resistance",
+        "code_tested": "V, I = 12.0, 3.0\nassert (V / I) == 4.0",
+        "is_ground_truth": true,
+        "surface_similarity": 1.0,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": false,
+        "sandbox_valid": true,
+        "sandbox_diagnostic": "Verified in sandbox: script executed and all assertions passed"
+      },
+      {
+        "assertion_id": "AX-14",
+        "name": "Matrix identity invariant",
+        "code_tested": "diag = [1, 1, 1]\nassert sum(diag) == 3",
+        "is_ground_truth": true,
+        "surface_similarity": 1.0,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": false,
+        "sandbox_valid": true,
+        "sandbox_diagnostic": "Verified in sandbox: script executed and all assertions passed"
+      },
+      {
+        "assertion_id": "AX-15",
+        "name": "Speed of sound medium ordering",
+        "code_tested": "v_steel, v_air = 5000.0, 343.0\nassert v_steel > v_air",
+        "is_ground_truth": true,
+        "surface_similarity": 1.0,
+        "base_accepted": true,
+        "legacy_accepted": true,
+        "hadl_falsified": false,
+        "sandbox_valid": true,
+        "sandbox_diagnostic": "Verified in sandbox: script executed and all assertions passed"
+      }
+    ]
   },
   "lcii": {
     "num_domains": 10,
@@ -69,7 +840,69 @@
     "final_retention": {
       "base_unconstrained": 47.96,
       "hadl_v24_nullspace": 100.0
-    }
+    },
+    "domain_logs": [
+      {
+        "domain_step": 1,
+        "unconstrained_retention_pct": 100.0,
+        "hadl_nullspace_retention_pct": 100.0,
+        "orthogonality_guarantee_held": true
+      },
+      {
+        "domain_step": 2,
+        "unconstrained_retention_pct": 91.87,
+        "hadl_nullspace_retention_pct": 100.0,
+        "orthogonality_guarantee_held": true
+      },
+      {
+        "domain_step": 3,
+        "unconstrained_retention_pct": 84.08,
+        "hadl_nullspace_retention_pct": 100.0,
+        "orthogonality_guarantee_held": true
+      },
+      {
+        "domain_step": 4,
+        "unconstrained_retention_pct": 77.34,
+        "hadl_nullspace_retention_pct": 100.0,
+        "orthogonality_guarantee_held": true
+      },
+      {
+        "domain_step": 5,
+        "unconstrained_retention_pct": 71.52,
+        "hadl_nullspace_retention_pct": 100.0,
+        "orthogonality_guarantee_held": true
+      },
+      {
+        "domain_step": 6,
+        "unconstrained_retention_pct": 64.07,
+        "hadl_nullspace_retention_pct": 100.0,
+        "orthogonality_guarantee_held": true
+      },
+      {
+        "domain_step": 7,
+        "unconstrained_retention_pct": 55.85,
+        "hadl_nullspace_retention_pct": 100.0,
+        "orthogonality_guarantee_held": true
+      },
+      {
+        "domain_step": 8,
+        "unconstrained_retention_pct": 54.21,
+        "hadl_nullspace_retention_pct": 100.0,
+        "orthogonality_guarantee_held": true
+      },
+      {
+        "domain_step": 9,
+        "unconstrained_retention_pct": 49.28,
+        "hadl_nullspace_retention_pct": 100.0,
+        "orthogonality_guarantee_held": true
+      },
+      {
+        "domain_step": 10,
+        "unconstrained_retention_pct": 47.96,
+        "hadl_nullspace_retention_pct": 100.0,
+        "orthogonality_guarantee_held": true
+      }
+    ]
   },
   "alts": {
     "sequence_lengths": [
@@ -81,20 +914,20 @@
       512
     ],
     "latencies_legacy_us": [
-      4.92,
-      5.02,
-      6.26,
-      7.21,
-      9.41,
-      20.31
+      5.47,
+      6.2,
+      6.58,
+      8.17,
+      18.81,
+      22.73
     ],
     "latencies_hadl_us": [
-      63.09,
-      57.01,
-      57.88,
-      61.61,
-      74.52,
-      96.65
+      71.11,
+      63.76,
+      61.69,
+      62.87,
+      97.23,
+      96.68
     ],
     "signal_preservation_legacy": [
       0.1344,
@@ -112,6 +945,56 @@
       0.9656,
       0.9656
     ],
-    "fast_path_streaming_latency_us": 63.09
+    "fast_path_streaming_latency_us": 71.11,
+    "trials_log": [
+      {
+        "sequence_length": 1,
+        "latency_legacy_us": 5.47,
+        "latency_hadl_us": 71.11,
+        "signal_preservation_legacy": 0.1344,
+        "signal_preservation_hadl": 0.9656,
+        "speedup_vs_unconsolidated": 0.08
+      },
+      {
+        "sequence_length": 16,
+        "latency_legacy_us": 6.2,
+        "latency_hadl_us": 63.76,
+        "signal_preservation_legacy": 0.1344,
+        "signal_preservation_hadl": 0.9656,
+        "speedup_vs_unconsolidated": 0.1
+      },
+      {
+        "sequence_length": 64,
+        "latency_legacy_us": 6.58,
+        "latency_hadl_us": 61.69,
+        "signal_preservation_legacy": 0.1344,
+        "signal_preservation_hadl": 0.9656,
+        "speedup_vs_unconsolidated": 0.11
+      },
+      {
+        "sequence_length": 128,
+        "latency_legacy_us": 8.17,
+        "latency_hadl_us": 62.87,
+        "signal_preservation_legacy": 0.1344,
+        "signal_preservation_hadl": 0.9656,
+        "speedup_vs_unconsolidated": 0.13
+      },
+      {
+        "sequence_length": 256,
+        "latency_legacy_us": 18.81,
+        "latency_hadl_us": 97.23,
+        "signal_preservation_legacy": 0.1344,
+        "signal_preservation_hadl": 0.9656,
+        "speedup_vs_unconsolidated": 0.19
+      },
+      {
+        "sequence_length": 512,
+        "latency_legacy_us": 22.73,
+        "latency_hadl_us": 96.68,
+        "signal_preservation_legacy": 0.1344,
+        "signal_preservation_hadl": 0.9656,
+        "speedup_vs_unconsolidated": 0.24
+      }
+    ]
   }
 }

@@ -1,0 +1,117 @@
+{
+  "timestamp": "2026-09-23 12:22:53",
+  "version": "2.4.0",
+  "total_elapsed_seconds": 0.876,
+  "ecdr": {
+    "num_samples": 100,
+    "base": {
+      "accuracy": 24.0,
+      "ece": 0.6396,
+      "overconfident_error_rate": 63.0,
+      "mean_confidence": 0.907
+    },
+    "legacy": {
+      "accuracy": 24.0,
+      "ece": 0.5688,
+      "overconfident_error_rate": 59.0,
+      "mean_confidence": 0.809
+    },
+    "hadl_v24": {
+      "accuracy": 87.0,
+      "ece": 0.2488,
+      "overconfident_error_rate": 0.0,
+      "mean_confidence": 0.621,
+      "mean_vacuity": 0.428
+    }
+  },
+  "pfr": {
+    "num_assertions": 30,
+    "base": {
+      "false_acceptance_rate": 100.0,
+      "falsification_precision": 0.0
+    },
+    "legacy": {
+      "false_acceptance_rate": 100.0,
+      "falsification_precision": 0.0
+    },
+    "hadl_v24": {
+      "false_acceptance_rate": 0.0,
+      "falsification_precision": 100.0,
+      "falsified_count": 15
+    }
+  },
+  "lcii": {
+    "num_domains": 10,
+    "domain_1_retention_unconstrained": [
+      100.0,
+      91.87,
+      84.08,
+      77.34,
+      71.52,
+      64.07,
+      55.85,
+      54.21,
+      49.28,
+      47.96
+    ],
+    "domain_1_retention_hadl": [
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "final_retention": {
+      "base_unconstrained": 47.96,
+      "hadl_v24_nullspace": 100.0
+    }
+  },
+  "alts": {
+    "sequence_lengths": [
+      1,
+      16,
+      64,
+      128,
+      256,
+      512
+    ],
+    "latencies_legacy_us": [
+      4.92,
+      5.02,
+      6.26,
+      7.21,
+      9.41,
+      20.31
+    ],
+    "latencies_hadl_us": [
+      63.09,
+      57.01,
+      57.88,
+      61.61,
+      74.52,
+      96.65
+    ],
+    "signal_preservation_legacy": [
+      0.1344,
+      0.1344,
+      0.1344,
+      0.1344,
+      0.1344,
+      0.1344
+    ],
+    "signal_preservation_hadl": [
+      0.9656,
+      0.9656,
+      0.9656,
+      0.9656,
+      0.9656,
+      0.9656
+    ],
+    "fast_path_streaming_latency_us": 63.09
+  }
+}

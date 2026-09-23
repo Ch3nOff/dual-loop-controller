@@ -30,4 +30,5 @@ ealtime_benchmark_results.json** | Scratch timing probe | Unreferenced intermedi
 | **system_comparison_graph.png / comprehensive_dual_loop_behavior.png** | Early iteration charts | Early design draft charts replaced by high-resolution publication graphs. | [../authentic_20_benchmarks_all_systems.png](../authentic_20_benchmarks_all_systems.png) |
 | **images/** | Historical diagram & plot artifacts | Superseded by v2.4.0 visual assets (`hadl_v24_system_architecture.png`, `comprehensive_v24_benchmark_matrix.png`). | Root / README |
 | **scripts/** | Historical exploratory run & plotting scripts | Superseded by v2.4.0 unified benchmark suite in `dual_loop/benchmarks/`. | `dual_loop/benchmarks/` |
+| **epistemic_plasticity_benchmark_summary_only.json** | Early summary-only stub (2056 bytes) | Contained aggregated metric dictionaries without per-sample logs or elapsed execution breakdown. | [../epistemic_plasticity_benchmark.json](../epistemic_plasticity_benchmark.json) |
 

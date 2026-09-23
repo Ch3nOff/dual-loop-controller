@@ -195,29 +195,139 @@ class PopperianSelfPlayEngine(nn.Module):
         return self.falsifier_net(pair)
 
     @staticmethod
-    def verify_sandbox(hypothesis_name: str, test_condition: str) -> Tuple[bool, str]:
+    def verify_sandbox(
+        code_or_expression: str,
+        test_condition: str = "eval",
+        context_variables: Optional[Dict[str, Any]] = None
+    ) -> Tuple[bool, str]:
         """
         Deterministic Ground-Truth Sandbox Verification.
+        Safely executes code or evaluates boolean/arithmetic expressions within
+        an isolated Python execution environment with restricted builtins.
+        
+        Args:
+            code_or_expression: Python code string or boolean/arithmetic expression.
+            test_condition: Verification mode:
+                - 'eval' or 'boolean_logic': Evaluates expression via eval().
+                  Returns True if result is Truthy, False if Falsy (e.g. 1 == 2 -> False).
+                - 'exec' or 'assertion': Executes code block via exec().
+                  Returns True if all assertions hold, False if AssertionError or runtime error.
+                - 'syntax_check': Validates syntax only via compile().
+            context_variables: Optional dictionary of variables injected into sandbox scope.
+            
         Returns:
-            is_valid: True if hypothesis survives test_condition, False if falsified.
+            is_valid: True if assertion/condition holds, False if refuted/falsified.
             diag: Diagnostic output string.
         """
-        # Deterministic logic / syntax execution verification
+        # Security Guard 1: Prohibit dunder introspection (__import__, __class__, etc.)
+        if "__" in code_or_expression:
+            return False, "Sandbox security violation: double-underscore attribute access prohibited"
+        
+        # Security Guard 2: Prohibit forbidden calls and modules
+        forbidden = ["import ", "open(", "eval(", "exec(", "globals(", "locals(", "os.", "sys.", "subprocess", "shutil"]
+        for bad in forbidden:
+            if bad in code_or_expression:
+                return False, f"Sandbox security violation: forbidden call '{bad}' detected"
+                
+        safe_builtins = {
+            "abs": abs, "min": min, "max": max, "sum": sum, "all": all, "any": any,
+            "len": len, "range": range, "bool": bool, "int": int, "float": float,
+            "str": str, "dict": dict, "list": list, "set": set, "tuple": tuple,
+            "round": round, "zip": zip,
+            "AssertionError": AssertionError, "ValueError": ValueError,
+            "TypeError": TypeError, "ZeroDivisionError": ZeroDivisionError,
+            "True": True, "False": False, "None": None,
+        }
+        safe_env: Dict[str, Any] = {"__builtins__": safe_builtins}
+        if context_variables:
+            for k, v in context_variables.items():
+                if not k.startswith("__"):
+                    safe_env[k] = v
+                    
         try:
-            # Safe sandbox evaluation for arithmetic, boolean logic, and syntax invariants
-            if "syntax_check" in test_condition:
-                code_snippet = hypothesis_name
-                compile(code_snippet, "<sandbox>", "exec")
+            mode = test_condition.lower()
+            if mode in ["eval", "boolean_logic", "logic", "expression"]:
+                res = eval(code_or_expression, safe_env)
+                if isinstance(res, bool):
+                    if res:
+                        return True, "Verified in sandbox: boolean expression evaluated to True"
+                    else:
+                        return False, "Falsified in sandbox: boolean condition evaluated to False"
+                return bool(res), f"Evaluated in sandbox with result: {res}"
+                
+            elif mode in ["exec", "assertion", "assertion_test"]:
+                exec(code_or_expression, safe_env)
+                return True, "Verified in sandbox: script executed and all assertions passed"
+                
+            elif mode in ["syntax_check", "syntax"]:
+                compile(code_or_expression, "<sandbox>", "exec")
                 return True, "Code compiled successfully without syntax errors"
-            elif "logic_consistency" in test_condition:
-                # Contradiction verification: A and not A cannot both be true
-                return True, "Logical consistency verified"
+                
             else:
-                return True, "Deterministic check passed"
+                # Default auto mode: try eval first; if syntax error (e.g. statements), fallback to exec
+                try:
+                    res = eval(code_or_expression, safe_env)
+                    if isinstance(res, bool):
+                        return res, f"Evaluated in sandbox: {res}"
+                    return bool(res), f"Evaluated in sandbox: {res}"
+                except SyntaxError:
+                    exec(code_or_expression, safe_env)
+                    return True, "Executed in sandbox successfully"
+                    
+        except AssertionError as e:
+            msg = str(e) if str(e) else "Assertion failed"
+            return False, f"Falsified in sandbox: AssertionError ({msg})"
         except SyntaxError as e:
-            return False, f"SyntaxError in sandbox: {e}"
+            return False, f"Falsified in sandbox: SyntaxError ({e})"
         except Exception as e:
-            return False, f"Sandbox execution failure: {e}"
+            return False, f"Falsified in sandbox: runtime error {type(e).__name__} ({e})"
+
+    def synthesize_sandbox_challenge(
+        self,
+        hypothesis: torch.Tensor,
+        counter_ex: torch.Tensor,
+        slot_a: torch.Tensor,
+        slot_b: torch.Tensor
+    ) -> Tuple[str, str, Dict[str, Any]]:
+        """
+        Synthesizes a concrete, executable verification challenge testing whether
+        the candidate hypothesis legitimately resolves the contradiction or is refuted
+        by the Popperian Red Team counter-example.
+        """
+        h_flat = hypothesis.flatten()
+        c_flat = counter_ex.flatten()
+        a_flat = slot_a.flatten()
+        b_flat = slot_b.flatten()
+        
+        h_norm = float(h_flat.norm().item())
+        diff_stress = float(torch.norm(c_flat - h_flat).item())
+        cos_a = float(F.cosine_similarity(h_flat.unsqueeze(0), a_flat.unsqueeze(0)).item())
+        cos_b = float(F.cosine_similarity(h_flat.unsqueeze(0), b_flat.unsqueeze(0)).item())
+        
+        context_meta = {
+            "h_norm": round(h_norm, 4),
+            "diff_stress": round(diff_stress, 4),
+            "cos_a": round(cos_a, 4),
+            "cos_b": round(cos_b, 4),
+        }
+        
+        test_script = f"""
+def verify_latent_hypothesis(h_norm, diff_stress, cos_a, cos_b):
+    # Invariant 1: Non-triviality (energy must be bounded and non-collapsed)
+    assert h_norm > 0.01, "Degenerate hypothesis: representation collapsed to zero"
+    assert h_norm < 100.0, "Unstable hypothesis: representation exploded"
+    
+    # Invariant 2: Non-trivial reconciliation (cannot be identical to pure simultaneous negation)
+    assert not (cos_a < -0.99 and cos_b < -0.99), "Trivial negation: hypothesis rejects both premises"
+    
+    # Invariant 3: Popperian Falsifier Challenge
+    # Counter-example tests the boundary stability of the synthesized hypothesis
+    assert diff_stress <= 1.25, f"Boundary challenge refuted hypothesis: stress={{diff_stress}} > 1.25"
+    return True
+
+verify_latent_hypothesis(h_norm, diff_stress, cos_a, cos_b)
+"""
+        return test_script, "exec", context_meta
 
 
 class AutonomousDaemonController:
@@ -334,10 +444,15 @@ class AutonomousDaemonController:
             # Falsifier creates boundary challenge
             counter_ex = self.popperian_engine.generate_counter_example(hyp, slot_a)
             
-            # Deterministic sandbox verification
-            # If counter example is valid, hypothesis was falsified
-            diff_norm = float(torch.norm(counter_ex - hyp).item())
-            is_falsified = (diff_norm > 1.0)
+            # Deterministic sandbox verification via safe Python execution
+            test_script, test_mode, context_meta = self.popperian_engine.synthesize_sandbox_challenge(
+                hyp, counter_ex, slot_a, slot_b
+            )
+            is_valid, sandbox_diag = self.popperian_engine.verify_sandbox(
+                test_script, test_condition=test_mode, context_variables=context_meta
+            )
+            # Hypothesis is falsified if the deterministic sandbox assertion fails
+            is_falsified = not is_valid
             
             # Compute Epistemic Humility Loss
             hyp_conf = humility_out["confidence"][idx_a:idx_a+1]
@@ -356,6 +471,8 @@ class AutonomousDaemonController:
             step_result["humility_loss"] = float(h_loss.item())
             step_result["nullspace_residual_norm"] = float(v_perp.norm().item())
             step_result["falsification_event"] = is_falsified
+            step_result["sandbox_diagnostic"] = sandbox_diag
+            step_result["sandbox_code_tested"] = test_script.strip()
             
         # 6. Compute ICM Curiosity Reward
         if action_vector is None:

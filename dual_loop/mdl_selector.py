@@ -5,18 +5,27 @@ from typing import List, Tuple, Dict, Any, Optional
 
 class NeuroSymbolicMDLSelector(nn.Module):
     """
-    Neuro-Symbolic Minimum Description Length (MDL) Selector.
+    Parsimony-Driven Latent Plan Selector (Inspired by MDL & Occam's Razor).
     
-    Evaluates candidate thought trajectories or latent plans using the MDL principle:
-        Score(p*) = Length(p*) + lambda * Error(Constraints | p*)
+    THEORETICAL SCOPE & TRANSPARENCY:
+    This module implements a continuous regularization heuristic inspired by the
+    Minimum Description Length (MDL) principle (Rissanen, 1978) and Occam's Razor.
+    
+    It does NOT compute formal discrete Kolmogorov complexity, Shannon source coding,
+    or Huffman prefix-free bit-lengths. Instead, it defines an empirical continuous
+    parsimony proxy:
+        Score(p) = Complexity(p) + lambda * Error(Constraints | p)
         
-    Where:
-        Length(p*): Structural complexity of the proposed latent plan
-                    (measured via effective latent rank / sparsity / entropy).
-        Error(Constraints | p*): Reconstruction discrepancy against grounded context slots.
-        
-    Penalizes bloated, repetitive, or over-engineered code architectures,
-    favoring the most compact, elegant, and parsimonious solution (Occam's Razor).
+    where:
+        Complexity(p): Continuous complexity regularization penalty combining
+                       L1 sparsity (w_l1 = 0.05) and latent variance across thought
+                       steps (w_var = 1.5).
+        Error(Constraints | p): Latent reconstruction discrepancy via cross-attention
+                                between candidate rollout and grounded context memory slots.
+                                
+    This penalizes bloated, wandering, or over-parameterized latent plans in continuous
+    activation space, prioritizing the most stable, parsimonious trajectory that
+    faithfully satisfies grounded context constraints.
     """
     def __init__(
         self,
@@ -34,16 +43,16 @@ class NeuroSymbolicMDLSelector(nn.Module):
 
     def compute_plan_complexity(self, thought_plan: torch.Tensor) -> torch.Tensor:
         """
-        Computes description length / structural complexity of thought representation.
+        Computes continuous complexity regularization proxy (L1 sparsity + trajectory variance).
         Args:
             thought_plan: [B, L, D]
         Returns:
-            complexity: [B] Scalar complexity score.
+            complexity: [B] Scalar regularization penalty.
         """
-        # 1. Sparsity / L1 energy norm
+        # 1. Sparsity / L1 energy norm proxy (penalizes excessive unconstrained magnitude)
         l1_cost = torch.norm(thought_plan, p=1, dim=-1).mean(dim=-1) # [B]
         
-        # 2. Latent variance / diversity across thought tokens (penalizes chaotic high-entropy wandering)
+        # 2. Latent variance across thought tokens (penalizes chaotic trajectory wandering)
         variance_cost = torch.var(thought_plan, dim=1).mean(dim=-1) # [B]
         
         return (l1_cost * 0.05 + variance_cost * 1.5) * self.complexity_weight

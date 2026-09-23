@@ -70,15 +70,37 @@ class TestCuriosityDaemon(unittest.TestCase):
         counter_ex = self.self_play.generate_counter_example(hyp, mem_a)
         self.assertEqual(counter_ex.shape, (1, self.d_model))
         
-        # Deterministic sandbox verification
-        valid_code = "x = 10 + 20\ny = x * 2"
-        is_ok, msg = PopperianSelfPlayEngine.verify_sandbox(valid_code, "syntax_check")
+        # 1. Real boolean logic execution (not just compile)
+        is_true, msg_true = PopperianSelfPlayEngine.verify_sandbox("1 == 1", "eval")
+        self.assertTrue(is_true)
+        self.assertIn("Verified", msg_true)
+        
+        is_false, msg_false = PopperianSelfPlayEngine.verify_sandbox("1 == 2", "eval")
+        self.assertFalse(is_false)
+        self.assertIn("Falsified", msg_false)
+        
+        # 2. Real assertion script execution
+        valid_assert = "def test():\n    assert 2 + 2 == 4\ntest()"
+        is_ok, msg_ok = PopperianSelfPlayEngine.verify_sandbox(valid_assert, "exec")
         self.assertTrue(is_ok)
         
-        invalid_code = "def broken(:\n    pass"
-        is_bad, bad_msg = PopperianSelfPlayEngine.verify_sandbox(invalid_code, "syntax_check")
-        self.assertFalse(is_bad)
-        self.assertIn("SyntaxError", bad_msg)
+        invalid_assert = "def test():\n    assert 2 + 2 == 5, 'Math refuted'\ntest()"
+        is_refuted, msg_refuted = PopperianSelfPlayEngine.verify_sandbox(invalid_assert, "exec")
+        self.assertFalse(is_refuted)
+        self.assertIn("AssertionError", msg_refuted)
+        self.assertIn("Math refuted", msg_refuted)
+        
+        # 3. Security guards against sandbox escape
+        escape_attempt = "__import__('os').system('ls')"
+        is_blocked, msg_blocked = PopperianSelfPlayEngine.verify_sandbox(escape_attempt, "eval")
+        self.assertFalse(is_blocked)
+        self.assertIn("security violation", msg_blocked.lower())
+        
+        # 4. Invariant challenge synthesis
+        script, mode, meta = self.self_play.synthesize_sandbox_challenge(hyp, counter_ex, mem_a, mem_b)
+        self.assertIn("def verify_latent_hypothesis", script)
+        self.assertEqual(mode, "exec")
+        self.assertIn("diff_stress", meta)
 
     def test_autonomous_daemon_step(self):
         # Create synthetic memory slots with deliberate opposition (contradiction)
@@ -94,6 +116,9 @@ class TestCuriosityDaemon(unittest.TestCase):
         self.assertEqual(step_res["anomalies_resolved"], 1)
         self.assertIn("curiosity_reward", step_res)
         self.assertIn("humility_loss", step_res)
+        self.assertIn("sandbox_diagnostic", step_res)
+        self.assertIn("sandbox_code_tested", step_res)
+        self.assertIn("falsification_event", step_res)
         self.assertEqual(self.daemon.resolved_anomalies_count, 1)
 
 if __name__ == "__main__":

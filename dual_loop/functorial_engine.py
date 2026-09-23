@@ -5,17 +5,20 @@ from typing import Tuple, Dict, Any, Optional
 
 class FunctorialCrossDomainMapper(nn.Module):
     r"""
-    Functorial Cross-Domain Mapping (Category Theory for Deep Analogical Reasoning).
+    Relational Morphism Cross-Domain Mapper (Inspired by Functorial Category Theory).
     
-    Instead of matching surface token embeddings, maps structural relations between
-    relations (Morphisms between Morphisms):
-        If Category C has objects X, Y and morphism f: X -> Y,
-        and Category D has objects A, B and morphism g: A -> B,
-        the Functor F: C -> D preserves identity and composition:
-            F(f \circ g) = F(f) \circ F(g)
-            
-    Enables structural analogical transfer across completely distinct domains
-    (e.g., Solar System -> Rutherford Atom, or React State Machine -> Python Async Worker).
+    THEORETICAL SCOPE & TRANSPARENCY:
+    This module performs structural analogical mapping across domains by extracting
+    pairwise relational morphisms (attention graphs between memory slots) and learning
+    a projection network F: C -> D between domain graphs.
+    
+    NOTE ON CATEGORY THEORY GUARANTEES:
+    While conceptually motivated by functor composition F(f \circ g) = F(f) \circ F(g),
+    diagram commutativity is NOT axiomatically guaranteed by construction. Instead,
+    the empirical divergence ||F(f \circ f) - F(f) \circ F(f)|| is tracked as
+    `commutativity_error` (and can be minimized via `compute_commutativity_loss()`).
+    Users should view this as an empirical relational alignment mechanism rather than
+    a strict mathematical category-theoretic isomorphism.
     """
     def __init__(
         self,
@@ -101,3 +104,16 @@ class FunctorialCrossDomainMapper(nn.Module):
             "functor_applied": True
         }
         return structured_analog, telemetry
+
+    def compute_commutativity_loss(self, source_memory: torch.Tensor) -> torch.Tensor:
+        r"""
+        Computes differentiable commutativity loss ||F(f \circ f) - F(f) \circ F(f)||^2.
+        Can be used as an auxiliary regularization objective during training to penalize
+        functor diagram inconsistency.
+        """
+        f_source = self.extract_morphisms(source_memory)
+        f_target = F.softmax(self.functor_map(f_source), dim=-1)
+        f_composed_source = torch.bmm(f_source, f_source)
+        f_composed_target_pred = self.functor_map(f_composed_source)
+        f_composed_target_actual = torch.bmm(f_target, f_target)
+        return F.mse_loss(f_composed_target_pred, f_composed_target_actual)
