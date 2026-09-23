@@ -39,7 +39,9 @@ from .adapters.qwen_adapter import (
     DualLoopTransformerModel,
     attach_dual_loop_to_qwen,
     attach_dual_loop,
-    attach_dual_loop_to_model
+    attach_dual_loop_to_model,
+    attach_dual_loop_to_glm4,
+    attach_dual_loop_to_glm
 )
 
 import os

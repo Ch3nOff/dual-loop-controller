@@ -653,3 +653,45 @@ def attach_dual_loop(
 
 attach_dual_loop_to_model = attach_dual_loop
 DualLoopTransformerModel = DualLoopQwenModel
+
+
+def attach_dual_loop_to_glm4(
+    model: nn.Module,
+    layer_idx: Optional[int] = None,
+    k_steps: int = 2,
+    bottleneck_dim: int = 1024,
+    enable_allostatic_modulation: bool = True,
+    enable_homeostasis: bool = True,
+    enable_nullspace_projection: bool = True,
+    enable_brain_sandbox: bool = True,
+    enable_mdl_selection: bool = True,
+    enable_functorial_mapping: bool = True,
+    **kwargs
+) -> DualLoopQwenModel:
+    """
+    Convenience factory to attach the Dual-Loop Cognitive Controller to GLM-4 / ChatGLM models.
+    Automatically applies bottleneck compression (D=4096 -> d=1024) to fit comfortably within standard RAM/VRAM.
+    """
+    cfg = getattr(model, "config", None)
+    if cfg is not None:
+        if not hasattr(cfg, "max_length"):
+            cfg.max_length = getattr(cfg, "seq_length", 8192)
+        if not hasattr(cfg, "use_cache"):
+            cfg.use_cache = False
+
+    return attach_dual_loop(
+        model,
+        layer_idx=layer_idx,
+        k_steps=k_steps,
+        bottleneck_dim=bottleneck_dim,
+        enable_homeostasis=enable_homeostasis,
+        enable_nullspace_projection=enable_nullspace_projection,
+        enable_brain_sandbox=enable_brain_sandbox,
+        enable_mdl_selection=enable_mdl_selection,
+        enable_functorial_mapping=enable_functorial_mapping,
+        enable_allostatic_modulation=enable_allostatic_modulation,
+        **kwargs
+    )
+
+
+attach_dual_loop_to_glm = attach_dual_loop_to_glm4

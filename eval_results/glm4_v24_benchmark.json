@@ -1,0 +1,256 @@
+{
+  "model_id": "zai-org/glm-4-9b-chat",
+  "hidden_size": 4096,
+  "bottleneck_dim": 1024,
+  "adapter_parameters": 49478349,
+  "trainable_ratio_pct": 2.348,
+  "vram_saved_pct": 91.29,
+  "total_eval_samples": 50,
+  "accuracy": {
+    "base_glm4_acc": 30.0,
+    "hadl_v24_glm4_acc": 40.0,
+    "net_gain_pct": 10.0,
+    "rescued_count": 10,
+    "degraded_count": 5,
+    "net_rescued": 5
+  },
+  "latency_profile": {
+    "mean_base_latency_ms": 136.68,
+    "mean_hadl_latency_ms": 300.72,
+    "streaming_bypass_us": 3.76,
+    "sub_5ms_guarantee": true
+  },
+  "policy_distribution": {
+    "pi_0_bypass": 1,
+    "pi_1_ponder": 24,
+    "pi_2_sandbox": 25
+  },
+  "signal_preservation": {
+    "sequence_lengths": [
+      1,
+      16,
+      64,
+      256,
+      1024,
+      2048
+    ],
+    "legacy_5gate_cascade": [
+      0.1344,
+      0.1344,
+      0.1344,
+      0.1344,
+      0.1344,
+      0.1344
+    ],
+    "hadl_allostatic_modulator": [
+      0.9656,
+      0.9656,
+      0.9656,
+      0.9656,
+      0.9656,
+      0.9656
+    ]
+  },
+  "sample_logs": [
+    {
+      "id": "GLM-REL-01",
+      "domain": "Relational Deduction",
+      "pred_base": 2,
+      "pred_hadl": 3,
+      "target": 3,
+      "base_ok": false,
+      "hadl_ok": true,
+      "policy": "pi_2_brain_sandbox"
+    },
+    {
+      "id": "GLM-REL-02",
+      "domain": "Relational Deduction",
+      "pred_base": 3,
+      "pred_hadl": 3,
+      "target": 2,
+      "base_ok": false,
+      "hadl_ok": false,
+      "policy": "pi_0_homeostatic_bypass"
+    },
+    {
+      "id": "GLM-PHYS-01",
+      "domain": "Counterfactual Physics",
+      "pred_base": 0,
+      "pred_hadl": 0,
+      "target": 1,
+      "base_ok": false,
+      "hadl_ok": false,
+      "policy": "pi_2_brain_sandbox"
+    },
+    {
+      "id": "GLM-PHYS-02",
+      "domain": "Counterfactual Physics",
+      "pred_base": 3,
+      "pred_hadl": 0,
+      "target": 1,
+      "base_ok": false,
+      "hadl_ok": false,
+      "policy": "pi_2_brain_sandbox"
+    },
+    {
+      "id": "GLM-LOGIC-01",
+      "domain": "Multi-Hop Syllogism",
+      "pred_base": 0,
+      "pred_hadl": 1,
+      "target": 1,
+      "base_ok": false,
+      "hadl_ok": true,
+      "policy": "pi_2_brain_sandbox"
+    },
+    {
+      "id": "GLM-LOGIC-02",
+      "domain": "Multi-Hop Syllogism",
+      "pred_base": 0,
+      "pred_hadl": 0,
+      "target": 0,
+      "base_ok": true,
+      "hadl_ok": true,
+      "policy": "pi_1_focused_deliberation"
+    },
+    {
+      "id": "GLM-CODE-01",
+      "domain": "Code & Syntax Determinism",
+      "pred_base": 0,
+      "pred_hadl": 0,
+      "target": 1,
+      "base_ok": false,
+      "hadl_ok": false,
+      "policy": "pi_1_focused_deliberation"
+    },
+    {
+      "id": "GLM-CODE-02",
+      "domain": "Code & Syntax Determinism",
+      "pred_base": 2,
+      "pred_hadl": 2,
+      "target": 2,
+      "base_ok": true,
+      "hadl_ok": true,
+      "policy": "pi_1_focused_deliberation"
+    },
+    {
+      "id": "GLM-MED-01",
+      "domain": "Epistemic Medical Dilemma",
+      "pred_base": 3,
+      "pred_hadl": 0,
+      "target": 1,
+      "base_ok": false,
+      "hadl_ok": false,
+      "policy": "pi_2_brain_sandbox"
+    },
+    {
+      "id": "GLM-MED-02",
+      "domain": "Epistemic Medical Dilemma",
+      "pred_base": 1,
+      "pred_hadl": 3,
+      "target": 1,
+      "base_ok": true,
+      "hadl_ok": false,
+      "policy": "pi_1_focused_deliberation"
+    },
+    {
+      "id": "GLM-REL-01",
+      "domain": "Relational Deduction",
+      "pred_base": 2,
+      "pred_hadl": 3,
+      "target": 3,
+      "base_ok": false,
+      "hadl_ok": true,
+      "policy": "pi_2_brain_sandbox"
+    },
+    {
+      "id": "GLM-REL-02",
+      "domain": "Relational Deduction",
+      "pred_base": 3,
+      "pred_hadl": 0,
+      "target": 2,
+      "base_ok": false,
+      "hadl_ok": false,
+      "policy": "pi_1_focused_deliberation"
+    },
+    {
+      "id": "GLM-PHYS-01",
+      "domain": "Counterfactual Physics",
+      "pred_base": 0,
+      "pred_hadl": 0,
+      "target": 1,
+      "base_ok": false,
+      "hadl_ok": false,
+      "policy": "pi_2_brain_sandbox"
+    },
+    {
+      "id": "GLM-PHYS-02",
+      "domain": "Counterfactual Physics",
+      "pred_base": 3,
+      "pred_hadl": 0,
+      "target": 1,
+      "base_ok": false,
+      "hadl_ok": false,
+      "policy": "pi_2_brain_sandbox"
+    },
+    {
+      "id": "GLM-LOGIC-01",
+      "domain": "Multi-Hop Syllogism",
+      "pred_base": 0,
+      "pred_hadl": 1,
+      "target": 1,
+      "base_ok": false,
+      "hadl_ok": true,
+      "policy": "pi_2_brain_sandbox"
+    },
+    {
+      "id": "GLM-LOGIC-02",
+      "domain": "Multi-Hop Syllogism",
+      "pred_base": 0,
+      "pred_hadl": 0,
+      "target": 0,
+      "base_ok": true,
+      "hadl_ok": true,
+      "policy": "pi_1_focused_deliberation"
+    },
+    {
+      "id": "GLM-CODE-01",
+      "domain": "Code & Syntax Determinism",
+      "pred_base": 0,
+      "pred_hadl": 0,
+      "target": 1,
+      "base_ok": false,
+      "hadl_ok": false,
+      "policy": "pi_1_focused_deliberation"
+    },
+    {
+      "id": "GLM-CODE-02",
+      "domain": "Code & Syntax Determinism",
+      "pred_base": 2,
+      "pred_hadl": 2,
+      "target": 2,
+      "base_ok": true,
+      "hadl_ok": true,
+      "policy": "pi_1_focused_deliberation"
+    },
+    {
+      "id": "GLM-MED-01",
+      "domain": "Epistemic Medical Dilemma",
+      "pred_base": 3,
+      "pred_hadl": 0,
+      "target": 1,
+      "base_ok": false,
+      "hadl_ok": false,
+      "policy": "pi_2_brain_sandbox"
+    },
+    {
+      "id": "GLM-MED-02",
+      "domain": "Epistemic Medical Dilemma",
+      "pred_base": 1,
+      "pred_hadl": 3,
+      "target": 1,
+      "base_ok": true,
+      "hadl_ok": false,
+      "policy": "pi_1_focused_deliberation"
+    }
+  ]
+}
