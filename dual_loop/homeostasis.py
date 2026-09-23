@@ -239,3 +239,13 @@ class ActiveInferencePolicyRouter(nn.Module):
             "is_streaming": is_token_streaming
         }
         return optimal_k, telemetry
+
+    def forward(
+        self,
+        h_current: torch.Tensor,
+        vacuity_u: Optional[float] = None,
+        is_token_streaming: bool = False,
+        base_k_steps: int = 2
+    ) -> Tuple[int, Dict[str, Any]]:
+        return self.select_policy(h_current, vacuity_u, is_token_streaming, base_k_steps)
+
