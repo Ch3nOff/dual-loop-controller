@@ -1,0 +1,71 @@
+{
+  "benchmark1_transport": {
+    "mu_diff_before": 145.735107421875,
+    "mu_diff_after": 2.1636526525981026e-06,
+    "std_diff_before": 92.80216979980469,
+    "std_diff_after": 0.030477095395326614,
+    "alignment_fidelity_mu": 99.99999851535249,
+    "alignment_fidelity_std": 99.96715907024473,
+    "latency_ms": 0.518269999884069
+  },
+  "benchmark2_token_explosion": {
+    "256": {
+      "t_std_ms": 1.1747933332420266,
+      "m_std_mb": 8.0615234375,
+      "t_topo_ms": 1.6697699999591957,
+      "m_topo_mb": 14.7431640625,
+      "speedup": 0.7035659601446518,
+      "salient_patches": 64,
+      "compression_ratio": 0.25
+    },
+    "576": {
+      "t_std_ms": 1.9766099993527557,
+      "m_std_mb": 15.2490234375,
+      "t_topo_ms": 1.6637599997920915,
+      "m_topo_mb": 16.4951171875,
+      "speedup": 1.1880379379235941,
+      "salient_patches": 64,
+      "compression_ratio": 0.1111111111111111
+    },
+    "1024": {
+      "t_std_ms": 3.158316667152879,
+      "m_std_mb": 25.4365234375,
+      "t_topo_ms": 1.6669266663181286,
+      "m_topo_mb": 31.751953125,
+      "speedup": 1.8946944283571274,
+      "salient_patches": 64,
+      "compression_ratio": 0.0625
+    },
+    "2048": {
+      "t_std_ms": 5.843996666953899,
+      "m_std_mb": 48.4365234375,
+      "t_topo_ms": 2.2240466661363216,
+      "m_topo_mb": 68.267578125,
+      "speedup": 2.627641207325141,
+      "salient_patches": 64,
+      "compression_ratio": 0.03125
+    }
+  },
+  "benchmark3_hetero_associative": {
+    "accuracy_pct": 100.0,
+    "mean_cosine": 0.19703173637390137,
+    "pre_bind_recall_norm": 0.0,
+    "m_cross_final_norm": 0.8674353361129761
+  },
+  "benchmark4_falsification": {
+    "grounded_f_cross": 0.3952827453613281,
+    "grounded_penalty": 0.0,
+    "grounded_delta_norm": 0.014891264028847218,
+    "deceptive_f_cross": -0.014162275940179825,
+    "deceptive_penalty": 0.2641622722148895,
+    "deceptive_delta_norm": 0.0027053903322666883,
+    "suppression_ratio": 81.83236609715716
+  },
+  "benchmark5_e2e_qwen": {
+    "t_base_ms": 7.231513333196441,
+    "t_dual_loop_ms": 28.12332666653674,
+    "latency_overhead_ms": 20.891813333340302,
+    "active_neurons": 248842,
+    "bimodal": true
+  }
+}

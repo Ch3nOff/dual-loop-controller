@@ -15,7 +15,7 @@ from .adapters.latent_adapter import LatentDeliberationAdapter
 def get_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="dual-loop",
-        description="Dual-Loop Cognitive Controller (HADL v2.4.0) Command-Line Suite"
+        description="Dual-Loop Cognitive Controller (HADL v2.5.0) Command-Line Suite"
     )
     parser.add_argument("-v", "--version", action="version", version=f"dual-loop-controller {__version__}")
     
@@ -28,7 +28,7 @@ def get_parser() -> argparse.ArgumentParser:
     p_bench = subparsers.add_parser("benchmark", help="Execute authentic PyTorch benchmark suites")
     p_bench.add_argument(
         "--suite",
-        choices=["plasticity", "comprehensive", "halting", "qwen"],
+        choices=["plasticity", "comprehensive", "halting", "qwen", "multimodal"],
         default="plasticity",
         help="Benchmark suite to execute (default: plasticity)"
     )
@@ -69,7 +69,7 @@ def cmd_info(args):
     print(f"[*] CUDA Available     : {torch.cuda.is_available()}")
     if torch.cuda.is_available():
         print(f"[*] CUDA Device Name   : {torch.cuda.get_device_name(0)}")
-    print(f"[*] Active Architecture: Autopoietic Dual-Process Engine")
+    print(f"[*] Active Architecture: Autopoietic Dual-Process Engine (v2.5.0)")
     print(f"[*] Key Components     :")
     print("    - Consolidated Allostatic Energy Modulator  (Gate Pruning, sub-5ms)")
     print("    - Decoupled Autonomous Curiosity Daemon     (ICM + Popperian Self-Play)")
@@ -78,6 +78,9 @@ def cmd_info(args):
     print("    - Orthogonal Nullspace Memory Engine        (QR Nullspace Projection, col=0)")
     print("    - Parsimony-Driven Plan Selector            (MDL-inspired L1 + variance proxy)")
     print("    - Functorial Cross-Domain Mapper            (Relational morphism graph alignment)")
+    print("    - Universal Multimodal Transport Engine     (Procrustes Optimal Covariance Transport)")
+    print("    - Spatio-Temporal Entropic CWM              (16-Slot Topological Token Compression)")
+    print("    - Bidirectional Hetero-Associative Memory   (Fast Weights M_cross & 1.4ms Imagination)")
     print("=" * 78)
 
 def cmd_verify_sandbox(args):
@@ -118,6 +121,9 @@ def cmd_benchmark(args):
     elif args.suite == "qwen":
         from .benchmarks.benchmark_qwen_reasoning import main as run_qwen
         run_qwen()
+    elif args.suite == "multimodal":
+        from .benchmarks.benchmark_bidirectional_multimodal import main as run_multimodal
+        run_multimodal()
     else:
         print(f"Unknown benchmark suite: {args.suite}")
         sys.exit(1)

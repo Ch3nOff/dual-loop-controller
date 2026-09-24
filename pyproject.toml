@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dual-loop-controller"
-version = "2.4.0"
-description = "A hardware-aligned, manifold-preserving latent deliberation framework for Transformers"
+version = "2.5.0"
+description = "A hardware-aligned, manifold-preserving latent deliberation & bidirectional multimodal framework for Transformers"
 readme = "README_PYPI.md"
 requires-python = ">=3.9"
 license = "MIT"
@@ -16,6 +16,9 @@ keywords = [
     "deep-learning",
     "transformers",
     "latent-reasoning",
+    "multimodal",
+    "vision-language",
+    "fast-weights",
     "cognitive-architecture",
     "system-2-thinking",
     "pytorch"

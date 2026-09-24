@@ -33,6 +33,9 @@ from .matrix_helper import CognitiveMatrixHelper
 from .cognitive_judge import ProbabilisticCognitiveJudge
 from .directional_reservoir import ContextDirectionalRouter, CompactCommonSenseReservoir
 from .decoder import DualLoopTransformer
+from .multimodal_transport import ProcrustesOptimalManifoldTransport
+from .topological_cwm import SpatioTemporalEntropicCWM
+from .plasticity import HeteroAssociativePlasticMemory
 from .adapters.latent_adapter import LatentDeliberationAdapter
 from .adapters.qwen_adapter import (
     DualLoopQwenModel,
@@ -44,11 +47,14 @@ from .adapters.qwen_adapter import (
     attach_dual_loop_to_glm
 )
 
+# Convenient shorthand alias for users
+attach = attach_dual_loop
+
 import os
 import torch
 from typing import Optional
 
-__version__ = "2.4.0"
+__version__ = "2.5.0"
 
 def get_default_checkpoint_path() -> Optional[str]:
     """
@@ -106,6 +112,9 @@ __all__ = [
     "CognitiveMatrixHelper",
     "DualLoopTransformer",
     "LatentDeliberationAdapter",
+    "ProcrustesOptimalManifoldTransport",
+    "SpatioTemporalEntropicCWM",
+    "HeteroAssociativePlasticMemory",
     "AllostaticEnergyModulator",
     "EpistemicHumilityModule",
     "IntrinsicCuriosityModule",
@@ -115,6 +124,7 @@ __all__ = [
     "DualLoopTransformerModel",
     "attach_dual_loop_to_qwen",
     "attach_dual_loop",
+    "attach",
     "attach_dual_loop_to_model",
     "attach_dual_loop_to_glm4",
     "attach_dual_loop_to_glm",
