@@ -4,6 +4,7 @@ import torch.nn.functional as F
 from typing import Optional, Tuple, List, Dict, Any
 from .halting import EntropyHaltingUnit, LearnedHaltingGate, DriftDiffusionHalting
 from .plasticity import PlasticFastWeightUnit
+from .self_awareness import SelfAwarenessController
 
 class TopKCapacityCrossAttention(nn.Module):
     """
@@ -157,6 +158,10 @@ class RecurrentLatentController(nn.Module):
         ) if enable_plasticity else None
         self.last_plastic_telemetry: Dict[str, Any] = {}
 
+        # Dual-Loop Self-Awareness Engine (Introspective Self-Descriptor Vector & Ego-Thought Slot 0)
+        self.self_awareness = SelfAwarenessController(d_inner=d_model)
+        self.last_self_awareness_telem: Dict[str, Any] = {}
+
         # Learned Adaptive Anchor Gate (Contraction Mapping for K >= 4 stabilization)
         self.anchor_gate = nn.Linear(d_model, 1)
         nn.init.constant_(self.anchor_gate.bias, 1.0)
@@ -213,10 +218,12 @@ class RecurrentLatentController(nn.Module):
         if self.plastic_unit is not None:
             self.plastic_unit.reset_state(force=force)
         self.last_plastic_telemetry = {}
+        self.last_self_awareness_telem = {}
 
     def initialize_thoughts(self, query_rep: torch.Tensor) -> torch.Tensor:
         """
-        Initializes H_0 conditioned directly on the query.
+        Initializes H_0 conditioned directly on the query with Slot 0 reserved
+        for the Introspective Ego-Thought Token t_ego(0).
         Args:
             query_rep: [B, D] Representation of the query token / instruction.
         Returns:
@@ -225,6 +232,20 @@ class RecurrentLatentController(nn.Module):
         B = query_rep.size(0)
         base = self.query_projector(query_rep).unsqueeze(1) # [B, 1, D]
         H_0 = base.expand(B, self.num_thought_tokens, -1) + self.learned_slot_offsets
+        if hasattr(self, "self_awareness"):
+            s_0, _ = self.self_awareness.descriptor(
+                k=0,
+                k_max=self.max_ponder_steps,
+                u_vacuity=None,
+                h_k=base.squeeze(1),
+                h_anchor=base.squeeze(1),
+                H_k=H_0
+            )
+            t_ego_0 = self.self_awareness.ego_projector(s_0)
+            if self.num_thought_tokens > 1:
+                H_0 = torch.cat([t_ego_0, H_0[:, 1:, :]], dim=1)
+            else:
+                H_0 = t_ego_0
         return H_0
 
     def step_deliberation(
@@ -234,7 +255,11 @@ class RecurrentLatentController(nn.Module):
         memory: torch.Tensor,
         H_prev: Optional[torch.Tensor] = None,
         h_prev_primary: Optional[torch.Tensor] = None,
-        u_epistemic: Optional[torch.Tensor] = None
+        u_epistemic: Optional[torch.Tensor] = None,
+        step_idx: int = 1,
+        max_steps: int = 3,
+        H_prev2: Optional[torch.Tensor] = None,
+        logits: Optional[torch.Tensor] = None
     ) -> Tuple[torch.Tensor, Optional[torch.Tensor], Optional[torch.Tensor]]:
         """
         Executes a single recurrent step of outer loop deliberation.
@@ -247,6 +272,10 @@ class RecurrentLatentController(nn.Module):
             H_prev: [B, L_thought, D] Optional previous step thought representations.
             h_prev_primary: [B, D] Optional previous primary thought representation.
             u_epistemic: Optional [B] Epistemic uncertainty vacuity from EvidentialEpistemicGate.
+            step_idx: Current recurrent step (1-indexed).
+            max_steps: Total pondering quota K_max.
+            H_prev2: Thoughts at step k-2 for Lipschitz stability.
+            logits: Optional model prediction logits for margin.
             
         Returns:
             H_next: [B, L_thought, D] Updated thought representations.
@@ -256,7 +285,22 @@ class RecurrentLatentController(nn.Module):
         if H_prev is None:
             H_prev = H.clone()
 
-        # 1. Latent Self-Attention (Reflective deliberation)
+        # 0. Introspective Self-Awareness: Inject t_ego(k) into Slot 0
+        sa_telem = {}
+        if hasattr(self, "self_awareness"):
+            H, t_ego, sa_telem = self.self_awareness.step_self_awareness(
+                k=step_idx,
+                k_max=max_steps,
+                H_k=H,
+                H_anchor=H_anchor,
+                H_prev1=H_prev,
+                H_prev2=H_prev2,
+                u_vacuity=u_epistemic,
+                logits=logits
+            )
+            self.last_self_awareness_telem = sa_telem
+
+        # 1. Latent Self-Attention (Task thought slots 1, 2, 3 attend to Slot 0 Ego token)
         attn_self, _ = self.latent_self_attn(H, H, H)
         H = self.norm1(H + attn_self)
 
@@ -281,6 +325,11 @@ class RecurrentLatentController(nn.Module):
             )
             H_updated = H_updated + delta_plastic
             self.last_plastic_telemetry = plastic_telem
+
+        # 3c. Epistemic Modesty Modulation (Dampen extreme claims under divergence L_k > 1 or u > 0.7)
+        if sa_telem.get("epistemic_modesty_active", False):
+            m_factor = sa_telem.get("modesty_factor", 1.0)
+            H_updated = H_updated * m_factor
 
         # 4. Learned Adaptive Anchor Gate (Contraction Mapping: guarantees stability at K >= 4)
         alpha = torch.sigmoid(self.anchor_gate(H_updated)) # [B, L, 1]
@@ -347,6 +396,8 @@ class RecurrentLatentController(nn.Module):
         lambdas = []
         error_norms = []
         h_prev_primary = None
+        H_prev1 = None
+        H_prev2 = None
 
         for step in range(steps):
             H_prev = H.clone()
@@ -358,8 +409,13 @@ class RecurrentLatentController(nn.Module):
                 memory=memory,
                 H_prev=H_prev,
                 h_prev_primary=h_prev_primary,
-                u_epistemic=u_epistemic
+                u_epistemic=u_epistemic,
+                step_idx=step + 1,
+                max_steps=steps,
+                H_prev2=H_prev2
             )
+            H_prev2 = H_prev1
+            H_prev1 = H_prev
 
             if err_norm is not None:
                 error_norms.append(err_norm)

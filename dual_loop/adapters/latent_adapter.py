@@ -9,6 +9,7 @@ from ..verification import (
 )
 from ..evidential import EvidentialEpistemicGate
 from ..open_concept import OpenConceptSynthesizer
+from ..self_awareness import calculate_active_neurons
 
 class LatentDeliberationAdapter(nn.Module):
     """
@@ -579,6 +580,13 @@ class LatentDeliberationAdapter(nn.Module):
             "adapter_mode": self.adapter_mode,
             "homeostasis": homeostasis_telem,
             "allostasis": allo_telem,
+            "self_awareness": getattr(self.controller, "last_self_awareness_telem", {}),
+            "active_neurons": calculate_active_neurons(
+                d_model=self.d_model,
+                d_inner=self.d_inner,
+                k_steps=steps,
+                num_slots=getattr(self.cwm, "num_slots", 16)
+            ),
             "mdl_telemetry": mdl_telem,
             "functorial_telemetry": functorial_telem,
             "bypassed": False

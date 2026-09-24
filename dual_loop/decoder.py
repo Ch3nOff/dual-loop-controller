@@ -229,6 +229,8 @@ class DualLoopTransformer(nn.Module):
             lambdas_list = []
             error_norms_list = []
             h_prev_primary = None
+            H_prev1 = None
+            H_prev2 = None
             
             for k in range(1, max_k + 1):
                 H_prev = H.clone()
@@ -241,8 +243,13 @@ class DualLoopTransformer(nn.Module):
                     memory=cwm_memory,
                     H_prev=H_prev,
                     h_prev_primary=h_prev_primary,
-                    u_epistemic=vacuity_u
+                    u_epistemic=vacuity_u,
+                    step_idx=k,
+                    max_steps=max_k,
+                    H_prev2=H_prev2
                 )
+                H_prev2 = H_prev1
+                H_prev1 = H_prev
 
                 if err_norm is not None:
                     error_norms_list.append(err_norm)

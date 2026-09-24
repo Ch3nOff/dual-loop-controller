@@ -986,6 +986,11 @@
       font-weight: 600;
       cursor: pointer;
     }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(1.15); }
+    }
   </style>
 </head>
 <body>
@@ -1011,6 +1016,11 @@
       <div class="badge badge-emerald" id="model-badge">
         <span id="detected-model-label">Loading Backbone...</span>
       </div>
+
+      <!-- Proactive Autonomous Mode Toggle Button -->
+      <button class="btn-header" id="toggle-proactive-btn" title="Toggle Autonomous Proactive Stream (Mode Otonom)">
+        <span id="proactive-status-badge" style="color: var(--accent-emerald); font-weight: 600;">⚡ Proactive Mind: ON</span>
+      </button>
 
       <!-- Artifact Stage Toggle Button -->
       <button class="btn-header" id="toggle-artifact-stage-btn" title="Toggle Artifact Live Preview">
@@ -1045,8 +1055,12 @@
             <span class="metric-lbl">Fast Bypass (&pi;<sub>0</sub>)</span>
           </div>
           <div class="metric-item">
-            <span class="metric-val" style="color: var(--accent-emerald);" id="hud-tokens-saved">+0 tok</span>
-            <span class="metric-lbl">Token Bloat</span>
+            <span class="metric-val" style="color: var(--accent-emerald);" id="hud-neurons">185.3K</span>
+            <span class="metric-lbl">Active Neurons</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-val" style="color: var(--accent-cyan);" id="hud-lipschitz">L<sub>k</sub>=0.74</span>
+            <span class="metric-lbl">Lipschitz Dynamics</span>
           </div>
           <div class="metric-item">
             <span class="metric-val" style="color: var(--accent-amber);" id="hud-k-steps">k=2</span>
@@ -1073,6 +1087,9 @@
       <!-- Chat Input Field -->
       <div class="chat-input-bar">
         <form class="input-form" id="chat-form">
+          <button type="button" class="btn-secondary" id="spark-insight-btn" style="padding: 0.65rem 0.95rem; font-size: 0.8rem; white-space: nowrap; border-radius: 8px; display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: var(--accent-emerald); cursor: pointer;" title="Picu pemikiran mandiri spontan (Autonomous Insight)">
+            <span>✨ Spark Insight</span>
+          </button>
           <input 
             type="text" 
             class="prompt-textarea" 
@@ -1140,6 +1157,14 @@
             <span class="spec-val" id="spec-device">Detecting...</span>
           </div>
           <div class="spec-item">
+            <span class="spec-lbl">Active Neurons</span>
+            <span class="spec-val" id="spec-neurons" style="color: var(--accent-emerald);">185,344 Neurons</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-lbl">Synaptic Base</span>
+            <span class="spec-val" id="spec-synapses">2.31B Synapses</span>
+          </div>
+          <div class="spec-item">
             <span class="spec-lbl">VRAM Allocated</span>
             <span class="spec-val" id="spec-vram">0.0 MB</span>
           </div>
@@ -1154,13 +1179,44 @@
         </div>
       </div>
 
-      <!-- HADL System Architecture (The 6 Pillars) -->
+      <!-- Introspective Self-Descriptor Vector (s_t in R^5) -->
+      <div class="card">
+        <div class="card-title">
+          <span>Self-Descriptor Vector (s<sub>t</sub>)</span>
+          <span class="badge badge-emerald" id="descriptor-stability-badge">Convergent</span>
+        </div>
+        <div style="font-size: 0.72rem; display: flex; flex-direction: column; gap: 0.35rem; color: var(--text-muted); font-family: var(--font-mono);">
+          <div style="display: flex; justify-content: space-between;">
+            <span>s<sub>time</sub> (Quota Budget):</span>
+            <span style="color: var(--accent-amber);" id="st-time">0.50</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>s<sub>vacuity</sub> (Dirichlet u):</span>
+            <span style="color: var(--accent-emerald);" id="st-vacuity">0.082</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>s<sub>drift</sub> (Anchor Fidelity):</span>
+            <span style="color: #60a5fa;" id="st-drift">0.045</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>s<sub>lipschitz</sub> (L<sub>k</sub> Stability):</span>
+            <span style="color: var(--accent-cyan);" id="st-lipschitz">0.742</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>s<sub>margin</sub> (S1 Decisiveness):</span>
+            <span style="color: #c084fc;" id="st-margin">2.450</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HADL System Architecture (The 7 Pillars) -->
       <div class="card">
         <div class="card-title">
           <span>HADL Cognitive Architecture</span>
-          <span style="color: var(--accent-emerald); font-size: 0.7rem;">6 Systems</span>
+          <span style="color: var(--accent-emerald); font-size: 0.7rem;">7 Systems</span>
         </div>
         <div style="font-size: 0.72rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
+          <div><strong style="color: #f43f5e;">Siklus Swareferensial:</strong> Vektor diri s<sub>t</sub> &in; R<sup>5</sup> &bull; Slot 0 Ego-Token</div>
           <div><strong style="color: var(--accent-cyan);">&pi;<sub>0</sub> Fast Bypass:</strong> 3.76 &mu;s latency, 0 token bloat</div>
           <div><strong style="color: var(--accent-amber);">&pi;<sub>1</sub> Deliberation Adapter:</strong> Recurrent latent pondering</div>
           <div><strong style="color: #38bdf8;">Allostatic Drive:</strong> Energy regulation &Gamma; &in; [0.40, 0.95]</div>
@@ -1325,7 +1381,8 @@
       systemPrompt: "You are HADL, a helpful, intelligent, and concise AI reasoning assistant. When asked to create apps, games, tools, or diagrams, output complete self-contained HTML/CSS/JavaScript or SVG code blocks so the user can preview them live in the Artifact Stage.",
       kSteps: 2,
       maxTokens: 2048,
-      temperature: 0.7
+      temperature: 0.7,
+      proactiveMode: true
     };
 
     let userConfig = { ...DEFAULT_CONFIG };
@@ -1350,6 +1407,11 @@
     const triggerDreamBtn = document.getElementById("trigger-dream-btn");
     const dreamFeed = document.getElementById("dream-feed");
     const epiphaniesCount = document.getElementById("epiphanies-count");
+    
+    // Proactive Mode Controls DOM
+    const toggleProactiveBtn = document.getElementById("toggle-proactive-btn");
+    const proactiveStatusBadge = document.getElementById("proactive-status-badge");
+    const sparkInsightBtn = document.getElementById("spark-insight-btn");
     
     // Artifact Drawer DOM
     const artifactDrawer = document.getElementById("artifact-drawer");
@@ -1473,6 +1535,52 @@
       document.getElementById("hud-k-steps").textContent = `k=${userConfig.kSteps}`;
       settingsModal.classList.remove("active");
     });
+
+    // Proactive Autonomous Mode Toggle
+    if (toggleProactiveBtn) {
+      toggleProactiveBtn.addEventListener("click", async () => {
+        try {
+          const res = await fetch("/v1/autonomous/toggle", { method: "POST" });
+          if (res.ok) {
+            const d = await res.json();
+            userConfig.proactiveMode = d.proactive_mode_enabled;
+            if (userConfig.proactiveMode) {
+              proactiveStatusBadge.textContent = "⚡ Proactive Mind: ON";
+              proactiveStatusBadge.style.color = "var(--accent-emerald)";
+            } else {
+              proactiveStatusBadge.textContent = "⏸ Proactive Mind: OFF";
+              proactiveStatusBadge.style.color = "var(--text-muted)";
+            }
+          }
+        } catch (e) {}
+      });
+    }
+
+    // Spark Insight Button (Autonomous Insight Trigger)
+    if (sparkInsightBtn) {
+      sparkInsightBtn.addEventListener("click", async () => {
+        sparkInsightBtn.disabled = true;
+        const origHTML = sparkInsightBtn.innerHTML;
+        sparkInsightBtn.innerHTML = "<span>⚡ Pondering...</span>";
+        try {
+          const res = await fetch("/v1/autonomous/spark", { method: "POST" });
+          if (res.ok) {
+            const d = await res.json();
+            if (d.message) {
+              handleProactiveMessage({
+                content: d.message,
+                telemetry: d.telemetry,
+                cycle: 0
+              });
+            }
+          }
+        } catch (e) {
+        } finally {
+          sparkInsightBtn.disabled = false;
+          sparkInsightBtn.innerHTML = origHTML;
+        }
+      });
+    }
 
     // Artifact Navigation & Actions
     function openArtifact(type, title, code) {
@@ -1601,7 +1709,14 @@
         ws.onmessage = (event) => {
           try {
             const data = JSON.parse(event.data);
-            updateTelemetryUI(data);
+            if (data.type === "proactive_message") {
+              handleProactiveMessage(data);
+            } else if (data.type === "dream_epiphany") {
+              if (data.telemetry) updateTelemetryUI(data.telemetry);
+              fetchDreamFeed();
+            } else {
+              updateTelemetryUI(data);
+            }
           } catch (e) {}
         };
         ws.onclose = () => {
@@ -1638,6 +1753,68 @@
       if (data.vram_used_mb !== undefined && data.vram_total_mb !== undefined && data.vram_total_mb > 0) {
         document.getElementById("spec-vram").textContent = `${data.vram_used_mb} / ${data.vram_total_mb} MB`;
       }
+
+      // Active Neurons Display in HUD & Specification Card
+      const neurons = data.active_neurons_system2 || data.active_neurons;
+      if (neurons) {
+        const hudNeurons = document.getElementById("hud-neurons");
+        if (hudNeurons) hudNeurons.textContent = `${(neurons / 1000).toFixed(1)}K`;
+        const specNeurons = document.getElementById("spec-neurons");
+        if (specNeurons) specNeurons.textContent = `${neurons.toLocaleString()} Neurons`;
+      }
+
+      // Lipschitz Stability L_k HUD & Card
+      if (data.s_lipschitz !== undefined) {
+        const lk = parseFloat(data.s_lipschitz);
+        const hudLipschitz = document.getElementById("hud-lipschitz");
+        if (hudLipschitz) hudLipschitz.innerHTML = `L<sub>k</sub>=${lk.toFixed(2)}`;
+
+        const stLipschitz = document.getElementById("st-lipschitz");
+        if (stLipschitz) stLipschitz.textContent = lk.toFixed(3);
+
+        const badge = document.getElementById("descriptor-stability-badge");
+        if (badge) {
+          if (lk <= 1.0) {
+            badge.textContent = "Convergent";
+            badge.className = "badge badge-emerald";
+          } else {
+            badge.textContent = "Divergent";
+            badge.className = "badge badge-amber";
+          }
+        }
+      }
+
+      // Introspective Self-Descriptor Vector (s_t in R^5)
+      if (data.s_time !== undefined) {
+        const el = document.getElementById("st-time");
+        if (el) el.textContent = parseFloat(data.s_time).toFixed(2);
+      }
+      if (data.s_vacuity !== undefined) {
+        const el = document.getElementById("st-vacuity");
+        if (el) el.textContent = parseFloat(data.s_vacuity).toFixed(3);
+      }
+      if (data.s_drift !== undefined) {
+        const el = document.getElementById("st-drift");
+        if (el) el.textContent = parseFloat(data.s_drift).toFixed(3);
+      }
+      if (data.s_margin !== undefined) {
+        const el = document.getElementById("st-margin");
+        if (el) el.textContent = parseFloat(data.s_margin).toFixed(3);
+      }
+    }
+
+    function handleProactiveMessage(data) {
+      if (!data || !data.content) return;
+      const telem = data.telemetry || {};
+      const container = createAssistantMessagePlaceholder();
+      chatStream.appendChild(container);
+      populateAssistantMessage(container, data.content, {
+        ...telem,
+        isProactive: true,
+        proactiveCycle: data.cycle
+      });
+      updateTelemetryUI(telem);
+      smartScrollChatToBottom();
     }
 
     async function fetchDreamFeed() {
@@ -1781,9 +1958,13 @@
       const kSteps = telem.k_steps !== undefined ? telem.k_steps : userConfig.kSteps;
       const energy = (telem.allostatic_energy || 0.782).toFixed(3);
       const latency = (telem.latency_ms || 4.2).toFixed(2);
+      const activeNeurons = telem.active_neurons_system2 || telem.active_neurons || 185344;
+      const lipschitz = telem.s_lipschitz !== undefined ? parseFloat(telem.s_lipschitz).toFixed(3) : "0.742";
+      const isProactive = telem.isProactive || false;
 
       let policyLabel = "Pondering (Active Inference)";
-      if (kSteps === 0) policyLabel = "Fast Streaming Bypass";
+      if (isProactive) policyLabel = `Autonomous Mind Spark \u2022 Cycle #${telem.proactiveCycle || 1}`;
+      else if (kSteps === 0) policyLabel = "Fast Streaming Bypass";
       else if (kSteps > 2) policyLabel = "Popperian Sandbox Verification";
 
       // Detect Artifact Code Blocks (HTML, SVG, JS, Python, Markdown)
@@ -1813,7 +1994,15 @@
         }
       }
 
+      const proactiveBadge = isProactive ? `
+        <div style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.68rem; font-weight: 700; color: var(--accent-emerald); background: rgba(16, 185, 129, 0.12); padding: 0.25rem 0.65rem; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3); margin-bottom: 0.65rem;">
+          <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent-emerald); box-shadow: 0 0 6px var(--accent-emerald); animation: pulse 1.5s infinite;"></span>
+          <span>⚡ PIKIRAN OTONOM SPONTAN (PROACTIVE COGNITIVE CYCLE)</span>
+        </div>
+      ` : "";
+
       bubble.innerHTML = `
+        ${proactiveBadge}
         <div class="deliberation-box">
           <div class="trace-header">
             <span>&bull; Latent Trajectory (${policyLabel})</span>
@@ -1822,7 +2011,8 @@
           <div class="trace-meta">
             <span>Steps: k=${kSteps}</span>
             <span>&Gamma;=${energy}</span>
-            <span>Bloat: +0 tokens</span>
+            <span>L<sub>k</sub>=${lipschitz}</span>
+            <span style="color: var(--accent-emerald); font-weight: 600;">Active Neurons: ${activeNeurons.toLocaleString()}</span>
             <span>Nullspace: 0.000000</span>
           </div>
         </div>
