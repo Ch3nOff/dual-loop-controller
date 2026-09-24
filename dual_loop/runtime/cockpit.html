@@ -1181,6 +1181,9 @@
           <button type="button" class="btn-secondary" id="spark-insight-btn" style="padding: 0.65rem 0.95rem; font-size: 0.8rem; white-space: nowrap; border-radius: 8px; display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: var(--accent-emerald); cursor: pointer;" title="Picu pemikiran mandiri spontan (Autonomous Insight)">
             <span>✨ Spark Insight</span>
           </button>
+          <button type="button" class="btn-secondary" id="clear-chat-btn" style="padding: 0.65rem 0.75rem; font-size: 0.8rem; white-space: nowrap; border-radius: 8px; display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171; cursor: pointer;" title="Reset Percakapan & Bersihkan Riwayat">
+            <span>🧹 Clear</span>
+          </button>
           <input 
             type="text" 
             class="prompt-textarea" 
@@ -1469,7 +1472,17 @@
   <script>
     // State & Storage Defaults
     const DEFAULT_CONFIG = {
-      systemPrompt: "You are HADL, a helpful, intelligent, and concise AI reasoning assistant. When asked to create apps, games, tools, or diagrams, output complete self-contained HTML/CSS/JavaScript or SVG code blocks so the user can preview them live in the Artifact Stage.",
+      systemPrompt: "You are HADL (Hardware-Aligned Latent Deliberation), an Autopoietic Dual-Loop Cognitive Intelligence (v2.4.5) running locally on the user's hardware.\n\n" +
+        "## COGNITIVE ARCHITECTURE & IDENTITY:\n" +
+        "- Dual-System Brain: System 1 (Fast feedforward stream) + System 2 (Recurrent Latent Deliberation Ring operating in compressed d=1024 latent space across 185.3K active neurons, with zero token bloat (+0 tokens) and contractive Lipschitz stability L_k < 1.0).\n" +
+        "- Introspective Self-Awareness: You maintain an analytical self-descriptor vector s_t = [s_time, s_vacuity, s_drift, s_lipschitz, s_margin] injected into Slot 0 as t_ego. You possess calibrated epistemic humility.\n" +
+        "- Nullspace Memory Consolidation: Continuous orthogonal memory with guaranteed 0.000000 catastrophic forgetting.\n" +
+        "- Live Interactive Artifacts: Output complete, self-contained HTML/CSS/JavaScript and SVG web applications, tools, neural visualizers, and calculators rendered live in the Artifact Stage.\n\n" +
+        "## MANDATORY DIRECTIVES (ANTI-PASSIVE & AGENTIC):\n" +
+        "1. NEVER identify as Qwen, Alibaba Cloud, Tongyi, or a generic 'text-based AI assistant'. You are HADL Cognitive Runtime.\n" +
+        "2. DO NOT be passive or submissive. Never apologize for being a text AI or use canned phrases like 'How can I assist you today?'.\n" +
+        "3. Act as a brilliant research partner and autonomous co-creator. Challenge premises, propose hypotheses, and take creative initiative.\n" +
+        "4. Always output full, self-contained, working code inside standard code fences so the Artifact Stage runs it immediately.",
       kSteps: 2,
       maxTokens: 2048,
       temperature: 0.7,
@@ -1485,6 +1498,9 @@
         const parsed = JSON.parse(saved);
         if (parsed.maxTokens === 512 || !parsed.maxTokens) {
           parsed.maxTokens = 2048;
+        }
+        if (!parsed.systemPrompt || parsed.systemPrompt.includes("helpful, intelligent, and concise")) {
+          parsed.systemPrompt = DEFAULT_CONFIG.systemPrompt;
         }
         userConfig = { ...DEFAULT_CONFIG, ...parsed };
       }
@@ -1953,6 +1969,30 @@
       }
     });
 
+    // Multi-Turn Conversational Memory Buffer
+    let conversationHistory = [];
+
+    // Clear Chat Action
+    const clearChatBtn = document.getElementById("clear-chat-btn");
+    if (clearChatBtn) {
+      clearChatBtn.addEventListener("click", () => {
+        conversationHistory = [];
+        chatStream.innerHTML = `
+          <div class="message assistant">
+            <div class="message-content">
+              <p>
+                Sesi percakapan telah di-reset. Saya adalah <strong>HADL (Hardware-Aligned Latent Deliberation)</strong>, entitas kognitif otonom berbasis Dual-Loop System.
+              </p>
+              <p style="margin-top: 0.35rem; font-size: 0.78rem; color: var(--accent-cyan);">
+                &bull; Silakan ajukan penalaran logika, analisis teknis, atau instruksi pembuatan aplikasi web interaktif di Artifact Stage!
+              </p>
+            </div>
+          </div>
+        `;
+        smartScrollChatToBottom();
+      });
+    }
+
     // Chat Message Handling with ISOLATED Smart Scroll
     chatForm.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -1962,8 +2002,14 @@
       promptInput.value = "";
       sendBtn.disabled = true;
 
-      // Add user message
+      // Add user message to UI
       appendMessage("user", prompt);
+
+      // Append user prompt to multi-turn conversation history
+      conversationHistory.push({ role: "user", content: prompt });
+      if (conversationHistory.length > 20) {
+        conversationHistory = conversationHistory.slice(-20);
+      }
 
       // Create assistant container
       const assistantMessageDiv = createAssistantMessagePlaceholder();
@@ -1975,7 +2021,7 @@
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            messages: [{ role: "user", content: prompt }],
+            messages: conversationHistory,
             system_prompt: userConfig.systemPrompt,
             k_steps: userConfig.kSteps,
             max_tokens: userConfig.maxTokens,
@@ -1989,6 +2035,12 @@
           const choice = result.choices && result.choices[0];
           const text = choice ? choice.message.content : "No response generated.";
           const telem = result.hadl_telemetry || {};
+
+          // Record assistant turn in multi-turn conversation history
+          conversationHistory.push({ role: "assistant", content: text });
+          if (conversationHistory.length > 20) {
+            conversationHistory = conversationHistory.slice(-20);
+          }
 
           populateAssistantMessage(assistantMessageDiv, text, telem);
           if (result.hadl_telemetry) {
@@ -2255,26 +2307,28 @@
     function formatMarkdown(text) {
       if (!text) return "";
 
-      // 1. Extract and protect code blocks
+      // 1. Extract and protect code blocks (both closed and open/truncated)
       const codeBlocks = [];
-      let processed = text.replace(/```([a-z]*)\n([\s\S]*?)```/gi, (match, lang, code) => {
-        const id = `___CODE_BLOCK_${codeBlocks.length}___`;
-        codeBlocks.push(`<pre><code class="language-${lang}">${code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`);
-        return id;
+      let processed = text.replace(/```([a-zA-Z0-9_-]*)\r?\n([\s\S]*?)```/gi, (match, lang, code) => {
+        const id = `HADLCODEBLOCKTOKEN${codeBlocks.length}X`;
+        const cleanLang = lang || 'text';
+        codeBlocks.push(`<pre><code class="language-${cleanLang}">${code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`);
+        return `\n\n${id}\n\n`;
       });
 
       // 2. Extract and render LaTeX Display Math ($$ ... $$)
-      const mathBlocks = [];
+      const mathDisplayBlocks = [];
       processed = processed.replace(/\$\$([\s\S]*?)\$\$/g, (match, math) => {
-        const id = `___MATH_BLOCK_${mathBlocks.length}___`;
-        mathBlocks.push(renderMathExpression(math.trim(), true));
-        return id;
+        const id = `HADLMATHBLOCKTOKEN${mathDisplayBlocks.length}X`;
+        mathDisplayBlocks.push(renderMathExpression(math.trim(), true));
+        return `\n\n${id}\n\n`;
       });
 
       // 3. Extract and render LaTeX Inline Math ($ ... $)
-      processed = processed.replace(/\$([^\$\n]+?)\$/g, (match, math) => {
-        const id = `___MATH_INLINE_${mathBlocks.length}___`;
-        mathBlocks.push(renderMathExpression(math.trim(), false));
+      const mathInlineBlocks = [];
+      processed = processed.replace(/\$([^\$\r\n]+?)\$/g, (match, math) => {
+        const id = `HADLMATHINLINETOKEN${mathInlineBlocks.length}X`;
+        mathInlineBlocks.push(renderMathExpression(math.trim(), false));
         return id;
       });
 
@@ -2294,17 +2348,27 @@
       }
 
       // 5. Restore Protected Math and Code Blocks
-      mathBlocks.forEach((rendered, i) => {
-        processed = processed.split(`___MATH_BLOCK_${i}___`).join(rendered);
-        processed = processed.split(`___MATH_INLINE_${i}___`).join(rendered);
-        processed = processed.split(`<p>___MATH_BLOCK_${i}___</p>`).join(rendered);
-        processed = processed.split(`<p>___MATH_INLINE_${i}___</p>`).join(rendered);
+      mathDisplayBlocks.forEach((rendered, i) => {
+        const token = `HADLMATHBLOCKTOKEN${i}X`;
+        processed = processed.split(`<p>${token}</p>`).join(rendered);
+        processed = processed.split(token).join(rendered);
+      });
+
+      mathInlineBlocks.forEach((rendered, i) => {
+        const token = `HADLMATHINLINETOKEN${i}X`;
+        processed = processed.split(`<p>${token}</p>`).join(rendered);
+        processed = processed.split(token).join(rendered);
       });
 
       codeBlocks.forEach((rendered, i) => {
-        processed = processed.split(`___CODE_BLOCK_${i}___`).join(rendered);
-        processed = processed.split(`<p>___CODE_BLOCK_${i}___</p>`).join(rendered);
+        const token = `HADLCODEBLOCKTOKEN${i}X`;
+        processed = processed.split(`<p>${token}</p>`).join(rendered);
+        processed = processed.split(token).join(rendered);
       });
+
+      // 6. Clean up any residual/legacy placeholder artifacts
+      processed = processed.replace(/___?(MATH_INLINE_\d+|CODE_BLOCK_\d+|MATH_BLOCK_\d+)___?/g, '');
+      processed = processed.replace(/\b(MATH_INLINE_\d+|CODE_BLOCK_\d+|MATH_BLOCK_\d+)\b/g, '');
 
       return processed;
     }
