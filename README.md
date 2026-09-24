@@ -293,7 +293,7 @@ synth_sensory, _ = model.recall_sensory_from_text(text_label)
 print("Synthesized internal sensory representation in 1.4 ms without diffusion overhead!")
 ```
 
-![Multimodal Architecture Comparison](multimodal_peer_comparison_benchmark.png)
+![Bidirectional Multimodal Sensory Benchmark](bidirectional_multimodal_benchmark.png)
 
 ---
 
@@ -310,19 +310,23 @@ Launch interactive tools and live streaming dashboards with one click:
   - Mode 2: Web Dashboard inspection.
   - Mode 3: Terminal Benchmark Suite.
   - Mode 4: 3-Pass Memory Loop (Cold Start $\to$ Selective S2 $\to$ Hippocampal Shortcut with 3,146.9x speedup).
+- **Automated Mathematical Benchmark Integrity Validator**:
+  ```bash
+  hadl validate-benchmark eval_results
+  ```
 
 ---
 
-## 🧪 Unit Test Suite (109 / 109 Passed - 100% OK)
+## 🧪 Unit Test Suite (127 / 127 Passed - 100% OK)
 
-All 109 unit tests validate tensor shapes, allostatic energy modulation, bounded confidence, asymmetric overconfidence loss, intrinsic curiosity inverse/forward dynamics, Popperian self-play, and orthogonal nullspace projection:
+All 127 unit tests validate tensor shapes, allostatic energy modulation, bounded confidence, asymmetric overconfidence loss, intrinsic curiosity inverse/forward dynamics, Popperian self-play, orthogonal nullspace projection, multimodal manifold transport, and benchmark mathematical integrity validation:
 
 ```bash
 python -m unittest discover -s tests -p "test_*.py"
 ```
 
 ```text
-Ran 109 tests in 4.794s
+Ran 127 tests in 7.657s
 OK
 ```
 

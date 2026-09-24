@@ -57,6 +57,12 @@ def get_parser() -> argparse.ArgumentParser:
     p_pub.add_argument("--output-dir", type=str, default=None, help="Local staging output directory")
     p_pub.add_argument("--private", action="store_true", help="Create private repository on HF Hub")
 
+    # 7. validate-benchmark
+    p_val = subparsers.add_parser("validate-benchmark", help="Validate benchmark JSON files for mathematical and structural integrity")
+    p_val.add_argument("path", nargs="?", default="eval_results", help="File or directory of benchmark JSON files to validate (default: eval_results)")
+    p_val.add_argument("--quarantine", action="store_true", help="Automatically quarantine failing files")
+    p_val.add_argument("--quarantine-dir", type=str, default="eval_results/archive_deprecated", help="Quarantine directory")
+
     return parser
 
 def cmd_info(args):
@@ -160,6 +166,48 @@ def cmd_publish_hf(args):
     )
     sys.exit(0 if success else 1)
 
+def cmd_validate_benchmark(args):
+    import os
+    import shutil
+    from .validation.benchmark_validator import BenchmarkValidator, _print_result, validate_benchmark_directory
+    validator = BenchmarkValidator()
+    
+    target = args.path
+    if os.path.isfile(target):
+        res = validator.validate_file(target)
+        _print_result(res)
+        if not res.is_valid and args.quarantine:
+            os.makedirs(args.quarantine_dir, exist_ok=True)
+            dest = os.path.join(args.quarantine_dir, os.path.basename(target))
+            shutil.move(target, dest)
+            print(f"\n[QUARANTINED] Moved {target} -> {dest}")
+        sys.exit(0 if res.is_valid else 1)
+    elif os.path.isdir(target):
+        passed, failed = validate_benchmark_directory(
+            target,
+            validator=validator,
+            quarantine_invalid=args.quarantine,
+            quarantine_dir=args.quarantine_dir
+        )
+        print("=" * 80)
+        print(f"  HADL BENCHMARK INTEGRITY AUDIT: {target}")
+        print("=" * 80)
+        print(f"[*] Total Audited Files: {len(passed) + len(failed)}")
+        print(f"[+] PASSED             : {len(passed)}")
+        print(f"[-] FAILED / REJECTED  : {len(failed)}")
+        print("-" * 80)
+        if failed:
+            print("\nFAILURES / ARITHMETIC REJECTIONS:")
+            for f_res in failed:
+                _print_result(f_res)
+            sys.exit(1)
+        else:
+            print("\nALL FILES PASSED MATHEMATICAL INTEGRITY AUDIT.")
+            sys.exit(0)
+    else:
+        print(f"Error: Path '{target}' not found.")
+        sys.exit(1)
+
 def main():
     parser = get_parser()
     if len(sys.argv) == 1:
@@ -179,6 +227,8 @@ def main():
         cmd_test(args)
     elif args.command == "publish-hf":
         cmd_publish_hf(args)
+    elif args.command == "validate-benchmark":
+        cmd_validate_benchmark(args)
     else:
         parser.print_help(sys.stderr)
         sys.exit(1)

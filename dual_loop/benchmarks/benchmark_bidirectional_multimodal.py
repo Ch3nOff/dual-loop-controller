@@ -74,9 +74,11 @@ def run_benchmark_image_to_text(device: torch.device, d_model: int = 1536) -> Di
     accuracies = []
     cosines = []
     margins = []
+    samples_log = []
     
     t0 = time.perf_counter()
     for i in range(num_concepts):
+        t_item = time.perf_counter()
         # Add 20% noise to image patch embeddings
         noisy_img = img_patches[i] + 0.20 * torch.randn_like(img_patches[i])
         
@@ -102,9 +104,19 @@ def run_benchmark_image_to_text(device: torch.device, d_model: int = 1536) -> Di
         margin = target_cos - max_distractor
         
         is_correct = (margin > 0.0)
+        item_ms = (time.perf_counter() - t_item) * 1000.0
         accuracies.append(1.0 if is_correct else 0.0)
         cosines.append(target_cos)
         margins.append(margin)
+        samples_log.append({
+            "sample_id": i + 1,
+            "concept_name": concept_names[i],
+            "target_cosine": target_cos,
+            "max_distractor_cosine": max_distractor,
+            "margin": margin,
+            "is_correct": is_correct,
+            "latency_ms": item_ms
+        })
         
         status = "SUCCESS" if is_correct else "FAIL"
         print(f"    - Photo #{i+1} ('{concept_names[i]}'): Cosine={target_cos:.4f} | Margin={margin:+.4f} -> {status}")
@@ -124,7 +136,8 @@ def run_benchmark_image_to_text(device: torch.device, d_model: int = 1536) -> Di
         "mean_cosine": mean_cos,
         "mean_margin": mean_margin,
         "latency_ms": total_time_ms,
-        "num_concepts": num_concepts
+        "num_concepts": num_concepts,
+        "samples_log": samples_log
     }
 
 
@@ -173,9 +186,11 @@ def run_benchmark_audio_to_text(device: torch.device, d_model: int = 1536) -> Di
     accuracies = []
     cosines = []
     margins = []
+    samples_log = []
     
     t0 = time.perf_counter()
     for i in range(num_classes):
+        t_item = time.perf_counter()
         noisy_audio = audio_frames[i] + 0.20 * torch.randn_like(audio_frames[i])
         prompt_tokens = torch.randn(1, 16, d_model, device=device)
         
@@ -195,9 +210,19 @@ def run_benchmark_audio_to_text(device: torch.device, d_model: int = 1536) -> Di
         margin = target_cos - max_distractor
         
         is_correct = (margin > 0.0)
+        item_ms = (time.perf_counter() - t_item) * 1000.0
         accuracies.append(1.0 if is_correct else 0.0)
         cosines.append(target_cos)
         margins.append(margin)
+        samples_log.append({
+            "sample_id": i + 1,
+            "audio_class": audio_classes[i],
+            "target_cosine": target_cos,
+            "max_distractor_cosine": max_distractor,
+            "margin": margin,
+            "is_correct": is_correct,
+            "latency_ms": item_ms
+        })
         
         status = "SUCCESS" if is_correct else "FAIL"
         print(f"    - Audio #{i+1} ('{audio_classes[i]}'): Cosine={target_cos:.4f} | Margin={margin:+.4f} -> {status}")
@@ -217,7 +242,8 @@ def run_benchmark_audio_to_text(device: torch.device, d_model: int = 1536) -> Di
         "mean_cosine": mean_cos,
         "mean_margin": mean_margin,
         "latency_ms": total_time_ms,
-        "num_classes": num_classes
+        "num_classes": num_classes,
+        "samples_log": samples_log
     }
 
 
@@ -262,9 +288,11 @@ def run_benchmark_text_to_photo(device: torch.device, d_model: int = 1536) -> Di
     accuracies = []
     cosines = []
     margins = []
+    samples_log = []
     
     t0 = time.perf_counter()
     for i in range(num_concepts):
+        t_item = time.perf_counter()
         # Recall sensory visual representation from text concept
         with torch.no_grad():
             synth_visual, telem = adapter.recall_sensory_from_text(txt_prompts[i])
@@ -278,9 +306,19 @@ def run_benchmark_text_to_photo(device: torch.device, d_model: int = 1536) -> Di
         margin = target_cos - max_distractor
         
         is_correct = (margin > 0.0)
+        item_ms = (time.perf_counter() - t_item) * 1000.0
         accuracies.append(1.0 if is_correct else 0.0)
         cosines.append(target_cos)
         margins.append(margin)
+        samples_log.append({
+            "sample_id": i + 1,
+            "concept_name": concept_names[i],
+            "target_cosine": target_cos,
+            "max_distractor_cosine": max_distractor,
+            "margin": margin,
+            "is_correct": is_correct,
+            "latency_ms": item_ms
+        })
         
         status = "SUCCESS" if is_correct else "FAIL"
         print(f"    - Text Prompt #{i+1} ('{concept_names[i]}'): Cosine={target_cos:.4f} | Margin={margin:+.4f} -> {status}")
@@ -299,7 +337,9 @@ def run_benchmark_text_to_photo(device: torch.device, d_model: int = 1536) -> Di
         "accuracy_pct": mean_acc,
         "mean_cosine": mean_cos,
         "mean_margin": mean_margin,
-        "latency_ms": total_time_ms
+        "latency_ms": total_time_ms,
+        "num_concepts": num_concepts,
+        "samples_log": samples_log
     }
 
 
@@ -344,9 +384,11 @@ def run_benchmark_text_to_audio(device: torch.device, d_model: int = 1536) -> Di
     accuracies = []
     cosines = []
     margins = []
+    samples_log = []
     
     t0 = time.perf_counter()
     for i in range(num_concepts):
+        t_item = time.perf_counter()
         with torch.no_grad():
             synth_audio, telem = adapter.recall_sensory_from_text(txt_prompts[i])
             
@@ -358,9 +400,19 @@ def run_benchmark_text_to_audio(device: torch.device, d_model: int = 1536) -> Di
         margin = target_cos - max_distractor
         
         is_correct = (margin > 0.0)
+        item_ms = (time.perf_counter() - t_item) * 1000.0
         accuracies.append(1.0 if is_correct else 0.0)
         cosines.append(target_cos)
         margins.append(margin)
+        samples_log.append({
+            "sample_id": i + 1,
+            "audio_name": audio_names[i],
+            "target_cosine": target_cos,
+            "max_distractor_cosine": max_distractor,
+            "margin": margin,
+            "is_correct": is_correct,
+            "latency_ms": item_ms
+        })
         
         status = "SUCCESS" if is_correct else "FAIL"
         print(f"    - Text Prompt #{i+1} ('{audio_names[i]}'): Cosine={target_cos:.4f} | Margin={margin:+.4f} -> {status}")
@@ -379,7 +431,9 @@ def run_benchmark_text_to_audio(device: torch.device, d_model: int = 1536) -> Di
         "accuracy_pct": mean_acc,
         "mean_cosine": mean_cos,
         "mean_margin": mean_margin,
-        "latency_ms": total_time_ms
+        "latency_ms": total_time_ms,
+        "num_concepts": num_concepts,
+        "samples_log": samples_log
     }
 
 
@@ -555,6 +609,7 @@ def main():
     print("  HADL BIDIRECTIONAL MULTIMODAL TRANSLATION BENCHMARK SUITE")
     print("="*80)
     
+    t_start = time.perf_counter()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Device: {device}")
     if device.type == "cuda":
@@ -566,8 +621,21 @@ def main():
     bench3 = run_benchmark_text_to_photo(device)
     bench4 = run_benchmark_text_to_audio(device)
     bench5 = run_benchmark_e2e_qwen_bidirectional(device)
+    elapsed_total = time.perf_counter() - t_start
+    
+    all_samples = (
+        bench1.get("samples_log", []) +
+        bench2.get("samples_log", []) +
+        bench3.get("samples_log", []) +
+        bench4.get("samples_log", [])
+    )
     
     results = {
+        "benchmark_name": "bidirectional_multimodal_translation_suite",
+        "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "elapsed_seconds": elapsed_total,
+        "total_samples": len(all_samples),
+        "samples_log": all_samples,
         "photo_to_text": bench1,
         "audio_to_text": bench2,
         "text_to_photo": bench3,
@@ -575,12 +643,21 @@ def main():
         "e2e_qwen": bench5
     }
     
+    # Save to artifacts/
     out_dir = "artifacts"
     os.makedirs(out_dir, exist_ok=True)
     out_json = os.path.join(out_dir, "bidirectional_multimodal_benchmark_results.json")
     with open(out_json, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\n[OK] Results serialized to {out_json}")
+    
+    # Also save to eval_results/
+    eval_dir = "eval_results"
+    os.makedirs(eval_dir, exist_ok=True)
+    eval_json = os.path.join(eval_dir, "bidirectional_multimodal_benchmark_results.json")
+    with open(eval_json, "w") as f:
+        json.dump(results, f, indent=2)
+    print(f"[OK] Authoritative log mirrored to {eval_json}")
     
     artifact_dir = r"C:\Users\Matthew Chen\.gemini\antigravity\brain\19bea55e-42a6-476a-af5b-9c25391e2be9"
     os.makedirs(artifact_dir, exist_ok=True)
