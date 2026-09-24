@@ -193,6 +193,11 @@ class DualLoopQwenModel(nn.Module):
         if not isinstance(hidden_states, torch.Tensor):
             return output
 
+        # Autoregressive decoding bypass: when generating token-by-token (seq_len == 1) during eval,
+        # bypass deliberation so tokens are emitted cleanly from the deliberated KV-cache.
+        if hidden_states.size(1) == 1 and not self.adapter.training:
+            return output
+
         # Automatically match adapter device and dtype to intercepted hidden states
         try:
             adapter_param = next(self.adapter.parameters())
@@ -558,6 +563,8 @@ class DualLoopQwenModel(nn.Module):
     def generate(self, *args, **kwargs):
         """Autoregressive generation with Dual-Loop latent deliberation enabled."""
         self.last_telemetry = {}
+        if not isinstance(self.query_idx, int):
+            self.query_idx = -1
         self._current_attention_mask = kwargs.get("attention_mask", None)
         if "candidate_embeds" in kwargs:
             self._current_candidate_embeds = kwargs.pop("candidate_embeds")

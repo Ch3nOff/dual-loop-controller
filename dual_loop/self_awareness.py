@@ -54,58 +54,66 @@ class IntrospectiveSelfDescriptor(nn.Module):
         device = h_k.device
         dtype = h_k.dtype
 
-        # 1. s_time: computational progress relative to quota
-        time_ratio = float(min(max(k, 0), k_max)) / float(max(k_max, 1))
-        s_time = torch.full((B, 1), time_ratio, device=device, dtype=dtype)
+        with torch.no_grad():
+            h_k_d = h_k.detach()
+            h_anchor_d = h_anchor.detach()
+            H_k_d = H_k.detach()
+            H_prev1_d = H_prev1.detach() if H_prev1 is not None else None
+            H_prev2_d = H_prev2.detach() if H_prev2 is not None else None
 
-        # 2. s_vacuity: Dirichlet epistemic uncertainty
-        if u_vacuity is not None:
-            vac = u_vacuity.to(device=device, dtype=dtype).reshape(B, 1)
-            s_vacuity = torch.clamp(vac, 0.0, 1.0)
-        else:
-            s_vacuity = torch.full((B, 1), 0.15, device=device, dtype=dtype)
+            # 1. s_time: computational progress relative to quota
+            time_ratio = float(min(max(k, 0), k_max)) / float(max(k_max, 1))
+            s_time = torch.full((B, 1), time_ratio, device=device, dtype=dtype)
 
-        # 3. s_drift: query identity integrity
-        diff_h = torch.norm(h_k - h_anchor, p=2, dim=-1, keepdim=True) # [B, 1]
-        norm_anchor = torch.norm(h_anchor, p=2, dim=-1, keepdim=True) # [B, 1]
-        s_drift = diff_h / (norm_anchor + self.eps)
+            # 2. s_vacuity: Dirichlet epistemic uncertainty
+            if u_vacuity is not None:
+                vac = u_vacuity.to(device=device, dtype=dtype).reshape(B, 1).detach()
+                s_vacuity = torch.clamp(vac, 0.0, 1.0)
+            else:
+                s_vacuity = torch.full((B, 1), 0.15, device=device, dtype=dtype)
 
-        # 4. s_lipschitz: local Lipschitz stability ratio
-        if H_prev1 is not None and H_prev2 is not None:
-            # Frobenius norm per batch item
-            delta_1 = torch.norm(H_k - H_prev1, p="fro", dim=(-2, -1)).reshape(B, 1)
-            delta_2 = torch.norm(H_prev1 - H_prev2, p="fro", dim=(-2, -1)).reshape(B, 1)
-            s_lipschitz = delta_1 / (delta_2 + self.eps)
-        elif H_prev1 is not None:
-            delta_1 = torch.norm(H_k - H_prev1, p="fro", dim=(-2, -1)).reshape(B, 1)
-            norm_prev = torch.norm(H_prev1, p="fro", dim=(-2, -1)).reshape(B, 1)
-            s_lipschitz = delta_1 / (0.5 * norm_prev + self.eps)
-        else:
-            # Initial step baseline
-            s_lipschitz = torch.full((B, 1), 0.75, device=device, dtype=dtype)
-        s_lipschitz = s_lipschitz.reshape(B, 1)
+            # 3. s_drift: query identity integrity
+            diff_h = torch.norm(h_k_d - h_anchor_d, p=2, dim=-1, keepdim=True) # [B, 1]
+            norm_anchor = torch.norm(h_anchor_d, p=2, dim=-1, keepdim=True) # [B, 1]
+            s_drift = diff_h / (norm_anchor + self.eps)
 
-        # 5. s_margin: System 1 probabilistic certainty
-        if logits is not None and logits.size(-1) > 1:
-            top2_vals, _ = torch.topk(logits, k=2, dim=-1)
-            margin = (top2_vals[:, 0] - top2_vals[:, 1]).unsqueeze(1)
-            s_margin = torch.clamp(margin, min=-10.0, max=10.0)
-        else:
-            # Cosine similarity margin against anchor
-            cos_sim = F.cosine_similarity(h_k, h_anchor, dim=-1).unsqueeze(1)
-            s_margin = cos_sim * 2.5 # Proxy margin in reasonable range
+            # 4. s_lipschitz: local Lipschitz stability ratio
+            if H_prev1_d is not None and H_prev2_d is not None:
+                # Frobenius norm per batch item
+                delta_1 = torch.norm(H_k_d - H_prev1_d, p="fro", dim=(-2, -1)).reshape(B, 1)
+                delta_2 = torch.norm(H_prev1_d - H_prev2_d, p="fro", dim=(-2, -1)).reshape(B, 1)
+                s_lipschitz = delta_1 / (delta_2 + self.eps)
+            elif H_prev1_d is not None:
+                delta_1 = torch.norm(H_k_d - H_prev1_d, p="fro", dim=(-2, -1)).reshape(B, 1)
+                norm_prev = torch.norm(H_prev1_d, p="fro", dim=(-2, -1)).reshape(B, 1)
+                s_lipschitz = delta_1 / (0.5 * norm_prev + self.eps)
+            else:
+                # Initial step baseline
+                s_lipschitz = torch.full((B, 1), 0.75, device=device, dtype=dtype)
+            s_lipschitz = s_lipschitz.reshape(B, 1)
 
-        # Assemble s_t in R^(B x 5)
-        s_t = torch.cat([s_time, s_vacuity, s_drift, s_lipschitz, s_margin], dim=-1) # [B, 5]
+            # 5. s_margin: System 1 probabilistic certainty
+            if logits is not None and logits.size(-1) > 1:
+                top2_vals, _ = torch.topk(logits.detach(), k=2, dim=-1)
+                margin = (top2_vals[:, 0] - top2_vals[:, 1]).unsqueeze(1)
+                s_margin = torch.clamp(margin, min=-10.0, max=10.0)
+            else:
+                # Cosine similarity margin against anchor
+                cos_sim = F.cosine_similarity(h_k_d, h_anchor_d, dim=-1).unsqueeze(1)
+                s_margin = cos_sim * 2.5 # Proxy margin in reasonable range
 
-        metrics = {
-            "s_time": float(s_time.mean().item()),
-            "s_vacuity": float(s_vacuity.mean().item()),
-            "s_drift": float(s_drift.mean().item()),
-            "s_lipschitz": float(s_lipschitz.mean().item()),
-            "s_margin": float(s_margin.mean().item()),
-            "is_divergent": bool(float(s_lipschitz.mean().item()) > 1.0)
-        }
+            # Assemble s_t in R^(B x 5)
+            s_t = torch.cat([s_time, s_vacuity, s_drift, s_lipschitz, s_margin], dim=-1) # [B, 5]
+            s_t = torch.nan_to_num(s_t, nan=0.0, posinf=1.0, neginf=-1.0)
+
+            metrics = {
+                "s_time": float(s_time.mean().item()),
+                "s_vacuity": float(s_vacuity.mean().item()),
+                "s_drift": float(s_drift.mean().item()),
+                "s_lipschitz": float(s_lipschitz.mean().item()),
+                "s_margin": float(s_margin.mean().item()),
+                "is_divergent": bool(float(s_lipschitz.mean().item()) > 1.0)
+            }
 
         return s_t, metrics
 

@@ -345,9 +345,13 @@ class LatentDeliberationAdapter(nn.Module):
             else:
                 raise TypeError(f"query_idx must be int, torch.Tensor, or List[int], got {type(query_idx)}")
             
-            # Normalize negative indices & clamp
-            idx_tensor = torch.where(idx_tensor < 0, S + idx_tensor, idx_tensor)
-            idx_tensor = torch.clamp(idx_tensor, 0, S - 1)
+            # If batch size doesn't match idx_tensor length, fallback gracefully to last token (-1)
+            if idx_tensor.size(0) != B:
+                idx_tensor = torch.full((B,), S - 1, device=hidden_states.device, dtype=torch.long)
+            else:
+                # Normalize negative indices & clamp
+                idx_tensor = torch.where(idx_tensor < 0, S + idx_tensor, idx_tensor)
+                idx_tensor = torch.clamp(idx_tensor, 0, S - 1)
             batch_idx = torch.arange(B, device=hidden_states.device)
             query_rep = hidden_states[batch_idx, idx_tensor, :] # [B, D]
             is_scalar_idx = False

@@ -38,9 +38,11 @@ class AllostaticEnergyModulator(nn.Module):
         self.energy_bias = nn.Parameter(torch.tensor([float(init_bias)], dtype=torch.float32))
 
     def _safe_logit(self, p: torch.Tensor) -> torch.Tensor:
-        """Numerically stable logit transformation clamped to prevent inf."""
-        p_clamped = torch.clamp(p, min=self.eps, max=1.0 - self.eps)
-        return torch.log(p_clamped) - torch.log1p(-p_clamped)
+        """Numerically stable logit transformation clamped to prevent inf in fp16/bf16."""
+        p_f32 = p.float()
+        logit_f32 = torch.logit(p_f32, eps=1e-3)
+        logit_clamped = torch.clamp(logit_f32, min=-6.0, max=6.0)
+        return logit_clamped.to(dtype=p.dtype)
 
     def forward(
         self,

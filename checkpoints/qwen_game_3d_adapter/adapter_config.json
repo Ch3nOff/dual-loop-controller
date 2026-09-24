@@ -1,0 +1,12 @@
+{
+  "architecture": "HADL-Dual-Loop-v2.4.0",
+  "domain": "3D_Game_Engine_and_Spatial_Mathematics",
+  "base_model": "Qwen/Qwen3.5-2B",
+  "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+  "layer_idx": 11,
+  "k_steps": 2,
+  "d_model": 2048,
+  "best_val_loss": 0.6075,
+  "total_epochs": 10,
+  "hardware": "NVIDIA GeForce RTX 5060 Laptop GPU"
+}
