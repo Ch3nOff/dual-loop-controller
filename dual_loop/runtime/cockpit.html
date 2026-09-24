@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HADL Cognitive Runtime Cockpit | Autopoietic Dual-Loop Engine</title>
+  <!-- Marked.js for Markdown parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+  <!-- KaTeX for high-fidelity LaTeX math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
   <style>
     :root {
       --bg-canvas: #060913;
@@ -404,6 +409,92 @@
       font-family: var(--font-mono);
       font-size: 0.8rem;
       color: #38bdf8;
+    }
+
+    /* Response Body & Markdown Typography */
+    .response-body {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--text-main);
+      overflow-wrap: break-word;
+    }
+
+    .response-body h1, .response-body h2, .response-body h3, .response-body h4 {
+      margin: 0.8rem 0 0.4rem;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .response-body h1 { font-size: 1.15rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.3rem; }
+    .response-body h2 { font-size: 1.05rem; }
+    .response-body h3 { font-size: 0.95rem; color: var(--accent-cyan); }
+    .response-body h4 { font-size: 0.88rem; color: var(--accent-emerald); }
+
+    .response-body p {
+      margin-bottom: 0.6rem;
+    }
+
+    .response-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .response-body ul, .response-body ol {
+      margin: 0.4rem 0 0.6rem 1.4rem;
+    }
+
+    .response-body li {
+      margin-bottom: 0.25rem;
+    }
+
+    .response-body blockquote {
+      border-left: 3px solid var(--accent-cyan);
+      padding: 0.4rem 0.8rem;
+      background: rgba(56, 189, 248, 0.08);
+      border-radius: 0 6px 6px 0;
+      margin: 0.6rem 0;
+      color: #bae6fd;
+      font-style: italic;
+    }
+
+    .response-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.6rem 0;
+      font-size: 0.82rem;
+    }
+
+    .response-body th, .response-body td {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.4rem 0.6rem;
+      text-align: left;
+    }
+
+    .response-body th {
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--accent-cyan);
+    }
+
+    .response-body hr {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      margin: 0.8rem 0;
+    }
+
+    /* Math Formula Typography */
+    .math-inline, .katex {
+      color: #93c5fd;
+      font-weight: 500;
+    }
+
+    .math-display {
+      display: block;
+      margin: 0.6rem 0;
+      padding: 0.5rem;
+      text-align: center;
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 6px;
+      overflow-x: auto;
+      color: #93c5fd;
     }
 
     /* Chat Input Bar */
@@ -2095,23 +2186,127 @@
       return null;
     }
 
-    function formatMarkdown(text) {
+    function renderMathExpression(expr, isDisplay = false) {
+      if (typeof katex !== "undefined") {
+        try {
+          return katex.renderToString(expr, {
+            throwOnError: false,
+            displayMode: isDisplay
+          });
+        } catch (e) {}
+      }
+      // Resilient fallback formatting for LaTeX when offline or before KaTeX loads
+      let fallback = expr
+        .replace(/\\mathbb\{R\}/g, "&#x211D;")
+        .replace(/\\Gamma/g, "&Gamma;")
+        .replace(/\\pi/g, "&pi;")
+        .replace(/\\epsilon/g, "&epsilon;")
+        .replace(/\\beta/g, "&beta;")
+        .replace(/\\gamma/g, "&gamma;")
+        .replace(/\\lambda/g, "&lambda;")
+        .replace(/\\cdot/g, "&bull;")
+        .replace(/\\times/g, "&times;")
+        .replace(/\\le/g, "&le;")
+        .replace(/\\ge/g, "&ge;")
+        .replace(/\\in/g, "&isin;")
+        .replace(/\\to/g, "&rarr;")
+        .replace(/\\text\{([^}]+)\}/g, "$1")
+        .replace(/_\{([^}]+)\}/g, "<sub>$1</sub>")
+        .replace(/_([a-zA-Z0-9])/g, "<sub>$1</sub>")
+        .replace(/\^\{([^}]+)\}/g, "<sup>$1</sup>")
+        .replace(/\^([0-9a-zA-Z])/g, "<sup>$1</sup>");
+      
+      if (isDisplay) {
+        return `<div class="math-display"><code>${fallback}</code></div>`;
+      }
+      return `<span class="math-inline"><code>${fallback}</code></span>`;
+    }
+
+    function fallbackMarkdownParse(text) {
       let formatted = text
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
-      
-      // Code blocks (closed)
-      formatted = formatted.replace(/```([a-z]*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
-      // Code blocks (unclosed at end of message)
-      formatted = formatted.replace(/```([a-z]*)\n([\s\S]+)$/g, '<pre><code>$2</code></pre>');
+
+      // Headers
+      formatted = formatted.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+      formatted = formatted.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+      formatted = formatted.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+      // Bold & Italic
+      formatted = formatted.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      formatted = formatted.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
       // Inline code
       formatted = formatted.replace(/`([^`]+)`/g, '<code style="color: var(--accent-cyan);">$1</code>');
-      // Bold
-      formatted = formatted.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+      // Blockquote
+      formatted = formatted.replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>');
+
+      // Bullet lists
+      formatted = formatted.replace(/^\s*[\-\*]\s+(.*$)/gim, '<li>$1</li>');
+      formatted = formatted.replace(/(<li>[\s\S]*?<\/li>)/gi, '<ul>$1</ul>');
+
       // Newlines to <br>
       formatted = formatted.replace(/\n/g, '<br>');
       return formatted;
+    }
+
+    function formatMarkdown(text) {
+      if (!text) return "";
+
+      // 1. Extract and protect code blocks
+      const codeBlocks = [];
+      let processed = text.replace(/```([a-z]*)\n([\s\S]*?)```/gi, (match, lang, code) => {
+        const id = `___CODE_BLOCK_${codeBlocks.length}___`;
+        codeBlocks.push(`<pre><code class="language-${lang}">${code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`);
+        return id;
+      });
+
+      // 2. Extract and render LaTeX Display Math ($$ ... $$)
+      const mathBlocks = [];
+      processed = processed.replace(/\$\$([\s\S]*?)\$\$/g, (match, math) => {
+        const id = `___MATH_BLOCK_${mathBlocks.length}___`;
+        mathBlocks.push(renderMathExpression(math.trim(), true));
+        return id;
+      });
+
+      // 3. Extract and render LaTeX Inline Math ($ ... $)
+      processed = processed.replace(/\$([^\$\n]+?)\$/g, (match, math) => {
+        const id = `___MATH_INLINE_${mathBlocks.length}___`;
+        mathBlocks.push(renderMathExpression(math.trim(), false));
+        return id;
+      });
+
+      // 4. If marked.js is available, parse markdown with marked
+      if (typeof marked !== "undefined" && typeof marked.parse === "function") {
+        try {
+          marked.setOptions({
+            gfm: true,
+            breaks: true
+          });
+          processed = marked.parse(processed);
+        } catch (e) {
+          processed = fallbackMarkdownParse(processed);
+        }
+      } else {
+        processed = fallbackMarkdownParse(processed);
+      }
+
+      // 5. Restore Protected Math and Code Blocks
+      mathBlocks.forEach((rendered, i) => {
+        processed = processed.split(`___MATH_BLOCK_${i}___`).join(rendered);
+        processed = processed.split(`___MATH_INLINE_${i}___`).join(rendered);
+        processed = processed.split(`<p>___MATH_BLOCK_${i}___</p>`).join(rendered);
+        processed = processed.split(`<p>___MATH_INLINE_${i}___</p>`).join(rendered);
+      });
+
+      codeBlocks.forEach((rendered, i) => {
+        processed = processed.split(`___CODE_BLOCK_${i}___`).join(rendered);
+        processed = processed.split(`<p>___CODE_BLOCK_${i}___</p>`).join(rendered);
+      });
+
+      return processed;
     }
 
     window.addEventListener("DOMContentLoaded", initCockpit);

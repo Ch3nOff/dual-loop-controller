@@ -1,0 +1,322 @@
+{
+  "timestamp": "2026-09-24 09:22:18",
+  "model_id": "Qwen/Qwen3.5-2B",
+  "total_benchmarks": 20,
+  "total_samples": 200,
+  "macro_summary": {
+    "regime1_dasar_acc": 56.00000000000001,
+    "regime2_test1_acc": 56.49999999999999,
+    "regime3_belajar_test_acc": 82.0,
+    "delta_test1_vs_dasar": 0.4999999999999858,
+    "delta_belajar_vs_dasar": 25.999999999999993,
+    "total_rescued_test1": 1,
+    "total_rescued_belajar": 52
+  },
+  "category_summary": {
+    "Science & Facts": {
+      "dasar_acc": 53.3,
+      "test1_acc": 63.3,
+      "belajar_acc": 80.0,
+      "samples": 30
+    },
+    "Physical & Commonsense": {
+      "dasar_acc": 60.0,
+      "test1_acc": 60.0,
+      "belajar_acc": 100.0,
+      "samples": 20
+    },
+    "Multi-Step Deductive Logic": {
+      "dasar_acc": 50.0,
+      "test1_acc": 50.0,
+      "belajar_acc": 76.2,
+      "samples": 80
+    },
+    "Formal Logic": {
+      "dasar_acc": 80.0,
+      "test1_acc": 80.0,
+      "belajar_acc": 100.0,
+      "samples": 20
+    },
+    "Spatial & Symbolic": {
+      "dasar_acc": 53.3,
+      "test1_acc": 46.7,
+      "belajar_acc": 66.7,
+      "samples": 30
+    },
+    "Linguistic & Structural": {
+      "dasar_acc": 80.0,
+      "test1_acc": 80.0,
+      "belajar_acc": 100.0,
+      "samples": 10
+    },
+    "Counterfactual Simulation": {
+      "dasar_acc": 40.0,
+      "test1_acc": 40.0,
+      "belajar_acc": 90.0,
+      "samples": 10
+    }
+  },
+  "benchmarks": {
+    "ARC-Easy": {
+      "category": "Science & Facts",
+      "domain": "Elementary Science QA",
+      "samples": 10,
+      "regime1_dasar_correct": 8,
+      "regime1_dasar_acc": 80.0,
+      "regime2_test1_correct": 9,
+      "regime2_test1_acc": 90.0,
+      "regime3_belajar_test_correct": 10,
+      "regime3_belajar_test_acc": 100.0,
+      "delta_test1_vs_dasar": 10.0,
+      "delta_belajar_vs_dasar": 20.0
+    },
+    "ARC-Challenge": {
+      "category": "Science & Facts",
+      "domain": "Complex Science Reasoning",
+      "samples": 10,
+      "regime1_dasar_correct": 5,
+      "regime1_dasar_acc": 50.0,
+      "regime2_test1_correct": 7,
+      "regime2_test1_acc": 70.0,
+      "regime3_belajar_test_correct": 8,
+      "regime3_belajar_test_acc": 80.0,
+      "delta_test1_vs_dasar": 20.0,
+      "delta_belajar_vs_dasar": 30.0
+    },
+    "OpenBookQA": {
+      "category": "Science & Facts",
+      "domain": "Multi-Hop Fact Chaining",
+      "samples": 10,
+      "regime1_dasar_correct": 3,
+      "regime1_dasar_acc": 30.0,
+      "regime2_test1_correct": 3,
+      "regime2_test1_acc": 30.0,
+      "regime3_belajar_test_correct": 6,
+      "regime3_belajar_test_acc": 60.0,
+      "delta_test1_vs_dasar": 0.0,
+      "delta_belajar_vs_dasar": 30.0
+    },
+    "PIQA": {
+      "category": "Physical & Commonsense",
+      "domain": "Physical Dynamics Intuition",
+      "samples": 10,
+      "regime1_dasar_correct": 8,
+      "regime1_dasar_acc": 80.0,
+      "regime2_test1_correct": 8,
+      "regime2_test1_acc": 80.0,
+      "regime3_belajar_test_correct": 10,
+      "regime3_belajar_test_acc": 100.0,
+      "delta_test1_vs_dasar": 0.0,
+      "delta_belajar_vs_dasar": 20.0
+    },
+    "BBH-LogicalDeduction": {
+      "category": "Multi-Step Deductive Logic",
+      "domain": "Transitive Relational Ordering",
+      "samples": 10,
+      "regime1_dasar_correct": 9,
+      "regime1_dasar_acc": 90.0,
+      "regime2_test1_correct": 9,
+      "regime2_test1_acc": 90.0,
+      "regime3_belajar_test_correct": 10,
+      "regime3_belajar_test_acc": 100.0,
+      "delta_test1_vs_dasar": 0.0,
+      "delta_belajar_vs_dasar": 10.0
+    },
+    "BBH-DateUnderstanding": {
+      "category": "Multi-Step Deductive Logic",
+      "domain": "Calendar Temporal Deduction",
+      "samples": 10,
+      "regime1_dasar_correct": 4,
+      "regime1_dasar_acc": 40.0,
+      "regime2_test1_correct": 4,
+      "regime2_test1_acc": 40.0,
+      "regime3_belajar_test_correct": 7,
+      "regime3_belajar_test_acc": 70.0,
+      "delta_test1_vs_dasar": 0.0,
+      "delta_belajar_vs_dasar": 30.0
+    },
+    "BBH-TrackingShuffledObjects": {
+      "category": "Multi-Step Deductive Logic",
+      "domain": "State Permutation Tracking",
+      "samples": 10,
+      "regime1_dasar_correct": 5,
+      "regime1_dasar_acc": 50.0,
+      "regime2_test1_correct": 5,
+      "regime2_test1_acc": 50.0,
+      "regime3_belajar_test_correct": 9,
+      "regime3_belajar_test_acc": 90.0,
+      "delta_test1_vs_dasar": 0.0,
+      "delta_belajar_vs_dasar": 40.0
+    },
+    "BBH-BooleanExpressions": {
+      "category": "Multi-Step Deductive Logic",
+      "domain": "Boolean Circuit Evaluation",
+      "samples": 10,
+      "regime1_dasar_correct": 8,
+      "regime1_dasar_acc": 80.0,
+      "regime2_test1_correct": 9,
+      "regime2_test1_acc": 90.0,
+      "regime3_belajar_test_correct": 10,
+      "regime3_belajar_test_acc": 100.0,
+      "delta_test1_vs_dasar": 10.0,
+      "delta_belajar_vs_dasar": 20.0
+    },
+    "BBH-CausalJudgement": {
+      "category": "Physical & Commonsense",
+      "domain": "Causal Disambiguation",
+      "samples": 10,
+      "regime1_dasar_correct": 4,
+      "regime1_dasar_acc": 40.0,
+      "regime2_test1_correct": 4,
+      "regime2_test1_acc": 40.0,
+      "regime3_belajar_test_correct": 10,
+      "regime3_belajar_test_acc": 100.0,
+      "delta_test1_vs_dasar": 0.0,
+      "delta_belajar_vs_dasar": 60.0
+    },
+    "BBH-FormalFallacies": {
+      "category": "Formal Logic",
+      "domain": "Syllogistic Fallacy Detection",
+      "samples": 10,
+      "regime1_dasar_correct": 6,
+      "regime1_dasar_acc": 60.0,
+      "regime2_test1_correct": 6,
+      "regime2_test1_acc": 60.0,
+      "regime3_belajar_test_correct": 10,
+      "regime3_belajar_test_acc": 100.0,
+      "delta_test1_vs_dasar": 0.0,
+      "delta_belajar_vs_dasar": 40.0
+    },
+    "BBH-GeometricShapes": {
+      "category": "Spatial & Symbolic",
+      "domain": "Geometric SVG Representation",
+      "samples": 10,
+      "regime1_dasar_correct": 4,
+      "regime1_dasar_acc": 40.0,
+      "regime2_test1_correct": 4,
+      "regime2_test1_acc": 40.0,
+      "regime3_belajar_test_correct": 5,
+      "regime3_belajar_test_acc": 50.0,
+      "delta_test1_vs_dasar": 0.0,
+      "delta_belajar_vs_dasar": 10.0
+    },
+    "BBH-Hyperbaton": {
+      "category": "Linguistic & Structural",
+      "domain": "Adjective Ordering Constraint",
+      "samples": 10,
+      "regime1_dasar_correct": 8,
+      "regime1_dasar_acc": 80.0,
+      "regime2_test1_correct": 8,
+      "regime2_test1_acc": 80.0,
+      "regime3_belajar_test_correct": 10,
+      "regime3_belajar_test_acc": 100.0,
+      "delta_test1_vs_dasar": 0.0,
+      "delta_belajar_vs_dasar": 20.0
+    },
+    "BBH-Navigate": {
+      "category": "Spatial & Symbolic",
+      "domain": "Spatial Trajectory Simulation",
+      "samples": 10,
+      "regime1_dasar_correct": 6,
+      "regime1_dasar_acc": 60.0,
+      "regime2_test1_correct": 6,
+      "regime2_test1_acc": 60.0,
+      "regime3_belajar_test_correct": 10,
+      "regime3_belajar_test_acc": 100.0,
+      "delta_test1_vs_dasar": 0.0,
+      "delta_belajar_vs_dasar": 40.0
+    },
+    "BBH-ColoredObjects": {
+      "category": "Multi-Step Deductive Logic",
+      "domain": "Multi-Attribute Set Intersection",
+      "samples": 10,
+      "regime1_dasar_correct": 7,
+      "regime1_dasar_acc": 70.0,
+      "regime2_test1_correct": 7,
+      "regime2_test1_acc": 70.0,
+      "regime3_belajar_test_correct": 9,
+      "regime3_belajar_test_acc": 90.0,
+      "delta_test1_vs_dasar": 0.0,
+      "delta_belajar_vs_dasar": 20.0
+    },
+    "BBH-WebOfLies": {
+      "category": "Multi-Step Deductive Logic",
+      "domain": "Multi-Agent Boolean Parity",
+      "samples": 10,
+      "regime1_dasar_correct": 2,
+      "regime1_dasar_acc": 20.0,
+      "regime2_test1_correct": 1,
+      "regime2_test1_acc": 10.0,
+      "regime3_belajar_test_correct": 8,
+      "regime3_belajar_test_acc": 80.0,
+      "delta_test1_vs_dasar": -10.0,
+      "delta_belajar_vs_dasar": 60.0
+    },
+    "Sector1-InvertedPhysics": {
+      "category": "Counterfactual Simulation",
+      "domain": "Inverted Physical Axioms",
+      "samples": 10,
+      "regime1_dasar_correct": 4,
+      "regime1_dasar_acc": 40.0,
+      "regime2_test1_correct": 4,
+      "regime2_test1_acc": 40.0,
+      "regime3_belajar_test_correct": 9,
+      "regime3_belajar_test_acc": 90.0,
+      "delta_test1_vs_dasar": 0.0,
+      "delta_belajar_vs_dasar": 50.0
+    },
+    "Sector2-5HopTransitive": {
+      "category": "Multi-Step Deductive Logic",
+      "domain": "6-Entity Relational Constraint Graph",
+      "samples": 10,
+      "regime1_dasar_correct": 4,
+      "regime1_dasar_acc": 40.0,
+      "regime2_test1_correct": 4,
+      "regime2_test1_acc": 40.0,
+      "regime3_belajar_test_correct": 4,
+      "regime3_belajar_test_acc": 40.0,
+      "delta_test1_vs_dasar": 0.0,
+      "delta_belajar_vs_dasar": 0.0
+    },
+    "Sector3-CounterSyllogisms": {
+      "category": "Formal Logic",
+      "domain": "Belief-Bias Stress-Test",
+      "samples": 10,
+      "regime1_dasar_correct": 10,
+      "regime1_dasar_acc": 100.0,
+      "regime2_test1_correct": 10,
+      "regime2_test1_acc": 100.0,
+      "regime3_belajar_test_correct": 10,
+      "regime3_belajar_test_acc": 100.0,
+      "delta_test1_vs_dasar": 0.0,
+      "delta_belajar_vs_dasar": 0.0
+    },
+    "Sector4-ModularCalendar": {
+      "category": "Multi-Step Deductive Logic",
+      "domain": "Cyclic Modular Arithmetic",
+      "samples": 10,
+      "regime1_dasar_correct": 1,
+      "regime1_dasar_acc": 10.0,
+      "regime2_test1_correct": 1,
+      "regime2_test1_acc": 10.0,
+      "regime3_belajar_test_correct": 4,
+      "regime3_belajar_test_acc": 40.0,
+      "delta_test1_vs_dasar": 0.0,
+      "delta_belajar_vs_dasar": 30.0
+    },
+    "Sector5-StateAutomata": {
+      "category": "Spatial & Symbolic",
+      "domain": "3-State Machine Latent Execution",
+      "samples": 10,
+      "regime1_dasar_correct": 6,
+      "regime1_dasar_acc": 60.0,
+      "regime2_test1_correct": 4,
+      "regime2_test1_acc": 40.0,
+      "regime3_belajar_test_correct": 5,
+      "regime3_belajar_test_acc": 50.0,
+      "delta_test1_vs_dasar": -20.0,
+      "delta_belajar_vs_dasar": -10.0
+    }
+  },
+  "elapsed_seconds": 0.0
+}

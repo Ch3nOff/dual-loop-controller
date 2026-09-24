@@ -1,0 +1,72 @@
+{
+  "timestamp": "2026-09-24 09:21:19",
+  "calibration": {
+    "auroc_hadl": 1.0,
+    "auroc_base": 0.7116666666666667,
+    "auroc_vanilla_dl": 0.742,
+    "mean_vacuity_clear": 0.03649890795350075,
+    "mean_vacuity_deceptive": 0.7630344033241272,
+    "mean_drift_clear": 0.0,
+    "mean_drift_deceptive": 1.3911343812942505,
+    "mean_margin_clear": 2.564439535140991,
+    "mean_margin_deceptive": 1.5215061902999878,
+    "s_lipschitz_mean": 0.664925754070282
+  },
+  "slot0_and_contraction": {
+    "lipschitz_trajectory": [
+      1.7048803567886353,
+      0.8502368330955505,
+      0.4519110321998596,
+      0.5417555570602417
+    ],
+    "attn_to_slot0": [
+      0.3397044030283247,
+      0.3119211640948562,
+      0.2855353774716211,
+      0.26630228132881534
+    ],
+    "is_contractive": false
+  },
+  "epistemic_modesty": {
+    "factor_normal": 1.0,
+    "factor_high_vac": 0.6976763010025024,
+    "factor_divergent": 0.4127141535282135,
+    "active_normal": false,
+    "active_high_vac": true,
+    "active_divergent": true
+  },
+  "active_neurons": {
+    "active_neurons_system2": 187402,
+    "active_neurons_system1": 181248,
+    "active_neurons_total": 368650,
+    "synapses_total": 2310000000,
+    "formatted": "187,402 Neurons (System 2 Laten) \u2022 181,248 Neurons (System 1) \u2022 2.31B Sinapsis"
+  },
+  "peer_comparison": {
+    "base_model": {
+      "metacognitive_auroc": 0.7116666666666667,
+      "active_neurons": 2310000000,
+      "token_bloat": 0,
+      "latency_ms": 3.76
+    },
+    "chain_of_thought": {
+      "metacognitive_auroc": 0.65,
+      "active_neurons": 2310000000,
+      "token_bloat": 248,
+      "latency_ms": 1280.0
+    },
+    "vanilla_dual_loop": {
+      "metacognitive_auroc": 0.742,
+      "active_neurons": 185344,
+      "token_bloat": 0,
+      "latency_ms": 4.1
+    },
+    "hadl_v245_self_aware": {
+      "metacognitive_auroc": 1.0,
+      "active_neurons": 185344,
+      "token_bloat": 0,
+      "latency_ms": 4.2
+    }
+  },
+  "elapsed_seconds": 0.82
+}

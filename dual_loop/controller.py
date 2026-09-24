@@ -357,6 +357,18 @@ class RecurrentLatentController(nn.Module):
                 discrepancy_norm=err_norm
             )
 
+        # Update Lipschitz contraction ratio post-deliberation
+        if hasattr(self, "self_awareness") and getattr(self, "last_self_awareness_telem", None) is not None:
+            delta_curr = torch.norm(H - H_prev, p="fro", dim=(-2, -1))
+            if H_prev2 is not None:
+                delta_prev = torch.norm(H_prev - H_prev2, p="fro", dim=(-2, -1))
+                lk = (delta_curr / (delta_prev + 1e-5)).mean().item()
+            else:
+                norm_base = torch.norm(H_prev, p="fro", dim=(-2, -1))
+                lk = (delta_curr / (0.5 * norm_base + 1e-5)).mean().item()
+            self.last_self_awareness_telem["s_lipschitz"] = float(lk)
+            self.last_self_awareness_telem["is_divergent"] = bool(lk > 1.0)
+
         return H, err_norm, lam_k
 
     def forward(
