@@ -236,7 +236,10 @@ class DualLoopQwenModel(nn.Module):
             dynamic_halting=self.dynamic_halting,
             key_padding_mask=key_padding_mask,
             candidate_embeds=getattr(self, "_current_candidate_embeds", None),
-            critique_vector=getattr(self, "_current_critique_vector", None)
+            critique_vector=getattr(self, "_current_critique_vector", None),
+            visual_embeds=getattr(self, "_current_visual_embeds", None),
+            modality_mask=getattr(self, "_current_modality_mask", None),
+            vision_mask=getattr(self, "_current_vision_mask", None)
         )
         self.last_telemetry = telemetry
 
@@ -247,6 +250,27 @@ class DualLoopQwenModel(nn.Module):
     def set_candidate_embeds(self, embeds: Optional[Any] = None):
         """Sets candidate embeddings for joint contrastive distractor elimination."""
         self._current_candidate_embeds = embeds
+
+    def set_visual_embeds(self, embeds: Optional[torch.Tensor] = None):
+        """Sets external sensory visual embeddings (e.g., from vision encoder or patch projections)."""
+        self._current_visual_embeds = embeds
+
+    def set_modality_mask(self, mask: Optional[torch.Tensor] = None):
+        """Sets token-level modality mask (0 for text, 1 for visual/audio)."""
+        self._current_modality_mask = mask
+
+    def set_vision_mask(self, mask: Optional[torch.Tensor] = None):
+        """Sets boolean validity mask for visual tokens."""
+        self._current_vision_mask = mask
+
+    def bind_visual_concept(
+        self,
+        h_vision: torch.Tensor,
+        h_text: torch.Tensor,
+        u_vacuity: Optional[torch.Tensor] = None
+    ) -> Dict[str, Any]:
+        """Directly bind a visual concept to text in fast associative memory."""
+        return self.adapter.bind_visual_concept(h_vision, h_text, u_vacuity=u_vacuity)
 
     def set_critique_vector(self, vector: Optional[torch.Tensor] = None):
         """Sets counterfactual critique vector for autonomous self-correction."""
@@ -259,6 +283,9 @@ class DualLoopQwenModel(nn.Module):
     def reset_state(self, force: bool = False):
         """Resets mutable state (or soft decays if in continual mode)."""
         self.adapter.reset_state(force=force)
+        self._current_visual_embeds = None
+        self._current_modality_mask = None
+        self._current_vision_mask = None
 
     def clear_episodic_memory(self):
         """Clears all stored episodic traces."""

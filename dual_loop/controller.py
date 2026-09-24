@@ -219,6 +219,8 @@ class RecurrentLatentController(nn.Module):
             self.plastic_unit.reset_state(force=force)
         self.last_plastic_telemetry = {}
         self.last_self_awareness_telem = {}
+        self.last_hallucination_penalty = None
+        self.last_cross_falsification = {}
 
     def initialize_thoughts(self, query_rep: torch.Tensor) -> torch.Tensor:
         """
@@ -230,7 +232,7 @@ class RecurrentLatentController(nn.Module):
             H_0: [B, L_thought, D] Initialized thought vectors.
         """
         B = query_rep.size(0)
-        base = self.query_projector(query_rep).unsqueeze(1) # [B, 1, D]
+        base = (query_rep + 0.1 * self.query_projector(query_rep)).unsqueeze(1) # [B, 1, D]
         H_0 = base.expand(B, self.num_thought_tokens, -1) + self.learned_slot_offsets
         if hasattr(self, "self_awareness"):
             s_0, _ = self.self_awareness.descriptor(
@@ -259,7 +261,8 @@ class RecurrentLatentController(nn.Module):
         step_idx: int = 1,
         max_steps: int = 3,
         H_prev2: Optional[torch.Tensor] = None,
-        logits: Optional[torch.Tensor] = None
+        logits: Optional[torch.Tensor] = None,
+        visual_slots: Optional[torch.Tensor] = None
     ) -> Tuple[torch.Tensor, Optional[torch.Tensor], Optional[torch.Tensor]]:
         """
         Executes a single recurrent step of outer loop deliberation.
@@ -276,6 +279,7 @@ class RecurrentLatentController(nn.Module):
             max_steps: Total pondering quota K_max.
             H_prev2: Thoughts at step k-2 for Lipschitz stability.
             logits: Optional model prediction logits for margin.
+            visual_slots: Optional [B, M_v, D] Dedicated sensory visual slots for cross-modal falsification.
             
         Returns:
             H_next: [B, L_thought, D] Updated thought representations.
@@ -331,6 +335,24 @@ class RecurrentLatentController(nn.Module):
             m_factor = sa_telem.get("modesty_factor", 1.0)
             H_updated = H_updated * m_factor
 
+        # 3d. Popperian Cross-Modal Falsification (Anti-Hallucination Sensory Grounding)
+        hallucination_penalty = None
+        f_cross_val = 1.0
+        if visual_slots is not None and visual_slots.size(1) > 0:
+            h_task = H_updated[:, 1:, :] if H_updated.size(1) > 1 else H_updated
+            h_norm = F.normalize(h_task, p=2, dim=-1)
+            v_norm = F.normalize(visual_slots, p=2, dim=-1)
+            cos_matrix = torch.bmm(h_norm, v_norm.transpose(1, 2)) # [B, L-1, M_v]
+            f_cross = cos_matrix.max(dim=-1).values.mean(dim=-1, keepdim=True) # [B, 1]
+            tau_evidence = 0.25
+            hallucination_penalty = F.relu(tau_evidence - f_cross) # [B, 1]
+            f_cross_val = float(f_cross.mean().item())
+        self.last_cross_falsification = {
+            "f_cross": f_cross_val,
+            "hallucination_penalty": float(hallucination_penalty.mean().item()) if hallucination_penalty is not None else 0.0
+        }
+        self.last_hallucination_penalty = hallucination_penalty
+
         # 4. Learned Adaptive Anchor Gate (Contraction Mapping: guarantees stability at K >= 4)
         alpha = torch.sigmoid(self.anchor_gate(H_updated)) # [B, L, 1]
         H = self.norm2(alpha * H_updated + (1.0 - alpha) * H_anchor)
@@ -378,7 +400,8 @@ class RecurrentLatentController(nn.Module):
         k_steps: Optional[int] = None,
         dynamic_halting: bool = False,
         return_aux: bool = False,
-        u_epistemic: Optional[torch.Tensor] = None
+        u_epistemic: Optional[torch.Tensor] = None,
+        visual_slots: Optional[torch.Tensor] = None
     ) -> Tuple[torch.Tensor, List[torch.Tensor], List[torch.Tensor]]:
         """
         Executes recurrent latent pondering.
@@ -390,6 +413,7 @@ class RecurrentLatentController(nn.Module):
             dynamic_halting: If True, evaluates entropy to halt early.
             return_aux: If True, collects probe predictions for audit/training.
             u_epistemic: Optional [B] Epistemic uncertainty vacuity.
+            visual_slots: Optional [B, M_v, D] Dedicated sensory visual slots for cross-modal falsification.
             
         Returns:
             H_final: [B, L_thought, D] Final thought state.
@@ -424,7 +448,8 @@ class RecurrentLatentController(nn.Module):
                 u_epistemic=u_epistemic,
                 step_idx=step + 1,
                 max_steps=steps,
-                H_prev2=H_prev2
+                H_prev2=H_prev2,
+                visual_slots=visual_slots
             )
             H_prev2 = H_prev1
             H_prev1 = H_prev

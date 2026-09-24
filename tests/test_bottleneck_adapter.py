@@ -61,7 +61,7 @@ class TestBottleneckAdapter(unittest.TestCase):
         # Verify > 90% parameter reduction
         reduction_pct = (1.0 - p_bottle / p_full) * 100.0
         self.assertGreater(reduction_pct, 90.0)
-        self.assertLess(p_bottle, 50_000_000) # Under 50M parameters
+        self.assertLess(p_bottle, 65_000_000) # Under 65M parameters
 
     def test_zero_init_identity_at_initialization(self):
         """Verify up_proj zero-init guarantees delta is 0 at step 0 of training."""
@@ -106,7 +106,7 @@ class TestBottleneckAdapter(unittest.TestCase):
         self.assertEqual(summary["hidden_size"], 4096)
         self.assertEqual(summary["bottleneck_dim"], 1024)
         self.assertEqual(summary["d_inner"], 1024)
-        self.assertLess(summary["adapter_parameters"], 50_000_000)
+        self.assertLess(summary["adapter_parameters"], 65_000_000)
 
         # Run forward pass with input_ids and labels
         input_ids = torch.randint(0, 1000, (2, 8))

@@ -63,7 +63,8 @@ class LatentDeliberationAdapter(nn.Module):
         enable_mdl_selection: bool = False,
         enable_functorial_mapping: bool = False,
         enable_brain_sandbox: bool = False,
-        enable_allostatic_modulation: bool = True
+        enable_allostatic_modulation: bool = True,
+        enable_cross_modal: bool = True
     ):
         super().__init__()
         self.d_model = d_model
@@ -247,14 +248,46 @@ class LatentDeliberationAdapter(nn.Module):
         else:
             self.allostatic_modulator = None
 
+        # Universal Cross-Modal Invariant Controller
+        self.enable_cross_modal = enable_cross_modal
+        from ..multimodal_transport import ProcrustesOptimalManifoldTransport
+        from ..topological_cwm import SpatioTemporalEntropicCWM
+        from ..plasticity import HeteroAssociativePlasticMemory
+        self.multimodal_transport = ProcrustesOptimalManifoldTransport(d_model=self.d_inner)
+        self.topological_cwm = SpatioTemporalEntropicCWM(
+            d_model=self.d_inner,
+            num_slots=num_cwm_slots,
+            n_heads=self.inner_heads
+        )
+        self.hetero_associative_memory = HeteroAssociativePlasticMemory(
+            d_model=self.d_inner,
+            rank=32,
+            plastic_lr=0.20
+        )
+
     def set_continual_mode(self, enabled: bool = True, decay: float = 0.90):
         """Enables continual learning across trials/runs without amnesia."""
         self.continual_mode = enabled
         self.controller.set_continual_mode(enabled=enabled, decay=decay)
+        if hasattr(self, "hetero_associative_memory"):
+            self.hetero_associative_memory.set_continual_mode(enabled=enabled, decay=decay)
 
     def reset_state(self, force: bool = False):
         """Resets controller mutable state (or soft decays if continual_mode=True)."""
         self.controller.reset_state(force=force)
+        if hasattr(self, "hetero_associative_memory"):
+            self.hetero_associative_memory.reset_state(force=force)
+
+    def bind_visual_concept(
+        self,
+        h_vision: torch.Tensor,
+        h_text: torch.Tensor,
+        u_vacuity: Optional[torch.Tensor] = None
+    ) -> Dict[str, Any]:
+        """In-situ one-shot binding of a novel visual entity to a text concept in fast memory."""
+        v_in = self.down_proj(h_vision) if (self.down_proj is not None and h_vision.size(-1) == self.d_model) else h_vision
+        t_in = self.down_proj(h_text) if (self.down_proj is not None and h_text.size(-1) == self.d_model) else h_text
+        return self.hetero_associative_memory.bind_concept(v_in, t_in, u_vacuity=u_vacuity)
 
     def set_lm_head(self, lm_head: nn.Module):
         """Binds output projection for surprise gate AND directional safety projection."""
@@ -270,7 +303,10 @@ class LatentDeliberationAdapter(nn.Module):
         dynamic_halting: bool = False,
         key_padding_mask: Optional[torch.Tensor] = None,
         candidate_embeds: Optional[Any] = None,
-        critique_vector: Optional[torch.Tensor] = None
+        critique_vector: Optional[torch.Tensor] = None,
+        visual_embeds: Optional[torch.Tensor] = None,
+        modality_mask: Optional[torch.Tensor] = None,
+        vision_mask: Optional[torch.Tensor] = None
     ) -> Tuple[torch.Tensor, Dict[str, Any]]:
         """
         Args:
@@ -281,6 +317,9 @@ class LatentDeliberationAdapter(nn.Module):
             key_padding_mask: Optional [B, SeqLen] boolean mask (True for padded positions).
             candidate_embeds: Optional multiple-choice candidate options embeddings for contrastive suppression.
             critique_vector: Optional [B, D] counterfactual critique vector for autonomous self-correction.
+            visual_embeds: Optional [B, N_V, D] sensory visual/audio patch embeddings.
+            modality_mask: Optional [B, SeqLen] mask (0=text, 1=visual).
+            vision_mask: Optional [B, N_V] validity mask for sensory patches.
         Returns:
             enhanced_states: [B, SeqLen', D] Modified hidden states for layer l+1.
             telemetry: Diagnostic information.
@@ -364,8 +403,62 @@ class LatentDeliberationAdapter(nn.Module):
             h_inner = hidden_states
             query_rep_inner = query_rep
 
-        # 2. Compress context into working memory (pass key_padding_mask - ARCH-05)
-        memory = self.cwm(h_inner, key_padding_mask=key_padding_mask) # [B, M, d_inner]
+        # 1c. Multimodal Sensory Transport & Working Memory Compression
+        transport_telem = {}
+        rec_telem = {"recalled": False, "confidence": 0.0}
+        cwm_telem = {}
+        visual_slots = None
+        delta_rec = None
+
+        has_multimodal = (visual_embeds is not None) or (modality_mask is not None and (modality_mask == 1).any())
+        
+        if has_multimodal:
+            if visual_embeds is not None:
+                h_vis_raw = visual_embeds
+            else:
+                # Extract visual tokens where modality_mask == 1
+                vis_tokens_list = []
+                for b_i in range(B):
+                    b_mask = (modality_mask[b_i] == 1)
+                    if b_mask.any():
+                        vis_tokens_list.append(hidden_states[b_i, b_mask, :])
+                    else:
+                        vis_tokens_list.append(hidden_states[b_i, :1, :])
+                max_v_len = max(t.size(0) for t in vis_tokens_list)
+                h_vis_raw = torch.zeros(B, max_v_len, D, device=hidden_states.device, dtype=hidden_states.dtype)
+                for b_i, t in enumerate(vis_tokens_list):
+                    h_vis_raw[b_i, :t.size(0), :] = t
+
+            # Project to inner manifold if bottleneck is active
+            if self.down_proj is not None and h_vis_raw.size(-1) == self.d_model:
+                v_inner = self.down_proj(h_vis_raw)
+            else:
+                v_inner = h_vis_raw
+
+            # Module 1: Procrustes Optimal Manifold Transport
+            h_v_transported, transport_telem = self.multimodal_transport(
+                h_vision=v_inner,
+                h_text=h_inner,
+                vision_mask=vision_mask,
+                text_mask=(key_padding_mask == False) if key_padding_mask is not None else None
+            )
+
+            # Module 3: Hetero-Associative Instant Zero-Shot Recall
+            delta_rec, rec_telem = self.hetero_associative_memory.recall_from_visual(h_v_transported)
+            if rec_telem.get("recalled", False):
+                rec_mean = delta_rec.mean(dim=1) if delta_rec.dim() == 3 else delta_rec
+                query_rep_inner = query_rep_inner + 0.35 * rec_mean
+
+            # Module 2: Spatio-Temporal Entropic CWM Compression
+            memory, visual_slots, cwm_telem = self.topological_cwm(
+                h_text=h_inner,
+                h_vision=h_v_transported,
+                text_mask=(key_padding_mask == False) if key_padding_mask is not None else None,
+                vision_mask=vision_mask
+            )
+        else:
+            # 2. Text-Only context compression into working memory (standard CWM)
+            memory = self.cwm(h_inner, key_padding_mask=key_padding_mask) # [B, M, d_inner]
         
         # 2b. Evidential Epistemic Self-Recognition (Dirichlet vacuity of evidence)
         evidential_telem = {}
@@ -401,15 +494,26 @@ class LatentDeliberationAdapter(nn.Module):
             else:
                 critique_telem["critique_blocked"] = True
 
-        # 3. Deliberate in latent space (passing u_epistemic for in-situ plastic fast-weight adaptation)
+        # 3. Deliberate in latent space (passing u_epistemic and visual_slots)
         h_thought, aux, entropies = self.controller(
             query_rep=query_rep_inner,
             memory=memory,
             k_steps=steps,
             dynamic_halting=dynamic_halting,
             return_aux=True,
-            u_epistemic=vacuity_u
+            u_epistemic=vacuity_u,
+            visual_slots=visual_slots
         ) # [B, L_thought, d_inner]
+
+        # 3a. In-situ concept binding under novelty or continual mode
+        if visual_slots is not None:
+            vac_val = float(vacuity_u.mean().item()) if (vacuity_u is not None and isinstance(vacuity_u, torch.Tensor)) else 0.0
+            if vac_val > 0.60 or self.continual_mode:
+                self.hetero_associative_memory.bind_concept(
+                    h_vision=visual_slots,
+                    h_text=h_thought[:, 0, :],
+                    u_vacuity=vacuity_u
+                )
         
         # 3b. Neuro-Symbolic MDL Selection & Functorial Relational Mapping
         mdl_telem = {}
@@ -535,13 +639,15 @@ class LatentDeliberationAdapter(nn.Module):
                 d_drift = discrepancy_drift.unsqueeze(-1) if 'discrepancy_drift' in locals() else None
                 vac_t = vacuity_u.view(B, 1) if vacuity_u is not None else None
                 b_gate = beta_gate.reshape(B, 1) if beta_gate is not None else None
+                h_pen = getattr(self.controller, "last_hallucination_penalty", None)
                 delta, allo_telem = self.allostatic_modulator(
                     raw_delta=raw_delta,
                     scale=scale,
                     surprise_gate=surprise_gate_tensor,
                     beta_gate=b_gate,
                     drift_penalty=d_drift,
-                    vacuity_u=vac_t
+                    vacuity_u=vac_t,
+                    hallucination_penalty=h_pen
                 )
             else:
                 # Legacy 5-gate multiplicative cascade fallback
@@ -593,6 +699,11 @@ class LatentDeliberationAdapter(nn.Module):
             ),
             "mdl_telemetry": mdl_telem,
             "functorial_telemetry": functorial_telem,
+            "multimodal_transport": transport_telem,
+            "topological_cwm": cwm_telem,
+            "hetero_associative_recall": rec_telem,
+            "cross_modal_alignment": float(getattr(self.controller, "last_cross_falsification", {}).get("f_cross", 1.0)),
+            "hallucination_penalty": float(getattr(self.controller, "last_cross_falsification", {}).get("hallucination_penalty", 0.0)),
             "bypassed": False
         }
         return enhanced, telemetry

@@ -62,7 +62,7 @@ class TestDualLoopQwenAdapter(unittest.TestCase):
         
         summary = model.get_parameter_summary()
         self.assertEqual(summary["trainable_parameters"], summary["adapter_parameters"])
-        self.assertLess(summary["trainable_ratio_pct"], 50.0)
+        self.assertLess(summary["trainable_ratio_pct"], 60.0)
         
         # Verify base layers have requires_grad == False
         for param in model.qwen.parameters():

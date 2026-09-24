@@ -52,7 +52,8 @@ class AllostaticEnergyModulator(nn.Module):
         beta_gate: Optional[torch.Tensor] = None,
         drift_penalty: Optional[torch.Tensor] = None,
         vacuity_u: Optional[torch.Tensor] = None,
-        drive_penalty: Optional[torch.Tensor] = None
+        drive_penalty: Optional[torch.Tensor] = None,
+        hallucination_penalty: Optional[torch.Tensor] = None
     ) -> Tuple[torch.Tensor, Dict[str, Any]]:
         """
         Computes the unified allostatic gate and modulates raw_delta.
@@ -65,6 +66,7 @@ class AllostaticEnergyModulator(nn.Module):
             drift_penalty: [B, 1] Metacognitive divergence discrepancy (e_K - e_1).
             vacuity_u: [B, 1] Epistemic uncertainty/vacuity in [0, 1].
             drive_penalty: Optional [B, 1] Physiological homeostatic drive penalty.
+            hallucination_penalty: Optional [B, 1] Cross-modal falsification ungroundedness penalty.
             
         Returns:
             modulated_delta: [B, D] Allostatically gated delta.
@@ -107,7 +109,7 @@ class AllostaticEnergyModulator(nn.Module):
         
         # Energy formulation in logit-space
         # Positive contributions: scale, surprise, hypothesis acceptance
-        # Negative contributions: metacognitive drift, excessive epistemic vacuity
+        # Negative contributions: metacognitive drift, excessive epistemic vacuity, cross-modal hallucination
         E_allo = (
             b
             + w[0] * scale_val
@@ -119,6 +121,17 @@ class AllostaticEnergyModulator(nn.Module):
         
         if drive_penalty is not None:
             E_allo = E_allo - 0.5 * drive_penalty.to(device=device, dtype=dtype).reshape(B, 1)
+
+        # 2b. Popperian Cross-Modal Falsification penalty
+        if hallucination_penalty is not None:
+            tau_ev = 0.25
+            h_pen = F.relu(hallucination_penalty.to(device=device, dtype=dtype).reshape(B, 1))
+            # Normalized ungroundedness ratio in [0, 1] scaled by Popperian falsification factor
+            ungrounded_ratio = h_pen / tau_ev
+            E_allo = E_allo - 8.0 * ungrounded_ratio
+            h_val = float(h_pen.mean().item())
+        else:
+            h_val = 0.0
             
         # 3. Allostatic Modulation Gate Gamma in [0, 1]
         gamma_allostatic = torch.sigmoid(E_allo / self.temperature)
@@ -130,6 +143,7 @@ class AllostaticEnergyModulator(nn.Module):
             "gamma_allostatic": gamma_allostatic.detach().cpu().squeeze(-1).tolist(),
             "energy_potential": E_allo.detach().cpu().squeeze(-1).tolist(),
             "scale": scale_val.detach().cpu().squeeze(-1).tolist(),
+            "hallucination_penalty": h_val,
             "pruned_gate_active": True
         }
         
