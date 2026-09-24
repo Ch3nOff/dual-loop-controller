@@ -3,7 +3,6 @@ import json
 import unittest
 import torch
 import torch.nn as nn
-from fastapi.testclient import TestClient
 
 from dual_loop.runtime.detector import (
     detect_architecture_family,
@@ -13,7 +12,6 @@ from dual_loop.runtime.detector import (
     create_mock_detected_model,
     MockTransformerBackbone,
 )
-from dual_loop.runtime.server import app, initialize_engine, engine_state
 from dual_loop.runtime.hf_publisher import package_hf_bundle
 
 
@@ -53,64 +51,6 @@ class TestModelAutoDetector(unittest.TestCase):
         self.assertIn("engine_version", res.manifest)
         self.assertEqual(res.manifest["engine_version"], "v2.4.0-autopoietic")
 
-
-class TestRuntimeServerAndCockpit(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        initialize_engine(mock=True)
-        cls.client = TestClient(app)
-
-    def test_cockpit_html_served(self):
-        response = self.client.get("/")
-        self.assertEqual(response.status_code, 200)
-        self.assertIn("HADL Cognitive Runtime Cockpit", response.text)
-        self.assertIn("The Latent Mind HUD", response.text)
-        self.assertIn("Allostatic Energy Gauge", response.text)
-
-    def test_models_endpoint(self):
-        response = self.client.get("/v1/models")
-        self.assertEqual(response.status_code, 200)
-        data = response.json()
-        self.assertEqual(data["object"], "list")
-        self.assertTrue(len(data["data"]) > 0)
-        self.assertIn("hadl_manifest", data["data"][0])
-
-    def test_chat_completions_telemetry(self):
-        payload = {
-            "model": "hadl-v24-autopoietic",
-            "messages": [
-                {"role": "user", "content": "Explain the autopoietic dual-loop architecture"}
-            ],
-            "stream": False,
-            "k_steps": 2
-        }
-        response = self.client.post("/v1/chat/completions", json=payload)
-        self.assertEqual(response.status_code, 200)
-        data = response.json()
-        
-        self.assertIn("choices", data)
-        self.assertIn("hadl_telemetry", data)
-        telem = data["hadl_telemetry"]
-        self.assertEqual(telem["k_steps"], 2)
-        self.assertEqual(telem["policy"], "pi_1_deliberation")
-        self.assertIn("allostatic_energy", telem)
-        self.assertEqual(telem["nullspace_leakage"], 0.000000)
-        self.assertIn("zero-token", telem["token_bloat_saved"])
-
-    def test_curiosity_dream_feed(self):
-        # Trigger on-demand dream
-        r_dream = self.client.post("/v1/dream")
-        self.assertEqual(r_dream.status_code, 200)
-        dream_data = r_dream.json()
-        self.assertIn("state", dream_data)
-        self.assertIn("cycle_latency_ms", dream_data)
-
-        # Inspect chronological feed
-        r_feed = self.client.get("/v1/dream/feed")
-        self.assertEqual(r_feed.status_code, 200)
-        feed = r_feed.json()
-        self.assertIsInstance(feed, list)
-        self.assertTrue(len(feed) > 0)
 
 
 class TestHFHubPackaging(unittest.TestCase):

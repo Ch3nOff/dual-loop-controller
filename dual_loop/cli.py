@@ -47,17 +47,8 @@ def get_parser() -> argparse.ArgumentParser:
     p_daemon = subparsers.add_parser("daemon-step", help="Run a single autonomous background contemplation cycle")
     p_daemon.add_argument("--slots", type=int, default=6, help="Number of synthetic memory slots (default: 6)")
     p_daemon.add_argument("--d-model", type=int, default=128, help="Latent dimension (default: 128)")
-    
-    # 6. serve
-    p_serve = subparsers.add_parser("serve", help="Launch HADL Cognitive Runtime Server & Interactive Cockpit")
-    p_serve.add_argument("--model", type=str, default=None, help="Backbone model ID or path (auto-detects if None)")
-    p_serve.add_argument("--host", type=str, default="127.0.0.1", help="Host interface (default: 127.0.0.1)")
-    p_serve.add_argument("--port", type=int, default=8000, help="Port to bind (default: 8000)")
-    p_serve.add_argument("--mock", action="store_true", help="Launch lightweight mock engine for zero-download test")
-    p_serve.add_argument("--k-steps", type=int, default=2, help="Deliberation steps (default: 2)")
-    p_serve.add_argument("--bottleneck-dim", type=int, default=None, help="Latent bottleneck dimension")
 
-    # 7. publish-hf
+    # 6. publish-hf
     p_pub = subparsers.add_parser("publish-hf", help="Package and upload HADL model adapters to Hugging Face Hub")
     p_pub.add_argument("--model-type", choices=["glm4", "qwen"], default="glm4", help="Model family to package (default: glm4)")
     p_pub.add_argument("--repo-id", type=str, default=None, help="Target Hugging Face repository ID")
@@ -145,17 +136,6 @@ def cmd_test(args):
     res = runner.run(suite)
     sys.exit(0 if res.wasSuccessful() else 1)
 
-def cmd_serve(args):
-    from .runtime.server import start_server
-    start_server(
-        model=args.model,
-        host=args.host,
-        port=args.port,
-        mock=args.mock,
-        k_steps=args.k_steps,
-        bottleneck_dim=args.bottleneck_dim
-    )
-
 def cmd_publish_hf(args):
     from .runtime.hf_publisher import package_hf_bundle, publish_to_huggingface
     default_repo = "CH3NDev/dual-loop-glm4-9b-adapter" if args.model_type == "glm4" else "CH3NDev/dual-loop-qwen3.5-2b-adapter"
@@ -191,8 +171,6 @@ def main():
         cmd_benchmark(args)
     elif args.command == "test":
         cmd_test(args)
-    elif args.command == "serve":
-        cmd_serve(args)
     elif args.command == "publish-hf":
         cmd_publish_hf(args)
     else:

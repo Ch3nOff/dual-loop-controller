@@ -1,8 +1,7 @@
 """
-HADL Cognitive Runtime Package.
+HADL Cognitive Model Utilities.
 
-Provides universal model auto-detection, OpenAI-compatible REST server,
-WebSocket telemetry broadcasting, and an interactive cognitive cockpit.
+Provides universal model auto-detection and Hugging Face Hub packaging.
 """
 
 from .detector import (
@@ -14,11 +13,9 @@ from .detector import (
     create_mock_detected_model,
 )
 
-from .server import (
-    app,
-    start_server,
-    initialize_engine,
-    engine_state,
+from .hf_publisher import (
+    package_hf_bundle,
+    publish_to_huggingface,
 )
 
 __all__ = [
@@ -28,8 +25,7 @@ __all__ = [
     "determine_optimal_hook",
     "AutoDetectionResult",
     "create_mock_detected_model",
-    "app",
-    "start_server",
-    "initialize_engine",
-    "engine_state",
+    "package_hf_bundle",
+    "publish_to_huggingface",
 ]
+

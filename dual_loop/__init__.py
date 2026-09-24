@@ -126,7 +126,3 @@ def auto_attach_hadl(*args, **kwargs):
     from .runtime.detector import auto_attach_hadl as _fn
     return _fn(*args, **kwargs)
 
-def start_server(*args, **kwargs):
-    from .runtime.server import start_server as _fn
-    return _fn(*args, **kwargs)
-
