@@ -1,0 +1,35 @@
+{
+  "photo_to_text": {
+    "accuracy_pct": 100.0,
+    "mean_cosine": 0.18956402242183684,
+    "mean_margin": 0.1702572364360094,
+    "latency_ms": 109.74701999803074,
+    "num_concepts": 5
+  },
+  "audio_to_text": {
+    "accuracy_pct": 100.0,
+    "mean_cosine": 0.19499453008174897,
+    "mean_margin": 0.18925094660371541,
+    "latency_ms": 13.643600000068545,
+    "num_classes": 5
+  },
+  "text_to_photo": {
+    "accuracy_pct": 100.0,
+    "mean_cosine": 0.1926623821258545,
+    "mean_margin": 0.1656616061925888,
+    "latency_ms": 1.4421599975321442
+  },
+  "text_to_audio": {
+    "accuracy_pct": 100.0,
+    "mean_cosine": 0.21288869976997377,
+    "mean_margin": 0.2005434188991785,
+    "latency_ms": 1.358500000787899
+  },
+  "e2e_qwen": {
+    "t_base_ms": 7.535183333675377,
+    "t_v2t_ms": 26.355560000714224,
+    "t_a2t_ms": 27.586889999414172,
+    "overhead_v2t": 18.820376667038847,
+    "overhead_a2t": 20.051706665738795
+  }
+}

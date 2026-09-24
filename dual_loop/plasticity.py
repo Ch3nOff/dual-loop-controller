@@ -203,9 +203,9 @@ class HeteroAssociativePlasticMemory(nn.Module):
     def __init__(
         self,
         d_model: int,
-        rank: int = 32,
-        plastic_lr: float = 0.20,
-        decay_rate: float = 0.05
+        rank: int = 64,
+        plastic_lr: float = 0.50,
+        decay_rate: float = 0.0
     ):
         super().__init__()
         self.d_model = d_model
@@ -339,3 +339,42 @@ class HeteroAssociativePlasticMemory(nn.Module):
             "m_cross_norm": float(m_cross.norm().item())
         }
         return delta_rec, telemetry
+
+    def recall_from_text(self, h_text: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, Any]]:
+        """
+        Recalls associated sensory (visual/audio) representation given a textual query/concept.
+        h_text: [B, N_T, D] or [B, D]
+        Returns:
+            delta_sensory: [B, N_T, D] or [B, D]
+        """
+        B = h_text.size(0)
+        is_2d = (h_text.dim() == 2)
+        t_in = h_text.unsqueeze(1) if is_2d else h_text # [B, N_T, D]
+        device = h_text.device
+        dtype = h_text.dtype
+
+        if self.last_m_cross is None or self.last_m_cross.device != device:
+            zero_out = torch.zeros_like(h_text)
+            return zero_out, {"recalled": False, "confidence": 0.0}
+
+        m_cross = self.last_m_cross.to(device=device, dtype=dtype) # [B, R, R]
+
+        # Project linguistic tokens with L2 spherical normalization: [B, N_T, R]
+        v_t = F.normalize(self.psi_text(t_in), p=2, dim=-1)
+
+        # Transposed associative memory recall: [B, N_T, R] @ [B, R, R]^T -> [B, N_T, R]
+        z_sensory = torch.bmm(v_t, m_cross.transpose(1, 2))
+
+        # Adjoint output project to D: [B, N_T, D]
+        delta_sensory = self.norm_out(F.linear(z_sensory, self.phi_visual.weight.t()))
+
+        if is_2d:
+            delta_sensory = delta_sensory.squeeze(1)
+
+        confidence = float(z_sensory.norm(dim=-1).mean().item())
+        telemetry = {
+            "recalled": True,
+            "confidence": confidence,
+            "m_cross_norm": float(m_cross.norm().item())
+        }
+        return delta_sensory, telemetry

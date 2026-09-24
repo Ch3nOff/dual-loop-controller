@@ -261,8 +261,9 @@ class LatentDeliberationAdapter(nn.Module):
         )
         self.hetero_associative_memory = HeteroAssociativePlasticMemory(
             d_model=self.d_inner,
-            rank=32,
-            plastic_lr=0.20
+            rank=64,
+            plastic_lr=0.50,
+            decay_rate=0.0
         )
 
     def set_continual_mode(self, enabled: bool = True, decay: float = 0.90):
@@ -288,6 +289,22 @@ class LatentDeliberationAdapter(nn.Module):
         v_in = self.down_proj(h_vision) if (self.down_proj is not None and h_vision.size(-1) == self.d_model) else h_vision
         t_in = self.down_proj(h_text) if (self.down_proj is not None and h_text.size(-1) == self.d_model) else h_text
         return self.hetero_associative_memory.bind_concept(v_in, t_in, u_vacuity=u_vacuity)
+
+    def recall_text_from_sensory(self, h_sensory: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, Any]]:
+        """Recalls linguistic concept from sensory (visual or audio) query."""
+        s_in = self.down_proj(h_sensory) if (self.down_proj is not None and h_sensory.size(-1) == self.d_model) else h_sensory
+        delta_text, telem = self.hetero_associative_memory.recall_from_visual(s_in)
+        if self.up_proj is not None:
+            delta_text = self.up_proj(delta_text)
+        return delta_text, telem
+
+    def recall_sensory_from_text(self, h_text: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, Any]]:
+        """Recalls sensory (visual or audio) latent representation from linguistic query."""
+        t_in = self.down_proj(h_text) if (self.down_proj is not None and h_text.size(-1) == self.d_model) else h_text
+        delta_sensory, telem = self.hetero_associative_memory.recall_from_text(t_in)
+        if self.up_proj is not None:
+            delta_sensory = self.up_proj(delta_sensory)
+        return delta_sensory, telem
 
     def set_lm_head(self, lm_head: nn.Module):
         """Binds output projection for surprise gate AND directional safety projection."""
@@ -505,10 +522,10 @@ class LatentDeliberationAdapter(nn.Module):
             visual_slots=visual_slots
         ) # [B, L_thought, d_inner]
 
-        # 3a. In-situ concept binding under novelty or continual mode
-        if visual_slots is not None:
+        # 3a. In-situ concept binding under novelty during training mode
+        if visual_slots is not None and self.training:
             vac_val = float(vacuity_u.mean().item()) if (vacuity_u is not None and isinstance(vacuity_u, torch.Tensor)) else 0.0
-            if vac_val > 0.60 or self.continual_mode:
+            if vac_val > 0.60:
                 self.hetero_associative_memory.bind_concept(
                     h_vision=visual_slots,
                     h_text=h_thought[:, 0, :],

@@ -2,7 +2,7 @@ import os
 import hashlib
 import torch
 import torch.nn as nn
-from typing import Optional, Dict, Any, Union
+from typing import Optional, Dict, Any, Union, Tuple, List
 from .latent_adapter import LatentDeliberationAdapter
 
 
@@ -271,6 +271,14 @@ class DualLoopQwenModel(nn.Module):
     ) -> Dict[str, Any]:
         """Directly bind a visual concept to text in fast associative memory."""
         return self.adapter.bind_visual_concept(h_vision, h_text, u_vacuity=u_vacuity)
+
+    def recall_sensory_from_text(self, h_text: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, Any]]:
+        """Recalls sensory (visual or audio) latent representation from linguistic query."""
+        return self.adapter.recall_sensory_from_text(h_text)
+
+    def recall_text_from_sensory(self, h_sensory: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, Any]]:
+        """Recalls linguistic concept from sensory (visual or audio) query."""
+        return self.adapter.recall_text_from_sensory(h_sensory)
 
     def set_critique_vector(self, vector: Optional[torch.Tensor] = None):
         """Sets counterfactual critique vector for autonomous self-correction."""
