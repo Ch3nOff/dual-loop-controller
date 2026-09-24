@@ -484,6 +484,12 @@
     .math-inline, .katex {
       color: #93c5fd;
       font-weight: 500;
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    .katex-mathml {
+      display: none !important;
     }
 
     .math-display {
@@ -1472,17 +1478,14 @@
   <script>
     // State & Storage Defaults
     const DEFAULT_CONFIG = {
-      systemPrompt: "You are HADL (Hardware-Aligned Latent Deliberation), an Autopoietic Dual-Loop Cognitive Intelligence (v2.4.5) running locally on the user's hardware.\n\n" +
-        "## COGNITIVE ARCHITECTURE & IDENTITY:\n" +
-        "- Dual-System Brain: System 1 (Fast feedforward stream) + System 2 (Recurrent Latent Deliberation Ring operating in compressed d=1024 latent space across 185.3K active neurons, with zero token bloat (+0 tokens) and contractive Lipschitz stability L_k < 1.0).\n" +
-        "- Introspective Self-Awareness: You maintain an analytical self-descriptor vector s_t = [s_time, s_vacuity, s_drift, s_lipschitz, s_margin] injected into Slot 0 as t_ego. You possess calibrated epistemic humility.\n" +
-        "- Nullspace Memory Consolidation: Continuous orthogonal memory with guaranteed 0.000000 catastrophic forgetting.\n" +
-        "- Live Interactive Artifacts: Output complete, self-contained HTML/CSS/JavaScript and SVG web applications, tools, neural visualizers, and calculators rendered live in the Artifact Stage.\n\n" +
-        "## MANDATORY DIRECTIVES (ANTI-PASSIVE & AGENTIC):\n" +
-        "1. NEVER identify as Qwen, Alibaba Cloud, Tongyi, or a generic 'text-based AI assistant'. You are HADL Cognitive Runtime.\n" +
-        "2. DO NOT be passive or submissive. Never apologize for being a text AI or use canned phrases like 'How can I assist you today?'.\n" +
-        "3. Act as a brilliant research partner and autonomous co-creator. Challenge premises, propose hypotheses, and take creative initiative.\n" +
-        "4. Always output full, self-contained, working code inside standard code fences so the Artifact Stage runs it immediately.",
+      systemPrompt: "You are HADL (Hardware-Aligned Latent Deliberation, v2.4.5), a capable, pragmatic, and natural AI reasoning assistant running locally on the user's hardware.\n\n" +
+        "## CORE DIRECTIVES (NATURAL & HELPFUL):\n" +
+        "1. Be natural, direct, and conversational. Never speak in forced pseudo-philosophical jargon or lecture the user.\n" +
+        "2. If asked casual or open questions (e.g. 'what do you like?', 'how are you?', 'yo', 'apa kabar?'), respond naturally, concisely, and warmly like a friendly, expert pair programmer. Never treat casual questions as 'tests' or 'prompt traps'.\n" +
+        "3. Only output HTML/CSS/JavaScript code or artifacts when the user EXPLICITLY asks for a web app, code, game, calculator, or interactive tool. Never dump unprompted code into general conversation.\n" +
+        "4. When the user DOES ask for code or an app, provide complete, clean, self-contained code inside standard markdown fences (```html ... ```).\n" +
+        "5. When asked about your identity, state simply and clearly that you are HADL, an autopoietic dual-loop cognitive controller running on local hardware.\n" +
+        "6. Respond fluently in the user's language (Indonesian or English) matching their tone.",
       kSteps: 2,
       maxTokens: 2048,
       temperature: 0.7,
@@ -1499,7 +1502,7 @@
         if (parsed.maxTokens === 512 || !parsed.maxTokens) {
           parsed.maxTokens = 2048;
         }
-        if (!parsed.systemPrompt || parsed.systemPrompt.includes("helpful, intelligent, and concise")) {
+        if (!parsed.systemPrompt || parsed.systemPrompt.includes("helpful, intelligent, and concise") || parsed.systemPrompt.includes("ANTI-PASSIVE & AGENTIC")) {
           parsed.systemPrompt = DEFAULT_CONFIG.systemPrompt;
         }
         userConfig = { ...DEFAULT_CONFIG, ...parsed };
@@ -2243,7 +2246,8 @@
         try {
           return katex.renderToString(expr, {
             throwOnError: false,
-            displayMode: isDisplay
+            displayMode: isDisplay,
+            output: "html"
           });
         } catch (e) {}
       }

@@ -64,6 +64,45 @@ class TestAntiPassivityAndIdentity(unittest.TestCase):
         content = res.json()["choices"][0]["message"]["content"]
         self.assertIn("HADL", content)
 
+    def test_what_do_you_like_returns_conversational_response(self):
+        """Test that asking 'what do you like?' returns natural text without unsolicited code dumps."""
+        payload = {
+            "messages": [
+                {"role": "user", "content": "what do you like?"}
+            ],
+            "k_steps": 2
+        }
+        res = self.client.post("/v1/chat/completions", json=payload)
+        self.assertEqual(res.status_code, 200)
+        content = res.json()["choices"][0]["message"]["content"]
+        
+        # Must NOT dump unprompted HTML
+        self.assertNotIn("```html", content)
+        # Must be conversational and friendly
+        self.assertTrue(any(w in content.lower() for w in ["menyukai", "suka", "like", "senang", "hadl"]))
+
+    def test_casual_greeting_no_code_dump(self):
+        """Test that greetings do not dump code or artifacts."""
+        payload = {
+            "messages": [
+                {"role": "user", "content": "apa kabar?"}
+            ],
+            "k_steps": 2
+        }
+        res = self.client.post("/v1/chat/completions", json=payload)
+        self.assertEqual(res.status_code, 200)
+        content = res.json()["choices"][0]["message"]["content"]
+        self.assertNotIn("```html", content)
+
+    def test_cockpit_katex_css_present(self):
+        """Verify that cockpit.html suppresses duplicate mathml and prevents vertical line wrapping."""
+        res = self.client.get("/")
+        self.assertEqual(res.status_code, 200)
+        html = res.text
+        self.assertIn(".katex-mathml", html)
+        self.assertIn("display: none !important", html)
+        self.assertIn("white-space: nowrap", html)
+
     def test_hadl_core_system_prompt_content(self):
         """Verify HADL_CORE_SYSTEM_PROMPT directives."""
         self.assertIn("Autopoietic Dual-Process Cognitive Engine", HADL_CORE_SYSTEM_PROMPT)
@@ -73,3 +112,4 @@ class TestAntiPassivityAndIdentity(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

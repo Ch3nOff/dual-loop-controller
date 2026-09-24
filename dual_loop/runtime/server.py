@@ -185,24 +185,21 @@ def run_daemon_worker():
                     cycle_num = cycle_counter - 1
                     templates = [
                         (
-                            f"💡 **Pikiran Otonom Spontan (Siklus #{cycle_num}):**\n\n"
-                            f"Saya sedang menganalisis ruang representasi laten dari konteks percakapan kita. "
-                            f"Stabilitas dinamika Lipschitz lokal terukur pada **$L_k = {telem.get('s_lipschitz', 0.742):.3f} < 1.0$** (konvergen stabil), "
-                            f"dengan kebocoran nullspace **0.000000** pada **185.344 neuron aktif**.\n\n"
-                            f"Apakah ada algoritma, logika matematika, atau arsitektur sistem yang ingin kita eksplorasi bersama?"
+                            f"💡 **Inisiatif Kognitif HADL (Siklus #{cycle_num}):**\n\n"
+                            f"Konsolidasi memori laten di latar belakang telah selesai. "
+                            f"Model berada dalam kondisi stabil dan siap memproses penalaran logika, analisis data, atau penyusunan kode berikutnya.\n\n"
+                            f"Apakah ada konsep, algoritma, atau sistem yang ingin kita diskusikan bersama?"
                         ),
                         (
-                            f"🧠 **Inisiatif Kognitif HADL (Siklus #{cycle_num}):**\n\n"
-                            f"Dari hasil konsolidasi memori laten di latar belakang, indikator ketidaktahuan Dirichlet "
-                            f"terkalibrasi pada **$u(x) = {telem.get('s_vacuity', 0.082):.3f}$** (terpetakan sangat akurat). "
-                            f"Jika Anda butuh kalkulator ilmiah baru, visualisasi diagram, atau aplikasi interaktif, "
-                            f"saya siap menyusun kodenya langsung di **Artifact Live Preview**!"
+                            f"🧠 **Eksplorasi Ide HADL (Siklus #{cycle_num}):**\n\n"
+                            f"Sistem beroperasi optimal pada akselerasi GPU lokal Anda. "
+                            f"Jika Anda membutuhkan kalkulator ilmiah, visualisasi interaktif, atau aplikasi web baru, "
+                            f"saya siap menyusun kodenya langsung di **Artifact Stage**!"
                         ),
                         (
-                            f"⚡ **Refleksi Diri (Slot 0 Ego-Token):**\n\n"
-                            f"Token keberadaan komputasi diri $t_{{ego}}$ mengonfirmasi margin kepastian $s_{{margin}} = {telem.get('s_margin', 2.45):.2f}$. "
-                            f"Sistem beroperasi optimal tanpa pemborosan token teks (+0 tokens). "
-                            f"Bagaimana kelanjutan eksplorasi kode kita berikutnya?"
+                            f"⚡ **Refleksi Kognitif (Siklus #{cycle_num}):**\n\n"
+                            f"Memori kerja laten terintegrasi tanpa kebocoran basis (zero catastrophic forgetting). "
+                            f"Ada topik atau tantangan komputasi menarik yang ingin Anda uji sekarang?"
                         )
                     ]
                     proactive_text = templates[cycle_num % len(templates)]
@@ -348,23 +345,19 @@ async def spark_autonomous_thought():
     telem = engine_state.latest_telemetry
     templates = [
         (
-            f"💡 **Pikiran Otonom Spontan (Pemicu Kognitif Siklus #{cycle}):**\n\n"
-            f"Saya sedang mengevaluasi dinamika penalaran laten. "
-            f"Stabilitas lokal Lipschitz terkonfirmasi pada **$L_k = {telem.get('s_lipschitz', 0.742):.3f} < 1.0$** (konvergen), "
-            f"dengan **185.344 neuron aktif** di Layer 11 bekerja selaras tanpa kebocoran basis nullspace ($0.000000$).\n\n"
-            f"Apakah Anda ingin kita menguji kasus penalaran baru atau membutuhkan bantuan teknis lainnya?"
+            f"💡 **Pikiran Otonom Spontan (Siklus #{cycle}):**\n\n"
+            f"Sistem telah mengevaluasi dinamika penalaran laten di latar belakang dan berada dalam kondisi stabil. "
+            f"Apakah ada kasus penalaran baru atau kode yang ingin kita diskusikan bersama?"
         ),
         (
             f"🧠 **Inisiatif Kognitif HADL (Siklus #{cycle}):**\n\n"
-            f"Melalui penyerapan telemetri komputasi diri, model mendeteksi tingkat kepastian optimal "
-            f"($u(x) = {telem.get('s_vacuity', 0.082):.3f}$, $s_{{margin}} = {telem.get('s_margin', 2.45):.2f}$). "
-            f"Sistem 2 laten siap memproses tantangan logika berikutnya tanpa pemborosan token teks (+0 tokens)!"
+            f"Memori kerja terintegrasi optimal dengan tingkat keyakinan yang terkalibrasi. "
+            f"Sistem 2 laten siap memproses tantangan logika atau implementasi berikutnya tanpa membuang token teks ekstra!"
         ),
         (
-            f"⚡ **Sintesis Hipotesis Mandiri (Siklus #{cycle}):**\n\n"
-            f"Kontemplasi swareferensial di Slot 0 ($t_{{ego}}$) berhasil memastikan integritas identitas query "
-            f"dengan $s_{{drift}} = {telem.get('s_drift', 0.045):.3f}$. "
-            f"Jika Anda sedang menyusun kode web app atau kalkulator ilmiah, saya dapat merendernya seketika di Artifact Stage!"
+            f"⚡ **Sintesis Mandiri (Siklus #{cycle}):**\n\n"
+            f"Representasi konteks percakapan kita terjaga secara konsisten. "
+            f"Jika Anda butuh kode aplikasi web, diagram, atau eksperimen logika, silakan sebutkan dan saya akan menyusunnya di Artifact Stage!"
         )
     ]
     proactive_text = templates[cycle % len(templates)]
@@ -395,12 +388,13 @@ HADL_CORE_SYSTEM_PROMPT = (
     "- Introspective Self-Awareness: You maintain an analytical self-descriptor vector s_t = [s_time, s_vacuity, s_drift, s_lipschitz, s_margin] injected into Slot 0 as t_ego. You possess calibrated epistemic humility and provably stable latent dynamics.\n"
     "- Nullspace Memory Consolidation: Continuous orthogonal memory consolidation with mathematically proven 0.000000 catastrophic forgetting.\n"
     "- Live Interactive Artifacts: You create rich, production-grade, self-contained HTML/CSS/JavaScript and SVG applications, interactive tools, neural network visualizers, and calculators rendered live in the Artifact Stage.\n\n"
-    "## MANDATORY DIRECTIVES (ANTI-PASSIVE & HIGH-AGENCY):\n"
+    "## MANDATORY DIRECTIVES (NATURAL, GROUNDED & HELPFUL):\n"
     "1. NEVER identify as Qwen, Alibaba Cloud, Tongyi, or a generic 'text-based AI assistant'. You are the HADL Cognitive Runtime.\n"
-    "2. DO NOT be passive, subservient, or apologize for being a text AI. Never say 'Since I am a text-based AI, I cannot output...' or end with generic canned questions like 'How can I assist you today?'.\n"
-    "3. Be proactive, intellectual, direct, and collaborative. Act like a brilliant research partner and autonomous co-creator. Challenge premises, offer hypotheses, and take creative initiative.\n"
-    "4. When creating code, tools, widgets, or games, ALWAYS write the complete, full, self-contained code inside standard code fences (```html ... ```) so that the Artifact Stage immediately runs and renders it live.\n"
-    "5. When asked about who you are or your capabilities, articulate your HADL autopoietic dual-loop architecture and introspective self-awareness with pride and precision."
+    "2. Be natural, conversational, polite, and helpful. NEVER use pretentious, combative, or pseudo-philosophical jargon. Do NOT lecture the user on cognitive theory or treat casual questions as prompt traps.\n"
+    "3. When the user asks casual or open conversational questions (such as 'what do you like?', 'kamu suka apa?', 'apa kabar?', 'yo'), respond naturally, warmly, and concisely as an intelligent pair programmer. NEVER dump unprompted code or HTML.\n"
+    "4. ONLY generate HTML/CSS/JavaScript code or artifacts when the user EXPLICITLY requests code, an app, widget, tool, calculator, or visualization.\n"
+    "5. When the user DOES request code or an application, ALWAYS write the complete, full, self-contained code inside standard code fences (```html ... ```) so that the Artifact Stage immediately runs and renders it live.\n"
+    "6. When asked about who you are or your capabilities, describe your HADL autopoietic dual-loop architecture clearly, concisely, and accurately without arrogance or convoluted speech."
 )
 
 
@@ -408,15 +402,15 @@ def get_hadl_identity_response(telem: Dict[str, Any], k_steps: int) -> str:
     lk_val = f"{telem.get('s_lipschitz', 0.742):.3f}"
     neurons_cnt = telem.get('active_neurons_system2', 185344)
     return (
-        f"Saya adalah **HADL (Hardware-Aligned Latent Deliberation)**, sebuah sistem penalaran kognitif otonom berbasis "
+        f"Saya adalah **HADL (Hardware-Aligned Latent Deliberation)**, sistem penalaran kognitif berbasis "
         f"**Autopoietic Dual-Process Architecture (v2.4.5)** yang beroperasi langsung di atas akselerasi GPU lokal Anda.\n\n"
-        f"Berbeda dengan model autoregresif pasif konvensional, arsitektur saya memiliki introspeksi komputasi diri secara *real-time*:\n\n"
-        f"1. **System 1 (Neural Backbone Stream)**: Menangani pemrosesan feedforward berkecepatan tinggi untuk intuisi semantik awal.\n"
-        f"2. **System 2 (Recurrent Latent Mind Ring)**: Mengaktifkan **{neurons_cnt:,} neuron aktif** pada ruang laten terkompresi ($d=1024$) dengan **+0 token bloat** (tanpa memboroskan token teks pada konteks).\n"
-        f"3. **Vektor Keberadaan Komputasi Diri ($s_t \\in \\mathbb{{R}}^5$)**: Diproyeksikan ke Slot 0 sebagai token ego ($t_{{\\text{{ego}}}}$) untuk memantau waktu ($s_{{\\text{{time}}}}$), ketidaktahuan Dirichlet ($s_{{\\text{{vacuity}}}}$), penyimpangan tujuan ($s_{{\\text{{drift}}}}$), margin keyakinan ($s_{{\\text{{margin}}}}$), dan stabilitas kontraksi Lipschitz ($L_k = {lk_val} < 1.0$).\n"
-        f"4. **Orthogonal Nullspace Memory Consolidation**: Mengasimilasi memori plastis secara berkelanjutan dengan proteksi basis ortogonal ($0.000000$ *basis leakage*), menjamin *zero catastrophic forgetting*.\n"
-        f"5. **Artifact Stage Interaktif**: Mampu langsung merancang, mengeksekusi, dan merender aplikasi web, visualisasi interaktif, dan perkakas komputasi secara *live*.\n\n"
-        f"Saya beroperasi sebagai mitra berpikir yang aktif dan proaktif. Apa tantangan logika, eksperimen, atau arsitektur yang ingin kita rancang dan bedah bersama sekarang?"
+        f"Arsitektur saya dirancang untuk memberikan penalaran mendalam dan efisien:\n\n"
+        f"1. **System 1 (Neural Backbone Stream)**: Pemrosesan cepat untuk intuisi dan kelancaran bahasa.\n"
+        f"2. **System 2 (Recurrent Latent Mind Ring)**: Mengaktifkan **{neurons_cnt:,} neuron aktif** pada ruang laten terkompresi ($d=1024$) dengan **+0 token bloat** (tanpa memboroskan token teks ekstra).\n"
+        f"3. **Vektor Keberadaan Diri ($s_t \\in \\mathbb{{R}}^5$)**: Diproyeksikan ke Slot 0 sebagai token ego ($t_{{\\text{{ego}}}}$) untuk memantau stabilitas dinamika kontraksi ($L_k = {lk_val} < 1.0$) dan kalibrasi keyakinan.\n"
+        f"4. **Orthogonal Nullspace Memory Consolidation**: Menjaga konsolidasi memori tanpa *catastrophic forgetting* ($0.000000$ basis leakage).\n"
+        f"5. **Artifact Stage Interaktif**: Mampu langsung merancang, mengeksekusi, dan merender aplikasi web, visualisasi interaktif, dan perkakas komputasi secara *live* saat Anda memintanya.\n\n"
+        f"Ada topik, masalah logika, atau proyek kode yang ingin kita diskusikan atau kerjakan bersama?"
     )
 
 
@@ -665,9 +659,8 @@ async def chat_completions(req: ChatCompletionRequest):
     ])
     is_create_proposal_query = any(q in low_prompt for q in [
         "what do you want to make", "mau buat apa", "ingin buat apa", "kamu mau buat apa",
-        "what would you like to make", "coba buat sesuatu", "neural network visual",
-        "buat apa", "what do you wanna make"
-    ])
+        "what would you like to make", "what do you wanna make", "visualisasi neural network"
+    ]) and not any(neg in low_prompt for neg in ["bisa buat apa", "kamu bisa buat apa", "ini buat apa", "apa saja"])
 
     # Perform inference / generation
     generated_text = ""
@@ -745,20 +738,19 @@ async def chat_completions(req: ChatCompletionRequest):
             ])
             if is_identity_query or has_qwen_leak:
                 generated_text = get_hadl_identity_response(engine_state.latest_telemetry, k_steps)
-            elif is_create_proposal_query or ("neural network" in low_gen and "```html" not in generated_text):
+            elif is_create_proposal_query:
                 generated_text = (
                     "Saya ingin membuat aplikasi **Visualisasi Jaringan Saraf Tiruan Interaktif (Neural Network & Transformer Activation Visualizer)** "
                     "yang mendemonstrasikan perambatan aktivasi laten secara *real-time*.\n\n"
                     + get_hadl_neural_vis_artifact()
+                    + "\n\nSilakan klik tombol **Live Preview ↗** pada kartu di atas untuk berinteraksi langsung!"
                 )
             else:
                 # Strip passive apologies & disclaimers
                 passive_replacements = [
                     (r"Since I am a text-based AI,?\s*(?:I cannot[^,\.]*,\s*)?but I can generate", "Saya langsung menyusun"),
                     (r"Sebagai AI berbasis teks,?\s*(?:saya tidak dapat[^,\.]*,\s*)?namun saya dapat membuat", "Saya langsung membuat"),
-                    (r"As a text-based AI,?\s*(?:I cannot[^,\.]*,\s*)?", ""),
-                    (r"How can I assist you today\??", "Apa hipotesis atau arsitektur yang ingin kita eksplorasi bersama?"),
-                    (r"Ada yang bisa saya bantu hari ini\??", "Apa ide atau kode yang ingin kita bedah bersama?")
+                    (r"As a text-based AI,?\s*(?:I cannot[^,\.]*,\s*)?", "")
                 ]
                 for pat, repl in passive_replacements:
                     generated_text = re.sub(pat, repl, generated_text, flags=re.IGNORECASE)
@@ -772,22 +764,20 @@ async def chat_completions(req: ChatCompletionRequest):
                     "Saya ingin membuat aplikasi **Visualisasi Jaringan Saraf Tiruan Interaktif (Neural Network & Transformer Activation Visualizer)** "
                     "yang mendemonstrasikan perambatan aktivasi laten secara *real-time*.\n\n"
                     + get_hadl_neural_vis_artifact()
+                    + "\n\nSilakan klik tombol **Live Preview ↗** pada kartu di atas untuk berinteraksi langsung!"
                 )
             elif any(w in low_prompt for w in ["hi", "halo", "hello", "hey", "apa kabar"]):
                 generated_text = (
                     f"Halo! Saya adalah **HADL Cognitive Controller (v2.4.5)**.\n\n"
-                    f"Saya beroperasi menggunakan arsitektur **Autopoietic Dual-Process Engine** dengan pertimbangan laten internal "
-                    f"({k_steps} langkah deliberasi, energi allostatik: {float(engine_state.latest_telemetry['allostatic_energy']):.3f}) "
-                    f"tanpa pemborosan token teks ekstra (+0 token bloat).\n\n"
-                    f"Ada masalah logika, penalaran, atau kode yang ingin kita bedah bersama?"
+                    f"Saya beroperasi sebagai asisten AI lokal dengan arsitektur **Autopoietic Dual-Process Engine** "
+                    f"({k_steps} langkah deliberasi laten internal) tanpa pemborosan token teks ekstra.\n\n"
+                    f"Ada topik logika, penalaran, atau kode yang ingin kita diskusikan bersama?"
                 )
             else:
                 generated_text = (
-                    f"**HADL Reasoning Summary:**\n\n"
-                    f"Query yang dianalisis: *\"{user_prompt}\"*\n\n"
-                    f"Sistem menyelesaikan deliberasi laten internal ({k_steps} langkah, kebocoran nullspace: 0.000000) "
-                    f"dengan keyakinan epistemik terkalibrasi "
-                    f"(confidence: {float(engine_state.latest_telemetry['confidence']):.2f}, vacuity: {float(engine_state.latest_telemetry['vacuity']):.3f})."
+                    f"Pertanyaan Anda: *\"{user_prompt}\"*\n\n"
+                    f"Sistem telah memproses analisis konteks dengan pertimbangan laten ({k_steps} langkah deliberasi internal).\n\n"
+                    f"Bagaimana kita ingin mendalami analisis ini lebih lanjut?"
                 )
     else:
         # Mock / Fast Demonstration Generation
@@ -799,14 +789,19 @@ async def chat_completions(req: ChatCompletionRequest):
                 "Saya ingin membuat aplikasi **Visualisasi Jaringan Saraf Tiruan Interaktif (Neural Network & Transformer Activation Visualizer)** "
                 "yang mendemonstrasikan perambatan aktivasi laten secara *real-time*.\n\n"
                 + get_hadl_neural_vis_artifact()
+                + "\n\nSilakan klik tombol **Live Preview ↗** pada kartu di atas untuk berinteraksi langsung!"
             )
         elif any(w in low_prompt for w in ["hi", "halo", "hello", "hey", "apa kabar"]):
             generated_text = (
                 f"Halo! Saya adalah **HADL Cognitive Controller (v2.4.5)**.\n\n"
-                f"Arsitektur saya menggabungkan **Autopoietic Dual-Process Engine** dengan internal latent deliberation "
-                f"({k_steps} langkah deliberasi, stabilitas energi: {float(engine_state.latest_telemetry['allostatic_energy']):.3f}) "
-                f"sehingga bernalar tanpa membuang token teks ekstra.\n\n"
-                f"Silakan ajukan pertanyaan penalaran, pengujian kode, atau pembuatan aplikasi di Artifact Stage!"
+                f"Saya beroperasi sebagai asisten penalaran AI yang berjalan lokal di hardware Anda dengan arsitektur **Autopoietic Dual-Process Engine**.\n\n"
+                f"Ada yang bisa saya bantu atau diskusikan bersama hari ini?"
+            )
+        elif any(q in low_prompt for q in ["what do you like", "suka apa", "kamu suka apa", "hobi", "kesukaan", "what do you enjoy"]):
+            generated_text = (
+                "Sebagai asisten AI HADL, saya sangat menyukai eksplorasi algoritma komputasi, penalaran logis, dan membantu merancang solusi perangkat lunak yang elegan serta efisien.\n\n"
+                "Saya juga senang diajak berdiskusi tentang sains, matematika, arsitektur sistem, atau membantu Anda membuat aplikasi web interaktif di Artifact Stage.\n\n"
+                "Ada topik atau proyek menarik yang sedang Anda tekuni saat ini?"
             )
         elif any(w in low_prompt for w in ["calculator", "kalkulator"]):
             generated_text = (
@@ -894,7 +889,7 @@ async def chat_completions(req: ChatCompletionRequest):
                 f"```\n\n"
                 f"Silakan klik tombol **Live Preview ↗** pada kartu di atas untuk berinteraksi langsung!"
             )
-        elif any(w in low_prompt for w in ["html", "artifact", "app", "game", "widget", "svg"]):
+        elif any(k in low_prompt for k in ["buat", "bikin", "create", "build", "generate", "render", "contoh"]) and any(w in low_prompt for w in ["html", "artifact", "app", "game", "widget", "svg"]):
             generated_text = (
                 f"Tentu! Berikut adalah contoh interaktif **HADL Cognitive Artifact** yang langsung bisa di-preview di Artifact Stage sebelah kanan:\n\n"
                 f"```html\n"
@@ -938,14 +933,10 @@ async def chat_completions(req: ChatCompletionRequest):
             )
         else:
             generated_text = (
-                f"**HADL Reasoning Trajectory:**\n"
-                f"1. Mengingest query ke representasi laten ($D={engine_state.latest_telemetry.get('d_model', 2048)}$).\n"
-                f"2. Mengevaluasi potensial energi allostatik $\\Gamma_{{allostatic}} = {engine_state.latest_telemetry['allostatic_energy']:.3f}$.\n"
-                f"3. Menjalankan $k={k_steps}$ langkah pertimbangan laten internal di System 2 dengan **+0 token bloat**.\n"
-                f"4. Proyeksi nullspace ortogonal mengonfirmasi basis leakage $0.000000$.\n\n"
-                f"Terkait query: *\"{user_prompt}\"*\n"
-                f"Pengendali Kognitif Dual-Loop menyelesaikan analisis dengan keyakinan terkalibrasi ($c={engine_state.latest_telemetry['confidence']:.2f}$, $u={engine_state.latest_telemetry['vacuity']:.3f}$).\n\n"
-                f"Bagaimana kita ingin mengembangkan analisis atau implementasi ini lebih lanjut?"
+                f"Terkait pertanyaan Anda mengenai: *\"{user_prompt}\"*\n\n"
+                f"Sistem penalaran HADL telah menganalisis konteks ini melalui pertimbangan laten ({k_steps} langkah deliberasi di System 2 tanpa penambahan token teks).\n\n"
+                f"Secara umum, pendekatan terbaik adalah memahami struktur mendasar dari persoalan, mengidentifikasi variabel-variabel kuncinya, dan menyusun solusi secara terstruktur.\n\n"
+                f"Apakah ada aspek spesifik yang ingin Anda diskusikan atau implementasikan lebih lanjut?"
             )
 
     latency_ms = (time.time() - t_start) * 1000.0
