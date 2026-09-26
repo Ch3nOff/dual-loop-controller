@@ -1,0 +1,7 @@
+# Optional participant evaluation configuration for Stage 1 inference.
+# Controls per-task execution budgets and sandbox command timeouts.
+evaluation:
+  timeout_seconds: 60
+  max_tool_calls: 10
+  max_time_minutes: 1
+  max_turns: 50

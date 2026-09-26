@@ -1,0 +1,11 @@
+name: code_analyzer_agent
+description: Fast read-only structural analysis of repository source files and AST symbol graphs to locate root causes.
+model: gemma-4-31b-it-qat-w4a16-ct
+adapter: tool_lora
+instruction: !include ../prompts/analyzer.md
+tools:
+  - read_file
+  - search_similar_code
+  - get_code_neighbors
+  - get_code_subgraph
+generate_content_config: !include ../configs/sampling.yaml

@@ -1,0 +1,10 @@
+name: deliberation_planner_agent
+description: System 2 latent deliberation agent that formulates falsifiable hypotheses, identifies system invariants, and produces surgical repair blueprints.
+model: gemma-4-31b-it-qat-w4a16-ct
+adapter: deliberation_lora
+instruction: !include ../prompts/deliberation.md
+tools:
+  - read_file
+  - search_similar_code
+  - get_code_neighbors
+generate_content_config: !include ../configs/sampling.yaml

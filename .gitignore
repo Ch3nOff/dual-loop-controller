@@ -12,3 +12,14 @@ build/
 hf_staging/
 hf_upload/
 scratch/
+*.whl
+*.tgz
+*.npz
+*.tar.gz
+wheels/
+snapshots/
+embeddings/
+graphs/
+submission.zip
+*.parquet
+results/

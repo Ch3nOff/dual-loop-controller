@@ -1,0 +1,6 @@
+# Stage 1 inference evaluation budget configuration
+evaluation:
+  timeout_seconds: 300
+  max_tool_calls: 50
+  max_time_minutes: 30
+  max_turns: 50

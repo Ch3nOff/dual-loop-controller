@@ -1,0 +1,10 @@
+name: code_intelligence
+description: AST call graph navigation, symbol discovery, and semantic code search.
+model: gemma-4-31b-it-qat-w4a16-ct
+instruction: !include ../prompts/analyzer.md
+tools:
+  - read_file
+  - search_similar_code
+  - get_code_neighbors
+  - get_code_subgraph
+generate_content_config: !include ../configs/sampling.yaml

@@ -1,0 +1,24 @@
+name: hadl_dual_loop_agent
+model: gemma-4-31b-it-qat-w4a16-ct
+adapter: main_lora
+instruction: !include prompts/system.md
+tools:
+  - run_command
+  - read_file
+  - edit_file
+  - write_file
+  - get_status
+  - submit_patch
+  - get_code_neighbors
+  - search_similar_code
+  - get_code_subgraph
+  - agent_tool:
+      config_path: sub_agents/code_analyzer.yaml
+      skip_summarization: true
+  - agent_tool:
+      config_path: sub_agents/deliberation_planner.yaml
+      skip_summarization: true
+  - agent_tool:
+      config_path: sub_agents/popperian_verifier.yaml
+      skip_summarization: true
+generate_content_config: !include configs/sampling.yaml

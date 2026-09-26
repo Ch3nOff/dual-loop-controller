@@ -1,0 +1,8 @@
+name: popperian_verifier
+description: Popperian Red-Team QA verifier enforcing zero test tampering, scratch script isolation, and git diff invariant audit.
+model: gemma-4-31b-it-qat-w4a16-ct
+instruction: !include ../prompts/popperian.md
+tools:
+  - run_command
+  - read_file
+generate_content_config: !include ../configs/sampling.yaml

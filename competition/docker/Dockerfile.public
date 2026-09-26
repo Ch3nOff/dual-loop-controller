@@ -1,0 +1,25 @@
+# SWE-bench Public Evaluation Sandbox
+# Extends Dockerfile.sandbox with offline public wheels cache
+FROM python:3.13-slim
+
+# Install git (required for agent to generate diffs) and protobuf-compiler
+RUN apt-get update -qq \
+    && apt-get install -y -qq --no-install-recommends git patch protobuf-compiler pigz \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install --no-cache-dir pytest pytest-timeout==2.1.0 typer pdm-backend setuptools wheel poetry-core hatchling flit-core editables \
+    && mkdir -p /wheels
+
+COPY imp.py /usr/local/lib/python3.13/site-packages/imp.py
+COPY telnetlib.py /usr/local/lib/python3.13/site-packages/telnetlib.py
+
+# Set git config to avoid warnings
+RUN git config --global user.email "agent@eval" \
+    && git config --global user.name "Agent" \
+    && git config --global init.defaultBranch main
+
+ENV TEST_TMPDIR=/tmp
+
+WORKDIR /workspace
+
+# Copy open-source public wheels cache only (zero private wheels or internal code artifacts)
+COPY wheels/ /wheels/

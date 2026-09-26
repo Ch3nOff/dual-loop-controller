@@ -1,0 +1,7 @@
+# Stage 1 inference evaluation budget configuration
+# Calibrated for 12-Hour Total Evaluation Window across 129-200 tasks
+evaluation:
+  timeout_seconds: 60      # Max 60s per single command (prevents hanging subshell)
+  max_tool_calls: 25       # Max 25 tool calls per task (Dual-Loop finishes in 3-8 calls)
+  max_time_minutes: 3      # Hard cap: 3 minutes per task (worst-case 129 tasks <= 6.5 hrs)
+  max_turns: 15            # Max 15 turns per task (prevents wandering / context bloating)

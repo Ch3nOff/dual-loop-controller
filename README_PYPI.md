@@ -105,6 +105,9 @@ hadl benchmark --suite multimodal
 # Run lifelong epistemic plasticity benchmark
 hadl benchmark --suite plasticity
 
+# Validate mathematical and structural consistency of benchmark logs
+hadl validate-benchmark eval_results
+
 # Execute single autonomous background contemplation cycle
 hadl daemon-step --slots 6 --d-model 128
 ```

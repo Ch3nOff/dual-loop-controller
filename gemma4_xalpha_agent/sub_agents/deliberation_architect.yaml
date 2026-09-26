@@ -1,0 +1,9 @@
+name: deliberation_architect
+description: System 2 Principal Systems Architect for latent deliberation, invariant analysis, and counterfactual edge case reasoning.
+model: gemma-4-31b-it-qat-w4a16-ct
+instruction: !include ../prompts/deliberation.md
+tools:
+  - read_file
+  - search_similar_code
+  - get_code_neighbors
+generate_content_config: !include ../configs/sampling.yaml

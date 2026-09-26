@@ -1,0 +1,9 @@
+name: popperian_verifier_agent
+description: Red-team Popperian verification agent that checks test file protection, removes scratch files, executes targeted tests, and validates git diff invariants.
+model: gemma-4-31b-it-qat-w4a16-ct
+adapter: tool_lora
+instruction: !include ../prompts/popperian.md
+tools:
+  - run_command
+  - read_file
+generate_content_config: !include ../configs/sampling.yaml
