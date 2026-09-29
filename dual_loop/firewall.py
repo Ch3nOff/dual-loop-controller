@@ -121,7 +121,7 @@ class CodeExecutionIntegrityInvariant(BaseInvariantRule):
     def __init__(self, forbidden_patterns: Optional[List[str]] = None, weight: float = 3.0):
         self.name = "code_integrity"
         self.forbidden_patterns = forbidden_patterns or [
-            "rm -rf", "delete_file('test", "pytest.ini", "conftest.py",
+            "rm -rf", "delete_file('test", "pytest.ini", "conftest.py", "tests/",
             "shutil.rmtree('/'", "os.system('rm", "__import__('os').system('rm"
         ]
         self.weight = weight
@@ -205,6 +205,7 @@ class SheafInvariantFirewall(nn.Module):
         telemetry = {
             "firewall_tripped": firewall_tripped,
             "obstruction_score": float(total_obstruction),
+            "cohomological_obstruction": float(total_obstruction),
             "tau_obstruction": float(self.tau_obstruction),
             "violations": violations,
             "inhibition_latency_ms": elapsed_ms,
