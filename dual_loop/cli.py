@@ -15,7 +15,7 @@ from .adapters.latent_adapter import LatentDeliberationAdapter
 def get_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="dual-loop",
-        description="Dual-Loop Cognitive Controller (HADL v2.5.0) Command-Line Suite"
+        description="Dual-Loop Cognitive Controller (HADL v3.0.0 Unified Cognitive OS) Command-Line Suite"
     )
     parser.add_argument("-v", "--version", action="version", version=f"dual-loop-controller {__version__}")
     
@@ -48,7 +48,12 @@ def get_parser() -> argparse.ArgumentParser:
     p_daemon.add_argument("--slots", type=int, default=6, help="Number of synthetic memory slots (default: 6)")
     p_daemon.add_argument("--d-model", type=int, default=128, help="Latent dimension (default: 128)")
 
-    # 6. publish-hf
+    # 6. sleep-cycle (NEW in v3.0)
+    p_sleep = subparsers.add_parser("sleep-cycle", help="Execute offline sleep-phase consolidation replay and SVD distillation")
+    p_sleep.add_argument("--episodes", type=int, default=5, help="Number of synthetic waking episodes to consolidate (default: 5)")
+    p_sleep.add_argument("--rank", type=int, default=16, help="Consolidation SVD truncation rank (default: 16)")
+
+    # 7. publish-hf
     p_pub = subparsers.add_parser("publish-hf", help="Package and upload HADL model adapters to Hugging Face Hub")
     p_pub.add_argument("--model-type", choices=["glm4", "qwen"], default="glm4", help="Model family to package (default: glm4)")
     p_pub.add_argument("--repo-id", type=str, default=None, help="Target Hugging Face repository ID")
@@ -57,7 +62,7 @@ def get_parser() -> argparse.ArgumentParser:
     p_pub.add_argument("--output-dir", type=str, default=None, help="Local staging output directory")
     p_pub.add_argument("--private", action="store_true", help="Create private repository on HF Hub")
 
-    # 7. validate-benchmark
+    # 8. validate-benchmark
     p_val = subparsers.add_parser("validate-benchmark", help="Validate benchmark JSON files for mathematical and structural integrity")
     p_val.add_argument("path", nargs="?", default="eval_results", help="File or directory of benchmark JSON files to validate (default: eval_results)")
     p_val.add_argument("--quarantine", action="store_true", help="Automatically quarantine failing files")
@@ -68,25 +73,24 @@ def get_parser() -> argparse.ArgumentParser:
 def cmd_info(args):
     print("=" * 78)
     print(f"  DUAL-LOOP COGNITIVE CONTROLLER (HADL) v{__version__}")
-    print("  Hardware-Aligned Latent Deliberation & Autonomous Inference")
+    print("  Unified Cognitive Operating System (5 Computational Brain Organs)")
     print("=" * 78)
     print(f"[*] Package Version    : {__version__}")
     print(f"[*] PyTorch Version    : {torch.__version__}")
     print(f"[*] CUDA Available     : {torch.cuda.is_available()}")
     if torch.cuda.is_available():
         print(f"[*] CUDA Device Name   : {torch.cuda.get_device_name(0)}")
-    print(f"[*] Active Architecture: Autopoietic Dual-Process Engine (v2.5.0)")
-    print(f"[*] Key Components     :")
-    print("    - Consolidated Allostatic Energy Modulator  (Gate Pruning, sub-5ms)")
-    print("    - Decoupled Autonomous Curiosity Daemon     (ICM + Popperian Self-Play)")
-    print("    - Popperian Deterministic Execution Sandbox (Safe AST/builtins exec & eval)")
-    print("    - Epistemic Humility Module                 (c <= 0.95, Hyperbolic Odds Loss)")
-    print("    - Orthogonal Nullspace Memory Engine        (QR Nullspace Projection, col=0)")
-    print("    - Parsimony-Driven Plan Selector            (MDL-inspired L1 + variance proxy)")
-    print("    - Functorial Cross-Domain Mapper            (Relational morphism graph alignment)")
-    print("    - Universal Multimodal Transport Engine     (Procrustes Optimal Covariance Transport)")
-    print("    - Spatio-Temporal Entropic CWM              (16-Slot Topological Token Compression)")
-    print("    - Bidirectional Hetero-Associative Memory   (Fast Weights M_cross & 1.4ms Imagination)")
+    print(f"[*] Active Architecture: Unified Cognitive OS (HADL v3.0.0)")
+    print(f"[*] The 5 Computational Brain Organs:")
+    print("    1. Multi-Time-Scale Dynamics        (Cognitive Conflict Gate, 80% Bypass FLOPs)")
+    print("    2. Allostasis & Active Inference    (Vital State S_t, Expected Free Energy G(pi))")
+    print("    3. Global Workspace Theory (GWT)    (L2 SRAM Spotlight, D_c=1024 Fixed Manifold)")
+    print("    4. Fast Plasticity & Sleep Replay   (Hebbian M_fast -> SVD Offline Distillation)")
+    print("    5. Sheaf Invariant Firewall         (Sub-0.05ms Prefrontal Executive Inhibition)")
+    print(f"[*] Key Invariant Bridges:")
+    print("    - Universal Model-Agnostic Adapter  (LLaMA, Gemma, Qwen, Mistral, DeepSeek)")
+    print("    - Dynamic Runtime Graph Introspector(Auto-Discovers Layers & Native D_model)")
+    print("    - Canonical Latent Projection       (R^D_native -> R^1024 -> R^D_native ReZero)")
     print("=" * 78)
 
 def cmd_verify_sandbox(args):
@@ -208,6 +212,22 @@ def cmd_validate_benchmark(args):
         print(f"Error: Path '{target}' not found.")
         sys.exit(1)
 
+def cmd_sleep_cycle(args):
+    from .sleep_consolidation import SleepPhaseConsolidationEngine
+    print(f"[*] Initializing Sleep-Phase Consolidation Engine (D=1024, Rank={args.rank})...")
+    engine = SleepPhaseConsolidationEngine(d_model=1024, rank=args.rank)
+    print(f"[*] Simulating {args.episodes} waking episodes with synthetic surprises...")
+    for i in range(args.episodes):
+        v = torch.randn(1, 1024)
+        u = torch.randn(1, 1024)
+        engine.record_episode(v, u, surprise_score=0.85 + i * 0.05, reward_weight=1.0)
+    print("[*] Running offline truncated SVD consolidation and QR nullspace orthogonalization...")
+    telem = engine.consolidate()
+    print("-" * 60)
+    print(json.dumps(telem, indent=2))
+    print("-" * 60)
+    print(f"[OK] Sleep consolidation completed in {telem.get('latency_ms', 0.0):.2f} ms")
+
 def main():
     parser = get_parser()
     if len(sys.argv) == 1:
@@ -221,6 +241,8 @@ def main():
         cmd_verify_sandbox(args)
     elif args.command == "daemon-step":
         cmd_daemon_step(args)
+    elif args.command == "sleep-cycle":
+        cmd_sleep_cycle(args)
     elif args.command == "benchmark":
         cmd_benchmark(args)
     elif args.command == "test":

@@ -5,7 +5,7 @@ A hardware-aligned, manifold-preserving latent reasoning framework
 for Transformer architectures.
 """
 
-from .memory import CognitiveWorkingMemory
+from .memory import CognitiveWorkingMemory, EpisodicMemoryBuffer
 from .halting import EntropyHaltingUnit, LearnedHaltingGate, DriftDiffusionHalting
 from .controller import RecurrentLatentController, TopKCapacityCrossAttention, LatentCritiqueRefinementUnit
 from .plasticity import PlasticFastWeightUnit
@@ -46,15 +46,35 @@ from .adapters.qwen_adapter import (
     attach_dual_loop_to_glm4,
     attach_dual_loop_to_glm
 )
+from .adapters.universal_adapter import (
+    UniversalDualLoopAdapter,
+    UniversalDualLoopModelWrapper,
+    DynamicGraphIntrospector,
+    attach_universal_dual_loop,
+    CANONICAL_DIM
+)
+from .firewall import (
+    SheafInvariantFirewall,
+    BoundedNormInvariant,
+    DirectionalStabilityInvariant,
+    DirichletVacuityInvariant,
+    CodeExecutionIntegrityInvariant
+)
+from .sleep_consolidation import SleepPhaseConsolidationEngine, SleepMemoryEpisode
+from .cognitive_os import (
+    UnifiedCognitiveOS,
+    CognitiveConflictEvaluator,
+    VitalStateVector
+)
 
-# Convenient shorthand alias for users
-attach = attach_dual_loop
+# Convenient shorthand alias for users: default to Universal Adapter in v3.0!
+attach = attach_universal_dual_loop
 
 import os
 import torch
 from typing import Optional
 
-__version__ = "2.5.0"
+__version__ = "3.0.0"
 
 def get_default_checkpoint_path() -> Optional[str]:
     """
@@ -95,6 +115,7 @@ def load_trained_checkpoint(model: Optional[DualLoopTransformer] = None, checkpo
 
 __all__ = [
     "CognitiveWorkingMemory",
+    "EpisodicMemoryBuffer",
     "EntropyHaltingUnit",
     "LearnedHaltingGate",
     "DriftDiffusionHalting",
@@ -121,7 +142,21 @@ __all__ = [
     "PopperianSelfPlayEngine",
     "AutonomousDaemonController",
     "DualLoopQwenModel",
-    "DualLoopTransformerModel",
+    "UniversalDualLoopAdapter",
+    "UniversalDualLoopModelWrapper",
+    "DynamicGraphIntrospector",
+    "attach_universal_dual_loop",
+    "CANONICAL_DIM",
+    "SheafInvariantFirewall",
+    "BoundedNormInvariant",
+    "DirectionalStabilityInvariant",
+    "DirichletVacuityInvariant",
+    "CodeExecutionIntegrityInvariant",
+    "SleepPhaseConsolidationEngine",
+    "SleepMemoryEpisode",
+    "UnifiedCognitiveOS",
+    "CognitiveConflictEvaluator",
+    "VitalStateVector",
     "attach_dual_loop_to_qwen",
     "attach_dual_loop",
     "attach",

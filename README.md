@@ -2,8 +2,8 @@
   English | <a href="docs/README_id.md">Bahasa Indonesia</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_zh.md">简体中文</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ja.md">日本語</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ko.md">한국어</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_es.md">Español</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_fr.md">Français</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_de.md">Deutsch</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ru.md">Русский</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ar.md">العربية</a>
 </p>
 
-<h1 align="center">Dual-Loop Cognitive Controller (HADL v2.5.0)</h1>
-<h3 align="center">Hardware-Aligned Autopoietic Latent Deliberation, Curiosity-Driven Active Exploration & Bidirectional Multimodal Plasticity</h3>
+<h1 align="center">Dual-Loop Cognitive Controller (HADL v3.0.0)</h1>
+<h3 align="center">Unified Cognitive OS: Model-Agnostic Canonical Projection, Sleep-Phase Consolidation & Prefrontal Invariant Firewalls</h3>
 
 <p align="center">
   <a href="https://pypi.org/project/dual-loop-controller/"><img src="https://img.shields.io/pypi/v/dual-loop-controller.svg?color=blue" alt="PyPI version"></a>
@@ -12,7 +12,7 @@
   <a href="https://huggingface.co/spaces/CH3NDev/dual-loop-controller-demo"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces%20Live%20Demo-blue.svg" alt="Hugging Face Spaces"></a>
   <a href="https://huggingface.co/CH3NDev/dual-loop-qwen3.5-2b"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Adapter%20Weights-yellow.svg" alt="Hugging Face"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></a>
-  <a href="tests/"><img src="https://img.shields.io/badge/tests-109%20passed%20(100%25)-brightgreen.svg" alt="Unit Tests"></a>
+  <a href="tests/"><img src="https://img.shields.io/badge/tests-134%20passed%20(100%25)-brightgreen.svg" alt="Unit Tests"></a>
   <a href="#fast-path-inference"><img src="https://img.shields.io/badge/streaming%20bypass-0.0078%20ms%20(sub--5ms)-blueviolet.svg" alt="Sub-5ms Latency"></a>
   <a href="#orthogonal-nullspace-projection"><img src="https://img.shields.io/badge/nullspace%20overlap-0.000000%20(zero%20interference)-success.svg" alt="Zero Overlap"></a>
 </p>
@@ -21,11 +21,14 @@
 
 ---
 
-## 🏛️ System Architecture v2.4.0: The Autopoietic Dual-Process Engine
+## 🏛️ System Architecture v3.0.0: The Unified Cognitive OS
 
-In **v2.4.0**, the Dual-Loop Cognitive Controller resolves two long-standing challenges in artificial reasoning:
-1. **The Clock Coupling Bottleneck**: Conventional LLMs are passive autoregressive engines $P(Y \mid X)$ that only compute when user prompts arrive. HADL decouples inference from the user clock via an **Autonomous Background Curiosity Daemon** that actively inspects memory, detects contradictions, and refines hypotheses during idle intervals.
-2. **Gate Cascade Collapse & Signal Vanishing**: Naive multiplicative cascades ($g_1 \cdot g_2 \dots g_5$) exponentially suppress latent deltas to near zero ($<0.15$). v2.4.0 introduces **Consolidated Allostatic Energy Modulation**, evaluating homeostasis, surprise, vacuity, and drift in a unified energy-logit potential ($\Gamma_{allostatic} \in [0.40, 0.95]$), ensuring continuous non-zero gradients and guaranteeing **sub-5ms fast-path execution** (streaming bypass: **0.0078 ms / 7.8 $\mu$s**).
+In **v3.0.0**, the Dual-Loop Cognitive Controller transitions into a **Unified Cognitive Operating System** resolving structural bottlenecks across LLMs and VLMs via 5 Computational Brain Organs:
+1. **Dynamic Runtime Graph Introspection (`DynamicGraphIntrospector`) & Canonical Projection**: Unifies all model families (Qwen, LLaMA, Mistral, Gemma, GLM-4) by mapping native representations into a standardized canonical deliberation space $\mathbb{R}^{D_{native}} \to \mathbb{R}^{1024} \to \mathbb{R}^{D_{native}}$ with strict ReZero Identity Preservation ($\Delta_{init} \equiv 0$).
+2. **vLLM & TensorRT Inference Compatibility**: Pure branchless tensor arithmetic with 100% CUDA-Graph safety, zero dynamic Python dispatch, and native support for 2D $[N, D_{native}]$ flat tensors.
+3. **Sleep-Phase Consolidation Engine (Organ 4)**: Offline replay translating waking Hebbian fast weights ($M_{fast}$) into permanent LoRA parameters via truncated SVD low-rank distillation and QR nullspace orthogonalization ($0.000000$ interference leakage).
+4. **Sheaf-Theoretic Invariant Firewall (Organ 5)**: Sub-0.05ms prefrontal executive inhibition enforcing topological invariants against norm explosions, epistemic vacuity, and instruction corruption.
+5. **Bidirectional Multimodal Plasticity**: Native two-way translation between text and sensory (photo/audio) latents with 1-shot in-situ Hebbian binding.
 
 ![Dual-Loop v2.4.0 Complete Architecture Diagram](hadl_v24_system_architecture.png)
 

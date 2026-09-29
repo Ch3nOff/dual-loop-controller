@@ -1,7 +1,6 @@
-# Stage 1 inference evaluation budget configuration
-# Calibrated for 12-Hour Total Evaluation Window across 129-200 tasks
+# Calibrated competition evaluation budget configuration
 evaluation:
-  timeout_seconds: 60      # Max 60s per single command (prevents hanging subshell)
-  max_tool_calls: 25       # Max 25 tool calls per task (Dual-Loop finishes in 3-8 calls)
-  max_time_minutes: 3      # Hard cap: 3 minutes per task (worst-case 129 tasks <= 6.5 hrs)
-  max_turns: 15            # Max 15 turns per task (prevents wandering / context bloating)
+  timeout_seconds: 120     # Max 120s per single command (prevents premature pytest kill)
+  max_tool_calls: 40       # Max 40 tool calls per task
+  max_time_minutes: 5.0    # Hard cap: 5 minutes per task (129 tasks <= 10.75 hrs < 12 hrs)
+  max_turns: 30            # Max 30 turns

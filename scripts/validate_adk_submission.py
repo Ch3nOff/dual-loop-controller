@@ -281,8 +281,8 @@ def main() -> None:
     parser.add_argument(
         "--dir",
         type=Path,
-        default=Path("gemma4_hadl_agent"),
-        help="Path to submission directory (default: gemma4_hadl_agent)",
+        default=Path("gemma4_xalpha_agent"),
+        help="Path to submission directory (default: gemma4_xalpha_agent)",
     )
     parser.add_argument(
         "--output",
