@@ -71,6 +71,13 @@ from .hologram import (
     LatentReconstructiveHologram,
     SkeletonQuantizer
 )
+from .adapters.qwen3_8_adapter import (
+    attach_dual_loop_to_qwen3_8,
+    Qwen3_8HologramModel,
+    calculate_qwen3_8_vram_budget,
+    QWEN3_8_27B_D_NATIVE,
+    QWEN3_8_27B_TARGET_LAYER
+)
 
 # Convenient shorthand alias for users: default to Universal Adapter in v3.0!
 attach = attach_universal_dual_loop
@@ -165,6 +172,11 @@ __all__ = [
     "FISTALatentRecovery",
     "LatentReconstructiveHologram",
     "SkeletonQuantizer",
+    "attach_dual_loop_to_qwen3_8",
+    "Qwen3_8HologramModel",
+    "calculate_qwen3_8_vram_budget",
+    "QWEN3_8_27B_D_NATIVE",
+    "QWEN3_8_27B_TARGET_LAYER",
     "attach_dual_loop_to_qwen",
     "attach_dual_loop",
     "attach",

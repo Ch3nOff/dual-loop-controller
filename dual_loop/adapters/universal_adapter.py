@@ -51,6 +51,9 @@ class DynamicGraphIntrospector:
 
     LAYER_CONTAINER_NAMES = [
         "model.layers",
+        "model.language_model.layers",
+        "language_model.layers",
+        "model.model.language_model.layers",
         "transformer.h",
         "model.transformer.layers",
         "layers",
