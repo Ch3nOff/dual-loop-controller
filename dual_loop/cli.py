@@ -69,6 +69,17 @@ def get_parser() -> argparse.ArgumentParser:
     p_val.add_argument("--quarantine", action="store_true", help="Automatically quarantine failing files")
     p_val.add_argument("--quarantine-dir", type=str, default="eval_results/archive_deprecated", help="Quarantine directory")
 
+    # 9. serve (OpenAI-compatible inference server with VRAM auto-tuning)
+    p_serve = subparsers.add_parser("serve", help="Launch OpenAI-compatible inference server with dynamic VRAM auto-tuning")
+    p_serve.add_argument("--model", type=str, default="Qwen/Qwen2.5-7B-Instruct", help="Hugging Face model ID or path (default: Qwen/Qwen2.5-7B-Instruct)")
+    p_serve.add_argument("--host", type=str, default="0.0.0.0", help="Host interface to bind (default: 0.0.0.0)")
+    p_serve.add_argument("--port", type=int, default=8000, help="Port to listen on (default: 8000)")
+    p_serve.add_argument("--headroom", type=str, default="auto", help="VRAM safety headroom in GiB (e.g. 4.0 or auto, default: auto)")
+    p_serve.add_argument("--regime", type=str, choices=["auto", "bf16", "int8", "nf4", "hologram"], default="auto", help="Force specific quantization/hologram regime")
+    p_serve.add_argument("--k-steps", type=int, default=2, help="Number of latent deliberation steps (default: 2)")
+    p_serve.add_argument("--trust-remote-code", action="store_true", help="Trust remote code in HF model loaders (default: False)")
+    p_serve.add_argument("--log-level", type=str, default="info", help="Uvicorn log level (default: info)")
+
     return parser
 
 def cmd_info(args):
@@ -243,6 +254,21 @@ def cmd_sleep_cycle(args):
     print("-" * 60)
     print(f"[OK] Sleep consolidation completed in {telem.get('latency_ms', 0.0):.2f} ms")
 
+def cmd_serve(args):
+    from .server import start_server
+    headroom = "auto" if str(args.headroom).lower() == "auto" else float(args.headroom)
+    regime = None if str(args.regime).lower() == "auto" else args.regime.upper()
+    start_server(
+        model_id_or_path=args.model,
+        host=args.host,
+        port=args.port,
+        headroom_gib=headroom,
+        forced_regime=regime,
+        k_steps=args.k_steps,
+        trust_remote_code=args.trust_remote_code,
+        log_level=args.log_level
+    )
+
 def main():
     parser = get_parser()
     if len(sys.argv) == 1:
@@ -266,6 +292,8 @@ def main():
         cmd_publish_hf(args)
     elif args.command == "validate-benchmark":
         cmd_validate_benchmark(args)
+    elif args.command == "serve":
+        cmd_serve(args)
     else:
         parser.print_help(sys.stderr)
         sys.exit(1)

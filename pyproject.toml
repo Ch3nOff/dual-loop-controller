@@ -48,6 +48,22 @@ llm = [
     "transformers>=4.40.0,<5.0.0",
     "accelerate>=0.28.0,<2.0.0",
 ]
+serve = [
+    "transformers>=4.40.0,<5.0.0",
+    "accelerate>=0.28.0,<2.0.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.20.0",
+    "pydantic>=2.0.0",
+]
+all = [
+    "transformers>=4.40.0,<5.0.0",
+    "accelerate>=0.28.0,<2.0.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.20.0",
+    "pydantic>=2.0.0",
+    "build",
+    "twine",
+]
 
 [project.scripts]
 dual-loop = "dual_loop.cli:main"
