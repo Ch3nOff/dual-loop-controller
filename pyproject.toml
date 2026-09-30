@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dual-loop-controller"
-version = "3.1.0"
+version = "3.1.1"
 description = "A unified cognitive operating system with model-agnostic canonical adapters, sleep-phase consolidation, and prefrontal invariant firewalls for Transformers"
 readme = "README_PYPI.md"
 requires-python = ">=3.9"
@@ -35,11 +35,13 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
-    "torch>=2.0.0,<3.0.0",
     "numpy>=1.24.0,<3.0.0",
 ]
 
 [project.optional-dependencies]
+torch = [
+    "torch>=2.0.0,<3.0.0",
+]
 dev = [
     "build",
     "twine",
@@ -56,6 +58,7 @@ serve = [
     "pydantic>=2.0.0",
 ]
 all = [
+    "torch>=2.0.0,<3.0.0",
     "transformers>=4.40.0,<5.0.0",
     "accelerate>=0.28.0,<2.0.0",
     "fastapi>=0.100.0",

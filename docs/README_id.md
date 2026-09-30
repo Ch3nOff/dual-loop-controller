@@ -265,12 +265,30 @@ Seluruh 11 temuan audit keamanan independen telah diperbaiki, diverifikasi, dan 
 ### 1. Instalasi
 
 ```bash
-# Paket inti (PyPI v3.1.0)
+# Paket inti (PyPI v3.1.1 - instalasi cepat 2 detik, aman dari limit MAX_PATH Windows)
 pip install dual-loop-controller
 
-# Dengan dukungan Transformers & Accelerate
+# Akselerasi GPU NVIDIA CUDA (Disarankan: PyTorch dengan CUDA 12.4)
+pip install torch --index-url https://download.pytorch.org/whl/cu124
 pip install "dual-loop-controller[llm]"
+
+# Dengan Custom Inference Server (Alternatif vLLM / Ollama)
+pip install "dual-loop-controller[serve]"
 ```
+
+#### 🛠️ Diagnostik Otomatis & Setup Perangkat Keras
+Jalankan pemeriksa hardware dan lingkungan otomatis:
+```bash
+hadl setup
+# atau: dual-loop setup
+```
+
+> [!TIP]
+> **Catatan Pengguna Windows Terkait Limit MAX_PATH PyTorch `[Errno 2]`**:
+> Jika Windows menolak ekstraksi file PyTorch karena panjang path:
+> 1. Jalankan `fix_windows_longpaths.bat` (atau di Admin CMD: `reg add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "LongPathsEnabled" /t REG_DWORD /d 1 /f`).
+> 2. Atau install dalam virtual environment: `python -m venv .venv` -> `.venv\Scripts\activate` -> `pip install dual-loop-controller`.
+> 3. Atau gunakan installer otomatis 1-klik: `INSTALL_DUAL_LOOP.bat`.
 
 ---
 

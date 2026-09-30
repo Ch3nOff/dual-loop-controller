@@ -2,24 +2,21 @@ import sys
 import argparse
 import time
 import json
-import torch
 from typing import Optional
 
 from . import __version__
-from .curiosity_daemon import PopperianSelfPlayEngine, AutonomousDaemonController
-from .nullspace_engine import OrthogonalNullspaceProjector
-from .allostasis import AllostaticEnergyModulator
-from .homeostasis import HomeostaticDriveEngine
-from .adapters.latent_adapter import LatentDeliberationAdapter
 
 def get_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="dual-loop",
-        description="Dual-Loop Cognitive Controller (HADL v3.0.0 Unified Cognitive OS) Command-Line Suite"
+        description=f"Dual-Loop Cognitive Controller (HADL v{__version__} Unified Cognitive OS) Command-Line Suite"
     )
     parser.add_argument("-v", "--version", action="version", version=f"dual-loop-controller {__version__}")
     
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
+    
+    # 0. setup (Environment, Windows MAX_PATH & PyTorch diagnostics)
+    p_setup = subparsers.add_parser("setup", help="Diagnose environment, verify Windows MAX_PATH limits, and configure PyTorch")
     
     # 1. info
     p_info = subparsers.add_parser("info", help="Display environment, module telemetry, and version diagnostics")
@@ -82,17 +79,97 @@ def get_parser() -> argparse.ArgumentParser:
 
     return parser
 
+def cmd_setup(args):
+    """Diagnoses environment, verifies Windows MAX_PATH limits, checks GPU, and configures PyTorch."""
+    import platform
+    import subprocess
+    import shutil
+
+    print("=" * 78)
+    print(f"  DUAL-LOOP CONTROLLER SYSTEM & HARDWARE SETUP DIAGNOSTIC (v{__version__})")
+    print("=" * 78)
+    print(f"[*] Operating System   : {platform.system()} {platform.release()} ({platform.machine()})")
+    print(f"[*] Python Executable  : {sys.executable}")
+    print(f"[*] Python Version     : {platform.python_version()}")
+
+    # 1. Virtual Environment Check
+    is_venv = sys.prefix != sys.base_prefix
+    if is_venv:
+        print("[OK] Virtual Environment: Active (isolating paths and dependencies)")
+    else:
+        print("[!] Virtual Environment: Inactive (Running in global Python)")
+        print("    Recommendation: Use 'python -m venv .venv' to avoid Windows MAX_PATH limits.")
+
+    # 2. Windows MAX_PATH Check
+    if platform.system() == "Windows":
+        try:
+            import winreg
+            key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SYSTEM\CurrentControlSet\Control\FileSystem")
+            val, _ = winreg.QueryValueEx(key, "LongPathsEnabled")
+            winreg.CloseKey(key)
+            if val == 1:
+                print("[OK] Windows Long Paths : ENABLED (MAX_PATH limit is lifted)")
+            else:
+                print("[!] Windows Long Paths : DISABLED (260-char MAX_PATH limit is ACTIVE)")
+                print("    WARNING: This can cause 'pip install torch' to fail with [Errno 2].")
+                print("    To fix, run in Command Prompt (Admin):")
+                print('    reg add "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem" /v "LongPathsEnabled" /t REG_DWORD /d 1 /f')
+                print("    Or run the bundled script: fix_windows_longpaths.bat")
+        except Exception:
+            pass
+
+    # 3. GPU Detection
+    has_nvidia = False
+    if shutil.which("nvidia-smi"):
+        has_nvidia = True
+        try:
+            out = subprocess.check_output(["nvidia-smi", "--query-gpu=name,memory.total", "--format=csv,noheader"], text=True)
+            gpu_name = out.strip().split("\n")[0]
+            print(f"[OK] NVIDIA GPU Detected: {gpu_name}")
+        except Exception:
+            print("[OK] NVIDIA GPU Detected (via nvidia-smi)")
+    else:
+        print("[*] NVIDIA GPU          : Not detected (or nvidia-smi not in PATH)")
+
+    # 4. PyTorch Status
+    try:
+        import torch
+        print(f"[OK] PyTorch Version    : {torch.__version__}")
+        print(f"[*] PyTorch CUDA Enabled: {torch.cuda.is_available()}")
+        if torch.cuda.is_available():
+            print(f"[*] CUDA Device Name    : {torch.cuda.get_device_name(0)}")
+            print("\n[SUCCESS] Environment is fully configured for GPU-accelerated Dual-Loop inference!")
+        else:
+            if has_nvidia:
+                print("\n[!] NOTICE: NVIDIA GPU is present, but PyTorch is CPU-only!")
+                print("    To enable GPU acceleration, run:")
+                print("    pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124")
+            else:
+                print("\n[OK] Environment is configured for CPU execution.")
+    except ImportError:
+        print("[!] PyTorch Status      : NOT INSTALLED")
+        print("\n[*] Recommended Installation Command:")
+        if has_nvidia:
+            print("    pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124")
+        else:
+            print("    pip install torch")
+    print("=" * 78)
+
 def cmd_info(args):
     print("=" * 78)
     print(f"  DUAL-LOOP COGNITIVE CONTROLLER (HADL) v{__version__}")
     print("  Unified Cognitive Operating System (5 Computational Brain Organs)")
     print("=" * 78)
     print(f"[*] Package Version    : {__version__}")
-    print(f"[*] PyTorch Version    : {torch.__version__}")
-    print(f"[*] CUDA Available     : {torch.cuda.is_available()}")
-    if torch.cuda.is_available():
-        print(f"[*] CUDA Device Name   : {torch.cuda.get_device_name(0)}")
-    print(f"[*] Active Architecture: Unified Cognitive OS (HADL v3.0.0)")
+    try:
+        import torch
+        print(f"[*] PyTorch Version    : {torch.__version__}")
+        print(f"[*] CUDA Available     : {torch.cuda.is_available()}")
+        if torch.cuda.is_available():
+            print(f"[*] CUDA Device Name   : {torch.cuda.get_device_name(0)}")
+    except ImportError:
+        print("[!] PyTorch Version    : NOT INSTALLED (Run 'hadl setup' to configure)")
+    print(f"[*] Active Architecture: Unified Cognitive OS (HADL v{__version__})")
     print(f"[*] The 5 Computational Brain Organs:")
     print("    1. Multi-Time-Scale Dynamics        (Cognitive Conflict Gate, 80% Bypass FLOPs)")
     print("    2. Allostasis & Active Inference    (Vital State S_t, Expected Free Energy G(pi))")
@@ -106,6 +183,7 @@ def cmd_info(args):
     print("=" * 78)
 
 def cmd_verify_sandbox(args):
+    from .curiosity_daemon import PopperianSelfPlayEngine
     # SEC-02 hardening: restrict untrusted CLI exec
     if args.mode == "exec" and not getattr(args, "allow_untrusted_exec", False):
         print("=" * 68)
@@ -126,6 +204,12 @@ def cmd_verify_sandbox(args):
     sys.exit(0 if is_valid else 1)
 
 def cmd_daemon_step(args):
+    try:
+        import torch
+    except ImportError:
+        print("[ERROR] PyTorch is required to run daemon-step. Run 'hadl setup' first.")
+        sys.exit(1)
+    from .curiosity_daemon import AutonomousDaemonController
     print(f"[*] Initializing Autonomous Background Daemon (D={args.d_model}, Slots={args.slots})...")
     daemon = AutonomousDaemonController(d_model=args.d_model)
     
@@ -239,6 +323,11 @@ def cmd_validate_benchmark(args):
         sys.exit(1)
 
 def cmd_sleep_cycle(args):
+    try:
+        import torch
+    except ImportError:
+        print("[ERROR] PyTorch is required to run sleep-cycle. Run 'hadl setup' first.")
+        sys.exit(1)
     from .sleep_consolidation import SleepPhaseConsolidationEngine
     print(f"[*] Initializing Sleep-Phase Consolidation Engine (D=1024, Rank={args.rank})...")
     engine = SleepPhaseConsolidationEngine(d_model=1024, rank=args.rank)
@@ -276,7 +365,9 @@ def main():
         sys.exit(1)
         
     args = parser.parse_args()
-    if args.command == "info":
+    if args.command == "setup":
+        cmd_setup(args)
+    elif args.command == "info":
         cmd_info(args)
     elif args.command == "verify-sandbox":
         cmd_verify_sandbox(args)

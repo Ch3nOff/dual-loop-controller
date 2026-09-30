@@ -286,12 +286,30 @@ All 11 vulnerabilities identified in the independent security audit have been re
 ### 1. Installation
 
 ```bash
-# Core package (PyPI v3.1.0)
+# Core package (PyPI v3.1.1 - installs in 2s, completely immune to Windows MAX_PATH limits)
 pip install dual-loop-controller
 
-# With Hugging Face Transformers & Accelerate
+# For NVIDIA GPU Acceleration (Recommended: installs PyTorch with CUDA 12.4)
+pip install torch --index-url https://download.pytorch.org/whl/cu124
 pip install "dual-loop-controller[llm]"
+
+# With Custom Inference Server (vLLM / Ollama alternative)
+pip install "dual-loop-controller[serve]"
 ```
+
+#### 🛠️ Automated Setup & Hardware Diagnostic
+Run our automated hardware inspector to verify GPU, CUDA, and Windows settings:
+```bash
+hadl setup
+# or: dual-loop setup
+```
+
+> [!TIP]
+> **Windows Users & PyTorch `[Errno 2]` MAX_PATH Notice**:
+> If Windows blocks PyTorch header file extraction with `[Errno 2] No such file or directory`:
+> 1. Run `fix_windows_longpaths.bat` (or in Admin CMD: `reg add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "LongPathsEnabled" /t REG_DWORD /d 1 /f`).
+> 2. Or install inside a virtual environment: `python -m venv .venv` &rarr; `.venv\Scripts\activate` &rarr; `pip install dual-loop-controller`.
+> 3. Or simply double-click the turnkey installer: `INSTALL_DUAL_LOOP.bat`.
 
 ---
 
