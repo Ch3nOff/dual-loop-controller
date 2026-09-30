@@ -42,6 +42,7 @@ def get_parser() -> argparse.ArgumentParser:
     p_box = subparsers.add_parser("verify-sandbox", help="Evaluate expression or assertion script in deterministic sandbox")
     p_box.add_argument("code", type=str, help="Python expression or assertion code to evaluate")
     p_box.add_argument("--mode", choices=["eval", "exec", "syntax"], default="eval", help="Sandbox execution mode (default: eval)")
+    p_box.add_argument("--allow-untrusted-exec", action="store_true", help="Explicitly allow assertion script execution from CLI (SEC-02)")
     
     # 5. daemon-step
     p_daemon = subparsers.add_parser("daemon-step", help="Run a single autonomous background contemplation cycle")
@@ -57,7 +58,7 @@ def get_parser() -> argparse.ArgumentParser:
     p_pub = subparsers.add_parser("publish-hf", help="Package and upload HADL model adapters to Hugging Face Hub")
     p_pub.add_argument("--model-type", choices=["glm4", "qwen"], default="glm4", help="Model family to package (default: glm4)")
     p_pub.add_argument("--repo-id", type=str, default=None, help="Target Hugging Face repository ID")
-    p_pub.add_argument("--token", type=str, default=None, help="Hugging Face access token with write permission")
+    p_pub.add_argument("--token", type=str, default=None, help="Hugging Face access token (SEC-08: Prefer HF_TOKEN env var to avoid exposure)")
     p_pub.add_argument("--package-only", action="store_true", help="Only assemble bundle without uploading")
     p_pub.add_argument("--output-dir", type=str, default=None, help="Local staging output directory")
     p_pub.add_argument("--private", action="store_true", help="Create private repository on HF Hub")
@@ -94,6 +95,16 @@ def cmd_info(args):
     print("=" * 78)
 
 def cmd_verify_sandbox(args):
+    # SEC-02 hardening: restrict untrusted CLI exec
+    if args.mode == "exec" and not getattr(args, "allow_untrusted_exec", False):
+        print("=" * 68)
+        print("[SECURITY BLOCKED] Direct 'exec' evaluation via untrusted CLI is disabled by default (SEC-02).")
+        print("To safely verify expressions, use: dual-loop verify-sandbox '<expr>' --mode eval")
+        print("To verify syntax, use: dual-loop verify-sandbox '<code>' --mode syntax")
+        print("To force assertion execution from CLI, pass flag: --allow-untrusted-exec")
+        print("=" * 68)
+        sys.exit(1)
+
     print(f"[*] Executing sandbox verification in mode: '{args.mode}'")
     print(f"[*] Code snippet: {args.code}")
     is_valid, diag = PopperianSelfPlayEngine.verify_sandbox(args.code, test_condition=args.mode)
@@ -162,10 +173,14 @@ def cmd_publish_hf(args):
         print(f"[*] Packaging complete. Staging folder: {bundle_dir}")
         return
 
+    token = args.token or os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+    if not token and not args.package_only:
+        print("[*] Note: No HF token passed via CLI; checked HF_TOKEN environment variable.")
+
     success = publish_to_huggingface(
         repo_id=target_repo,
         bundle_dir=bundle_dir,
-        token=args.token,
+        token=token,
         private=args.private
     )
     sys.exit(0 if success else 1)

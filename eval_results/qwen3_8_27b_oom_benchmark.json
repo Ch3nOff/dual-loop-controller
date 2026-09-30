@@ -1,7 +1,7 @@
 {
   "benchmark_suite": "Qwen3.8-27B-Hardware-OOM-Comparison",
   "version": "3.0.0",
-  "timestamp": "2026-09-30T02:38:32Z",
+  "timestamp": "2026-09-30T02:45:10Z",
   "device": "cuda:0",
   "hardware_specs": {
     "device": "cuda:0",
@@ -34,7 +34,7 @@
       "vram_headroom_gib": -43.03,
       "execution_status": "OOM_CRASH",
       "oom_caught": true,
-      "error_message": "CUDA out of memory. Tried to allocate 50.96 GiB. GPU 0 has a total capacity of 7.93 GiB of which 6.88 GiB is free. Including non-PyTorch memory, this process has 17179869184.00 GiB memory in use. Of the allocated memory 0 bytes is allocated by PyTorch, and 0 bytes is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)",
+      "error_message": "CUDA out of memory. Tried to allocate 50.96 GiB. GPU 0 has a total capacity of 7.93 GiB of which 6.88 GiB is free. Process 20784 has 17179869184.00 GiB memory in use. Process 21628 has 17179869184.00 GiB memory in use. Including non-PyTorch memory, this process has 17179869184.00 GiB memory in use. Of the allocated memory 0 bytes is allocated by PyTorch, and 0 bytes is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)",
       "tokens_generated": 0,
       "tok_sec": 0.0,
       "latency_ms_per_token": 0.0,

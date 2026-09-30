@@ -13,7 +13,9 @@ import matplotlib.gridspec as gridspec
 from typing import Dict, Any, List, Tuple
 
 # Ensure workspace root is in sys.path
-sys.path.insert(0, os.path.abspath(r"C:\Users\Matthew Chen\Documents\X-Star"))
+repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if repo_root not in sys.path:
+    sys.path.insert(0, repo_root)
 
 from dual_loop import (
     AutonomousDaemonController,
@@ -861,27 +863,18 @@ def main():
     }
     
     # Paths for JSON and Graphics
-    json_path_eval = r"C:\Users\Matthew Chen\Documents\X-Star\eval_results\large_scale_usecase_benchmark.json"
-    json_path_bench = r"C:\Users\Matthew Chen\Documents\bench\large_scale_usecase_benchmark_results.json"
+    eval_dir = os.path.join(repo_root, "eval_results")
+    os.makedirs(eval_dir, exist_ok=True)
+    json_path_eval = os.path.join(eval_dir, "large_scale_usecase_benchmark.json")
     
-    graph_path_xstar = r"C:\Users\Matthew Chen\Documents\X-Star\large_scale_usecase_benchmark_graph.png"
-    graph_path_bench = r"C:\Users\Matthew Chen\Documents\bench\large_scale_usecase_benchmark_graph.png"
-    graph_path_paper = r"C:\Users\Matthew Chen\Documents\Paper\large_scale_usecase_benchmark_graph.png"
-    
-    os.makedirs(r"C:\Users\Matthew Chen\Documents\X-Star\eval_results", exist_ok=True)
-    os.makedirs(r"C:\Users\Matthew Chen\Documents\bench", exist_ok=True)
-    os.makedirs(r"C:\Users\Matthew Chen\Documents\Paper", exist_ok=True)
+    graph_path_xstar = os.path.join(repo_root, "large_scale_usecase_benchmark_graph.png")
     
     with open(json_path_eval, "w", encoding="utf-8") as f:
         json.dump(full_benchmark_output, f, indent=2)
-    with open(json_path_bench, "w", encoding="utf-8") as f:
-        json.dump(full_benchmark_output, f, indent=2)
-    print(f"[OK] Saved JSON logs:\n  - {json_path_eval}\n  - {json_path_bench}")
+    print(f"[OK] Saved JSON log:\n  - {json_path_eval}")
     
     plot_large_scale_usecase_matrix(full_benchmark_output, graph_path_xstar)
-    plot_large_scale_usecase_matrix(full_benchmark_output, graph_path_bench)
-    plot_large_scale_usecase_matrix(full_benchmark_output, graph_path_paper)
-    print(f"[OK] Saved 6-Panel Visualization Graphics:\n  - {graph_path_xstar}\n  - {graph_path_bench}\n  - {graph_path_paper}")
+    print(f"[OK] Saved 6-Panel Visualization Graphics:\n  - {graph_path_xstar}")
     
     print("\n" + "=" * 82)
     print("                     LARGE-SCALE MASTER SCOREBOARD SUMMARY                     ")

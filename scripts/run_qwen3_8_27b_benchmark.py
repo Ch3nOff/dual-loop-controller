@@ -62,7 +62,10 @@ from dual_loop.validation.benchmark_validator import BenchmarkValidator
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-QWEN_27B_PATH = r"C:\Users\Matthew Chen\.cache\huggingface\hub\models--Qwen--Qwen3.8-27B\snapshots\1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0"
+QWEN_27B_PATH = os.environ.get(
+    "QWEN_27B_PATH",
+    str(Path.home() / ".cache" / "huggingface" / "hub" / "models--Qwen--Qwen3.8-27B" / "snapshots" / "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0")
+)
 
 
 # ==============================================================================
@@ -1219,7 +1222,7 @@ def main():
     generate_qwen3_8_figure(m_bf16, m_q4_gpu, m_cpu_offload, m_hadl, plot_path)
 
     # Copy to brain artifact directory
-    artifact_dir = Path(r"C:\Users\Matthew Chen\.gemini\antigravity\brain\19bea55e-42a6-476a-af5b-9c25391e2be9")
+    artifact_dir = Path.home() / ".gemini" / "antigravity" / "brain" / "19bea55e-42a6-476a-af5b-9c25391e2be9"
     if artifact_dir.exists():
         dest_img = artifact_dir / "qwen3_8_27b_oom_comparison.png"
         shutil.copy2(plot_path, dest_img)

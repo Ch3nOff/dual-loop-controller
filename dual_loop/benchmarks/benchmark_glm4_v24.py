@@ -127,7 +127,8 @@ def evaluate_glm4_hadl_v24(
     adapter_checkpoint: str = "checkpoints/glm4_adapter/glm4_adapter.safetensors",
     bottleneck_dim: int = 1024,
     num_layers: int = 4,
-    seed: int = 42
+    seed: int = 42,
+    revision: Optional[str] = "main"
 ) -> Dict[str, Any]:
     """
     Executes an authentic PyTorch evaluation of GLM-4 attached to HADL v2.4.0.
@@ -142,11 +143,17 @@ def evaluate_glm4_hadl_v24(
 
     # 1. Load Tokenizer & Config
     print("\n[*] Loading GLM-4 Tokenizer & Config...")
-    tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
+    tok_kwargs = {"trust_remote_code": True}
+    if revision is not None:
+        tok_kwargs["revision"] = revision
+    tokenizer = AutoTokenizer.from_pretrained(model_id, **tok_kwargs)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
-    config = AutoConfig.from_pretrained(model_id, trust_remote_code=True)
+    cfg_kwargs = {"trust_remote_code": True}
+    if revision is not None:
+        cfg_kwargs["revision"] = revision
+    config = AutoConfig.from_pretrained(model_id, **cfg_kwargs)
     if not hasattr(config, "max_length"):
         config.max_length = getattr(config, "seq_length", 8192)
     if not hasattr(config, "use_cache"):

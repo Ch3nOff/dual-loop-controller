@@ -13,7 +13,9 @@ import matplotlib.gridspec as gridspec
 from matplotlib.patches import FancyBboxPatch, Rectangle
 
 # Ensure local modules are accessible
-sys.path.insert(0, os.path.abspath(r"C:\Users\Matthew Chen\Documents\X-Star"))
+repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if repo_root not in sys.path:
+    sys.path.insert(0, repo_root)
 
 from dual_loop import (
     AutonomousDaemonController,
@@ -647,23 +649,18 @@ def main():
     }
     
     # Save JSON logs
-    os.makedirs(r"C:\Users\Matthew Chen\Documents\X-Star\eval_results", exist_ok=True)
-    os.makedirs(r"C:\Users\Matthew Chen\Documents\bench", exist_ok=True)
+    eval_dir = os.path.join(repo_root, "eval_results")
+    os.makedirs(eval_dir, exist_ok=True)
     
-    json_path1 = r"C:\Users\Matthew Chen\Documents\X-Star\eval_results\epistemic_plasticity_benchmark.json"
-    json_path2 = r"C:\Users\Matthew Chen\Documents\bench\epistemic_plasticity_benchmark_results.json"
-    
+    json_path1 = os.path.join(eval_dir, "epistemic_plasticity_benchmark.json")
     with open(json_path1, "w", encoding="utf-8") as f:
         json.dump(full_results, f, indent=2)
-    with open(json_path2, "w", encoding="utf-8") as f:
-        json.dump(full_results, f, indent=2)
-    print(f"[OK] JSON logs saved to:\n  - {json_path1}\n  - {json_path2}")
+    print(f"[OK] JSON log saved to:\n  - {json_path1}")
     
     # Render and save graphics
-    graph_path1 = r"C:\Users\Matthew Chen\Documents\X-Star\epistemic_plasticity_benchmark_graph.png"
-    graph_path2 = r"C:\Users\Matthew Chen\Documents\bench\epistemic_plasticity_benchmark_graph.png"
+    graph_path1 = os.path.join(repo_root, "epistemic_plasticity_benchmark_graph.png")
     plot_epistemic_plasticity_graph(full_results, graph_path1)
-    plot_epistemic_plasticity_graph(full_results, graph_path2)
+    print(f"[OK] Plot saved to:\n  - {graph_path1}")
     
 if __name__ == "__main__":
     main()

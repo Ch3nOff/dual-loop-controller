@@ -474,13 +474,15 @@ class DualLoopQwenModel(nn.Module):
                     break
         # 2b. Check local models directory for repo basename match (e.g. models/dual-loop-qwen3.5-2b)
         if file_to_load is None:
-            base_name = os.path.basename(load_path)
-            for search_dir in [
+            search_dirs = [
                 os.path.join("models", base_name),
                 os.path.join(".", "models", base_name),
                 os.path.join("..", "models", base_name),
-                os.path.join(r"C:\Users\Matthew Chen\Documents\bench\models", base_name),
-            ]:
+            ]
+            env_models_dir = os.environ.get("DUAL_LOOP_MODELS_DIR")
+            if env_models_dir:
+                search_dirs.append(os.path.join(env_models_dir, base_name))
+            for search_dir in search_dirs:
                 if os.path.isdir(search_dir):
                     for fname in ["adapter_model.safetensors", "qwen35_2b_adapter.pt", "adapter.pt"]:
                         cand = os.path.join(search_dir, fname)

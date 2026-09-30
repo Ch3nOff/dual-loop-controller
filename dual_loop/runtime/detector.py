@@ -224,11 +224,15 @@ def auto_attach_hadl(
     enable_brain_sandbox: bool = True,
     enable_mdl_selection: bool = True,
     enable_functorial_mapping: bool = True,
+    trust_remote_code: bool = False,
+    revision: Optional[str] = None,
     **kwargs
 ) -> AutoDetectionResult:
     """
     Universal factory: introspects model architecture, calculates optimal hook & bottleneck,
     and returns a DualLoop-wrapped model with telemetry manifest.
+    
+    Security: trust_remote_code defaults to False. Must be explicitly opted into by user (SEC-03).
     """
     # Resolve target device
     if device is None:
@@ -245,7 +249,10 @@ def auto_attach_hadl(
         
         if tokenizer is None:
             try:
-                tokenizer = AutoTokenizer.from_pretrained(model_or_id, trust_remote_code=True)
+                tokenizer_kwargs = {"trust_remote_code": trust_remote_code}
+                if revision is not None:
+                    tokenizer_kwargs["revision"] = revision
+                tokenizer = AutoTokenizer.from_pretrained(model_or_id, **tokenizer_kwargs)
             except Exception:
                 tokenizer = None
 
@@ -253,9 +260,11 @@ def auto_attach_hadl(
             dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
 
         model_kwargs: Dict[str, Any] = {
-            "trust_remote_code": True,
+            "trust_remote_code": trust_remote_code,
             "torch_dtype": dtype,
         }
+        if revision is not None:
+            model_kwargs["revision"] = revision
         if torch.cuda.is_available() and target_device.type == "cuda":
             model_kwargs["device_map"] = "auto"
 
@@ -273,7 +282,10 @@ def auto_attach_hadl(
         # 2. If full weights not cached locally, instantiate from config for instant startup
         if base_model is None:
             try:
-                cfg = AutoConfig.from_pretrained(model_or_id, trust_remote_code=True)
+                cfg_kwargs = {"trust_remote_code": trust_remote_code}
+                if revision is not None:
+                    cfg_kwargs["revision"] = revision
+                cfg = AutoConfig.from_pretrained(model_or_id, **cfg_kwargs)
                 if not hasattr(cfg, "max_length"):
                     cfg.max_length = getattr(cfg, "seq_length", 8192)
                 if not hasattr(cfg, "use_cache"):
@@ -281,7 +293,7 @@ def auto_attach_hadl(
                 if target_device.type != "cuda":
                     # Keep layer count reasonable on CPU for instant response
                     cfg.num_layers = min(getattr(cfg, "num_layers", 28), 8)
-                base_model = AutoModelForCausalLM.from_config(cfg, trust_remote_code=True, empty_init=False)
+                base_model = AutoModelForCausalLM.from_config(cfg, trust_remote_code=trust_remote_code, empty_init=False)
             except Exception:
                 family_hint = "ChatGLM" if "glm" in model_or_id.lower() else "Qwen"
                 d_hint = 4096 if family_hint == "ChatGLM" else 2048

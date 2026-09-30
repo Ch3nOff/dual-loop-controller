@@ -979,13 +979,27 @@ $$\\text{Verify}(f, \\mathcal{D}_{train}) = \\prod_{i=1}^N \\mathbb{I}\\left(f(X
         self.timeout_sec = timeout_sec
 
     def execute_program(self, code_str: str, input_grid: np.ndarray) -> Tuple[bool, Optional[np.ndarray], str]:
-        # Static security & runaway construct pre-check
-        if any(bad in code_str for bad in ["import os", "import sys", "open(", "while True", "subprocess", "eval("]):
-            return False, None, "Forbidden or runaway construct detected in code"
+        # Static security & runaway construct pre-check (SEC-05)
+        forbidden_patterns = [
+            "import os", "import sys", "open(", "while True", "subprocess", "eval(", "exec(",
+            "np.load", "np.save", "np.savez", "np.fromfile", "np.tofile", "np.DataSource",
+            ".load(", ".fromfile(", "__import__", "__class__", "__subclasses__"
+        ]
+        if any(bad in code_str for bad in forbidden_patterns):
+            return False, None, "Forbidden or runaway construct detected in code (SEC-05)"
             
         try:
+            # SEC-05: Restricted numpy proxy disallowing filesystem I/O and pickle operations
+            class RestrictedNumpyProxy:
+                def __init__(self, target_np):
+                    self._np = target_np
+                def __getattr__(self, name):
+                    if name in ("load", "save", "savez", "savez_compressed", "fromfile", "tofile", "DataSource", "memmap"):
+                        raise PermissionError(f"numpy.{name} is disabled in the ARC evaluation sandbox (SEC-05)")
+                    return getattr(self._np, name)
+
             safe_scope = {
-                "np": np,
+                "np": RestrictedNumpyProxy(np),
                 "BoundingBoxCropPrimitive": BoundingBoxCropPrimitive,
                 "SymmetryInpaintingPrimitive": SymmetryInpaintingPrimitive,
                 "GeometricPrimitive": GeometricPrimitive,

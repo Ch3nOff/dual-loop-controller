@@ -92,12 +92,14 @@ from dual_loop import attach_dual_loop_to_glm4
 
 # 1. Load base GLM-4-9B
 base_model_id = "zai-org/glm-4-9b-chat"
-tokenizer = AutoTokenizer.from_pretrained(base_model_id, trust_remote_code=True)
+revision = "main" # Pin to a specific immutable commit SHA for supply chain security
+tokenizer = AutoTokenizer.from_pretrained(base_model_id, trust_remote_code=True, revision=revision)
 model = AutoModelForCausalLM.from_pretrained(
     base_model_id,
     torch_dtype=torch.bfloat16 if torch.cuda.is_available() else torch.float32,
     device_map="auto",
-    trust_remote_code=True
+    trust_remote_code=True,
+    revision=revision
 )
 
 # 2. Attach HADL Cognitive Controller and load adapter

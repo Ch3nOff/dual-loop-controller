@@ -1,3 +1,4 @@
+import ast
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -223,12 +224,28 @@ class PopperianSelfPlayEngine(nn.Module):
         if "__" in code_or_expression:
             return False, "Sandbox security violation: double-underscore attribute access prohibited"
         
-        # Security Guard 2: Prohibit forbidden calls and modules
-        forbidden = ["import ", "open(", "eval(", "exec(", "globals(", "locals(", "os.", "sys.", "subprocess", "shutil"]
-        for bad in forbidden:
-            if bad in code_or_expression:
-                return False, f"Sandbox security violation: forbidden call '{bad}' detected"
-                
+        # Security Guard 2: Prohibit forbidden calls and modules via AST inspection
+        try:
+            tree = ast.parse(code_or_expression)
+        except SyntaxError as e:
+            return False, f"Falsified in sandbox: SyntaxError ({e})"
+
+        forbidden_names = {
+            "eval", "exec", "open", "compile", "globals", "locals", "vars", "dir",
+            "getattr", "setattr", "delattr", "hasattr", "breakpoint", "__import__",
+            "input", "exit", "quit", "help", "copyright", "credits", "license",
+            "os", "sys", "posix", "nt", "subprocess", "socket", "ctypes", "shutil"
+        }
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.Import, ast.ImportFrom)):
+                return False, "Sandbox security violation: import statements prohibited"
+            if isinstance(node, ast.Name):
+                if node.id.startswith("__") or node.id in forbidden_names:
+                    return False, f"Sandbox security violation: forbidden identifier '{node.id}' detected"
+            if isinstance(node, ast.Attribute):
+                if node.attr.startswith("__") or node.attr in forbidden_names:
+                    return False, f"Sandbox security violation: forbidden attribute '{node.attr}' detected"
+
         safe_builtins = {
             "abs": abs, "min": min, "max": max, "sum": sum, "all": all, "any": any,
             "len": len, "range": range, "bool": bool, "int": int, "float": float,
