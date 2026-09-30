@@ -66,6 +66,11 @@ from .cognitive_os import (
     CognitiveConflictEvaluator,
     VitalStateVector
 )
+from .hologram import (
+    FISTALatentRecovery,
+    LatentReconstructiveHologram,
+    SkeletonQuantizer
+)
 
 # Convenient shorthand alias for users: default to Universal Adapter in v3.0!
 attach = attach_universal_dual_loop
@@ -157,6 +162,9 @@ __all__ = [
     "UnifiedCognitiveOS",
     "CognitiveConflictEvaluator",
     "VitalStateVector",
+    "FISTALatentRecovery",
+    "LatentReconstructiveHologram",
+    "SkeletonQuantizer",
     "attach_dual_loop_to_qwen",
     "attach_dual_loop",
     "attach",

@@ -33,6 +33,7 @@ from ..allostasis import AllostaticEnergyModulator
 from ..plasticity import HeteroAssociativePlasticMemory
 from ..firewall import SheafInvariantFirewall
 from ..sleep_consolidation import SleepPhaseConsolidationEngine
+from ..hologram import LatentReconstructiveHologram
 
 
 CANONICAL_DIM: int = 1024
@@ -139,12 +140,15 @@ class UniversalDualLoopAdapter(nn.Module):
         max_ponder_steps: int = 3,
         enable_plasticity: bool = True,
         enable_firewall: bool = True,
-        enable_sleep_consolidation: bool = True
+        enable_sleep_consolidation: bool = True,
+        enable_hologram: bool = False,
+        hologram_steps: int = 3
     ):
         super().__init__()
         self.d_native = int(d_native)
         self.d_canonical = int(d_canonical)
         self.max_ponder_steps = max_ponder_steps
+        self.enable_hologram = bool(enable_hologram)
         
         # 1. Canonical Projection Bridge (R^D_native -> R^D_canonical)
         self.down_proj = nn.Linear(self.d_native, self.d_canonical, bias=False)
@@ -175,6 +179,14 @@ class UniversalDualLoopAdapter(nn.Module):
             d_model=self.d_canonical,
             rank=32
         ) if enable_sleep_consolidation else None
+
+        # 6. Latent Reconstructive Hologram (Candès-Tao Compressed Sensing + FISTA)
+        self.hologram = LatentReconstructiveHologram(
+            d_native=self.d_native,
+            d_canonical=self.d_canonical,
+            default_steps=hologram_steps,
+            enable_plastic_compensation=enable_plasticity
+        ) if enable_hologram else None
 
         self.continual_mode: bool = False
 
@@ -239,8 +251,15 @@ class UniversalDualLoopAdapter(nn.Module):
                 "delta_norm": 0.0
             }
 
-        # 1. Project Inward to Canonical Manifold (R^D_native -> R^1024)
-        z_0 = self.canonical_norm(self.down_proj(h_input))  # [B, S, 1024]
+        # 0. Holographic Inverse Recovery (Candès-Tao Compressed Sensing)
+        holo_telem = {}
+        if self.enable_hologram and self.hologram is not None:
+            z_holo, h_clean, holo_telem = self.hologram.reconstruct(h_input, k_steps=k_steps)
+            h_input = h_clean
+            z_0 = self.canonical_norm(z_holo)
+        else:
+            # 1. Project Inward to Canonical Manifold (R^D_native -> R^1024)
+            z_0 = self.canonical_norm(self.down_proj(h_input))  # [B, S, 1024]
 
         # 2. CWM Compression (Organ 3: Global Workspace Theory in fast cache)
         cwm_slots = self.cwm(z_0)  # [B, 16, 1024]
@@ -309,6 +328,7 @@ class UniversalDualLoopAdapter(nn.Module):
             "delta_norm": float(torch.norm(full_delta).item()),
             "firewall": firewall_telem,
             "allostasis": allo_telem,
+            "hologram": holo_telem,
             "latency_ms": elapsed_ms,
             "latency_us": elapsed_ms * 1000.0
         }
@@ -391,7 +411,9 @@ def attach_universal_dual_loop(
     max_ponder_steps: int = 3,
     enable_plasticity: bool = True,
     enable_firewall: bool = True,
-    enable_sleep_consolidation: bool = True
+    enable_sleep_consolidation: bool = True,
+    enable_hologram: bool = False,
+    hologram_steps: int = 3
 ) -> UniversalDualLoopModelWrapper:
     """
     Universal Entrypoint for attaching HADL v3.0 to ANY model.
@@ -412,7 +434,9 @@ def attach_universal_dual_loop(
         max_ponder_steps=max_ponder_steps,
         enable_plasticity=enable_plasticity,
         enable_firewall=enable_firewall,
-        enable_sleep_consolidation=enable_sleep_consolidation
+        enable_sleep_consolidation=enable_sleep_consolidation,
+        enable_hologram=enable_hologram,
+        hologram_steps=hologram_steps
     )
 
     # Move adapter to base model device & dtype if parameters exist
