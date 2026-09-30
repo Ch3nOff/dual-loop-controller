@@ -1,5 +1,5 @@
 <p align="center">
-  English | <a href="docs/README_id.md">Bahasa Indonesia</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_zh.md">简体中文</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ja.md">日本語</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ko.md">한국어</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_es.md">Español</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_fr.md">Français</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_de.md">Deutsch</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ru.md">Русский</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ar.md">العربية</a>
+  English | <a href="docs/README_id.md">Bahasa Indonesia</a> | <a href="docs/README_zh.md">简体中文</a> | <a href="docs/README_ja.md">日本語</a> | <a href="docs/README_ko.md">한국어</a> | <a href="docs/README_es.md">Español</a> | <a href="docs/README_fr.md">Français</a> | <a href="docs/README_de.md">Deutsch</a> | <a href="docs/README_ru.md">Русский</a> | <a href="docs/README_ar.md">العربية</a>
 </p>
 
 <h1 align="center">Dual-Loop Cognitive Controller (HADL v3.1.0)</h1>
