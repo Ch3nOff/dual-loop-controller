@@ -86,7 +86,7 @@ import os
 import torch
 from typing import Optional
 
-__version__ = "3.0.0"
+__version__ = "3.1.0"
 
 def get_default_checkpoint_path() -> Optional[str]:
     """
