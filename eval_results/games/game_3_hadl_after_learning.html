@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON STARFIGHTER: CYBERPUNK DEFENDER - HADL Dual-Loop v3.0 (Post-Learning)</title>
+    <style>
+        * { box-sizing: border-box; user-select: none; }
+        body {
+            margin: 0;
+            background: #030014;
+            color: #00f0ff;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        #arcade-cabinet {
+            position: relative;
+            background: #09001f;
+            border: 3px solid #00f0ff;
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.4), inset 0 0 20px rgba(255, 0, 128, 0.2);
+            border-radius: 12px;
+            padding: 10px;
+        }
+        #hud {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 18px;
+            background: rgba(10, 0, 30, 0.85);
+            border-bottom: 2px solid #ff007f;
+            margin-bottom: 6px;
+            font-size: 15px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #00f0ff;
+        }
+        .stat-badge { color: #ffe600; text-shadow: 0 0 8px #ffe600; }
+        canvas {
+            display: block;
+            background: radial-gradient(circle at center, #0f002b 0%, #030014 100%);
+            border-radius: 6px;
+        }
+        #audio-hint {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #ff007f;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div id="arcade-cabinet">
+        <div id="hud">
+            <div>SCORE: <span id="score" class="stat-badge">00000</span></div>
+            <div>HI-SCORE: <span id="hi-score" class="stat-badge">05000</span></div>
+            <div>WAVE: <span id="wave" style="color: #00f0ff;">1</span></div>
+            <div>HULL: <span id="hull" style="color: #39ff14;">100%</span></div>
+        </div>
+        <canvas id="gameCanvas" width="700" height="540"></canvas>
+        <div id="audio-hint">🔊 PROCEDURAL CHIPTUNE AUDIO ACTIVE | ARROWS / WASD TO MOVE | SPACE TO FIRE</div>
+    </div>
+
+    <script>
+        // =====================================================================
+        // 1. PROCEDURAL 8-BIT WEB AUDIO API SYNTHESIZER (NO EXTERNAL FILES)
+        // =====================================================================
+        class SoundFX {
+            constructor() {
+                this.ctx = null;
+            }
+            init() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (this.ctx.state === "suspended") this.ctx.resume();
+            }
+            playLaser() {
+                if (!this.ctx) return;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = "sawtooth";
+                osc.frequency.setValueAtTime(880, this.ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(110, this.ctx.currentTime + 0.12);
+                gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.12);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.12);
+            }
+            playExplosion() {
+                if (!this.ctx) return;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = "square";
+                osc.frequency.setValueAtTime(160, this.ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(30, this.ctx.currentTime + 0.35);
+                gain.gain.setValueAtTime(0.35, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.35);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.35);
+            }
+            playAlienHit() {
+                if (!this.ctx) return;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = "triangle";
+                osc.frequency.setValueAtTime(440, this.ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(80, this.ctx.currentTime + 0.08);
+                gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.08);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.08);
+            }
+            playPowerup() {
+                if (!this.ctx) return;
+                [261.6, 329.6, 392.0, 523.3].forEach((f, i) => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = "sine";
+                    osc.frequency.setValueAtTime(f, this.ctx.currentTime + i * 0.06);
+                    gain.gain.setValueAtTime(0.15, this.ctx.currentTime + i * 0.06);
+                    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + (i + 1) * 0.06);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(this.ctx.currentTime + i * 0.06);
+                    osc.stop(this.ctx.currentTime + (i + 1) * 0.06);
+                });
+            }
+        }
+
+        const sfx = new SoundFX();
+        window.addEventListener("click", () => sfx.init(), { once: true });
+        window.addEventListener("keydown", () => sfx.init(), { once: true });
+
+        // =====================================================================
+        // 2. PARALLAX STARFIELD & NEON ENGINE
+        // =====================================================================
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const scoreEl = document.getElementById("score");
+        const hiScoreEl = document.getElementById("hi-score");
+        const waveEl = document.getElementById("wave");
+        const hullEl = document.getElementById("hull");
+
+        let savedHi = localStorage.getItem("HADL_NEON_HISCORE") || 5000;
+        hiScoreEl.textContent = String(savedHi).padStart(5, "0");
+
+        let score = 0;
+        let hull = 100;
+        let wave = 1;
+        let gameOver = false;
+        let screenShake = 0;
+
+        // 3-Layer Parallax Starfield
+        const stars = Array.from({ length: 90 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2 + 0.5,
+            speed: Math.random() * 2 + 0.5,
+            hue: Math.random() > 0.5 ? "#00f0ff" : "#ff007f"
+        }));
+
+        // Player Entity
+        const player = {
+            x: canvas.width / 2 - 20,
+            y: canvas.height - 55,
+            w: 42,
+            h: 28,
+            speed: 7,
+            cooldown: 0,
+            combo: 1
+        };
+
+        const keys = {};
+        const playerLasers = [];
+        const alienLasers = [];
+        const particles = [];
+        let aliens = [];
+        let alienDir = 1;
+        let alienSpeed = 1.3;
+
+        // Radial Particle Engine
+        function addExplosion(x, y, color = "#ff007f", count = 28) {
+            screenShake = 6;
+            for (let i = 0; i < count; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 5 + 1.5;
+                particles.push({
+                    x: x,
+                    y: y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    size: Math.random() * 3 + 1.5,
+                    alpha: 1.0,
+                    decay: Math.random() * 0.03 + 0.015,
+                    color: color
+                });
+            }
+        }
+
+        // Spawn Wave
+        function spawnWave() {
+            aliens = [];
+            const rows = 4;
+            const cols = 9;
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    aliens.push({
+                        x: 70 + c * 60,
+                        y: 50 + r * 38,
+                        w: 38,
+                        h: 24,
+                        row: r,
+                        type: r === 0 ? "Dreadnought" : r < 2 ? "Interceptor" : "Scout",
+                        color: r === 0 ? "#ffe600" : r < 2 ? "#ff007f" : "#00f0ff",
+                        hp: r === 0 ? 3 : r < 2 ? 2 : 1,
+                        maxHp: r === 0 ? 3 : r < 2 ? 2 : 1,
+                        pulse: Math.random() * Math.PI
+                    });
+                }
+            }
+        }
+
+        spawnWave();
+
+        // Controls
+        window.addEventListener("keydown", e => {
+            keys[e.key] = true;
+            if (e.key === " " && player.cooldown <= 0 && !gameOver) {
+                sfx.playLaser();
+                // Dual neon laser
+                playerLasers.push({ x: player.x + 8, y: player.y, w: 4, h: 16, speed: 11 });
+                playerLasers.push({ x: player.x + player.w - 12, y: player.y, w: 4, h: 16, speed: 11 });
+                player.cooldown = 11;
+            }
+            if (e.key === "Enter" && gameOver) {
+                score = 0;
+                hull = 100;
+                wave = 1;
+                alienSpeed = 1.3;
+                gameOver = false;
+                spawnWave();
+            }
+        });
+
+        window.addEventListener("keyup", e => keys[e.key] = false);
+
+        // Main Update Loop
+        function update() {
+            if (screenShake > 0) screenShake--;
+
+            // Stars
+            stars.forEach(s => {
+                s.y += s.speed;
+                if (s.y > canvas.height) s.y = 0;
+            });
+
+            // Particles
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= p.decay;
+                if (p.alpha <= 0) particles.splice(i, 1);
+            }
+
+            if (gameOver) return;
+
+            if (player.cooldown > 0) player.cooldown--;
+
+            // Move Player
+            if ((keys["ArrowLeft"] || keys["a"]) && player.x > 10) player.x -= player.speed;
+            if ((keys["ArrowRight"] || keys["d"]) && player.x < canvas.width - player.w - 10) player.x += player.speed;
+
+            // Player Lasers
+            for (let i = playerLasers.length - 1; i >= 0; i--) {
+                playerLasers[i].y -= playerLasers[i].speed;
+                if (playerLasers[i].y < -20) playerLasers.splice(i, 1);
+            }
+
+            // Alien Lasers
+            for (let i = alienLasers.length - 1; i >= 0; i--) {
+                alienLasers[i].y += alienLasers[i].speed;
+                // Collision with player
+                if (alienLasers[i].x > player.x && alienLasers[i].x < player.x + player.w &&
+                    alienLasers[i].y > player.y && alienLasers[i].y < player.y + player.h) {
+                    alienLasers.splice(i, 1);
+                    hull -= 20;
+                    addExplosion(player.x + player.w/2, player.y + player.h/2, "#ff007f", 18);
+                    sfx.playExplosion();
+                    hullEl.textContent = Math.max(0, hull) + "%";
+                    if (hull <= 30) hullEl.style.color = "#ff0055";
+                    if (hull <= 0) {
+                        gameOver = true;
+                        if (score > savedHi) {
+                            localStorage.setItem("HADL_NEON_HISCORE", score);
+                            hiScoreEl.textContent = String(score).padStart(5, "0");
+                        }
+                    }
+                    continue;
+                }
+                if (alienLasers[i] && alienLasers[i].y > canvas.height + 20) alienLasers.splice(i, 1);
+            }
+
+            // Alien Formation
+            let hitEdge = false;
+            aliens.forEach(a => {
+                a.x += alienSpeed * alienDir;
+                a.pulse += 0.05;
+                if (a.x < 15 || a.x > canvas.width - a.w - 15) hitEdge = true;
+                // Periodic plasma shot
+                if (Math.random() < 0.0035 + wave * 0.0008) {
+                    alienLasers.push({ x: a.x + a.w/2, y: a.y + a.h, w: 4, h: 10, speed: 4.5 + wave * 0.4 });
+                }
+            });
+
+            if (hitEdge) {
+                alienDir *= -1;
+                aliens.forEach(a => {
+                    a.y += 14;
+                    if (a.y >= player.y - 25) {
+                        gameOver = true;
+                    }
+                });
+            }
+
+            // Lasers vs Aliens
+            playerLasers.forEach((l, lIdx) => {
+                aliens.forEach((a, aIdx) => {
+                    if (l.x > a.x && l.x < a.x + a.w && l.y > a.y && l.y < a.y + a.h) {
+                        playerLasers.splice(lIdx, 1);
+                        a.hp--;
+                        sfx.playAlienHit();
+                        if (a.hp <= 0) {
+                            addExplosion(a.x + a.w/2, a.y + a.h/2, a.color, 32);
+                            sfx.playExplosion();
+                            aliens.splice(aIdx, 1);
+                            score += a.type === "Dreadnought" ? 100 : a.type === "Interceptor" ? 50 : 25;
+                            scoreEl.textContent = String(score).padStart(5, "0");
+                        } else {
+                            addExplosion(l.x, l.y, "#00f0ff", 8);
+                        }
+                    }
+                });
+            });
+
+            // Wave Completed
+            if (aliens.length === 0) {
+                wave++;
+                waveEl.textContent = wave;
+                sfx.playPowerup();
+                alienSpeed += 0.35;
+                hull = Math.min(100, hull + 30);
+                hullEl.textContent = hull + "%";
+                hullEl.style.color = "#39ff14";
+                spawnWave();
+            }
+        }
+
+        // Draw Function
+        function draw() {
+            ctx.save();
+            if (screenShake > 0) {
+                const ox = (Math.random() - 0.5) * screenShake * 2;
+                const oy = (Math.random() - 0.5) * screenShake * 2;
+                ctx.translate(ox, oy);
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Parallax Starfield
+            stars.forEach(s => {
+                ctx.fillStyle = s.hue;
+                ctx.shadowBlur = 4;
+                ctx.shadowColor = s.hue;
+                ctx.fillRect(s.x, s.y, s.size, s.size);
+            });
+
+            // Particles
+            particles.forEach(p => {
+                ctx.save();
+                ctx.globalAlpha = p.alpha;
+                ctx.fillStyle = p.color;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            });
+
+            // Player Ship (Cyberpunk Interceptor)
+            ctx.save();
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = "#00f0ff";
+            ctx.fillStyle = "#00f0ff";
+            // Fuselage
+            ctx.beginPath();
+            ctx.moveTo(player.x + player.w/2, player.y);
+            ctx.lineTo(player.x + player.w, player.y + player.h);
+            ctx.lineTo(player.x + player.w/2, player.y + player.h - 6);
+            ctx.lineTo(player.x, player.y + player.h);
+            ctx.closePath();
+            ctx.fill();
+            // Cockpit
+            ctx.fillStyle = "#ff007f";
+            ctx.fillRect(player.x + player.w/2 - 3, player.y + 10, 6, 8);
+            ctx.restore();
+
+            // Player Lasers (Glowing Neon Cyan)
+            ctx.save();
+            ctx.shadowBlur = 12;
+            ctx.shadowColor = "#00f0ff";
+            ctx.fillStyle = "#00f0ff";
+            playerLasers.forEach(l => ctx.fillRect(l.x, l.y, l.w, l.h));
+            ctx.restore();
+
+            // Alien Lasers (Glowing Plasma Red)
+            ctx.save();
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = "#ff0055";
+            ctx.fillStyle = "#ff0055";
+            alienLasers.forEach(b => ctx.fillRect(b.x, b.y, b.w, b.h));
+            ctx.restore();
+
+            // Aliens
+            aliens.forEach(a => {
+                ctx.save();
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = a.color;
+                ctx.fillStyle = a.color;
+                // Stylized alien hull
+                ctx.fillRect(a.x, a.y + 4, a.w, a.h - 8);
+                ctx.fillRect(a.x + 8, a.y, a.w - 16, a.h);
+                // Glowing eyes
+                ctx.fillStyle = "#030014";
+                ctx.fillRect(a.x + 10, a.y + 8, 4, 4);
+                ctx.fillRect(a.x + a.w - 14, a.y + 8, 4, 4);
+                ctx.restore();
+            });
+
+            // Game Over Screen
+            if (gameOver) {
+                ctx.fillStyle = "rgba(3, 0, 20, 0.85)";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.save();
+                ctx.shadowBlur = 25;
+                ctx.shadowColor = "#ff007f";
+                ctx.fillStyle = "#ff007f";
+                ctx.font = "900 38px 'Courier New', monospace";
+                ctx.textAlign = "center";
+                ctx.fillText("SYSTEM COMPROMISED", canvas.width / 2, canvas.height / 2 - 20);
+
+                ctx.shadowColor = "#00f0ff";
+                ctx.fillStyle = "#f8fafc";
+                ctx.font = "bold 18px 'Courier New', monospace";
+                ctx.fillText(`FINAL SCORE: ${score} | CLEARED WAVES: ${wave - 1}`, canvas.width / 2, canvas.height / 2 + 25);
+                ctx.fillStyle = "#ffe600";
+                ctx.fillText("PRESS [ENTER] TO REBOOT PROTOCOL", canvas.width / 2, canvas.height / 2 + 65);
+                ctx.restore();
+            }
+
+            ctx.restore();
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+        gameLoop();
+    </script>
+</body>
+</html>

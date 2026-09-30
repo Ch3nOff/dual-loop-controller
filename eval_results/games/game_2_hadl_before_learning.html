@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galactic Incursion - HADL Dual-Loop (Before Learning)</title>
+    <style>
+        body {
+            margin: 0;
+            background: #090a10;
+            color: #00ffcc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        #game-container {
+            position: relative;
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #1e293b;
+        }
+        canvas {
+            background: #030712;
+            display: block;
+        }
+        #hud {
+            display: flex;
+            justify-content: space-between;
+            width: 650px;
+            padding: 8px 16px;
+            box-sizing: border-box;
+            background: #0f172a;
+            border-bottom: 1px solid #334155;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .hud-val { color: #f8fafc; }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="hud">
+            <div>SCORE: <span id="score" class="hud-val">0</span></div>
+            <div>WAVE: <span id="wave" class="hud-val">1</span></div>
+            <div>SHIELDS: <span id="lives" class="hud-val">100%</span></div>
+        </div>
+        <canvas id="gameCanvas" width="650" height="520"></canvas>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const scoreEl = document.getElementById("score");
+        const waveEl = document.getElementById("wave");
+        const livesEl = document.getElementById("lives");
+
+        let score = 0;
+        let shields = 100;
+        let wave = 1;
+        let gameOver = false;
+
+        const stars = Array.from({ length: 60 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2 + 0.5,
+            speed: Math.random() * 1.5 + 0.5
+        }));
+
+        const player = {
+            x: 300,
+            y: 470,
+            w: 36,
+            h: 24,
+            speed: 6,
+            cooldown: 0
+        };
+
+        const keys = {};
+        const playerBullets = [];
+        const alienBullets = [];
+        let aliens = [];
+        let alienDir = 1;
+        let alienSpeed = 1.2;
+
+        function spawnWave() {
+            aliens = [];
+            for (let r = 0; r < 4; r++) {
+                for (let c = 0; c < 9; c++) {
+                    aliens.push({
+                        x: 60 + c * 55,
+                        y: 50 + r * 35,
+                        w: 32,
+                        h: 22,
+                        type: r === 0 ? "commander" : r < 2 ? "cruiser" : "drone",
+                        color: r === 0 ? "#f43f5e" : r < 2 ? "#eab308" : "#3b82f6",
+                        hp: r === 0 ? 2 : 1
+                    });
+                }
+            }
+        }
+
+        spawnWave();
+
+        window.addEventListener("keydown", e => {
+            keys[e.key] = true;
+            if (e.key === " " && player.cooldown <= 0 && !gameOver) {
+                playerBullets.push({ x: player.x + player.w / 2 - 2, y: player.y, w: 4, h: 12, speed: 9 });
+                player.cooldown = 14;
+            }
+            if (e.key === "Enter" && gameOver) {
+                score = 0;
+                shields = 100;
+                wave = 1;
+                gameOver = false;
+                spawnWave();
+            }
+        });
+
+        window.addEventListener("keyup", e => keys[e.key] = false);
+
+        function update() {
+            if (gameOver) return;
+
+            // Stars
+            stars.forEach(s => {
+                s.y += s.speed;
+                if (s.y > canvas.height) s.y = 0;
+            });
+
+            // Player cooldown
+            if (player.cooldown > 0) player.cooldown--;
+
+            // Move
+            if ((keys["ArrowLeft"] || keys["a"]) && player.x > 10) player.x -= player.speed;
+            if ((keys["ArrowRight"] || keys["d"]) && player.x < canvas.width - player.w - 10) player.x += player.speed;
+
+            // Bullets
+            for (let i = playerBullets.length - 1; i >= 0; i--) {
+                playerBullets[i].y -= playerBullets[i].speed;
+                if (playerBullets[i].y < 0) playerBullets.splice(i, 1);
+            }
+
+            for (let i = alienBullets.length - 1; i >= 0; i--) {
+                alienBullets[i].y += alienBullets[i].speed;
+                // Collision with player
+                if (alienBullets[i].x > player.x && alienBullets[i].x < player.x + player.w &&
+                    alienBullets[i].y > player.y && alienBullets[i].y < player.y + player.h) {
+                    alienBullets.splice(i, 1);
+                    shields -= 25;
+                    livesEl.textContent = Math.max(0, shields) + "%";
+                    if (shields <= 0) gameOver = true;
+                    continue;
+                }
+                if (alienBullets[i] && alienBullets[i].y > canvas.height) alienBullets.splice(i, 1);
+            }
+
+            // Aliens patrol
+            let edge = false;
+            aliens.forEach(a => {
+                a.x += alienSpeed * alienDir;
+                if (a.x < 15 || a.x > canvas.width - a.w - 15) edge = true;
+                // Random alien bomb
+                if (Math.random() < 0.003) {
+                    alienBullets.push({ x: a.x + a.w / 2, y: a.y + a.h, w: 3, h: 8, speed: 4 });
+                }
+            });
+
+            if (edge) {
+                alienDir *= -1;
+                aliens.forEach(a => {
+                    a.y += 12;
+                    if (a.y >= player.y - 20) gameOver = true;
+                });
+            }
+
+            // Bullet vs Alien
+            playerBullets.forEach((b, bIdx) => {
+                aliens.forEach((a, aIdx) => {
+                    if (b.x > a.x && b.x < a.x + a.w && b.y > a.y && b.y < a.y + a.h) {
+                        playerBullets.splice(bIdx, 1);
+                        a.hp--;
+                        if (a.hp <= 0) {
+                            aliens.splice(aIdx, 1);
+                            score += a.type === "commander" ? 30 : 15;
+                            scoreEl.textContent = score;
+                        }
+                    }
+                });
+            });
+
+            // Wave clear
+            if (aliens.length === 0) {
+                wave++;
+                waveEl.textContent = wave;
+                alienSpeed += 0.3;
+                shields = Math.min(100, shields + 25);
+                livesEl.textContent = shields + "%";
+                spawnWave();
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Stars
+            ctx.fillStyle = "#64748b";
+            stars.forEach(s => ctx.fillRect(s.x, s.y, s.size, s.size));
+
+            // Player Ship
+            ctx.fillStyle = "#38bdf8";
+            ctx.beginPath();
+            ctx.moveTo(player.x + player.w / 2, player.y);
+            ctx.lineTo(player.x + player.w, player.y + player.h);
+            ctx.lineTo(player.x, player.y + player.h);
+            ctx.closePath();
+            ctx.fill();
+
+            // Player Bullets
+            ctx.fillStyle = "#00ffcc";
+            playerBullets.forEach(b => ctx.fillRect(b.x, b.y, b.w, b.h));
+
+            // Alien Bullets
+            ctx.fillStyle = "#f43f5e";
+            alienBullets.forEach(b => ctx.fillRect(b.x, b.y, b.w, b.h));
+
+            // Aliens
+            aliens.forEach(a => {
+                ctx.fillStyle = a.color;
+                ctx.fillRect(a.x, a.y, a.w, a.h);
+            });
+
+            if (gameOver) {
+                ctx.fillStyle = "rgba(0, 0, 0, 0.75)";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "#f43f5e";
+                ctx.font = "bold 34px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("MISSION TERMINATED", canvas.width / 2, canvas.height / 2 - 10);
+                ctx.fillStyle = "#f8fafc";
+                ctx.font = "16px sans-serif";
+                ctx.fillText(`Final Score: ${score} | Wave: ${wave}`, canvas.width / 2, canvas.height / 2 + 30);
+                ctx.fillText("Press ENTER to Deploy Again", canvas.width / 2, canvas.height / 2 + 65);
+            }
+        }
+
+        function loop() {
+            update();
+            draw();
+            requestAnimationFrame(loop);
+        }
+        loop();
+    </script>
+</body>
+</html>

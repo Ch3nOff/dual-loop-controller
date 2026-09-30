@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HADL v3.0 Web Game Model Comparison Arena</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            background: #090d16;
+            color: #f1f5f9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+        header {
+            background: #0f172a;
+            border-bottom: 2px solid #1e293b;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        h1 { margin: 0; font-size: 20px; font-weight: 800; color: #38bdf8; letter-spacing: 0.5px; }
+        .header-sub { font-size: 12px; color: #94a3b8; margin-top: 3px; }
+        #tabs {
+            display: flex;
+            gap: 12px;
+            padding: 10px 24px;
+            background: #111827;
+            border-bottom: 1px solid #1f2937;
+        }
+        .tab-btn {
+            background: #1f2937;
+            color: #94a3b8;
+            border: 1px solid #374151;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tab-btn.active {
+            background: #0284c7;
+            color: #ffffff;
+            border-color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+        #arena-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+        #game-frame-box {
+            flex: 2.2;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            border-right: 2px solid #1e293b;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        #metrics-sidebar {
+            flex: 1.2;
+            background: #0f172a;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .metric-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 16px;
+        }
+        .metric-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #38bdf8;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .stat-item {
+            background: #0f172a;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #1f2937;
+        }
+        .stat-label { font-size: 11px; color: #94a3b8; }
+        .stat-val { font-size: 17px; font-weight: 800; color: #10b981; margin-top: 2px; }
+        .score-bar-bg {
+            background: #1f2937;
+            border-radius: 4px;
+            height: 8px;
+            width: 100%;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+        .score-bar-fill {
+            background: #10b981;
+            height: 100%;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>HADL v3.0 Web Game Model Execution Arena</h1>
+            <div class="header-sub">Direct Empirical Comparison: Generation Time, Token Throughput, Estimated Cost & Real Gameplay Fidelity</div>
+        </div>
+        <div style="font-size: 12px; color: #10b981; font-weight: bold; background: #064e3b; padding: 6px 12px; border-radius: 4px; border: 1px solid #059669;">
+            GPU: NVIDIA RTX 5060 (8GB VRAM)
+        </div>
+    </header>
+
+    <div id="tabs">
+        <button class="tab-btn active" onclick="switchGame('game_3_hadl_after_learning.html', 3)">🌟 3. HADL (Post-Learning & Teaching)</button>
+        <button class="tab-btn" onclick="switchGame('game_2_hadl_before_learning.html', 2)">⚡ 2. HADL (Before Learning / Zero-Shot)</button>
+        <button class="tab-btn" onclick="switchGame('game_1_naive_base.html', 1)">📦 1. Naive Base Model (No Dual-Loop)</button>
+    </div>
+
+    <div id="arena-container">
+        <div id="game-frame-box">
+            <iframe id="gameIframe" src="game_3_hadl_after_learning.html"></iframe>
+        </div>
+
+        <div id="metrics-sidebar">
+            <div class="metric-card">
+                <h3 id="currentModelTitle">HADL Dual-Loop (After Continual Learning)</h3>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">Total Time</div>
+                        <div class="stat-val" id="valTime">143.51s</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Output Tokens</div>
+                        <div class="stat-val" id="valTokens">4707</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Throughput</div>
+                        <div class="stat-val" id="valThroughput">32.80 tok/s</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Est. Cost / 1k Games</div>
+                        <div class="stat-val" id="valCost">$0.9414</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <h3>Game Capabilities & Feature Scoring</h3>
+                <div style="margin-bottom: 8px;">
+                    <div style="display:flex; justify-content:space-between; font-size:12px;"><span>Web Audio API Synthesizer</span><span id="scoreAudio">100%</span></div>
+                    <div class="score-bar-bg"><div class="score-bar-fill" id="barAudio" style="width: 100%;"></div></div>
+                </div>
+                <div style="margin-bottom: 8px;">
+                    <div style="display:flex; justify-content:space-between; font-size:12px;"><span>Particle Physics & Radial FX</span><span id="scoreParticle">100%</span></div>
+                    <div class="score-bar-bg"><div class="score-bar-fill" id="barParticle" style="width: 100%;"></div></div>
+                </div>
+                <div style="margin-bottom: 8px;">
+                    <div style="display:flex; justify-content:space-between; font-size:12px;"><span>Parallax Starfield & Neon Polish</span><span id="scoreVisual">100%</span></div>
+                    <div class="score-bar-bg"><div class="score-bar-fill" id="barVisual" style="width: 100%;"></div></div>
+                </div>
+                <div style="margin-bottom: 8px;">
+                    <div style="display:flex; justify-content:space-between; font-size:12px;"><span>LocalStorage Persistence</span><span id="scoreStorage">100%</span></div>
+                    <div class="score-bar-bg"><div class="score-bar-fill" id="barStorage" style="width: 100%;"></div></div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <h3>What Changed Post-Teaching?</h3>
+                <p id="learningNotes" style="font-size: 13px; color: #cbd5e1; line-height: 1.5; margin: 0;">
+                    In-situ fast weights ($M_{fast}$) and Sleep-Phase offline distillation bound 4 game engine invariants into System 2. Result: Completely added procedural sound synthesis, particle screen shake, and responsive combo mechanics without base model retraining.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const data = {
+            1: {
+                title: "1. Naive Base Model (No Dual-Loop)",
+                time: "34.96s",
+                tokens: "1346",
+                tok_sec: "38.50 tok/s",
+                cost: "$0.2692",
+                audio: "0%",
+                particle: "0%",
+                visual: "25%",
+                storage: "0%",
+                notes: "Basic game generated without System 2 contemplation. Simple square graphics, silent audio (no Web Audio API), basic frame loop, zero persistence."
+            },
+            2: {
+                title: "2. HADL Dual-Loop (Before Learning / Zero-Shot)",
+                time: "64.44s",
+                tokens: "2204",
+                tok_sec: "34.20 tok/s",
+                cost: "$0.4408",
+                audio: "0%",
+                particle: "15%",
+                visual: "65%",
+                storage: "0%",
+                notes: "System 2 contemplation active. Produced structured wave progression, enemy bombardment, lives percentage, starfield, and improved state transitions."
+            },
+            3: {
+                title: "3. HADL Dual-Loop (After Continual Learning & Teaching)",
+                time: "143.51s",
+                tokens: "4707",
+                tok_sec: "32.80 tok/s",
+                cost: "$0.9414",
+                audio: "100%",
+                particle: "100%",
+                visual: "100%",
+                storage: "100%",
+                notes: "After teaching 4 game engine invariants into plastic fast-weights ($M_{fast}$) and triggering sleep consolidation: The model integrated procedural chiptune audio, 30+ particle radial explosions with screen shake, high score memory, and cyberpunk neon glows!"
+            }
+        };
+
+        function switchGame(file, id) {
+            document.getElementById("gameIframe").src = file;
+            const buttons = document.querySelectorAll(".tab-btn");
+            buttons.forEach((b, idx) => {
+                b.classList.toggle("active", (3 - idx) === id);
+            });
+
+            const m = data[id];
+            document.getElementById("currentModelTitle").textContent = m.title;
+            document.getElementById("valTime").textContent = m.time;
+            document.getElementById("valTokens").textContent = m.tokens;
+            document.getElementById("valThroughput").textContent = m.tok_sec;
+            document.getElementById("valCost").textContent = m.cost;
+            document.getElementById("scoreAudio").textContent = m.audio;
+            document.getElementById("barAudio").style.width = m.audio;
+            document.getElementById("scoreParticle").textContent = m.particle;
+            document.getElementById("barParticle").style.width = m.particle;
+            document.getElementById("scoreVisual").textContent = m.visual;
+            document.getElementById("barVisual").style.width = m.visual;
+            document.getElementById("scoreStorage").textContent = m.storage;
+            document.getElementById("barStorage").style.width = m.storage;
+            document.getElementById("learningNotes").textContent = m.notes;
+        }
+    </script>
+</body>
+</html>

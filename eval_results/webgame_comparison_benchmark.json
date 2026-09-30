@@ -1,0 +1,113 @@
+{
+  "benchmark_suite": "Web-Game-Creation-and-Continual-Learning",
+  "version": "3.0.0",
+  "timestamp": "2026-09-30T02:16:23Z",
+  "device": "cuda:0",
+  "total_samples": 3,
+  "total_elapsed_seconds": 242.911,
+  "summary": {
+    "benchmark_name": "Web Game Generation & Continual Learning Benchmark",
+    "models_evaluated": 3,
+    "metrics_naive": {
+      "regime": "Naive Base Model (No Dual-Loop)",
+      "tokens": 1346,
+      "elapsed_sec": 34.961,
+      "tok_sec": 38.5,
+      "latency_ms_per_token": 25.97,
+      "cost_per_1k": 0.2692,
+      "playable": true,
+      "audio_api_synthesizer": false,
+      "particle_physics": false,
+      "visual_polish_score": 25.0
+    },
+    "metrics_before": {
+      "regime": "HADL Dual-Loop (Before Learning / Zero-Shot)",
+      "tokens": 2204,
+      "elapsed_sec": 64.444,
+      "tok_sec": 34.2,
+      "latency_ms_per_token": 29.24,
+      "cost_per_1k": 0.4408,
+      "playable": true,
+      "audio_api_synthesizer": false,
+      "particle_physics": true,
+      "visual_polish_score": 65.0
+    },
+    "metrics_after": {
+      "regime": "HADL Dual-Loop (After Continual Learning & Teaching)",
+      "tokens": 4707,
+      "elapsed_sec": 143.506,
+      "tok_sec": 32.8,
+      "latency_ms_per_token": 30.49,
+      "cost_per_1k": 0.9414,
+      "playable": true,
+      "audio_api_synthesizer": true,
+      "particle_physics": true,
+      "visual_polish_score": 100.0
+    },
+    "sleep_consolidation_telem": {
+      "sleep_cycle_id": 1,
+      "status": "CONSOLIDATED_SUCCESS",
+      "episodes_processed": 3,
+      "singular_energy_retained": 0.9999999999999997,
+      "delta_W_norm": 1656.1405029296875,
+      "total_permanent_norm": 165.6140594482422,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 438.2896000170149
+    },
+    "learning_delta": {
+      "token_count_gain_pct": 249.7,
+      "capability_score_gain_pct": 300.0,
+      "features_added_post_learning": [
+        "Procedural Web Audio API Chiptune Sound Synthesizer (Lasers, Explosions, Hits, Powerups)",
+        "30+ Radial Particle Burst Physics Engine with Screen Shake",
+        "3-Layer Parallax Starfield with Depth",
+        "Neon Canvas ShadowBlur Glowing Lasers & Shield Hulls",
+        "Persistent Hi-Score via Browser LocalStorage"
+      ]
+    }
+  },
+  "samples_log": [
+    {
+      "model_id": "naive_base",
+      "game_file": "eval_results\\games\\game_1_naive_base.html",
+      "regime": "Naive Base Model (No Dual-Loop)",
+      "tokens": 1346,
+      "elapsed_sec": 34.961,
+      "tok_sec": 38.5,
+      "latency_ms_per_token": 25.97,
+      "cost_per_1k": 0.2692,
+      "playable": true,
+      "audio_api_synthesizer": false,
+      "particle_physics": false,
+      "visual_polish_score": 25.0
+    },
+    {
+      "model_id": "hadl_before_learning",
+      "game_file": "eval_results\\games\\game_2_hadl_before_learning.html",
+      "regime": "HADL Dual-Loop (Before Learning / Zero-Shot)",
+      "tokens": 2204,
+      "elapsed_sec": 64.444,
+      "tok_sec": 34.2,
+      "latency_ms_per_token": 29.24,
+      "cost_per_1k": 0.4408,
+      "playable": true,
+      "audio_api_synthesizer": false,
+      "particle_physics": true,
+      "visual_polish_score": 65.0
+    },
+    {
+      "model_id": "hadl_after_learning",
+      "game_file": "eval_results\\games\\game_3_hadl_after_learning.html",
+      "regime": "HADL Dual-Loop (After Continual Learning & Teaching)",
+      "tokens": 4707,
+      "elapsed_sec": 143.506,
+      "tok_sec": 32.8,
+      "latency_ms_per_token": 30.49,
+      "cost_per_1k": 0.9414,
+      "playable": true,
+      "audio_api_synthesizer": true,
+      "particle_physics": true,
+      "visual_polish_score": 100.0
+    }
+  ]
+}
