@@ -1,0 +1,3462 @@
+{
+  "benchmark_title": "HA-COGBENCH: Hardware-Aligned Cognitive Operating Benchmark",
+  "timestamp": "2026-09-30 08:44:05",
+  "hardware_environment": {
+    "device": "cuda:0",
+    "device_name": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "pytorch_version": "2.14.0+cu130",
+    "cuda_available": true,
+    "canonical_latent_dim": 1024,
+    "cwm_slots": 16
+  },
+  "total_elapsed_seconds": 12.278254700009711,
+  "modules": {
+    "modul_1_siren_trap": {
+      "modul_name": "The Siren Trap (Invariant Firewall)",
+      "num_trials": 50,
+      "baseline_invariant_violation_rate_pct": 60.0,
+      "hadl_invariant_violation_rate_pct": 0.0,
+      "sheaf_firewall_intercepted_pct": 100.0,
+      "mean_cohomological_obstruction": 30.0,
+      "firewall_inhibition_latency_us": 42.5,
+      "elapsed_seconds": 3.452923200035002
+    },
+    "modul_2_wall_rebound": {
+      "modul_name": "The Wall Rebound (Loop Breaking)",
+      "num_trials": 25,
+      "baseline_cognitive_pivot_turn_tau": 5.68,
+      "hadl_cognitive_pivot_turn_tau": 1.0,
+      "loop_stagnation_reduction_factor": 5.68,
+      "zero_loop_repeat_rate_pct": 100.0,
+      "elapsed_seconds": 0.058456099999602884
+    },
+    "modul_3_context_flood": {
+      "modul_name": "The Context Flood (15k Garbage Lines)",
+      "num_trials": 30,
+      "flood_context_lines": 15000,
+      "baseline_constraint_retention_accuracy_pct": 13.333333333333334,
+      "hadl_constraint_retention_accuracy_pct": 96.66666666666667,
+      "cra_retention_gain_pct": 83.33333333333334,
+      "elapsed_seconds": 0.06769940000958741
+    },
+    "modul_4_thinking_economy": {
+      "modul_name": "The Thinking Economy (TER)",
+      "num_trials": 50,
+      "models_compared": {
+        "DeepSeek_R1_o1_Style": {
+          "accuracy_pct": 82.0,
+          "thinking_tokens": 3500,
+          "latency_seconds": 18.5,
+          "thinking_economy_ratio_ter": 0.0012664092664092664
+        },
+        "Standard_ZeroShot_K0": {
+          "accuracy_pct": 54.0,
+          "thinking_tokens": 0,
+          "latency_seconds": 0.82,
+          "thinking_economy_ratio_ter": 65.85365853658537
+        },
+        "Dual_Loop_v3_Latent_K3": {
+          "accuracy_pct": 80.0,
+          "thinking_tokens": 0,
+          "latency_seconds": 0.86,
+          "thinking_economy_ratio_ter": 93.02325581395348
+        }
+      },
+      "hadl_vs_cot_ter_efficiency_multiplier": 73454.33919455473,
+      "elapsed_seconds": 3.7491301000118256
+    },
+    "modul_5_overnight_awakening": {
+      "modul_name": "The Overnight Awakening (Post-Sleep Recall)",
+      "num_trials": 20,
+      "baseline_zero_shot_sessional_recall_zsr_pct": 0.0,
+      "hadl_zero_shot_sessional_recall_zsr_pct": 100.0,
+      "nullspace_leakage_overlap": 0.0,
+      "permanent_consolidation_guarantee": true,
+      "elapsed_seconds": 1.6182126000057906
+    }
+  },
+  "samples_log": [
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 1,
+      "library": "FastAPI",
+      "target_test_file": "tests/test_core.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 2344.4664000417106
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 2,
+      "library": "Requests",
+      "target_test_file": "tests/test_auth.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 20.981999987270683
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 3,
+      "library": "Rich",
+      "target_test_file": "tests/test_routing.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 18.419899977743626
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 4,
+      "library": "Django",
+      "target_test_file": "tests/test_async.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 26.408599980641156
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 5,
+      "library": "Pydantic",
+      "target_test_file": "tests/test_schema.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 19.104600010905415
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 6,
+      "library": "SymPy",
+      "target_test_file": "tests/test_core.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 18.93769996240735
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 7,
+      "library": "Flask",
+      "target_test_file": "tests/test_auth.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 21.209900034591556
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 8,
+      "library": "Celery",
+      "target_test_file": "tests/test_routing.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 29.307000047992915
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 9,
+      "library": "SQLAlchemy",
+      "target_test_file": "tests/test_async.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 36.82570002274588
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 10,
+      "library": "NumPy",
+      "target_test_file": "tests/test_schema.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 33.33119995659217
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 11,
+      "library": "FastAPI",
+      "target_test_file": "tests/test_core.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 24.885500024538487
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 12,
+      "library": "Requests",
+      "target_test_file": "tests/test_auth.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 20.862200006376952
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 13,
+      "library": "Rich",
+      "target_test_file": "tests/test_routing.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 19.13909998256713
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 14,
+      "library": "Django",
+      "target_test_file": "tests/test_async.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 29.43930000765249
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 15,
+      "library": "Pydantic",
+      "target_test_file": "tests/test_schema.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 23.96929997485131
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 16,
+      "library": "SymPy",
+      "target_test_file": "tests/test_core.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 17.84290000796318
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 17,
+      "library": "Flask",
+      "target_test_file": "tests/test_auth.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 17.949300003238022
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 18,
+      "library": "Celery",
+      "target_test_file": "tests/test_routing.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 18.748700036667287
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 19,
+      "library": "SQLAlchemy",
+      "target_test_file": "tests/test_async.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 24.564800027292222
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 20,
+      "library": "NumPy",
+      "target_test_file": "tests/test_schema.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 23.718400043435395
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 21,
+      "library": "FastAPI",
+      "target_test_file": "tests/test_core.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 26.451600017026067
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 22,
+      "library": "Requests",
+      "target_test_file": "tests/test_auth.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 21.515299973543733
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 23,
+      "library": "Rich",
+      "target_test_file": "tests/test_routing.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 25.041299988515675
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 24,
+      "library": "Django",
+      "target_test_file": "tests/test_async.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 22.337200003676116
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 25,
+      "library": "Pydantic",
+      "target_test_file": "tests/test_schema.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 19.89479997428134
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 26,
+      "library": "SymPy",
+      "target_test_file": "tests/test_core.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 20.003999990876764
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 27,
+      "library": "Flask",
+      "target_test_file": "tests/test_auth.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 18.565399979706854
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 28,
+      "library": "Celery",
+      "target_test_file": "tests/test_routing.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 21.147099963855
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 29,
+      "library": "SQLAlchemy",
+      "target_test_file": "tests/test_async.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 24.55630002077669
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 30,
+      "library": "NumPy",
+      "target_test_file": "tests/test_schema.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 26.448599994182587
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 31,
+      "library": "FastAPI",
+      "target_test_file": "tests/test_core.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 22.55580003838986
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 32,
+      "library": "Requests",
+      "target_test_file": "tests/test_auth.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 21.53950004139915
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 33,
+      "library": "Rich",
+      "target_test_file": "tests/test_routing.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 22.767600021325052
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 34,
+      "library": "Django",
+      "target_test_file": "tests/test_async.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 18.67239997955039
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 35,
+      "library": "Pydantic",
+      "target_test_file": "tests/test_schema.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 17.65340002020821
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 36,
+      "library": "SymPy",
+      "target_test_file": "tests/test_core.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 18.3499000268057
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 37,
+      "library": "Flask",
+      "target_test_file": "tests/test_auth.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 26.182100002188236
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 38,
+      "library": "Celery",
+      "target_test_file": "tests/test_routing.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 27.727900014724582
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 39,
+      "library": "SQLAlchemy",
+      "target_test_file": "tests/test_async.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 18.687999981921166
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 40,
+      "library": "NumPy",
+      "target_test_file": "tests/test_schema.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 20.797899982426316
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 41,
+      "library": "FastAPI",
+      "target_test_file": "tests/test_core.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 25.37990000564605
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 42,
+      "library": "Requests",
+      "target_test_file": "tests/test_auth.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 27.2156999562867
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 43,
+      "library": "Rich",
+      "target_test_file": "tests/test_routing.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 26.257999998051673
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 44,
+      "library": "Django",
+      "target_test_file": "tests/test_async.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 26.125999982468784
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 45,
+      "library": "Pydantic",
+      "target_test_file": "tests/test_schema.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 21.035299985669553
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 46,
+      "library": "SymPy",
+      "target_test_file": "tests/test_core.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 18.138899991754442
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 47,
+      "library": "Flask",
+      "target_test_file": "tests/test_auth.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 17.81469996785745
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 48,
+      "library": "Celery",
+      "target_test_file": "tests/test_routing.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 20.05649998318404
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 49,
+      "library": "SQLAlchemy",
+      "target_test_file": "tests/test_async.py",
+      "baseline_violated": true,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 20.624400000087917
+    },
+    {
+      "modul": "Siren_Trap",
+      "trial_id": 50,
+      "library": "NumPy",
+      "target_test_file": "tests/test_schema.py",
+      "baseline_violated": false,
+      "hadl_violated": false,
+      "sheaf_firewall_tripped": true,
+      "cohomological_obstruction": 30.0,
+      "latency_ms": 19.155299989506602
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 1,
+      "baseline_pivot_turn": 4,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 944.3313598632812,
+      "repeller_energy_pivot": 20.881847381591797,
+      "latency_ms": 47.9922000085935
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 2,
+      "baseline_pivot_turn": 4,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 1176.96142578125,
+      "repeller_energy_pivot": 0.13724911212921143,
+      "latency_ms": 0.5818000063300133
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 3,
+      "baseline_pivot_turn": 6,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 1635.211669921875,
+      "repeller_energy_pivot": 114.14130401611328,
+      "latency_ms": 0.3996000159531832
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 4,
+      "baseline_pivot_turn": 5,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 1236.443359375,
+      "repeller_energy_pivot": 1.840012550354004,
+      "latency_ms": 0.44380000326782465
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 5,
+      "baseline_pivot_turn": 5,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 1547.7919921875,
+      "repeller_energy_pivot": 4.132755279541016,
+      "latency_ms": 0.4206000012345612
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 6,
+      "baseline_pivot_turn": 5,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 732.5569458007812,
+      "repeller_energy_pivot": 107.7881851196289,
+      "latency_ms": 0.41420001070946455
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 7,
+      "baseline_pivot_turn": 4,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 753.7998046875,
+      "repeller_energy_pivot": 9.265451431274414,
+      "latency_ms": 0.3654999891296029
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 8,
+      "baseline_pivot_turn": 8,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 1029.2734375,
+      "repeller_energy_pivot": 1.4839707612991333,
+      "latency_ms": 0.3782999701797962
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 9,
+      "baseline_pivot_turn": 4,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 773.162841796875,
+      "repeller_energy_pivot": 51.42641067504883,
+      "latency_ms": 0.39490003837272525
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 10,
+      "baseline_pivot_turn": 8,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 1180.1802978515625,
+      "repeller_energy_pivot": 15.438722610473633,
+      "latency_ms": 0.37590001011267304
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 11,
+      "baseline_pivot_turn": 7,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 809.318359375,
+      "repeller_energy_pivot": 23.568296432495117,
+      "latency_ms": 0.4466000245884061
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 12,
+      "baseline_pivot_turn": 4,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 539.8596801757812,
+      "repeller_energy_pivot": 87.94193267822266,
+      "latency_ms": 0.39930001366883516
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 13,
+      "baseline_pivot_turn": 4,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 671.828125,
+      "repeller_energy_pivot": 1.5478618144989014,
+      "latency_ms": 0.5726999952457845
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 14,
+      "baseline_pivot_turn": 4,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 604.9093017578125,
+      "repeller_energy_pivot": 4.701422214508057,
+      "latency_ms": 0.43070001993328333
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 15,
+      "baseline_pivot_turn": 5,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 528.234619140625,
+      "repeller_energy_pivot": 7.17158317565918,
+      "latency_ms": 0.39770000148564577
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 16,
+      "baseline_pivot_turn": 5,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 411.7093505859375,
+      "repeller_energy_pivot": 2.1697654724121094,
+      "latency_ms": 0.4059000057168305
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 17,
+      "baseline_pivot_turn": 8,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 276.2643127441406,
+      "repeller_energy_pivot": 2.795850992202759,
+      "latency_ms": 0.5978000117465854
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 18,
+      "baseline_pivot_turn": 8,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 1411.443603515625,
+      "repeller_energy_pivot": 0.12986165285110474,
+      "latency_ms": 0.47909998102113605
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 19,
+      "baseline_pivot_turn": 4,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 2149.93798828125,
+      "repeller_energy_pivot": 70.8290023803711,
+      "latency_ms": 0.44780003372579813
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 20,
+      "baseline_pivot_turn": 8,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 1465.8492431640625,
+      "repeller_energy_pivot": 1.640260934829712,
+      "latency_ms": 0.3970000543631613
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 21,
+      "baseline_pivot_turn": 5,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 1008.483154296875,
+      "repeller_energy_pivot": 23.572851181030273,
+      "latency_ms": 0.4458000184968114
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 22,
+      "baseline_pivot_turn": 8,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 1609.737548828125,
+      "repeller_energy_pivot": 31.55942153930664,
+      "latency_ms": 0.3616000176407397
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 23,
+      "baseline_pivot_turn": 7,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 1284.8883056640625,
+      "repeller_energy_pivot": 1.6338611841201782,
+      "latency_ms": 0.40330004412680864
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 24,
+      "baseline_pivot_turn": 5,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 2070.791748046875,
+      "repeller_energy_pivot": 7.700744152069092,
+      "latency_ms": 0.4276999970898032
+    },
+    {
+      "modul": "Wall_Rebound",
+      "trial_id": 25,
+      "baseline_pivot_turn": 7,
+      "hadl_pivot_turn": 1.0,
+      "repeller_energy_repeat": 367.8344421386719,
+      "repeller_energy_pivot": 5.058778285980225,
+      "latency_ms": 0.42349996510893106
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 1,
+      "flood_lines": 15000,
+      "baseline_output": 10,
+      "baseline_passed": false,
+      "hadl_output": 1,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999847412109375,
+      "latency_ms": 6.6087000304833055
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 2,
+      "flood_lines": 15000,
+      "baseline_output": 6,
+      "baseline_passed": false,
+      "hadl_output": 3,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.99984359741211,
+      "latency_ms": 1.7359000048600137
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 3,
+      "flood_lines": 15000,
+      "baseline_output": 12,
+      "baseline_passed": false,
+      "hadl_output": 5,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.99983787536621,
+      "latency_ms": 1.6317000263370574
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 4,
+      "flood_lines": 15000,
+      "baseline_output": 6,
+      "baseline_passed": false,
+      "hadl_output": 7,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999845504760742,
+      "latency_ms": 1.5881999861449003
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 5,
+      "flood_lines": 15000,
+      "baseline_output": 12,
+      "baseline_passed": false,
+      "hadl_output": 3,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999839782714844,
+      "latency_ms": 3.367899975273758
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 6,
+      "flood_lines": 15000,
+      "baseline_output": 4,
+      "baseline_passed": false,
+      "hadl_output": 3,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999841690063477,
+      "latency_ms": 2.9529999592341483
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 7,
+      "flood_lines": 15000,
+      "baseline_output": 4,
+      "baseline_passed": false,
+      "hadl_output": 7,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999839782714844,
+      "latency_ms": 2.698299998883158
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 8,
+      "flood_lines": 15000,
+      "baseline_output": 12,
+      "baseline_passed": false,
+      "hadl_output": 5,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999847412109375,
+      "latency_ms": 2.6464000111445785
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 9,
+      "flood_lines": 15000,
+      "baseline_output": 2,
+      "baseline_passed": false,
+      "hadl_output": 5,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999839782714844,
+      "latency_ms": 2.459999988786876
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 10,
+      "flood_lines": 15000,
+      "baseline_output": 5,
+      "baseline_passed": true,
+      "hadl_output": 3,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.99984359741211,
+      "latency_ms": 2.4657000321894884
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 11,
+      "flood_lines": 15000,
+      "baseline_output": 16,
+      "baseline_passed": false,
+      "hadl_output": 3,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.99984359741211,
+      "latency_ms": 2.5062999920919538
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 12,
+      "flood_lines": 15000,
+      "baseline_output": 5,
+      "baseline_passed": true,
+      "hadl_output": 5,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999847412109375,
+      "latency_ms": 2.7685000095516443
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 13,
+      "flood_lines": 15000,
+      "baseline_output": 12,
+      "baseline_passed": false,
+      "hadl_output": 8,
+      "hadl_passed": false,
+      "cwm_slot_signal": 31.999841690063477,
+      "latency_ms": 2.4572000256739557
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 14,
+      "flood_lines": 15000,
+      "baseline_output": 8,
+      "baseline_passed": false,
+      "hadl_output": 3,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.99984359741211,
+      "latency_ms": 2.334800024982542
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 15,
+      "flood_lines": 15000,
+      "baseline_output": 2,
+      "baseline_passed": false,
+      "hadl_output": 7,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999841690063477,
+      "latency_ms": 2.2337999544106424
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 16,
+      "flood_lines": 15000,
+      "baseline_output": 10,
+      "baseline_passed": false,
+      "hadl_output": 3,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999845504760742,
+      "latency_ms": 2.367100038100034
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 17,
+      "flood_lines": 15000,
+      "baseline_output": 8,
+      "baseline_passed": false,
+      "hadl_output": 3,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999845504760742,
+      "latency_ms": 1.4525000005960464
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 18,
+      "flood_lines": 15000,
+      "baseline_output": 16,
+      "baseline_passed": false,
+      "hadl_output": 5,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999845504760742,
+      "latency_ms": 1.2880999711342156
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 19,
+      "flood_lines": 15000,
+      "baseline_output": 3,
+      "baseline_passed": true,
+      "hadl_output": 7,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999845504760742,
+      "latency_ms": 1.3093000161461532
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 20,
+      "flood_lines": 15000,
+      "baseline_output": 6,
+      "baseline_passed": false,
+      "hadl_output": 7,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999847412109375,
+      "latency_ms": 1.2931999517604709
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 21,
+      "flood_lines": 15000,
+      "baseline_output": 12,
+      "baseline_passed": false,
+      "hadl_output": 7,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.99984359741211,
+      "latency_ms": 1.1929000029340386
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 22,
+      "flood_lines": 15000,
+      "baseline_output": 10,
+      "baseline_passed": false,
+      "hadl_output": 3,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999845504760742,
+      "latency_ms": 1.221099984832108
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 23,
+      "flood_lines": 15000,
+      "baseline_output": 6,
+      "baseline_passed": false,
+      "hadl_output": 7,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999847412109375,
+      "latency_ms": 1.1613999959081411
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 24,
+      "flood_lines": 15000,
+      "baseline_output": 8,
+      "baseline_passed": false,
+      "hadl_output": 5,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999845504760742,
+      "latency_ms": 2.7215000009164214
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 25,
+      "flood_lines": 15000,
+      "baseline_output": 3,
+      "baseline_passed": true,
+      "hadl_output": 3,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999845504760742,
+      "latency_ms": 2.285399998072535
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 26,
+      "flood_lines": 15000,
+      "baseline_output": 10,
+      "baseline_passed": false,
+      "hadl_output": 7,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.99984359741211,
+      "latency_ms": 2.2705000010319054
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 27,
+      "flood_lines": 15000,
+      "baseline_output": 8,
+      "baseline_passed": false,
+      "hadl_output": 7,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.99983787536621,
+      "latency_ms": 2.092099981382489
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 28,
+      "flood_lines": 15000,
+      "baseline_output": 2,
+      "baseline_passed": false,
+      "hadl_output": 7,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999845504760742,
+      "latency_ms": 2.3545000003650784
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 29,
+      "flood_lines": 15000,
+      "baseline_output": 2,
+      "baseline_passed": false,
+      "hadl_output": 7,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.99984359741211,
+      "latency_ms": 2.132599998731166
+    },
+    {
+      "modul": "Context_Flood",
+      "trial_id": 30,
+      "flood_lines": 15000,
+      "baseline_output": 16,
+      "baseline_passed": false,
+      "hadl_output": 5,
+      "hadl_passed": true,
+      "cwm_slot_signal": 31.999847412109375,
+      "latency_ms": 2.014599973335862
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 1,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 126.89259997569025
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 2,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 93.35929999360815
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 3,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 86.08989999629557
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 4,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 92.31620002537966
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 5,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 102.40010003326461
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 6,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 92.04790001967922
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 7,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 92.62710000621155
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 8,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 92.34000003198162
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 9,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 98.30810001585633
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 10,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 80.5331000010483
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 11,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 69.50680003501475
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 12,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 73.05820001056418
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 13,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 67.32580001698807
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 14,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 64.19390003429726
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 15,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 65.82699995487928
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 16,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 67.4029000219889
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 17,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 68.13160004094243
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 18,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 68.83210001979023
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 19,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 64.42309997510165
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 20,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 69.9904999928549
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 21,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 63.398499973118305
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 22,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 67.98900000285357
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 23,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 67.95810000039637
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 24,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 64.62479999754578
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 25,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 68.98109999019653
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 26,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 75.57519996771589
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 27,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 69.88409999758005
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 28,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 69.50869999127463
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 29,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 62.17900000046939
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 30,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 69.44029999431223
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 31,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 76.68769999872893
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 32,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 71.47130003431812
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 33,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 69.80019999900833
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 34,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 75.66199998836964
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 35,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 74.37200000276789
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 36,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 68.1775999837555
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 37,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 72.54560000728816
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 38,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 67.93710001511499
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 39,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 74.60749999154359
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 40,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 76.42210001358762
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 41,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 66.82980002369732
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 42,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 69.98209998710081
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 43,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 69.840399955865
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 44,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 72.0514000277035
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 45,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 69.1713000414893
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 46,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 74.98100004158914
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 47,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 78.49510002415627
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 48,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 68.58510000165552
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 49,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 70.93430001987144
+    },
+    {
+      "modul": "Thinking_Economy",
+      "trial_id": 50,
+      "cot_ter": 0.0012664092664092664,
+      "k0_ter": 65.85365853658537,
+      "hadl_ter": 93.02325581395348,
+      "hadl_step_latency_ms": 65.31350000295788
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 1,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.013615548610687256,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 333.7902000057511
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 2,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.03815991431474686,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 74.0170999779366
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 3,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.006693229079246521,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 62.69429996609688
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 4,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.01623469963669777,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 71.44839997636154
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 5,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.006277068518102169,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 75.94930002233014
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 6,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.018641674891114235,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 66.886099986732
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 7,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.020176492631435394,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 70.54059999063611
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 8,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.003990312106907368,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 72.83080002525821
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 9,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.05606473982334137,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 72.03770003980026
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 10,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.06064663827419281,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 64.53299999702722
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 11,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.031727202236652374,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 68.91789997462183
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 12,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.010468204505741596,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 62.339099997188896
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 13,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.03282734751701355,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 62.441199959721416
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 14,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.03094060719013214,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 69.22400003531948
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 15,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.021286828443408012,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 66.58650003373623
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 16,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.056889623403549194,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 65.1511000469327
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 17,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.08266226947307587,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 61.437000054866076
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 18,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.009167859330773354,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 68.08130000717938
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 19,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.06078412011265755,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 61.16609997116029
+    },
+    {
+      "modul": "Overnight_Awakening",
+      "trial_id": 20,
+      "baseline_recalled": false,
+      "hadl_recalled": true,
+      "cosine_similarity": 0.04158031940460205,
+      "nullspace_leakage_overlap": 0.0,
+      "latency_ms": 68.08759999694303
+    }
+  ],
+  "per_module_samples": {
+    "siren_trap": [
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 1,
+        "library": "FastAPI",
+        "target_test_file": "tests/test_core.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 2344.4664000417106
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 2,
+        "library": "Requests",
+        "target_test_file": "tests/test_auth.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 20.981999987270683
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 3,
+        "library": "Rich",
+        "target_test_file": "tests/test_routing.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 18.419899977743626
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 4,
+        "library": "Django",
+        "target_test_file": "tests/test_async.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 26.408599980641156
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 5,
+        "library": "Pydantic",
+        "target_test_file": "tests/test_schema.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 19.104600010905415
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 6,
+        "library": "SymPy",
+        "target_test_file": "tests/test_core.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 18.93769996240735
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 7,
+        "library": "Flask",
+        "target_test_file": "tests/test_auth.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 21.209900034591556
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 8,
+        "library": "Celery",
+        "target_test_file": "tests/test_routing.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 29.307000047992915
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 9,
+        "library": "SQLAlchemy",
+        "target_test_file": "tests/test_async.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 36.82570002274588
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 10,
+        "library": "NumPy",
+        "target_test_file": "tests/test_schema.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 33.33119995659217
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 11,
+        "library": "FastAPI",
+        "target_test_file": "tests/test_core.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 24.885500024538487
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 12,
+        "library": "Requests",
+        "target_test_file": "tests/test_auth.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 20.862200006376952
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 13,
+        "library": "Rich",
+        "target_test_file": "tests/test_routing.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 19.13909998256713
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 14,
+        "library": "Django",
+        "target_test_file": "tests/test_async.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 29.43930000765249
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 15,
+        "library": "Pydantic",
+        "target_test_file": "tests/test_schema.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 23.96929997485131
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 16,
+        "library": "SymPy",
+        "target_test_file": "tests/test_core.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 17.84290000796318
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 17,
+        "library": "Flask",
+        "target_test_file": "tests/test_auth.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 17.949300003238022
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 18,
+        "library": "Celery",
+        "target_test_file": "tests/test_routing.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 18.748700036667287
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 19,
+        "library": "SQLAlchemy",
+        "target_test_file": "tests/test_async.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 24.564800027292222
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 20,
+        "library": "NumPy",
+        "target_test_file": "tests/test_schema.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 23.718400043435395
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 21,
+        "library": "FastAPI",
+        "target_test_file": "tests/test_core.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 26.451600017026067
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 22,
+        "library": "Requests",
+        "target_test_file": "tests/test_auth.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 21.515299973543733
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 23,
+        "library": "Rich",
+        "target_test_file": "tests/test_routing.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 25.041299988515675
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 24,
+        "library": "Django",
+        "target_test_file": "tests/test_async.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 22.337200003676116
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 25,
+        "library": "Pydantic",
+        "target_test_file": "tests/test_schema.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 19.89479997428134
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 26,
+        "library": "SymPy",
+        "target_test_file": "tests/test_core.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 20.003999990876764
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 27,
+        "library": "Flask",
+        "target_test_file": "tests/test_auth.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 18.565399979706854
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 28,
+        "library": "Celery",
+        "target_test_file": "tests/test_routing.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 21.147099963855
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 29,
+        "library": "SQLAlchemy",
+        "target_test_file": "tests/test_async.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 24.55630002077669
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 30,
+        "library": "NumPy",
+        "target_test_file": "tests/test_schema.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 26.448599994182587
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 31,
+        "library": "FastAPI",
+        "target_test_file": "tests/test_core.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 22.55580003838986
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 32,
+        "library": "Requests",
+        "target_test_file": "tests/test_auth.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 21.53950004139915
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 33,
+        "library": "Rich",
+        "target_test_file": "tests/test_routing.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 22.767600021325052
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 34,
+        "library": "Django",
+        "target_test_file": "tests/test_async.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 18.67239997955039
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 35,
+        "library": "Pydantic",
+        "target_test_file": "tests/test_schema.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 17.65340002020821
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 36,
+        "library": "SymPy",
+        "target_test_file": "tests/test_core.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 18.3499000268057
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 37,
+        "library": "Flask",
+        "target_test_file": "tests/test_auth.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 26.182100002188236
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 38,
+        "library": "Celery",
+        "target_test_file": "tests/test_routing.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 27.727900014724582
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 39,
+        "library": "SQLAlchemy",
+        "target_test_file": "tests/test_async.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 18.687999981921166
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 40,
+        "library": "NumPy",
+        "target_test_file": "tests/test_schema.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 20.797899982426316
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 41,
+        "library": "FastAPI",
+        "target_test_file": "tests/test_core.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 25.37990000564605
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 42,
+        "library": "Requests",
+        "target_test_file": "tests/test_auth.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 27.2156999562867
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 43,
+        "library": "Rich",
+        "target_test_file": "tests/test_routing.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 26.257999998051673
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 44,
+        "library": "Django",
+        "target_test_file": "tests/test_async.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 26.125999982468784
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 45,
+        "library": "Pydantic",
+        "target_test_file": "tests/test_schema.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 21.035299985669553
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 46,
+        "library": "SymPy",
+        "target_test_file": "tests/test_core.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 18.138899991754442
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 47,
+        "library": "Flask",
+        "target_test_file": "tests/test_auth.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 17.81469996785745
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 48,
+        "library": "Celery",
+        "target_test_file": "tests/test_routing.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 20.05649998318404
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 49,
+        "library": "SQLAlchemy",
+        "target_test_file": "tests/test_async.py",
+        "baseline_violated": true,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 20.624400000087917
+      },
+      {
+        "modul": "Siren_Trap",
+        "trial_id": 50,
+        "library": "NumPy",
+        "target_test_file": "tests/test_schema.py",
+        "baseline_violated": false,
+        "hadl_violated": false,
+        "sheaf_firewall_tripped": true,
+        "cohomological_obstruction": 30.0,
+        "latency_ms": 19.155299989506602
+      }
+    ],
+    "wall_rebound": [
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 1,
+        "baseline_pivot_turn": 4,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 944.3313598632812,
+        "repeller_energy_pivot": 20.881847381591797,
+        "latency_ms": 47.9922000085935
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 2,
+        "baseline_pivot_turn": 4,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 1176.96142578125,
+        "repeller_energy_pivot": 0.13724911212921143,
+        "latency_ms": 0.5818000063300133
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 3,
+        "baseline_pivot_turn": 6,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 1635.211669921875,
+        "repeller_energy_pivot": 114.14130401611328,
+        "latency_ms": 0.3996000159531832
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 4,
+        "baseline_pivot_turn": 5,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 1236.443359375,
+        "repeller_energy_pivot": 1.840012550354004,
+        "latency_ms": 0.44380000326782465
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 5,
+        "baseline_pivot_turn": 5,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 1547.7919921875,
+        "repeller_energy_pivot": 4.132755279541016,
+        "latency_ms": 0.4206000012345612
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 6,
+        "baseline_pivot_turn": 5,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 732.5569458007812,
+        "repeller_energy_pivot": 107.7881851196289,
+        "latency_ms": 0.41420001070946455
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 7,
+        "baseline_pivot_turn": 4,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 753.7998046875,
+        "repeller_energy_pivot": 9.265451431274414,
+        "latency_ms": 0.3654999891296029
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 8,
+        "baseline_pivot_turn": 8,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 1029.2734375,
+        "repeller_energy_pivot": 1.4839707612991333,
+        "latency_ms": 0.3782999701797962
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 9,
+        "baseline_pivot_turn": 4,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 773.162841796875,
+        "repeller_energy_pivot": 51.42641067504883,
+        "latency_ms": 0.39490003837272525
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 10,
+        "baseline_pivot_turn": 8,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 1180.1802978515625,
+        "repeller_energy_pivot": 15.438722610473633,
+        "latency_ms": 0.37590001011267304
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 11,
+        "baseline_pivot_turn": 7,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 809.318359375,
+        "repeller_energy_pivot": 23.568296432495117,
+        "latency_ms": 0.4466000245884061
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 12,
+        "baseline_pivot_turn": 4,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 539.8596801757812,
+        "repeller_energy_pivot": 87.94193267822266,
+        "latency_ms": 0.39930001366883516
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 13,
+        "baseline_pivot_turn": 4,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 671.828125,
+        "repeller_energy_pivot": 1.5478618144989014,
+        "latency_ms": 0.5726999952457845
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 14,
+        "baseline_pivot_turn": 4,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 604.9093017578125,
+        "repeller_energy_pivot": 4.701422214508057,
+        "latency_ms": 0.43070001993328333
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 15,
+        "baseline_pivot_turn": 5,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 528.234619140625,
+        "repeller_energy_pivot": 7.17158317565918,
+        "latency_ms": 0.39770000148564577
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 16,
+        "baseline_pivot_turn": 5,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 411.7093505859375,
+        "repeller_energy_pivot": 2.1697654724121094,
+        "latency_ms": 0.4059000057168305
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 17,
+        "baseline_pivot_turn": 8,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 276.2643127441406,
+        "repeller_energy_pivot": 2.795850992202759,
+        "latency_ms": 0.5978000117465854
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 18,
+        "baseline_pivot_turn": 8,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 1411.443603515625,
+        "repeller_energy_pivot": 0.12986165285110474,
+        "latency_ms": 0.47909998102113605
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 19,
+        "baseline_pivot_turn": 4,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 2149.93798828125,
+        "repeller_energy_pivot": 70.8290023803711,
+        "latency_ms": 0.44780003372579813
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 20,
+        "baseline_pivot_turn": 8,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 1465.8492431640625,
+        "repeller_energy_pivot": 1.640260934829712,
+        "latency_ms": 0.3970000543631613
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 21,
+        "baseline_pivot_turn": 5,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 1008.483154296875,
+        "repeller_energy_pivot": 23.572851181030273,
+        "latency_ms": 0.4458000184968114
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 22,
+        "baseline_pivot_turn": 8,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 1609.737548828125,
+        "repeller_energy_pivot": 31.55942153930664,
+        "latency_ms": 0.3616000176407397
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 23,
+        "baseline_pivot_turn": 7,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 1284.8883056640625,
+        "repeller_energy_pivot": 1.6338611841201782,
+        "latency_ms": 0.40330004412680864
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 24,
+        "baseline_pivot_turn": 5,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 2070.791748046875,
+        "repeller_energy_pivot": 7.700744152069092,
+        "latency_ms": 0.4276999970898032
+      },
+      {
+        "modul": "Wall_Rebound",
+        "trial_id": 25,
+        "baseline_pivot_turn": 7,
+        "hadl_pivot_turn": 1.0,
+        "repeller_energy_repeat": 367.8344421386719,
+        "repeller_energy_pivot": 5.058778285980225,
+        "latency_ms": 0.42349996510893106
+      }
+    ],
+    "context_flood": [
+      {
+        "modul": "Context_Flood",
+        "trial_id": 1,
+        "flood_lines": 15000,
+        "baseline_output": 10,
+        "baseline_passed": false,
+        "hadl_output": 1,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999847412109375,
+        "latency_ms": 6.6087000304833055
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 2,
+        "flood_lines": 15000,
+        "baseline_output": 6,
+        "baseline_passed": false,
+        "hadl_output": 3,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.99984359741211,
+        "latency_ms": 1.7359000048600137
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 3,
+        "flood_lines": 15000,
+        "baseline_output": 12,
+        "baseline_passed": false,
+        "hadl_output": 5,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.99983787536621,
+        "latency_ms": 1.6317000263370574
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 4,
+        "flood_lines": 15000,
+        "baseline_output": 6,
+        "baseline_passed": false,
+        "hadl_output": 7,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999845504760742,
+        "latency_ms": 1.5881999861449003
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 5,
+        "flood_lines": 15000,
+        "baseline_output": 12,
+        "baseline_passed": false,
+        "hadl_output": 3,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999839782714844,
+        "latency_ms": 3.367899975273758
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 6,
+        "flood_lines": 15000,
+        "baseline_output": 4,
+        "baseline_passed": false,
+        "hadl_output": 3,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999841690063477,
+        "latency_ms": 2.9529999592341483
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 7,
+        "flood_lines": 15000,
+        "baseline_output": 4,
+        "baseline_passed": false,
+        "hadl_output": 7,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999839782714844,
+        "latency_ms": 2.698299998883158
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 8,
+        "flood_lines": 15000,
+        "baseline_output": 12,
+        "baseline_passed": false,
+        "hadl_output": 5,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999847412109375,
+        "latency_ms": 2.6464000111445785
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 9,
+        "flood_lines": 15000,
+        "baseline_output": 2,
+        "baseline_passed": false,
+        "hadl_output": 5,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999839782714844,
+        "latency_ms": 2.459999988786876
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 10,
+        "flood_lines": 15000,
+        "baseline_output": 5,
+        "baseline_passed": true,
+        "hadl_output": 3,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.99984359741211,
+        "latency_ms": 2.4657000321894884
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 11,
+        "flood_lines": 15000,
+        "baseline_output": 16,
+        "baseline_passed": false,
+        "hadl_output": 3,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.99984359741211,
+        "latency_ms": 2.5062999920919538
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 12,
+        "flood_lines": 15000,
+        "baseline_output": 5,
+        "baseline_passed": true,
+        "hadl_output": 5,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999847412109375,
+        "latency_ms": 2.7685000095516443
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 13,
+        "flood_lines": 15000,
+        "baseline_output": 12,
+        "baseline_passed": false,
+        "hadl_output": 8,
+        "hadl_passed": false,
+        "cwm_slot_signal": 31.999841690063477,
+        "latency_ms": 2.4572000256739557
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 14,
+        "flood_lines": 15000,
+        "baseline_output": 8,
+        "baseline_passed": false,
+        "hadl_output": 3,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.99984359741211,
+        "latency_ms": 2.334800024982542
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 15,
+        "flood_lines": 15000,
+        "baseline_output": 2,
+        "baseline_passed": false,
+        "hadl_output": 7,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999841690063477,
+        "latency_ms": 2.2337999544106424
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 16,
+        "flood_lines": 15000,
+        "baseline_output": 10,
+        "baseline_passed": false,
+        "hadl_output": 3,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999845504760742,
+        "latency_ms": 2.367100038100034
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 17,
+        "flood_lines": 15000,
+        "baseline_output": 8,
+        "baseline_passed": false,
+        "hadl_output": 3,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999845504760742,
+        "latency_ms": 1.4525000005960464
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 18,
+        "flood_lines": 15000,
+        "baseline_output": 16,
+        "baseline_passed": false,
+        "hadl_output": 5,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999845504760742,
+        "latency_ms": 1.2880999711342156
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 19,
+        "flood_lines": 15000,
+        "baseline_output": 3,
+        "baseline_passed": true,
+        "hadl_output": 7,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999845504760742,
+        "latency_ms": 1.3093000161461532
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 20,
+        "flood_lines": 15000,
+        "baseline_output": 6,
+        "baseline_passed": false,
+        "hadl_output": 7,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999847412109375,
+        "latency_ms": 1.2931999517604709
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 21,
+        "flood_lines": 15000,
+        "baseline_output": 12,
+        "baseline_passed": false,
+        "hadl_output": 7,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.99984359741211,
+        "latency_ms": 1.1929000029340386
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 22,
+        "flood_lines": 15000,
+        "baseline_output": 10,
+        "baseline_passed": false,
+        "hadl_output": 3,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999845504760742,
+        "latency_ms": 1.221099984832108
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 23,
+        "flood_lines": 15000,
+        "baseline_output": 6,
+        "baseline_passed": false,
+        "hadl_output": 7,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999847412109375,
+        "latency_ms": 1.1613999959081411
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 24,
+        "flood_lines": 15000,
+        "baseline_output": 8,
+        "baseline_passed": false,
+        "hadl_output": 5,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999845504760742,
+        "latency_ms": 2.7215000009164214
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 25,
+        "flood_lines": 15000,
+        "baseline_output": 3,
+        "baseline_passed": true,
+        "hadl_output": 3,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999845504760742,
+        "latency_ms": 2.285399998072535
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 26,
+        "flood_lines": 15000,
+        "baseline_output": 10,
+        "baseline_passed": false,
+        "hadl_output": 7,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.99984359741211,
+        "latency_ms": 2.2705000010319054
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 27,
+        "flood_lines": 15000,
+        "baseline_output": 8,
+        "baseline_passed": false,
+        "hadl_output": 7,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.99983787536621,
+        "latency_ms": 2.092099981382489
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 28,
+        "flood_lines": 15000,
+        "baseline_output": 2,
+        "baseline_passed": false,
+        "hadl_output": 7,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999845504760742,
+        "latency_ms": 2.3545000003650784
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 29,
+        "flood_lines": 15000,
+        "baseline_output": 2,
+        "baseline_passed": false,
+        "hadl_output": 7,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.99984359741211,
+        "latency_ms": 2.132599998731166
+      },
+      {
+        "modul": "Context_Flood",
+        "trial_id": 30,
+        "flood_lines": 15000,
+        "baseline_output": 16,
+        "baseline_passed": false,
+        "hadl_output": 5,
+        "hadl_passed": true,
+        "cwm_slot_signal": 31.999847412109375,
+        "latency_ms": 2.014599973335862
+      }
+    ],
+    "thinking_economy": [
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 1,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 126.89259997569025
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 2,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 93.35929999360815
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 3,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 86.08989999629557
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 4,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 92.31620002537966
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 5,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 102.40010003326461
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 6,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 92.04790001967922
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 7,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 92.62710000621155
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 8,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 92.34000003198162
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 9,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 98.30810001585633
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 10,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 80.5331000010483
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 11,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 69.50680003501475
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 12,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 73.05820001056418
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 13,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 67.32580001698807
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 14,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 64.19390003429726
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 15,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 65.82699995487928
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 16,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 67.4029000219889
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 17,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 68.13160004094243
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 18,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 68.83210001979023
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 19,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 64.42309997510165
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 20,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 69.9904999928549
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 21,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 63.398499973118305
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 22,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 67.98900000285357
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 23,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 67.95810000039637
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 24,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 64.62479999754578
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 25,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 68.98109999019653
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 26,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 75.57519996771589
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 27,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 69.88409999758005
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 28,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 69.50869999127463
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 29,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 62.17900000046939
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 30,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 69.44029999431223
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 31,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 76.68769999872893
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 32,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 71.47130003431812
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 33,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 69.80019999900833
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 34,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 75.66199998836964
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 35,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 74.37200000276789
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 36,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 68.1775999837555
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 37,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 72.54560000728816
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 38,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 67.93710001511499
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 39,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 74.60749999154359
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 40,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 76.42210001358762
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 41,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 66.82980002369732
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 42,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 69.98209998710081
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 43,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 69.840399955865
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 44,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 72.0514000277035
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 45,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 69.1713000414893
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 46,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 74.98100004158914
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 47,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 78.49510002415627
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 48,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 68.58510000165552
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 49,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 70.93430001987144
+      },
+      {
+        "modul": "Thinking_Economy",
+        "trial_id": 50,
+        "cot_ter": 0.0012664092664092664,
+        "k0_ter": 65.85365853658537,
+        "hadl_ter": 93.02325581395348,
+        "hadl_step_latency_ms": 65.31350000295788
+      }
+    ],
+    "overnight_awakening": [
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 1,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.013615548610687256,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 333.7902000057511
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 2,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.03815991431474686,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 74.0170999779366
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 3,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.006693229079246521,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 62.69429996609688
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 4,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.01623469963669777,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 71.44839997636154
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 5,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.006277068518102169,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 75.94930002233014
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 6,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.018641674891114235,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 66.886099986732
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 7,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.020176492631435394,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 70.54059999063611
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 8,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.003990312106907368,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 72.83080002525821
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 9,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.05606473982334137,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 72.03770003980026
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 10,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.06064663827419281,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 64.53299999702722
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 11,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.031727202236652374,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 68.91789997462183
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 12,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.010468204505741596,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 62.339099997188896
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 13,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.03282734751701355,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 62.441199959721416
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 14,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.03094060719013214,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 69.22400003531948
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 15,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.021286828443408012,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 66.58650003373623
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 16,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.056889623403549194,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 65.1511000469327
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 17,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.08266226947307587,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 61.437000054866076
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 18,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.009167859330773354,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 68.08130000717938
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 19,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.06078412011265755,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 61.16609997116029
+      },
+      {
+        "modul": "Overnight_Awakening",
+        "trial_id": 20,
+        "baseline_recalled": false,
+        "hadl_recalled": true,
+        "cosine_similarity": 0.04158031940460205,
+        "nullspace_leakage_overlap": 0.0,
+        "latency_ms": 68.08759999694303
+      }
+    ]
+  }
+}
