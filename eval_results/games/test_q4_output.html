@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Space Shooter</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            display: block;
+        }
+        #gameUI {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+            text-align: center;
+        }
+        #gameUI.hidden {
+            display: none;
+        }
+        #gameUI h1 {
+            font-size: 48px;
+            margin: 0 0 20px 0;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+        }
+        #gameUI p {
+            font-size: 24px;
+            margin: 0;
+        }
+        #gameUI button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color: #00ff00;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+        }
+        #gameUI button:hover {
+            background-color: #00cc00;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameUI">
+        <h1 id="gameTitle">Space Shooter</h1>
+        <p id="gameScore">Score: 0</p>
+        <p id="gameMessage">Press Space to Start</p>
+        <button id="startBtn">Start Game</button>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const ui = document.getElementById('gameUI');
+        const title = document.getElementById('gameTitle');
+        const scoreDisplay = document.getElementById('gameScore');
+        const startBtn = document.getElementById('startBtn');
+        const gameMessage = document.getElementById('gameMessage');
+
+        // Set canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Game state
+        let gameRunning = false;
+        let score = 0;
+        let frameCount = 0;
+
+        // Player
+        const player = {
+            x: canvas.width / 2,
+            y: canvas.height - 100,
+            radius: 15,
+            color: '#00ff00',
+            speed: 7,
+            dx: 0,
+            dy: 0,
+            shootTimer: 0,
+            maxShootingDelay: 10, // Frames between shots
+            cooldown: 0
+        };
+
+        // Arrays for enemies
+        let enemies = [];
+        let bullets = [];
+        let particles = [];
+        let powerUps = [];
+
+        // Game variables
+        let scoreMultiplier = 1;
+        let difficultyMultiplier = 1;
+
+        // Input handling
+        const keys = {
+            ArrowUp: false,
+            ArrowDown: false,
+            ArrowLeft: false,
+            ArrowRight: false,
+            Space: false
+        };
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === ' ') {
+                e.preventDefault();
+                if (!gameRunning && !ui.hidden) {
+                    startGame();
+                } else if (!gameRunning && ui.hidden) {
+                    startGame();
+                }
+            }
+            if (keys.hasOwnProperty(e.key)) {
+                keys[e.key] = true;
+            }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (keys.hasOwnProperty(e.key)) {
+                keys[e.key] = false;
+            }
+        });
+
+        function startGame() {
+            gameRunning = true;
+            score = 0;
+            scoreMultiplier = 1;
+            difficultyMultiplier = 1;
+            enemies = [];
+            bullets = [];
+            particles = [];
+            powerUps = [];
+            player.x = canvas.width / 2;
+            player.y = canvas.height - 100;
+            ui.hidden = false;
+            startBtn.style.display = 'none';
+            gameMessage.textContent = 'Press Space to Start';
+            gameMessage.style.display = 'block';
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            ui.hidden = true;
+            startBtn.style.display = 'block';
+            gameMessage.textContent = 'Game Over';
+            gameMessage.style.display = 'block';
+            title.textContent = 'Game Over';
+            title.style.color = '#ff0000';
+            title.style.textShadow = '0 0 10px #ff0000';

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q4 Base Space Shooter</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #050505;
+            color: #ccc;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+        }
+        canvas {
+            border: 2px solid #333;
+            background: linear-gradient(to bottom, #000000, #0a0a0a);
+            box-shadow: 0 0 20px #000;
+        }
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            display: none;
+        }
+        #ui-layer.active {
+            display: flex;
+        }
+        .ui-text {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #score-board {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            color: #fff;
+            z-index: 10;
+        }
+        #game-over {
+            display: none;
+            color: #ff4444;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    <div id="score-board">SCORE: 0</div>
+    <div id="game-over">GAME OVER<br>SCORE: 0</div>
+    <div id="ui-layer">
+        <div class="ui-text" id="start-msg">PRESS SPACE TO START</div>
+        <div class="ui-text" id="game-over-msg">GAME OVER<br>SCORE: 0</div>
+    </div>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const startMsg = document.getElementById('start-msg');
+        const gameOverMsg = document.getElementById('game-over-msg');
+        const uiLayer = document.getElementById('ui-layer');
+        const scoreBoard = document.getElementById('score-board');
+        const gameOverScreen = document.getElementById('game-over');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let animationId;
+        let gameRunning = false;
+        let score = 0;
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        const keys = {
+            ArrowUp: false,
+            ArrowDown: false,
+            ArrowLeft: false,
+            ArrowRight: false,
+            Space: false
+        };
+
+        class Player {
+            constructor() {
+                this.x = canvas.width / 2;
+                this.y = canvas.height - 100;
+                this.radius = 15;
+                this.color = '#00d2ff';
+                this.speed = 0.5;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(Math.random() * Math.PI / 2 - Math.PI / 4);
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 2;
+                ctx.strokeRect(0, 0, this.radius, this.radius);
+                ctx.restore();
+            }
+
+            update() {
+                if (keys.ArrowUp) this.y -= this.speed;
+                if (keys.ArrowDown) this.y += this.speed;
+                if (keys.ArrowLeft) this.x -= this.speed;
+                if (keys.ArrowRight) this.x += this.speed;
+            }
+        }
+
+        class Projectile {
+            constructor({x, y, velocity}) {
+                this.x = x;
+                this.y = y;
+                this.velocity = velocity;
+                this.radius = 5;
+                this.color = '#00ff00';
+            }
+
+            draw() {
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.restore();
+            }
+
+            update() {
+                this.y += this.velocity;
+            }
+        }
+
+        class Enemy {
+            constructor() {
+                this.x = Math.random() * (canvas.width - 20);
+                this.y = -30;
+                this.radius = 15 + Math.random() * 15;
+                this.color = '#ff4444';
+                this.velocity = {
+                    x: (Math.random() - 0.5) * 2,
+                    y: 3
+                };
+            }
+
+            draw() {
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.restore();
+            }
+
+            update() {
+                this.y += this.velocity.y;
+                this.x += this.velocity.x;
+            }
+        }
+
+        class Particle {
+            constructor({x, y, radius, color, velocity}) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+                this.velocity = velocity;
+                this.alpha = 1;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.restore();
+            }
+
+            update() {
+                this.velocity.x *= 0.98;
+                this.velocity.y *= 0.98;
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                this.alpha -= 0.02;
+            }
+        }
+
+        const player = new Player();
+        const projectiles = [];
+        const enemies = [];
+        const particles = [];
+
+        function createExplosion({x, y, radius, color}) {
+            for (let i = 0; i < 30; i++) {
+                particles.push(new Particle({
+                    x,
+                    y,
+                    radius: Math.random() * 3,
+                    color: color,
+                    velocity: {
+                        x: (Math.random() - 0.5) * 5,
+                        y: (Math.random() - 0.5) * 5
+                    }
+                }));
+            }
+        }
+
+        function spawnEnemies() {
+            enemies.push(new Enemy());
+            enemies.push(new Enemy());
+            enemies.push(new Enemy());
+        }
+
+        function initGame() {
+            score = 0;
+            gameRunning = true;
+            uiLayer.classList.remove('active');
+            gameOverScreen.style.display = 'none';
+            scoreBoard.style.display = 'block';
+            startMsg.style.display = 'none';
+            gameOverMsg.style.display = 'none';
+            animate();
+        }
+
+        function animate() {
+            if (!gameRunning) return;
+            animationId = requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            player.update();
+            player.draw();
+
+            projectiles.forEach((projectile, index) => {
+                projectile.update();
+                projectile.draw
+    </script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HADL Zero-Shot Space Defender</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #050505;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        canvas {
+            display: block;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+        }
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .hidden {
+            display: none !important;
+        }
+        h1 { font-size: 4rem; color: #0ff; text-shadow: 0 0 10px #0ff; margin: 0; }
+        p { font-size: 1.5rem; color: #aaa; }
+        .blink { animation: blink 1s linear infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<div id="ui-layer">
+    <div id="start-screen">
+        <h1>HADL ZERO-SHOT</h1>
+        <p class="blink">PRESS SPACE TO START</p>
+    </div>
+    <div id="game-screen" class="hidden">
+        <h1 id="score-display" style="font-size: 3rem; margin: 0;">SCORE: 0</h1>
+        <p id="lives-display">LIVES: 3</p>
+        <p id="wave-display">WAVE: 1</p>
+    </div>
+    <div id="game-over-screen" class="hidden">
+        <h1 style="color: #f00;">GAME OVER</h1>
+        <p id="final-score" style="font-size: 2rem; margin: 0;">SCORE: 0</p>
+    </div>
+</div>
+
+<script>
+    /**
+     * HADL ZERO-SHOT: Space Defender
+     * A structured, single-file HTML5 canvas game.
+     * Features: State management, Wave progression, Collision detection, Delta-time loop.
+     */
+
+    // --- Configuration ---
+    const CONFIG = {
+        playerSpeed: 0.8,
+        bulletSpeed: 12,
+        enemyBaseSpeed: 1.5,
+        enemySpawnRate: 60, // Frames
+        colors: {
+            player: '#00ffff',
+            enemy: '#ff0055',
+            bullet: '#ffff00',
+            explosion: '#ff0000'
+        },
+        // Standard Game Loop
+        loop: 1000, // ms per frame
+        update: 1000, // ms per tick
+        keys: {
+            space: false,
+            up: false,
+            down: false,
+            left: false,
+            right: false
+        }
+    };
+
+    // --- State Management ---
+    const STATE = {
+        current: 'START', // START, PLAYING, GAMEOVER, WIN
+        frame: 0,
+        score: 0,
+        lives: 3,
+        wave: 1,
+        difficulty: 1,
+        enemies: [],
+        particles: [],
+        bullets: [],
+        player: {
+            x: 0, y: 0,
+            hp: 100,
+            maxHp: 100,
+            speed: 0,
+            color: CONFIG.colors.player,
+            cooldown: 0
+        },
+        input: {
+            space: false,
+            up: false,
+            down: false,
+            left: false,
+            right: false
+        },
+        // Wave Logic
+        currentEnemySpawnTimer: 0,
+        lastEnemySpawn: 0
+    };
+
+    // --- Input Handling ---
+    window.addEventListener('keydown', (e) => {
+        if (e.code === 'Space') STATE.input.space = true;
+        if (e.code === 'ArrowUp') STATE.input.up = true;
+        if (e.code === 'ArrowDown') STATE.input.down = true;
+        if (e.code === 'ArrowLeft') STATE.input.left = true;
+        if (e.code === 'ArrowRight') STATE.input.right = true;
+    });
+    window.addEventListener('keyup', (e) => {
+        if (e.code === 'Space') STATE.input.space = false;
+        if (e.code === 'ArrowUp') STATE.input.up = false;
+        if (e.code === 'ArrowDown') STATE.input.down = false;
+        if (e.code === 'ArrowLeft') STATE.input.left = false;
+        if (e.code === 'ArrowRight') STATE.input.right = false;
+    });
+
+    // --- Game Logic ---
+    function init() {
+        STATE.current = 'START';
+        STATE.score = 0;
+        STATE.lives = 3;
+        STATE.wave = 1;
+        STATE.difficulty = 1;
+        STATE.currentEnemySpawnTimer = 0;
+        STATE.enemies = [];
+        STATE.bullets = [];
+        STATE.particles = [];
+        STATE.player.x = window.innerWidth / 2;
+        STATE.player.y = window.innerHeight - 100;
+        STATE.player.hp = 100;
+        STATE.player.maxHp = 100;
+        STATE.player.speed = CONFIG.playerSpeed;
+        STATE.player.color = CONFIG.colors.player;
+        STATE.input = { ...STATE.input };
+        
+        document.getElementById('start-screen').classList.remove('hidden');
+        document.getElementById('game-screen').classList.add('hidden');
+        document.getElementById('game-over-screen').classList.add('hidden');
+        document.getElementById('score-display').innerText = 'SCORE: 0';
+        document.getElementById('lives-display').innerText = 'LIVES: 3';
+        document.getElementById('wave-display').innerText = 'WAVE: 1';
+        
+        // Start Loop
+        requestAnimationFrame(gameLoop);
+    }
+
+    function gameLoop() {
+        if (STATE.current !== 'PLAYING') return;
+
+        const dt = CONFIG.loop / CONFIG.update;
+        STATE.frame += dt;
+
+        update(dt);
+        checkCollision();
+        render();
+        
+        if (STATE.current !== 'PLAYING') {
+            requestAnimationFrame(gameLoop);
+        }
+    }
+
+    function update(dt) {
+        // 1. Player Movement & Cooldown
+        if (STATE.player.cooldown > 0) STATE.player.cooldown -= dt;
+        
+        if (STATE.input.space) {
+            STATE.player.cooldown = 20;
+            STATE.player.speed = CONFIG.playerSpeed;
+        }
+        if (STATE.input.up) {
+            STATE.player.speed = Math.max(0, STATE.player.speed - 0.5);
+        }
+        if (STATE.input.down) {
+            STATE.player.speed = Math.min(0, STATE.player.speed + 0.5);
+        }
+        if (STATE.input.left) {
+            STATE.player.x -= STATE.player.speed;
+        }
+        if (STATE.input.right) {
+            STATE.player.x += STATE.player.speed;
+        }
+
+        // 2. Wave Logic
+        STATE.currentEnemySpawnTimer += dt;
+        if (STATE.currentEnemySpawnTimer > STATE.difficulty * CONFIG.enemySpawnRate) {
+            STATE.currentEnemySpawnTimer = 0;
+            // Difficulty scales up
+            STATE.difficulty += 0.5;
+            
+            // Increase enemy count per wave
+            const waveSize = 1 + Math.floor(STATE.wave * 1.5);
+            STATE.enemies.push({
+                x: STATE.player.x,
+                y: -100,
+                size: 20 + (Math.random() * 30),
+                speed: CONFIG.enemyBaseSpeed + (Math.random() * 0.5),
+                hp: 30 + (Math.random() * 20),
+                color: CONFIG.colors.enemy,
+                type: Math.random() > 0.5 ? 'heavy' : 'normal'
+            });
+        }
+
+        // 3. Player Shooting
+        if (STATE.player.cooldown <= 0) {
+            STATE.bullets.push({
+                x: STATE.player.x,
+                y:
+    </script>
+</body>
+</html>
