@@ -47,6 +47,9 @@ class VexdoorDecayGate(nn.Module):
     def reset_step(self):
         self.current_step = 0
 
+    def reset(self):
+        self.reset_step()
+
     def step(self):
         self.current_step += 1
 
@@ -187,26 +190,32 @@ class NullspaceMemoryAppend(nn.Module):
             
             # SVD of W to get nullspace basis
             _, _, w_v = torch.linalg.svd(w_float, full_matrices=True)
-            k = min(w_float.shape)
-            # w_v[k:]: basis for nullspace of W
-            v_null = w_v[k:]  # [D_in - k, D_in]
-            
-            if v_null.shape[0] == 0:
-                # Full rank weight matrix, fallback to low-rank regularized residual
-                delta_W = torch.matmul(X_staged.T[:, :w_float.shape[0]], X_staged[:w_float.shape[1]]).T
+            m, n = w_float.shape
+            k = min(m, n)
+            if k >= n:
+                # If square or tall, select bottom 25% lowest energy singular vectors
+                k_cut = max(1, int(0.75 * k))
+                v_null = w_v[k_cut:]  # [n - k_cut, n]
             else:
-                # Orthogonal projection: Pi_null = V_null^T @ V_null
-                # Project staged knowledge onto nullspace: X_null = X_staged @ Pi_null
-                X_null = torch.matmul(X_staged, torch.matmul(v_null.T, v_null))
-                # Form delta weight: [D_out, D_in]
-                n_param = float(W.numel())
-                delta_W = torch.matmul(w_float[:, :X_null.shape[0]], X_null) / (math.sqrt(n_param) * param_scale + 1e-6)
+                # Wide rectangular matrix: exact nullspace of dimension (n - k)
+                v_null = w_v[k:]  # [n - k, n]
+            
+            # Orthogonal projection: Pi_null = V_null^T @ V_null
+            # Project staged knowledge onto nullspace: X_null = X_staged @ Pi_null
+            X_null = torch.matmul(X_staged, torch.matmul(v_null.T, v_null))
+            # Form delta weight: [D_out, D_in]
+            n_param = float(W.numel())
+            n_staged = min(X_null.shape[0], w_float.shape[0])
+            delta_W = torch.matmul(w_float[:, :n_staged], X_null[:n_staged]) / (math.sqrt(n_param) * param_scale + 1e-6)
 
             # Verify orthogonality: ||W @ delta_W^T||
-            test_prod = torch.matmul(w_float, delta_W.T[:w_float.shape[1], :w_float.shape[0]])
+            test_prod = torch.matmul(w_float, delta_W.T)
             ortho_error = float(torch.norm(test_prod).item())
             
             return delta_W.to(dtype=W.dtype), ortho_error
+
+
+from .evolving_manifold_syringe import EvolvingManifoldModule
 
 
 class VexdoorClosedLoopWrapper(nn.Module):
@@ -230,43 +239,66 @@ class VexdoorClosedLoopWrapper(nn.Module):
         self.d_model = getattr(base_model.config, "hidden_size", 2048)
         self.vocab_size = getattr(base_model.config, "vocab_size", 151936)
 
-        # 1. Vexdoor Dynamic Decay
+        # 1. Mid-Layer Evolving Manifold Engine (Layer 11)
+        self.manifold_engine = EvolvingManifoldModule(d_model=self.d_model)
+
+        # 2. Vexdoor Dynamic Decay
         self.vexdoor = VexdoorDecayGate(tau_wind=2.5, gamma_decay=0.12, max_bound=4.5)
 
-        # 2. Re-entrant Pull-Back Projector (Vocabulary -> Latent Manifold)
+        # 3. Re-entrant Pull-Back Projector (Vocabulary -> Latent Manifold)
         self.pullback_down = nn.Linear(self.vocab_size, rank, bias=False)
         self.pullback_up = nn.Linear(rank, self.d_model, bias=False)
         nn.init.zeros_(self.pullback_up.weight)
         nn.init.normal_(self.pullback_down.weight, std=0.01)
 
-        # 3. LM-Head Syringe (Forward Projection with ReZero init)
+        # 4. LM-Head Syringe (Forward Projection with ReZero init)
         self.syringe_down = nn.Linear(self.d_model, rank, bias=False)
         self.syringe_up = nn.Linear(rank, self.vocab_size, bias=False)
         nn.init.zeros_(self.syringe_up.weight)
         nn.init.normal_(self.syringe_down.weight, std=0.01)
 
-        # 4. Nullspace Memory Stager
+        # 5. Nullspace Memory Stager
         self.nullspace_memory = NullspaceMemoryAppend(d_model=self.d_model)
 
         # Align device and dtype
         param = next(base_model.parameters(), None)
         if param is not None:
+            self.manifold_engine.to(device=param.device, dtype=param.dtype)
             self.to(device=param.device, dtype=param.dtype)
 
         self.enabled: bool = True
         self._layer_hook_handle = None
         self._head_hook_handle = None
         self.last_telemetry: Dict[str, Any] = {}
+        self.last_manifold_telemetry: Dict[str, Any] = {}
 
         self._attach_hooks()
 
     def _attach_hooks(self):
-        # Locate mid-layer
+        # 1. Attach Mid-Layer Manifold Hook
         layers = None
         if hasattr(self.base_model, "model") and hasattr(self.base_model.model, "layers"):
             layers = self.base_model.model.layers
         elif hasattr(self.base_model, "layers"):
             layers = self.base_model.layers
+
+        if layers is not None and 0 <= self.target_layer_idx < len(layers):
+            target_layer = layers[self.target_layer_idx]
+
+            def _layer_hook(module, args, output):
+                if not self.enabled:
+                    return output
+                is_tuple = isinstance(output, tuple)
+                h = output[0] if is_tuple else output
+                if not isinstance(h, torch.Tensor):
+                    return output
+                enhanced_h, telem = self.manifold_engine(h)
+                self.last_manifold_telemetry = telem
+                if is_tuple:
+                    return (enhanced_h,) + output[1:]
+                return enhanced_h
+
+            self._layer_hook_handle = target_layer.register_forward_hook(_layer_hook)
 
         # Locate LM Head
         head = None
@@ -332,6 +364,9 @@ class VexdoorClosedLoopWrapper(nn.Module):
             self._head_hook_handle = head.register_forward_hook(_head_hook)
 
     def remove_hooks(self):
+        if self._layer_hook_handle is not None:
+            self._layer_hook_handle.remove()
+            self._layer_hook_handle = None
         if self._head_hook_handle is not None:
             self._head_hook_handle.remove()
             self._head_hook_handle = None

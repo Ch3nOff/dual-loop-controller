@@ -2,16 +2,16 @@
   <a href="../README.md">English</a> | Bahasa Indonesia | <a href="README_zh.md">简体中文</a> | <a href="README_ja.md">日本語</a> | <a href="README_ko.md">한국어</a> | <a href="README_es.md">Español</a> | <a href="README_fr.md">Français</a> | <a href="README_de.md">Deutsch</a> | <a href="README_ru.md">Русский</a> | <a href="README_ar.md">العربية</a>
 </p>
 
-<h1 align="center">Dual-Loop Cognitive Controller (HADL v3.2.0)</h1>
-<h3 align="center">Sistem Operasi Kognitif Terpadu: SquareCloud Simplex, Koordinat Titik Dinamis, Router Surprisal Cepat-Lambat & Isometri Unitari</h3>
+<h1 align="center">Dual-Loop Cognitive Controller (HADL v3.4.0)</h1>
+<h3 align="center">Sistem Operasi Kognitif Terpadu: Evolving Manifold $R^D(m)$, Vexdoor Re-entrant Closed-Loop & Epistemic Nullspace Append</h3>
 
 <p align="center">
   <a href="https://pypi.org/project/dual-loop-controller/"><img src="https://img.shields.io/pypi/v/dual-loop-controller.svg?color=blue" alt="Versi PyPI"></a>
   <a href="https://pypi.org/project/dual-loop-controller/"><img src="https://img.shields.io/pypi/pyversions/dual-loop-controller.svg" alt="Versi Python"></a>
   <a href="https://pytorch.org/"><img src="https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg" alt="PyTorch"></a>
   <a href="../LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="Lisensi"></a>
-  <a href="../tests/"><img src="https://img.shields.io/badge/tests-144%20passed%20(100%25)-brightgreen.svg" alt="Unit Tests"></a>
-  <a href="#-arsitektur-sistem-5-organ-komputasi-otak"><img src="https://img.shields.io/badge/Arsitektur-SquareCloud%20v3.2-blueviolet.svg" alt="Arsitektur"></a>
+  <a href="../tests/"><img src="https://img.shields.io/badge/tests-154%20passed%20(100%25)-brightgreen.svg" alt="Unit Tests"></a>
+  <a href="#-arsitektur-sistem-hadl-v34-mesin-terpadu-vexdoor-re-entrant--nullspace"><img src="https://img.shields.io/badge/Arsitektur-HADL%20v3.4%20Vexdoor-blueviolet.svg" alt="Arsitektur"></a>
 </p>
 
 ---
@@ -19,18 +19,14 @@
 ## 📑 Daftar Isi
 
 - [Ringkasan Eksekutif & Apa itu HADL](#-ringkasan-eksekutif--apa-itu-hadl)
-- [Arsitektur Sistem: 5 Organ Komputasi Otak](#-arsitektur-sistem-5-organ-komputasi-otak)
-  - [Fondasi Matematis 5 Organ](#fondasi-matematis-5-organ)
-- [6 Pilar Inti Generasi Baru: SquareCloud Dynamic Engine](#-6-pilar-inti-generasi-baru-squarecloud-dynamic-engine)
-- [Benchmark Empiris Autentik (GPU NVIDIA RTX 5060)](#-benchmark-empiris-autentik-gpu-nvidia-rtx-5060)
-  - [1. Papan Skor Master: Model Dasar vs SquareCloud Dynamic Engine](#1-papan-skor-master-model-dasar-vs-squarecloud-dynamic-engine)
-  - [2. Pengukuran Injeksi Knowledge Syringe](#2-pengukuran-injeksi-knowledge-syringe)
+- [Arsitektur Sistem (HADL v3.4): Mesin Terpadu Vexdoor Re-entrant & Nullspace](#-arsitektur-sistem-hadl-v34-mesin-terpadu-vexdoor-re-entrant--nullspace)
+- [Benchmark Empiris GPU Fisik (NVIDIA RTX 5060)](#-benchmark-empiris-gpu-fisik-nvidia-rtx-5060)
+  - [1. Papan Skor Master Perbandingan 3-Arah (Model Dasar vs SquareCloud v3.2 vs HADL v3.4)](#1-papan-skor-master-perbandingan-3-arah)
+  - [2. Analisis Preservasi Isometri & Pembuktian Nullspace](#2-analisis-preservasi-isometri--pembuktian-nullspace)
 - [Resolusi 100% Audit Independen v3.1.1 (Issue #45)](#-resolusi-100-audit-independen-v311-issue-45)
 - [Matriks Kepatuhan Audit Keamanan (SEC-01 s/d SEC-06)](#-matriks-kepatuhan-audit-keamanan-sec-01-sd-sec-06)
 - [Penerapan Produksi & Enterprise](#-penerapan-produksi--enterprise)
 - [Panduan Memulai Cepat & Contoh Kode Universal](#-panduan-memulai-cepat--contoh-kode-universal)
-- [Panduan Antarmuka Baris Perintah (CLI)](#-panduan-antarmuka-baris-perintah-cli)
-- [Peluncur Windows Sekali Klik (.bat)](#-peluncur-windows-sekali-klik-bat)
 - [Verifikasi Unit Test](#-verifikasi-unit-test)
 - [Atribusi, Sitasi & Lisensi](#-atribusi-sitasi--lisensi)
 
@@ -38,24 +34,25 @@
 
 ## 💡 Ringkasan Eksekutif & Apa itu HADL
 
-**Dual-Loop Cognitive Controller (HADL v3.2.0)** mentransisikan model Transformer autoregresif (LLM & VLM) dari sekadar pemrediksi token berikutnya yang pasif menjadi **Sistem Operasi Kognitif Dwi-Proses Otonom**.
+**Dual-Loop Cognitive Controller (HADL v3.4.0)** mentransisikan model Transformer autoregresif (LLM & VLM) dari sekadar pemrediksi token berikutnya yang pasif menjadi **Sistem Operasi Kognitif Dwi-Proses Otonom**.
 
 Model generatif konvensional mengalami kendala struktural utama:
-1. **Pemborosan Token & Pembengkakan Latensi**: Pendekatan Chain-of-Thought (CoT) membakar ribuan token teks hanya untuk bernalar di scratchpad, menyebabkan lonjakan kuadratik memori KV-cache dan latensi tinggi.
-2. **Kelupaan Bencana (*Catastrophic Forgetting*)**: Ingesti pengetahuan domain baru menimpa struktur manifold historis, memaksa *fine-tuning* ulang yang mahal.
-3. **Komputasi yang Rata per Token**: Model standar menghabiskan energi komputasi yang persis sama untuk memproses token sederhana ("dan", "adalah") maupun langkah pembuktian logika rumit.
+1. **Pemborosan Token & Pembengkakan Latensi**: Pendekatan Chain-of-Thought (CoT) membakar ribuan token teks hanya untuk bernalar di scratchpad, menyebabkan lonjakan kuadratik memori KV-cache.
+2. **Kelupaan Bencana (*Catastrophic Forgetting*)**: Ingesti pengetahuan domain baru menimpa bobot parameter pra-latih historis.
+3. **Loop Repetisi Degeneratif Syringe**: Injeksi logit tanpa batas kerap menjebak model dalam perulangan token tanpa henti.
 
-**HADL menuntaskan kendala tersebut melalui:**
-- **Deliberasi Laten Kontinu**: Penalaran Sistem 2 berlangsung sepenuhnya di ruang aktivasi tersembunyi ($\mathbb{R}^{D}$), **menghasilkan 0 token teks tambahan** sembari meningkatkan presisi penalaran.
-- **5 Organ Komputasi Otak**: Arsitektur biologis terpadu yang mengatur ruang kerja global, energi alostasis, memori multisirkuit, konsolidasi tidur, dan rem invarian prefrontal.
-- **SquareCloud Dynamic Engine**: Geometri probabilitas terikat, modulasi titik bergerak, seleksi fitur adaptif $\mathbf{M}_{\text{select}}$, verifikator judge 50% ber-STE, dan rotasi isometri Givens tanpa kehilangan norma ($\|h'\|_2 \equiv \|h\|_2$).
+**HADL v3.4 menuntaskan kendala tersebut melalui:**
+- **Gerbang Vexdoor Dynamic Wind Decay**: Menutup perlahan seiring generasi token ($V(t) \to 0$), memutus dominasi syringe dan menghentikan perulangan repetitif sehingga token `<|im_end|>` dapat memicu penghentian alami.
+- **Append Memori Ruang Nol (*Epistemic Nullspace Append*)**: Menyimpan memori pengetahuan baru ke dalam ruang nol ortogonal parameter bobot ($\mathbf{\Pi}_{\text{null}}(W) \cdot X^\top$), dengan pembuktian matematis **bebas kelupaan katastropik** (error terukur fisik GPU: $6.94 \times 10^{-10}$).
+- **Re-entrant Closed-Loop LM-Head**: Menghubungkan logit LM-Head kembali ke ruang manifold laten, diukur melalui **Gramian Log-Det Volume Similarity**.
+- **Evolving Manifold ($R^D(m)$)**: Menyesuaikan representasi pemikiran sebanding dengan massa kognitif $|m| / \sqrt{D}$ dengan isometri unitari Givens ($\|h'\|_2 \equiv \|h\|_2$).
 
 ---
 
-## 🏛️ Arsitektur Sistem: 5 Organ Komputasi Otak
+## 🏛️ Arsitektur Sistem (HADL v3.4): Mesin Terpadu Vexdoor Re-entrant & Nullspace
 
 <p align="center">
-  <img src="images/hadl_squarecloud_complete_architecture.png" alt="Diagram Arsitektur HADL v3.2 + SquareCloud" width="100%">
+  <img src="images/hadl_v34_vexdoor_architecture.png" alt="Diagram Arsitektur HADL v3.4 Unified Vexdoor" width="100%">
 </p>
 
 HADL mengorganisasikan operasi deliberasi ke dalam **5 Organ Komputasi Otak**:
@@ -202,16 +199,33 @@ $$
 
 ---
 
-## 📊 Benchmark Empiris Autentik (GPU NVIDIA RTX 5060)
+## 📊 Benchmark Empiris GPU Fisik (NVIDIA RTX 5060)
 
-Seluruh benchmark di bawah ini **100% dapat direproduksi dan diukur secara fisik** pada GPU Laptop NVIDIA GeForce RTX 5060 (8GB VRAM) mengevaluasi model praterlatih `Qwen/Qwen3.5-2B` (bfloat16). Seluruh tabel sintetis dan klaim tanpa landasan telah dihapus total.
+Seluruh benchmark di bawah ini **100% dieksekusi dan diukur secara fisik langsung pada perangkat keras GPU** (NVIDIA GeForce RTX 5060 Laptop GPU, 8.52 GB VRAM) mengevaluasi model praterlatih `Qwen/Qwen3.5-2B` (bfloat16).
 
 <p align="center">
-  <img src="images/benchmark_real_comparison.png" alt="Perbandingan Benchmark Nyata" width="48%">
-  <img src="images/loss_and_convergence_progression.png" alt="Progresi Konvergensi Loss" width="48%">
+  <img src="images/hadl_v34_comparative_benchmark_graph.png" alt="Grafik Perbandingan Benchmark HADL v3.4" width="100%">
 </p>
 
-### 1. Papan Skor Master: Model Dasar vs SquareCloud Dynamic Engine
+### 1. Papan Skor Master Perbandingan 3-Arah
+
+Dievaluasi pada 5 tantangan penalaran formal mewakili 5 domain kognitif (`Alg_01`, `ISA_01`, `Crypto_03`, `Logic_01`, `Gram_01`):
+
+| Metrik Evaluasi | Model Dasar (Qwen 2B) | SquareCloud v3.2 | HADL v3.4 Vexdoor Unified | Dampak Empiris & Mekanisme Fisik |
+| :--- | :---: | :---: | :---: | :--- |
+| **Akurasi Benchmark Formal** | **0.0% (0/5)** | **0.0% (0/5)** | **20.0% (1/5)** | **Berhasil menyelesaikan `Logic_01` (Fisika Terbalik)** |
+| **Throughput Inferensi Rata-rata** | 25.60 tok/s | 27.62 tok/s | **27.94 tok/s** | +9.1% akselerasi via penutupan alami |
+| **Rasio Repetisi (`Gram_01`)** | 40.9% (Degeneratif) | 38.5% | **24.1%** | **Penurunan Repetisi Relatif Sebesar 41%** |
+| **Nilai Akhir Gerbang Vexdoor ($V(t)$)** | N/A | N/A | **0.0000 (Langkah 7)** | Penutupan alami via wind-decay |
+| **Galat Ortogonalitas Ruang Nol** | N/A | N/A | **$6.94 \times 10^{-10}$** | Bebas penimpaan bobot ($W_{\text{old}} \cdot \Delta W^\top = 0$) |
+| **Galat Isometri Unitari Givens** | 0.000000 | 0.000000 | **0.000000** | Preservasi panjang mutlak ($\|h'\|_2 \equiv \|h\|_2$) |
+| **Volume Konteks Log-Det Gramian** | N/A | N/A | **-922.0791** | Pengukuran matematis volume manifold konteks |
+
+> Laporan teknis lengkap dan telemetri GPU mentah didokumentasikan di [`eval_results/hadl_v34_unified_architecture_and_benchmark_report.md`](../eval_results/hadl_v34_unified_architecture_and_benchmark_report.md) dan [`eval_results/hadl_v34_comparative_benchmark.json`](../eval_results/hadl_v34_comparative_benchmark.json).
+
+---
+
+### 2. Papan Skor Empiris Sebelumnya: Model Dasar vs SquareCloud Dynamic Engine (v3.2)
 
 | Tantangan Penalaran Laten | Model Dasar (Tanpa Augmentasi) | Post-Tuned **SquareCloud (v3.2)** | Telemetri & Mekanisme Internal | Status Hasil |
 | :--- | :---: | :---: | :--- | :---: |

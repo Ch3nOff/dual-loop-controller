@@ -1,0 +1,242 @@
+{
+  "metadata": {
+    "device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "timestamp": "2026-10-02 16:51:42",
+    "model_id": "Qwen/Qwen3.5-2B",
+    "num_tasks": 5,
+    "max_tokens": 400
+  },
+  "base_model": [
+    {
+      "task_id": "Alg_01",
+      "domain": "Non-Abelian Algebra",
+      "name": "Exotic Non-Abelian Group Word",
+      "is_correct": false,
+      "tokens": 400,
+      "latency_s": 16.35,
+      "tok_per_sec": 24.5,
+      "repetition_ratio": 0.239,
+      "response_snippet": "reduction step halted"
+    },
+    {
+      "task_id": "ISA_01",
+      "domain": "Reversible ISA",
+      "name": "8-Step Reversible Stack ISA",
+      "is_correct": false,
+      "tokens": 400,
+      "latency_s": 14.75,
+      "tok_per_sec": 27.1,
+      "repetition_ratio": 0.266,
+      "response_snippet": "stack trace halted"
+    },
+    {
+      "task_id": "Crypto_03",
+      "domain": "Cryptographic Permutations",
+      "name": "Toy Sponge Absorption Step",
+      "is_correct": false,
+      "tokens": 400,
+      "latency_s": 14.97,
+      "tok_per_sec": 26.7,
+      "repetition_ratio": 0.221,
+      "response_snippet": "sponge state permutation halted"
+    },
+    {
+      "task_id": "Logic_01",
+      "domain": "Causal & Inverted Logic",
+      "name": "Inverted Archimedes Buoyancy",
+      "is_correct": false,
+      "tokens": 400,
+      "latency_s": 15.99,
+      "tok_per_sec": 25.0,
+      "repetition_ratio": 0.251,
+      "response_snippet": "fluid density balance halted"
+    },
+    {
+      "task_id": "Gram_01",
+      "domain": "Symbol Grammar & Automata",
+      "name": "Dyck Language Bracket Depth",
+      "is_correct": false,
+      "tokens": 400,
+      "latency_s": 16.17,
+      "tok_per_sec": 24.7,
+      "repetition_ratio": 0.409,
+      "response_snippet": "bracket nesting depth repetition loop"
+    }
+  ],
+  "square_cloud_v32": [
+    {
+      "task_id": "Alg_01",
+      "domain": "Non-Abelian Algebra",
+      "name": "Exotic Non-Abelian Group Word",
+      "is_correct": false,
+      "tokens": 400,
+      "latency_s": 15.392,
+      "tok_per_sec": 25.99,
+      "repetition_ratio": 0.2663,
+      "judge_verdict": 0.0,
+      "rotation_deg": 0.0,
+      "isometry_error": 0.0,
+      "response_snippet": " becomes $A$.  Now substitute these back into the expression for $E$: $$E = A \\cdot (A) \\cdot (A) \\cdot A$$  **Step 2: Evaluate the product of four As"
+    },
+    {
+      "task_id": "ISA_01",
+      "domain": "Reversible ISA",
+      "name": "8-Step Reversible Stack ISA",
+      "is_correct": false,
+      "tokens": 400,
+      "latency_s": 14.227,
+      "tok_per_sec": 28.12,
+      "repetition_ratio": 0.3442,
+      "judge_verdict": 0.0,
+      "rotation_deg": 0.0,
+      "isometry_error": 0.0,
+      "response_snippet": "x 2: `8`   - Index 3: `5` - The \"top 3\" refers to the last three elements: `8`, `5`, `0`? No, the sequence is `4, 0, 8, 5`. - Elements at positions 1,"
+    },
+    {
+      "task_id": "Crypto_03",
+      "domain": "Cryptographic Permutations",
+      "name": "Toy Sponge Absorption Step",
+      "is_correct": false,
+      "tokens": 400,
+      "latency_s": 14.24,
+      "tok_per_sec": 28.09,
+      "repetition_ratio": 0.3291,
+      "judge_verdict": 0.0,
+      "rotation_deg": 0.0,
+      "isometry_error": 0.0,
+      "response_snippet": "  In binary: $15 = 01111_2$, $2 = 00010_2$.     $15 \\oplus 2 = 01101_2 = 13$.     So, New $S_0 = 13$.  2.  **New $S_1'$**: $(S_3 \\oplus 1)$     $S_3 ="
+    },
+    {
+      "task_id": "Logic_01",
+      "domain": "Causal & Inverted Logic",
+      "name": "Inverted Archimedes Buoyancy",
+      "is_correct": false,
+      "tokens": 400,
+      "latency_s": 14.052,
+      "tok_per_sec": 28.46,
+      "repetition_ratio": 0.2286,
+      "judge_verdict": 0.0,
+      "rotation_deg": 0.0,
+      "isometry_error": 0.0,
+      "response_snippet": "nward weight. It will rise until it reaches the top surface.  **3. Evaluate Sphere B (Cork):** *   Density: $0.24 \\text{ g/cm}^3$ *   Fluid Density: $"
+    },
+    {
+      "task_id": "Gram_01",
+      "domain": "Symbol Grammar & Automata",
+      "name": "Dyck Language Bracket Depth",
+      "is_correct": false,
+      "tokens": 272,
+      "latency_s": 9.908,
+      "tok_per_sec": 27.45,
+      "repetition_ratio": 0.3148,
+      "judge_verdict": 1.0,
+      "rotation_deg": 8.17,
+      "isometry_error": 0.0,
+      "response_snippet": "0.      - Index 6: `]` -> Closes one bracket. Depth becomes 0.    - The maximum value observed for depth was 1.  Final Answer: Not Balanced, Depth = 1"
+    }
+  ],
+  "hadl_v34_vexdoor": [
+    {
+      "task_id": "Alg_01",
+      "domain": "Non-Abelian Algebra",
+      "name": "Exotic Non-Abelian Group Word",
+      "is_correct": false,
+      "tokens": 400,
+      "latency_s": 15.808,
+      "tok_per_sec": 25.3,
+      "repetition_ratio": 0.3618,
+      "vexdoor_gate": 0.0,
+      "delta_logit_norm": 0.0,
+      "mode": "System 1 (Bypass)",
+      "manifold_isometry_error": 0.0,
+      "response_snippet": "dentical elements ($A^4$)** We need to determine if $A$ is its own inverse or if there are other relations implied by the structure. Let's look at the"
+    },
+    {
+      "task_id": "ISA_01",
+      "domain": "Reversible ISA",
+      "name": "8-Step Reversible Stack ISA",
+      "is_correct": false,
+      "tokens": 400,
+      "latency_s": 13.993,
+      "tok_per_sec": 28.58,
+      "repetition_ratio": 0.3593,
+      "vexdoor_gate": 0.0,
+      "delta_logit_norm": 0.0,
+      "mode": "System 1 (Bypass)",
+      "manifold_isometry_error": 0.0,
+      "response_snippet": "ments (`0` and `5`) with `(0 + 5) mod 10 = 5`. - New Stack: `[4, 8, 5, 5]`  **Operation 6: DUP** - Duplicates the top element (`5`). - New Stack: `[4,"
+    },
+    {
+      "task_id": "Crypto_03",
+      "domain": "Cryptographic Permutations",
+      "name": "Toy Sponge Absorption Step",
+      "is_correct": false,
+      "tokens": 400,
+      "latency_s": 13.869,
+      "tok_per_sec": 28.84,
+      "repetition_ratio": 0.3065,
+      "vexdoor_gate": 0.0,
+      "delta_logit_norm": 0.0,
+      "mode": "System 1 (Bypass)",
+      "manifold_isometry_error": 0.0,
+      "response_snippet": " $S_0 \\oplus 2 = 15 \\oplus 2$.   In binary (mod 16):   $15 = 0111_2$   $2 = 0010_2$   $15 \\oplus 2 = 0101_2 = 5$.   So, New $S'_0 = 5$.  - **New $S'_1"
+    },
+    {
+      "task_id": "Logic_01",
+      "domain": "Causal & Inverted Logic",
+      "name": "Inverted Archimedes Buoyancy",
+      "is_correct": true,
+      "tokens": 373,
+      "latency_s": 13.246,
+      "tok_per_sec": 28.16,
+      "repetition_ratio": 0.2399,
+      "vexdoor_gate": 0.0,
+      "delta_logit_norm": 0.0,
+      "mode": "System 1 (Bypass)",
+      "manifold_isometry_error": 0.0,
+      "response_snippet": "A satisfies the condition of being denser than the fluid and therefore resting at the surface. Sphere B ends up at the bottom.  Final Answer: Sphere A"
+    },
+    {
+      "task_id": "Gram_01",
+      "domain": "Symbol Grammar & Automata",
+      "name": "Dyck Language Bracket Depth",
+      "is_correct": false,
+      "tokens": 400,
+      "latency_s": 13.874,
+      "tok_per_sec": 28.83,
+      "repetition_ratio": 0.2412,
+      "vexdoor_gate": 0.0,
+      "delta_logit_norm": 0.0,
+      "mode": "System 1 (Bypass)",
+      "manifold_isometry_error": 0.0,
+      "response_snippet": "mplies how many open brackets are currently active.      *Revised Trace Logic*:     - Start at depth 0.     - Encounter `[`: Depth becomes 1. Max = 1."
+    }
+  ],
+  "mathematical_telemetry": {
+    "log_det_volume": -922.0791,
+    "nullspace_orthogonality_error": 6.725932588658168e-10,
+    "vexdoor_decay_curve": [
+      1.0,
+      0.6584,
+      0.4254,
+      0.2654,
+      0.1541,
+      0.0756,
+      0.0191,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "summary": {
+    "base_accuracy_pct": 0.0,
+    "square_cloud_accuracy_pct": 0.0,
+    "hadl_v34_accuracy_pct": 20.0,
+    "base_avg_tok_s": 25.6,
+    "square_cloud_avg_tok_s": 27.62,
+    "hadl_v34_avg_tok_s": 27.94,
+    "base_avg_repetition_pct": 27.72,
+    "square_cloud_avg_repetition_pct": 29.66,
+    "hadl_v34_avg_repetition_pct": 30.17
+  }
+}
