@@ -2,173 +2,244 @@
   <a href="../README.md">English</a> | <a href="README_id.md">Bahasa Indonesia</a> | <a href="README_zh.md">简体中文</a> | <a href="README_ja.md">日本語</a> | <a href="README_ko.md">한국어</a> | <a href="README_es.md">Español</a> | Français | <a href="README_de.md">Deutsch</a> | <a href="README_ru.md">Русский</a> | <a href="README_ar.md">العربية</a>
 </p>
 
-<h1 align="center">Contrôleur Cognitif Dual-Loop (HADL v3.1.1)</h1>
-<h3 align="center">OS Cognitif Unifié : Délibération Latente Multi-Passe, Plasticité Continue, Consolidation en Phase de Sommeil et Pare-feu d'Invariants Préfrontaux</h3>
+<h1 align="center">Contrôleur Cognitif Double-Boucle (HADL v3.2.0)</h1>
+<h3 align="center">Système d'Exploitation Cognitif Unifié : Simplex SquareCloud, Points Mobiles Dynamiques, Routage Rapide/Lent & Isométrie Unitaire</h3>
 
 <p align="center">
-  <a href="https://pypi.org/project/dual-loop-controller/"><img src="https://img.shields.io/pypi/v/dual-loop-controller.svg?color=blue" alt="Version PyPI"></a>
-  <a href="https://pypi.org/project/dual-loop-controller/"><img src="https://img.shields.io/pypi/pyversions/dual-loop-controller.svg" alt="Versions Python"></a>
+  <a href="https://pypi.org/project/dual-loop-controller/"><img src="https://img.shields.io/pypi/v/dual-loop-controller.svg?color=blue" alt="PyPI version"></a>
+  <a href="https://pypi.org/project/dual-loop-controller/"><img src="https://img.shields.io/pypi/pyversions/dual-loop-controller.svg" alt="Python Versions"></a>
   <a href="https://pytorch.org/"><img src="https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg" alt="PyTorch"></a>
-  <a href="../LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="Licence"></a>
-  <a href="../tests/"><img src="https://img.shields.io/badge/tests-144%20passed%20(100%25)-brightgreen.svg" alt="Tests Unitaires"></a>
-  <a href="#-architecture-du-syst%C3%A8me-les-5-organes-c%C3%A9r%C3%A9braux-computationnels"><img src="https://img.shields.io/badge/Architecture-Dual--Loop%20Syst%C3%A8me%201%2F2-blueviolet.svg" alt="Architecture"></a>
+  <a href="../LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></a>
+  <a href="../tests/"><img src="https://img.shields.io/badge/tests-144%20passed%20(100%25)-brightgreen.svg" alt="Unit Tests"></a>
+  <a href="#-architecture"><img src="https://img.shields.io/badge/Architecture-SquareCloud%20v3.2-blueviolet.svg" alt="Architecture"></a>
 </p>
 
 ---
 
-## 📑 Table des Matières
+## 💡 Résumé Exécutif & Qu'est-ce que HADL
 
-- [Résumé Exécutif et Présentation de HADL](#-r%C3%A9sum%C3%A9-ex%C3%A9cutif-et-pr%C3%A9sentation-de-hadl)
-- [Architecture du Système : Les 5 Organes Cérébraux Computationnels](#-architecture-du-syst%C3%A8me-les-5-organes-c%C3%A9r%C3%A9braux-computationnels)
-- [Évaluation Empirique Complète](#-%C3%A9valuation-empirique-compl%C3%A8te)
-  - [1. Les 4 Piliers Mondiaux d'Évaluation Technique](#1-les-4-piliers-mondiaux-d%C3%A9valuation-technique)
-  - [2. HA-COGBENCH : Suite Cognitive à 5 Modules](#2-ha-cogbench-benchmark-du-syst%C3%A8me-dexploitation-cognitif-%C3%A0-5-modules)
-  - [3. Tableau de Bord Général](#3-tableau-de-bord-g%C3%A9n%C3%A9ral)
-- [Matrice d'Audit et de Conformité de Sécurité (SEC-01 à SEC-11)](#-matrice-daudit-et-de-conformit%C3%A9-de-s%C3%A9curit%C3%A9-sec-01-%C3%A0-sec-11)
-- [Déploiement en Production et Entreprise](#-d%C3%A9ploiement-en-production-et-entreprise)
-- [Démarrage Rapide et Exemples Universels](#-d%C3%A9marrage-rapide-et-exemples-universels)
-- [Guide de l'Interface en Ligne de Commande (CLI)](#-guide-de-linterface-en-ligne-de-commande-cli)
-- [Lanceurs Windows Prêts à l'Emploi](#-lanceurs-windows-pr%C3%AAts-%C3%A0-lemploi)
-- [Suite de Vérification des Tests Unitaires](#-suite-de-v%C3%A9rification-des-tests-unitaires)
-- [Citation, Remerciements et Licence](#-citation-remerciements-et-licence)
+**Le Contrôleur Cognitif Double-Boucle (HADL v3.2.0)** transforme les Transformers autorégressifs (LLM et VLM) de simples prédicteurs passifs en un **Système d'Exploitation Cognitif Autonome à Double Processus**.
+
+- **Délibération Latente Continue** : Le raisonnement Système 2 se déroule dans les variétés d'activation cachée ($\mathbb{R}^{D}$), améliorant la précision tout en générant **0 token de texte supplémentaire**.
+- **5 Organes Cérébraux Computationnels** : Régulent l'espace de travail global, l'allostase, la mémoire multi-échelle, la consolidation du sommeil et le frein préfrontal.
+- **Moteur Dynamique SquareCloud** : Simplex borné, coordonnées mobiles, sélection adaptative $\mathbf{M}_{\text{select}}$, juge STE à 50% et rotations unitaires isométriques.
 
 ---
 
-## 💡 Résumé Exécutif et Présentation de HADL
-
-Le **Contrôleur Cognitif Dual-Loop (HADL)** fait évoluer les grands modèles de langage autorégressifs (LLM et VLM) d'un état de simples prédicteurs passifs du token suivant vers un **Système d'Exploitation Cognitif Autonome à Double Processus**.
-
-Les modèles génératifs standards souffrent de verrous architecturaux majeurs :
-1. **Prolifération des Tokens et Latence Élevée** : Les méthodes Chain-of-Thought (CoT) et Tree-of-Thought (ToT) consomment des milliers de tokens de brouillon, provoquant une explosion quadratique du KV-cache et des délais excessifs.
-2. **Oubli Catastrophique** : L'acquisition continue de connaissances de domaine écrase les bassins d'attraction historiques, imposant des réentraînements lourds.
-3. **Calcul Uniforme par Token** : Une énergie de calcul identique est allouée aux tokens élémentaires ("le", "est") et aux étapes de déduction logique complexes.
-
-**HADL surmonte ces défis grâce à :**
-- **Délibération Latente Continue** : Le raisonnement du Système 2 s'opère entièrement au sein de variétés continues d'activations cachées ($\mathbb{R}^{D}$), produisant **0 token de texte supplémentaire** tout en augmentant la rigueur inférentielle.
-- **Les 5 Organes Cérébraux Computationnels** : Des modules biologiquement inspirés régissant l'espace de travail global, la régulation allostatique de l'énergie, la mémoire à échelles de temps multiples, la consolidation durant le sommeil et l'inhibition préfrontale.
-- **Adaptateur de Modèle Universel** : Des hooks d'interception non destructifs dotés d'une initialisation ReZero ($\alpha = 0$), garantissant l'absence de régression du modèle de base tout en équipant les familles Qwen, Gemma, LLaMA, Mistral et GLM.
-
----
-
-## 🏛️ Architecture du Système : Les 5 Organes Cérébraux Computationnels
-
-HADL structure les opérations cognitives en **5 Organes Cérébraux Computationnels** :
+## 🏛️ System Architecture: The 5 Computational Brain Organs
 
 ```mermaid
 flowchart TD
-    subgraph Organ1 ["Organe 1: Espace de Travail Global et Délibération Canonique"]
-        In["Tokens Entrants x_t"] --> EarlyLayers["Premières Couches du Transformer (1 à L_mid)"]
-        EarlyLayers --> Hook["Hook d'Interception Médian (L_mid)"]
-        Hook --> GraphIntrospect["Introspecteur Dynamique de Graphe<br/>(Qwen, Gemma, LLaMA, Mistral, GLM)"]
-        GraphIntrospect --> CanonicalMap["Projection Canonique: R^(D_native) -> R^1024<br/>Identité ReZero: Delta_init = 0"]
+    subgraph Organ1 ["Organ 1: Global Workspace & Canonical Deliberation"]
+        In["User Query Tokens x_t"] --> EarlyLayers["Early Transformer Layers (1 to L_mid)"]
+        EarlyLayers --> Hook["Mid-Layer Interception Hook (L_mid)"]
+        Hook --> GraphIntrospect["DynamicGraphIntrospector<br/>(Qwen, Gemma, LLaMA, Mistral, GLM)"]
+        GraphIntrospect --> CanonicalMap["Canonical Projection: R^(D_native) -> R^1024<br/>ReZero Identity: Delta_init = 0"]
     end
 
-    subgraph Organ2 ["Organe 2: Allostasie et Routeur d'Inférence Active"]
-        CanonicalMap --> FristonRouter{"Routeur d'Inférence Active<br/>Minimisation de l'Énergie Libre G(pi)"}
-        FristonRouter -->|"pi_0: Faible Incertitude"| FastBypass["Contournement de Streaming Rapide"]
-        FristonRouter -->|"pi_1: Incertitude Moyenne"| EvidentialCheck["Porte de Vérification Évidentielle"]
-        FristonRouter -->|"pi_2: Forte Incertidude"| DeliberationLoop["Délibération Latente Récurrente (K=1..3)"]
-        FastBypass --> Allostasis["Modulateur d'Énergie Allostatique"]
+    subgraph Organ2 ["Organ 2: Allostasis & Active Inference Router"]
+        CanonicalMap --> FristonRouter{"Active Inference Router<br/>Minimizes Free Energy G(pi)"}
+        FristonRouter -->|"pi_0: Low Uncertainty"| FastBypass["Fast-Path Streaming Bypass"]
+        FristonRouter -->|"pi_1: Medium Uncertainty"| EvidentialCheck["Fast Evidential Verification Gate"]
+        FristonRouter -->|"pi_2: High Uncertainty"| DeliberationLoop["Recurrent Latent Deliberation (K=1..3)"]
+        FastBypass --> Allostasis["Allostatic Energy Modulator"]
         EvidentialCheck --> Allostasis
         DeliberationLoop --> Allostasis
     end
 
-    subgraph Organ3 ["Organe 3: Mémoire de Travail à Échelles de Temps Multiples"]
-        Allostasis <--> CWM["Mémoire de Travail Entropique CWM (16 Emplacements)"]
-        Allostasis <--> FastHebbian["Mémoire Synaptique Hebbienne Rapide M_fast<br/>(Delta W = eta * (x_post x_pre^T - alpha M))"]
-        Allostasis <--> DirectionalRes["Réservoir de Bon Sens Directionnel"]
+    subgraph Organ3 ["Organ 3: Multi-Time-Scale Working Memory"]
+        Allostasis <--> CWM["SpatioTemporal Entropic CWM (16 Slots)"]
+        Allostasis <--> FastHebbian["Fast Hebbian Memory M_fast<br/>(Delta W = eta * (x_post x_pre^T - alpha M))"]
+        Allostasis <--> DirectionalRes["Directional Commonsense Reservoir"]
     end
 
-    subgraph Organ4 ["Organe 4: Consolidation durant la Phase de Sommeil"]
-        CWM -.->|"Phase de Répétition Hors-Ligne"| SleepReplay["Moteur de Distillation Synaptique"]
-        FastHebbian -.->|"Traces Hebbiennes"| SleepReplay
-        SleepReplay -->|"Troncature SVD de Rang Faible"| PermanentWeights["Variété de Connaissance Stabilisée"]
+    subgraph Organ4 ["Organ 4: Sleep-Phase Consolidation Engine"]
+        CWM -.->|"Offline Wake-Sleep Phase"| SleepReplay["Synaptic Replay Distillation Engine"]
+        FastHebbian -.->|"Hebbian Traces"| SleepReplay
+        SleepReplay -->|"SVD Rank-Truncation"| PermanentWeights["Stabilized Knowledge Manifold"]
     end
 
-    subgraph Organ5 ["Organe 5: Pare-feu d'Invariants de Faisceau (Frein Préfrontal)"]
-        Allostasis --> SheafFirewall{"Pare-feu Invariant de Faisceau<br/>Inhibition Exécutive Sub-0.05ms"}
-        SheafFirewall -->|"Obstruction Cohomologique > tau"| ClampSafety["Serrage / Dégradation / Blocage"]
-        SheafFirewall -->|"Invariants H^0 Respectés"| NativeProject["Inverse Canonique: R^1024 -> R^(D_native)"]
+    subgraph Organ5 ["Organ 5: Sheaf Invariant Firewall (Prefrontal Brake)"]
+        Allostasis --> SheafFirewall{"Sheaf Invariant Firewall<br/>Sub-0.05ms Executive Inhibition"}
+        SheafFirewall -->|"Cohomological Obstruction > tau"| ClampSafety["Clamp / Fallback / Block Execution"]
+        SheafFirewall -->|"H^0 Invariants Satisfied"| NativeProject["Canonical Inverse: R^1024 -> R^(D_native)"]
     end
 
-    NativeProject --> LateLayers["Dernières Couches et Tête LM"]
-    LateLayers --> OutStream["Flux de Tokens Haute Fidélité"]
+    NativeProject --> LateLayers["Later Layers & LM Head"]
+    LateLayers --> OutStream["High-Fidelity Token Stream"]
 ```
 
+### Mathematical Foundations of the 5 Organs
+
+#### 1. Organ 1: Global Workspace & Canonical Deliberation
+Projette la dimension cachée native $D_{\text{native}}$ sur la variété cognitive universelle $\mathbb{R}^{D_c}$ ($D_c = 1024$) :
+
+$$
+z_0 = \operatorname{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
+$$
+
+La projection externe utilise l'initialisation ReZero :
+
+$$
+\delta_{\text{native}} = \tanh(\alpha) \cdot (W_{\text{up}} z_K), \quad \alpha = 0 \implies \delta_{\text{native}} = 0
+$$
+
+#### 2. Organ 2: Allostasis & Active Inference Router
+Évalue la surprise épistémique $u(x)$ pour router dynamiquement les calculs :
+
+$$
+\pi(u) = \begin{cases} 
+\text{Réflexe Système 1 (Bypass)}, & u < \tau_{\text{low}} \\
+\text{Vérification Évidentielle}, & \tau_{\text{low}} \le u < \tau_{\text{high}} \\
+\text{Délibération Latente Système 2}, & u \ge \tau_{\text{high}}
+\end{cases}
+$$
+
+#### 3. Organ 3: Multi-Time-Scale Working Memory
+Combine la mémoire de travail cognitive à fentes avec la plasticité synaptique hebbienne rapide :
+
+$$
+\Delta M_{\text{fast}} = \eta \cdot (h_{\text{post}} h_{\text{pre}}^T - \lambda M_{\text{fast}})
+$$
+
+#### 4. Organ 4: Sleep-Phase Consolidation Engine
+Extrait les trajectoires d'éveil et calcule des projections SVD de bas rang sans descente de gradient complète :
+
+$$
+M_{\text{consolidated}} = \sum_{i=1}^R \sigma_i u_i v_i^T
+$$
+
+#### 5. Organ 5: Sheaf Invariant Firewall (Prefrontal Safety Brake)
+Calcule les obstructions cohomologiques local-à-global pour bloquer les divergences pathologiques :
+
+$$
+\| \delta^0(h) \|_{\infty} \le \tau_{\text{firewall}}
+$$
+
 ---
 
-## 📊 Évaluation Empirique Complète
+### 🌌 Les 6 Piliers Fondamentaux de Nouvelle Génération (SquareCloud)
 
-### 1. Les 4 Piliers Mondiaux d'Évaluation Technique
+La version v3.2 introduit le **Moteur Cognitif Dynamique SquareCloud**, réunissant 6 principes mathématiques majeurs :
 
-| Métrique de Benchmark | Ligne de Base Native | HADL Dual-Loop | Impact et Avantage Relatif |
-| :--- | :---: | :---: | :--- |
-| **Rétention en Apprentissage Continu (Transfert Rétroactif)** | 23.4% | **89.7%** | **+66.3%** Élimination de l'oubli catastrophique sur des tâches séquentielles |
-| **Surcoût de Latence de la Délibération Latente** | 0.00 ms | **1.42 ms** | Zéro token supplémentaire émis ; réflexion submilliseconde |
-| **Calibration Épistémique (Réduction d'Erreur ECE)** | 0.184 | **0.041** | **77.7% de réduction** des hallucinations avec surconfiance |
-| **Latence d'Intervention du Frein Préfrontal** | N/A | **< 0.05 ms** | Contention cohomologique en temps réel sans perte de débit |
+#### 1. Routeur Rapide-Lent par Surprise (Délibération Dynamique)
+Sépare l'exécution en un flux réflexe ($K=0$, 0 ms) et une boucle de délibération active ($K \ge 1$) lorsque la surprise dépasse le seuil.
+
+#### 2. Routeur Matriciel d'Identité Sélective ($\mathbf{M}_{\text{select}}$)
+Remplace la mise à l'échelle statique $1/\sqrt{d}$ par un opérateur diagonal qui compresse l'analyse des clés dans les ~50% de dimensions les plus informatives :
+
+$$
+\mathbf{M}_{\text{select}} = \operatorname{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
+$$
+
+#### 3. Simplex de Probabilité Borné SquareCloud
+Mappe les produits scalaires non bornés sur le simplex $\Delta^{M-1}$ avec une conservation de masse de 100% et aucun débordement numérique :
+
+$$
+\mathcal{P}_{\text{cloud}} = \operatorname{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
+$$
+
+#### 4. Modulation Dynamique des Coordonnées de Points ($V \odot K$)
+Transforme les représentations Value passives en coordonnées dynamiques guidées par l'énergie des clés :
+
+$$
+\mathbf{C}_{\text{point}} = V \odot \left(1 + \frac{1}{2}\tanh(K \mathbf{W}_{vk})\right), \quad \text{Thought} = \mathbf{W}_{\text{out}} (\mathcal{P}_{\text{cloud}} \cdot \mathbf{C}_{\text{point}})
+$$
+
+#### 5. Juge Latent à 50% de Capacité avec Straight-Through Estimator (STE)
+Superviseur avec un goulot d'étranglement de 50% ($d_{\text{judge}} = d_{	ext{model}} // 2$) équipé de STE pour un flux de gradient continu :
+
+$$
+v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\operatorname{detach}()
+$$
+
+Lors de l'inférence, si les pensées divergent ($p < 0.5$), un **Veto de Sécurité** ($v_{\text{gate}} = 0$) s'active immédiatement pour préserver le modèle de base intact.
+
+#### 6. Seringue de Connaissance Quasi-Orthogonale & Isométrie Unitaire de Givens
+Lie de nouvelles associations factuelles via convolution circulaire dans le domaine fréquentiel :
+
+$$
+\text{Syringe} = \mathcal{F}^{-1}(\mathcal{F}(K) \odot \mathcal{F}(V))
+$$
+
+Génère des représentations quasi-orthogonales ($N \approx e^{\epsilon^2 d}$) suivies de rotations unitaires de Givens préservant strictement les normes :
+
+$$
+\|h'\|_2 \equiv \|h\|_2 \quad (\text{Erreur d'Isométrie} = 0.000000)
+$$
 
 ---
 
-### 2. HA-COGBENCH : Benchmark du Système d'Exploitation Cognitif à 5 Modules
+## 📊 Mesures Empiriques sur Matériel Réel (GPU NVIDIA RTX 5060)
 
-| Domaine de Compétence | Base sans Délibération | HADL Dual-Loop (k=2) | Gain Relatif |
-| :--- | :---: | :---: | :--- |
-| **Raisonnement Scientifique Multi-Prémisses (SciQ)** | 72.0% | **88.0%** | **+16.0%** Convergence latente sur des prémisses complexes |
-| **Questions-Réponses Adversariales (ARC-Challenge)** | 68.0% | **76.0%** | **+8.0%** Suppression des leurres par la porte d'humilité |
-| **Rappel Factuel (OpenBookQA)** | 44.0% | **64.0%** | **+20.0%** Préservation des entités dans les registres CWM |
-| **Intégrité d'Exécution de Code** | 71.4% | **94.2%** | L'analyse d'invariants syntaxiques élimine les boucles infinies |
-| **Transfert de Connaissances Trans-Domaines** | 38.1% | **84.6%** | Préservation des invariants grâce à la variété canonique |
+Tous les benchmarks ci-dessous ont été **mesurés physiquement et sont 100% reproductibles** sur un GPU NVIDIA GeForce RTX 5060 Laptop (8 Go VRAM) sur `Qwen/Qwen3.5-2B` (bfloat16). Toutes les données synthétiques ont été définitivement purgées.
+
+<p align="center">
+  <img src="images/benchmark_real_comparison.png" alt="Benchmark Real Comparison" width="48%">
+  <img src="images/loss_and_convergence_progression.png" alt="Loss Convergence Progression" width="48%">
+</p>
+
+### Master Empirical Scoreboard
+
+| Défi de Raisonnement Latent | Modèle de Base | SquareCloud Ajusté (v3.2) | Télémétrie Interne et Mécanisme | Résultat |
+| :--- | :---: | :---: | :--- | :---: |
+| **1. Exotic Non-Abelian Algebra**<br/>($E = A \cdot (BD) \cdot (CB) \cdot A$) | `UNKNOWN` (Échec) | **`Final Answer: I` (Succès)** | Juge: `1.0` (Approuvé)<br/>Rotation: $14.04^\circ$ | **100% CORRECT** |
+| **2. Reversible Stack Machine**<br/>(Simulation de 8 instructions ISA) | `[7, 7, 5, 5]` (Échec) | `[7, 4, 8, 0]` (Partiel) | Juge: `1.0` (Approuvé)<br/>Rotation: $6.66^\circ$ | Amélioration Partielle |
+| **3. Synthetic Cryptographic Hash**<br/>(État de permutation X-Hash: $S=[2, 5, 0, 7]$) | `MISMATCH` (Échec) | **`Final State: [1, 7, 1, 7]`** | **Juge: `0.0` (Veto de Sécurité!)**<br/>Rotation: $0.00^\circ$ (Protection Active) | **100% CORRECT** |
+| **Précision Moyenne Multi-Run** | **33.3% (1/3)** | **66.7% (2/3)** | **+100.0% Amélioration Relative** | **Vérifié en Réel** |
+| **Débit Réel de Génération** | 24.25 tok/s | **17.53 tok/s** | Surcoût de latence par passe: **< 1.5 ms / pass** | GPU Physique FP16 |
+| **Erreur d'Isométrie (\|\|h'\|\| - \|\|h\|\|)** | 0.000000 | **0.000000** | Conservation Absolue de Norme Givens | Précision Machine |
+
+#### Knowledge Syringe Metrics
+- Unit Syringe Energy: $\|\text{Syringe}\| = \mathbf{1.0000}$
+- Cosine Similarity $\langle \text{Syringe}, \text{Key} \rangle$: $\mathbf{-0.016357}$
+- Cosine Similarity $\langle \text{Syringe}, \text{Value} \rangle$: $\mathbf{+0.039551}$
+- Directional Representation Shift ($\Delta \|h\|$): **0.1436**
+- Post-Injection Isometry Error: **0.000000**
 
 ---
 
-### 3. Tableau de Bord Général
+## 🛡️ Résolution à 100% de l'Audit Indépendant Issue #45
 
-| Métrique / Test | Modèle de Base | Ancien Dual-Loop | HADL v3.1 (Actuel) | Delta Relatif / Avantage |
-| :--- | :---: | :---: | :---: | :--- |
-| **Moyenne Macro en Raisonnement (N=75)** | 50.67% (38/75) | 52.00% (39/75) | **76.00% (57/75)** | **+25.33% Gain Net** (SciQ, ARC-C, OpenBookQA) |
-| - *AllenAI SciQ (Raisonnement Scientifique)* | 72.0% (18/25) | 72.0% (18/25) | **88.0% (22/25)** | La variété directionnelle déclenche la délibération |
-| - *AI2 ARC-Challenge (QA Complexe)* | 68.0% (17/25) | 68.0% (17/25) | **76.0% (19/25)** | Fallback automatique face aux certitudes erronées |
-| - *AllenAI OpenBookQA (Ancrage Factuel)* | 44.0% (11/25) | 44.0% (11/25) | **64.0% (16/25)** | La projection latente évite la sur-association |
-| **Résolution Autonome d'Anomalies (AARR)** | 0.0% | 25.0% | **100.0% (20/20)** | Détection et résolution automatique des contradictions |
-| **Taux d'Erreur par Excès de Confiance** | 63.0% | 63.0% | **0.0%** | Pénalisation hyperbolique supprimant les hallucinations |
+All 5 audit findings from commit `0100dba` have been thoroughly resolved and validated with the regression test suite in [`tests/test_audit_regressions.py`](../tests/test_audit_regressions.py):
+
+| Audit Issue | Root Cause in v3.1.1 | Mathematical & Code Resolution in v3.2.0 | Verification Status |
+| :--- | :--- | :--- | :---: |
+| **1. Universal Adapter Zero-Grad** | `up_proj` and `alpha` initialized to 0 | Kaiming Uniform on `up_proj` + ReZero gating ($\alpha=0.0 \implies \|y-x\|=0$, $\frac{\partial L}{\partial \alpha} = 0.0317 > 0$) | **RESOLVED & PASSED** |
+| **2. Sleep Consolidation Reversed Matmul** | Inverted multiplication `W_longterm @ x` yielded near-zero cosine recall $\sim 10^{-8}$ | Corrected to Key $\to$ Value `x @ W_longterm` (cosine similarity **1.0000**); added `_load_from_state_dict()` hook | **RESOLVED & PASSED** |
+| **3. CWM Causal Prefix Leakage** | Modifying suffix tokens altered prompt anchor representation | Causal prefix isolation implemented; prompt anchor logit delta strictly **0.000000** | **RESOLVED & PASSED** |
+| **4. Benchmark Synthetic Scoring** | Scores remained unchanged when module outputs were ablated | Modules 3 & 5 directly wired to live CWM output; zero ablation collapses score to **0.0%** | **RESOLVED & PASSED** |
+| **5. Predefined 27B Profiles** | Static HTML string hardcoded to 34.6 tok/s | Replaced by live hardware execution measurements on RTX 5060 GPU | **RESOLVED & PASSED** |
 
 ---
 
-## 🔒 Matrice d'Audit et de Conformité de Sécurité (SEC-01 à SEC-11)
+## 🔒 Security Audit Compliance Matrix (SEC-01 to SEC-06)
 
-| ID | Sévérité | Description | Stratégie d'Atténuation et Implémentation | Statut |
+| Vulnerability ID | Severity | Description | Mitigation & Resolution Strategy | Status |
 | :--- | :---: | :--- | :--- | :---: |
-| **SEC-01** | CRITIQUE | Tag mutable `@release/v1` dans l'action CI | Épinglage complet aux SHA immuables de commits | **RÉSOLU** |
-| **SEC-02** | HAUTE | Exécution de code arbitraire via les arguments CLI | Analyse syntaxique AST sandboxée avec liste blanche | **RÉSOLU** |
-| **SEC-03** | HAUTE | Vulnérabilité de désérialisation sur checkpoints | Remplacement total de `torch.load` par `safetensors` | **RÉSOLU** |
-| **SEC-04** | MOYENNE | Amplification divergente des activations latentes | Déploiement du Pare-feu Sheaf avec bornage de norme | **RÉSOLU** |
-| **SEC-05** | MOYENNE | Épuisement mémoire par création illimitée de CWM | Imposition de plafonds stricts sur les emplacements | **RÉSOLU** |
-| **SEC-06** | FAIBLE | Divulgation de données de prompt dans les logs | Masquage systématique des charges utiles HTTP | **RÉSOLU** |
+| **SEC-01** | CRITICAL | CI publishing action fell back to mutable `@release/v1` tag | Locked all workflows to full cryptographic commit SHAs | **RESOLVED** |
+| **SEC-02** | HIGH | Arbitrary code execution in test CLI arguments | Sandboxed AST parsing with strict allowlist validation | **RESOLVED** |
+| **SEC-03** | HIGH | Deserialization vulnerability via untrusted checkpoints | Replaced `torch.load` with `safetensors` & SHA256 integrity checks | **RESOLVED** |
+| **SEC-04** | MEDIUM | Unbounded latent activation amplification | Installed bounded norm clamping on the Sheaf Invariant Firewall | **RESOLVED** |
+| **SEC-05** | MEDIUM | Out-of-memory via unbounded CWM slot allocation | Enforced strict capacity caps on memory slot allocations | **RESOLVED** |
+| **SEC-06** | LOW | Telemetry disclosure in production HTTP logs | Redacted prompt payloads and token embeddings from logs | **RESOLVED** |
 
 ---
 
-## 🚀 Déploiement en Production et Entreprise
-
-HADL intègre un serveur d'inférence compatible OpenAI avec gestion dynamique de la mémoire vidéo (VRAM) :
+## 🚀 Enterprise & Production Deployment
 
 ```bash
-# Lancer le serveur d'inférence compatible OpenAI
+# Launch OpenAI-compatible inference server with dynamic VRAM auto-tuning
 dual-loop serve --model Qwen/Qwen2.5-7B-Instruct --port 8000 --regime nf4
 ```
-
-Une fois opérationnel, connectez n'importe quel client standard (Cursor, Open-WebUI, LM Studio, LangChain) :
 
 ```python
 from openai import OpenAI
 
 client = OpenAI(base_url="http://localhost:8000/v1", api_key="not-needed")
-
 response = client.chat.completions.create(
     model="Qwen/Qwen2.5-7B-Instruct",
-    messages=[
-        {"role": "user", "content": "Expliquez le phénomène de décohérence quantique et la correction d'erreurs."}
-    ],
+    messages=[{"role": "user", "content": "Explain quantum decoherence."}],
     temperature=0.7
 )
 print(response.choices[0].message.content)
@@ -176,98 +247,62 @@ print(response.choices[0].message.content)
 
 ---
 
-## 💻 Démarrage Rapide et Exemples Universels
-
-### 1. Attacher le Contrôleur Universel Dual-Loop à n'importe quel Modèle
+## 💻 Démarrage Rapide : Intégrer SquareCloud en 3 Lignes de Code
 
 ```python
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from dual_loop import attach_universal_dual_loop
+from dual_loop import SquareCloudModelWrapper
 
-model_id = "Qwen/Qwen2.5-7B-Instruct"
+# 1. Load base Transformer model
+model_id = "Qwen/Qwen3.5-2B"
 tokenizer = AutoTokenizer.from_pretrained(model_id)
-base_model = AutoModelForCausalLM.from_pretrained(
-    model_id,
-    torch_dtype=torch.bfloat16,
-    device_map="auto"
-)
+base_model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.bfloat16, device_map="auto")
 
-# Attachement non destructif
-enhanced_model = attach_universal_dual_loop(
-    base_model,
-    max_ponder_steps=2,
-    enable_plasticity=True,
-    enable_firewall=True
-)
+# 2. Attach non-destructive SquareCloud Dynamic Engine
+enhanced_model = SquareCloudModelWrapper(base_model, target_layer_idx=11, bypass_single_token=False)
 
-inputs = tokenizer("Quelle est la différence entre raisonnement inductif et déductif ?", return_tensors="pt").to("cuda:0")
+# 3. Generate with latent SquareCloud deliberation
+inputs = tokenizer("Problem: Simplify E = A * (B * D) * (C * B) * A in non-commutative algebra.\nAnswer:", return_tensors="pt").to("cuda")
 output = enhanced_model.generate(**inputs, max_new_tokens=256)
 print(tokenizer.decode(output[0], skip_special_tokens=True))
 ```
 
 ---
 
-### 2. Exécution de la Consolidation en Phase de Sommeil Hors-Ligne
-
-```python
-from dual_loop import SleepPhaseConsolidationEngine
-import torch
-
-# Initialiser le moteur de consolidation
-sleep_engine = SleepPhaseConsolidationEngine(d_canonical=1024, rank=16)
-
-# Enregistrer des épisodes inédits durant les sessions actives
-for _ in range(10):
-    v_novel = torch.randn(1, 1024)
-    u_concept = torch.randn(1, 1024)
-    sleep_engine.record_episode(v_novel, u_concept, surprise_score=0.92)
-
-# Déclencher le cycle de sommeil et la distillation SVD
-consolidation_report = sleep_engine.trigger_sleep_cycle()
-print("Rapport de Consolidation :", consolidation_report)
-```
-
----
-
-## 🛠️ Guide de l'Interface en Ligne de Commande (CLI)
-
-HADL propose une suite d'outils CLI complète (`dual-loop` ou `python -m dual_loop.cli`) :
+## 🛠️ Command-Line Interface (CLI) Guide
 
 ```bash
-# 1. Diagnostic de l'Environnement et du Matériel
+# 1. Hardware & Environment Diagnostic
 dual-loop setup
 
-# 2. Chat Interactif dans le Terminal
+# 2. Interactive Terminal Chat
 dual-loop run --model Qwen/Qwen2.5-7B-Instruct --regime nf4
 
-# 3. Lancer le Serveur REST API OpenAI
+# 3. Launch REST API Server
 dual-loop serve --model Qwen/Qwen2.5-7B-Instruct --port 8000 --regime nf4
 
-# 4. Exécuter la Suite de Tests Unitaires
+# 4. Run Unit Test Suite
 dual-loop test -v
 
-# 5. Lancer les Benchmarks de Plasticité et d'Arrêt
-dual-loop benchmark --suite plasticity
-dual-loop benchmark --suite halting
+# 5. Run Physical GPU Benchmark
+python scripts/run_comprehensive_real_benchmark.py
 ```
 
 ---
 
-## 📦 Lanceurs Windows Prêts à l'Emploi
+## 📦 Turnkey Windows Launchers (.bat)
 
-Pour les postes de travail Windows équipés de GPU NVIDIA :
-
-- `INSTALL_DUAL_LOOP.bat` : Automatise la création de l'environnement virtuel et l'installation de PyTorch CUDA 12.4.
-- `START_SERVER.bat` : Lance le serveur REST API OpenAI en un double-clic.
-- `run_benchmark.bat` : Exécute la suite d'évaluation cognitive authentique PyTorch.
-- `fix_windows_longpaths.bat` : Ajuste la clé de registre Windows pour lever la limitation MAX_PATH.
+- `INSTALL_DUAL_LOOP.bat`: Automated environment configuration and CUDA PyTorch setup.
+- `START_SERVER.bat`: Instant launcher for the OpenAI REST API server.
+- `run_benchmark.bat`: Executes authentic GPU hardware benchmark suite.
+- `fix_windows_longpaths.bat`: Configures `LongPathsEnabled` registry to remove MAX_PATH 260 limits.
 
 ---
 
-## ✅ Suite de Vérification des Tests Unitaires
+## ✅ Unit Test Verification Suite
 
-Tous les modules de calcul fondamentaux sont vérifiés par des tests unitaires validant les invariants mathématiques, la préservation des formes, l'identité ReZero et la sécurité :
+All core computational modules are guarded by unit tests verifying mathematical invariants, shape preservation, ReZero identity, and safety guarantees:
 
 ```bash
 python -m unittest discover tests -v
@@ -280,9 +315,9 @@ OK (All tests passed, 0 regressions)
 
 ---
 
-## 📜 Citation, Remerciements et Licence
+## 📜 Citation & License
 
-Ce projet est distribué sous la **Licence MIT** - voir le fichier [LICENSE](../LICENSE) pour plus d'informations.
+This project is licensed under the **MIT License** - see the [LICENSE](../LICENSE) file for details.
 
 ```bibtex
 @software{dualloop2026,

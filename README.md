@@ -97,31 +97,50 @@ flowchart TD
 
 ### Mathematical Foundations of the 5 Organs
 
-1. **Organ 1: Global Workspace & Canonical Deliberation**:
-   Projects arbitrary native model hidden dimension $D_{\text{native}}$ into a universal cognitive manifold $\mathbb{R}^{D_c}$ ($D_c = 1024$):
-   $$z_0 = \text{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}$$
-   Outward projection uses ReZero initialization:
-   $$\delta_{\text{native}} = \tanh(\alpha) \cdot (W_{\text{up}} z_K), \quad \alpha = 0 \implies \delta_{\text{native}} = 0$$
+#### 1. Organ 1: Global Workspace & Canonical Deliberation
+Projects arbitrary native model hidden dimension $D_{\text{native}}$ into a universal cognitive manifold $\mathbb{R}^{D_c}$ ($D_c = 1024$):
 
-2. **Organ 2: Allostasis & Active Inference Router**:
-   Evaluates epistemic surprise $u(x)$ to dynamically route computation:
-   $$\pi(u) = \begin{cases} 
-   \text{Bypass (System 1 Reflex)}, & u < \tau_{\text{low}} \\
-   \text{Evidential Verification}, & \tau_{\text{low}} \le u < \tau_{\text{high}} \\
-   \text{Recurrent Deliberation (System 2)}, & u \ge \tau_{\text{high}}
-   \end{cases}$$
+$$
+z_0 = \operatorname{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
+$$
 
-3. **Organ 3: Multi-Time-Scale Working Memory**:
-   Combines short-term slot-based Cognitive Working Memory with fast Hebbian synaptic plasticity:
-   $$\Delta M_{\text{fast}} = \eta \cdot (h_{\text{post}} h_{\text{pre}}^T - \lambda M_{\text{fast}})$$
+Outward projection uses ReZero initialization:
 
-4. **Organ 4: Sleep-Phase Consolidation Engine**:
-   Extracts transient waking episodes and computes low-rank SVD projections to stabilize factual knowledge without full gradient descent:
-   $$M_{\text{consolidated}} = \sum_{i=1}^R \sigma_i u_i v_i^T$$
+$$
+\delta_{\text{native}} = \tanh(\alpha) \cdot (W_{\text{up}} z_K), \quad \alpha = 0 \implies \delta_{\text{native}} = 0
+$$
 
-5. **Organ 5: Sheaf Invariant Firewall (Prefrontal Safety Brake)**:
-   Computes local-to-global cohomological obstructions on latent representations, clamping pathological divergences before token projection:
-   $$\| \delta^0(h) \|_{\infty} \le \tau_{\text{firewall}}$$
+#### 2. Organ 2: Allostasis & Active Inference Router
+Evaluates epistemic surprise $u(x)$ to dynamically route computation:
+
+$$
+\pi(u) = \begin{cases} 
+\text{Bypass (System 1 Reflex)}, & u < \tau_{\text{low}} \\
+\text{Evidential Verification}, & \tau_{\text{low}} \le u < \tau_{\text{high}} \\
+\text{Recurrent Deliberation (System 2)}, & u \ge \tau_{\text{high}}
+\end{cases}
+$$
+
+#### 3. Organ 3: Multi-Time-Scale Working Memory
+Combines short-term slot-based Cognitive Working Memory with fast Hebbian synaptic plasticity:
+
+$$
+\Delta M_{\text{fast}} = \eta \cdot (h_{\text{post}} h_{\text{pre}}^T - \lambda M_{\text{fast}})
+$$
+
+#### 4. Organ 4: Sleep-Phase Consolidation Engine
+Extracts transient waking episodes and computes low-rank SVD projections to stabilize factual knowledge without full gradient descent:
+
+$$
+M_{\text{consolidated}} = \sum_{i=1}^R \sigma_i u_i v_i^T
+$$
+
+#### 5. Organ 5: Sheaf Invariant Firewall (Prefrontal Safety Brake)
+Computes local-to-global cohomological obstructions on latent representations, clamping pathological divergences before token projection:
+
+$$
+\| \delta^0(h) \|_{\infty} \le \tau_{\text{firewall}}
+$$
 
 ---
 
@@ -129,21 +148,51 @@ flowchart TD
 
 The latest v3.2 release advances beyond fixed canonical bottlenecks by introducing the **SquareCloud Dynamic Cognitive Engine**, uniting 6 breakthrough mathematical principles:
 
-1. **Fast-Slow Surprisal Router (Dynamic Deliberation)**:
-   Splits execution into a reflex streaming path ($K=0$, 0 ms overhead) for predictable tokens and an active deliberation loop ($K \ge 1$) when epistemic surprisal exceeds confidence thresholds.
-2. **Selective Identity Matrix Router ($\mathbf{M}_{\text{select}}$)**:
-   Replaces static $\frac{1}{\sqrt{d}}$ scaling with a learnable diagonal selection operator that compresses key analysis into the most salient $\sim 50\%$ feature subspace:
-   $$\mathbf{M}_{\text{select}} = \operatorname{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}$$
-3. **SquareCloud Bounded Probability Simplex**:
-   Maps unbounded linear dot-products into a bounded probability density simplex $\Delta^{M-1}$ with 100% mass conservation and zero numerical overflow:
-   $$\mathcal{P}_{\text{cloud}} = \operatorname{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}$$
-4. **Dynamic Moving Point Modulation $[V \odot K]$**:
-   Transforms passive value representations into dynamic particle coordinates driven by address key energy:
-   $$\mathbf{C}_{\text{point}} = V \odot \left(1 + \frac{1}{2}\tanh(K \mathbf{W}_{vk})\right), \quad \text{Thought} = \mathbf{W}_{\text{out}} (\mathcal{P}_{\text{cloud}} \cdot \mathbf{C}_{\text{point}})$$
-5. **50% Capacity Latent Judge with Straight-Through Estimator (STE)**:
-   Acts as a heavyweight supervisor with a 50% hidden bottleneck ($d_{\text{judge}} = d_{\text{model}} // 2$). Equipped with STE for continuous gradient flow during training and binary fail-safe veto ($v_{\text{gate}} = 0$) during inference if candidate thoughts diverge.
-6. **Quasi-Orthogonal Knowledge Syringe & Unitary Givens Isometry**:
-   Binds novel factual associations via circular convolution ($K \circledast V = \mathcal{F}^{-1}(\mathcal{F}(K) \odot \mathcal{F}(V))$) based on high-dimensional quasi-orthogonality ($N \approx e^{\epsilon^2 d}$), followed by pairwise Unitary Givens trigonometric rotations guaranteeing strict length preservation ($\|h'\|_2 \equiv \|h\|_2$, isometry error = 0.000000).
+#### 1. Fast-Slow Surprisal Router (Dynamic Deliberation)
+Splits execution into a reflex streaming path ($K=0$, 0 ms overhead) for predictable tokens and an active deliberation loop ($K \ge 1$) when epistemic surprisal exceeds confidence thresholds.
+
+#### 2. Selective Identity Matrix Router ($\mathbf{M}_{\text{select}}$)
+Replaces static $1/\sqrt{d}$ scaling with a learnable diagonal selection operator that compresses key analysis into the most salient ~50% feature subspace:
+
+$$
+\mathbf{M}_{\text{select}} = \operatorname{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
+$$
+
+#### 3. SquareCloud Bounded Probability Simplex
+Maps unbounded linear dot-products into a bounded probability density simplex $\Delta^{M-1}$ with 100% mass conservation and zero numerical overflow:
+
+$$
+\mathcal{P}_{\text{cloud}} = \operatorname{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
+$$
+
+#### 4. Dynamic Moving Point Modulation ($V \odot K$)
+Transforms passive value representations into dynamic particle coordinates driven by address key energy:
+
+$$
+\mathbf{C}_{\text{point}} = V \odot \left(1 + \frac{1}{2}\tanh(K \mathbf{W}_{vk})\right), \quad \text{Thought} = \mathbf{W}_{\text{out}} (\mathcal{P}_{\text{cloud}} \cdot \mathbf{C}_{\text{point}})
+$$
+
+#### 5. 50% Capacity Latent Judge with Straight-Through Estimator (STE)
+Acts as a heavyweight supervisor with a 50% hidden bottleneck ($d_{\text{judge}} = d_{\text{model}} // 2$). Equipped with STE for continuous gradient flow during training:
+
+$$
+v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\operatorname{detach}()
+$$
+
+Inference engages a binary fail-safe veto ($v_{\text{gate}} = 0$) if candidate thoughts diverge ($p < 0.5$).
+
+#### 6. Quasi-Orthogonal Knowledge Syringe & Unitary Givens Isometry
+Binds novel factual associations via circular convolution in the frequency domain:
+
+$$
+\text{Syringe} = \mathcal{F}^{-1}(\mathcal{F}(K) \odot \mathcal{F}(V))
+$$
+
+Produces quasi-orthogonal representations ($N \approx e^{\epsilon^2 d}$), followed by pairwise Unitary Givens trigonometric rotations strictly preserving vector lengths:
+
+$$
+\|h'\|_2 \equiv \|h\|_2 \quad (\text{Isometry Error} = 0.000000)
+$$
 
 ---
 
