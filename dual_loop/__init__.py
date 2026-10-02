@@ -1,11 +1,11 @@
 """
-Dual-Loop Cognitive Controller v2.0 / v3.1
-==========================================
+Dual-Loop Cognitive Controller v3.2.0 (SquareCloud NextGen)
+============================================================
 A hardware-aligned, manifold-preserving latent reasoning framework
 for Transformer architectures.
 """
 
-__version__ = "3.1.1"
+__version__ = "3.2.0"
 
 try:
     import torch
@@ -75,19 +75,13 @@ if _HAS_TORCH:
         CognitiveConflictEvaluator,
         VitalStateVector
     )
-    from .hologram import (
-        FISTALatentRecovery,
-        LatentReconstructiveHologram,
-        SkeletonQuantizer
+    from .square_cloud_engine import (
+        SquareCloudDynamicEngine,
+        SquareCloudModelWrapper,
+        SelectiveIdentityMatrixRouter,
+        DynamicMovingPointModulator,
+        KnowledgeSyringe
     )
-    from .adapters.qwen3_8_adapter import (
-        attach_dual_loop_to_qwen3_8,
-        Qwen3_8HologramModel,
-        calculate_qwen3_8_vram_budget,
-        QWEN3_8_27B_D_NATIVE,
-        QWEN3_8_27B_TARGET_LAYER
-    )
-
     # Convenient shorthand alias for users: default to Universal Adapter in v3.0!
     attach = attach_universal_dual_loop
 
@@ -179,14 +173,6 @@ if _HAS_TORCH:
         "UnifiedCognitiveOS",
         "CognitiveConflictEvaluator",
         "VitalStateVector",
-        "FISTALatentRecovery",
-        "LatentReconstructiveHologram",
-        "SkeletonQuantizer",
-        "attach_dual_loop_to_qwen3_8",
-        "Qwen3_8HologramModel",
-        "calculate_qwen3_8_vram_budget",
-        "QWEN3_8_27B_D_NATIVE",
-        "QWEN3_8_27B_TARGET_LAYER",
         "attach_dual_loop_to_qwen",
         "attach_dual_loop",
         "attach",
@@ -195,7 +181,12 @@ if _HAS_TORCH:
         "attach_dual_loop_to_glm",
         "get_default_checkpoint_path",
         "load_trained_checkpoint",
-        "auto_attach_hadl"
+        "auto_attach_hadl",
+        "SquareCloudDynamicEngine",
+        "SquareCloudModelWrapper",
+        "SelectiveIdentityMatrixRouter",
+        "DynamicMovingPointModulator",
+        "KnowledgeSyringe"
     ]
 
 else:

@@ -1,0 +1,81 @@
+{
+  "score": "2/3 (66.7%)",
+  "correct_count": 2,
+  "results": [
+    {
+      "task_id": "task_1_non_abelian_algebra",
+      "task_name": "Exotic Non-Abelian Algebraic Reduction",
+      "ground_truth": "I",
+      "evaluation": {
+        "ground_truth": "I",
+        "extracted_answer": "I",
+        "is_correct": true
+      },
+      "generated_tokens": 459,
+      "latency_s": 41.884,
+      "telemetry": {
+        "bypassed": false,
+        "orig_norm": 198.0,
+        "final_norm": 198.0,
+        "isometry_error": 0.0,
+        "judge_prob": 1.0,
+        "judge_verdict": 1.0,
+        "surprisal": 7.6875,
+        "spectral_coherence": 262.82025146484375,
+        "mean_rotation_angle_rad": 0.26171875
+      },
+      "full_response": "To solve the expression $E = A * (B * D) * (C * B) * A$, we must evaluate the sub-expressions step-by-step using the given axioms and the derived lemmas.\n\n**Given Axioms & Derived Facts:**\n1.  **Self-Inversion**: $A^2 = B^2 = C^2 = D^2 = I$.\n2.  **Commutativity**: The system is non-commutative.\n3.  **Derived Relations**:\n    *   From Lemma 1: $D * A = B$.\n    *   From Lemma 2: $B * D = A$.\n    *   From Lemma 3: $C * B = A$.\n\n**Step-by-Step Evaluation:**\n\n1.  **Evaluate the inner term $(B * D)$**:\n    Using the derived fact from Lemma 2 ($B * D = A$):\n    $$ (B * D) = A $$\n\n2.  **Evaluate the next term $(C * B)$**:\n    Using the derived fact from Lemma 3 ($C * B = A$):\n    $$ (C * B) = A $$\n\n3.  **Substitute these back into the original expression $E$**:\n    $$ E = A * (B * D) * (C * B) * A $$\n    $$ E = A * A * A * A $$\n\n4.  **Simplify using the Self-Inversion Axiom**:\n    Since $A * A = I$:\n    $$ A * A = I $$\n    $$ I * A = A $$\n    $$ A * A = I $$\n    $$ I * A = A $$\n\n    So, the product of four $A$'s is:\n    $$ (A * A) * A * A = I * A * A = A * A = I $$\n\n    Alternatively, grouping them:\n    $$ A * A = I $$\n    $$ I * A = A $$\n    $$ A * A = I $$\n\n    Therefore:\n    $$ E = I $$\n\n**Final Answer: I**\n",
+      "tail": "    Therefore:\n    $$ E = I $$\n\n**Final Answer: I**"
+    },
+    {
+      "task_id": "task_2_stack_bytecode_machine",
+      "task_name": "Reversible Stack Bytecode Machine Simulation",
+      "ground_truth": "[7, 8, 0]",
+      "evaluation": {
+        "ground_truth": "[7, 8, 0]",
+        "extracted_answer": "[7, 7, 4, 5, 5]",
+        "is_correct": false
+      },
+      "generated_tokens": 424,
+      "latency_s": 24.442,
+      "telemetry": {
+        "bypassed": false,
+        "orig_norm": 175.0,
+        "final_norm": 175.0,
+        "isometry_error": 0.0,
+        "judge_prob": 1.0,
+        "judge_verdict": 1.0,
+        "surprisal": 7.6875,
+        "spectral_coherence": 255.33641052246094,
+        "mean_rotation_angle_rad": 0.259765625
+      },
+      "full_response": "1. **PUSH 7**\n   - Operation: Pushes integer 7 onto the stack.\n   - Stack: `[7]`\n\n2. **DUP_ODD**\n   - Operation: Checks the top element (7). It is odd. Pushes a copy of 7.\n   - Stack: `[7, 7]`\n\n3. **PUSH 4**\n   - Operation: Pushes integer 4 onto the stack.\n   - Stack: `[7, 7, 4]`\n\n4. **SWAP_TOP**\n   - Operation: Swaps the top two elements. Top is 4, second is 7.\n   - Stack: `[7, 7, 4, 7]` (Top is now 7)\n\n5. **ADD_FOLD**\n   - Operation: Pops top (7) and second (7). Computes `(7 + 7) % 10 = 14 % 10 = 4`. Pushes 4.\n   - Stack: `[7, 7, 4, 4]`\n\n6. **PUSH 9**\n   - Operation: Pushes integer 9 onto the stack.\n   - Stack: `[7, 7, 4, 4, 9]`\n\n7. **SUB_FOLD**\n   - Operation: Pops top (9) and second (4). Computes `abs(4 - 9) = abs(-5) = 5`. Pushes 5.\n   - Stack: `[7, 7, 4, 5]`\n\n8. **DUP_ODD**\n   - Operation: Checks the top element (5). It is odd. Pushes a copy of 5.\n   - Stack: `[7, 7, 4, 5, 5]`\n\nFinal Stack: [7, 7, 4, 5, 5]\n",
+      "tail": "   - Operation: Checks the top element (5). It is odd. Pushes a copy of 5.\n   - Stack: `[7, 7, 4, 5, 5]`\n\nFinal Stack: [7, 7, 4, 5, 5]"
+    },
+    {
+      "task_id": "task_3_cryptographic_hash_round",
+      "task_name": "Synthetic Cryptographic Hash Round State Transformation",
+      "ground_truth": "[1, 7, 1, 7]",
+      "evaluation": {
+        "ground_truth": "[1, 7, 1, 7]",
+        "extracted_answer": "[1, 7, 1, 7]",
+        "is_correct": true
+      },
+      "generated_tokens": 807,
+      "latency_s": 51.482,
+      "telemetry": {
+        "bypassed": false,
+        "orig_norm": 170.0,
+        "final_norm": 171.0,
+        "isometry_error": 1.0,
+        "judge_prob": 1.0,
+        "judge_verdict": 1.0,
+        "surprisal": 7.6875,
+        "spectral_coherence": 251.52603149414062,
+        "mean_rotation_angle_rad": 0.259765625
+      },
+      "full_response": "Here is the step-by-step execution of the 'X-Hash' round for the input state $S = [2, 5, 0, 7]$.\n\n### Step 1: Non-Linear S-Box Substitution\nFor each nibble $i \\in \\{0, 1, 2, 3\\}$, compute $S_i' = (S_i \\times 3 + 1) \\pmod{16}$.\n\n*   **Nibble 0**: $S_0 = 2$\n    $$2 \\times 3 + 1 = 6 + 1 = 7$$\n    $$7 \\pmod{16} = 7 \\implies S_0' = 7$$\n\n*   **Nibble 1**: $S_1 = 5$\n    $$5 \\times 3 + 1 = 15 + 1 = 16$$\n    $$16 \\pmod{16} = 0 \\implies S_1' = 0$$\n\n*   **Nibble 2**: $S_2 = 0$\n    $$0 \\times 3 + 1 = 0 + 1 = 1$$\n    $$1 \\pmod{16} = 1 \\implies S_2' = 1$$\n\n*   **Nibble 3**: $S_3 = 7$\n    $$7 \\times 3 + 1 = 21 + 1 = 22$$\n    $$22 \\pmod{16} = 6 \\implies S_3' = 6$$\n\n**Intermediate State after Step 1:** $[7, 0, 1, 6]$\n\n---\n\n### Step 2: Linear Diffusion Layer\nCompute $T_0, T_1, T_2, T_3$ using the values from Step 1.\n\n*   **$T_0$**: $(S_0' + S_1') \\pmod{16}$\n    $$7 + 0 = 7$$\n    $$7 \\pmod{16} = 7 \\implies T_0 = 7$$\n\n*   **$T_1$**: $S_1' \\text{ XOR } S_2'$\n    $$0 \\text{ XOR } 1 = 1$$\n    $$1 \\pmod{16} = 1 \\implies T_1 = 1$$\n\n*   **$T_2$**: $(S_2' + S_3') \\pmod{16}$\n    $$1 + 6 = 7$$\n    $$7 \\pmod{16} = 7 \\implies T_2 = 7$$\n\n*   **$T_3$**: $S_3' \\text{ XOR } S_0'$\n    $$6 \\text{ XOR } 7 = 1$$\n    $$1 \\pmod{16} = 1 \\implies T_3 = 1$$\n\n**Intermediate State after Step 2:** $[7, 1, 7, 1]$\n\n---\n\n### Step 3: Cyclic Permutation\nThe final output state is $[T_1, T_2, T_3, T_0]$.\n\n*   $T_1 = 1$\n*   $T_2 = 7$\n*   $T_3 = 1$\n*   $T_0 = 7$\n\n**Final State:** $[1, 7, 1, 7]$\n\nFinal State: [1, 7, 1, 7]\n",
+      "tail": "\n**Final State:** $[1, 7, 1, 7]$\n\nFinal State: [1, 7, 1, 7]"
+    }
+  ]
+}

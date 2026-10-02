@@ -2,7 +2,7 @@
 Dual-Loop Custom Inference Engine
 =================================
 Model-agnostic inference engine that loads and runs any open-source Hugging Face
-model with Dual-Loop Latent Deliberation and Latent Reconstructive Hologram.
+model with Dual-Loop Latent Deliberation and dynamic VRAM auto-tuning.
 Supports real-time streaming token generation and standard synchronous generation.
 """
 
@@ -26,11 +26,6 @@ from transformers import (
 
 from .vram_tuner import VRAMAutoTuner, AllocationPlan
 from ..adapters.universal_adapter import attach_universal_dual_loop
-from ..adapters.qwen3_8_adapter import (
-    attach_dual_loop_to_qwen3_8,
-    Qwen3_8HologramModel,
-    QWEN3_8_27B_D_NATIVE
-)
 
 
 class DualLoopInferenceEngine:
@@ -67,6 +62,31 @@ class DualLoopInferenceEngine:
         self.total_tokens_generated = 0
         self.total_generation_time_sec = 0.0
 
+    def _load_base_model(self, **kwargs):
+        """Dispatches to the correct model loader based on model architecture."""
+        model_path = self.model_id
+        cache_snapshot = r"C:\Users\Matthew Chen\.cache\huggingface\hub\models--Qwen--Qwen3.8-27B\snapshots\1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0"
+        if not os.path.exists(model_path) and os.path.exists(cache_snapshot) and ("27b" in self.model_id.lower() or "qwen3" in self.model_id.lower()):
+            model_path = cache_snapshot
+
+        try:
+            from transformers import AutoConfig
+            cfg = AutoConfig.from_pretrained(model_path, trust_remote_code=self.trust_remote_code)
+            if getattr(cfg, "model_type", None) == "qwen3_5":
+                from transformers.models.qwen3_5 import Qwen3_5ForConditionalGeneration
+                return Qwen3_5ForConditionalGeneration.from_pretrained(
+                    model_path,
+                    trust_remote_code=self.trust_remote_code,
+                    **kwargs
+                )
+        except Exception:
+            pass
+        return AutoModelForCausalLM.from_pretrained(
+            model_path,
+            trust_remote_code=self.trust_remote_code,
+            **kwargs
+        )
+
     def load_model(self) -> None:
         """Loads tokenizer and attaches Dual-Loop Controller according to the allocation plan."""
         print("=" * 80)
@@ -82,16 +102,21 @@ class DualLoopInferenceEngine:
 
         t0 = time.time()
 
-        # 1. Load Tokenizer
+        # 1. Load Tokenizer (check local cache snapshot first to prevent HF Hub timeout)
+        tok_source = self.model_id
+        cache_snapshot = r"C:\Users\Matthew Chen\.cache\huggingface\hub\models--Qwen--Qwen3.8-27B\snapshots\1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0"
+        if not os.path.exists(tok_source) and os.path.exists(cache_snapshot):
+            tok_source = cache_snapshot
+
         try:
             self.tokenizer = AutoTokenizer.from_pretrained(
-                self.model_id,
+                tok_source,
                 trust_remote_code=self.trust_remote_code
             )
             if self.tokenizer.pad_token is None:
                 self.tokenizer.pad_token = self.tokenizer.eos_token
         except Exception as e:
-            print(f"[!] Warning loading remote tokenizer for {self.model_id}: {e}")
+            print(f"[!] Warning loading tokenizer from {tok_source}: {e}")
             print(f"[*] Falling back to universal Qwen tokenizer...")
             self.tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-7B-Instruct")
             if self.tokenizer.pad_token is None:
@@ -100,90 +125,56 @@ class DualLoopInferenceEngine:
         # 2. Load Model based on selected regime
         regime = self.plan.selected_regime
 
-        if regime == "LATENT_HOLOGRAM":
-            # For 27B/30B models where full weights exceed 8GB/12GB consumer VRAM
-            print(f"[*] Activating Candès-Tao Latent Hologram (27B -> 2B Footprint in VRAM)...")
-            try:
-                # Attempt loading base model with 4-bit NF4 if available
-                bnb_config = BitsAndBytesConfig(
-                    load_in_4bit=True,
-                    bnb_4bit_quant_type="nf4",
-                    bnb_4bit_compute_dtype=torch.bfloat16
-                )
-                base = AutoModelForCausalLM.from_pretrained(
-                    self.model_id,
-                    quantization_config=bnb_config,
-                    device_map="auto",
-                    trust_remote_code=self.trust_remote_code
-                )
-                self.model = attach_dual_loop_to_qwen3_8(
-                    base,
-                    hologram_steps=self.k_steps,
-                    enable_plasticity=True
-                )
-            except Exception as e:
-                # If downloading 50GB weights is infeasible, load the authentic high-performance Hologram Skeleton
-                print(f"[*] Remote weights not cached locally ({e}).")
-                print(f"[*] Instantiating authentic Qwen3.8-27B Hologram Engine (~3.82 GiB VRAM)...")
-                skeleton = Qwen3_8HologramModel(
-                    d_native=QWEN3_8_27B_D_NATIVE,
-                    enable_hologram=True,
-                    hologram_steps=self.k_steps
-                )
-                if torch.cuda.is_available():
-                    skeleton = skeleton.cuda()
-                skeleton.quantize_skeleton_to_2bit()
-                self.model = skeleton
-
-        elif regime == "NF4":
-            print(f"[*] Loading 4-bit NormalFloat (NF4) quantized base model...")
+        if regime == "NF4":
+            print(f"[*] Loading 4-bit NormalFloat (NF4) quantized base model with Hybrid GPU+CPU Allocation...")
             bnb_config = BitsAndBytesConfig(
                 load_in_4bit=True,
                 bnb_4bit_quant_type="nf4",
-                bnb_4bit_compute_dtype=torch.bfloat16
+                bnb_4bit_compute_dtype=torch.bfloat16,
+                llm_int8_enable_fp32_cpu_offload=True
             )
-            base = AutoModelForCausalLM.from_pretrained(
-                self.model_id,
+            # Reserve headroom on GPU 0 and allocate remainder to Host RAM
+            gpu_mem = f"{max(2.0, self.plan.effective_budget_gib):.1f}GiB"
+            cpu_mem = f"{max(8.0, self.plan.hardware.host_ram_avail_gib - 2.0):.1f}GiB"
+            max_mem_plan = {0: gpu_mem, "cpu": cpu_mem}
+            print(f"[*] Memory Target: GPU={gpu_mem}, Host RAM={cpu_mem}")
+            base = self._load_base_model(
                 quantization_config=bnb_config,
                 device_map="auto",
-                trust_remote_code=self.trust_remote_code
+                max_memory=max_mem_plan
             )
             self.model = attach_universal_dual_loop(
                 base,
-                k_steps=self.k_steps,
-                enable_allostatic_modulation=True,
-                enable_brain_sandbox=True
+                max_ponder_steps=self.k_steps,
+                enable_plasticity=True,
+                enable_firewall=True
             )
 
         elif regime == "INT8":
             print(f"[*] Loading 8-bit integer quantized base model...")
-            base = AutoModelForCausalLM.from_pretrained(
-                self.model_id,
+            base = self._load_base_model(
                 load_in_8bit=True,
-                device_map="auto",
-                trust_remote_code=self.trust_remote_code
+                device_map="auto"
             )
             self.model = attach_universal_dual_loop(
                 base,
-                k_steps=self.k_steps,
-                enable_allostatic_modulation=True,
-                enable_brain_sandbox=True
+                max_ponder_steps=self.k_steps,
+                enable_plasticity=True,
+                enable_firewall=True
             )
 
         else:  # BF16
             print(f"[*] Loading full BF16 base model directly to GPU...")
             dtype = torch.bfloat16 if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else torch.float16
-            base = AutoModelForCausalLM.from_pretrained(
-                self.model_id,
+            base = self._load_base_model(
                 torch_dtype=dtype,
-                device_map="auto" if torch.cuda.is_available() else None,
-                trust_remote_code=self.trust_remote_code
+                device_map="auto" if torch.cuda.is_available() else None
             )
             self.model = attach_universal_dual_loop(
                 base,
-                k_steps=self.k_steps,
-                enable_allostatic_modulation=True,
-                enable_brain_sandbox=True
+                max_ponder_steps=self.k_steps,
+                enable_plasticity=True,
+                enable_firewall=True
             )
 
         load_sec = time.time() - t0
@@ -201,20 +192,8 @@ class DualLoopInferenceEngine:
 
     def format_chat_prompt(self, messages: List[Dict[str, str]]) -> str:
         """
-        Formats a list of OpenAI chat messages into a model-aligned prompt string.
-        Supports Hermes, ChatML, and standard tokenizer templates.
+        Formats a list of OpenAI chat messages into a standard prompt string.
         """
-        if self.tokenizer and hasattr(self.tokenizer, "apply_chat_template") and self.tokenizer.chat_template:
-            try:
-                return self.tokenizer.apply_chat_template(
-                    messages,
-                    tokenize=False,
-                    add_generation_prompt=True
-                )
-            except Exception:
-                pass
-
-        # Robust ChatML / Hermes Agent fallback format
         formatted = ""
         for m in messages:
             role = m.get("role", "user")
@@ -242,16 +221,14 @@ class DualLoopInferenceEngine:
 
         prompt_len = inputs["input_ids"].shape[1]
 
-        # Call underlying generation
         gen_kwargs = {
             "max_new_tokens": max_tokens,
+            "temperature": temperature,
+            "top_p": top_p,
             "do_sample": temperature > 0.0,
             "pad_token_id": self.tokenizer.pad_token_id,
             "eos_token_id": self.tokenizer.eos_token_id,
         }
-        if temperature > 0.0:
-            gen_kwargs["temperature"] = max(0.01, temperature)
-            gen_kwargs["top_p"] = top_p
 
         with torch.no_grad():
             if hasattr(self.model, "generate"):
@@ -260,9 +237,7 @@ class DualLoopInferenceEngine:
                 output_text = self.tokenizer.decode(out_ids, skip_special_tokens=True)
                 completion_tokens = len(out_ids)
             else:
-                # Direct skeleton forward pass
-                output_text = "Generated response from Qwen3.8-27B Latent Hologram."
-                completion_tokens = 32
+                raise RuntimeError("Loaded model does not implement generate().")
 
         elapsed = max(0.001, time.time() - t0)
         tok_sec = completion_tokens / elapsed
@@ -309,13 +284,12 @@ class DualLoopInferenceEngine:
             **inputs,
             "streamer": streamer,
             "max_new_tokens": max_tokens,
+            "temperature": temperature,
+            "top_p": top_p,
             "do_sample": temperature > 0.0,
             "pad_token_id": self.tokenizer.pad_token_id,
             "eos_token_id": self.tokenizer.eos_token_id,
         }
-        if temperature > 0.0:
-            gen_kwargs["temperature"] = max(0.01, temperature)
-            gen_kwargs["top_p"] = top_p
 
         # Run model.generate in a background thread while main thread yields from streamer
         if hasattr(self.model, "generate"):
@@ -327,8 +301,4 @@ class DualLoopInferenceEngine:
 
             thread.join()
         else:
-            # Fallback mock streaming for standalone prototype
-            msg = "Dual-Loop Latent Hologram response streaming active."
-            for word in msg.split():
-                yield word + " "
-                time.sleep(0.02)
+            raise RuntimeError("Loaded model does not implement generate().")

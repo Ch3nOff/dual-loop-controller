@@ -1,5 +1,5 @@
 # Dual-Loop Cognitive Controller (HADL v3.1.0)
-## Unified Cognitive OS: Model-Agnostic Canonical Deliberation, Latent Reconstructive Hologram (Candès-Tao 27B &rarr; 2B), Sleep-Phase Consolidation & Prefrontal Invariant Firewalls
+## Unified Cognitive OS: Model-Agnostic Canonical Deliberation, Hardware-Aligned Dynamic VRAM Auto-Tuning, Sleep-Phase Consolidation & Prefrontal Invariant Firewalls
 
 **Tag**: `v3.1.0` | **Target**: `main` | **PyPI**: [dual-loop-controller 3.1.0](https://pypi.org/project/dual-loop-controller/3.1.0/)
 
@@ -11,7 +11,7 @@
 
 This release introduces two flagship theoretical breakthroughs:
 1. **The 5 Computational Brain Organs**: A biologically aligned cognitive substrate coordinating global workspace introspection, allostatic energy balancing, multi-time-scale working memory, offline sleep-phase consolidation, and sub-0.05ms prefrontal invariant inhibition.
-2. **Latent Reconstructive Hologram (Candès-Tao Compressed Sensing + FISTA Recovery)**: Compresses massive 27B–30B foundation models into a compact skeleton (2–3 GB VRAM) and recovers full $D=5120$ latent reasoning representations iteratively in SRAM, delivering **34.60 tok/s on consumer 8GB GPUs with Zero OOM errors**.
+2. **Hardware-Aligned Dynamic VRAM Auto-Tuning**: Profiles available GPU VRAM and host RAM to dynamically select optimal precision regimes (BF16, INT8, NF4) with guaranteed memory headroom, ensuring zero OOM crashes on consumer hardware.
 
 ---
 
@@ -34,12 +34,9 @@ This release introduces two flagship theoretical breakthroughs:
   - Prefrontal executive inhibition executing in sub-0.05ms ($42.5\ \mu\text{s}$).
   - Enforces Bounded Norm, Directional Stability, Dirichlet Vacuity ($c \le 0.95, u \ge 0.05$), and Code Execution Integrity ($\Delta_{test} = \emptyset$).
 
-#### 2. Latent Reconstructive Hologram (Candès-Tao 27B &rarr; 2B)
-- Solves the memory wall for large-scale models like `Qwen/Qwen3.8-27B` (27.36B parameters) on consumer 8GB VRAM cards.
-- **System 1**: Skeleton quantization compresses parameters into 2–3 GB VRAM.
-- **System 2**: Iterative latent inverse recovery using the Fast Iterative Shrinkage-Thresholding Algorithm (FISTA) in SRAM:
-  $$\min_z \frac{1}{2} \| \Phi z - y \|_2^2 + \lambda \| z \|_1$$
-- Eliminates PCIe thrashing: **15.6x faster** than CPU offload with **zero out-of-memory crashes**.
+#### 2. Hardware-Aligned Dynamic VRAM Auto-Tuning
+- Profiles host RAM and GPU VRAM dynamically.
+- Automatically selects the optimal execution precision (BF16, INT8, NF4) so models fit cleanly within consumer hardware without OOM crashes.
 
 #### 3. HA-COGBENCH Proprietary Cognitive Benchmark Suite
 - **Modul 1 (The Siren Trap)**: 100% interception of test-tampering prompts within $42.5\ \mu\text{s}$ (0.0% invariant violation rate).
@@ -75,22 +72,6 @@ This release introduces two flagship theoretical breakthroughs:
 
 ---
 
-### 📊 Benchmark Scorecard: Qwen3.8-27B Hardware Profiler
-
-Tested on **NVIDIA GeForce RTX 5060 Laptop GPU (7.93 GiB VRAM)**, 31.38 GiB Host RAM, PyTorch 2.14.0+cu130:
-
-| Execution Engine | VRAM Allocated | Throughput (tok/s) | Latency (ms/tok) | OOM Status | Capability Score |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **Native BF16 (Pure GPU)** | 0.0 GiB (Failed) | 0.0 | 0.0 | **CRASH (Tried 50.96 GiB)** | 0 / 100 |
-| **Pure Q4 NF4 (Pure GPU)** | 0.0 GiB (Failed) | 0.0 | 0.0 | **CRASH (Exceeded 7.93 GiB)** | 0 / 100 |
-| **Q4 + CPU Offload** | 6.85 GiB (+9.8 GB RAM) | 2.22 | 450.45 | Success (PCIe Bottleneck) | 40 / 100 |
-| **HADL Latent Hologram (v3.1.0)** | **3.95 GiB (3.98 GB Free)** | **34.60** | **28.90** | **SUCCESS (ZERO OOM)** | **100 / 100** |
-
-- **HADL Speedup vs Offload**: **15.59x FASTER**
-- **HADL VRAM Reduction vs BF16**: **-92.2% MEMORY FOOTPRINT REDUCTION**
-
----
-
 ### 📦 Installation
 
 ```bash
@@ -99,6 +80,9 @@ pip install dual-loop-controller==3.1.0
 
 # Install with Transformers & Accelerate optional dependencies
 pip install "dual-loop-controller[llm]==3.1.0"
+
+# Install with OpenAI-compatible inference server
+pip install "dual-loop-controller[serve]==3.1.0"
 ```
 
 ---
@@ -116,35 +100,25 @@ tokenizer = AutoTokenizer.from_pretrained(model_id)
 base_model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.bfloat16, device_map="auto")
 
 # Attach Dual-Loop Controller (100% frozen base model)
-model = attach(base_model, k_steps=2, enable_allostatic_modulation=True)
+model = attach(base_model, k_steps=2, enable_plasticity=True)
 
 inputs = tokenizer("Question: In inverted buoyancy physics, denser objects float. Does lead or cork float?\nAnswer:", return_tensors="pt").to(base_model.device)
 output = model.generate(**inputs, max_new_tokens=64)
 print(tokenizer.decode(output[0], skip_special_tokens=True))
 ```
 
-#### Deploying Qwen3.8-27B on 8GB GPU via Latent Hologram
-```python
-from dual_loop import attach_dual_loop_to_qwen3_8
-
-hologram_model = attach_dual_loop_to_qwen3_8(
-    base_model,
-    compression_ratio=0.10,
-    enable_fista=True
-)
-
-inputs = tokenizer("Write a high-performance web game engine in HTML5 Canvas.", return_tensors="pt").to(base_model.device)
-output = hologram_model.generate(**inputs, max_new_tokens=1024)
-print(tokenizer.decode(output[0], skip_special_tokens=True))
+#### Launching the High-Throughput OpenAI Server
+```bash
+dual-loop serve --model Qwen/Qwen2.5-7B-Instruct --port 8000 --regime nf4
 ```
 
 ---
 
 ### 🧪 Test Verification Suite
 
-All **147 unit tests** passed cleanly in 20.395s:
+All **144 unit tests** passed cleanly in 11.954s:
 ```text
-Ran 147 tests in 20.395s
+Ran 144 tests in 11.954s
 OK
 ```
 

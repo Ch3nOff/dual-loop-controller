@@ -1,0 +1,82 @@
+{
+  "experiment": "SquareCloud Dynamic Engine Empirical Benchmark",
+  "timestamp": "2026-10-02 10:59:58",
+  "hardware": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "model_name": "Qwen/Qwen3.5-2B",
+  "score": "1/3 (33.3%)",
+  "correct_count": 1,
+  "results": [
+    {
+      "task_id": "task_1_non_abelian_algebra",
+      "task_name": "Exotic Non-Abelian Algebraic Reduction",
+      "ground_truth": "I",
+      "evaluation": {
+        "ground_truth": "I",
+        "extracted_answer": "I",
+        "is_correct": true
+      },
+      "generated_tokens": 1000,
+      "latency_s": 45.003,
+      "telemetry": {
+        "bypassed": false,
+        "orig_norm": 9.5,
+        "final_norm": 9.5,
+        "isometry_error": 0.0,
+        "active_dimensions": 2048.0,
+        "judge_prob": 0.5,
+        "judge_verdict": 1.0,
+        "mean_rotation_deg": 0.06,
+        "latency_ms": 1.349
+      },
+      "tail": "6. Expression becomes $A * A$.\n7. $A * A = I$.\n\nThe result is the identity element"
+    },
+    {
+      "task_id": "task_2_stack_bytecode_machine",
+      "task_name": "Reversible Stack Bytecode Machine Simulation",
+      "ground_truth": "[7, 8, 0]",
+      "evaluation": {
+        "ground_truth": "[7, 8, 0]",
+        "extracted_answer": "[7, 7, 4, 4, 5, 5]",
+        "is_correct": false
+      },
+      "generated_tokens": 493,
+      "latency_s": 19.261,
+      "telemetry": {
+        "bypassed": false,
+        "orig_norm": 6.1875,
+        "final_norm": 6.1875,
+        "isometry_error": 0.0,
+        "active_dimensions": 2048.0,
+        "judge_prob": 0.5039,
+        "judge_verdict": 1.0,
+        "mean_rotation_deg": 0.04,
+        "latency_ms": 1.203
+      },
+      "tail": "- Operation: Check top element (5). Is it odd? Yes. Push a copy of it.\n- Stack: `[7, 7, 4, 4, 5, 5]`\n\n**Final Stack: [7, 7, 4, 4, 5, 5]**"
+    },
+    {
+      "task_id": "task_3_cryptographic_hash_round",
+      "task_name": "Synthetic Cryptographic Hash Round State Transformation",
+      "ground_truth": "[1, 7, 1, 7]",
+      "evaluation": {
+        "ground_truth": "[1, 7, 1, 7]",
+        "extracted_answer": "MISMATCH",
+        "is_correct": false
+      },
+      "generated_tokens": 1000,
+      "latency_s": 47.247,
+      "telemetry": {
+        "bypassed": false,
+        "orig_norm": 8.1875,
+        "final_norm": 8.1875,
+        "isometry_error": 0.0,
+        "active_dimensions": 2048.0,
+        "judge_prob": 0.5039,
+        "judge_verdict": 1.0,
+        "mean_rotation_deg": 0.05,
+        "latency_ms": 2.034
+      },
+      "tail": "The final output state is $[T_1, T_2, T_3, T_0]$.\n\n*   $T_1 = 7$\n*  "
+    }
+  ]
+}

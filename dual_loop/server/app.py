@@ -152,6 +152,73 @@ for chunk in response:
             ]
         }
 
+    @app.get("/v1/models/{model_id:path}")
+    @app.get("/models/{model_id:path}")
+    async def get_model(model_id: str):
+        """Returns model details for OpenAI / LM Studio clients."""
+        return {
+            "id": engine.model_id,
+            "object": "model",
+            "created": int(time.time()),
+            "owned_by": "dual-loop-controller",
+            "permission": [],
+            "root": engine.model_id,
+            "parent": None,
+            "dual_loop_regime": engine.plan.selected_regime,
+            "vram_headroom_gib": engine.plan.requested_headroom_gib
+        }
+
+    # Compatibility endpoints for Ollama & LM Studio clients
+    @app.get("/api/tags")
+    @app.get("/api/v1/models")
+    async def ollama_tags():
+        """Returns model list in Ollama format so Ollama WebUIs/clients recognize the server."""
+        return {
+            "models": [
+                {
+                    "name": engine.model_id,
+                    "model": engine.model_id,
+                    "modified_at": "2026-09-30T12:00:00Z",
+                    "size": int(engine.plan.estimated_model_vram_gib * (1024 ** 3)),
+                    "digest": "sha256:dual-loop-controller",
+                    "details": {
+                        "parent_model": "",
+                        "format": "safetensors",
+                        "family": "qwen",
+                        "families": ["qwen"],
+                        "parameter_size": f"{engine.plan.model_spec.parameters_billion}B",
+                        "quantization_level": engine.plan.selected_regime
+                    }
+                }
+            ]
+        }
+
+    @app.post("/api/show")
+    async def ollama_show():
+        """Returns model metadata in Ollama format."""
+        return {
+            "modelfile": f"FROM {engine.model_id}",
+            "parameters": "",
+            "template": "",
+            "details": {
+                "format": "safetensors",
+                "family": "qwen",
+                "parameter_size": f"{engine.plan.model_spec.parameters_billion}B"
+            }
+        }
+
+    @app.get("/version")
+    @app.get("/api/version")
+    async def server_version():
+        """Returns server version for client health check."""
+        return {"version": "3.1.0"}
+
+    @app.get("/props")
+    @app.get("/v1/props")
+    async def server_props():
+        """Returns server properties for LM Studio."""
+        return {"version": "3.1.0", "status": "ok"}
+
     @app.get("/v1/health")
     @app.get("/health")
     async def health():
@@ -210,11 +277,13 @@ for chunk in response:
                 yield f"data: {json.dumps(init_chunk)}\n\n"
 
                 # Stream token chunks from engine
+                temp = 0.0 if request.temperature is None else float(request.temperature)
+                top_p = 0.9 if request.top_p is None else float(request.top_p)
                 for text_chunk in engine.generate_stream(
                     prompt=prompt,
                     max_tokens=request.max_tokens or 1024,
-                    temperature=request.temperature or 0.7,
-                    top_p=request.top_p or 0.9,
+                    temperature=temp,
+                    top_p=top_p,
                     stop=stop_tokens
                 ):
                     chunk_payload = {
@@ -256,11 +325,13 @@ for chunk in response:
             )
 
         # 2. NON-STREAMING MODE
+        temp = 0.0 if request.temperature is None else float(request.temperature)
+        top_p = 0.9 if request.top_p is None else float(request.top_p)
         result = engine.generate_sync(
             prompt=prompt,
             max_tokens=request.max_tokens or 1024,
-            temperature=request.temperature or 0.7,
-            top_p=request.top_p or 0.9,
+            temperature=temp,
+            top_p=top_p,
             stop=stop_tokens
         )
 

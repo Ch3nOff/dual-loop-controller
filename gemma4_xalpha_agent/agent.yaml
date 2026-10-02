@@ -1,7 +1,6 @@
-name: agent_xalpha_enterprise
+name: swe_xalpha_coder
 model: gemma-4-31b-it-qat-w4a16-ct
-adapter: main_lora
-description: Autonomous Cognitive Software Enterprise operating with HADL Dual-Loop JEV Evidential Gating, Defect Atlas, and Popperian verification.
+description: Autonomous senior Python engineer fixing open-source repository issues with HADL Dual-Loop cognition, Bayesian defect priors, and verified minimal patches.
 instruction: !include prompts/system.md
 tools:
   - run_command
@@ -11,6 +10,6 @@ tools:
   - get_status
   - submit_patch
   - agent_tool:
-      config_path: sub_agents/jev_verifier.yaml
+      config_path: sub_agents/code_analyzer.yaml
       skip_summarization: true
 generate_content_config: !include configs/sampling.yaml

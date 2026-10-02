@@ -36,9 +36,8 @@ Launch interactive tools and live dashboards on Windows with a single double-cli
 
 | Launcher File | Purpose & Capability |
 | :--- | :--- |
+| `run_hadl_server.bat` | Starts local OpenAI-compatible inference server with dynamic VRAM auto-tuning |
 | `START_BENCHMARK.bat` | Starts local streaming inference server & English HUD at `http://127.0.0.1:8000` |
-| `run_qwen3_8_27b_benchmark.bat` | Executes complete Qwen3.8-27B OOM memory profiler on real hardware |
-| `run_webgame_comparison.bat` | Runs unconstrained web game generation & in-situ learning benchmark |
 | `run_benchmark.bat` | Interactive 4-mode terminal suite (Spotlight Showdown, Web Dashboard, Memory Loop) |
 
 ---

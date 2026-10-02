@@ -1,6 +1,5 @@
-# Calibrated competition evaluation budget configuration
 evaluation:
-  timeout_seconds: 120     # Max 120s per single command (prevents premature pytest kill)
-  max_tool_calls: 40       # Max 40 tool calls per task
-  max_time_minutes: 5.0    # Hard cap: 5 minutes per task (129 tasks <= 10.75 hrs < 12 hrs)
-  max_turns: 30            # Max 30 turns
+  timeout_seconds: 180
+  max_tool_calls: 50
+  max_time_minutes: 5.0
+  max_turns: 100

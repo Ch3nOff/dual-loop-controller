@@ -1,0 +1,194 @@
+{
+  "baseline_runs": [
+    [
+      {
+        "run_index": 1,
+        "task_id": "task_1_non_abelian_algebra",
+        "task_name": "Exotic Non-Abelian Algebraic Reduction",
+        "is_correct": true,
+        "extracted": "I",
+        "ground_truth": "I",
+        "latency_s": 31.43,
+        "tokens": 657,
+        "tok_per_sec": 20.9,
+        "telemetry": {}
+      },
+      {
+        "run_index": 1,
+        "task_id": "task_2_stack_bytecode_machine",
+        "task_name": "Reversible Stack Bytecode Machine Simulation",
+        "is_correct": false,
+        "extracted": "MISMATCH",
+        "ground_truth": "[7, 8, 0]",
+        "latency_s": 29.35,
+        "tokens": 800,
+        "tok_per_sec": 27.3,
+        "telemetry": {}
+      },
+      {
+        "run_index": 1,
+        "task_id": "task_3_cryptographic_hash_round",
+        "task_name": "Synthetic Cryptographic Hash Round State Transformation",
+        "is_correct": false,
+        "extracted": "MISMATCH",
+        "ground_truth": "[1, 7, 1, 7]",
+        "latency_s": 30.51,
+        "tokens": 800,
+        "tok_per_sec": 26.2,
+        "telemetry": {}
+      }
+    ],
+    [
+      {
+        "run_index": 2,
+        "task_id": "task_1_non_abelian_algebra",
+        "task_name": "Exotic Non-Abelian Algebraic Reduction",
+        "is_correct": true,
+        "extracted": "I",
+        "ground_truth": "I",
+        "latency_s": 25.23,
+        "tokens": 657,
+        "tok_per_sec": 26.0,
+        "telemetry": {}
+      },
+      {
+        "run_index": 2,
+        "task_id": "task_2_stack_bytecode_machine",
+        "task_name": "Reversible Stack Bytecode Machine Simulation",
+        "is_correct": false,
+        "extracted": "MISMATCH",
+        "ground_truth": "[7, 8, 0]",
+        "latency_s": 44.49,
+        "tokens": 800,
+        "tok_per_sec": 18.0,
+        "telemetry": {}
+      },
+      {
+        "run_index": 2,
+        "task_id": "task_3_cryptographic_hash_round",
+        "task_name": "Synthetic Cryptographic Hash Round State Transformation",
+        "is_correct": false,
+        "extracted": "MISMATCH",
+        "ground_truth": "[1, 7, 1, 7]",
+        "latency_s": 29.51,
+        "tokens": 800,
+        "tok_per_sec": 27.1,
+        "telemetry": {}
+      }
+    ]
+  ],
+  "squarecloud_runs": [
+    [
+      {
+        "run_index": 1,
+        "task_id": "task_1_non_abelian_algebra",
+        "task_name": "Exotic Non-Abelian Algebraic Reduction",
+        "is_correct": true,
+        "extracted": "I",
+        "ground_truth": "I",
+        "latency_s": 36.82,
+        "tokens": 587,
+        "tok_per_sec": 15.9,
+        "telemetry": {
+          "judge_verdict": 1.0,
+          "judge_prob": 1.0,
+          "mean_rotation_deg": 14.04,
+          "isometry_error": 0.0,
+          "active_dimensions": 2048.0
+        }
+      },
+      {
+        "run_index": 1,
+        "task_id": "task_2_stack_bytecode_machine",
+        "task_name": "Reversible Stack Bytecode Machine Simulation",
+        "is_correct": false,
+        "extracted": "MISMATCH",
+        "ground_truth": "[7, 8, 0]",
+        "latency_s": 35.27,
+        "tokens": 742,
+        "tok_per_sec": 21.0,
+        "telemetry": {
+          "judge_verdict": 1.0,
+          "judge_prob": 0.973,
+          "mean_rotation_deg": 6.66,
+          "isometry_error": 0.0,
+          "active_dimensions": 2048.0
+        }
+      },
+      {
+        "run_index": 1,
+        "task_id": "task_3_cryptographic_hash_round",
+        "task_name": "Synthetic Cryptographic Hash Round State Transformation",
+        "is_correct": true,
+        "extracted": "[1, 7, 1, 7]",
+        "ground_truth": "[1, 7, 1, 7]",
+        "latency_s": 46.77,
+        "tokens": 800,
+        "tok_per_sec": 17.1,
+        "telemetry": {
+          "judge_verdict": 0.0,
+          "judge_prob": 0.002,
+          "mean_rotation_deg": 0.0,
+          "isometry_error": 0.0,
+          "active_dimensions": 2048.0
+        }
+      }
+    ],
+    [
+      {
+        "run_index": 2,
+        "task_id": "task_1_non_abelian_algebra",
+        "task_name": "Exotic Non-Abelian Algebraic Reduction",
+        "is_correct": true,
+        "extracted": "I",
+        "ground_truth": "I",
+        "latency_s": 34.21,
+        "tokens": 587,
+        "tok_per_sec": 17.2,
+        "telemetry": {
+          "judge_verdict": 1.0,
+          "judge_prob": 1.0,
+          "mean_rotation_deg": 14.04,
+          "isometry_error": 0.0,
+          "active_dimensions": 2048.0
+        }
+      },
+      {
+        "run_index": 2,
+        "task_id": "task_2_stack_bytecode_machine",
+        "task_name": "Reversible Stack Bytecode Machine Simulation",
+        "is_correct": false,
+        "extracted": "MISMATCH",
+        "ground_truth": "[7, 8, 0]",
+        "latency_s": 46.69,
+        "tokens": 742,
+        "tok_per_sec": 15.9,
+        "telemetry": {
+          "judge_verdict": 1.0,
+          "judge_prob": 0.973,
+          "mean_rotation_deg": 6.66,
+          "isometry_error": 0.0,
+          "active_dimensions": 2048.0
+        }
+      },
+      {
+        "run_index": 2,
+        "task_id": "task_3_cryptographic_hash_round",
+        "task_name": "Synthetic Cryptographic Hash Round State Transformation",
+        "is_correct": true,
+        "extracted": "[1, 7, 1, 7]",
+        "ground_truth": "[1, 7, 1, 7]",
+        "latency_s": 44.21,
+        "tokens": 800,
+        "tok_per_sec": 18.1,
+        "telemetry": {
+          "judge_verdict": 0.0,
+          "judge_prob": 0.002,
+          "mean_rotation_deg": 0.0,
+          "isometry_error": 0.0,
+          "active_dimensions": 2048.0
+        }
+      }
+    ]
+  ]
+}

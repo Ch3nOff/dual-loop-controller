@@ -81,6 +81,15 @@ class SleepPhaseConsolidationEngine(nn.Module):
         self.episodes: List[SleepMemoryEpisode] = []
         self.total_sleep_cycles: int = 0
 
+    def _load_from_state_dict(self, state_dict, prefix, local_metadata, strict, missing_keys, unexpected_keys, error_msgs):
+        """Allows dynamically-sized historical_basis buffer to load into a fresh instance without size mismatch."""
+        key = prefix + "historical_basis"
+        if key in state_dict:
+            ckpt_basis = state_dict[key]
+            if ckpt_basis.shape != self.historical_basis.shape:
+                self.historical_basis = torch.zeros_like(ckpt_basis)
+        super()._load_from_state_dict(state_dict, prefix, local_metadata, strict, missing_keys, unexpected_keys, error_msgs)
+
     def record_episode(
         self,
         v_novel: torch.Tensor,
@@ -170,17 +179,24 @@ class SleepPhaseConsolidationEngine(nn.Module):
             B = torch.eye(self.rank, self.d_model, device=device)
 
         # 3. Orthogonal Nullspace Projection (Zero Catastrophic Forgetting)
-        # 3. Orthogonal Nullspace Projection (Zero Catastrophic Forgetting)
         # Ensure delta_W lies in the nullspace of historical memories
         delta_W_safe = torch.zeros_like(delta_W)
+        measured_leakage = 0.0
         if self.historical_basis.shape[1] > 0:
             basis = self.historical_basis.to(device)
             for col_idx in range(delta_W.shape[1]):
                 col = delta_W[:, col_idx].unsqueeze(0)  # [1, D]
                 col_proj, _ = self.nullspace_projector.project_to_nullspace(col, basis)
                 delta_W_safe[:, col_idx] = col_proj.squeeze(0)
+            
+            # Compute empirical overlap between safe delta and historical memory basis
+            flat_basis = basis.squeeze(0)  # [M, D]
+            overlap = torch.norm(torch.matmul(flat_basis, delta_W_safe))
+            denom = torch.norm(delta_W_safe) * torch.norm(flat_basis) + 1e-8
+            measured_leakage = float((overlap / denom).item())
         else:
             delta_W_safe = delta_W
+            measured_leakage = 0.0
 
         # Register novel keys to historical basis for future nullspace protection
         if num_episodes > 0:
@@ -195,8 +211,17 @@ class SleepPhaseConsolidationEngine(nn.Module):
 
         # 4. Integrate into Permanent Consolidated Matrix
         self.W_longterm.data += self.consolidation_rate * delta_W_safe
-        self.lora_A.data = A
-        self.lora_B.data = B
+        try:
+            U_s, S_s, Vh_s = torch.linalg.svd(delta_W_safe, full_matrices=False)
+            retained = min(self.rank, len(S_s))
+            sqrt_S = torch.sqrt(torch.clamp(S_s[:retained], min=1e-8))
+            self.lora_A.data.zero_()
+            self.lora_B.data.zero_()
+            self.lora_A.data[:, :retained] = U_s[:, :retained] * sqrt_S.unsqueeze(0)
+            self.lora_B.data[:retained, :] = sqrt_S.unsqueeze(1) * Vh_s[:retained, :]
+        except Exception:
+            self.lora_A.data = A
+            self.lora_B.data = B
         
         self.total_sleep_cycles += 1
         
@@ -213,13 +238,13 @@ class SleepPhaseConsolidationEngine(nn.Module):
             "singular_energy_retained": float(energy_ratio),
             "delta_W_norm": float(torch.norm(delta_W_safe).item()),
             "total_permanent_norm": float(torch.norm(self.W_longterm).item()),
-            "nullspace_leakage_overlap": 0.000000,
+            "nullspace_leakage_overlap": round(measured_leakage, 6),
             "latency_ms": elapsed_ms
         }
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Applies consolidated long-term memory to input representation."""
-        # W_longterm(x) + lora_A @ lora_B (x)
-        longterm_out = torch.matmul(x, self.W_longterm.T)
-        lora_out = torch.matmul(torch.matmul(x, self.lora_B.T), self.lora_A.T)
-        return longterm_out + lora_out
+        """
+        Applies consolidated long-term memory to input representation.
+        Maps key vector x -> recalled concept value: y = x @ W_longterm
+        """
+        return torch.matmul(x, self.W_longterm)

@@ -19,21 +19,20 @@ class TestVRAMAutoTuner(unittest.TestCase):
         self.assertGreaterEqual(hw.host_ram_total_gib, 0.0)
 
     def test_estimate_model_spec_known(self):
-        spec_27b = VRAMAutoTuner.estimate_model_spec("Qwen/Qwen3.8-27B")
-        self.assertEqual(spec_27b.hidden_size, 5120)
-        self.assertAlmostEqual(spec_27b.parameters_billion, 27.36, delta=0.5)
-        self.assertGreater(spec_27b.vram_bf16_gib, 40.0)
-        self.assertLess(spec_27b.vram_hologram_gib, 5.0)
-
         spec_7b = VRAMAutoTuner.estimate_model_spec("Qwen/Qwen2.5-7B-Instruct")
         self.assertEqual(spec_7b.hidden_size, 3584)
         self.assertAlmostEqual(spec_7b.parameters_billion, 7.61, delta=0.5)
+        self.assertGreater(spec_7b.vram_bf16_gib, 14.0)
+
+        spec_3b = VRAMAutoTuner.estimate_model_spec("Qwen/Qwen2.5-3B-Instruct")
+        self.assertEqual(spec_3b.hidden_size, 2048)
+        self.assertAlmostEqual(spec_3b.parameters_billion, 3.40, delta=0.5)
 
     def test_calculate_plan_auto_and_custom_headroom(self):
         # Test plan generation with custom 4.0 GiB headroom
-        plan = VRAMAutoTuner.calculate_plan("Qwen/Qwen3.8-27B", headroom_gib=4.0)
+        plan = VRAMAutoTuner.calculate_plan("Qwen/Qwen2.5-7B-Instruct", headroom_gib=4.0)
         self.assertEqual(plan.requested_headroom_gib, 4.0)
-        self.assertIn(plan.selected_regime, ["BF16", "INT8", "NF4", "LATENT_HOLOGRAM"])
+        self.assertIn(plan.selected_regime, ["BF16", "INT8", "NF4"])
         self.assertTrue(plan.enable_allostasis)
 
     def test_forced_regime(self):
@@ -47,7 +46,7 @@ class TestInferenceServerAPI(unittest.TestCase):
     def setUp(self):
         # Setup mock engine to avoid loading real GPU weights during fast unit testing
         self.mock_engine = MagicMock(spec=DualLoopInferenceEngine)
-        self.mock_engine.model_id = "Qwen/Qwen3.8-27B"
+        self.mock_engine.model_id = "Qwen/Qwen2.5-7B-Instruct"
         self.mock_engine.k_steps = 2
         self.mock_engine.total_tokens_generated = 128
         self.mock_engine.total_generation_time_sec = 2.5
@@ -61,22 +60,21 @@ class TestInferenceServerAPI(unittest.TestCase):
             host_ram_avail_gib=24.0,
             cuda_available=True
         )
-        spec = VRAMAutoTuner.estimate_model_spec("Qwen/Qwen3.8-27B")
+        spec = VRAMAutoTuner.estimate_model_spec("Qwen/Qwen2.5-7B-Instruct")
         self.mock_engine.plan = AllocationPlan(
-            model_id="Qwen/Qwen3.8-27B",
+            model_id="Qwen/Qwen2.5-7B-Instruct",
             hardware=hw,
             model_spec=spec,
             requested_headroom_gib=4.0,
             effective_budget_gib=8.0,
-            selected_regime="LATENT_HOLOGRAM",
-            estimated_model_vram_gib=3.82,
-            projected_free_vram_gib=8.18,
-            enable_hologram_fista=True,
+            selected_regime="NF4",
+            estimated_model_vram_gib=4.19,
+            projected_free_vram_gib=7.81,
             enable_allostasis=True,
             torch_dtype="bfloat16",
-            load_in_4bit=False,
+            load_in_4bit=True,
             load_in_8bit=False,
-            description="Candès-Tao Latent Hologram"
+            description="4-bit NormalFloat (NF4) quantization + Dual-Loop Deliberation"
         )
 
         self.mock_engine.format_chat_prompt.side_effect = lambda msgs: "<|im_start|>user\nHello<|im_end|>\n<|im_start|>assistant\n"
@@ -87,7 +85,7 @@ class TestInferenceServerAPI(unittest.TestCase):
             "total_tokens": 18,
             "elapsed_seconds": 0.15,
             "tokens_per_second": 53.3,
-            "regime": "LATENT_HOLOGRAM"
+            "regime": "NF4"
         }
         self.mock_engine.generate_stream.return_value = iter(["Hello", "! ", "I ", "am ", "Dual-Loop."])
 
@@ -98,7 +96,7 @@ class TestInferenceServerAPI(unittest.TestCase):
         resp = self.client.get("/")
         self.assertEqual(resp.status_code, 200)
         self.assertIn("Dual-Loop Inference Engine", resp.text)
-        self.assertIn("Qwen/Qwen3.8-27B", resp.text)
+        self.assertIn("Qwen/Qwen2.5-7B-Instruct", resp.text)
 
     def test_models_endpoint(self):
         resp = self.client.get("/v1/models")
@@ -106,8 +104,8 @@ class TestInferenceServerAPI(unittest.TestCase):
         data = resp.json()
         self.assertEqual(data["object"], "list")
         self.assertEqual(len(data["data"]), 1)
-        self.assertEqual(data["data"][0]["id"], "Qwen/Qwen3.8-27B")
-        self.assertEqual(data["data"][0]["dual_loop_regime"], "LATENT_HOLOGRAM")
+        self.assertEqual(data["data"][0]["id"], "Qwen/Qwen2.5-7B-Instruct")
+        self.assertEqual(data["data"][0]["dual_loop_regime"], "NF4")
         self.assertEqual(data["data"][0]["vram_headroom_gib"], 4.0)
 
     def test_health_endpoint(self):
@@ -115,12 +113,12 @@ class TestInferenceServerAPI(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)
         data = resp.json()
         self.assertEqual(data["status"], "healthy")
-        self.assertEqual(data["regime"], "LATENT_HOLOGRAM")
+        self.assertEqual(data["regime"], "NF4")
         self.assertEqual(data["vram_headroom_reserved_gib"], 4.0)
 
     def test_chat_completions_non_streaming(self):
         payload = {
-            "model": "Qwen/Qwen3.8-27B",
+            "model": "Qwen/Qwen2.5-7B-Instruct",
             "messages": [
                 {"role": "user", "content": "Explain active inference."}
             ],
@@ -136,7 +134,7 @@ class TestInferenceServerAPI(unittest.TestCase):
 
     def test_chat_completions_streaming(self):
         payload = {
-            "model": "Qwen/Qwen3.8-27B",
+            "model": "Qwen/Qwen2.5-7B-Instruct",
             "messages": [
                 {"role": "user", "content": "Explain active inference."}
             ],

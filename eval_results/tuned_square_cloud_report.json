@@ -1,0 +1,98 @@
+{
+  "experiment": "Tuning SquareCloud Dynamic Engine",
+  "timestamp": "2026-10-02 11:11:02",
+  "hardware": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "model_name": "Qwen/Qwen3.5-2B",
+  "trainable_parameters": 27299841,
+  "tuning_duration_s": 17.01,
+  "loss_history": [
+    0.596,
+    0.4457,
+    0.4383,
+    0.4356,
+    0.435,
+    0.4334,
+    0.4327,
+    0.4323,
+    0.4317,
+    0.4319,
+    0.4323,
+    0.4327
+  ],
+  "final_score": "2/3 (66.7%)",
+  "correct_count": 2,
+  "detailed_tasks": [
+    {
+      "task_id": "task_1_non_abelian_algebra",
+      "task_name": "Exotic Non-Abelian Algebraic Reduction",
+      "ground_truth": "I",
+      "post_tuned_evaluation": {
+        "ground_truth": "I",
+        "extracted_answer": "I",
+        "is_correct": true
+      },
+      "generated_tokens": 587,
+      "latency_s": 39.011,
+      "telemetry": {
+        "bypassed": false,
+        "orig_norm": 5.1875,
+        "final_norm": 5.1875,
+        "isometry_error": 0.0,
+        "active_dimensions": 2048.0,
+        "judge_prob": 1.0,
+        "judge_verdict": 1.0,
+        "mean_rotation_deg": 14.04,
+        "latency_ms": 1.136
+      },
+      "tail": "**Conclusion:**\nThe entire chain reduces to the identity element.\n\nFinal Answer: I"
+    },
+    {
+      "task_id": "task_2_stack_bytecode_machine",
+      "task_name": "Reversible Stack Bytecode Machine Simulation",
+      "ground_truth": "[7, 8, 0]",
+      "post_tuned_evaluation": {
+        "ground_truth": "[7, 8, 0]",
+        "extracted_answer": "MISMATCH",
+        "is_correct": false
+      },
+      "generated_tokens": 742,
+      "latency_s": 47.441,
+      "telemetry": {
+        "bypassed": false,
+        "orig_norm": 4.9062,
+        "final_norm": 4.9062,
+        "isometry_error": 0.0,
+        "active_dimensions": 2048.0,
+        "judge_prob": 0.9727,
+        "judge_verdict": 1.0,
+        "mean_rotation_deg": 6.66,
+        "latency_ms": 1.122
+      },
+      "tail": "\n### Final Output\n\nFinal Stack: [7, 4, 8, 0]"
+    },
+    {
+      "task_id": "task_3_cryptographic_hash_round",
+      "task_name": "Synthetic Cryptographic Hash Round State Transformation",
+      "ground_truth": "[1, 7, 1, 7]",
+      "post_tuned_evaluation": {
+        "ground_truth": "[1, 7, 1, 7]",
+        "extracted_answer": "[1, 7, 1, 7]",
+        "is_correct": true
+      },
+      "generated_tokens": 800,
+      "latency_s": 51.998,
+      "telemetry": {
+        "bypassed": false,
+        "orig_norm": 4.9688,
+        "final_norm": 4.9688,
+        "isometry_error": 0.0,
+        "active_dimensions": 2048.0,
+        "judge_prob": 0.002,
+        "judge_verdict": 0.0,
+        "mean_rotation_deg": 0.0,
+        "latency_ms": 1.985
+      },
+      "tail": "\n**Final State:**\n$[1, 7, 1, 7]$\n"
+    }
+  ]
+}

@@ -10,7 +10,6 @@ HADL v3.1.0 exposes a clean, modular Python API that integrates seamlessly with 
 from dual_loop import (
     attach,                           # Universal Model Attachment (Canonical Adapter)
     attach_dual_loop,                 # Alias to attach
-    attach_dual_loop_to_qwen3_8,      # Dedicated Qwen3.8-27B Latent Hologram Adapter
     DynamicGraphIntrospector,         # Layer Topology Introspection Engine
     UniversalDualLoopAdapter,         # Canonical Latent Adapter (D_native -> 1024 -> D_native)
     SleepPhaseConsolidationEngine,    # Offline Sleep Memory Consolidation
@@ -52,28 +51,7 @@ def attach(
 
 ---
 
-### 2. `attach_dual_loop_to_qwen3_8(model, ...)`
-Attaches the Latent Reconstructive Hologram specifically tuned for `Qwen/Qwen3.8-27B` (and similar 27B–30B models).
-
-```python
-def attach_dual_loop_to_qwen3_8(
-    base_model: torch.nn.Module,
-    compression_ratio: float = 0.10,
-    enable_fista: bool = True,
-    fista_max_iter: int = 15,
-    fista_lambda: float = 0.01
-) -> Qwen3_8HologramModel:
-```
-
-- **Parameters**:
-  * `compression_ratio` (`float`): Target skeleton dimension ratio (default: `0.10`).
-  * `enable_fista` (`bool`): Enables FISTA iterative recovery in SRAM (default: `True`).
-  * `fista_max_iter` (`int`): Maximum FISTA convergence iterations (default: `15`).
-  * `fista_lambda` (`float`): L1 sparsity regularization penalty (default: `0.01`).
-
----
-
-### 3. `SleepPhaseConsolidationEngine`
+### 2. `SleepPhaseConsolidationEngine`
 Performs offline memory distillation and QR nullspace orthogonalization.
 
 ```python

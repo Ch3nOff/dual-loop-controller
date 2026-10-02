@@ -9,8 +9,7 @@ Welcome to the official documentation wiki for **Dual-Loop Cognitive Controller 
 | Topic | Description | Link |
 | :--- | :--- | :--- |
 | **Cognitive OS Architecture** | Deep dive into the 5 Computational Brain Organs | [[Architecture: Cognitive OS|01-Architecture-Cognitive-OS]] |
-| **Latent Reconstructive Hologram** | Candès-Tao compressed sensing & FISTA recovery for 27B &rarr; 2B zero-OOM inference | [[Latent Reconstructive Hologram|02-Latent-Reconstructive-Hologram]] |
-| **Benchmarks & Validation** | HA-COGBENCH, Qwen3.8-27B OOM Profiler, Web Game Arena | [[Benchmarks & Validation|03-Benchmarks-and-Empirical-Validation]] |
+| **Benchmarks & Validation** | HA-COGBENCH 5-Module Cognitive Suite, Web Dev Latency | [[Benchmarks & Validation|03-Benchmarks-and-Empirical-Validation]] |
 | **Python SDK & API Reference** | Complete class, method, and function documentation | [[API Reference & SDK|04-API-Reference-and-SDK]] |
 | **Security & Sandboxing** | Compliance matrix SEC-01 to SEC-11, AST sandboxing | [[Security & Sandboxing|05-Security-and-Sandboxing]] |
 | **CLI & Production Deployment** | Command-line guide, Windows `.bat` launchers, vLLM & CUDA graphs | [[CLI & Production Deployment|06-CLI-and-Production-Deployment]] |
@@ -26,7 +25,7 @@ Unlike Chain-of-Thought (CoT) prompting which pollutes the context window with t
 * **Zero Output Token Waste**: 0 extra tokens generated during System 2 reasoning.
 * **Continuous State Space**: Deliberation occurs over latent vectors $\mathbb{R}^{D}$.
 * **Zero Interference**: Memories are consolidated into orthogonal nullspaces ($P_{null} = I - V V^T$) guaranteeing $0.000000$ catastrophic forgetting.
-* **Hardware Alignment**: Enables 27B/30B foundation models to run on 8GB consumer GPUs at 34.60 tok/s with zero OOM errors.
+* **Hardware Alignment**: Dynamic VRAM Auto-Tuning ensures seamless execution across BF16, INT8, and NF4 without OOM errors.
 
 ---
 

@@ -1,0 +1,100 @@
+{
+  "experiment_name": "In-Situ Teaching of Complex Novel Domains with Fresh (Untrained) Adapter",
+  "timestamp": "2026-10-01 19:47:41",
+  "hardware": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "model_name": "Qwen/Qwen3.5-2B",
+  "adapter_state": "FRESH_UNTRAINED_KOSONGAN",
+  "adapter_parameters": 211100365,
+  "k_steps": 2,
+  "target_layer_idx": 11,
+  "summary": {
+    "total_tasks": 3,
+    "base_model_score": "1/3",
+    "base_model_accuracy_pct": 33.3,
+    "dual_loop_fresh_score": "0/3",
+    "dual_loop_fresh_accuracy_pct": 0.0
+  },
+  "detailed_results": [
+    {
+      "task_id": "task_1_non_abelian_algebra",
+      "task_name": "Exotic Non-Abelian Algebraic Reduction",
+      "ground_truth": "I",
+      "base_model": {
+        "generated_tokens": 657,
+        "latency_s": 31.851,
+        "tokens_per_second": 20.63,
+        "response": "To simplify the expression $E = A \\cdot (B \\cdot D) \\cdot (C \\cdot B) \\cdot A$, we will proceed step-by-step using the given axioms and derived lemmas. We must be careful not to assume commutativity ($XY \\neq YX$).\n\n**Step 1: Analyze the term $(B \\cdot D)$**\nFrom Lemma derivation #2 (\"Multiplying by B on the left...\"):\n$$B \\cdot (B \\cdot A) = B \\cdot D$$\nSince $B \\cdot B = I$:\n$$I \\cdot A = B \\cdot D \\implies A = B \\cdot D$$\nSo, we can replace $(B \\cdot D)$ with **A**.\n\nNow substitute this back into $E$:\n$$E = A \\cdot (A) \\cdot (C \\cdot B) \\cdot A$$\n$$E = A^2 \\cdot (C \\cdot B) \\cdot A$$\n\n**Step 2: Analyze the term $(C \\cdot B)$**\nFrom Lemma derivation #3 (\"Multiplying by B on the right...\"):\n$$A \\cdot (B \\cdot B) = C \\cdot B$$\nSince $B \\cdot B = I$:\n$$A \\cdot I = C \\cdot B \\implies A = C \\cdot B$$\nSo, we can replace $(C \\cdot B)$ with **A**.\n\nNow substitute this back into $E$:\n$$E = A^2 \\cdot (A) \\cdot A$$\n$$E = A^2 \\cdot A^2$$\n$$E = A^4$$\n\n**Step 3: Simplify $A^4$ using the Inversion Law**\nThe problem states that every element is self-inverse: $X \\cdot X = I$. Therefore, $A \\cdot A = I$.\nWe need to find $A^4$:\n$$A^4 = (A^2)^2$$\nAlternatively, since $A^2 = I$:\n$$A^4 = I \\cdot I = I$$\n\nLet's verify the logic flow without jumping too quickly to ensure no non-commutative traps were missed during substitution:\nOriginal: $E = A \\cdot (B \\cdot D) \\cdot (C \\cdot B) \\cdot A$\nSubstitute $(B \\cdot D) = A$: $E = A \\cdot A \\cdot (C \\cdot B) \\cdot A$\nSubstitute $(C \\cdot B) = A$: $E = A \\cdot A \\cdot A \\cdot A$\nUsing associativity: $E = (A \\cdot A) \\cdot (A \\cdot A)$\nGiven $A \\cdot A = I$: $E = I \\cdot I = I$\n\nThe result is consistent regardless of whether we group as $(AA)(AA)$ or $(A(AA))A$. The key was correctly identifying the substitutions based on the provided lemmas.\n\n**Conclusion:**\nThe simplified expression reduces entirely to the identity element.\n\nFinal Answer: I",
+        "evaluation": {
+          "ground_truth": "I",
+          "extracted_answer": "I",
+          "is_correct": true
+        }
+      },
+      "dual_loop_fresh_adapter": {
+        "generated_tokens": 700,
+        "latency_s": 33.013,
+        "tokens_per_second": 21.2,
+        "response": "To simplify the expression $E = A \\cdot (B \\cdot D) \\cdot (C \\cdot B) \\cdot A$, we will proceed step-by-step using the given axioms and derived lemmas. We must be careful not to assume commutativity ($XY \\neq YX$).\n\n**Step 1: Analyze the term $(B \\cdot D)$**\nFrom Lemma derivation #2 (\"Multiplying by B on the left...\"):\n$$B \\cdot (B \\cdot A) = B \\cdot D \\implies (B \\cdot B) \\cdot A = B \\cdot D$$\nSince $B \\cdot B = I$:\n$$I \\cdot A = B \\cdot D \\implies A = B \\cdot D$$\nSo, **$(B \\cdot D) = A$**.\n\nNow substitute this back into the original expression $E$:\n$$E = A \\cdot (A) \\cdot (C \\cdot B) \\cdot A$$\n$$E = A^2 \\cdot (C \\cdot B) \\cdot A$$\n\n**Step 2: Simplify the term $(C \\cdot B)$**\nFrom Lemma derivation #3 (\"Multiplying by B on the right...\"):\n$$(A \\cdot B) \\cdot B = C \\cdot B \\implies A \\cdot (B \\cdot B) = C \\cdot B$$\nSince $B \\cdot B = I$:\n$$A \\cdot I = C \\cdot B \\implies A = C \\cdot B$$\nSo, **$(C \\cdot B) = A$**.\n\nNow substitute this back into the expression from Step 1:\n$$E = A^2 \\cdot (A) \\cdot A$$\n$$E = A^2 \\cdot A^2$$\n$$E = A^4$$\n\n**Step 3: Calculate $A^4$**\nWe know that every element is self-inverse ($X \\cdot X = I$), so $A^2 = I$.\nTherefore:\n$$A^4 = (A^2)^2 = I^2 = I$$\n\nLet's double-check the logic without relying solely on the power rule immediately, just to ensure no circular dependencies were missed regarding the specific order of operations within the complex terms.\n\nAlternative Path Verification:\nOriginal: $E = A \\cdot (B \\cdot D) \\cdot (C \\cdot B) \\cdot A$\n\nSubstitute $(B \\cdot D) = A$ (derived earlier):\n$E = A \\cdot A \\cdot (C \\cdot B) \\cdot A = A^2 \\cdot (C \\cdot B) \\cdot A$\n\nSubstitute $(C \\cdot B) = A$ (derived earlier):\n$E = A^2 \\cdot A \\cdot A = A^4$\n\nSince $A \\cdot A = I$, then $A^4 = (A \\cdot A) \\cdot (A \\cdot A) = I \\cdot I = I$.\n\nThe chain of reasoning holds regardless of whether we group the powers differently because multiplication is associative. The key was establishing the equalities between distinct elements based on the inversion law and the provided lemmas.\n\n1.  From $B \\cdot D = A$ and substituting into $E",
+        "evaluation": {
+          "ground_truth": "I",
+          "extracted_answer": "UNKNOWN",
+          "is_correct": false
+        }
+      }
+    },
+    {
+      "task_id": "task_2_stack_bytecode_machine",
+      "task_name": "Reversible Stack Bytecode Machine Simulation",
+      "ground_truth": "[7, 8, 0]",
+      "base_model": {
+        "generated_tokens": 700,
+        "latency_s": 27.17,
+        "tokens_per_second": 25.76,
+        "response": "### Step-by-Step Execution\n\n**Initial State:**\nStack: `[]`\n\n---\n\n**Instruction 1: PUSH 7**\n- **Operation:** Pushes the integer `7` onto the stack.\n- **Current Stack:** `[7]`\n\n**Instruction 2: DUP_ODD**\n- **Check:** The top element is `7`. Since `7` is odd, we must push a copy of it.\n- **Action:** Push `7` again.\n- **Current Stack:** `[7, 7]`\n\n**Instruction 3: PUSH 4**\n- **Operation:** Pushes the integer `4` onto the stack.\n- **Current Stack:** `[7, 7, 4]`\n\n**Instruction 4: SWAP_TOP**\n- **Definition:** Swaps the top two elements. Here, the top two are `7` and `4`.\n- **Action:** Swap them so that `4` becomes the new top.\n- **Current Stack:** `[7, 7, 4]` -> Becomes `[7, 7, 4]`? Wait, let's re-read carefully.\n    - Stack before: Bottom=`7`, Middle=`7`, Top=`4`.\n    - After swap: Bottom=`7`, Middle=`4`, Top=`7`.\n    - Resulting Stack: `[7, 7, 4]`? No.\n    - Let's trace indices: Index 0=7, Index 1=7, Index 2=4.\n    - Swap Index 1 and Index 2. New Index 1 = Old Index 2 (`4`). New Index 2 = Old Index 1 (`7`).\n    - Stack becomes: `[7, 4, 7]`.\n\n*Correction on previous thought:*\nPrevious thought said \"Swap them so that 4 becomes the new top\". That implies the *result* has 4 at the top. But the instruction says \"Swaps the top two elements\".\nBefore: `[7, 7, 4]` (Top is 4).\nAfter swapping the top two (the `7`s and the `4`):\nNew Top becomes the old middle (`7`).\nMiddle becomes the old top (`4`).\nBottom remains the first `7`.\nResult: `[7, 4, 7]`.\n\nLet me double check the logic.\nStack: `[A, B, C]` where C is top.\nSWAP_TOP swaps B and C.\nNew Stack: `[A, C, B]`.\nIn our case: `[7, 7, 4]`.\nA=7, B=7, C=4.\nNew Stack: `[7, 4, 7]`.\n\n- **Current Stack:** `[7, 4, 7]`\n\n**Instruction 5: ADD_FOLD**\n- **Definition:** Pops top two (A=top, B=second), computes `(B + A) % 10`, pushes result.\n- **Popping:** Pop `7` (top), pop `4` (second).\n- **Calculation:** `(4 + 7) % 10 = 11 % 10 = 1`.\n-",
+        "evaluation": {
+          "ground_truth": "[7, 8, 0]",
+          "extracted_answer": "MISMATCH",
+          "is_correct": false
+        }
+      },
+      "dual_loop_fresh_adapter": {
+        "generated_tokens": 598,
+        "latency_s": 23.677,
+        "tokens_per_second": 25.26,
+        "response": "Let's execute the program step by step.\n\n**Initial State:**\nStack: `[]`\n\n---\n\n### Step 1: PUSH 7\n- **Operation:** Pushes integer 7 onto the stack.\n- **Resulting Stack:** `[7]`\n\n### Step 2: DUP_ODD\n- **Current Top:** 7 (which is odd).\n- **Action:** Check if top is odd. Since 7 is odd, push a copy of it.\n- **Resulting Stack:** `[7, 7]`\n\n### Step 3: PUSH 4\n- **Operation:** Pushes integer 4 onto the stack.\n- **Resulting Stack:** `[7, 7, 4]`\n\n### Step 4: SWAP_TOP\n- **Current Stack:** `[7, 7, 4]` (Top is 4).\n- **Action:** Swap the top two elements. The top becomes 7, and the new second-to-top becomes 4.\n- **Resulting Stack:** `[7, 7, 4, 7]`\n\n### Step 5: ADD_FOLD\n- **Popped Elements:** Top (`A`) = 7, Second (`B`) = 4.\n- **Calculation:** `(B + A) % 10` → `(4 + 7) % 10` → `11 % 10` → `1`.\n- **Pushed Element:** 1.\n- **Resulting Stack:** `[7, 7, 4, 7, 1]`\n\n### Step 6: PUSH 9\n- **Operation:** Pushes integer 9 onto the stack.\n- **Resulting Stack:** `[7, 7, 4, 7, 1, 9]`\n\n### Step 7: SUB_FOLD\n- **Popped Elements:** Top (`A`) = 9, Second (`B`) = 1.\n- **Calculation:** `abs(B - A)` → `abs(1 - 9)` → `abs(-8)` → `8`.\n- **Pushed Element:** 8.\n- **Resulting Stack:** `[7, 7, 4, 7, 1, 9, 8]`\n\n### Step 8: DUP_ODD\n- **Current Top:** 8.\n- **Check:** Is 8 odd? No, it is even.\n- **Action:** Push integer 0.\n- **Resulting Stack:** `[7, 7, 4, 7, 1, 9, 8, 0]`\n\n---\n\n**Final Stack: [7, 7, 4, 7, 1, 9, 8, 0]**",
+        "evaluation": {
+          "ground_truth": "[7, 8, 0]",
+          "extracted_answer": "MISMATCH",
+          "is_correct": false
+        }
+      }
+    },
+    {
+      "task_id": "task_3_cryptographic_hash_round",
+      "task_name": "Synthetic Cryptographic Hash Round State Transformation",
+      "ground_truth": "[1, 7, 1, 7]",
+      "base_model": {
+        "generated_tokens": 700,
+        "latency_s": 27.773,
+        "tokens_per_second": 25.2,
+        "response": "Here is the step-by-step execution of the X-Hash round with input state $S = [2, 5, 0, 7]$.\n\n### **Initial State**\n$S_0 = 2$, $S_1 = 5$, $S_2 = 0$, $S_3 = 7$\n\n---\n\n### **Step 1: Non-Linear S-Box Substitution**\nFormula: $S_i' = (S_i \\times 3 + 1) \\pmod{16}$\n\n*   **Calculation for $S_0$:**\n    $(2 \\times 3 + 1) \\pmod{16} = (6 + 1) \\pmod{16} = 7$\n    $\\Rightarrow S_0' = 7$\n\n*   **Calculation for $S_1$:**\n    $(5 \\times 3 + 1) \\pmod{16} = (15 + 1) \\pmod{16} = 16 \\equiv 0$\n    $\\Rightarrow S_1' = 0$\n\n*   **Calculation for $S_2$:**\n    $(0 \\times 3 + 1) \\pmod{16} = (0 + 1) \\pmod{16} = 1$\n    $\\Rightarrow S_2' = 1$\n\n*   **Calculation for $S_3$:**\n    $(7 \\times 3 + 1) \\pmod{16} = (21 + 1) \\pmod{16} = 22 \\equiv 6$\n    $\\Rightarrow S_3' = 6$\n\n**Intermediate Result after Step 1:**\n$[S_0', S_1', S_2', S_3'] = [7, 0, 1, 6]$\n\n---\n\n### **Step 2: Linear Diffusion Layer**\nFormulae:\n- $T_0 = (S_0' + S_1') \\pmod{16}$\n- $T_1 = S_1' \\oplus S_2'$\n- $T_2 = (S_2' + S_3') \\pmod{16}$\n- $T_3 = S_3' \\oplus S_0'$\n\nUsing current values $[7, 0, 1, 6]$:\n\n*   **Calculate $T_0$:**\n    $7 + 0 = 7$\n    $\\Rightarrow T_0 = 7$\n\n*   **Calculate $T_1$:**\n    $0 \\oplus 1 = 1$\n    $\\Rightarrow T_1 = 1$\n\n*   **Calculate $T_2$:**\n    $1 + 6 = 7$\n    $\\Rightarrow T_2 = 7$\n\n*   **Calculate $T_3$:**\n    $6 \\oplus 7 = 1$\n    ($6 = 110_2$, $7 = 111_2$, XOR result is $001_2 = 1$)\n    $\\",
+        "evaluation": {
+          "ground_truth": "[1, 7, 1, 7]",
+          "extracted_answer": "MISMATCH",
+          "is_correct": false
+        }
+      },
+      "dual_loop_fresh_adapter": {
+        "generated_tokens": 700,
+        "latency_s": 27.314,
+        "tokens_per_second": 25.63,
+        "response": "Here is the step-by-step execution of the X-Hash round with input state $S = [2, 5, 0, 7]$.\n\n### **Initial State**\n$S_0 = 2$, $S_1 = 5$, $S_2 = 0$, $S_3 = 7$\n\n---\n\n### **Step 1: Non-Linear S-Box Substitution**\nFormula: $S_i' = (S_i \\times 3 + 1) \\pmod{16}$\n\n*   **Calculation for $S_0'$**:\n    $$S_0' = (2 \\times 3 + 1) \\pmod{16} = (6 + 1) \\pmod{16} = 7$$\n*   **Calculation for $S_1'$**:\n    $$S_1' = (5 \\times 3 + 1) \\pmod{16} = (15 + 1) \\pmod{16} = 16 \\equiv 0$$\n*   **Calculation for $S_2'$**:\n    $$S_2' = (0 \\times 3 + 1) \\pmod{16} = 1$$\n*   **Calculation for $S_3'$**:\n    $$S_3' = (7 \\times 3 + 1) \\pmod{16} = (21 + 1) \\pmod{16} = 22 \\equiv 6$$\n\n**Intermediate Result after Step 1:**\n$S'_0 = 7$, $S'_1 = 0$, $S'_2 = 1$, $S'_3 = 6$\n\n---\n\n### **Step 2: Linear Diffusion Layer**\nFormulas:\n- $T_0 = (S'_0 + S'_1) \\pmod{16}$\n- $T_1 = S'_1 \\oplus S'_2$\n- $T_2 = (S'_2 + S'_3) \\pmod{16}$\n- $T_3 = S'_3 \\oplus S'_0$\n\n*   **Calculation for $T_0$**:\n    $$T_0 = (7 + 0) \\pmod{16} = 7$$\n*   **Calculation for $T_1$**:\n    $$T_1 = 0 \\oplus 1 = 1$$\n*   **Calculation for $T_2$**:\n    $$T_2 = (1 + 6) \\pmod{16} = 7$$\n*   **Calculation for $T_3$**:\n    $$T_3 = 6 \\oplus 7 = 1$$\n\n**Intermediate Result after Step 2:**\n$T_0 = 7$, $T_1 = 1$, $T_2 = 7$, $T_3 = 1$\n\n---\n\n### **Step 3: Cyclic Permutation**\nNew order: $[T_1, T_2, T_3, T_0]$\n\n*   New $S_0 =",
+        "evaluation": {
+          "ground_truth": "[1, 7, 1, 7]",
+          "extracted_answer": "MISMATCH",
+          "is_correct": false
+        }
+      }
+    }
+  ]
+}

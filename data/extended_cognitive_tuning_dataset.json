@@ -1,0 +1,242 @@
+[
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: A * (B * A) * D\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: B * A = D.\nStep 2: A * D * D. Since D * D = I, this becomes A * I = A.\nFinal Answer: A"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: B * (B * A)\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: B * B = I by Inversion Law.\nStep 2: I * A = A by Identity Law.\nFinal Answer: A"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: (A * B) * B\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: B * B = I by Inversion Law.\nStep 2: (A * B) * B = A * (B * B) = A * I = A.\nFinal Answer: A"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: (B * A) * A\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: A * A = I by Inversion Law.\nStep 2: (B * A) * A = B * (A * A) = B * I = B.\nFinal Answer: B"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: C * (D * C)\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: D * C = B.\nStep 2: C * B = A by Lemma.\nFinal Answer: A"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: D * (C * D)\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: C * D = A.\nStep 2: D * A = B by Lemma.\nFinal Answer: B"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: A * B * C * D\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: A * B = C.\nStep 2: C * C * D. Since C * C = I, we have I * D = D.\nFinal Answer: D"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: B * A * D * C\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: B * A = D.\nStep 2: D * D * C. Since D * D = I, we have I * C = C.\nFinal Answer: C"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: A * (B * D) * A\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: B * D = A by Lemma.\nStep 2: A * A * A = (A * A) * A = I * A = A.\nFinal Answer: A"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: B * (A * C) * B\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: A * C = B by Lemma.\nStep 2: B * B * B = (B * B) * B = I * B = B.\nFinal Answer: B"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: C * (B * D) * C\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: B * D = A by Lemma.\nStep 2: C * A * C.\nStep 3: Since C * A = I, I * C = C.\nFinal Answer: C"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: D * (A * C) * D\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: A * C = B by Lemma.\nStep 2: D * B * D.\nStep 3: Since D * B = I, I * D = D.\nFinal Answer: D"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: (C * B) * (D * A)\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: C * B = A by Lemma.\nStep 2: D * A = B by Lemma.\nStep 3: A * B = C.\nFinal Answer: C"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: (D * A) * (C * B)\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: D * A = B by Lemma.\nStep 2: C * B = A by Lemma.\nStep 3: B * A = D.\nFinal Answer: D"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: A * A * B * B\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: A * A = I.\nStep 2: B * B = I.\nStep 3: I * I = I.\nFinal Answer: I"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: C * C * D * D\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: C * C = I.\nStep 2: D * D = I.\nStep 3: I * I = I.\nFinal Answer: I"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: A * (B * D) * (C * B) * A\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: B * D = A.\nStep 2: C * B = A.\nStep 3: Expression becomes A * A * A * A = (A * A) * (A * A) = I * I = I.\nFinal Answer: I"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: B * (A * C) * (D * A) * B\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: A * C = B.\nStep 2: D * A = B.\nStep 3: Expression becomes B * B * B * B = (B * B) * (B * B) = I * I = I.\nFinal Answer: I"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: (A * B) * (C * D)\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: A * B = C.\nStep 2: C * D = A.\nStep 3: So (A * B) * (C * D) = C * A.\nFinal Answer: I"
+  },
+  {
+    "prompt": "You are learning a newly invented abstract algebraic system (G, *) with 4 generators {A, B, C, D} and identity I.\nAxioms: A*B=C, B*A=D, C*D=A, D*C=B, X*X=I, X*I=I*X=X, associative.\nLemmas: D*A=B, B*D=A, C*B=A, A*C=B.\n\nSimplify step-by-step: (B * A) * (D * C)\nOn the final line, state strictly: 'Final Answer: [ELEMENT]'",
+    "target": "Step 1: B * A = D.\nStep 2: D * C = B.\nStep 3: So (B * A) * (D * C) = D * B.\nFinal Answer: I"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 5\n2. DUP_ODD\n3. PUSH 2\n4. ADD_FOLD\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 5 -> Stack: [5]\nStep 2: DUP_ODD -> Top is 5 (odd), push copy -> Stack: [5, 5]\nStep 3: PUSH 2 -> Stack: [5, 5, 2]\nStep 4: ADD_FOLD -> Pop 2 and 5, (5 + 2) % 10 = 7 -> Stack: [5, 7]\nFinal Stack: [5, 7]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 6\n2. DUP_ODD\n3. PUSH 3\n4. SWAP_TOP\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 6 -> Stack: [6]\nStep 2: DUP_ODD -> Top is 6 (even), push 0 -> Stack: [6, 0]\nStep 3: PUSH 3 -> Stack: [6, 0, 3]\nStep 4: SWAP_TOP -> Stack: [6, 3, 0]\nFinal Stack: [6, 3, 0]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 1\n2. PUSH 8\n3. SUB_FOLD\n4. DUP_ODD\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 1 -> Stack: [1]\nStep 2: PUSH 8 -> Stack: [1, 8]\nStep 3: SUB_FOLD -> Pop 8 and 1, abs(1 - 8) = 7 -> Stack: [7]\nStep 4: DUP_ODD -> Top is 7 (odd), push copy -> Stack: [7, 7]\nFinal Stack: [7, 7]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 3\n2. PUSH 7\n3. ADD_FOLD\n4. DUP_ODD\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 3 -> Stack: [3]\nStep 2: PUSH 7 -> Stack: [3, 7]\nStep 3: ADD_FOLD -> Pop 7 and 3, (3 + 7) % 10 = 0 -> Stack: [0]\nStep 4: DUP_ODD -> Top is 0 (even), push 0 -> Stack: [0, 0]\nFinal Stack: [0, 0]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 9\n2. DUP_ODD\n3. PUSH 4\n4. SWAP_TOP\n5. ADD_FOLD\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 9 -> Stack: [9]\nStep 2: DUP_ODD -> Top is 9 (odd), push copy -> Stack: [9, 9]\nStep 3: PUSH 4 -> Stack: [9, 9, 4]\nStep 4: SWAP_TOP -> Stack: [9, 4, 9]\nStep 5: ADD_FOLD -> Pop 9 and 4, (4 + 9) % 10 = 3 -> Stack: [9, 3]\nFinal Stack: [9, 3]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 2\n2. PUSH 5\n3. SWAP_TOP\n4. SUB_FOLD\n5. PUSH 1\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 2 -> Stack: [2]\nStep 2: PUSH 5 -> Stack: [2, 5]\nStep 3: SWAP_TOP -> Stack: [5, 2]\nStep 4: SUB_FOLD -> Pop 2 and 5, abs(5 - 2) = 3 -> Stack: [3]\nStep 5: PUSH 1 -> Stack: [3, 1]\nFinal Stack: [3, 1]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 7\n2. PUSH 3\n3. ADD_FOLD\n4. PUSH 6\n5. SUB_FOLD\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 7 -> Stack: [7]\nStep 2: PUSH 3 -> Stack: [7, 3]\nStep 3: ADD_FOLD -> Pop 3 and 7, (7 + 3) % 10 = 0 -> Stack: [0]\nStep 4: PUSH 6 -> Stack: [0, 6]\nStep 5: SUB_FOLD -> Pop 6 and 0, abs(0 - 6) = 6 -> Stack: [6]\nFinal Stack: [6]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 8\n2. DUP_ODD\n3. PUSH 5\n4. SWAP_TOP\n5. SUB_FOLD\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 8 -> Stack: [8]\nStep 2: DUP_ODD -> Top is 8 (even), push 0 -> Stack: [8, 0]\nStep 3: PUSH 5 -> Stack: [8, 0, 5]\nStep 4: SWAP_TOP -> Stack: [8, 5, 0]\nStep 5: SUB_FOLD -> Pop 0 and 5, abs(5 - 0) = 5 -> Stack: [8, 5]\nFinal Stack: [8, 5]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 4\n2. PUSH 9\n3. SWAP_TOP\n4. ADD_FOLD\n5. DUP_ODD\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 4 -> Stack: [4]\nStep 2: PUSH 9 -> Stack: [4, 9]\nStep 3: SWAP_TOP -> Stack: [9, 4]\nStep 4: ADD_FOLD -> Pop 4 and 9, (9 + 4) % 10 = 3 -> Stack: [3]\nStep 5: DUP_ODD -> Top is 3 (odd), push copy -> Stack: [3, 3]\nFinal Stack: [3, 3]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 3\n2. DUP_ODD\n3. PUSH 8\n4. SWAP_TOP\n5. ADD_FOLD\n6. PUSH 2\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 3 -> Stack: [3]\nStep 2: DUP_ODD -> Top is 3 (odd), push copy -> Stack: [3, 3]\nStep 3: PUSH 8 -> Stack: [3, 3, 8]\nStep 4: SWAP_TOP -> Stack: [3, 8, 3]\nStep 5: ADD_FOLD -> Pop 3 and 8, (8 + 3) % 10 = 1 -> Stack: [3, 1]\nStep 6: PUSH 2 -> Stack: [3, 1, 2]\nFinal Stack: [3, 1, 2]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 7\n2. DUP_ODD\n3. PUSH 4\n4. SWAP_TOP\n5. ADD_FOLD\n6. PUSH 9\n7. SUB_FOLD\n8. DUP_ODD\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 7 -> Stack: [7]\nStep 2: DUP_ODD -> Top is 7 (odd), push copy -> Stack: [7, 7]\nStep 3: PUSH 4 -> Stack: [7, 7, 4]\nStep 4: SWAP_TOP -> Stack: [7, 4, 7]\nStep 5: ADD_FOLD -> Pop 7 and 4, (4 + 7) % 10 = 1 -> Stack: [7, 1]\nStep 6: PUSH 9 -> Stack: [7, 1, 9]\nStep 7: SUB_FOLD -> Pop 9 and 1, abs(1 - 9) = 8 -> Stack: [7, 8]\nStep 8: DUP_ODD -> Top is 8 (even), push 0 -> Stack: [7, 8, 0]\nFinal Stack: [7, 8, 0]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 5\n2. PUSH 2\n3. SWAP_TOP\n4. ADD_FOLD\n5. DUP_ODD\n6. PUSH 6\n7. SUB_FOLD\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 5 -> Stack: [5]\nStep 2: PUSH 2 -> Stack: [5, 2]\nStep 3: SWAP_TOP -> Stack: [2, 5]\nStep 4: ADD_FOLD -> Pop 5 and 2, (2 + 5) % 10 = 7 -> Stack: [7]\nStep 5: DUP_ODD -> Top is 7 (odd), push copy -> Stack: [7, 7]\nStep 6: PUSH 6 -> Stack: [7, 7, 6]\nStep 7: SUB_FOLD -> Pop 6 and 7, abs(7 - 6) = 1 -> Stack: [7, 1]\nFinal Stack: [7, 1]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 1\n2. DUP_ODD\n3. PUSH 7\n4. ADD_FOLD\n5. PUSH 3\n6. SUB_FOLD\n7. DUP_ODD\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 1 -> Stack: [1]\nStep 2: DUP_ODD -> Top is 1 (odd), push copy -> Stack: [1, 1]\nStep 3: PUSH 7 -> Stack: [1, 1, 7]\nStep 4: ADD_FOLD -> Pop 7 and 1, (1 + 7) % 10 = 8 -> Stack: [1, 8]\nStep 5: PUSH 3 -> Stack: [1, 8, 3]\nStep 6: SUB_FOLD -> Pop 3 and 8, abs(8 - 3) = 5 -> Stack: [1, 5]\nStep 7: DUP_ODD -> Top is 5 (odd), push copy -> Stack: [1, 5, 5]\nFinal Stack: [1, 5, 5]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 8\n2. PUSH 4\n3. SUB_FOLD\n4. DUP_ODD\n5. PUSH 5\n6. ADD_FOLD\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 8 -> Stack: [8]\nStep 2: PUSH 4 -> Stack: [8, 4]\nStep 3: SUB_FOLD -> Pop 4 and 8, abs(8 - 4) = 4 -> Stack: [4]\nStep 4: DUP_ODD -> Top is 4 (even), push 0 -> Stack: [4, 0]\nStep 5: PUSH 5 -> Stack: [4, 0, 5]\nStep 6: ADD_FOLD -> Pop 5 and 0, (0 + 5) % 10 = 5 -> Stack: [4, 5]\nFinal Stack: [4, 5]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 6\n2. PUSH 9\n3. ADD_FOLD\n4. DUP_ODD\n5. PUSH 2\n6. SWAP_TOP\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 6 -> Stack: [6]\nStep 2: PUSH 9 -> Stack: [6, 9]\nStep 3: ADD_FOLD -> Pop 9 and 6, (6 + 9) % 10 = 5 -> Stack: [5]\nStep 4: DUP_ODD -> Top is 5 (odd), push copy -> Stack: [5, 5]\nStep 5: PUSH 2 -> Stack: [5, 5, 2]\nStep 6: SWAP_TOP -> Stack: [5, 2, 5]\nFinal Stack: [5, 2, 5]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 3\n2. PUSH 5\n3. PUSH 7\n4. ADD_FOLD\n5. SUB_FOLD\n6. DUP_ODD\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 3 -> Stack: [3]\nStep 2: PUSH 5 -> Stack: [3, 5]\nStep 3: PUSH 7 -> Stack: [3, 5, 7]\nStep 4: ADD_FOLD -> Pop 7 and 5, (5 + 7) % 10 = 2 -> Stack: [3, 2]\nStep 5: SUB_FOLD -> Pop 2 and 3, abs(3 - 2) = 1 -> Stack: [1]\nStep 6: DUP_ODD -> Top is 1 (odd), push copy -> Stack: [1, 1]\nFinal Stack: [1, 1]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 4\n2. DUP_ODD\n3. PUSH 1\n4. SWAP_TOP\n5. ADD_FOLD\n6. PUSH 8\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 4 -> Stack: [4]\nStep 2: DUP_ODD -> Top is 4 (even), push 0 -> Stack: [4, 0]\nStep 3: PUSH 1 -> Stack: [4, 0, 1]\nStep 4: SWAP_TOP -> Stack: [4, 1, 0]\nStep 5: ADD_FOLD -> Pop 0 and 1, (1 + 0) % 10 = 1 -> Stack: [4, 1]\nStep 6: PUSH 8 -> Stack: [4, 1, 8]\nFinal Stack: [4, 1, 8]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 9\n2. PUSH 0\n3. SUB_FOLD\n4. DUP_ODD\n5. PUSH 3\n6. ADD_FOLD\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 9 -> Stack: [9]\nStep 2: PUSH 0 -> Stack: [9, 0]\nStep 3: SUB_FOLD -> Pop 0 and 9, abs(9 - 0) = 9 -> Stack: [9]\nStep 4: DUP_ODD -> Top is 9 (odd), push copy -> Stack: [9, 9]\nStep 5: PUSH 3 -> Stack: [9, 9, 3]\nStep 6: ADD_FOLD -> Pop 3 and 9, (9 + 3) % 10 = 2 -> Stack: [9, 2]\nFinal Stack: [9, 2]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 2\n2. DUP_ODD\n3. PUSH 7\n4. ADD_FOLD\n5. DUP_ODD\n6. PUSH 4\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 2 -> Stack: [2]\nStep 2: DUP_ODD -> Top is 2 (even), push 0 -> Stack: [2, 0]\nStep 3: PUSH 7 -> Stack: [2, 0, 7]\nStep 4: ADD_FOLD -> Pop 7 and 0, (0 + 7) % 10 = 7 -> Stack: [2, 7]\nStep 5: DUP_ODD -> Top is 7 (odd), push copy -> Stack: [2, 7, 7]\nStep 6: PUSH 4 -> Stack: [2, 7, 7, 4]\nFinal Stack: [2, 7, 7, 4]"
+  },
+  {
+    "prompt": "You are an interpreter executing a synthetic stack-based bytecode virtual machine.\nStack is initially empty: [bottom, ..., top].\nISA: PUSH v, DUP_ODD (if odd copy, if even 0), SWAP_TOP, ADD_FOLD ((B+A)%10), SUB_FOLD (abs(B-A)).\n\nProgram to Execute:\n1. PUSH 5\n2. DUP_ODD\n3. PUSH 5\n4. ADD_FOLD\n5. DUP_ODD\n6. PUSH 1\n\nTask: Execute each instruction sequentially.\nOn the final line, state strictly: 'Final Stack: [x, y, z]'",
+    "target": "Step 1: PUSH 5 -> Stack: [5]\nStep 2: DUP_ODD -> Top is 5 (odd), push copy -> Stack: [5, 5]\nStep 3: PUSH 5 -> Stack: [5, 5, 5]\nStep 4: ADD_FOLD -> Pop 5 and 5, (5 + 5) % 10 = 0 -> Stack: [5, 0]\nStep 5: DUP_ODD -> Top is 0 (even), push 0 -> Stack: [5, 0, 0]\nStep 6: PUSH 1 -> Stack: [5, 0, 0, 1]\nFinal Stack: [5, 0, 0, 1]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [0, 1, 2, 3]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(0*3+1)%16=1, S1'=(1*3+1)%16=4, S2'=(2*3+1)%16=7, S3'=(3*3+1)%16=10 -> S'=[1, 4, 7, 10].\nStep 2 (Diffusion): T0=(1+4)%16=5, T1=4^7=3, T2=(7+10)%16=1, T3=10^1=11 -> T=[5, 3, 1, 11].\nStep 3 (Permutation): [T1, T2, T3, T0] = [3, 1, 11, 5].\nFinal State: [3, 1, 11, 5]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [4, 5, 6, 7]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(4*3+1)%16=13, S1'=(5*3+1)%16=0, S2'=(6*3+1)%16=3, S3'=(7*3+1)%16=6 -> S'=[13, 0, 3, 6].\nStep 2 (Diffusion): T0=(13+0)%16=13, T1=0^3=3, T2=(3+6)%16=9, T3=6^13=11 -> T=[13, 3, 9, 11].\nStep 3 (Permutation): [T1, T2, T3, T0] = [3, 9, 11, 13].\nFinal State: [3, 9, 11, 13]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [8, 9, 10, 11]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(8*3+1)%16=9, S1'=(9*3+1)%16=12, S2'=(10*3+1)%16=15, S3'=(11*3+1)%16=2 -> S'=[9, 12, 15, 2].\nStep 2 (Diffusion): T0=(9+12)%16=5, T1=12^15=3, T2=(15+2)%16=1, T3=2^9=11 -> T=[5, 3, 1, 11].\nStep 3 (Permutation): [T1, T2, T3, T0] = [3, 1, 11, 5].\nFinal State: [3, 1, 11, 5]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [12, 13, 14, 15]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(12*3+1)%16=5, S1'=(13*3+1)%16=8, S2'=(14*3+1)%16=11, S3'=(15*3+1)%16=14 -> S'=[5, 8, 11, 14].\nStep 2 (Diffusion): T0=(5+8)%16=13, T1=8^11=3, T2=(11+14)%16=9, T3=14^5=11 -> T=[13, 3, 9, 11].\nStep 3 (Permutation): [T1, T2, T3, T0] = [3, 9, 11, 13].\nFinal State: [3, 9, 11, 13]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [1, 3, 5, 7]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(1*3+1)%16=4, S1'=(3*3+1)%16=10, S2'=(5*3+1)%16=0, S3'=(7*3+1)%16=6 -> S'=[4, 10, 0, 6].\nStep 2 (Diffusion): T0=(4+10)%16=14, T1=10^0=10, T2=(0+6)%16=6, T3=6^4=2 -> T=[14, 10, 6, 2].\nStep 3 (Permutation): [T1, T2, T3, T0] = [10, 6, 2, 14].\nFinal State: [10, 6, 2, 14]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [0, 2, 4, 6]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(0*3+1)%16=1, S1'=(2*3+1)%16=7, S2'=(4*3+1)%16=13, S3'=(6*3+1)%16=3 -> S'=[1, 7, 13, 3].\nStep 2 (Diffusion): T0=(1+7)%16=8, T1=7^13=10, T2=(13+3)%16=0, T3=3^1=2 -> T=[8, 10, 0, 2].\nStep 3 (Permutation): [T1, T2, T3, T0] = [10, 0, 2, 8].\nFinal State: [10, 0, 2, 8]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [15, 10, 5, 0]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(15*3+1)%16=14, S1'=(10*3+1)%16=15, S2'=(5*3+1)%16=0, S3'=(0*3+1)%16=1 -> S'=[14, 15, 0, 1].\nStep 2 (Diffusion): T0=(14+15)%16=13, T1=15^0=15, T2=(0+1)%16=1, T3=1^14=15 -> T=[13, 15, 1, 15].\nStep 3 (Permutation): [T1, T2, T3, T0] = [15, 1, 15, 13].\nFinal State: [15, 1, 15, 13]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [7, 7, 7, 7]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(7*3+1)%16=6, S1'=(7*3+1)%16=6, S2'=(7*3+1)%16=6, S3'=(7*3+1)%16=6 -> S'=[6, 6, 6, 6].\nStep 2 (Diffusion): T0=(6+6)%16=12, T1=6^6=0, T2=(6+6)%16=12, T3=6^6=0 -> T=[12, 0, 12, 0].\nStep 3 (Permutation): [T1, T2, T3, T0] = [0, 12, 0, 12].\nFinal State: [0, 12, 0, 12]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [1, 1, 1, 1]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(1*3+1)%16=4, S1'=(1*3+1)%16=4, S2'=(1*3+1)%16=4, S3'=(1*3+1)%16=4 -> S'=[4, 4, 4, 4].\nStep 2 (Diffusion): T0=(4+4)%16=8, T1=4^4=0, T2=(4+4)%16=8, T3=4^4=0 -> T=[8, 0, 8, 0].\nStep 3 (Permutation): [T1, T2, T3, T0] = [0, 8, 0, 8].\nFinal State: [0, 8, 0, 8]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [3, 2, 1, 0]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(3*3+1)%16=10, S1'=(2*3+1)%16=7, S2'=(1*3+1)%16=4, S3'=(0*3+1)%16=1 -> S'=[10, 7, 4, 1].\nStep 2 (Diffusion): T0=(10+7)%16=1, T1=7^4=3, T2=(4+1)%16=5, T3=1^10=11 -> T=[1, 3, 5, 11].\nStep 3 (Permutation): [T1, T2, T3, T0] = [3, 5, 11, 1].\nFinal State: [3, 5, 11, 1]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [9, 4, 1, 8]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(9*3+1)%16=12, S1'=(4*3+1)%16=13, S2'=(1*3+1)%16=4, S3'=(8*3+1)%16=9 -> S'=[12, 13, 4, 9].\nStep 2 (Diffusion): T0=(12+13)%16=9, T1=13^4=9, T2=(4+9)%16=13, T3=9^12=5 -> T=[9, 9, 13, 5].\nStep 3 (Permutation): [T1, T2, T3, T0] = [9, 13, 5, 9].\nFinal State: [9, 13, 5, 9]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [11, 2, 13, 4]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(11*3+1)%16=2, S1'=(2*3+1)%16=7, S2'=(13*3+1)%16=8, S3'=(4*3+1)%16=13 -> S'=[2, 7, 8, 13].\nStep 2 (Diffusion): T0=(2+7)%16=9, T1=7^8=15, T2=(8+13)%16=5, T3=13^2=15 -> T=[9, 15, 5, 15].\nStep 3 (Permutation): [T1, T2, T3, T0] = [15, 5, 15, 9].\nFinal State: [15, 5, 15, 9]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [6, 12, 3, 9]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(6*3+1)%16=3, S1'=(12*3+1)%16=5, S2'=(3*3+1)%16=10, S3'=(9*3+1)%16=12 -> S'=[3, 5, 10, 12].\nStep 2 (Diffusion): T0=(3+5)%16=8, T1=5^10=15, T2=(10+12)%16=6, T3=12^3=15 -> T=[8, 15, 6, 15].\nStep 3 (Permutation): [T1, T2, T3, T0] = [15, 6, 15, 8].\nFinal State: [15, 6, 15, 8]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [14, 7, 0, 8]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(14*3+1)%16=11, S1'=(7*3+1)%16=6, S2'=(0*3+1)%16=1, S3'=(8*3+1)%16=9 -> S'=[11, 6, 1, 9].\nStep 2 (Diffusion): T0=(11+6)%16=1, T1=6^1=7, T2=(1+9)%16=10, T3=9^11=2 -> T=[1, 7, 10, 2].\nStep 3 (Permutation): [T1, T2, T3, T0] = [7, 10, 2, 1].\nFinal State: [7, 10, 2, 1]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [5, 10, 15, 4]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(5*3+1)%16=0, S1'=(10*3+1)%16=15, S2'=(15*3+1)%16=14, S3'=(4*3+1)%16=13 -> S'=[0, 15, 14, 13].\nStep 2 (Diffusion): T0=(0+15)%16=15, T1=15^14=1, T2=(14+13)%16=11, T3=13^0=13 -> T=[15, 1, 11, 13].\nStep 3 (Permutation): [T1, T2, T3, T0] = [1, 11, 13, 15].\nFinal State: [1, 11, 13, 15]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [2, 8, 14, 1]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(2*3+1)%16=7, S1'=(8*3+1)%16=9, S2'=(14*3+1)%16=11, S3'=(1*3+1)%16=4 -> S'=[7, 9, 11, 4].\nStep 2 (Diffusion): T0=(7+9)%16=0, T1=9^11=2, T2=(11+4)%16=15, T3=4^7=3 -> T=[0, 2, 15, 3].\nStep 3 (Permutation): [T1, T2, T3, T0] = [2, 15, 3, 0].\nFinal State: [2, 15, 3, 0]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [13, 6, 12, 5]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(13*3+1)%16=8, S1'=(6*3+1)%16=3, S2'=(12*3+1)%16=5, S3'=(5*3+1)%16=0 -> S'=[8, 3, 5, 0].\nStep 2 (Diffusion): T0=(8+3)%16=11, T1=3^5=6, T2=(5+0)%16=5, T3=0^8=8 -> T=[11, 6, 5, 8].\nStep 3 (Permutation): [T1, T2, T3, T0] = [6, 5, 8, 11].\nFinal State: [6, 5, 8, 11]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [10, 1, 11, 2]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(10*3+1)%16=15, S1'=(1*3+1)%16=4, S2'=(11*3+1)%16=2, S3'=(2*3+1)%16=7 -> S'=[15, 4, 2, 7].\nStep 2 (Diffusion): T0=(15+4)%16=3, T1=4^2=6, T2=(2+7)%16=9, T3=7^15=8 -> T=[3, 6, 9, 8].\nStep 3 (Permutation): [T1, T2, T3, T0] = [6, 9, 8, 3].\nFinal State: [6, 9, 8, 3]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [3, 14, 8, 0]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(3*3+1)%16=10, S1'=(14*3+1)%16=11, S2'=(8*3+1)%16=9, S3'=(0*3+1)%16=1 -> S'=[10, 11, 9, 1].\nStep 2 (Diffusion): T0=(10+11)%16=5, T1=11^9=2, T2=(9+1)%16=10, T3=1^10=11 -> T=[5, 2, 10, 11].\nStep 3 (Permutation): [T1, T2, T3, T0] = [2, 10, 11, 5].\nFinal State: [2, 10, 11, 5]"
+  },
+  {
+    "prompt": "You are executing 1 round of 'X-Hash' cryptographic permutation.\nState: 4 nibbles S = [S0, S1, S2, S3] in [0..15].\nStep 1: S_i' = (S_i * 3 + 1) mod 16\nStep 2: T0 = (S0' + S1') mod 16, T1 = S1' XOR S2', T2 = (S2' + S3') mod 16, T3 = S3' XOR S0'\nStep 3: Output = [T1, T2, T3, T0]\n\nInput State: S = [2, 5, 0, 7]\n\nTask: Calculate Step 1, Step 2, and Step 3.\nOn the final line, state strictly: 'Final State: [w, x, y, z]'",
+    "target": "Step 1 (S-Box): S0'=(2*3+1)%16=7, S1'=(5*3+1)%16=0, S2'=(0*3+1)%16=1, S3'=(7*3+1)%16=6 -> S'=[7, 0, 1, 6].\nStep 2 (Diffusion): T0=(7+0)%16=7, T1=0^1=1, T2=(1+6)%16=7, T3=6^7=1 -> T=[7, 1, 7, 1].\nStep 3 (Permutation): [T1, T2, T3, T0] = [1, 7, 1, 7].\nFinal State: [1, 7, 1, 7]"
+  }
+]

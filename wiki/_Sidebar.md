@@ -4,7 +4,6 @@
 
 ### Core Architecture
 - [[5 Computational Brain Organs|01-Architecture-Cognitive-OS]]
-- [[Latent Reconstructive Hologram|02-Latent-Reconstructive-Hologram]]
 - [[Mathematical Formulations|07-Mathematical-Formulations]]
 
 ---

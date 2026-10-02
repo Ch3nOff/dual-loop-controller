@@ -51,7 +51,6 @@ class ModelSpec:
     vram_bf16_gib: float
     vram_int8_gib: float
     vram_nf4_gib: float
-    vram_hologram_gib: float
 
 
 @dataclass
@@ -61,10 +60,9 @@ class AllocationPlan:
     model_spec: ModelSpec
     requested_headroom_gib: float
     effective_budget_gib: float
-    selected_regime: str  # "BF16", "INT8", "NF4", "LATENT_HOLOGRAM"
+    selected_regime: str  # "BF16", "INT8", "NF4"
     estimated_model_vram_gib: float
     projected_free_vram_gib: float
-    enable_hologram_fista: bool
     enable_allostasis: bool
     torch_dtype: str
     load_in_4bit: bool
@@ -149,7 +147,6 @@ class VRAMAutoTuner:
 
         # Known pre-calculated architectures for instant offline lookup
         known_models = {
-            "Qwen/Qwen3.8-27B": (27.36e9, 5120, 64, 24, 4, 152064, 17408, "Qwen3ForCausalLM"),
             "Qwen/Qwen2.5-7B-Instruct": (7.61e9, 3584, 28, 28, 4, 152064, 18944, "Qwen2ForCausalLM"),
             "Qwen/Qwen2.5-3B-Instruct": (3.40e9, 2048, 36, 16, 2, 151936, 11008, "Qwen2ForCausalLM"),
             "Qwen/Qwen3.5-2B": (1.88e9, 1536, 24, 12, 2, 151936, 8960, "Qwen2ForCausalLM"),
@@ -158,14 +155,13 @@ class VRAMAutoTuner:
         }
 
         # Check offline cache first
+        clean_path = model_id_or_path.lower().replace("--", "/").replace("\\", "/")
         for key, vals in known_models.items():
-            if key.lower() in model_id_or_path.lower():
+            if key.lower() in clean_path:
                 params, h, l, nh, nkv, v, inter, arch = vals
                 bf16_gib = round((params * 2.0) / (1024 ** 3), 2)
                 int8_gib = round((params * 1.0) / (1024 ** 3), 2)
                 nf4_gib = round((params * 0.55) / (1024 ** 3), 2)
-                # Hologram compresses skeleton to ~0.14x and reconstructs in SRAM
-                holo_gib = round(max(3.2, (params * 0.15) / (1024 ** 3)), 2)
                 return ModelSpec(
                     model_id=model_id_or_path,
                     architecture=arch,
@@ -179,19 +175,19 @@ class VRAMAutoTuner:
                     intermediate_size=inter,
                     vram_bf16_gib=bf16_gib,
                     vram_int8_gib=int8_gib,
-                    vram_nf4_gib=nf4_gib,
-                    vram_hologram_gib=holo_gib
+                    vram_nf4_gib=nf4_gib
                 )
 
         try:
             cfg = AutoConfig.from_pretrained(model_id_or_path, trust_remote_code=trust_remote_code)
-            h = getattr(cfg, 'hidden_size', getattr(cfg, 'd_model', 4096))
-            l = getattr(cfg, 'num_hidden_layers', getattr(cfg, 'n_layer', 32))
-            v = getattr(cfg, 'vocab_size', 32000)
-            inter = getattr(cfg, 'intermediate_size', int(h * 3.5))
-            nh = getattr(cfg, 'num_attention_heads', getattr(cfg, 'n_head', 32))
-            nkv = getattr(cfg, 'num_key_value_heads', nh)
-            head_dim = getattr(cfg, 'head_dim', h // max(1, nh))
+            sub_cfg = getattr(cfg, "text_config", cfg)
+            h = getattr(sub_cfg, 'hidden_size', getattr(sub_cfg, 'd_model', 4096))
+            l = getattr(sub_cfg, 'num_hidden_layers', getattr(sub_cfg, 'n_layer', 32))
+            v = getattr(sub_cfg, 'vocab_size', 32000)
+            inter = getattr(sub_cfg, 'intermediate_size', int(h * 3.5))
+            nh = getattr(sub_cfg, 'num_attention_heads', getattr(sub_cfg, 'n_head', 32))
+            nkv = getattr(sub_cfg, 'num_key_value_heads', nh)
+            head_dim = getattr(sub_cfg, 'head_dim', h // max(1, nh))
             arch = getattr(cfg, 'architectures', ['UnknownCausalLM'])[0]
 
             embed = v * h
@@ -221,8 +217,7 @@ class VRAMAutoTuner:
             intermediate_size=inter,
             vram_bf16_gib=bf16_gib,
             vram_int8_gib=int8_gib,
-            vram_nf4_gib=nf4_gib,
-            vram_hologram_gib=holo_gib
+            vram_nf4_gib=nf4_gib
         )
 
     @classmethod
@@ -268,12 +263,8 @@ class VRAMAutoTuner:
                 regime = "BF16"
             elif spec.vram_int8_gib <= effective_budget:
                 regime = "INT8"
-            elif spec.vram_nf4_gib <= effective_budget:
-                regime = "NF4"
             else:
-                # Model exceeds standard 4-bit budget (e.g. 27B on 8GB/12GB GPU)
-                # Automatically deploy Candès-Tao Latent Hologram with FISTA SRAM reconstruction!
-                regime = "LATENT_HOLOGRAM"
+                regime = "NF4"
 
         # 3. Configure parameters for selected regime
         if regime == "BF16":
@@ -290,23 +281,13 @@ class VRAMAutoTuner:
             in_8bit = True
             enable_holo = False
             desc = f"8-bit integer quantization ({spec.parameters_billion}B params in {est_vram:.2f} GiB VRAM)."
-        elif regime == "NF4":
+        else:  # NF4
             est_vram = spec.vram_nf4_gib
             t_dtype = "bfloat16"
             in_4bit = True
             in_8bit = False
             enable_holo = False
             desc = f"4-bit NormalFloat (NF4) quantization + Dual-Loop Deliberation ({est_vram:.2f} GiB VRAM)."
-        else:  # LATENT_HOLOGRAM
-            est_vram = spec.vram_hologram_gib
-            t_dtype = "bfloat16"
-            in_4bit = False
-            in_8bit = False
-            enable_holo = True
-            desc = (
-                f"HADL Latent Reconstructive Hologram (Candès-Tao Compressed Sensing + FISTA in SRAM). "
-                f"Compresses {spec.parameters_billion}B parameter model down to {est_vram:.2f} GiB VRAM footprint. Zero OOM guaranteed."
-            )
 
         projected_free = round(max(0.0, hw.total_vram_gib - est_vram), 2)
 
@@ -319,7 +300,6 @@ class VRAMAutoTuner:
             selected_regime=regime,
             estimated_model_vram_gib=est_vram,
             projected_free_vram_gib=projected_free,
-            enable_hologram_fista=enable_holo,
             enable_allostasis=True,
             torch_dtype=t_dtype,
             load_in_4bit=in_4bit,

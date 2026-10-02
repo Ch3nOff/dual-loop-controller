@@ -23,6 +23,7 @@ We establish a fixed canonical cognitive manifold R^D_c where D_c = 1024 FIXED f
 """
 
 import time
+import math
 import torch
 import torch.nn as nn
 from typing import Dict, Any, List, Optional, Tuple, Union, Callable
@@ -33,7 +34,6 @@ from ..allostasis import AllostaticEnergyModulator
 from ..plasticity import HeteroAssociativePlasticMemory
 from ..firewall import SheafInvariantFirewall
 from ..sleep_consolidation import SleepPhaseConsolidationEngine
-from ..hologram import LatentReconstructiveHologram
 
 
 CANONICAL_DIM: int = 1024
@@ -111,13 +111,16 @@ class DynamicGraphIntrospector:
     @classmethod
     def probe_native_dimension(cls, model: nn.Module, fallback_d: int = 2048) -> int:
         """Determines D_native from model configuration or parameter tensors."""
-        # 1. Inspect config
+        # 1. Inspect config (including text_config for multimodal models like Qwen3.5/Qwen3.8)
         cfg = getattr(model, "config", None)
         if cfg is not None:
-            for attr in ("hidden_size", "d_model", "dim", "n_embd", "hidden_dim"):
-                val = getattr(cfg, attr, None)
-                if val is not None and isinstance(val, int) and val > 0:
-                    return val
+            sub_cfg = getattr(cfg, "text_config", None)
+            search_cfgs = [sub_cfg, cfg] if sub_cfg is not None else [cfg]
+            for c in search_cfgs:
+                for attr in ("hidden_size", "d_model", "dim", "n_embd", "hidden_dim"):
+                    val = getattr(c, attr, None)
+                    if val is not None and isinstance(val, int) and val > 0:
+                        return val
 
         # 2. Inspect first linear layer or embedding
         for name, param in model.named_parameters():
@@ -144,14 +147,12 @@ class UniversalDualLoopAdapter(nn.Module):
         enable_plasticity: bool = True,
         enable_firewall: bool = True,
         enable_sleep_consolidation: bool = True,
-        enable_hologram: bool = False,
-        hologram_steps: int = 3
+        init_alpha: float = 0.0
     ):
         super().__init__()
         self.d_native = int(d_native)
         self.d_canonical = int(d_canonical)
         self.max_ponder_steps = max_ponder_steps
-        self.enable_hologram = bool(enable_hologram)
         
         # 1. Canonical Projection Bridge (R^D_native -> R^D_canonical)
         self.down_proj = nn.Linear(self.d_native, self.d_canonical, bias=False)
@@ -171,8 +172,9 @@ class UniversalDualLoopAdapter(nn.Module):
 
         # 3. Canonical Expansion Bridge with ReZero Guarantee (R^D_canonical -> R^D_native)
         self.up_proj = nn.Linear(self.d_canonical, self.d_native, bias=False)
-        nn.init.zeros_(self.up_proj.weight)  # Zero initialization for ReZero identity preservation
-        self.alpha = nn.Parameter(torch.zeros(1))  # Learnable ReZero gate initialized to 0
+        # Kaiming initialization allows backpropagation gradients to reach alpha immediately
+        nn.init.kaiming_uniform_(self.up_proj.weight, a=math.sqrt(5))
+        self.alpha = nn.Parameter(torch.tensor([float(init_alpha)]))  # ReZero gate (0.0 preserves identity, >0 for eager delta)
 
         # 4. Sheaf-Theoretic Invariant Firewall (Organ 5: Prefrontal Executive Inhibition)
         self.firewall = SheafInvariantFirewall(max_norm=60.0) if enable_firewall else None
@@ -182,14 +184,6 @@ class UniversalDualLoopAdapter(nn.Module):
             d_model=self.d_canonical,
             rank=32
         ) if enable_sleep_consolidation else None
-
-        # 6. Latent Reconstructive Hologram (Candès-Tao Compressed Sensing + FISTA)
-        self.hologram = LatentReconstructiveHologram(
-            d_native=self.d_native,
-            d_canonical=self.d_canonical,
-            default_steps=hologram_steps,
-            enable_plastic_compensation=enable_plasticity
-        ) if enable_hologram else None
 
         self.continual_mode: bool = False
 
@@ -223,7 +217,8 @@ class UniversalDualLoopAdapter(nn.Module):
         self,
         h_native: torch.Tensor,
         k_steps: Optional[int] = None,
-        context: Optional[Dict[str, Any]] = None
+        context: Optional[Dict[str, Any]] = None,
+        query_idx: Optional[int] = None
     ) -> Tuple[torch.Tensor, Dict[str, Any]]:
         """
         Universal Latent Deliberation Forward Pass.
@@ -239,6 +234,9 @@ class UniversalDualLoopAdapter(nn.Module):
             h_input = h_native               # [B, S, D_native]
 
         B, S, D = h_input.shape
+        # Ensure adapter parameters and buffers match input tensor device & dtype
+        if self.down_proj.weight.device != h_input.device or self.down_proj.weight.dtype != h_input.dtype:
+            self.to(device=h_input.device, dtype=h_input.dtype)
         steps = self.max_ponder_steps if k_steps is None else k_steps
 
         # Fast Streaming Bypass: if steps == 0, bypass System 2 immediately
@@ -254,18 +252,16 @@ class UniversalDualLoopAdapter(nn.Module):
                 "delta_norm": 0.0
             }
 
-        # 0. Holographic Inverse Recovery (Candès-Tao Compressed Sensing)
-        holo_telem = {}
-        if self.enable_hologram and self.hologram is not None:
-            z_holo, h_clean, holo_telem = self.hologram.reconstruct(h_input, k_steps=k_steps)
-            h_input = h_clean
-            z_0 = self.canonical_norm(z_holo)
-        else:
-            # 1. Project Inward to Canonical Manifold (R^D_native -> R^1024)
-            z_0 = self.canonical_norm(self.down_proj(h_input))  # [B, S, 1024]
+        # 1. Project Inward to Canonical Manifold (R^D_native -> R^1024)
+        z_0 = self.canonical_norm(self.down_proj(h_input))  # [B, S, 1024]
 
-        # 2. CWM Compression (Organ 3: Global Workspace Theory in fast cache)
-        cwm_slots = self.cwm(z_0)  # [B, 16, 1024]
+        # 2. CWM Compression with Causal Isolation (Organ 3: Global Workspace Theory)
+        # Prevent future suffix tokens from leaking into CWM slots during full-sequence scoring
+        if query_idx is not None and 0 <= query_idx < S - 1:
+            z_context = z_0[:, :query_idx + 1, :]
+        else:
+            z_context = z_0
+        cwm_slots = self.cwm(z_context)  # [B, 16, 1024]
 
         # 3. Universal Recurrent Latent Contemplation in Canonical Space
         query_rep = z_0[:, -1, :]  # Focus deliberation on current token state [B, 1024]
@@ -303,7 +299,11 @@ class UniversalDualLoopAdapter(nn.Module):
         # Broadcast to full sequence if necessary (or inject at query token)
         if S > 1:
             full_delta = torch.zeros_like(h_input)
-            full_delta[:, -1:, :] = delta_native
+            inject_idx = query_idx if query_idx is not None else -1
+            if inject_idx < 0:
+                inject_idx = S + inject_idx
+            inject_idx = max(0, min(S - 1, inject_idx))
+            full_delta[:, inject_idx:inject_idx+1, :] = delta_native
         else:
             full_delta = delta_native
 
@@ -331,7 +331,6 @@ class UniversalDualLoopAdapter(nn.Module):
             "delta_norm": float(torch.norm(full_delta).item()),
             "firewall": firewall_telem,
             "allostasis": allo_telem,
-            "hologram": holo_telem,
             "latency_ms": elapsed_ms,
             "latency_us": elapsed_ms * 1000.0
         }
@@ -415,8 +414,7 @@ def attach_universal_dual_loop(
     enable_plasticity: bool = True,
     enable_firewall: bool = True,
     enable_sleep_consolidation: bool = True,
-    enable_hologram: bool = False,
-    hologram_steps: int = 3
+    init_alpha: float = 0.0
 ) -> UniversalDualLoopModelWrapper:
     """
     Universal Entrypoint for attaching HADL v3.0 to ANY model.
@@ -438,8 +436,7 @@ def attach_universal_dual_loop(
         enable_plasticity=enable_plasticity,
         enable_firewall=enable_firewall,
         enable_sleep_consolidation=enable_sleep_consolidation,
-        enable_hologram=enable_hologram,
-        hologram_steps=hologram_steps
+        init_alpha=init_alpha
     )
 
     # Move adapter to base model device & dtype if parameters exist

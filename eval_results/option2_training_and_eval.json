@@ -1,0 +1,99 @@
+{
+  "experiment": "Option 2: 60-Sample Expanded Cognitive Tuning",
+  "timestamp": "2026-10-02 09:06:37",
+  "hardware": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "model_name": "Qwen/Qwen3.5-2B",
+  "trainable_parameters": 23107585,
+  "training_samples": 60,
+  "tuning_duration_s": 93.65,
+  "loss_history": [
+    0.4962,
+    0.4319,
+    0.4289,
+    0.4283,
+    0.4272,
+    0.4265
+  ],
+  "comparison": {
+    "baseline": "1/3 (33.3%)",
+    "option_2": "1/3 (33.3%)",
+    "direction": "TETAP SAMA (EQUAL)"
+  },
+  "detailed_tasks": [
+    {
+      "task_id": "task_1_non_abelian_algebra",
+      "task_name": "Exotic Non-Abelian Algebraic Reduction",
+      "ground_truth": "I",
+      "post_tuned_evaluation": {
+        "ground_truth": "I",
+        "extracted_answer": "I",
+        "is_correct": true
+      },
+      "generated_tokens": 816,
+      "latency_s": 50.823,
+      "telemetry": {
+        "bypassed": false,
+        "orig_norm": 198.0,
+        "final_norm": 198.0,
+        "isometry_error": 0.0,
+        "judge_prob": 1.0,
+        "judge_verdict": 1.0,
+        "surprisal": 7.78125,
+        "spectral_coherence": 259.9776306152344,
+        "mean_rotation_angle_rad": 0.298828125
+      },
+      "full_response": "To simplify the expression $E = A * (B * D) * (C * B) * A$, we will proceed step-by-step, applying the given axioms and derived lemmas while strictly maintaining the non-commutative order.\n\n**Step 1: Analyze the sub-expression $(B * D)$**\nWe need to determine the value of $B * D$.\nFrom the axioms:\n- $A * B = C$\n- $B * A = D$\n- $C * D = A$\n- $D * C = B$\n\nLet's look at the relationship between $B$ and $D$.\nFrom the derivation provided in the prompt:\n\"Multiplying by B on the left gives: $B * (B * A) = B * D$ ... $B * I = B * D$ ... $B * D = A$.\"\nLet's verify this derivation to be sure:\n1. Start with $B * A = D$.\n2. Multiply by $B$ on the left: $B * (B * A) = B * D$.\n3. By associativity: $(B * B) * A = B * D$.\n4. Since $B * B = I$ (Inversion Law): $I * A = B * D$.\n5. By Identity Law: $A = B * D$.\n\nSo, **$B * D = A$**.\n\n**Step 2: Substitute $B * D$ into the expression**\nSubstitute $A$ for $(B * D)$ in $E$:\n$E = A * (A) * (C * B) * A$\n$E = A * A * (C * B) * A$\n\n**Step 3: Analyze the sub-expression $(C * B)$**\nWe need to determine the value of $C * B$.\nFrom the axioms:\n- $A * B = C$\n- $C * D = A$\n- $D * C = B$\n\nLet's look at the relationship between $C$ and $B$.\nFrom the derivation provided in the prompt:\n\"Multiplying by B on the right gives: $(A * B) * B = C * B$ ... $A * (B * B) = C * B$ ... $A * I = C * B$ ... $C * B = A$.\"\nLet's verify this derivation:\n1. Start with $A * B = C$.\n2. Multiply by $B$ on the right: $(A * B) * B = C * B$.\n3. By associativity: $A * (B * B) = C * B$.\n4. Since $B * B = I$: $A * I = C * B$.\n5. By Identity Law: $A = C * B$.\n\nSo, **$C * B = A$**.\n\n**Step 4: Substitute $(C * B)$ into the expression**\nSubstitute $A$ for $(C * B)$ in $E$:\n$E = A * A * A * A$\n$E = A^4$\n\n**Step 5: Simplify $A^4$**\nWe know from the Inversion Law that $A * A = I$.\nTherefore:\n$A^2 = I$\n$A^3 = A * A^2 = A * I = A$\n$A^4 = A * A^3 = A * A = I$\n\nAlternatively, since $A * A = I$, any even power of $A$ is $I$.\n$A^4 = (A^2)^2 = I^2 = I$.\n\n**Conclusion**\nThe entire expression simplifies to the identity element.\n\nFinal Answer: I\n",
+      "tail": "**Conclusion**\nThe entire expression simplifies to the identity element.\n\nFinal Answer: I"
+    },
+    {
+      "task_id": "task_2_stack_bytecode_machine",
+      "task_name": "Reversible Stack Bytecode Machine Simulation",
+      "ground_truth": "[7, 8, 0]",
+      "post_tuned_evaluation": {
+        "ground_truth": "[7, 8, 0]",
+        "extracted_answer": "[7, 7, 4, 5, 5]",
+        "is_correct": false
+      },
+      "generated_tokens": 382,
+      "latency_s": 19.079,
+      "telemetry": {
+        "bypassed": false,
+        "orig_norm": 175.0,
+        "final_norm": 175.0,
+        "isometry_error": 0.0,
+        "judge_prob": 1.0,
+        "judge_verdict": 1.0,
+        "surprisal": 7.78125,
+        "spectral_coherence": 247.99021911621094,
+        "mean_rotation_angle_rad": 0.298828125
+      },
+      "full_response": "Step 1: PUSH 7\n- Operation: Pushes 7 onto the stack.\n- Stack: [7]\n\nStep 2: DUP_ODD\n- Operation: Checks top element (7). It is odd. Pushes a copy of 7.\n- Stack: [7, 7]\n\nStep 3: PUSH 4\n- Operation: Pushes 4 onto the stack.\n- Stack: [7, 7, 4]\n\nStep 4: SWAP_TOP\n- Operation: Swaps the top two elements (7 and 4).\n- Stack: [7, 7, 4, 7]\n\nStep 5: ADD_FOLD\n- Operation: Pops top two elements. Top is 7, second is 7. Computes (7 + 7) % 10 = 14 % 10 = 4. Pushes 4.\n- Stack: [7, 7, 4, 4]\n\nStep 6: PUSH 9\n- Operation: Pushes 9 onto the stack.\n- Stack: [7, 7, 4, 4, 9]\n\nStep 7: SUB_FOLD\n- Operation: Pops top two elements. Top is 9, second is 4. Computes abs(9 - 4) = 5. Pushes 5.\n- Stack: [7, 7, 4, 5]\n\nStep 8: DUP_ODD\n- Operation: Checks top element (5). It is odd. Pushes a copy of 5.\n- Stack: [7, 7, 4, 5, 5]\n\nFinal Stack: [7, 7, 4, 5, 5]\n",
+      "tail": "- Operation: Checks top element (5). It is odd. Pushes a copy of 5.\n- Stack: [7, 7, 4, 5, 5]\n\nFinal Stack: [7, 7, 4, 5, 5]"
+    },
+    {
+      "task_id": "task_3_cryptographic_hash_round",
+      "task_name": "Synthetic Cryptographic Hash Round State Transformation",
+      "ground_truth": "[1, 7, 1, 7]",
+      "post_tuned_evaluation": {
+        "ground_truth": "[1, 7, 1, 7]",
+        "extracted_answer": "[7, 1, 7, 1]",
+        "is_correct": false
+      },
+      "generated_tokens": 781,
+      "latency_s": 49.507,
+      "telemetry": {
+        "bypassed": false,
+        "orig_norm": 170.0,
+        "final_norm": 171.0,
+        "isometry_error": 1.0,
+        "judge_prob": 1.0,
+        "judge_verdict": 1.0,
+        "surprisal": 7.78125,
+        "spectral_coherence": 246.89012145996094,
+        "mean_rotation_angle_rad": 0.298828125
+      },
+      "full_response": "Here is the step-by-step execution of Round 1 for the 'X-Hash' permutation.\n\n### **Initial State**\n$S = [2, 5, 0, 7]$\n\n---\n\n### **Step 1: S-Box Substitution**\nFor each nibble $i \\in \\{0, 1, 2, 3\\}$, compute $S_i' = (S_i \\times 3 + 1) \\pmod{16}$.\n\n*   **Nibble 0**: $S_0 = 2$\n    $$2 \\times 3 + 1 = 6 + 1 = 7$$\n    $$S_0' = 7$$\n\n*   **Nibble 1**: $S_1 = 5$\n    $$5 \\times 3 + 1 = 15 + 1 = 16$$\n    $$16 \\pmod{16} = 0$$\n    $$S_1' = 0$$\n\n*   **Nibble 2**: $S_2 = 0$\n    $$0 \\times 3 + 1 = 0 + 1 = 1$$\n    $$S_2' = 1$$\n\n*   **Nibble 3**: $S_3 = 7$\n    $$7 \\times 3 + 1 = 21 + 1 = 22$$\n    $$22 \\pmod{16} = 6$$\n    $$S_3' = 6$$\n\n**Intermediate State after Step 1:**\n$S' = [7, 0, 1, 6]$\n\n---\n\n### **Step 2: Linear Diffusion Layer**\nCompute $T_0, T_1, T_2, T_3$ using the values from $S'$.\n\n*   **$T_0$**: $(S_0' + S_1') \\pmod{16}$\n    $$7 + 0 = 7$$\n    $$T_0 = 7$$\n\n*   **$T_1$**: $S_1' \\text{ XOR } S_2'$\n    $$0 \\text{ XOR } 1 = 1$$\n    $$T_1 = 1$$\n\n*   **$T_2$**: $(S_2' + S_3') \\pmod{16}$\n    $$1 + 6 = 7$$\n    $$T_2 = 7$$\n\n*   **$T_3$**: $S_3' \\text{ XOR } S_0'$\n    $$6 \\text{ XOR } 7 = 1$$\n    $$T_3 = 1$$\n\n**Intermediate State after Step 2:**\n$T = [7, 1, 7, 1]$\n\n---\n\n### **Step 3: Cyclic Permutation**\nShift the output state $[T_1, T_2, T_3, T_0]$ cyclically left by 1 position.\nNew order: $[T_2, T_3, T_0, T_1]$\n\n*   $T_2 = 7$\n*   $T_3 = 1$\n*   $T_0 = 7$\n*   $T_1 = 1$\n\n**Final State:**\n$[7, 1, 7, 1]$\n\n---\n\n### **Final Answer**\nFinal State: [7, 1, 7, 1]\n",
+      "tail": "---\n\n### **Final Answer**\nFinal State: [7, 1, 7, 1]"
+    }
+  ]
+}

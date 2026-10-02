@@ -1,0 +1,101 @@
+{
+  "experiment": "Tuning 6-Principle Cognitive Engine (HULD)",
+  "timestamp": "2026-10-02 08:52:35",
+  "hardware": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "model_name": "Qwen/Qwen3.5-2B",
+  "trainable_parameters": 23107585,
+  "tuning_duration_s": 28.69,
+  "loss_history": [
+    0.5452,
+    0.5101,
+    0.401,
+    0.3906,
+    0.375,
+    0.374,
+    0.3693,
+    0.3664,
+    0.359,
+    0.3556,
+    0.3529,
+    0.3493
+  ],
+  "comparison": {
+    "pre_tuning": "1/3 (33.3%)",
+    "post_tuning": "1/3 (33.3%)",
+    "direction": "TETAP SAMA (EQUAL)"
+  },
+  "detailed_tasks": [
+    {
+      "task_id": "task_1_non_abelian_algebra",
+      "task_name": "Exotic Non-Abelian Algebraic Reduction",
+      "ground_truth": "I",
+      "post_tuned_evaluation": {
+        "ground_truth": "I",
+        "extracted_answer": "I",
+        "is_correct": true
+      },
+      "generated_tokens": 700,
+      "latency_s": 39.069,
+      "telemetry": {
+        "bypassed": false,
+        "orig_norm": 118.5,
+        "final_norm": 118.5,
+        "isometry_error": 0.0,
+        "judge_prob": 1.0,
+        "judge_verdict": 1.0,
+        "surprisal": 7.6875,
+        "spectral_coherence": 167.6180419921875,
+        "mean_rotation_angle_rad": 0.259765625
+      },
+      "tail": "2. We established $C \\cdot B = I$.\n   Expression becomes: $A \\cdot A \\cdot I \\cdot A$.\n3. We know $A \\cdot A = I$.\n   Expression becomes: $I \\cdot I \\cdot"
+    },
+    {
+      "task_id": "task_2_stack_bytecode_machine",
+      "task_name": "Reversible Stack Bytecode Machine Simulation",
+      "ground_truth": "[7, 8, 0]",
+      "post_tuned_evaluation": {
+        "ground_truth": "[7, 8, 0]",
+        "extracted_answer": "MISMATCH",
+        "is_correct": false
+      },
+      "generated_tokens": 508,
+      "latency_s": 31.825,
+      "telemetry": {
+        "bypassed": false,
+        "orig_norm": 102.0,
+        "final_norm": 102.0,
+        "isometry_error": 0.0,
+        "judge_prob": 1.0,
+        "judge_verdict": 1.0,
+        "surprisal": 7.6875,
+        "spectral_coherence": 153.36672973632812,
+        "mean_rotation_angle_rad": 0.26171875
+      },
+      "tail": "    *   Action: Push a copy of 5.\n    *   Resulting Stack: `[7, 7, 5, 5]`\n\n**Final Stack: [7, 7, 5, 5]**"
+    },
+    {
+      "task_id": "task_3_cryptographic_hash_round",
+      "task_name": "Synthetic Cryptographic Hash Round State Transformation",
+      "ground_truth": "[1, 7, 1, 7]",
+      "post_tuned_evaluation": {
+        "ground_truth": "[1, 7, 1, 7]",
+        "extracted_answer": "MISMATCH",
+        "is_correct": false
+      },
+      "generated_tokens": 700,
+      "latency_s": 48.243,
+      "telemetry": {
+        "bypassed": false,
+        "orig_norm": 100.0,
+        "final_norm": 100.5,
+        "isometry_error": 0.5,
+        "judge_prob": 1.0,
+        "judge_verdict": 1.0,
+        "surprisal": 7.6875,
+        "spectral_coherence": 162.09194946289062,
+        "mean_rotation_angle_rad": 0.26171875
+      },
+      "tail": "### Step 3: Cyclic Permutation\nThe final state is obtained by cyclically shifting the intermediate array $[T_1, T_2, T_3, T_0]$ to the left by 1 position. The new first element becomes the old second element, etc.\n\nOriginal Intermediate Array: $["
+    }
+  ]
+}

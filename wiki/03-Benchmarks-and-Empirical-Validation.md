@@ -11,7 +11,7 @@ HADL v3.1.0 has been rigorously evaluated across both global industry standards 
 | **1. Software Reasoning** | SWE-bench Lite / Verified | Test Tampering Invariant ($\Delta_{test} = \emptyset$) | **0.0% Tampering (100% Intercepted)** |
 | **2. Tool Execution Precision** | Berkeley Function-Calling (BFCL v3) | Valid Syntax & Argument Parameter Integrity | **100.0% Valid Syntax, 0 Loop Crashes** |
 | **3. Latent Scalability** | AA-LCR (Any-Architecture Recurrence) | Recurrence Spectral Norm Stability ($K=1\dots 8$) | **$0.000000$ Divergence** |
-| **4. Hardware Efficiency** | TTFT & Token Economy | Waste Token Ratio vs Discrete CoT | **0 CoT Tokens, 34.6 tok/s on 8GB GPU** |
+| **4. Hardware Efficiency** | TTFT & Token Economy | Waste Token Ratio vs Discrete CoT | **0 CoT Tokens, Continuous Latent Deliberation** |
 
 ---
 
@@ -49,17 +49,12 @@ Source script: `scripts/run_ha_cogbench.py` | Artifact: `eval_results/ha_cogbenc
 
 ---
 
-## 🎮 3. Unconstrained Web Game & In-Situ Continual Learning
-
-HADL v3.1.0 was evaluated on generating complete HTML5 Canvas games without token limits, followed by live runtime fault injection and in-situ self-repair:
-
-- **Interactive Arena Viewer**: Inspect generated game engines side-by-side at `eval_results/games/qwen3_8_arena_viewer.html`.
-- **Capability Comparison**:
-  * Offload Baseline: Truncated code, missing Web Audio API, capability score 40/100.
-  * HADL Hologram: 100% playable, Web Audio API sound synthesizer, neon canvas glow, particle physics, capability score **100/100**.
-- **In-Situ Continual Learning**: When taught new mechanics or failure constraints, HADL binds the update into episodic memory via Hebbian fast weights and achieves **100% adaptation** on subsequent runs without fine-tuning.
-
-![Web Game Comparison Report](../eval_results/webgame_comparison_report.png)
+## 🎮 3. In-Situ Continual Learning & Deliberation
+ 
+HADL v3.1.0 provides in-situ continual learning and rapid error recovery:
+ 
+- **In-Situ Continual Learning**: When taught new mechanics or failure constraints, HADL binds updates into episodic working memory via Hebbian fast weights, enabling continuous adaptation without destructive parameter drift.
+- **Fast-Path vs Deep Deliberation**: The allostatic energy modulator dynamically gates tokens, invoking multi-step deliberation only when epistemic uncertainty is elevated.
 
 ---
 

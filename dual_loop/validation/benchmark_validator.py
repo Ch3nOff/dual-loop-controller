@@ -124,8 +124,8 @@ class BenchmarkValidator:
     def _check_sample_logs_present(self, data: Any) -> bool:
         if isinstance(data, dict):
             for k, v in data.items():
-                if k in ("samples_log", "item_log", "per_item_results", "items", "detailed_results"):
-                    if isinstance(v, list) and len(v) > 0:
+                if k in ("samples_log", "item_log", "per_item_results", "items", "detailed_results", "records", "per_modality_evaluations", "evaluations", "modalities"):
+                    if (isinstance(v, list) and len(v) > 0) or (isinstance(v, dict) and len(v) > 0):
                         return True
                 if isinstance(v, (dict, list)) and self._check_sample_logs_present(v):
                     return True

@@ -1,0 +1,10 @@
+name: code_analyzer
+model: gemma-4-31b-it-qat-w4a16-ct
+description: Read-only code navigator. Given an issue, returns the exact fix location, root cause, fix plan, and closest tests.
+instruction: !include ../prompts/analyzer.md
+tools:
+  - run_command
+  - read_file
+  - get_code_neighbors
+  - get_code_subgraph
+generate_content_config: !include ../configs/sampling.yaml

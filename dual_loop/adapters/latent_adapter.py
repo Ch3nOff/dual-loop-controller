@@ -466,16 +466,31 @@ class LatentDeliberationAdapter(nn.Module):
                 rec_mean = delta_rec.mean(dim=1) if delta_rec.dim() == 3 else delta_rec
                 query_rep_inner = query_rep_inner + 0.35 * rec_mean
 
+            # Causal Prefix Isolation: prevent future tokens beyond query anchor from leaking into CWM
+            if is_scalar_idx and idx_int < S - 1:
+                h_text_cwm = h_inner[:, :idx_int + 1, :]
+                text_mask_cwm = (key_padding_mask[:, :idx_int + 1] == False) if key_padding_mask is not None else None
+            else:
+                h_text_cwm = h_inner
+                text_mask_cwm = (key_padding_mask == False) if key_padding_mask is not None else None
+
             # Module 2: Spatio-Temporal Entropic CWM Compression
             memory, visual_slots, cwm_telem = self.topological_cwm(
-                h_text=h_inner,
+                h_text=h_text_cwm,
                 h_vision=h_v_transported,
-                text_mask=(key_padding_mask == False) if key_padding_mask is not None else None,
+                text_mask=text_mask_cwm,
                 vision_mask=vision_mask
             )
         else:
             # 2. Text-Only context compression into working memory (standard CWM)
-            memory = self.cwm(h_inner, key_padding_mask=key_padding_mask) # [B, M, d_inner]
+            # Causal Prefix Isolation: restrict context to prefix up to query anchor
+            if is_scalar_idx and idx_int < S - 1:
+                h_cwm_in = h_inner[:, :idx_int + 1, :]
+                mask_cwm = key_padding_mask[:, :idx_int + 1] if key_padding_mask is not None else None
+            else:
+                h_cwm_in = h_inner
+                mask_cwm = key_padding_mask
+            memory = self.cwm(h_cwm_in, key_padding_mask=mask_cwm) # [B, M, d_inner]
         
         # 2b. Evidential Epistemic Self-Recognition (Dirichlet vacuity of evidence)
         evidential_telem = {}

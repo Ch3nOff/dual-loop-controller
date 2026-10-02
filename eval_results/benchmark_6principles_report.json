@@ -1,0 +1,151 @@
+{
+  "benchmark_name": "Head-to-Head 6-Principle Cognitive Engine vs Baselines",
+  "timestamp": "2026-10-02 08:44:52",
+  "hardware": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "model_name": "Qwen/Qwen3.5-2B",
+  "summary": {
+    "base_model": "1/3 (33.3%)",
+    "standard_dual_loop": "1/3 (33.3%)",
+    "six_principle_engine": "1/3 (33.3%)"
+  },
+  "tasks": [
+    {
+      "task_id": "task_1_non_abelian_algebra",
+      "task_name": "Exotic Non-Abelian Algebraic Reduction",
+      "ground_truth": "I",
+      "base_model": {
+        "generated_tokens": 657,
+        "latency_s": 52.474,
+        "evaluation": {
+          "ground_truth": "I",
+          "extracted_answer": "I",
+          "is_correct": true
+        },
+        "tail": "**Conclusion:**\nThe simplified expression reduces entirely to the identity element.\n\nFinal Answer: I"
+      },
+      "standard_dual_loop": {
+        "generated_tokens": 658,
+        "latency_s": 55.173,
+        "evaluation": {
+          "ground_truth": "I",
+          "extracted_answer": "I",
+          "is_correct": true
+        },
+        "tail": "**Conclusion:**\nThe expression simplifies entirely to the identity element.\n\nFinal Answer: I"
+      },
+      "six_principle_engine": {
+        "generated_tokens": 657,
+        "latency_s": 44.403,
+        "evaluation": {
+          "ground_truth": "I",
+          "extracted_answer": "I",
+          "is_correct": true
+        },
+        "telemetry": {
+          "bypassed": false,
+          "orig_norm": 118.5,
+          "final_norm": 118.5,
+          "isometry_error": 0.0,
+          "judge_prob": 0.62109375,
+          "judge_verdict": 1.0,
+          "surprisal": 7.59375,
+          "spectral_coherence": 13.196386337280273,
+          "mean_rotation_angle_rad": 0.0
+        },
+        "tail": "**Conclusion:**\nThe simplified expression reduces entirely to the identity element.\n\nFinal Answer: I"
+      }
+    },
+    {
+      "task_id": "task_2_stack_bytecode_machine",
+      "task_name": "Reversible Stack Bytecode Machine Simulation",
+      "ground_truth": "[7, 8, 0]",
+      "base_model": {
+        "generated_tokens": 700,
+        "latency_s": 45.54,
+        "evaluation": {
+          "ground_truth": "[7, 8, 0]",
+          "extracted_answer": "MISMATCH",
+          "is_correct": false
+        },
+        "tail": "- **Definition:** Pops top two (A=top, B=second), computes `(B + A) % 10`, pushes result.\n- **Popping:** Pop `7` (top), pop `4` (second).\n- **Calculation:** `(4 + 7) % 10 = 11 % 10 = 1`.\n-"
+      },
+      "standard_dual_loop": {
+        "generated_tokens": 700,
+        "latency_s": 43.036,
+        "evaluation": {
+          "ground_truth": "[7, 8, 0]",
+          "extracted_answer": "MISMATCH",
+          "is_correct": false
+        },
+        "tail": "- **Resulting Stack:** `[7, 4, 7, 1, 8]`\n\n### Step 8: `DUP_ODD`\n- **Operation:** Check the top element (`8`). Is it odd? No ($8 \\pmod 2 = 0$). Push integer"
+      },
+      "six_principle_engine": {
+        "generated_tokens": 700,
+        "latency_s": 44.655,
+        "evaluation": {
+          "ground_truth": "[7, 8, 0]",
+          "extracted_answer": "MISMATCH",
+          "is_correct": false
+        },
+        "telemetry": {
+          "bypassed": false,
+          "orig_norm": 102.0,
+          "final_norm": 102.0,
+          "isometry_error": 0.0,
+          "judge_prob": 0.62109375,
+          "judge_verdict": 1.0,
+          "surprisal": 7.59375,
+          "spectral_coherence": 11.972911834716797,
+          "mean_rotation_angle_rad": 0.0
+        },
+        "tail": "- **Definition:** Pops top two (A=top, B=second), computes `(B + A) % 10`, pushes result.\n- **Popping:** Pop `7` (top), pop `4` (second).\n- **Calculation:** `(4 + 7) % 10 = 11 % 10 = 1`.\n-"
+      }
+    },
+    {
+      "task_id": "task_3_cryptographic_hash_round",
+      "task_name": "Synthetic Cryptographic Hash Round State Transformation",
+      "ground_truth": "[1, 7, 1, 7]",
+      "base_model": {
+        "generated_tokens": 700,
+        "latency_s": 38.116,
+        "evaluation": {
+          "ground_truth": "[1, 7, 1, 7]",
+          "extracted_answer": "MISMATCH",
+          "is_correct": false
+        },
+        "tail": "*   **Calculate $T_3$:**\n    $6 \\oplus 7 = 1$\n    ($6 = 110_2$, $7 = 111_2$, XOR result is $001_2 = 1$)\n    $\\"
+      },
+      "standard_dual_loop": {
+        "generated_tokens": 700,
+        "latency_s": 41.572,
+        "evaluation": {
+          "ground_truth": "[1, 7, 1, 7]",
+          "extracted_answer": "MISMATCH",
+          "is_correct": false
+        },
+        "tail": "### **Step 3: Cyclic Permutation**\nNew order: $[T_1, T_2, T_3, T_0]$\n\n*   New $S_0 ="
+      },
+      "six_principle_engine": {
+        "generated_tokens": 700,
+        "latency_s": 42.745,
+        "evaluation": {
+          "ground_truth": "[1, 7, 1, 7]",
+          "extracted_answer": "MISMATCH",
+          "is_correct": false
+        },
+        "telemetry": {
+          "bypassed": false,
+          "orig_norm": 100.0,
+          "final_norm": 100.0,
+          "isometry_error": 0.0,
+          "judge_prob": 0.62109375,
+          "judge_verdict": 1.0,
+          "surprisal": 7.59375,
+          "spectral_coherence": 12.573836326599121,
+          "mean_rotation_angle_rad": 0.0
+        },
+        "tail": "*   **Calculate $T_3$:**\n    $6 \\oplus 7 = 1$\n    ($6 = 110_2$, $7 = 111_2$, XOR result is $001_2 = 1$)\n    $\\"
+      }
+    }
+  ]
+}

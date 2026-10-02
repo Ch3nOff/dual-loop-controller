@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dual-loop-controller"
-version = "3.1.1"
+version = "3.2.0"
 description = "A unified cognitive operating system with model-agnostic canonical adapters, sleep-phase consolidation, and prefrontal invariant firewalls for Transformers"
 readme = "README_PYPI.md"
 requires-python = ">=3.9"

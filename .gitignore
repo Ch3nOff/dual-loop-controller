@@ -23,3 +23,6 @@ graphs/
 submission.zip
 *.parquet
 results/
+scripts/competitor_dumps/
+scripts/competitor_analysis.txt
+scripts/getting_started_cells.txt
