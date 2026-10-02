@@ -87,6 +87,12 @@ if _HAS_TORCH:
         LMHeadSyringe,
         EvolvingSquareCloudWrapper
     )
+    from .vexdoor_reentrant_engine import (
+        VexdoorDecayGate,
+        LogDetVolumeSimilarity,
+        NullspaceMemoryAppend,
+        VexdoorClosedLoopWrapper
+    )
     # Convenient shorthand alias for users: default to Universal Adapter in v3.0!
     attach = attach_universal_dual_loop
 
