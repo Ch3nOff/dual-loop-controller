@@ -82,6 +82,11 @@ if _HAS_TORCH:
         DynamicMovingPointModulator,
         KnowledgeSyringe
     )
+    from .evolving_manifold_syringe import (
+        EvolvingManifoldModule,
+        LMHeadSyringe,
+        EvolvingSquareCloudWrapper
+    )
     # Convenient shorthand alias for users: default to Universal Adapter in v3.0!
     attach = attach_universal_dual_loop
 
