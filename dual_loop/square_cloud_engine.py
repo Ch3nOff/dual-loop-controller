@@ -283,9 +283,13 @@ class SquareCloudModelWrapper(nn.Module):
         self.surprisal_threshold = float(surprisal_threshold)
         self.bypass_single_token = bool(bypass_single_token)
         
-        # Probe hidden size
+        # Probe hidden size, device and dtype
         d_model = getattr(base_model.config, "hidden_size", 2048)
         self.engine = SquareCloudDynamicEngine(d_model=d_model)
+        
+        param = next(base_model.parameters(), None)
+        if param is not None:
+            self.engine.to(device=param.device, dtype=param.dtype)
         
         self.enabled: bool = True
         self._hook_handle = None

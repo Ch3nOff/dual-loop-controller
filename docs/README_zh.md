@@ -28,6 +28,10 @@
 
 ## 🏛️ System Architecture: The 5 Computational Brain Organs
 
+<p align="center">
+  <img src="images/hadl_squarecloud_complete_architecture.png" alt="HADL v3.2 + SquareCloud Architecture Diagram" width="100%">
+</p>
+
 ```mermaid
 flowchart TD
     subgraph Organ1 ["Organ 1: Global Workspace & Canonical Deliberation"]
@@ -75,7 +79,7 @@ flowchart TD
 将任意模型原生隐藏维度 $D_{\text{native}}$ 投影至通用认知流形 $\mathbb{R}^{D_c}$ ($D_c = 1024$)：
 
 $$
-z_0 = \operatorname{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
+z_0 = \text{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
 $$
 
 向外投影采用 ReZero 恒等初始化：
@@ -129,14 +133,14 @@ v3.2 版本通过引入 **SquareCloud 动态认知引擎** 突破了固定规范
 以可学习的对角选择算子取代静态 $1/\sqrt{d}$ 缩放，将 Key 分析压缩到前 ~50% 最具信息量的特征子空间：
 
 $$
-\mathbf{M}_{\text{select}} = \operatorname{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
+\mathbf{M}_{\text{select}} = \text{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
 $$
 
 #### 3. SquareCloud 有界概率单纯形
 将无界的线性点积映射至有界的概率密度单纯形 $\Delta^{M-1}$，实现 100% 质量守恒且绝对无数值溢出：
 
 $$
-\mathcal{P}_{\text{cloud}} = \operatorname{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
+\mathcal{P}_{\text{cloud}} = \text{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
 $$
 
 #### 4. 动态移动坐标点调制 ($V \odot K$)
@@ -150,7 +154,7 @@ $$
 作为具备 50% 隐层容量瓶颈的权威监督者 ($d_{\text{judge}} = d_{	ext{model}} // 2$)，配备 STE 实现端到端连续梯度流动：
 
 $$
-v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\operatorname{detach}()
+v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\text{detach}()
 $$
 
 推理期间若候选思考偏离安全基准 ($p < 0.5$)，将自动触发**故障安全否决 (Fail-Safe Veto)** ($v_{\text{gate}} = 0$)，保护基础模型表征完好无损。

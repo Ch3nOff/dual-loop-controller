@@ -28,6 +28,10 @@
 
 ## 🏛️ System Architecture: The 5 Computational Brain Organs
 
+<p align="center">
+  <img src="images/hadl_squarecloud_complete_architecture.png" alt="HADL v3.2 + SquareCloud Architecture Diagram" width="100%">
+</p>
+
 ```mermaid
 flowchart TD
     subgraph Organ1 ["Organ 1: Global Workspace & Canonical Deliberation"]
@@ -75,7 +79,7 @@ flowchart TD
 Проецирует скрытое измерение $D_{\text{native}}$ в универсальное многообразие $\mathbb{R}^{D_c}$ ($D_c = 1024$):
 
 $$
-z_0 = \operatorname{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
+z_0 = \text{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
 $$
 
 Выходная проекция использует инициализацию ReZero:
@@ -129,14 +133,14 @@ $$
 Заменяет статическое масштабирование $1/\sqrt{d}$ диагональным оператором, сжимающим ключи в ~50% наиболее информативных признаков:
 
 $$
-\mathbf{M}_{\text{select}} = \operatorname{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
+\mathbf{M}_{\text{select}} = \text{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
 $$
 
 #### 3. Ограниченный Вероятностный Симплекс SquareCloud
 Отображает неограниченные скалярные произведения в симплекс $\Delta^{M-1}$ со 100% сохранением массы и без переполнения:
 
 $$
-\mathcal{P}_{\text{cloud}} = \operatorname{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
+\mathcal{P}_{\text{cloud}} = \text{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
 $$
 
 #### 4. Динамическая Модуляция Координат Точек ($V \odot K$)
@@ -150,7 +154,7 @@ $$
 Супервизор с 50% узким местом ($d_{\text{judge}} = d_{	ext{model}} // 2$) со STE для непрерывного потока градиентов при обучении:
 
 $$
-v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\operatorname{detach}()
+v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\text{detach}()
 $$
 
 При инференсе, если мысли расходятся ($p < 0.5$), мгновенно срабатывает **Защитное Вето** ($v_{\text{gate}} = 0$), сохраняя базовую модель нетронутой.

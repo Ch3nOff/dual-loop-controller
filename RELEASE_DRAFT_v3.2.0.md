@@ -30,12 +30,12 @@ Splits token processing into:
 #### 2. Selective Identity Matrix Router ($\mathbf{M}_{\text{select}}$)
 Replaces the static scalar scaling factor $\frac{1}{\sqrt{d}}$ with an adaptive diagonal dimensional selection operator:
 $$s_i = \sigma(w_i) \in (0, 1], \quad d_{\text{eff}} = \sum_{i=1}^d s_i$$
-$$\mathbf{M}_{\text{select}} = \operatorname{diag}\left(\frac{s_i}{\sqrt{d_{\text{eff}}}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}$$
+$$\mathbf{M}_{\text{select}} = \text{diag}\left(\frac{s_i}{\sqrt{d_{\text{eff}}}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}$$
 *Benefit:* Adaptively compresses key analysis into the top $\sim 50\%$ most informative feature dimensions, suppressing latent noise.
 
 #### 3. SquareCloud Bounded Probability Simplex
 Maps unconstrained linear dot-product interactions into a bounded unit probability simplex $\Delta^{M-1}$ with 100% mass conservation:
-$$\mathcal{P}_{\text{cloud}} = \operatorname{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}$$
+$$\mathcal{P}_{\text{cloud}} = \text{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}$$
 *Benefit:* Mathematically guarantees zero magnitude explosion (*zero overflow*), preserves stable variance, and safeguards causality via the triangular causal mask $\mathbf{M}_{\text{causal}}$.
 
 #### 4. Dynamic Moving Point Coordinates $[V \odot K]$
@@ -45,8 +45,8 @@ The collapse of the probability cloud yields dynamic thought trajectories across
 
 #### 5. 50% Capacity Latent 1-Bit Judge with Straight-Through Estimator (STE)
 Functions as an executive supervisory verifier constrained to a 50% capacity bottleneck ($d_{\text{judge}} = d_{\text{model}} // 2$):
-$$p_{\text{judge}} = \sigma(\operatorname{MLP}([h, \text{Thought}])), \quad v_{\text{hard}} = \mathbb{I}(p_{\text{judge}} \ge 0.5)$$
-$$v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\operatorname{detach}()$$
+$$p_{\text{judge}} = \sigma(\text{MLP}([h, \text{Thought}])), \quad v_{\text{hard}} = \mathbb{I}(p_{\text{judge}} \ge 0.5)$$
+$$v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\text{detach}()$$
 - **During Training:** Initial final bias $+1.0$ ($p \approx 0.73$, gate open) with gradient $\frac{\partial v_{\text{gate}}}{\partial p_{\text{judge}}} = 1.0$ flowing smoothly through all adapter parameters.
 - **During Inference (Executive Fail-Safe Veto):** If candidate thoughts deviate or have low confidence ($p < 0.5$), the gate instantaneously snaps shut ($v_{\text{gate}} = 0.0$), aborting rotation and safely preserving the base model's uncorrupted representation!
 

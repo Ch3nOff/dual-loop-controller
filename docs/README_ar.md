@@ -28,6 +28,10 @@
 
 ## 🏛️ System Architecture: The 5 Computational Brain Organs
 
+<p align="center">
+  <img src="images/hadl_squarecloud_complete_architecture.png" alt="HADL v3.2 + SquareCloud Architecture Diagram" width="100%">
+</p>
+
 ```mermaid
 flowchart TD
     subgraph Organ1 ["Organ 1: Global Workspace & Canonical Deliberation"]
@@ -75,7 +79,7 @@ flowchart TD
 إسقاط البعد الخفي الأصلي للنموذج $D_{\text{native}}$ إلى المشعب المعرفي العام $\mathbb{R}^{D_c}$ ($D_c = 1024$):
 
 $$
-z_0 = \operatorname{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
+z_0 = \text{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
 $$
 
 يستخدم الإسقاط الخارجي تهيئة تطابق ReZero:
@@ -129,14 +133,14 @@ $$
 استبدال التحجيم الثابت $1/\sqrt{d}$ بمؤثر قطري قابل للتعلم يضغط تحليل المفاتيح في أكثر ~50% من السمات فائدة:
 
 $$
-\mathbf{M}_{\text{select}} = \operatorname{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
+\mathbf{M}_{\text{select}} = \text{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
 $$
 
 #### 3. سيمبلكس الاحتمال المقيد SquareCloud
 تحويل الضرب القياسي الخطي غير المقيد إلى سيمبلكس كثافة احتمالية مقيد $\Delta^{M-1}$ مع الحفاظ على الكتلة بنسبة 100% ومنع الفائض العددي:
 
 $$
-\mathcal{P}_{\text{cloud}} = \operatorname{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
+\mathcal{P}_{\text{cloud}} = \text{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
 $$
 
 #### 4. تعديل إحداثيات النقاط المتحركة ($V \odot K$)
@@ -150,7 +154,7 @@ $$
 مشرف بعنق زجاجة 50% ($d_{\text{judge}} = d_{	ext{model}} // 2$) مجهز بـ STE لتدفق تدرج مستمر أثناء التدريب:
 
 $$
-v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\operatorname{detach}()
+v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\text{detach}()
 $$
 
 أثناء الاستدلال، إذا انحرفت الأفكار المرشحة ($p < 0.5$)، يتم تفعيل **فيتو الأمان التلقائي** ($v_{\text{gate}} = 0$) لحماية النموذج الأساسي.

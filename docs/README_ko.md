@@ -28,6 +28,10 @@
 
 ## 🏛️ System Architecture: The 5 Computational Brain Organs
 
+<p align="center">
+  <img src="images/hadl_squarecloud_complete_architecture.png" alt="HADL v3.2 + SquareCloud Architecture Diagram" width="100%">
+</p>
+
 ```mermaid
 flowchart TD
     subgraph Organ1 ["Organ 1: Global Workspace & Canonical Deliberation"]
@@ -75,7 +79,7 @@ flowchart TD
 임의의 모델 네이티브 은닉 차원 $D_{\text{native}}$ 를 범용 인지 다양체 $\mathbb{R}^{D_c}$ ($D_c = 1024$) 로 투영：
 
 $$
-z_0 = \operatorname{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
+z_0 = \text{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
 $$
 
 외부 투영에는 ReZero 항등 초기화를 적용：
@@ -129,14 +133,14 @@ v3.2 릴리스는 **SquareCloud 동적 인지 엔진** 을 도입하여 6가지 
 정적 $1/\sqrt{d}$ 스케일링을 학습 가능한 대각 선택 연산자로 대체하여 키 분석을 가장 정보량이 많은 상위 ~50% 특성 부분공간으로 압축：
 
 $$
-\mathbf{M}_{\text{select}} = \operatorname{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
+\mathbf{M}_{\text{select}} = \text{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
 $$
 
 #### 3. SquareCloud 유계 확률 심플렉스
 무한한 선형 내적을 유계 확률 밀도 심플렉스 $\Delta^{M-1}$ 로 매핑하여 100% 질량 보존 및 수치 오버플로 완전 배제：
 
 $$
-\mathcal{P}_{\text{cloud}} = \operatorname{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
+\mathcal{P}_{\text{cloud}} = \text{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
 $$
 
 #### 4. 동적 이동점 좌표 변조 ($V \odot K$)
@@ -150,7 +154,7 @@ $$
 50% 은닉 병목 용량 ($d_{\text{judge}} = d_{	ext{model}} // 2$) 을 갖춘 감독관으로 작동하며, STE를 통해 학습 중 연속적인 기울기 흐름을 보장：
 
 $$
-v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\operatorname{detach}()
+v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\text{detach}()
 $$
 
 추론 시 후보 사고가 기준을 벗어날 경우 ($p < 0.5$), 즉각적인 **페일세이프 거부 (Fail-Safe Veto)** ($v_{\text{gate}} = 0$) 가 작동하여 기본 모델 표현을 안전하게 보존합니다.

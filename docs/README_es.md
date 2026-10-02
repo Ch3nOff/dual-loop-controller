@@ -28,6 +28,10 @@
 
 ## 🏛️ System Architecture: The 5 Computational Brain Organs
 
+<p align="center">
+  <img src="images/hadl_squarecloud_complete_architecture.png" alt="HADL v3.2 + SquareCloud Architecture Diagram" width="100%">
+</p>
+
 ```mermaid
 flowchart TD
     subgraph Organ1 ["Organ 1: Global Workspace & Canonical Deliberation"]
@@ -75,7 +79,7 @@ flowchart TD
 Proyecta la dimensión nativa oculta $D_{\text{native}}$ a la variedad cognitiva universal $\mathbb{R}^{D_c}$ ($D_c = 1024$):
 
 $$
-z_0 = \operatorname{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
+z_0 = \text{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
 $$
 
 La proyección hacia afuera utiliza inicialización ReZero:
@@ -129,14 +133,14 @@ Separa la ejecución en un flujo reflejo ($K=0$, 0 ms) y un ciclo deliberativo a
 Reemplaza el escalado estático $1/\sqrt{d}$ con un operador diagonal que comprime el análisis de claves en el ~50% de características más informativas:
 
 $$
-\mathbf{M}_{\text{select}} = \operatorname{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
+\mathbf{M}_{\text{select}} = \text{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
 $$
 
 #### 3. Simplex de Probabilidad Acotado SquareCloud
 Mapea productos punto lineales al simplex $\Delta^{M-1}$ con conservación de masa al 100% y cero desbordamiento numérico:
 
 $$
-\mathcal{P}_{\text{cloud}} = \operatorname{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
+\mathcal{P}_{\text{cloud}} = \text{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
 $$
 
 #### 4. Modulación de Coordenadas de Puntos Móviles ($V \odot K$)
@@ -150,7 +154,7 @@ $$
 Supervisor con cuello de botella al 50% ($d_{\text{judge}} = d_{	ext{model}} // 2$) equipado con STE para flujo de gradiente continuo:
 
 $$
-v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\operatorname{detach}()
+v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\text{detach}()
 $$
 
 Durante la inferencia, si las ideas divergen ($p < 0.5$), se activa un **Veto de Seguridad** ($v_{\text{gate}} = 0$) que protege la representación base intacta.

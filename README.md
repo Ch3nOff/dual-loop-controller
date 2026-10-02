@@ -52,6 +52,10 @@ Standard generative models suffer from fundamental architectural bottlenecks:
 
 ## 🏛️ System Architecture: The 5 Computational Brain Organs
 
+<p align="center">
+  <img src="docs/images/hadl_squarecloud_complete_architecture.png" alt="HADL v3.2 + SquareCloud Architecture Diagram" width="100%">
+</p>
+
 HADL organizes deliberative cognitive operations into **5 distinct Computational Brain Organs**:
 
 ```mermaid
@@ -101,7 +105,7 @@ flowchart TD
 Projects arbitrary native model hidden dimension $D_{\text{native}}$ into a universal cognitive manifold $\mathbb{R}^{D_c}$ ($D_c = 1024$):
 
 $$
-z_0 = \operatorname{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
+z_0 = \text{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
 $$
 
 Outward projection uses ReZero initialization:
@@ -155,14 +159,14 @@ Splits execution into a reflex streaming path ($K=0$, 0 ms overhead) for predict
 Replaces static $1/\sqrt{d}$ scaling with a learnable diagonal selection operator that compresses key analysis into the most salient ~50% feature subspace:
 
 $$
-\mathbf{M}_{\text{select}} = \operatorname{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
+\mathbf{M}_{\text{select}} = \text{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
 $$
 
 #### 3. SquareCloud Bounded Probability Simplex
 Maps unbounded linear dot-products into a bounded probability density simplex $\Delta^{M-1}$ with 100% mass conservation and zero numerical overflow:
 
 $$
-\mathcal{P}_{\text{cloud}} = \operatorname{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
+\mathcal{P}_{\text{cloud}} = \text{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
 $$
 
 #### 4. Dynamic Moving Point Modulation ($V \odot K$)
@@ -176,7 +180,7 @@ $$
 Acts as a heavyweight supervisor with a 50% hidden bottleneck ($d_{\text{judge}} = d_{\text{model}} // 2$). Equipped with STE for continuous gradient flow during training:
 
 $$
-v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\operatorname{detach}()
+v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\text{detach}()
 $$
 
 Inference engages a binary fail-safe veto ($v_{\text{gate}} = 0$) if candidate thoughts diverge ($p < 0.5$).
@@ -232,7 +236,31 @@ Evaluated across 3 synthetic formal reasoning challenges designed to test strict
 
 ---
 
-### 3. Resolution of Independent Audit v3.1.1 (Issue #45)
+### 3. Comprehensive 20-Benchmark Empirical GPU Evaluation (Qwen3.5-2B)
+
+<p align="center">
+  <img src="docs/images/benchmark_20_tasks_comparison.png" alt="20-Benchmark Empirical GPU Evaluation" width="100%">
+</p>
+
+To rigorously evaluate HADL v3.2 and the SquareCloud Dynamic Engine against base `Qwen/Qwen3.5-2B` (bfloat16), we executed 20 formal symbolic challenges across 5 mathematical domains on an NVIDIA RTX 5060 Laptop GPU. Full raw records are preserved in [`eval_results/benchmark_20_tasks_real_gpu.json`](eval_results/benchmark_20_tasks_real_gpu.json) and [`eval_results/qwen2b_20_benchmark_empirical_analysis.md`](eval_results/qwen2b_20_benchmark_empirical_analysis.md).
+
+| Domain | Total Tasks | Base Accuracy | SquareCloud Dynamic (v3.2) | Latent Judge Veto Rate | Mean Rotation ($\theta$) |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **1. Non-Abelian Algebra** | 4 | 0/4 (0.0%) | 0/4 (0.0%) | **3/4 (75%) Vetoed** | $2.09^\circ$ |
+| **2. Reversible ISA Machines** | 4 | 0/4 (0.0%) | 0/4 (0.0%) | **3/4 (75%) Vetoed** | $1.86^\circ$ |
+| **3. Cryptographic Permutations** | 4 | 0/4 (0.0%) | 0/4 (0.0%) | **3/4 (75%) Vetoed** | $1.09^\circ$ |
+| **4. Causal & Inverted Logic** | 4 | 1/4 (25.0%) | **1/4 (25.0%)** | **3/4 (75%) Vetoed** | $2.55^\circ$ |
+| **5. Symbol Grammar & Automata** | 4 | 0/4 (0.0%) | 0/4 (0.0%) | **1/4 (25%) Vetoed** | $4.49^\circ$ |
+| **Master Summary** | **20** | **1/20 (5.0%)** | **1/20 (5.0%)** | **13/20 (65.0%) Vetoed** | **$\|h'\|_2 \equiv \|h\|_2$ (0.000000)** |
+
+**Key Hardware Telemetry:**
+- **Hardware Generation Rate:** Base throughput reached **16.34 tok/s** vs. SquareCloud throughput of **22.20 tok/s** (+35.8% throughput acceleration via dynamic routing).
+- **Mathematical Invariance:** Givens unitary rotations exhibited **0.000000** isometry drift, strictly preserving activation manifolds without vanishing or exploding gradients.
+- **Fail-Safe Veto Rate:** The 50% STE Latent Judge triggered protective vetoes on **13 of 20 tasks (65.0%)**, reverting candidate updates to $0.00^\circ$ and safeguarding the base model from destructive trajectory shifts.
+
+---
+
+### 4. Resolution of Independent Audit v3.1.1 (Issue #45)
 
 All anomalies reported in the independent audit of commit `0100dba` have been mathematically resolved and covered by regression tests in [`tests/test_audit_regressions.py`](tests/test_audit_regressions.py):
 

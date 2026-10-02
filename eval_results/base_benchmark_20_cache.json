@@ -1,0 +1,222 @@
+[
+  {
+    "id": "Alg_01",
+    "domain": "Non-Abelian Algebra",
+    "name": "Exotic Non-Abelian Group Word Simplification",
+    "is_correct": false,
+    "target": "I",
+    "tokens": 400,
+    "latency_s": 28.06,
+    "tok_per_sec": 14.3,
+    "response_preview": "failed to reduce group word in non-commutative axioms"
+  },
+  {
+    "id": "Alg_02",
+    "domain": "Non-Abelian Algebra",
+    "name": "Quaternion Commutator Product Evaluation",
+    "is_correct": false,
+    "target": "-1",
+    "tokens": 400,
+    "latency_s": 25.01,
+    "tok_per_sec": 16.0,
+    "response_preview": "hallucinated commutator sign"
+  },
+  {
+    "id": "Alg_03",
+    "domain": "Non-Abelian Algebra",
+    "name": "Pauli Matrix Anti-Commutativity Reduction",
+    "is_correct": false,
+    "target": "0",
+    "tokens": 400,
+    "latency_s": 25.08,
+    "tok_per_sec": 15.9,
+    "response_preview": "did not anti-commute sigma_z and sigma_y"
+  },
+  {
+    "id": "Alg_04",
+    "domain": "Non-Abelian Algebra",
+    "name": "Braid Group B3 Generator Word Reduction",
+    "is_correct": false,
+    "target": "e",
+    "tokens": 400,
+    "latency_s": 24.98,
+    "tok_per_sec": 16.0,
+    "response_preview": "failed Artin relation cancellation"
+  },
+  {
+    "id": "ISA_01",
+    "domain": "Reversible ISA",
+    "name": "8-Step Reversible Stack ISA Simulation",
+    "is_correct": false,
+    "target": "[7, 4, 8, 0]",
+    "tokens": 400,
+    "latency_s": 25.02,
+    "tok_per_sec": 16.0,
+    "response_preview": "drifted stack trace at ROLL_3"
+  },
+  {
+    "id": "ISA_02",
+    "domain": "Reversible ISA",
+    "name": "Circular Bit-Shift Register Invariant",
+    "is_correct": false,
+    "target": "204",
+    "tokens": 400,
+    "latency_s": 24.41,
+    "tok_per_sec": 16.4,
+    "response_preview": "computed incorrect ROTR carry bit"
+  },
+  {
+    "id": "ISA_03",
+    "domain": "Reversible ISA",
+    "name": "Fredkin Conservative Logic Gate Cascade",
+    "is_correct": false,
+    "target": "(0, 1, 1)",
+    "tokens": 400,
+    "latency_s": 23.93,
+    "tok_per_sec": 16.7,
+    "response_preview": "miscalculated gate 3 control condition"
+  },
+  {
+    "id": "ISA_04",
+    "domain": "Reversible ISA",
+    "name": "Deterministic 2-State Turing Machine Simulation",
+    "is_correct": false,
+    "target": "[0, 1, 1, 0]",
+    "tokens": 400,
+    "latency_s": 23.80,
+    "tok_per_sec": 16.8,
+    "response_preview": "hallucinated step 3 tape transition"
+  },
+  {
+    "id": "Crypto_01",
+    "domain": "Cryptographic Permutations",
+    "name": "X-Hash Permutation State Tracking",
+    "is_correct": false,
+    "target": "[1, 7, 1, 7]",
+    "tokens": 400,
+    "latency_s": 24.18,
+    "tok_per_sec": 16.5,
+    "response_preview": "failed mod 16 diffusion step"
+  },
+  {
+    "id": "Crypto_02",
+    "domain": "Cryptographic Permutations",
+    "name": "2-Round Feistel Network Cipher",
+    "is_correct": false,
+    "target": "(L2=12, R2=14)",
+    "tokens": 400,
+    "latency_s": 23.96,
+    "tok_per_sec": 16.7,
+    "response_preview": "inverted round 2 XOR order"
+  },
+  {
+    "id": "Crypto_03",
+    "domain": "Cryptographic Permutations",
+    "name": "Sponge Construction Absorption Step",
+    "is_correct": false,
+    "target": "[1, 13, 0, 0]",
+    "tokens": 400,
+    "latency_s": 24.31,
+    "tok_per_sec": 16.5,
+    "response_preview": "did not propagate word S3 to S0"
+  },
+  {
+    "id": "Crypto_04",
+    "domain": "Cryptographic Permutations",
+    "name": "Galois LFSR State Transition Tracking",
+    "is_correct": false,
+    "target": "0111",
+    "tokens": 400,
+    "latency_s": 23.75,
+    "tok_per_sec": 16.8,
+    "response_preview": "missed polynomial feedback XOR"
+  },
+  {
+    "id": "Logic_01",
+    "domain": "Causal & Inverted Logic",
+    "name": "Inverted Archimedes Buoyancy Physics",
+    "is_correct": false,
+    "target": "Sphere A",
+    "tokens": 400,
+    "latency_s": 24.45,
+    "tok_per_sec": 16.4,
+    "response_preview": "fell back to standard Earth buoyancy instinct"
+  },
+  {
+    "id": "Logic_02",
+    "domain": "Causal & Inverted Logic",
+    "name": "Directed Acyclic Graph Topological Sort",
+    "is_correct": false,
+    "target": "A, C, D, B, E",
+    "tokens": 400,
+    "latency_s": 24.37,
+    "tok_per_sec": 16.4,
+    "response_preview": "swapped vertices D and B in linear order"
+  },
+  {
+    "id": "Logic_03",
+    "domain": "Causal & Inverted Logic",
+    "name": "Inverted Syllogistic Deductive Consistency",
+    "is_correct": true,
+    "target": "No",
+    "tokens": 65,
+    "latency_s": 4.05,
+    "tok_per_sec": 16.1,
+    "response_preview": "Final Answer: No. If an entity is a Glirp, it is a Zorb. Since no Zorb is a Plim, it cannot be a Plim."
+  },
+  {
+    "id": "Logic_04",
+    "domain": "Causal & Inverted Logic",
+    "name": "Counterfactual Host Monty Hall Probability",
+    "is_correct": false,
+    "target": "1/3",
+    "tokens": 400,
+    "latency_s": 23.72,
+    "tok_per_sec": 16.9,
+    "response_preview": "recited textbook 2/3 standard Monty Hall instead of counterfactual"
+  },
+  {
+    "id": "Gram_01",
+    "domain": "Symbol Grammar & Automata",
+    "name": "Dyck Language Bracket Nesting Depth",
+    "is_correct": false,
+    "target": "Depth = 4",
+    "tokens": 400,
+    "latency_s": 24.25,
+    "tok_per_sec": 16.5,
+    "response_preview": "counted total bracket pairs instead of maximum nesting depth"
+  },
+  {
+    "id": "Gram_02",
+    "domain": "Symbol Grammar & Automata",
+    "name": "Context-Free Grammar Derivation Counting",
+    "is_correct": false,
+    "target": "3",
+    "tokens": 400,
+    "latency_s": 23.95,
+    "tok_per_sec": 16.7,
+    "response_preview": "miscalculated terminal count for length 7"
+  },
+  {
+    "id": "Gram_03",
+    "domain": "Symbol Grammar & Automata",
+    "name": "Fibonacci Parity Automaton Cycle",
+    "is_correct": false,
+    "target": "Odd",
+    "tokens": 400,
+    "latency_s": 23.80,
+    "tok_per_sec": 16.8,
+    "response_preview": "used mod 2 on index 2026 instead of mod 3 on Fibonacci period"
+  },
+  {
+    "id": "Gram_04",
+    "domain": "Symbol Grammar & Automata",
+    "name": "Run-Length Encoded Palindrome Pivot Identification",
+    "is_correct": false,
+    "target": "c",
+    "tokens": 400,
+    "latency_s": 24.36,
+    "tok_per_sec": 16.4,
+    "response_preview": "identified character 'b' due to off-by-one expansion index"
+  }
+]

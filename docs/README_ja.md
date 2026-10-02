@@ -28,6 +28,10 @@
 
 ## 🏛️ System Architecture: The 5 Computational Brain Organs
 
+<p align="center">
+  <img src="images/hadl_squarecloud_complete_architecture.png" alt="HADL v3.2 + SquareCloud Architecture Diagram" width="100%">
+</p>
+
 ```mermaid
 flowchart TD
     subgraph Organ1 ["Organ 1: Global Workspace & Canonical Deliberation"]
@@ -75,7 +79,7 @@ flowchart TD
 任意のモデル固有隠れ次元 $D_{\text{native}}$ をユニバーサル認知多様体 $\mathbb{R}^{D_c}$ ($D_c = 1024$) に投影：
 
 $$
-z_0 = \operatorname{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
+z_0 = \text{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
 $$
 
 外部への投影には ReZero 恒等初期化を採用：
@@ -129,14 +133,14 @@ v3.2 リリースでは、**SquareCloud 動的認知エンジン** を導入し�
 静的な $1/\sqrt{d}$ スケーリングを学習可能な対角選択演算子に置き換え、キー分析を最も有益な約50%の特徴部分空間に圧縮：
 
 $$
-\mathbf{M}_{\text{select}} = \operatorname{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
+\mathbf{M}_{\text{select}} = \text{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
 $$
 
 #### 3. SquareCloud 有界確率シンプレックス
 無限の線形ドット積を有界な確率密度シンプレックス $\Delta^{M-1}$ にマッピングし、100%の質量保存と数値オーバーフローゼロを実現：
 
 $$
-\mathcal{P}_{\text{cloud}} = \operatorname{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
+\mathcal{P}_{\text{cloud}} = \text{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
 $$
 
 #### 4. 動的移動点座標変調 ($V \odot K$)
@@ -150,7 +154,7 @@ $$
 50%の隠れボトルネック容量 ($d_{\text{judge}} = d_{	ext{model}} // 2$) を持つ監督者として機能し、STEによって学習中の連続勾配流を確保：
 
 $$
-v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\operatorname{detach}()
+v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\text{detach}()
 $$
 
 推論時に候補思考が基準から逸脱した場合 ($p < 0.5$)、即座に**フェイルセーフ拒否 (Fail-Safe Veto)** ($v_{\text{gate}} = 0$) が作動し、基本表現を安全に保護します。

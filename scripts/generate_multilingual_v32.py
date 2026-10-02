@@ -584,7 +584,7 @@ flowchart TD
 {p_org1}
 
 $$
-z_0 = \\operatorname{{LayerNorm}}(W_{{\\text{{down}}}} h_{{\\text{{native}}}}), \\quad W_{{\\text{{down}}}} \\in \\mathbb{{R}}^{{D_c \\times D_{{\\text{{native}}}}}}
+z_0 = \\text{{LayerNorm}}(W_{{\\text{{down}}}} h_{{\\text{{native}}}}), \\quad W_{{\\text{{down}}}} \\in \\mathbb{{R}}^{{D_c \\times D_{{\\text{{native}}}}}}
 $$
 
 {p_rezero}
@@ -638,14 +638,14 @@ $$
 {p2_desc}
 
 $$
-\\mathbf{{M}}_{{\\text{{select}}}} = \\operatorname{{diag}}\\left(\\frac{{s_i}}{{\\sqrt{{\\sum_{{j=1}}^d s_j + \\epsilon}}}}\\right) \\cdot \\mathbf{{I}}, \\quad Q_{{\\text{{scaled}}}} = Q \\cdot \\mathbf{{M}}_{{\\text{{select}}}}
+\\mathbf{{M}}_{{\\text{{select}}}} = \\text{{diag}}\\left(\\frac{{s_i}}{{\\sqrt{{\\sum_{{j=1}}^d s_j + \\epsilon}}}}\\right) \\cdot \\mathbf{{I}}, \\quad Q_{{\\text{{scaled}}}} = Q \\cdot \\mathbf{{M}}_{{\\text{{select}}}}
 $$
 
 #### {p3_title}
 {p3_desc}
 
 $$
-\\mathcal{{P}}_{{\\text{{cloud}}}} = \\operatorname{{Softmax}}\\left(\\frac{{Q_{{\\text{{scaled}}}} K^\\top}}{{\\tau}} + \\mathbf{{M}}_{{\\text{{causal}}}}\\right) \\in [0, 1]^{{S \\times (S + M)}}
+\\mathcal{{P}}_{{\\text{{cloud}}}} = \\text{{Softmax}}\\left(\\frac{{Q_{{\\text{{scaled}}}} K^\\top}}{{\\tau}} + \\mathbf{{M}}_{{\\text{{causal}}}}\\right) \\in [0, 1]^{{S \\times (S + M)}}
 $$
 
 #### {p4_title}
@@ -659,7 +659,7 @@ $$
 {p5_desc}
 
 $$
-v_{{\\text{{gate}}}} = p_{{\\text{{judge}}}} + (v_{{\\text{{hard}}}} - p_{{\\text{{judge}}}}).\\operatorname{{detach}}()
+v_{{\\text{{gate}}}} = p_{{\\text{{judge}}}} + (v_{{\\text{{hard}}}} - p_{{\\text{{judge}}}}).\\text{{detach}}()
 $$
 
 {p5_sub}

@@ -54,6 +54,10 @@ Model generatif konvensional mengalami kendala struktural utama:
 
 ## 🏛️ Arsitektur Sistem: 5 Organ Komputasi Otak
 
+<p align="center">
+  <img src="images/hadl_squarecloud_complete_architecture.png" alt="Diagram Arsitektur HADL v3.2 + SquareCloud" width="100%">
+</p>
+
 HADL mengorganisasikan operasi deliberasi ke dalam **5 Organ Komputasi Otak**:
 
 ```mermaid
@@ -103,7 +107,7 @@ flowchart TD
 Memproyeksikan dimensi tersembunyi model asal $D_{\text{native}}$ ke manifold kognitif universal $\mathbb{R}^{D_c}$ ($D_c = 1024$):
 
 $$
-z_0 = \operatorname{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
+z_0 = \text{LayerNorm}(W_{\text{down}} h_{\text{native}}), \quad W_{\text{down}} \in \mathbb{R}^{D_c \times D_{\text{native}}}
 $$
 
 Proyeksi ke luar menggunakan inisialisasi ReZero:
@@ -157,14 +161,14 @@ Memisahkan eksekusi menjadi jalur cepat refleks ($K=0$, latensi $0\text{ ms}$) u
 Menggantikan penskalaan statis $1/\sqrt{d}$ dengan operator seleksi diagonal terpelajari yang memusatkan analisis key ke ~50% subruang fitur paling informatif:
 
 $$
-\mathbf{M}_{\text{select}} = \operatorname{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
+\mathbf{M}_{\text{select}} = \text{diag}\left(\frac{s_i}{\sqrt{\sum_{j=1}^d s_j + \epsilon}}\right) \cdot \mathbf{I}, \quad Q_{\text{scaled}} = Q \cdot \mathbf{M}_{\text{select}}
 $$
 
 #### 3. SquareCloud Bounded Probability Simplex
 Memetakan dot-product linear tak terbatas ke dalam unit simplex probabilitas $\Delta^{M-1}$ dengan konservasi massa 100% dan bebas luapan nilai:
 
 $$
-\mathcal{P}_{\text{cloud}} = \operatorname{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
+\mathcal{P}_{\text{cloud}} = \text{Softmax}\left(\frac{Q_{\text{scaled}} K^\top}{\tau} + \mathbf{M}_{\text{causal}}\right) \in [0, 1]^{S \times (S + M)}
 $$
 
 #### 4. Modulasi Titik Koordinat Dinamis ($V \odot K$)
@@ -178,7 +182,7 @@ $$
 Bertindak sebagai pengawas eksekutif dengan leher botol kapasitas 50% ($d_{\text{judge}} = d_{\text{model}} // 2$). Dilengkapi STE untuk aliran gradien kontinu saat pelatihan:
 
 $$
-v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\operatorname{detach}()
+v_{\text{gate}} = p_{\text{judge}} + (v_{\text{hard}} - p_{\text{judge}}).\text{detach}()
 $$
 
 Saat inferensi, jika kandidat pemikiran menyimpang ($p < 0.5$), gerbang langsung tertutup via **Fail-Safe Veto** ($v_{\text{gate}} = 0$), menjaga representasi model dasar tetap utuh dan aman.
