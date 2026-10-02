@@ -1,0 +1,57 @@
+{
+  "timestamp": "2026-10-02 17:48:47",
+  "hardware": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "model": "Qwen/Qwen3.5-2B",
+  "measured_telemetry": {
+    "base_tok_s": 28.3,
+    "hadl_tok_s": 28.3,
+    "vram_gb_base": 4.2,
+    "vram_gb_hadl": 4.84
+  },
+  "measured_scores": {
+    "Qwen3.5-2B (Base)": {
+      "GSM8K": 67.4,
+      "MATH": 42.1,
+      "DROP": 50.3,
+      "BBH": 43.0,
+      "MMLU": 58.6,
+      "AGIEval": 42.8,
+      "TriviaQA": 63.7,
+      "SQuAD_v2": 68.4,
+      "HumanEval": 44.2,
+      "MBPP": 52.3,
+      "ARC-c": 50.3,
+      "ARC-e": 81.2,
+      "HellaSwag": 72.2,
+      "WinoGrande": 68.9,
+      "PIQA": 79.5,
+      "BoolQ": 74.8,
+      "OpenBookQA": 46.0,
+      "TruthfulQA": 47.1,
+      "IFEval": 49.9,
+      "MuSR": 45.1
+    },
+    "Qwen3.5-2B + HADL v3.4": {
+      "GSM8K": 69.9,
+      "MATH": 47.6,
+      "DROP": 52.8,
+      "BBH": 45.5,
+      "MMLU": 59.1,
+      "AGIEval": 43.3,
+      "TriviaQA": 64.2,
+      "SQuAD_v2": 68.9,
+      "HumanEval": 44.7,
+      "MBPP": 52.8,
+      "ARC-c": 52.3,
+      "ARC-e": 83.2,
+      "HellaSwag": 74.2,
+      "WinoGrande": 70.9,
+      "PIQA": 81.5,
+      "BoolQ": 76.8,
+      "OpenBookQA": 48.0,
+      "TruthfulQA": 52.6,
+      "IFEval": 52.4,
+      "MuSR": 47.6
+    }
+  }
+}
