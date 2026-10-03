@@ -13,5 +13,12 @@ def check(path):
             for l in lines[:5]:
                 print("  ", l)
 
-check('C:/Users/Matthew Chen/Downloads/gemma-eda-baseline-for-a-start-lb-top-1.ipynb')
-check('C:/Users/Matthew Chen/Downloads/black-cat-swe-agent-pack-instinct.ipynb')
+from pathlib import Path
+dl_dir = Path.home() / "Downloads"
+f1 = dl_dir / "gemma-eda-baseline-for-a-start-lb-top-1.ipynb"
+f2 = dl_dir / "black-cat-swe-agent-pack-instinct.ipynb"
+
+if f1.exists():
+    check(str(f1))
+if f2.exists():
+    check(str(f2))

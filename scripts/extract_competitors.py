@@ -1,9 +1,18 @@
 import json, base64, zipfile, io, os
+from pathlib import Path
 
-with open('C:/Users/Matthew Chen/Downloads/black-cat-swe-agent-pack-instinct.ipynb', 'r', encoding='utf-8') as f:
+dl_dir = Path.home() / "Downloads"
+f_bc = dl_dir / "black-cat-swe-agent-pack-instinct.ipynb"
+f_top1 = dl_dir / "gemma-eda-baseline-for-a-start-lb-top-1.ipynb"
+
+if not f_bc.exists() or not f_top1.exists():
+    print("Competitor notebooks not found in Downloads, skipping extraction.")
+    exit(0)
+
+with open(f_bc, 'r', encoding='utf-8') as f:
     nb_bc = json.load(f)
 
-with open('C:/Users/Matthew Chen/Downloads/gemma-eda-baseline-for-a-start-lb-top-1.ipynb', 'r', encoding='utf-8') as f:
+with open(f_top1, 'r', encoding='utf-8') as f:
     nb_top1 = json.load(f)
 
 os.makedirs('scripts/competitor_dumps', exist_ok=True)

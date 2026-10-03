@@ -62,12 +62,25 @@ class DualLoopInferenceEngine:
         self.total_tokens_generated = 0
         self.total_generation_time_sec = 0.0
 
+    def _resolve_model_path(self, model_id_or_path: str) -> str:
+        """Resolves model path dynamically from HF cache or local path without hardcoded PII (SEC-03)."""
+        if os.path.exists(model_id_or_path):
+            return model_id_or_path
+
+        # Check standard user Hugging Face cache dynamically
+        hf_cache = os.environ.get("HF_HOME") or os.path.join(os.path.expanduser("~"), ".cache", "huggingface", "hub")
+        if os.path.isdir(hf_cache):
+            sanitized = f"models--{model_id_or_path.replace('/', '--')}"
+            snapshots_dir = os.path.join(hf_cache, sanitized, "snapshots")
+            if os.path.isdir(snapshots_dir):
+                snapshots = [os.path.join(snapshots_dir, s) for s in os.listdir(snapshots_dir) if os.path.isdir(os.path.join(snapshots_dir, s))]
+                if snapshots:
+                    return snapshots[0]
+        return model_id_or_path
+
     def _load_base_model(self, **kwargs):
         """Dispatches to the correct model loader based on model architecture."""
-        model_path = self.model_id
-        cache_snapshot = r"C:\Users\Matthew Chen\.cache\huggingface\hub\models--Qwen--Qwen3.8-27B\snapshots\1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0"
-        if not os.path.exists(model_path) and os.path.exists(cache_snapshot) and ("27b" in self.model_id.lower() or "qwen3" in self.model_id.lower()):
-            model_path = cache_snapshot
+        model_path = self._resolve_model_path(self.model_id)
 
         try:
             from transformers import AutoConfig
@@ -103,10 +116,7 @@ class DualLoopInferenceEngine:
         t0 = time.time()
 
         # 1. Load Tokenizer (check local cache snapshot first to prevent HF Hub timeout)
-        tok_source = self.model_id
-        cache_snapshot = r"C:\Users\Matthew Chen\.cache\huggingface\hub\models--Qwen--Qwen3.8-27B\snapshots\1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0"
-        if not os.path.exists(tok_source) and os.path.exists(cache_snapshot):
-            tok_source = cache_snapshot
+        tok_source = self._resolve_model_path(self.model_id)
 
         try:
             self.tokenizer = AutoTokenizer.from_pretrained(

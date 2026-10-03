@@ -48,22 +48,73 @@ class CompletionRequest(BaseModel):
     stop: Optional[Union[str, List[str]]] = None
 
 
-def create_app(engine: DualLoopInferenceEngine) -> FastAPI:
+def create_app(engine: DualLoopInferenceEngine, api_key: Optional[str] = None) -> FastAPI:
     """Creates the FastAPI server application with OpenAI v1 endpoints."""
+    import os
+
     app = FastAPI(
         title="Dual-Loop Inference Engine (OpenAI Compatible)",
         description="Autonomous System 2 Deliberative Cognitive OS Inference Server",
         version="3.1.0"
     )
 
-    # Enable CORS for all external clients (Hermes Agent, Open-WebUI, LM Studio)
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=["*"],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
+    # SEC-01: Secure CORS configuration.
+    # Allowing wildcard "*" with allow_credentials=True violates CORS RFC & is blocked by modern browsers.
+    # If specific origins are provided via DUAL_LOOP_CORS_ORIGINS, allow credentials; otherwise disable credentials on wildcard.
+    cors_env = os.environ.get("DUAL_LOOP_CORS_ORIGINS", "").strip()
+    if cors_env:
+        origins = [o.strip() for o in cors_env.split(",") if o.strip()]
+        app.add_middleware(
+            CORSMiddleware,
+            allow_origins=origins,
+            allow_credentials=True,
+            allow_methods=["*"],
+            allow_headers=["*"],
+        )
+    else:
+        app.add_middleware(
+            CORSMiddleware,
+            allow_origins=["*"],
+            allow_credentials=False,
+            allow_methods=["*"],
+            allow_headers=["*"],
+        )
+
+    # SEC-01: Authentication middleware. If an API key is configured (via argument or env var),
+    # enforce Bearer token or x-api-key verification on all API routes except public health/metadata.
+    resolved_api_key = api_key or os.environ.get("DUAL_LOOP_API_KEY", "").strip() or None
+
+    @app.middleware("http")
+    async def authenticate_request(request: Request, call_next):
+        path = request.url.path
+        # Allow public access to health, props, version, and web dashboard
+        public_paths = {"/", "/health", "/v1/health", "/version", "/api/version", "/props", "/v1/props"}
+        if path in public_paths or request.method == "OPTIONS":
+            return await call_next(request)
+
+        if resolved_api_key:
+            auth_header = request.headers.get("Authorization", "")
+            api_key_header = request.headers.get("x-api-key", "")
+            
+            token = ""
+            if auth_header.startswith("Bearer "):
+                token = auth_header[7:].strip()
+            elif api_key_header:
+                token = api_key_header.strip()
+
+            if not token or token != resolved_api_key:
+                return JSONResponse(
+                    status_code=401,
+                    content={
+                        "error": {
+                            "message": "Invalid or missing API key. Provide Authorization: Bearer <key> or x-api-key header.",
+                            "type": "authentication_error",
+                            "code": "invalid_api_key"
+                        }
+                    }
+                )
+
+        return await call_next(request)
 
     @app.get("/", response_class=HTMLResponse)
     async def index():

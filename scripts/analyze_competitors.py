@@ -28,7 +28,14 @@ def dump_notebook(path):
                 print(f"... ({len(lines) - 35} more lines) ...")
 
 if __name__ == '__main__':
+    from pathlib import Path
+    dl_dir = Path.home() / "Downloads"
+    f_top1 = dl_dir / "gemma-eda-baseline-for-a-start-lb-top-1.ipynb"
+    f_bc = dl_dir / "black-cat-swe-agent-pack-instinct.ipynb"
+
     with open('scripts/competitor_analysis.txt', 'w', encoding='utf-8') as out:
         sys.stdout = out
-        dump_notebook("C:/Users/Matthew Chen/Downloads/gemma-eda-baseline-for-a-start-lb-top-1.ipynb")
-        dump_notebook("C:/Users/Matthew Chen/Downloads/black-cat-swe-agent-pack-instinct.ipynb")
+        if f_top1.exists():
+            dump_notebook(str(f_top1))
+        if f_bc.exists():
+            dump_notebook(str(f_bc))

@@ -69,8 +69,9 @@ def get_parser() -> argparse.ArgumentParser:
     # 9. serve (OpenAI-compatible inference server with VRAM auto-tuning)
     p_serve = subparsers.add_parser("serve", help="Launch OpenAI-compatible inference server with dynamic VRAM auto-tuning")
     p_serve.add_argument("--model", type=str, default="Qwen/Qwen2.5-7B-Instruct", help="Hugging Face model ID or path (default: Qwen/Qwen2.5-7B-Instruct)")
-    p_serve.add_argument("--host", type=str, default="0.0.0.0", help="Host interface to bind (default: 0.0.0.0)")
+    p_serve.add_argument("--host", type=str, default="127.0.0.1", help="Host interface to bind (default: 127.0.0.1; specify 0.0.0.0 for external access)")
     p_serve.add_argument("--port", type=int, default=8000, help="Port to listen on (default: 8000)")
+    p_serve.add_argument("--api-key", type=str, default=None, help="API key for Bearer token authentication (or set DUAL_LOOP_API_KEY env var)")
     p_serve.add_argument("--regime", type=str, choices=["auto", "bf16", "int8", "nf4"], default="auto", help="Force specific quantization regime (default: auto)")
     p_serve.add_argument("--k-steps", type=int, default=2, help="Number of latent deliberation steps (default: 2)")
     p_serve.add_argument("--trust-remote-code", action="store_true", help="Trust remote code in HF model loaders (default: False)")
@@ -282,7 +283,10 @@ def cmd_publish_hf(args):
         return
 
     token = args.token or os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
-    if not token and not args.package_only:
+    if args.token:
+        print("[WARNING] Passing HF token via CLI argument '--token' may expose credentials in system process tables (e.g. ps/Process Explorer).")
+        print("          Prefer setting the HF_TOKEN environment variable instead.")
+    elif not token and not args.package_only:
         print("[*] Note: No HF token passed via CLI; checked HF_TOKEN environment variable.")
 
     success = publish_to_huggingface(
@@ -368,6 +372,7 @@ def cmd_serve(args):
         forced_regime=regime,
         k_steps=getattr(args, "k_steps", 2),
         trust_remote_code=getattr(args, "trust_remote_code", False),
+        api_key=getattr(args, "api_key", None),
         log_level=getattr(args, "log_level", "info")
     )
 

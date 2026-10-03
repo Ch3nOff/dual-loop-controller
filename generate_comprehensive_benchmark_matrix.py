@@ -161,7 +161,9 @@ def generate_comprehensive_matrix(output_path):
     print(f"[OK] Comprehensive Benchmark Matrix graphic saved to: {output_path}")
 
 if __name__ == "__main__":
-    out1 = r"C:\Users\Matthew Chen\Documents\X-Star\comprehensive_v24_benchmark_matrix.png"
-    out2 = r"C:\Users\Matthew Chen\Documents\bench\comprehensive_v24_benchmark_matrix.png"
+    out1 = os.path.join(os.path.dirname(os.path.abspath(__file__)), "comprehensive_v24_benchmark_matrix.png")
     generate_comprehensive_matrix(out1)
-    generate_comprehensive_matrix(out2)
+    bench_dir = os.environ.get("HADL_BENCH_DIR")
+    if bench_dir and os.path.isdir(bench_dir):
+        out2 = os.path.join(bench_dir, "comprehensive_v24_benchmark_matrix.png")
+        generate_comprehensive_matrix(out2)

@@ -784,8 +784,8 @@ def main():
     results_dir = Path("eval_results")
     results_dir.mkdir(parents=True, exist_ok=True)
     json_path = results_dir / "authentic_v3_global_benchmark_results.json"
-    plot_path = results_dir / "hadl_v3_global_benchmark_report.png"
-    artifact_plot_path = Path("C:/Users/Matthew Chen/.gemini/antigravity/brain/19bea55e-42a6-476a-af5b-9c25391e2be9/hadl_v3_global_benchmark_report.png")
+    artifact_env = os.environ.get("ANTIGRAVITY_ARTIFACT_DIR")
+    artifact_plot_path = Path(artifact_env) / "hadl_v3_global_benchmark_report.png" if artifact_env else None
 
     # 1. Pillar 1: SWE-bench Lite (129 Tasks)
     swe_summary, swe_samples = run_swe_bench_lite_129(device)
@@ -868,7 +868,7 @@ def main():
     )
 
     # Also copy to artifact directory
-    if artifact_plot_path.parent.exists():
+    if artifact_plot_path and artifact_plot_path.parent.exists():
         import shutil
         shutil.copy(plot_path, artifact_plot_path)
         print(f"[OK] Artifact graph copied to {artifact_plot_path}")

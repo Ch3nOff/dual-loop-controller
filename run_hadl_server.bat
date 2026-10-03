@@ -64,7 +64,7 @@ if "%USER_PORT%"=="" (
 
 echo.
 echo ===============================================================================
-echo Starting Dual-Loop Inference Engine on http://0.0.0.0:%USER_PORT%/v1 ...
+echo Starting Dual-Loop Inference Engine on http://127.0.0.1:%USER_PORT%/v1 ...
 echo ===============================================================================
 echo.
 echo Hermes Agent / OpenAI Client Configuration:

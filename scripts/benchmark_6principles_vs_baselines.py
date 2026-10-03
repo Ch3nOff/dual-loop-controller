@@ -28,7 +28,18 @@ from transformers import Qwen3_5ForConditionalGeneration, AutoTokenizer
 from dual_loop.adapters.qwen_adapter import DualLoopQwenModel
 from dual_loop.experimental_cognitive_engine import SixPrincipleModelWrapper
 
-MODEL_PATH = r"C:\Users\Matthew Chen\.cache\huggingface\hub\models--Qwen--Qwen3.5-2B\snapshots\15852e8c16360a2fea060d615a32b45270f8a8fc"
+def _resolve_model_path(model_id: str = "Qwen/Qwen3.5-2B") -> str:
+    hf_cache = os.environ.get("HF_HOME") or os.path.join(os.path.expanduser("~"), ".cache", "huggingface", "hub")
+    if os.path.isdir(hf_cache):
+        sanitized = f"models--{model_id.replace('/', '--')}"
+        snapshots_dir = os.path.join(hf_cache, sanitized, "snapshots")
+        if os.path.isdir(snapshots_dir):
+            snapshots = [os.path.join(snapshots_dir, s) for s in os.listdir(snapshots_dir) if os.path.isdir(os.path.join(snapshots_dir, s))]
+            if snapshots:
+                return snapshots[0]
+    return model_id
+
+MODEL_PATH = _resolve_model_path()
 OUTPUT_JSON = r"eval_results/benchmark_6principles_report.json"
 
 TASKS = [

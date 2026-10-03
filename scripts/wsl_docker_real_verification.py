@@ -20,10 +20,10 @@ import tempfile
 import zipfile
 from pathlib import Path
 
-# Paths inside WSL
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 WORKSPACE_DIR = Path("/tmp/xalpha_sandbox_test")
-SUBMISSION_ZIP = Path("/mnt/c/Users/Matthew Chen/Documents/X-Star/submission.zip")
-SETUP_PY = Path("/mnt/c/Users/Matthew Chen/Documents/X-Star/competition/sandbox/setup.py")
+SUBMISSION_ZIP = PROJECT_ROOT / "submission.zip"
+SETUP_PY = PROJECT_ROOT / "competition" / "sandbox" / "setup.py"
 
 
 def log(section: str, msg: str):

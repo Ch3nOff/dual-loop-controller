@@ -8,8 +8,8 @@ echo               Active Inference Telemetry and Token Waste HUD
 echo ==============================================================================
 echo.
 
-set "BENCH_DIR=C:\Users\Matthew Chen\Documents\bench"
-set "PYTHON_EXE=C:\Users\Matthew Chen\Documents\X-Star\.venv\Scripts\python.exe"
+if "%BENCH_DIR%"=="" set "BENCH_DIR=%~dp0..\bench"
+if "%PYTHON_EXE%"=="" set "PYTHON_EXE=%~dp0.venv\Scripts\python.exe"
 
 if not exist "%PYTHON_EXE%" (
     echo [ERROR] Python not found at: "%PYTHON_EXE%"

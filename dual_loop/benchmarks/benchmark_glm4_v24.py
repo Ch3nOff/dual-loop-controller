@@ -128,7 +128,8 @@ def evaluate_glm4_hadl_v24(
     bottleneck_dim: int = 1024,
     num_layers: int = 4,
     seed: int = 42,
-    revision: Optional[str] = "main"
+    revision: Optional[str] = "main",
+    trust_remote_code: bool = False
 ) -> Dict[str, Any]:
     """
     Executes an authentic PyTorch evaluation of GLM-4 attached to HADL v2.4.0.
@@ -143,14 +144,14 @@ def evaluate_glm4_hadl_v24(
 
     # 1. Load Tokenizer & Config
     print("\n[*] Loading GLM-4 Tokenizer & Config...")
-    tok_kwargs = {"trust_remote_code": True}
+    tok_kwargs = {"trust_remote_code": trust_remote_code}
     if revision is not None:
         tok_kwargs["revision"] = revision
     tokenizer = AutoTokenizer.from_pretrained(model_id, **tok_kwargs)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
-    cfg_kwargs = {"trust_remote_code": True}
+    cfg_kwargs = {"trust_remote_code": trust_remote_code}
     if revision is not None:
         cfg_kwargs["revision"] = revision
     config = AutoConfig.from_pretrained(model_id, **cfg_kwargs)
@@ -162,7 +163,7 @@ def evaluate_glm4_hadl_v24(
 
     # 2. Instantiate Model
     print(f"[*] Instantiating {config.model_type} architecture ({num_layers} layers, D={config.hidden_size})...")
-    base_model = AutoModelForCausalLM.from_config(config, trust_remote_code=True, empty_init=False).to(dtype=torch.float32)
+    base_model = AutoModelForCausalLM.from_config(config, trust_remote_code=trust_remote_code, empty_init=False).to(dtype=torch.float32)
 
     # Deterministic init for reproducible weights
     torch.manual_seed(seed)
@@ -467,8 +468,8 @@ def main():
 
     # Copy image to bench and Paper
     import shutil
-    paper_dir = r"C:\Users\Matthew Chen\Documents\Paper"
-    if os.path.exists(paper_dir):
+    paper_dir = os.environ.get("HADL_PAPER_DIR")
+    if paper_dir and os.path.exists(paper_dir):
         shutil.copy(args.output_png, os.path.join(paper_dir, args.output_png))
     if os.path.exists(bench_dir):
         shutil.copy(args.output_png, os.path.join(bench_dir, args.output_png))

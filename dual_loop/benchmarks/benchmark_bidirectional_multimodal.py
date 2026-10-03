@@ -659,7 +659,7 @@ def main():
         json.dump(results, f, indent=2)
     print(f"[OK] Authoritative log mirrored to {eval_json}")
     
-    artifact_dir = r"C:\Users\Matthew Chen\.gemini\antigravity\brain\19bea55e-42a6-476a-af5b-9c25391e2be9"
+    artifact_dir = os.environ.get("ANTIGRAVITY_ARTIFACT_DIR") or os.path.join(out_dir, "visualizations")
     os.makedirs(artifact_dir, exist_ok=True)
     png_path = os.path.join(artifact_dir, "bidirectional_multimodal_benchmark.png")
     generate_visualization(results, png_path)

@@ -52,7 +52,7 @@ MODEL_ID = "Qwen/Qwen3.5-2B"
 CKPT_PATH = "checkpoints/tuned_square_cloud_engine.pt"
 OUTPUT_JSON = "eval_results/hadl_v34_comparative_benchmark.json"
 OUTPUT_GRAPH = "docs/images/hadl_v34_comparative_benchmark_graph.png"
-ARTIFACT_DIR = r"C:\Users\Matthew Chen\.gemini\antigravity\brain\19bea55e-42a6-476a-af5b-9c25391e2be9"
+ARTIFACT_DIR = os.environ.get("ANTIGRAVITY_ARTIFACT_DIR", "eval_results/artifacts")
 
 BENCHMARK_TASKS = [
     {
@@ -260,7 +260,7 @@ def run_benchmark():
     )
     sq_wrapper.engine.to(device=device, dtype=torch.bfloat16)
     if os.path.exists(CKPT_PATH):
-        ckpt = torch.load(CKPT_PATH, map_location=device)
+        ckpt = torch.load(CKPT_PATH, map_location=device, weights_only=True)
         sq_wrapper.engine.load_state_dict(ckpt)
         sq_wrapper.engine.to(device=device, dtype=torch.bfloat16)
         print(f"  [*] Loaded tuned SquareCloud weights from {CKPT_PATH}")

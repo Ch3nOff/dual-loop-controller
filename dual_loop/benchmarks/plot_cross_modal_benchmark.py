@@ -141,7 +141,7 @@ def main():
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 
     # Save to artifacts directory
-    artifact_dir = r"C:\Users\Matthew Chen\.gemini\antigravity\brain\19bea55e-42a6-476a-af5b-9c25391e2be9"
+    artifact_dir = os.environ.get("ANTIGRAVITY_ARTIFACT_DIR") or os.path.join("artifacts", "visualizations")
     os.makedirs(artifact_dir, exist_ok=True)
     out_file = os.path.join(artifact_dir, "cross_modal_invariant_benchmark.png")
     plt.savefig(out_file, dpi=300, bbox_inches='tight', facecolor=fig.get_facecolor())

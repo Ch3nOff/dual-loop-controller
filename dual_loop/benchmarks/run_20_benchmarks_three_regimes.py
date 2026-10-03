@@ -33,7 +33,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../.
 OUTPUT_DIR = "eval_results"
 OUTPUT_JSON = os.path.join(OUTPUT_DIR, "three_regimes_20_benchmarks.json")
 OUTPUT_PNG = "three_regimes_20_benchmarks_scoreboard.png"
-ARTIFACT_PNG = os.path.join("C:/Users/Matthew Chen/.gemini/antigravity/brain/19bea55e-42a6-476a-af5b-9c25391e2be9", OUTPUT_PNG)
+_artifact_base = os.environ.get("ANTIGRAVITY_ARTIFACT_DIR") or os.path.join(OUTPUT_DIR, "artifacts")
+ARTIFACT_PNG = os.path.join(_artifact_base, OUTPUT_PNG)
 
 RAW_EVAL_FILE = "eval_results/authentic_20_benchmarks_all_systems.json"
 FALLBACK_RAW_FILE = "eval_results/archive_deprecated/qwen35_2b_authentic_20_benchmarks.json"

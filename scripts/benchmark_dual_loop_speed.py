@@ -14,8 +14,9 @@ import tempfile
 import time
 from pathlib import Path
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 WORKSPACE_DIR = Path("/tmp/hadl_speed_benchmark")
-SETUP_PY = Path("/mnt/c/Users/Matthew Chen/Documents/X-Star/competition/sandbox/setup.py")
+SETUP_PY = PROJECT_ROOT / "competition" / "sandbox" / "setup.py"
 
 
 def log(title: str, msg: str):

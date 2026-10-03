@@ -11,12 +11,13 @@ from .app import create_app
 
 def start_server(
     model_id_or_path: str = "Qwen/Qwen2.5-7B-Instruct",
-    host: str = "0.0.0.0",
+    host: str = "127.0.0.1",
     port: int = 8000,
     headroom_gib: float | str = "auto",
     forced_regime: str | None = None,
     k_steps: int = 2,
     trust_remote_code: bool = False,
+    api_key: str | None = None,
     log_level: str = "info"
 ) -> None:
     """Initializes the DualLoopInferenceEngine and serves the OpenAI-compatible FastAPI server via uvicorn."""
@@ -32,7 +33,7 @@ def start_server(
     # Eagerly load model and print telemetry
     engine.load_model()
 
-    app = create_app(engine)
+    app = create_app(engine, api_key=api_key)
 
     print("\n" + "=" * 80)
     print(f"[*] DUAL-LOOP INFERENCE SERVER IS LIVE!")

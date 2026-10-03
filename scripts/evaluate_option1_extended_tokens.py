@@ -158,7 +158,7 @@ def main():
     # Wrap model with 6-principle engine
     huld_model = SixPrincipleModelWrapper(base_model, target_layer_idx=14)
     print(f"Loading tuned checkpoint: {CKPT_PATH}")
-    huld_model.adapter.load_state_dict(torch.load(CKPT_PATH, map_location=device))
+    huld_model.adapter.load_state_dict(torch.load(CKPT_PATH, map_location=device, weights_only=True))
     huld_model.adapter.eval()
     
     eval_results = []

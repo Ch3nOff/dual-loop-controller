@@ -158,6 +158,43 @@ class TestInferenceServerAPI(unittest.TestCase):
         self.assertEqual(data["object"], "text_completion")
         self.assertEqual(data["choices"][0]["text"], "Hello! I am Dual-Loop Deliberative Agent.")
 
+    def test_api_key_authentication(self):
+        # SEC-01: When api_key is configured, unauthenticated requests must be rejected with 401
+        protected_app = create_app(self.mock_engine, api_key="secret-token-xyz")
+        protected_client = TestClient(protected_app)
+
+        # 1. Health check should remain accessible
+        resp_health = protected_client.get("/health")
+        self.assertEqual(resp_health.status_code, 200)
+
+        # 2. Protected endpoint without token should return 401
+        resp_unauth = protected_client.get("/v1/models")
+        self.assertEqual(resp_unauth.status_code, 401)
+        self.assertIn("invalid_api_key", resp_unauth.text)
+
+        # 3. Protected endpoint with invalid token should return 401
+        resp_bad = protected_client.get("/v1/models", headers={"Authorization": "Bearer wrong-token"})
+        self.assertEqual(resp_bad.status_code, 401)
+
+        # 4. Protected endpoint with valid Bearer token should succeed
+        resp_ok = protected_client.get("/v1/models", headers={"Authorization": "Bearer secret-token-xyz"})
+        self.assertEqual(resp_ok.status_code, 200)
+
+        # 5. Protected endpoint with valid x-api-key header should succeed
+        resp_key_ok = protected_client.get("/v1/models", headers={"x-api-key": "secret-token-xyz"})
+        self.assertEqual(resp_key_ok.status_code, 200)
+
+    def test_cors_configuration(self):
+        # SEC-01: Test CORS middleware default headers
+        resp = self.client.options(
+            "/v1/models",
+            headers={"Origin": "http://localhost:3000", "Access-Control-Request-Method": "GET"}
+        )
+        self.assertEqual(resp.status_code, 200)
+        # When allow_origins=["*"], allow-credentials must NOT be true
+        self.assertNotEqual(resp.headers.get("access-control-allow-credentials"), "true")
+
 
 if __name__ == "__main__":
     unittest.main()
+

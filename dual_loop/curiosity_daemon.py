@@ -1,4 +1,5 @@
 import ast
+import concurrent.futures
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -220,11 +221,14 @@ class PopperianSelfPlayEngine(nn.Module):
             is_valid: True if assertion/condition holds, False if refuted/falsified.
             diag: Diagnostic output string.
         """
-        # Security Guard 1: Prohibit dunder introspection (__import__, __class__, etc.)
+        # Security Guard 1: Prohibit excessive input length and dunder introspection
+        if len(code_or_expression) > 10000:
+            return False, "Sandbox security violation: code payload exceeds length limit (10000 chars)"
+
         if "__" in code_or_expression:
             return False, "Sandbox security violation: double-underscore attribute access prohibited"
-        
-        # Security Guard 2: Prohibit forbidden calls and modules via AST inspection
+
+        # Security Guard 2: Prohibit forbidden calls, modules, and constructs via AST inspection
         try:
             tree = ast.parse(code_or_expression)
         except SyntaxError as e:
@@ -234,17 +238,28 @@ class PopperianSelfPlayEngine(nn.Module):
             "eval", "exec", "open", "compile", "globals", "locals", "vars", "dir",
             "getattr", "setattr", "delattr", "hasattr", "breakpoint", "__import__",
             "input", "exit", "quit", "help", "copyright", "credits", "license",
-            "os", "sys", "posix", "nt", "subprocess", "socket", "ctypes", "shutil"
+            "os", "sys", "posix", "nt", "subprocess", "socket", "ctypes", "shutil",
+            "builtins", "__builtins__", "type", "classmethod", "staticmethod",
+            "property", "super", "memoryview", "bytearray", "format_map", "pickle",
+            "bases", "subclasses", "closure", "code"
         }
+
         for node in ast.walk(tree):
             if isinstance(node, (ast.Import, ast.ImportFrom)):
                 return False, "Sandbox security violation: import statements prohibited"
+            if isinstance(node, ast.While):
+                return False, "Sandbox security violation: while loops prohibited (prevent DoS)"
+            if isinstance(node, (ast.AsyncFunctionDef, ast.AsyncFor, ast.AsyncWith, ast.Await)):
+                return False, "Sandbox security violation: asynchronous constructs prohibited"
             if isinstance(node, ast.Name):
-                if node.id.startswith("__") or node.id in forbidden_names:
+                if node.id.startswith("_") or node.id in forbidden_names:
                     return False, f"Sandbox security violation: forbidden identifier '{node.id}' detected"
             if isinstance(node, ast.Attribute):
-                if node.attr.startswith("__") or node.attr in forbidden_names:
+                if node.attr.startswith("_") or node.attr in forbidden_names:
                     return False, f"Sandbox security violation: forbidden attribute '{node.attr}' detected"
+            if isinstance(node, ast.Call):
+                if isinstance(node.func, ast.Attribute) and node.func.attr in ("format", "format_map"):
+                    return False, "Sandbox security violation: format methods prohibited"
 
         safe_builtins = {
             "abs": abs, "min": min, "max": max, "sum": sum, "all": all, "any": any,
@@ -258,10 +273,10 @@ class PopperianSelfPlayEngine(nn.Module):
         safe_env: Dict[str, Any] = {"__builtins__": safe_builtins}
         if context_variables:
             for k, v in context_variables.items():
-                if not k.startswith("__"):
+                if not k.startswith("_"):
                     safe_env[k] = v
-                    
-        try:
+
+        def _execute_in_sandbox():
             mode = test_condition.lower()
             if mode in ["eval", "boolean_logic", "logic", "expression"]:
                 res = eval(code_or_expression, safe_env)
@@ -281,7 +296,6 @@ class PopperianSelfPlayEngine(nn.Module):
                 return True, "Code compiled successfully without syntax errors"
                 
             else:
-                # Default auto mode: try eval first; if syntax error (e.g. statements), fallback to exec
                 try:
                     res = eval(code_or_expression, safe_env)
                     if isinstance(res, bool):
@@ -290,7 +304,14 @@ class PopperianSelfPlayEngine(nn.Module):
                 except SyntaxError:
                     exec(code_or_expression, safe_env)
                     return True, "Executed in sandbox successfully"
-                    
+
+        # Security Guard 3: Strict timeout watchdog in worker thread (1.0s limit)
+        try:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+                future = executor.submit(_execute_in_sandbox)
+                return future.result(timeout=1.0)
+        except concurrent.futures.TimeoutError:
+            return False, "Falsified in sandbox: execution timeout (>1.0s exceeded)"
         except AssertionError as e:
             msg = str(e) if str(e) else "Assertion failed"
             return False, f"Falsified in sandbox: AssertionError ({msg})"

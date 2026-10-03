@@ -51,6 +51,7 @@ llm = [
     "accelerate>=0.28.0,<2.0.0",
 ]
 serve = [
+    "torch>=2.0.0,<3.0.0",
     "transformers>=4.40.0,<5.0.0",
     "accelerate>=0.28.0,<2.0.0",
     "fastapi>=0.100.0",

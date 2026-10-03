@@ -437,7 +437,7 @@ def run_benchmark():
     )
     wrapper.engine.to(device=device, dtype=torch.bfloat16)
     if os.path.exists(CKPT_PATH):
-        ckpt = torch.load(CKPT_PATH, map_location=device)
+        ckpt = torch.load(CKPT_PATH, map_location=device, weights_only=True)
         wrapper.engine.load_state_dict(ckpt)
         wrapper.engine.to(device=device, dtype=torch.bfloat16)
         print(f"  -> Loaded tuned weights from {CKPT_PATH}", flush=True)

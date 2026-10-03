@@ -216,7 +216,9 @@ def create_hadl_v24_diagram(output_path):
     print(f"[OK] Revised Architecture diagram saved to: {output_path}")
 
 if __name__ == "__main__":
-    out1 = r"C:\Users\Matthew Chen\Documents\X-Star\hadl_v24_system_architecture.png"
-    out2 = r"C:\Users\Matthew Chen\Documents\bench\hadl_v24_system_architecture.png"
+    out1 = os.path.join(os.path.dirname(os.path.abspath(__file__)), "hadl_v24_system_architecture.png")
     create_hadl_v24_diagram(out1)
-    create_hadl_v24_diagram(out2)
+    bench_dir = os.environ.get("HADL_BENCH_DIR")
+    if bench_dir and os.path.isdir(bench_dir):
+        out2 = os.path.join(bench_dir, "hadl_v24_system_architecture.png")
+        create_hadl_v24_diagram(out2)

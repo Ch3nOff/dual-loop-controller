@@ -1,5 +1,6 @@
 import json
 import os
+from pathlib import Path
 
 def build_llm_arc_notebook():
     cells = []
@@ -119,8 +120,7 @@ POSSIBLE_DATA_PATHS = [
     "/kaggle/input/competitions/arc-prize-2026-arc-agi-2",
     "/kaggle/input/competitions/arc-prize-2026-arc-agi-2/arc-prize-2026-arc-agi-2.zip",
     "/kaggle/input/arc-prize-2026-arc-agi-2",
-    "/kaggle/input/arc-prize-2026-arc-agi-2/arc-prize-2026-arc-agi-2.zip",
-    r"C:\\Users\\Matthew Chen\\Downloads\\arc-prize-2026-arc-agi-2.zip",
+    os.path.expanduser("~/Downloads/arc-prize-2026-arc-agi-2.zip"),
     "./arc-prize-2026-arc-agi-2.zip",
     "../arc-prize-2026-arc-agi-2.zip"
 ]
@@ -979,27 +979,62 @@ $$\\text{Verify}(f, \\mathcal{D}_{train}) = \\prod_{i=1}^N \\mathbb{I}\\left(f(X
         self.timeout_sec = timeout_sec
 
     def execute_program(self, code_str: str, input_grid: np.ndarray) -> Tuple[bool, Optional[np.ndarray], str]:
-        # Static security & runaway construct pre-check (SEC-05)
+        # Static security & runaway construct pre-check (SEC-07)
         forbidden_patterns = [
             "import os", "import sys", "open(", "while True", "subprocess", "eval(", "exec(",
             "np.load", "np.save", "np.savez", "np.fromfile", "np.tofile", "np.DataSource",
-            ".load(", ".fromfile(", "__import__", "__class__", "__subclasses__"
+            ".load(", ".fromfile(", "__import__", "__class__", "__subclasses__", "__globals__"
         ]
-        if any(bad in code_str for bad in forbidden_patterns):
-            return False, None, "Forbidden or runaway construct detected in code (SEC-05)"
-            
+        if any(bad in code_str for bad in forbidden_patterns) or "__" in code_str:
+            return False, None, "Forbidden or runaway construct detected in code (SEC-07)"
+
         try:
-            # SEC-05: Restricted numpy proxy disallowing filesystem I/O and pickle operations
-            class RestrictedNumpyProxy:
+            tree = ast.parse(code_str)
+            for node in ast.walk(tree):
+                if isinstance(node, (ast.Import, ast.ImportFrom)):
+                    return False, None, "Import statements prohibited in ARC sandbox (SEC-07)"
+                if isinstance(node, ast.While):
+                    return False, None, "While loops prohibited in ARC sandbox (SEC-07)"
+                if isinstance(node, ast.Attribute) and node.attr.startswith("_"):
+                    return False, None, "Private attribute access prohibited in ARC sandbox (SEC-07)"
+                if isinstance(node, ast.Name) and node.id.startswith("_"):
+                    return False, None, "Private identifiers prohibited in ARC sandbox (SEC-07)"
+        except SyntaxError as e:
+            return False, None, f"Syntax error in ARC code: {e}"
+
+        try:
+            # SEC-07: Strict allowlist numpy proxy disallowing sys, os, ctypes, pickle, and filesystem I/O
+            SAFE_NUMPY_ALLOWLIST = {
+                "zeros", "ones", "array", "asarray", "asanyarray", "rot90", "flip", "fliplr", "flipud",
+                "pad", "where", "isin", "unique", "copy", "ndarray", "int_", "int32", "int64", "bool_",
+                "shape", "reshape", "sum", "all", "any", "min", "max", "clip", "concatenate", "stack",
+                "vstack", "hstack", "dstack", "transpose", "nonzero", "count_nonzero", "equal",
+                "not_equal", "zeros_like", "ones_like", "full", "full_like", "argmax", "argmin",
+                "maximum", "minimum", "diff", "roll", "tile", "repeat", "diag", "eye", "arange",
+                "linspace", "abs", "sign", "floor", "ceil", "round"
+            }
+
+            class SafeNumpyAllowlistProxy:
                 def __init__(self, target_np):
                     self._np = target_np
                 def __getattr__(self, name):
-                    if name in ("load", "save", "savez", "savez_compressed", "fromfile", "tofile", "DataSource", "memmap"):
-                        raise PermissionError(f"numpy.{name} is disabled in the ARC evaluation sandbox (SEC-05)")
+                    if name.startswith("_") or name not in SAFE_NUMPY_ALLOWLIST:
+                        raise PermissionError(f"numpy.{name} is prohibited in the ARC evaluation sandbox (SEC-07)")
                     return getattr(self._np, name)
 
+            safe_builtins = {
+                "abs": abs, "min": min, "max": max, "sum": sum, "all": all, "any": any,
+                "len": len, "range": range, "bool": bool, "int": int, "float": float,
+                "str": str, "dict": dict, "list": list, "set": set, "tuple": tuple,
+                "enumerate": enumerate, "zip": zip,
+                "AssertionError": AssertionError, "ValueError": ValueError,
+                "TypeError": TypeError, "ZeroDivisionError": ZeroDivisionError,
+                "True": True, "False": False, "None": None,
+            }
+
             safe_scope = {
-                "np": RestrictedNumpyProxy(np),
+                "__builtins__": safe_builtins,
+                "np": SafeNumpyAllowlistProxy(np),
                 "BoundingBoxCropPrimitive": BoundingBoxCropPrimitive,
                 "SymmetryInpaintingPrimitive": SymmetryInpaintingPrimitive,
                 "GeometricPrimitive": GeometricPrimitive,
@@ -1524,7 +1559,7 @@ print(f"SUCCESS: 'submission.json' Generated ({sub_size_kb:.1f} KB) in {sub_time
         "nbformat_minor": 5
     }
 
-    target_path = r"c:\Users\Matthew Chen\Documents\X-Star\arc_agi_2_dual_loop_controller.ipynb"
+    target_path = Path(__file__).resolve().parent.parent / "arc_agi_2_dual_loop_controller.ipynb"
     with open(target_path, "w", encoding="utf-8") as f:
         json.dump(notebook_dict, f, indent=2)
 

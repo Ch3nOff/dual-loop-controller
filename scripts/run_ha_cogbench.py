@@ -628,7 +628,8 @@ def main():
     results_dir.mkdir(parents=True, exist_ok=True)
     json_path = results_dir / "ha_cogbench_results.json"
     plot_path = results_dir / "ha_cogbench_comparison_report.png"
-    artifact_plot_path = Path("C:/Users/Matthew Chen/.gemini/antigravity/brain/19bea55e-42a6-476a-af5b-9c25391e2be9/ha_cogbench_comparison_report.png")
+    artifact_env = os.environ.get("ANTIGRAVITY_ARTIFACT_DIR")
+    artifact_plot_path = Path(artifact_env) / "ha_cogbench_comparison_report.png" if artifact_env else None
 
     # Run 5 Special Modules
     m1_summary, m1_samples = run_modul_1_siren_trap(device)
@@ -704,7 +705,7 @@ def main():
     )
 
     # Copy to artifact folder
-    if artifact_plot_path.parent.exists():
+    if artifact_plot_path and artifact_plot_path.parent.exists():
         import shutil
         shutil.copy(plot_path, artifact_plot_path)
         print(f"[OK] Artifact graph copied to {artifact_plot_path}")

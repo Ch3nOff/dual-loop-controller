@@ -240,6 +240,16 @@ def auto_attach_hadl(
     else:
         target_device = torch.device(device)
 
+    # SEC-05: Enforce safe remote code loading policy.
+    if trust_remote_code:
+        import warnings
+        warnings.warn(
+            "Security Notice (SEC-05): trust_remote_code=True executes arbitrary code from the model repository. "
+            "Ensure the repository and commit SHA are fully verified.",
+            category=UserWarning,
+            stacklevel=2
+        )
+
     model_id_str = "custom-torch-model"
 
     # Load from Hugging Face ID or local path if string

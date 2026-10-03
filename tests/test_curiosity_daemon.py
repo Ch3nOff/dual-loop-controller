@@ -90,11 +90,23 @@ class TestCuriosityDaemon(unittest.TestCase):
         self.assertIn("AssertionError", msg_refuted)
         self.assertIn("Math refuted", msg_refuted)
         
-        # 3. Security guards against sandbox escape
+        # 3. Security guards against sandbox escape (SEC-04)
         escape_attempt = "__import__('os').system('ls')"
         is_blocked, msg_blocked = PopperianSelfPlayEngine.verify_sandbox(escape_attempt, "eval")
         self.assertFalse(is_blocked)
         self.assertIn("security violation", msg_blocked.lower())
+
+        # SEC-04 regression: private attribute escape attempt
+        private_attr_attempt = "().__class__.__bases__[0].__subclasses__()"
+        is_blocked2, msg_blocked2 = PopperianSelfPlayEngine.verify_sandbox(private_attr_attempt, "eval")
+        self.assertFalse(is_blocked2)
+        self.assertIn("security violation", msg_blocked2.lower())
+
+        # SEC-04 regression: while loop DoS attempt
+        while_loop_attempt = "while True:\n    pass"
+        is_blocked3, msg_blocked3 = PopperianSelfPlayEngine.verify_sandbox(while_loop_attempt, "exec")
+        self.assertFalse(is_blocked3)
+        self.assertIn("while loops prohibited", msg_blocked3.lower())
         
         # 4. Invariant challenge synthesis
         script, mode, meta = self.self_play.synthesize_sandbox_challenge(hyp, counter_ex, mem_a, mem_b)

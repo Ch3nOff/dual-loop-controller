@@ -29,7 +29,7 @@ from scripts.train_and_evaluate_6principles import TEST_TASKS, check_answer_corr
 MODEL_ID = "Qwen/Qwen3.5-2B"
 CKPT_PATH = "checkpoints/tuned_square_cloud_engine.pt"
 OUTPUT_JSON = "eval_results/comprehensive_real_benchmark_3x.json"
-ARTIFACT_DIR = r"C:\Users\Matthew Chen\.gemini\antigravity\brain\19bea55e-42a6-476a-af5b-9c25391e2be9"
+ARTIFACT_DIR = os.environ.get("ANTIGRAVITY_ARTIFACT_DIR", "eval_results/artifacts")
 DOCS_IMG_DIR = "docs/images"
 
 
@@ -267,7 +267,7 @@ def main():
 
     # Load tuned weights
     if os.path.exists(CKPT_PATH):
-        sq_model.engine.load_state_dict(torch.load(CKPT_PATH, map_location=device))
+        sq_model.engine.load_state_dict(torch.load(CKPT_PATH, map_location=device, weights_only=True))
         print(f"Loaded tuned checkpoint from: {CKPT_PATH}")
     else:
         print(f"Warning: Checkpoint {CKPT_PATH} not found, using initialized weights.")
