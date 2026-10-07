@@ -119,12 +119,19 @@ Compresses hidden state $h_{11}$ ($D=2048 \to 32$) using semi-orthogonal Stiefel
 ## 📊 Physical Empirical GPU Benchmarks (RTX 5060)
 
 <p align="center">
+  <img src="docs/images/hadl_v45_boosted_accuracy_vs_frontier.png" alt="HADL v4.5 Boosted Accuracy Analysis vs Bigger Frontier LLMs" width="100%">
+</p>
+
+<p align="center">
   <img src="docs/images/hadl_v45_frontier_model_comparison.png" alt="HADL v4.5 vs Frontier SOTA Models Benchmark" width="100%">
 </p>
 
 <p align="center">
   <img src="docs/images/xstar_2b_carlift_500q_audit.png" alt="20 Benchmarks Audit Chart" width="100%">
 </p>
+
+> [!NOTE]
+> **Methodological Disclosure:** Frontier model scores reflect official published figures from technical reports on full canonical benchmarks. HADL v4.5 scores reflect an empirical 1,000-probe stratified evaluation (20 canonical benchmarks $\times$ 50 questions) conducted locally on an NVIDIA GeForce RTX 5060 (8GB VRAM). The analysis highlights the **+39.1% deliberative reasoning boost** and how latent deliberation enables a small 2.3B parameter model to close the capability gap with 14B–70B parameter models at 23.4×–229× higher VRAM efficiency.
 
 ### 1. Master Scoreboard Across 20 Canonical Benchmarks (1,000 Questions)
 

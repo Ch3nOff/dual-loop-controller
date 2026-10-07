@@ -119,12 +119,19 @@ Mengompresi hidden state $h_{11}$ ($D=2048 \to 32$) dengan proyeksi Stiefel isom
 ## 📊 Benchmark Empiris GPU Fisik (NVIDIA RTX 5060)
 
 <p align="center">
+  <img src="images/hadl_v45_boosted_accuracy_vs_frontier.png" alt="Analisis Akurasi yang Di-Boost vs Model Frontier Besar" width="100%">
+</p>
+
+<p align="center">
   <img src="images/hadl_v45_frontier_model_comparison.png" alt="Perbandingan HADL v4.5 vs Model Frontier SOTA" width="100%">
 </p>
 
 <p align="center">
   <img src="images/xstar_2b_carlift_500q_audit.png" alt="Grafik Audit 20 Benchmark" width="100%">
 </p>
+
+> [!NOTE]
+> **Catatan Transparansi Metodologi:** Skor model-model besar (7B–70B) merupakan data publikasi resmi dari laporan teknis masing-masing pada rangkaian benchmark kanonikal penuh. Skor HADL v4.5 mencerminkan audit empiris 1.000 soal terstratifikasi (20 benchmark $\times$ 50 soal) yang dijalankan secara lokal di laptop GPU RTX 5060 (8GB VRAM). Analisis ini menyoroti **efek dorongan penalaran laten (+39.1% Boost)** yang menjembatani defisit skala parameter model kecil 2.3B terhadap model 14B–70B dengan efisiensi VRAM 23.4×–229× lebih tinggi.
 
 ### 1. Papan Skor Master 20 Tolok Ukur Kanonikal (1.000 Soal)
 
