@@ -55,15 +55,23 @@ Prior modular controllers face a fundamental dilemma:
 ## 🏛️ System Architecture (HADL v4.5 Car-Lift Edition)
 
 <p align="center">
-  <img src="docs/images/hadl_v45_complete_technical_schematic.png" alt="HADL v4.5 Complete End-to-End Technical Schematic" width="100%">
+  <a href="docs/images/hadl_v45_complete_technical_schematic.png" target="_blank">
+    <img src="docs/images/hadl_v45_complete_technical_schematic.png" alt="HADL v4.5 Complete End-to-End Technical Schematic (Click to Zoom)" width="100%">
+  </a>
+  <br>
+  <em>🔍 <b>Tip: Click any diagram above to open and zoom in high-resolution</b></em>
 </p>
 
 <p align="center">
-  <img src="docs/images/hadl_v45_carlift_architecture_technical.png" alt="HADL v4.5 Car-Lift Architecture Diagram" width="100%">
+  <a href="docs/images/hadl_v45_carlift_architecture_technical.png" target="_blank">
+    <img src="docs/images/hadl_v45_carlift_architecture_technical.png" alt="HADL v4.5 Car-Lift Architecture Diagram (Click to Zoom)" width="100%">
+  </a>
 </p>
 
 <p align="center">
-  <img src="docs/images/hadl_v45_evolution_and_hydraulic_mechanics.png" alt="Technical Paradigm Evolution & Hydraulic Mechanics" width="100%">
+  <a href="docs/images/hadl_v45_evolution_and_hydraulic_mechanics.png" target="_blank">
+    <img src="docs/images/hadl_v45_evolution_and_hydraulic_mechanics.png" alt="Technical Paradigm Evolution & Hydraulic Mechanics (Click to Zoom)" width="100%">
+  </a>
 </p>
 
 ### 1. Porous Orifice Prime Firewall (Permeability Mechanics)

@@ -55,15 +55,23 @@ Arsitektur modular sebelumnya selalu terjebak dalam dilema yang tidak terhindark
 ## 🏛️ Arsitektur Sistem (HADL v4.5 Edisi Car-Lift)
 
 <p align="center">
-  <img src="images/hadl_v45_complete_technical_schematic.png" alt="Skematik Teknis Lengkap HADL v4.5 Car-Lift" width="100%">
+  <a href="images/hadl_v45_complete_technical_schematic.png" target="_blank">
+    <img src="images/hadl_v45_complete_technical_schematic.png" alt="Skematik Teknis Lengkap HADL v4.5 Car-Lift (Klik untuk Zoom)" width="100%">
+  </a>
+  <br>
+  <em>🔍 <b>Tips: Klik diagram di atas untuk membuka dan memperbesar gambar resolusi penuh</b></em>
 </p>
 
 <p align="center">
-  <img src="images/hadl_v45_carlift_architecture_technical.png" alt="Diagram Arsitektur HADL v4.5 Car-Lift" width="100%">
+  <a href="images/hadl_v45_carlift_architecture_technical.png" target="_blank">
+    <img src="images/hadl_v45_carlift_architecture_technical.png" alt="Diagram Arsitektur HADL v4.5 Car-Lift (Klik untuk Zoom)" width="100%">
+  </a>
 </p>
 
 <p align="center">
-  <img src="images/hadl_v45_evolution_and_hydraulic_mechanics.png" alt="Evolusi Paradigma Teknis dan Dinamika Hidrolik" width="100%">
+  <a href="images/hadl_v45_evolution_and_hydraulic_mechanics.png" target="_blank">
+    <img src="images/hadl_v45_evolution_and_hydraulic_mechanics.png" alt="Evolusi Paradigma Teknis dan Dinamika Hidrolik (Klik untuk Zoom)" width="100%">
+  </a>
 </p>
 
 ### 1. Firewall Berpori (Porous Orifice Permeability)
