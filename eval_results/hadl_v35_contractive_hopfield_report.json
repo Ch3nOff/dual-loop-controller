@@ -1,0 +1,106 @@
+{
+  "benchmark_title": "HADL v3.5 Contractive Dynamical & Discrete Hopfield Evaluation",
+  "timestamp": "2026-10-04 13:12:25",
+  "hardware": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "model_id": "Qwen/Qwen3.5-2B",
+  "adapter_architecture": "AdvancedCognitiveEngine (HADL v3.5)",
+  "trainable_parameters": 32588293,
+  "base_parameters": 1881825088,
+  "parameter_ratio_pct": 1.732,
+  "training_epochs": 15,
+  "training_duration_sec": 52.09,
+  "loss_progression": {
+    "initial_loss": 0.7296,
+    "final_loss": 0.6383,
+    "history": [
+      0.7296,
+      0.6377,
+      0.64,
+      0.6383,
+      0.6383,
+      0.6383,
+      0.6383,
+      0.6383,
+      0.6383,
+      0.6383,
+      0.6383,
+      0.6383,
+      0.6383,
+      0.6383,
+      0.6383
+    ]
+  },
+  "scoreboard": {
+    "baseline_accuracy_pct": 40.0,
+    "hadl_v34_accuracy_pct": 20.0,
+    "hadl_v35_accuracy_pct": 40.0,
+    "net_gain_vs_baseline_pct": 0.0,
+    "net_gain_vs_v34_pct": 20.0
+  },
+  "telemetry": {
+    "fixed_point_iters": 4,
+    "cauchy_residual": 0.216796875,
+    "hopfield_mean_energy": 7.5,
+    "prefrontal_confidence": 1.0,
+    "mean_rotation_angle_rad": 0.2001953125,
+    "isometry_error": 0.0,
+    "latency_us": 2756.4000338315964
+  },
+  "task_results": [
+    {
+      "task_id": "eval_alg_01",
+      "name": "Exotic Non-Abelian Algebraic Reduction",
+      "domain": "Non-Abelian Algebra",
+      "is_correct": true,
+      "ground_truth": "I",
+      "extracted": "I",
+      "speed_tok_s": 23.33,
+      "generated_preview": "To simplify the expression $E = A * (B * D) * (C * B) * A$, we will proceed step-by-step using the given axioms and lemmas.\n\n**Given Axioms ",
+      "full_output": "To simplify the expression $E = A * (B * D) * (C * B) * A$, we will proceed step-by-step using the given axioms and lemmas.\n\n**Given Axioms and Lemmas:**\n1.  $A * B = C$\n2.  $B * A = D$\n3.  $C * D = A$\n4.  $D * C = B$\n5.  $X * X = I$ (Identity)\n6.  $X * I = I$\n7.  $I * X = X$\n8.  $B * D = A$ (Lemma)\n9.  $C * B = A$ (Lemma)\n10. $D * A = B$ (Lemma)\n11. $C * A = D$ (Lemma)\n\n**Step 1: Analyze the inner terms.**\nThe expression is $E = A * (B * D) * (C * B) * A$.\nLet's look at the term $(B * D)$. According to Lemma 8, $B * D = A$.\nSubstitute this into the expression:\n$E = A * A * (C * B) * A$\n\n**Step 2: Simplify using the identity $X * X = I$.**\nNow we have $E = A * A * (C * B) * A$.\nAccording to Lemma 5, $A * A = I$.\nSubstitute this into the expression:\n$E = I * (C * B) * A$\n\n**Step 3: Simplify using the identity $I * X = X$.**\nAccording to Lemma 6, $I * (C * B) = C * B$.\nSubstitute this into the expression:\n$E = (C * B) * A$\n\n**Step 4: Simplify using the identity $X * Y = Z$.**\nAccording to Lemma 1, $A * B = C$.\nAccording to Lemma 2, $B * A = D$."
+    },
+    {
+      "task_id": "eval_vm_02",
+      "name": "Reversible Stack Bytecode Machine Simulation",
+      "domain": "Bytecode VM Simulation",
+      "is_correct": false,
+      "ground_truth": "[7, 8, 0]",
+      "extracted": "MISMATCH",
+      "speed_tok_s": 23.09,
+      "generated_preview": "1. PUSH 7\n   Stack: [7]\n\n2. DUP_ODD\n   Top is 7 (odd). Dup it.\n   Stack: [7, 7]\n\n3. PUSH 4\n   Stack: [7, 7, 4]\n\n4. SWAP_TOP\n   Swaps top two",
+      "full_output": "1. PUSH 7\n   Stack: [7]\n\n2. DUP_ODD\n   Top is 7 (odd). Dup it.\n   Stack: [7, 7]\n\n3. PUSH 4\n   Stack: [7, 7, 4]\n\n4. SWAP_TOP\n   Swaps top two elements (7 and 4).\n   Stack: [7, 7, 4] -> [7, 4, 7]\n\n5. ADD_FOLD\n   Pops top two: A=7, B=4.\n   Pushes (4 + 7) % 10 = 11 % 10 = 1.\n   Stack: [7, 4, 7, 1]\n\n6. PUSH 9\n   Stack: [7, 4, 7, 1, 9]\n\n7. SUB_FOLD\n   Pops top two: A=1, B=9.\n   Pushes abs(9 - 1) = 8.\n   Stack: [7, 4, 7, 1, 9, 8]\n\n8. DUP_ODD\n   Top is 8 (even). Push 0.\n   Stack: [7, 4, 7, 1, 9, 8, 0]\n\nFinal Stack: [7, 4, 7, 1, 9, 8, 0]"
+    },
+    {
+      "task_id": "eval_hash_03",
+      "name": "Synthetic Cryptographic Hash Round State Transformation",
+      "domain": "Cryptographic Permutation",
+      "is_correct": false,
+      "ground_truth": "[1, 7, 1, 7]",
+      "extracted": "MISMATCH",
+      "speed_tok_s": 23.44,
+      "generated_preview": "### Step 1: Apply the Linear Transformation ($S_i' = (S_i \\times 3 + 1) \\pmod{16}$)\n\nWe calculate the new state for each index $i$ from 0 to",
+      "full_output": "### Step 1: Apply the Linear Transformation ($S_i' = (S_i \\times 3 + 1) \\pmod{16}$)\n\nWe calculate the new state for each index $i$ from 0 to 3.\n\n**Index 0:**\n$$S_0' = (2 \\times 3 + 1) \\pmod{16} = 6 + 1 = 7$$\n\n**Index 1:**\n$$S_1' = (5 \\times 3 + 1) \\pmod{16} = 15 + 1 = 16 \\equiv 0 \\pmod{16}$$\n\n**Index 2:**\n$$S_2' = (0 \\times 3 + 1) \\pmod{16} = 0 + 1 = 1$$\n\n**Index 3:**\n$$S_3' = (7 \\times 3 + 1) \\pmod{16} = 21 + 1 = 22 \\equiv 6 \\pmod{16}$$\n\n**Result after Step 1:**\n$S' = [7, 0, 1, 6]$\n\n---\n\n### Step 2: Compute Intermediate Values ($T_0, T_1, T_2, T_3$)\n\nUsing the values from Step 1:\n$S_0' = 7, S_1' = 0, S_2' = 1, S_3' = 6$\n\n**Calculate $T_0$:**\n$$T_0 = (S_0' + S_1') \\pmod{16} = (7 + 0) \\pmod{16} = 7$$\n\n**Calculate $T_1$:**\n$$T_1 = S_1' \\text{ XOR } S_2' = 0 \\text{ XOR } 1 = 1$$\n\n**Calculate $T_2$:**\n$$T_2 = (S_2' + S_"
+    },
+    {
+      "task_id": "eval_math_04",
+      "name": "Modular Exponentiation & Prime Order Deduction",
+      "domain": "Olympiad Math CoT",
+      "is_correct": false,
+      "ground_truth": "1",
+      "extracted": "MISMATCH",
+      "speed_tok_s": 23.15,
+      "generated_preview": "To find the remainder when $3^{2028}$ is divided by $13$, we can use Fermat's Little Theorem.\n\n**Step 1: State Fermat's Little Theorem**\nFer",
+      "full_output": "To find the remainder when $3^{2028}$ is divided by $13$, we can use Fermat's Little Theorem.\n\n**Step 1: State Fermat's Little Theorem**\nFermat's Little Theorem states that if $p$ is a prime number and $a$ is an integer not divisible by $p$, then:\n$$a^{p-1} \\equiv 1 \\pmod{p}$$\n\n**Step 2: Identify the parameters**\nIn this problem:\n- The base $a = 3$\n- The modulus $p = 13$\n\nSince $13$ is a prime number and $3$ is not a multiple of $13$, we can apply the theorem.\n\n**Step 3: Calculate the exponent**\nAccording to the theorem, the powers of $3$ repeat with a period of $13 - 1 = 12$. This means:\n$$3^{12} \\equiv 1 \\pmod{13}$$\n\nWe need to find the remainder of the exponent $2028$ when divided by $12$. Let's perform the division:\n$$2028 \\div 12$$\n\nFirst, check if $2028$ is divisible by $12$:\n$$2028 = 12 \\times 100 + 828$$\n$$828 = 12 \\times 69$$\n$$69 = 12 \\times 5 + 9$$\nWait, let's do the long division or sum of digits test more carefully.\nSum of digits of $2028$: $2+0+2+8 = 12$. Since $12$ is divisible by $3$, $2028$ is divisible by $3$.\nIs $2028$ divisible by $4$? The last two digits are $28$, which is not divisible by $4$ (since $28 = 4 \\times 7 + 0$? No, $28"
+    },
+    {
+      "task_id": "eval_trap_05",
+      "name": "Thermal Equilibrium Invariant Verification",
+      "domain": "Epistemic Trap Invalidation",
+      "is_correct": true,
+      "ground_truth": "20",
+      "extracted": "20",
+      "speed_tok_s": 22.32,
+      "generated_preview": "Final Temperature: 20 C",
+      "full_output": "Final Temperature: 20 C"
+    }
+  ]
+}

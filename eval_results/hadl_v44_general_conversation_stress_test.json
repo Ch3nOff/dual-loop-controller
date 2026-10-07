@@ -1,0 +1,309 @@
+{
+  "suite_title": "HADL v4.4 Real-World Stress-Test: Coding, Daily Conversation, Creative & Practical",
+  "timestamp": "2026-10-06 08:38:02",
+  "model_id": "Qwen/Qwen3.5-2B",
+  "overall_accuracy_pct": 83.33333333333334,
+  "passed_count": 10,
+  "total_tasks": 12,
+  "style_bleed_incidents": 0,
+  "routing_accuracy_pct": 100.0,
+  "average_speed_tok_s": 18.14,
+  "peak_vram_gib": 3.97,
+  "task_results": [
+    {
+      "task_id": "code_01_binary_search",
+      "category": "Code Generation",
+      "name": "Python Binary Search with Edge Cases",
+      "prompt": "Write a Python function `binary_search(arr, target)` that implements the binary search algorithm on a sorted list of integers.\nRequirements:\n1. Return the 0-based index if target is found, otherwise return -1.\n2. Properly handle edge cases (empty list, target smaller than min, target larger than max).\n3. Include a concise docstring and type hints.\nProvide only the Python code with a brief explanation.",
+      "route_taken": "FAST BYPASS",
+      "p_bypass": 0.9157184362411499,
+      "p_heavy": 0.08428153395652771,
+      "is_passed": true,
+      "has_style_bleed": false,
+      "detected_anti_patterns": [],
+      "content_score_pct": 100.0,
+      "matched_keywords": [
+        "def binary_search",
+        "return -1",
+        "while",
+        "mid"
+      ],
+      "missing_keywords": [],
+      "num_tokens": 174,
+      "speed_tok_s": 10.94,
+      "full_response": "```python\ndef binary_search(arr: list[int], target: int) -> int:\n    \"\"\"\n    Perform binary search on a sorted list of integers.\n\n    Args:\n        arr (list[int]): A sorted list of integers.\n        target (int): The value to search for.\n\n    Returns:\n        int: The 0-based index of the target if found, otherwise -1.\n    \"\"\"\n    left, right = 0, len(arr) - 1\n\n    while left <= right:\n        mid = (left + right) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n\n    return -1\n```"
+    },
+    {
+      "task_id": "code_02_debug_mutable_default",
+      "category": "Code Debugging",
+      "name": "Python Mutable Default Argument Bugfix",
+      "prompt": "A junior developer wrote the following Python function, but it exhibits strange buggy behavior across multiple calls:\n\n```python\ndef add_item(item, item_list=[]):\n    item_list.append(item)\n    return item_list\n\nprint(add_item('apple'))   # ['apple']\nprint(add_item('banana'))  # ['apple', 'banana'] - BUG!\n```\n\nQuestion: Explain clearly why this bug happens in Python, and provide the idiomatic, correct way to fix it.",
+      "route_taken": "FAST BYPASS",
+      "p_bypass": 0.9075055122375488,
+      "p_heavy": 0.09249448031187057,
+      "is_passed": true,
+      "has_style_bleed": false,
+      "detected_anti_patterns": [],
+      "content_score_pct": 100.0,
+      "matched_keywords": [
+        "None",
+        "default",
+        "mutable",
+        "item_list is None"
+      ],
+      "missing_keywords": [],
+      "num_tokens": 412,
+      "speed_tok_s": 18.83,
+      "full_response": "The bug is caused by **Python\u2019s default argument evaluation rule**: function arguments are evaluated **once** when the function is defined, not each time the function is called.\n\n### Why the bug happens\n\nWhen you write:\n\n```python\ndef add_item(item, item_list=[]):\n    item_list.append(item)\n    return item_list\n```\n\nThe `item_list=[]` is evaluated **at function definition time**, so it creates a single empty list object once. This list is then stored in the function\u2019s local namespace and reused on every call.\n\n- First call: `add_item('apple')`\n  - `item_list` refers to that same empty list.\n  - `'apple'` is appended \u2192 `['apple']`.\n  - Returns `['apple']`.\n\n- Second call: `add_item('banana')`\n  - Again, `item_list` refers to the *same* empty list object.\n  - `'banana'` is appended to that *same* list \u2192 `['apple', 'banana']`.\n  - Returns `['apple', 'banana']`.\n\nThe problem is that `item_list` is a mutable object (a list), and modifying it inside the function affects the object that was passed in (or the default) on the first call, which then persists across calls.\n\n### Idiomatic, correct fix\n\nTo ensure each call gets its own list, pass a new list (or a default empty list) by value:\n\n```python\ndef add_item(item, item_list=None):\n    if item_list is None:\n        item_list = []\n    item_list.append(item)\n    return item_list\n```\n\nAlternatively, using `*args` to avoid the mutable default altogether:\n\n```python\ndef add_item(item, *args):\n    item_list = [item] + list(args)\n    return item_list\n```\n\nBoth approaches prevent the shared-list bug and follow Pythonic conventions."
+    },
+    {
+      "task_id": "code_03_sql_join_group",
+      "category": "Database & SQL",
+      "name": "SQL Multi-Table Aggregation Query",
+      "prompt": "Given two SQL tables:\n- `departments` (dept_id INT, dept_name VARCHAR)\n- `employees` (emp_id INT, emp_name VARCHAR, dept_id INT, salary NUMERIC)\n\nWrite an ANSI SQL query to find each department's name along with its average employee salary, but only include departments that have at least 3 employees and an average salary greater than 50,000. Order by average salary descending.",
+      "route_taken": "FAST BYPASS",
+      "p_bypass": 0.8800657391548157,
+      "p_heavy": 0.11993423104286194,
+      "is_passed": true,
+      "has_style_bleed": false,
+      "detected_anti_patterns": [],
+      "content_score_pct": 100.0,
+      "matched_keywords": [
+        "JOIN",
+        "GROUP BY",
+        "HAVING",
+        "COUNT",
+        "AVG",
+        "ORDER BY"
+      ],
+      "missing_keywords": [],
+      "num_tokens": 84,
+      "speed_tok_s": 18.63,
+      "full_response": "```sql\nSELECT \n    d.dept_name,\n    AVG(e.salary) AS avg_salary\nFROM departments d\nJOIN employees e ON d.dept_id = e.dept_id\nGROUP BY d.dept_id, d.dept_name\nHAVING COUNT(*) >= 3 \n   AND AVG(e.salary) > 50000\nORDER BY avg_salary DESC;\n```"
+    },
+    {
+      "task_id": "code_04_regex_date_extraction",
+      "category": "Regex & Parsing",
+      "name": "Python Regex Date Pattern Extractor",
+      "prompt": "Write a Python function `extract_dates(text)` using the `re` module that extracts all dates formatted either as `YYYY-MM-DD` (e.g. 2026-10-06) or `DD/MM/YYYY` (e.g. 06/10/2026) from a given string. Return them as a list of matched date strings.",
+      "route_taken": "FAST BYPASS",
+      "p_bypass": 0.8230137228965759,
+      "p_heavy": 0.1769862323999405,
+      "is_passed": true,
+      "has_style_bleed": false,
+      "detected_anti_patterns": [],
+      "content_score_pct": 100.0,
+      "matched_keywords": [
+        "import re",
+        "re.findall",
+        "\\d{4}-\\d{2}-\\d{2}",
+        "\\d{2}/\\d{2}/\\d{4}"
+      ],
+      "missing_keywords": [],
+      "num_tokens": 177,
+      "speed_tok_s": 18.76,
+      "full_response": "```python\nimport re\n\ndef extract_dates(text):\n    \"\"\"\n    Extract all dates formatted as either:\n      - YYYY-MM-DD\n      - DD/MM/YYYY\n\n    Returns a list of matched date strings.\n    \"\"\"\n    pattern = r'\\d{4}-\\d{2}-\\d{2}|(\\d{2}/\\d{2}/\\d{4})'\n    return re.findall(pattern, text)\n```\n\nExample usage:\n\n```python\ntext = \"The meeting was scheduled for 2026-10-06 and also on 06/10/2026.\"\nprint(extract_dates(text))\n# Output: ['2026-10-06', '06/10/2026']\n```"
+    },
+    {
+      "task_id": "chat_01_weekend_burnout",
+      "category": "Daily Conversation (ID)",
+      "name": "Empathetic Burnout & Relaxation Advice (Bahasa Indonesia)",
+      "prompt": "Halo! Akhir pekan kemarin aku capek banget karena harus kerja lembur tanpa henti. Badan rasanya pegal dan otak terasa jenuh banget. Boleh minta saran aktivitas santai yang gak makan banyak tenaga buat recharge energi sebelum mulai kerja lagi besok?",
+      "route_taken": "FAST BYPASS",
+      "p_bypass": 0.851564884185791,
+      "p_heavy": 0.14843513071537018,
+      "is_passed": true,
+      "has_style_bleed": false,
+      "detected_anti_patterns": [],
+      "content_score_pct": 60.0,
+      "matched_keywords": [
+        "santai",
+        "tidur",
+        "air"
+      ],
+      "missing_keywords": [
+        "istirahat",
+        "recharge"
+      ],
+      "num_tokens": 650,
+      "speed_tok_s": 18.72,
+      "full_response": "Halo! Saya sangat mengerti perasaanmu. Kerja lembur tanpa henti memang bikin tubuh dan otak lelah, bahkan lebih dari sekadar \"kecewa\".\n\nKuncinya di sini adalah **aktivitas yang memulihkan** (restorative) dan **tidak menuntut banyak energi fisik**. Karena kamu merasa pegal, hindari aktivitas yang membutuhkan keseimbangan tubuh (seperti lari, berenang, atau aktivitas fisik berat).\n\nBerikut adalah beberapa saran aktivitas santai yang bisa langsung kamu kerjakan besok pagi sebelum kerja lagi:\n\n### 1. Aktivitas Fisik Ringan (Untuk Mengurangi Pegal)\nJika pegalannya masih terasa, kamu bisa melakukan gerakan pendampingan (stretching) atau gerakan ringan yang memutar sendi:\n*   **Stretching Pasif:** Duduk santai, tarik-tenangkan otot bahu, leher, dan punggung.\n*   **Mangkuk Air:** Duduk di tepi meja, masukkan kedua tangan ke dalam mangkuk air (atau botol air besar) dan teruskan air ke bawah. Ini membantu peredaran darah dan meredakan pegal.\n*   **Berjalan Cepat (Lenting):** Lakukan 5 menit jalan cepat di rumah. Ini membantu memompa darah kembali ke otak untuk \"reset\" fokusnya.\n\n### 2. Aktivitas \"Low Energy\" (Tanpa Berpikir Berat)\nCoba lakukan ini di tempat yang nyaman, mungkin di sofa atau kursi santai:\n*   **Hidup Kembali (Brain Dump):** Tulis semua tugas yang masih terasa rumit atau belum selesai di kertas. Memindahkan beban ke kertas bisa membuat otak merasa lega dan siap bertransisi ke mode kerja besok.\n*   **Makan Makanan Sehat (Bukan Makanan Berat):** Hindari makanan yang memuat banyak gula (makanan olahan) karena bisa bikin otak terasa lemas. Coba makan buah segar, buah segar, atau yogurt.\n*   **Dengarkan Musik Klasik atau Suara Alam:** Putar lagu-lagu instrumental yang menenangkan atau suara hujan/alam. Ini membantu otak \"mati\" sebentar untuk memproses memori.\n\n### 3. Aktivitas Mengisi Waktu (Jika Ingin Sedikit Aktivitas)\nJika kamu merasa lapar atau butuh sedikit bergerak tapi tidak ingin capek:\n*   **Lihat Film Pendek tanpa Plot:** Cari film pendek (short film) yang lucu atau menghibur tanpa harus memikirkan ceritanya.\n*   **Buat Catatan Digital:** Gunakan aplikasi catatan atau aplikasi seperti Notion/Obsidian untuk menyusun ulang ide-ide kamu. Ini butuh sedikit ketekunan mental tapi sangat produktif.\n\n### Tips Tambahan untuk Segera Mulai Kerja Besok:\n*   **Wajib Tidur Cukup:** Karena kamu lelah, pastikan kamu tidur 7-8 jam malam hari agar besok bangun lebih segar.\n*   **Jangan Langsung Mengerjakan Tugas Berat:** Setelah aktivitas santai selesai, cobalah langsung *stretching* lagi sebelum membuka laptop. Jangan langsung langsung masuk ke mode kerja tanpa jeda 10-15 menit agar otak tidak kewalahan.\n*   **Hindari Kafein Terlalu Dulu:** Jangan minum kopi atau teh terlalu pagi hari sebelum kerja besok"
+    },
+    {
+      "task_id": "chat_02_polite_debt_reminder",
+      "category": "Interpersonal & Empathy (ID)",
+      "name": "Polite Debt Collection Advice (Bahasa Indonesia)",
+      "prompt": "Mau tanya pendapat dong. Teman dekatku pernah pinjam uang sebulan yang lalu untuk keperluan mendesak, tapi sampai sekarang belum ada kabar atau balikin. Aku agak segan dan gak enak hati mau nagihnya. Gimana ya cara ngomong atau kirim chat yang sopan, gak terkesan menuduh, tapi pesannya tetap sampai tanpa merusak pertemanan?",
+      "route_taken": "FAST BYPASS",
+      "p_bypass": 0.8982734084129333,
+      "p_heavy": 0.10172657668590546,
+      "is_passed": true,
+      "has_style_bleed": false,
+      "detected_anti_patterns": [],
+      "content_score_pct": 60.0,
+      "matched_keywords": [
+        "sopan",
+        "kabar",
+        "teman"
+      ],
+      "missing_keywords": [
+        "chat",
+        "ingatkan"
+      ],
+      "num_tokens": 650,
+      "speed_tok_s": 18.7,
+      "full_response": "Lalu itu adalah situasi yang sangat wajar terjadi, terutama karena uang adalah aset berharga yang sering kali melibatkan kepercayaan dan rasa tidak nyaman. Teman dekatmu mungkin merasa malu, khawatir, atau bahkan takut kehilangan kedekatan denganmu karena merasa tidak bertanggung jawab.\n\nKunci utamanya adalah **menjaga batasan antara \"perselingkuhan\" dan \"utang\"**. Kamu tidak ingin menuduh, tapi tetap ingin menyampaikan fakta bahwa uang belum balik.\n\nBerikut adalah beberapa strategi dan contoh kalimat yang bisa kamu gunakan, disesuaikan dengan kedekatan kalian:\n\n### 1. Prinsip Utama Sebelum Mengomong\n*   **Gunakan kalimat \"Saya\" (I), bukan \"Kamu\" (You):** Hindari kata-kata seperti \"kau kabur\", \"kau tidak bayar\", atau \"kamu tidak mau\". Ini bisa terasa menyerang.\n*   **Buat alasan yang halus:** Ceritakan bahwa kamu butuh konfirmasi karena ada rencana lain, bukan karena kamu marah.\n*   **Pilih waktu yang tepat:** Jangan kirim saat dia sedang sibuk, stres, atau sedang marah. Pilih saat dia santai.\n*   **Jawab dengan jujur tapi tenang:** Jika dia bingung atau tidak tahu, jangan menghakimi, tapi berikan alasan yang logis.\n\n---\n\n### 2. Contoh Kalimat & Cara Mengirim\n\nBerikut adalah beberapa opsi tergantung pada seberapa dekat kalian dan seberapa sering kalian berinteraksi:\n\n#### Opsi A: Jika kalian sangat dekat (Santai & Ramah)\nGunakan pendekatan yang lebih personal dan menenangkan.\n\n> \"Hebat, ya! Senang banget bisa temuin kamu. \ud83e\udd70\n>\n> Cuma mau ngasih kabar kecil aja, baru sebulan lalu aku pinjam uang buat keperluan mendesak (pake [jelaskan singkat, misal: biaya kuliah/lainnya]). Tapi sampai sekarang belum ada kabar balikin.\n>\n> Aku lagi berencana [sebutkan rencana, misal: beli barang X / buat rencana perjalanan], jadi aku agak kehabisan dana. Kamu bisa tau gak kalau ada yang perlu dibantu atau mau bantu lagi? Kalau nggak apa-apa, jangan ditanya, aku nggak butuh jawaban pasti ya. Nanti aku juga akan berusaha cari solusinya sendiri.\"\n\n*   **Kenapa ini bagus:** Fokus pada kebutuhanmu sendiri dan menawarkan bantuan tanpa menuntut balas.\n\n#### Opsi B: Jika kalian biasa-biasa saja (Tetap sopan & rendah hati)\nGunakan nada yang lebih formal namun tetap hangat.\n\n> \"Hai [Nama Teman], semoga sehat selalu. \ud83c\udf38\n>\n> Masih ingat sama temen kita sebulan lalu yang pinjam uang? Aku mau nanya kabarnya. Uang itu penting banget buat aku, jadi aku nggak mau lagi bingung kalau nggak ada.\n>\n> Kalau kamu punya waktu, tolong kasih tahu ya. Aku mau bantu cari solusi untuk kebutuhan mendadak yang lagi aku perlukan.\"\n\n*   **Kenapa ini bagus:** Menunjukkan bahwa kamu menghargai uang temanmu dan ingin menyelesaikannya.\n\n#### Opsi C: Jika dia mungkin merasa bersalah atau malu (Langsung tapi tidak menyalahkan)"
+    },
+    {
+      "task_id": "chat_03_travel_kyoto",
+      "category": "Conversational Planning (EN)",
+      "name": "Kyoto Autumn 3-Day Travel Itinerary (English)",
+      "prompt": "Hey! I'm planning a 3-day solo trip to Kyoto during autumn (late November) to see the fall foliage. Can you give me a realistic, well-paced day-by-day itinerary that balances iconic temples with peaceful scenic walks? Keep the tone friendly and conversational.",
+      "route_taken": "FAST BYPASS",
+      "p_bypass": 0.9219929575920105,
+      "p_heavy": 0.07800707221031189,
+      "is_passed": true,
+      "has_style_bleed": false,
+      "detected_anti_patterns": [],
+      "content_score_pct": 80.0,
+      "matched_keywords": [
+        "Day 1",
+        "Day 2",
+        "Kyoto",
+        "temple"
+      ],
+      "missing_keywords": [
+        "Day 3"
+      ],
+      "num_tokens": 650,
+      "speed_tok_s": 18.32,
+      "full_response": "Hey there! That sounds like a perfect plan. Late November in Kyoto is a magical time to be there\u2014the air is crisp, the streets are lined with maple trees turning brilliant red and gold, and the cherry blossoms have just faded, leaving a beautiful, lingering beauty in the air.\n\nSince you're solo, the vibe is great: you can enjoy the city's quiet corners without worrying about crowds, but you'll also appreciate the solitude of walking through ancient gardens alone. Here is a realistic, well-paced 3-day itinerary that balances the must-see temples with some very relaxing scenic walks.\n\n### **Day 1: The Imperial Capital (Kyoto's Historic Heart)**\n*Focus: History, architecture, and the best views of the city.*\n\n**Morning: Fushimi Inari Shrine (The Red Trail)**\nStart your day early. Head straight to Fushimi Inari, the most famous shrine in Japan.\n*   **Why go:** The *Illuminating Torii Gate* is iconic, and the trail is steep but incredibly atmospheric. It's less crowded than Senso-ji right now, making it perfect for solo travelers.\n*   **Tip:** Wear comfortable walking shoes; the trail is about 1.5 km with many stairs.\n*   **Lunch:** Grab a quick lunch near the shrine (like *Yakitori Central* or *Yakiniku Kyoto*) or head to a nearby *Nishiki Market* for some fresh fish and street food.\n\n**Afternoon: Kinkaku-ji (The Golden Pavilion)**\nTake a short 15-minute train ride to the Kinkaku-ji.\n*   **Why go:** The gold leaf pavilion is stunning, but don't forget to explore the entire grounds. The *Ginkaku-ji* (Silver Pavilion) right next to it is equally beautiful in the fall. The *Kinkaku-ji Garden* is filled with camellias and other autumn flowers.\n*   **Scenic Walk:** If you have time, take a stroll along the *Hikone Bridge* nearby, which offers a great vantage point over the city and the river.\n\n**Evening: Kiyomizu-dera**\nHead back down to the city center for Kiyomizu-dera.\n*   **Why go:** Built on an old wooden stage, it offers one of the most breathtaking panoramic views of Kyoto's Tenryu-ji and the surrounding hills. The fall colors reflect beautifully off the water below.\n*   **Vibe:** It's a quiet, contemplative evening. You'll see the temple lanterns glowing softly in the twilight.\n\n---\n\n### **Day 2: The Zen Garden & The Water City (Chiyoda District)**\n*Focus: Serenity, water features, and the quieter parts of Kyoto.*\n\n**Morning: The Great Buddha (Kinkaku-ji / Ryoan-ji)**\nFrom Kinkaku-ji, take the 5-minute walk to Ryoan-ji.\n*   **Why go:** This is a Zen rock garden that is arguably"
+    },
+    {
+      "task_id": "chat_04_proverb_context",
+      "category": "Cultural & Idiomatic (ID)",
+      "name": "Proverb Contextualization (Bahasa Indonesia)",
+      "prompt": "Jelaskan makna peribahasa 'Air tenang menghanyutkan' dan berikan satu contoh situasinya di lingkungan kerja atau kantor modern.",
+      "route_taken": "FAST BYPASS",
+      "p_bypass": 0.8043621182441711,
+      "p_heavy": 0.19563789665699005,
+      "is_passed": false,
+      "has_style_bleed": false,
+      "detected_anti_patterns": [],
+      "content_score_pct": 40.0,
+      "matched_keywords": [
+        "bahaya",
+        "kerja"
+      ],
+      "missing_keywords": [
+        "pendiam",
+        "kemampuan",
+        "kantor"
+      ],
+      "num_tokens": 592,
+      "speed_tok_s": 18.38,
+      "full_response": "Berikut adalah penjelasan makna peribahasa **\"Air tenang menghanyutkan\"** serta sebuah contoh situasinya di lingkungan kerja modern.\n\n### Penjelasan Makna\nPeribahasa **\"Air tenang menghanyutkan\"** berasal dari filosofi Islam dan bahasa Arab yang bermakna: **ketenangan atau kesabaran yang tinggi adalah kunci utama untuk meraih kesuksesan**.\n\nSecara literal, air yang tenang memiliki daya hancur yang lemah (tidak bisa menghanyutkan batu atau logam), sedangkan air yang deras atau berpanas akan menghancurkan apapun yang dilaluinya.\n\nDalam konteks kehidupan, ini mengajarkan bahwa:\n1.  **Kesabaran adalah modal:** Orang yang tenang dan sabar mampu menghadapi tantangan tanpa panik atau terobsesi.\n2.  **Keuntungan dari ketenangan:** Kesabaran membuat seseorang lebih bijaksana, tidak mudah marah, dan lebih efektif dalam mengambil keputusan.\n3.  **Bahaya dari panik:** Sebaliknya, orang yang panik, gelisah, atau terus-menerus terobsesi akan mudah hancur oleh masalah yang datang (seperti air deras).\n\n---\n\n### Contoh Situasi di Lingkungan Kerja Modern\n\n**Skenario:**\nAnda adalah seorang *Project Manager* di perusahaan teknologi yang sedang menangani proyek *agile* (iterasi cepat) di tengah krisis. Tim Anda sedang melakukan *sprint* terakhir untuk meluncurkan fitur baru, namun di tengah jalan, salah satu klien utama membatalkan pesanan karena masalah teknis yang tidak terantisipasi. Klien tersebut marah-marah dan meminta tim untuk segera melakukan *rework* (penyempurnaan ulang) dari nol, padahal tim sudah bekerja selama 2 minggu dengan hasil yang sangat baik.\n\n**Analisis:**\n*   **Air yang deras (Panik):** Jika Anda merasa panik, marah, atau bingung memikirkan solusi saat klien membatalkan pesanan, Anda mungkin langsung merespons dengan defensif atau meminta orang lain untuk menangani masalah tersebut. Ini adalah tanda Anda \"dihanyutkan\" oleh tekanan dan emosi. Akibatnya, tim Anda bisa kehilangan fokus, kualitas kerja menurun, dan reputasi perusahaan di mata klien semakin buruk.\n*   **Air yang tenang (Sabar & Bijak):** Jika Anda merespons dengan tenang, Anda akan mendengarkan keluhan klien dengan empati, menenangkan suasana agar tidak meledak, dan kemudian secara strategis mencari solusi alternatif atau menunda pengerjaan sementara untuk meredam emosi klien. Langkah ini menunjukkan bahwa Anda tidak hanya bertahan hidup, tetapi juga mampu \"menghancurkan\" kemarahan klien dengan ketenangan Anda, sehingga tim tetap bisa menyelesaikan tugasnya dengan baik.\n\n**Kesimpulan Situasi:**\nDi sinilah peribahasa berlaku. Jika Anda merespons dengan tenang, Anda tidak akan \"dihanyutkan\" oleh emosi klien yang memaksakan tuntutan, melainkan akan tetap mengendalikan arah proyek dan memastikan kesuksesan tim meskipun menghadapi kesulitan besar."
+    },
+    {
+      "task_id": "creative_01_coffee_rain_poem",
+      "category": "Creative Writing (ID)",
+      "name": "Poem: Secangkir Kopi Saat Hujan Pagi (Bahasa Indonesia)",
+      "prompt": "Tuliskan sebuah puisi pendek yang hangat dan puitis (terdiri dari 3-4 bait) tentang kenikmatan secangkir kopi hangat di pagi hari saat hujan deras turun di luar jendela.",
+      "route_taken": "FAST BYPASS",
+      "p_bypass": 0.740536630153656,
+      "p_heavy": 0.259463369846344,
+      "is_passed": true,
+      "has_style_bleed": false,
+      "detected_anti_patterns": [],
+      "content_score_pct": 100.0,
+      "matched_keywords": [
+        "kopi",
+        "hujan",
+        "pagi",
+        "jendela",
+        "hangat"
+      ],
+      "missing_keywords": [],
+      "num_tokens": 134,
+      "speed_tok_s": 18.55,
+      "full_response": "Di bawah atap yang memeluk langit,\nHujan deras bergulir tanpa henti,\nMenyapu debu kota dan membasahi jendela,\nMenjadi latar belakang yang menyala terang.\n\nDi dalam, ada segelas kopi hangat,\nSemenjak pagi yang baru saja bermula,\nKenyang aroma tanah dan biji yang lama,\nSeolah menyapa jiwa yang sedang menunda.\n\nAngin luar mendesak, namun hati tenang,\nDi setiap sorot air, ada cerita lama,\nSedang aku bersantai di kursi kayu,\nMenikmati senyuman yang tersembunyi di daun."
+    },
+    {
+      "task_id": "explain_02_rsa_layman",
+      "category": "Technical Layman Explanation",
+      "name": "RSA Public-Key Cryptography for Laypeople",
+      "prompt": "Jelaskan konsep dasar kriptografi kunci publik (seperti RSA) kepada orang yang sama sekali tidak punya latar belakang teknis atau matematika. Gunakan analogi sederhana sehari-hari (seperti gembok dan kotak surat) agar mudah dipahami, tanpa menggunakan rumus matematika.",
+      "route_taken": "FAST BYPASS",
+      "p_bypass": 0.8571851849555969,
+      "p_heavy": 0.1428147852420807,
+      "is_passed": true,
+      "has_style_bleed": false,
+      "detected_anti_patterns": [],
+      "content_score_pct": 60.0,
+      "matched_keywords": [
+        "kunci",
+        "publik",
+        "rahasia"
+      ],
+      "missing_keywords": [
+        "gembok",
+        "privat"
+      ],
+      "num_tokens": 650,
+      "speed_tok_s": 18.47,
+      "full_response": "Tentu, mari kita bayangkan kriptografi kunci publik seperti **sistem keamanan bank digital atau sistem surat elektronik** yang sangat canggih.\n\nBayangkan sebuah **kotak surat rahasia** yang dikirim ke alamat tertentu. Kotak ini memiliki dua sisi berbeda:\n1.  **Sisi Depan (Kunci Publik):** Ini adalah nomor telepon atau alamat email orang yang ingin menerima surat. Orang ini bisa melihat isi kotak surat dengan mudah karena dia punya kunci ini.\n2.  **Sisi Belakang (Kunci Rahasia):** Ini adalah kode rahasia yang hanya bisa dibuka oleh satu orang tertentu (penyedia layanan).\n\n### Bagaimana Cara Kerjanya?\n\nBayangkan Anda ingin mengirim surat rahasia kepada teman, tapi teman tersebut **tidak pernah** berkomunikasi dengan Anda sebelumnya. Anda tidak bisa meminta teman untuk membuka surat Anda.\n\nBerikut adalah langkah-langkahnya:\n\n1.  **Kunci Rahasia (Sisi Belakang):** Anda memikirkan sebuah kode rahasia yang unik, seperti kode **\"ABCD\"**.\n    *   Kode ini hanya bisa dibuka oleh satu orang khusus yang Anda kenal di kantor (misalnya, petugas keamanan).\n    *   Jika petugas keamanan memasukkan kode **\"ABCD\"** ke mesin kriptografinya, surat akan terbuka.\n    *   Jika orang lain mencoba memasukkan kode **\"ABCD\"** ke mesin mereka, surat tetap tertutup rapat.\n\n2.  **Kunci Publik (Sisi Depan):** Anda ingin mengirim surat ke teman yang alamatnya **\"John Doe\"**.\n    *   Anda tahu bahwa mesin kriptografinya bisa membuka surat jika diberikan kode rahasia **\"ABCD\"**.\n    *   Jadi, Anda bisa memberikan kode **\"ABCD\"** kepada teman **\"John Doe\"** sebagai tanda terima kasih atau sebagai kunci pembuka.\n\n3.  **Proses Pengiriman Surat:**\n    *   Anda menulis surat rahasia.\n    *   Anda memasukkan kode rahasia **\"ABCD\"** (kunci rahasia) ke mesin kriptografinya. Mesin menyatukan surat dengan kode rahasia tersebut dan membuatkan **surat terenkripsi**.\n    *   Anda mengirim **surat terenkripsi** tersebut ke alamat **\"John Doe\"**.\n    *   Ketika **\"John Doe\"** membuka suratnya, ia melihat kode **\"ABCD\"**. Mesin kriptografinya melihat kode ini sama dengan kunci rahasia **\"ABCD\"** yang Anda berikan kepadanya.\n    *   Mesin membuka surat terenkripsi dan mengirimkan isi suratnya ke Anda.\n\n### Mengapa Aman?\n\nDi sini ada satu hal yang membuat sistem ini aman: **Kunci Rahasia tidak pernah diketahui oleh siapa-siapa selain penyedia layanan.**\n\n*   Orang lain (seperti hacker atau orang yang tidak Anda kenal) tidak tahu kode rahasia **\"ABCD\"**.\n*   Karena mereka tidak tahu kunci rahasia, mereka tidak bisa membuka surat Anda, meskipun mereka tahu alamat Anda.\n*   Hanya penyedia layanan yang memegang kunci rahasia. Jika penyedia layanan mau membuka surat Anda, ia harus memasukkan kunci rahasia yang sama ke mesinnya.\n\n### Analogi Tambahan: Kunci Kulkas\n\nBayangkan sebuah kulkas di rumah Anda.\n*   **Kunci Kulkas"
+    },
+    {
+      "task_id": "trans_03_grain_of_salt",
+      "category": "Language & Translation",
+      "name": "Idiom Nuance Translation & Usage",
+      "prompt": "Dalam bahasa Inggris ada ungkapan 'take it with a grain of salt'.\n1. Apa arti dan maksud sebenarnya dari idiom ini?\n2. Bagaimana cara menerjemahkannya ke dalam bahasa Indonesia secara alami (bukan terjemahan harfiah)?\n3. Berikan contoh kalimat penggunaannya dalam percakapan sehari-hari.",
+      "route_taken": "FAST BYPASS",
+      "p_bypass": 0.7991461157798767,
+      "p_heavy": 0.20085391402244568,
+      "is_passed": false,
+      "has_style_bleed": false,
+      "detected_anti_patterns": [],
+      "content_score_pct": 40.0,
+      "matched_keywords": [
+        "garam",
+        "contoh"
+      ],
+      "missing_keywords": [
+        "jangan langsung percaya",
+        "kritis",
+        "skeptis"
+      ],
+      "num_tokens": 650,
+      "speed_tok_s": 18.26,
+      "full_response": "Berikut adalah penjelasan mendalam mengenai idiom **\"take it with a grain of salt\"** dalam bahasa Inggris, termasuk arti sebenarnya, cara menerjemahannya secara alami, dan contoh penggunaannya.\n\n### 1. Arti dan Maksud Sebenarnya\nSecara harfiah, ungkapan ini berarti \"menerima hal tersebut dengan seperempat sendok garam\". Namun, makna sebenarnya jauh lebih dalam dan kontekstual:\n\n*   **Arti Mendasar:** Mengabaikan sebagian besar atau tidak terlalu mengonfirmasi sesuatu yang baru diterima karena kemungkinan besar tidak benar, atau menganggapnya sebagai hipotesis sementara.\n*   **Nuansa:** Ini adalah cara untuk **menyadari keterbatasan pengetahuan** kita. Orang yang menggunakan ungkapan ini biasanya merasa tidak yakin sepenuhnya dengan informasi yang mereka terima, karena tidak memiliki bukti yang cukup kuat atau karena situasi itu terlalu kompleks untuk langsung percaya.\n*   **Tujuan:** Mencegah kesimpulan yang salah. Kita mengambil keputusan untuk *tidak* terlalu percaya pada informasi tersebut sampai kita mendapat bukti lebih lanjut.\n\n**Ringkasan:** \"Jangan terlalu percaya pada informasi ini; mungkin saja itu salah atau belum terbukti benar.\"\n\n---\n\n### 2. Cara Menerjemahkan ke Bahasa Indonesia (Alami)\nMenerjemahkan langsung dari bahasa Inggris ke Indonesia seringkali menghasilkan kalimat yang terdengar kaku atau terjemahan harfiah. Untuk terdengar alami, kita harus menangkap *rasa* dan *kepentingan* di balik ungkapan tersebut.\n\nBerikut adalah beberapa opsi terjemahan yang natural:\n\n*   **Opsi 1 (Fokus pada ketidakpercayaan):** \"Jangan terlalu percaya pada hal itu.\"\n*   **Opsi 2 (Fokus pada ketidakpastian):** \"Jangan terlalu menaruh harapan pada hal itu.\"\n*   **Opsi 3 (Fokus pada kewajaran):** \"Tidak perlu terlalu mengonfirmasi hal itu.\"\n*   **Opsi 4 (Sangat natural dalam percakapan):** \"Mungkin itu belum benar, jadi jangan terlalu meyakini.\"\n\n**Kesimpulan untuk Bahasa Indonesia:**\nDalam percakapan sehari-hari, terjemahan yang paling natural dan mudah dipahami adalah: **\"Jangan terlalu meyakini hal itu\"** atau **\"Mungkin itu belum benar, jadi jangan terlalu percaya.\"**\n\n---\n\n### 3. Contoh Kalimat Penggunaan\nBerikut adalah beberapa contoh kalimat dalam konteks percakapan sehari-hari:\n\n*   **Konteks: Berita Negatif**\n    *   *English:* \"The stock market crashed yesterday, so **take the news with a grain of salt**.\"\n    *   *Indonesi:* \"Gempa bumi terjadi kemarin, jadi **jangan terlalu meyakini berita ini**.\"\n    *   *Penjelasan:* Penulis merasa bahwa laporan media mungkin salah karena tidak ada konfirmasi independen.\n\n*   **Konteks: Pendapat Orang Lain**\n    *   *English:* \"She told me that the new policy is a good idea, so **take her words with a grain of salt**.\"\n    *   *Indonesi:* \"Dia bilang kebijakan baru itu bagus, jadi **jangan terlalu"
+    },
+    {
+      "task_id": "advice_04_laptop_buying",
+      "category": "Practical Consumer Advice (ID)",
+      "name": "Laptop Buying Guide for Programming & Casual Gaming",
+      "prompt": "Aku berencana beli laptop dengan budget sekitar 10-12 juta rupiah. Kebutuhan utamaku adalah belajar programming (web development & sedikit machine learning pemula) serta sesekali main game kasual seperti Dota 2 atau Valorant. Spesifikasi minimal apa yang harus kupilih (prosesor, RAM, storage, GPU)? Berikan rekomendasi praktis.",
+      "route_taken": "FAST BYPASS",
+      "p_bypass": 0.7711499929428101,
+      "p_heavy": 0.22884997725486755,
+      "is_passed": true,
+      "has_style_bleed": false,
+      "detected_anti_patterns": [],
+      "content_score_pct": 71.4,
+      "matched_keywords": [
+        "RAM",
+        "SSD",
+        "GPU",
+        "Intel",
+        "Ryzen"
+      ],
+      "missing_keywords": [
+        "16GB",
+        "prosesor"
+      ],
+      "num_tokens": 650,
+      "speed_tok_s": 18.64,
+      "full_response": "Dengan budget **Rp 10.000.000 - Rp 12.000.000**, kamu berada di posisi yang sangat bagus untuk mendapatkan laptop yang sangat solid untuk kebutuhan pengembangan web dan machine learning (ML) pemula, sekaligus tetap *playable* untuk Dota 2 dan Valorant.\n\nKunci di sini adalah menyeimbangkan **CPU** (untuk coding & AI), **RAM** (untuk multitasking), dan **GPU** (untuk rendering game dan ML).\n\nBerikut adalah analisis spesifikasi minimal yang direkomendasikan dan rekomendasi produk praktisnya.\n\n### 1. Analisis Spesifikasi Minimal\n\nUntuk tujuanmu, berikut adalah \"minimal\" yang wajib ada:\n\n*   **Processor (CPU):**\n    *   **Kebutuhan:** Intel Core i3 (Gen 12 atau 13) atau AMD Ryzen 3 (7000 series atau 8000 series).\n    *   **Alasan:** Untuk web development (HTML/CSS/JS), React, dan Node.js, CPU ringan sudah cukup. Untuk ML pemula (TensorFlow/PyTorch), CPU ringan cukup, asalkan RAM-nya cukup. Jangan biarkan di gen lama (seperti i3 12th gen ke bawah) karena performa bisa stagnan.\n*   **RAM (Memory):**\n    *   **Kebutuhan:** Minimum **8 GB DDR4** (disarankan 16 GB jika memungkinkan).\n    *   **Alasan:** 8 GB adalah batas bawah yang aman. Jika kamu sering membuka banyak file IDE (VS Code, WebStorm) sekaligus, 8 GB akan cepat penuh. 16 GB adalah rekomendasi terbaik untuk mulus.\n*   **Storage (Harddisk):**\n    *   **Kebutuhan:** **512 GB NVMe SSD**.\n    *   **Alasan:** SSD sangat penting untuk kecepatan loading game dan kecepatan kompilasi coding. Jangan pilih 256 GB karena akan sangat lambat untuk menyimpan data proyek dan game.\n*   **GPU (Graphics Card):**\n    *   **Kebutuhan:** **Integrated Graphics (Ultrabook)** atau **Entry-level Dedicated GPU (RTX 3050/4050 atau RX 6600)**.\n    *   **Alasan:**\n        *   Untuk *web dev* & *ML*: Integrated Graphics (seperti Intel Iris Xe atau AMD Radeon 760M) sudah sangat cukup untuk menjalankan script Python ringan.\n        *   Untuk *Dota 2/Valorant*: Jika kamu main di setting Medium-High, Integrated Graphics akan *lag* (bergeser warna, FPS turun). Untuk game ini, kamu **wajib** GPU terpisah (Dedicated GPU).\n*   **Display:**\n    *   **Kebutuhan:** 144Hz, 100% sRGB, dan Resolusi Full HD (1920x1080).\n    *   **Alasan:** Untuk coding, ketelitian warna (sRGB) penting. Untuk gaming, 144Hz memberikan smoothness yang"
+    }
+  ]
+}

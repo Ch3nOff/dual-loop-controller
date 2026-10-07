@@ -5,9 +5,17 @@ OpenAI-compatible inference server with dynamic VRAM auto-tuning,
 enabling models to run without OOM on 8GB/12GB consumer GPUs.
 """
 
-from .vram_tuner import VRAMAutoTuner, AllocationPlan, HardwareProfile, ModelSpec
-from .engine import DualLoopInferenceEngine
-from .app import create_app
+try:
+    from .vram_tuner import VRAMAutoTuner, AllocationPlan, HardwareProfile, ModelSpec
+    from .engine import DualLoopInferenceEngine
+    from .app import create_app
+except ImportError:
+    VRAMAutoTuner = None  # type: ignore
+    AllocationPlan = None  # type: ignore
+    HardwareProfile = None  # type: ignore
+    ModelSpec = None  # type: ignore
+    DualLoopInferenceEngine = None  # type: ignore
+    create_app = None  # type: ignore
 
 def start_server(
     model_id_or_path: str = "Qwen/Qwen2.5-7B-Instruct",
@@ -21,6 +29,12 @@ def start_server(
     log_level: str = "info"
 ) -> None:
     """Initializes the DualLoopInferenceEngine and serves the OpenAI-compatible FastAPI server via uvicorn."""
+    if DualLoopInferenceEngine is None or create_app is None:
+        raise ImportError(
+            "PyTorch and transformers are required to run the standard DualLoopInferenceEngine server.\n"
+            "Install with: pip install 'dual-loop-controller[serve]'"
+        )
+
     import uvicorn
 
     engine = DualLoopInferenceEngine(
@@ -52,5 +66,19 @@ __all__ = [
     "ModelSpec",
     "DualLoopInferenceEngine",
     "create_app",
-    "start_server"
+    "start_server",
 ]
+
+# Conditionally export vLLM components when available
+try:
+    from .vllm_engine import VLLMInferenceEngine
+    from .vllm_app import start_vllm_server
+    from .vllm_offline import vllm_batch_generate, vllm_compare_base_vs_hadl
+    __all__.extend([
+        "VLLMInferenceEngine",
+        "start_vllm_server",
+        "vllm_batch_generate",
+        "vllm_compare_base_vs_hadl",
+    ])
+except ImportError:
+    pass

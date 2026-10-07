@@ -1,7 +1,8 @@
-name: swe_xalpha_coder
+name: swe_coder
 model: gemma-4-31b-it-qat-w4a16-ct
-description: Autonomous senior Python engineer fixing open-source repository issues with HADL Dual-Loop cognition, Bayesian defect priors, and verified minimal patches.
+description: Autonomous software engineer that fixes repository issues with minimal, verified patches.
 instruction: !include prompts/system.md
+generate_content_config: !include configs/sampling.yaml
 tools:
   - run_command
   - read_file
@@ -12,4 +13,3 @@ tools:
   - agent_tool:
       config_path: sub_agents/code_analyzer.yaml
       skip_summarization: true
-generate_content_config: !include configs/sampling.yaml

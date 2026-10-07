@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dual-loop-controller"
-version = "3.2.0"
-description = "A unified cognitive operating system with model-agnostic canonical adapters, sleep-phase consolidation, and prefrontal invariant firewalls for Transformers"
+version = "4.5.0"
+description = "HADL v4.5 Car-Lift Edition: Two-Piston Car-Lift Hydraulic Equilibrium, Porous Orifice Firewall, and 100% Frozen Foundation Model Architecture"
 readme = "README_PYPI.md"
 requires-python = ">=3.9"
 license = "MIT"
@@ -50,6 +50,11 @@ llm = [
     "transformers>=4.40.0,<5.0.0",
     "accelerate>=0.28.0,<2.0.0",
 ]
+vllm = [
+    "vllm>=0.6.0",
+    "torch>=2.0.0,<3.0.0",
+    "transformers>=4.40.0,<5.0.0",
+]
 serve = [
     "torch>=2.0.0,<3.0.0",
     "transformers>=4.40.0,<5.0.0",
@@ -72,6 +77,9 @@ all = [
 [project.scripts]
 dual-loop = "dual_loop.cli:main"
 hadl = "dual_loop.cli:main"
+
+[project.entry-points."vllm.general_plugins"]
+hadl_dual_loop = "dual_loop.vllm_plugin:register"
 
 [project.urls]
 Homepage = "https://github.com/Ch3nOff/dual-loop-controller"

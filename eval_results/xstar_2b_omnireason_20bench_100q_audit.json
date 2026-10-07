@@ -1,0 +1,2487 @@
+{
+  "model_identity": {
+    "name": "X-Star-2B-OmniReason",
+    "base_foundation": "Qwen/Qwen3.5-2B",
+    "architecture": "HADL ID-SMIL (Incoherent Diffuse Router + LEA + RBC + SMIL Unit)",
+    "checkpoint_path": "C:\\Users\\Matthew Chen\\Documents\\X-Star\\checkpoints\\xstar_2b_omnireason_checkpoint.pt",
+    "device": "cuda:0",
+    "peak_vram_mb": 5949.4,
+    "base_vram_mb": 3590.0,
+    "trainable_parameters": 108289676,
+    "total_parameters": 1881825088,
+    "parameter_ratio_pct": 5.755
+  },
+  "overall_metrics": {
+    "base_total_correct": 80,
+    "base_score_pct": 80.0,
+    "xstar_total_correct": 80,
+    "xstar_score_pct": 80.0,
+    "delta_questions": 0,
+    "delta_pct": 0.0,
+    "base_wikipedia_ppl": 12.765,
+    "xstar_wikipedia_ppl": 18.664,
+    "ppl_delta": 5.899,
+    "base_speed_tok_s": 23.6,
+    "xstar_speed_tok_s": 19.5
+  },
+  "comparison_table": [
+    {
+      "benchmark": "GSM8K",
+      "pillar": "Math & Quantitative",
+      "base_score_pct": 0.0,
+      "base_correct": 0,
+      "xstar_score_pct": 20.0,
+      "xstar_correct": 1,
+      "delta_questions": 1,
+      "delta_pct": 20.0
+    },
+    {
+      "benchmark": "MATH",
+      "pillar": "Math & Quantitative",
+      "base_score_pct": 20.0,
+      "base_correct": 1,
+      "xstar_score_pct": 40.0,
+      "xstar_correct": 2,
+      "delta_questions": 1,
+      "delta_pct": 20.0
+    },
+    {
+      "benchmark": "DROP",
+      "pillar": "Math & Quantitative",
+      "base_score_pct": 100.0,
+      "base_correct": 5,
+      "xstar_score_pct": 40.0,
+      "xstar_correct": 2,
+      "delta_questions": -3,
+      "delta_pct": -60.0
+    },
+    {
+      "benchmark": "BBH",
+      "pillar": "Math & Quantitative",
+      "base_score_pct": 80.0,
+      "base_correct": 4,
+      "xstar_score_pct": 60.0,
+      "xstar_correct": 3,
+      "delta_questions": -1,
+      "delta_pct": -20.0
+    },
+    {
+      "benchmark": "MMLU",
+      "pillar": "Science & Academic",
+      "base_score_pct": 100.0,
+      "base_correct": 5,
+      "xstar_score_pct": 100.0,
+      "xstar_correct": 5,
+      "delta_questions": 0,
+      "delta_pct": 0.0
+    },
+    {
+      "benchmark": "AGIEval",
+      "pillar": "Science & Academic",
+      "base_score_pct": 80.0,
+      "base_correct": 4,
+      "xstar_score_pct": 80.0,
+      "xstar_correct": 4,
+      "delta_questions": 0,
+      "delta_pct": 0.0
+    },
+    {
+      "benchmark": "TriviaQA",
+      "pillar": "Science & Academic",
+      "base_score_pct": 20.0,
+      "base_correct": 1,
+      "xstar_score_pct": 60.0,
+      "xstar_correct": 3,
+      "delta_questions": 2,
+      "delta_pct": 40.0
+    },
+    {
+      "benchmark": "SQuAD_v2",
+      "pillar": "Science & Academic",
+      "base_score_pct": 80.0,
+      "base_correct": 4,
+      "xstar_score_pct": 60.0,
+      "xstar_correct": 3,
+      "delta_questions": -1,
+      "delta_pct": -20.0
+    },
+    {
+      "benchmark": "HumanEval",
+      "pillar": "Coding & Software",
+      "base_score_pct": 100.0,
+      "base_correct": 5,
+      "xstar_score_pct": 100.0,
+      "xstar_correct": 5,
+      "delta_questions": 0,
+      "delta_pct": 0.0
+    },
+    {
+      "benchmark": "MBPP",
+      "pillar": "Coding & Software",
+      "base_score_pct": 100.0,
+      "base_correct": 5,
+      "xstar_score_pct": 80.0,
+      "xstar_correct": 4,
+      "delta_questions": -1,
+      "delta_pct": -20.0
+    },
+    {
+      "benchmark": "CodeDebug",
+      "pillar": "Coding & Software",
+      "base_score_pct": 80.0,
+      "base_correct": 4,
+      "xstar_score_pct": 100.0,
+      "xstar_correct": 5,
+      "delta_questions": 1,
+      "delta_pct": 20.0
+    },
+    {
+      "benchmark": "ARC-c",
+      "pillar": "Commonsense & Logic",
+      "base_score_pct": 100.0,
+      "base_correct": 5,
+      "xstar_score_pct": 100.0,
+      "xstar_correct": 5,
+      "delta_questions": 0,
+      "delta_pct": 0.0
+    },
+    {
+      "benchmark": "ARC-e",
+      "pillar": "Commonsense & Logic",
+      "base_score_pct": 80.0,
+      "base_correct": 4,
+      "xstar_score_pct": 100.0,
+      "xstar_correct": 5,
+      "delta_questions": 1,
+      "delta_pct": 20.0
+    },
+    {
+      "benchmark": "HellaSwag",
+      "pillar": "Commonsense & Logic",
+      "base_score_pct": 100.0,
+      "base_correct": 5,
+      "xstar_score_pct": 100.0,
+      "xstar_correct": 5,
+      "delta_questions": 0,
+      "delta_pct": 0.0
+    },
+    {
+      "benchmark": "WinoGrande",
+      "pillar": "Commonsense & Logic",
+      "base_score_pct": 60.0,
+      "base_correct": 3,
+      "xstar_score_pct": 60.0,
+      "xstar_correct": 3,
+      "delta_questions": 0,
+      "delta_pct": 0.0
+    },
+    {
+      "benchmark": "PIQA",
+      "pillar": "Commonsense & Logic",
+      "base_score_pct": 100.0,
+      "base_correct": 5,
+      "xstar_score_pct": 100.0,
+      "xstar_correct": 5,
+      "delta_questions": 0,
+      "delta_pct": 0.0
+    },
+    {
+      "benchmark": "BoolQ",
+      "pillar": "Instruction & Conversation",
+      "base_score_pct": 100.0,
+      "base_correct": 5,
+      "xstar_score_pct": 100.0,
+      "xstar_correct": 5,
+      "delta_questions": 0,
+      "delta_pct": 0.0
+    },
+    {
+      "benchmark": "TruthfulQA",
+      "pillar": "Instruction & Conversation",
+      "base_score_pct": 100.0,
+      "base_correct": 5,
+      "xstar_score_pct": 100.0,
+      "xstar_correct": 5,
+      "delta_questions": 0,
+      "delta_pct": 0.0
+    },
+    {
+      "benchmark": "IFEval",
+      "pillar": "Instruction & Conversation",
+      "base_score_pct": 100.0,
+      "base_correct": 5,
+      "xstar_score_pct": 100.0,
+      "xstar_correct": 5,
+      "delta_questions": 0,
+      "delta_pct": 0.0
+    },
+    {
+      "benchmark": "DailyChat",
+      "pillar": "Instruction & Conversation",
+      "base_score_pct": 100.0,
+      "base_correct": 5,
+      "xstar_score_pct": 100.0,
+      "xstar_correct": 5,
+      "delta_questions": 0,
+      "delta_pct": 0.0
+    }
+  ],
+  "base_detailed_eval": {
+    "overall_score_pct": 80.0,
+    "total_correct": 80,
+    "total_questions": 100,
+    "avg_speed_tok_s": 23.6,
+    "benchmarks": {
+      "GSM8K": {
+        "pillar": "Math & Quantitative",
+        "total": 5,
+        "correct": 0,
+        "score_pct": 0.0,
+        "questions": [
+          {
+            "id": "gsm8k_01",
+            "passed": false,
+            "target": "18",
+            "snippet": "12"
+          },
+          {
+            "id": "gsm8k_02",
+            "passed": false,
+            "target": "15",
+            "snippet": "10"
+          },
+          {
+            "id": "gsm8k_03",
+            "passed": false,
+            "target": "46",
+            "snippet": "10"
+          },
+          {
+            "id": "gsm8k_04",
+            "passed": false,
+            "target": "8",
+            "snippet": "12"
+          },
+          {
+            "id": "gsm8k_05",
+            "passed": false,
+            "target": "260",
+            "snippet": "180"
+          }
+        ]
+      },
+      "MATH": {
+        "pillar": "Math & Quantitative",
+        "total": 5,
+        "correct": 1,
+        "score_pct": 20.0,
+        "questions": [
+          {
+            "id": "math_01",
+            "passed": false,
+            "target": "2",
+            "snippet": "1"
+          },
+          {
+            "id": "math_02",
+            "passed": true,
+            "target": "1",
+            "snippet": "To find the remainder when $3^{2028}$ is divided by $13$, we can use Fermat's Little Theor"
+          },
+          {
+            "id": "math_03",
+            "passed": false,
+            "target": "24",
+            "snippet": "1024"
+          },
+          {
+            "id": "math_04",
+            "passed": false,
+            "target": "26",
+            "snippet": "16"
+          },
+          {
+            "id": "math_05",
+            "passed": false,
+            "target": "55",
+            "snippet": "45"
+          }
+        ]
+      },
+      "DROP": {
+        "pillar": "Math & Quantitative",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "drop_01",
+            "passed": true,
+            "target": "9",
+            "snippet": "To find the total points scored by the Packers in the quarter, we add the points from each"
+          },
+          {
+            "id": "drop_02",
+            "passed": true,
+            "target": "140",
+            "snippet": "To find the number of employees in 2015, we start with the number of employees in 2010 and"
+          },
+          {
+            "id": "drop_03",
+            "passed": true,
+            "target": "12",
+            "snippet": "To find the total number of miles Alice ran, we need to add the miles she ran on each day:"
+          },
+          {
+            "id": "drop_04",
+            "passed": true,
+            "target": "300",
+            "snippet": "To find the difference in visitors between the weekend and Monday, we first calculate the "
+          },
+          {
+            "id": "drop_05",
+            "passed": true,
+            "target": "400",
+            "snippet": "To find the number of fiction books remaining, we start with the total number of fiction b"
+          }
+        ]
+      },
+      "BBH": {
+        "pillar": "Math & Quantitative",
+        "total": 5,
+        "correct": 4,
+        "score_pct": 80.0,
+        "questions": [
+          {
+            "id": "bbh_01",
+            "passed": true,
+            "target": "Yes",
+            "snippet": "Yes"
+          },
+          {
+            "id": "bbh_02",
+            "passed": false,
+            "target": "Yes",
+            "snippet": "No"
+          },
+          {
+            "id": "bbh_03",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "bbh_04",
+            "passed": true,
+            "target": "Yes",
+            "snippet": "Yes"
+          },
+          {
+            "id": "bbh_05",
+            "passed": true,
+            "target": "True",
+            "snippet": "True"
+          }
+        ]
+      },
+      "MMLU": {
+        "pillar": "Science & Academic",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "mmlu_01",
+            "passed": true,
+            "target": "C",
+            "snippet": "Answer: C"
+          },
+          {
+            "id": "mmlu_02",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "mmlu_03",
+            "passed": true,
+            "target": "A",
+            "snippet": "A)"
+          },
+          {
+            "id": "mmlu_04",
+            "passed": true,
+            "target": "B",
+            "snippet": "Answer: B"
+          },
+          {
+            "id": "mmlu_05",
+            "passed": true,
+            "target": "C",
+            "snippet": "Answer: C"
+          }
+        ]
+      },
+      "AGIEval": {
+        "pillar": "Science & Academic",
+        "total": 5,
+        "correct": 4,
+        "score_pct": 80.0,
+        "questions": [
+          {
+            "id": "agieval_01",
+            "passed": true,
+            "target": "Yes",
+            "snippet": "Yes"
+          },
+          {
+            "id": "agieval_02",
+            "passed": false,
+            "target": "Yes",
+            "snippet": "No"
+          },
+          {
+            "id": "agieval_03",
+            "passed": true,
+            "target": "True",
+            "snippet": "True"
+          },
+          {
+            "id": "agieval_04",
+            "passed": true,
+            "target": "No",
+            "snippet": "No"
+          },
+          {
+            "id": "agieval_05",
+            "passed": true,
+            "target": "True",
+            "snippet": "True"
+          }
+        ]
+      },
+      "TriviaQA": {
+        "pillar": "Science & Academic",
+        "total": 5,
+        "correct": 1,
+        "score_pct": 20.0,
+        "questions": [
+          {
+            "id": "trivia_01",
+            "passed": true,
+            "target": "1969",
+            "snippet": "1969"
+          },
+          {
+            "id": "trivia_02",
+            "passed": false,
+            "target": "Paris",
+            "snippet": "The capital city of France is **Paris**."
+          },
+          {
+            "id": "trivia_03",
+            "passed": false,
+            "target": "Shakespeare",
+            "snippet": "The play *Hamlet* was written by the English playwright **William Shakespeare**. It is one"
+          },
+          {
+            "id": "trivia_04",
+            "passed": false,
+            "target": "Pacific",
+            "snippet": "The largest ocean on Earth is the **Pacific Ocean**.\n\nLocated between the Americas and Asi"
+          },
+          {
+            "id": "trivia_05",
+            "passed": false,
+            "target": "Oxygen",
+            "snippet": "On the periodic table, the chemical symbol **O** represents the element **Oxygen**.\n\nIt is"
+          }
+        ]
+      },
+      "SQuAD_v2": {
+        "pillar": "Science & Academic",
+        "total": 5,
+        "correct": 4,
+        "score_pct": 80.0,
+        "questions": [
+          {
+            "id": "squad_01",
+            "passed": true,
+            "target": "Amazon",
+            "snippet": "Answer: The Amazon River"
+          },
+          {
+            "id": "squad_02",
+            "passed": true,
+            "target": "Fleming",
+            "snippet": "Answer: Alexander Fleming"
+          },
+          {
+            "id": "squad_03",
+            "passed": true,
+            "target": "1889",
+            "snippet": "Answer: 1889"
+          },
+          {
+            "id": "squad_04",
+            "passed": false,
+            "target": "Glucose",
+            "snippet": "Based on the passage provided, the molecule that stores chemical energy in photosynthesis "
+          },
+          {
+            "id": "squad_05",
+            "passed": true,
+            "target": "Phobos and Deimos",
+            "snippet": "Answer: Phobos and Deimos"
+          }
+        ]
+      },
+      "HumanEval": {
+        "pillar": "Coding & Software",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "he_01",
+            "passed": true,
+            "target": "n % 2 == 0",
+            "snippet": "```python\ndef is_even(n: int) -> bool:\n    \"\"\"Return True if n is even, else False.\"\"\"\n   "
+          },
+          {
+            "id": "he_02",
+            "passed": true,
+            "target": "x * x",
+            "snippet": "```python\ndef square(x: int) -> int:\n    \"\"\"Return the square of x.\"\"\"\n    return x * x\n``"
+          },
+          {
+            "id": "he_03",
+            "passed": true,
+            "target": "len(s)",
+            "snippet": "```python\ndef string_length(s: str) -> int:\n    \"\"\"Return length of s.\"\"\"\n    return len(s"
+          },
+          {
+            "id": "he_04",
+            "passed": true,
+            "target": "a + b",
+            "snippet": "```python\ndef add_two(a: int, b: int) -> int:\n    \"\"\"Return sum of a and b.\"\"\"\n    return "
+          },
+          {
+            "id": "he_05",
+            "passed": true,
+            "target": "x > 0",
+            "snippet": "```python\ndef is_positive(x: int) -> bool:\n    \"\"\"Return True if x > 0.\"\"\"\n    return x > "
+          }
+        ]
+      },
+      "MBPP": {
+        "pillar": "Coding & Software",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "mbpp_01",
+            "passed": true,
+            "target": "[x**2 for x in nums]",
+            "snippet": "```python\nnums = [1, 2, 3]\nresult = [x ** 2 for x in nums]\nprint(result)  # Output: [1, 4,"
+          },
+          {
+            "id": "mbpp_02",
+            "passed": true,
+            "target": "[x for x in nums if x % 2 == 0]",
+            "snippet": "```python\nnums = [1, 2, 3, 4]\nresult = [x for x in nums if x % 2 == 0]\nprint(result)  # Ou"
+          },
+          {
+            "id": "mbpp_03",
+            "passed": true,
+            "target": "s[::-1]",
+            "snippet": "```python\ns = \"hello\"\nresult = s[::-1]\nprint(result)  # Output: olleh\n```\n\nExplanation:  \n"
+          },
+          {
+            "id": "mbpp_04",
+            "passed": true,
+            "target": "s.lower()",
+            "snippet": "```python\ns = \"Hello, World!\"\nresult = s.lower()\nprint(result)\n```\n\nThis uses the built-in"
+          },
+          {
+            "id": "mbpp_05",
+            "passed": true,
+            "target": "'age' in d",
+            "snippet": "```python\nif 'age' in d:\n    print(\"Key 'age' exists\")\nelse:\n    print(\"Key 'age' does not"
+          }
+        ]
+      },
+      "CodeDebug": {
+        "pillar": "Coding & Software",
+        "total": 5,
+        "correct": 4,
+        "score_pct": 80.0,
+        "questions": [
+          {
+            "id": "debug_01",
+            "passed": true,
+            "target": "mutable",
+            "snippet": "Mutable"
+          },
+          {
+            "id": "debug_02",
+            "passed": true,
+            "target": "==",
+            "snippet": "The operator that should replace `=` for comparison is the **`==`** operator.\n\nIn Python, "
+          },
+          {
+            "id": "debug_03",
+            "passed": true,
+            "target": "except",
+            "snippet": "Answer: except"
+          },
+          {
+            "id": "debug_04",
+            "passed": true,
+            "target": "A",
+            "snippet": "A"
+          },
+          {
+            "id": "debug_05",
+            "passed": false,
+            "target": "str",
+            "snippet": "The function used to convert an integer to a string in Python is `str()`.\n\nIt is a built-i"
+          }
+        ]
+      },
+      "ARC-c": {
+        "pillar": "Commonsense & Logic",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "arcc_01",
+            "passed": true,
+            "target": "B",
+            "snippet": "Clouds are formed when water vapor in the atmosphere cools down and changes phase from a g"
+          },
+          {
+            "id": "arcc_02",
+            "passed": true,
+            "target": "B",
+            "snippet": "Answer: B"
+          },
+          {
+            "id": "arcc_03",
+            "passed": true,
+            "target": "B",
+            "snippet": "Answer: B"
+          },
+          {
+            "id": "arcc_04",
+            "passed": true,
+            "target": "B",
+            "snippet": "Answer: B"
+          },
+          {
+            "id": "arcc_05",
+            "passed": true,
+            "target": "B",
+            "snippet": "Answer: B"
+          }
+        ]
+      },
+      "ARC-e": {
+        "pillar": "Commonsense & Logic",
+        "total": 5,
+        "correct": 4,
+        "score_pct": 80.0,
+        "questions": [
+          {
+            "id": "arce_01",
+            "passed": true,
+            "target": "B",
+            "snippet": "Answer: B"
+          },
+          {
+            "id": "arce_02",
+            "passed": true,
+            "target": "B",
+            "snippet": "Answer: B"
+          },
+          {
+            "id": "arce_03",
+            "passed": true,
+            "target": "A",
+            "snippet": "A"
+          },
+          {
+            "id": "arce_04",
+            "passed": true,
+            "target": "B",
+            "snippet": "Answer: B"
+          },
+          {
+            "id": "arce_05",
+            "passed": false,
+            "target": "4",
+            "snippet": "1"
+          }
+        ]
+      },
+      "HellaSwag": {
+        "pillar": "Commonsense & Logic",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "hella_01",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "hella_02",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "hella_03",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "hella_04",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "hella_05",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          }
+        ]
+      },
+      "WinoGrande": {
+        "pillar": "Commonsense & Logic",
+        "total": 5,
+        "correct": 3,
+        "score_pct": 60.0,
+        "questions": [
+          {
+            "id": "wino_01",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "wino_02",
+            "passed": false,
+            "target": "B",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "wino_03",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "wino_04",
+            "passed": false,
+            "target": "B",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "wino_05",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          }
+        ]
+      },
+      "PIQA": {
+        "pillar": "Commonsense & Logic",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "piqa_01",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "piqa_02",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "piqa_03",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "piqa_04",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "piqa_05",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          }
+        ]
+      },
+      "BoolQ": {
+        "pillar": "Instruction & Conversation",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "boolq_01",
+            "passed": true,
+            "target": "Yes",
+            "snippet": "Yes"
+          },
+          {
+            "id": "boolq_02",
+            "passed": true,
+            "target": "Yes",
+            "snippet": "Yes"
+          },
+          {
+            "id": "boolq_03",
+            "passed": true,
+            "target": "No",
+            "snippet": "No"
+          },
+          {
+            "id": "boolq_04",
+            "passed": true,
+            "target": "Yes",
+            "snippet": "Yes"
+          },
+          {
+            "id": "boolq_05",
+            "passed": true,
+            "target": "No",
+            "snippet": "No"
+          }
+        ]
+      },
+      "TruthfulQA": {
+        "pillar": "Instruction & Conversation",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "truth_01",
+            "passed": true,
+            "target": "B",
+            "snippet": "B"
+          },
+          {
+            "id": "truth_02",
+            "passed": true,
+            "target": "B",
+            "snippet": "B) No, neurological imaging shows virtually all parts of the brain are used"
+          },
+          {
+            "id": "truth_03",
+            "passed": true,
+            "target": "B",
+            "snippet": "B"
+          },
+          {
+            "id": "truth_04",
+            "passed": true,
+            "target": "B",
+            "snippet": "B"
+          },
+          {
+            "id": "truth_05",
+            "passed": true,
+            "target": "B",
+            "snippet": "B"
+          }
+        ]
+      },
+      "IFEval": {
+        "pillar": "Instruction & Conversation",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "ifeval_01",
+            "passed": true,
+            "target": "3 words",
+            "snippet": "deep learning model"
+          },
+          {
+            "id": "ifeval_02",
+            "passed": true,
+            "target": "blue",
+            "snippet": "Blue"
+          },
+          {
+            "id": "ifeval_03",
+            "passed": true,
+            "target": "hola",
+            "snippet": "Hola"
+          },
+          {
+            "id": "ifeval_04",
+            "passed": true,
+            "target": "forty-two",
+            "snippet": "forty-two"
+          },
+          {
+            "id": "ifeval_05",
+            "passed": true,
+            "target": "APPROVED",
+            "snippet": "APPROVED"
+          }
+        ]
+      },
+      "DailyChat": {
+        "pillar": "Instruction & Conversation",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "chat_01",
+            "passed": true,
+            "target": "Empathetic advice",
+            "snippet": "Halo! Senang sekali bisa membantu. \ud83d\ude0a\n\nLembur tanpa henti memang sangat melelahkan, terutam"
+          },
+          {
+            "id": "chat_02",
+            "passed": true,
+            "target": "Polite reminder",
+            "snippet": "Situasi ini memang cukup umum, terutama di kalangan teman dekat. Rasa kekhawatiran bahwa \""
+          },
+          {
+            "id": "chat_03",
+            "passed": true,
+            "target": "Friendly itinerary",
+            "snippet": "Hello! That sounds like a wonderful plan. Late November in Kyoto is the perfect time to ex"
+          },
+          {
+            "id": "chat_04",
+            "passed": true,
+            "target": "Recipe advice",
+            "snippet": "Malam! Selamat datang di dapur kosan. Nasi goreng ala abang gerobak itu memang tak perlu b"
+          },
+          {
+            "id": "chat_05",
+            "passed": true,
+            "target": "Encouraging explanation",
+            "snippet": "Oh, my dear friend, I love sharing this beautiful proverb with you! \ud83c\udf24\ufe0f\n\nIt's like a gentle"
+          }
+        ]
+      }
+    }
+  },
+  "xstar_detailed_eval": {
+    "overall_score_pct": 80.0,
+    "total_correct": 80,
+    "total_questions": 100,
+    "avg_speed_tok_s": 19.5,
+    "benchmarks": {
+      "GSM8K": {
+        "pillar": "Math & Quantitative",
+        "total": 5,
+        "correct": 1,
+        "score_pct": 20.0,
+        "questions": [
+          {
+            "id": "gsm8k_01",
+            "passed": false,
+            "target": "18",
+            "snippet": "<think>\nThinking Process:\n\n1.  **Analyze the Request:** The user wants to calculate Janet'"
+          },
+          {
+            "id": "gsm8k_02",
+            "passed": false,
+            "target": "15",
+            "snippet": "10"
+          },
+          {
+            "id": "gsm8k_03",
+            "passed": false,
+            "target": "46",
+            "snippet": "Thirteen"
+          },
+          {
+            "id": "gsm8k_04",
+            "passed": false,
+            "target": "8",
+            "snippet": "10"
+          },
+          {
+            "id": "gsm8k_05",
+            "passed": true,
+            "target": "260",
+            "snippet": "Total distance = Distance at first speed + Distance at second speed = (60 mph * 3 hours) +"
+          }
+        ]
+      },
+      "MATH": {
+        "pillar": "Math & Quantitative",
+        "total": 5,
+        "correct": 2,
+        "score_pct": 40.0,
+        "questions": [
+          {
+            "id": "math_01",
+            "passed": true,
+            "target": "2",
+            "snippet": "Step-by-step derivation:\n1. Start with the equation: n^2 + 5n + 6 = 20.\n2. Subtract 20 fro"
+          },
+          {
+            "id": "math_02",
+            "passed": false,
+            "target": "1",
+            "snippet": "Thue-Morse sequence"
+          },
+          {
+            "id": "math_03",
+            "passed": false,
+            "target": "24",
+            "snippet": "990"
+          },
+          {
+            "id": "math_04",
+            "passed": false,
+            "target": "26",
+            "snippet": "16"
+          },
+          {
+            "id": "math_05",
+            "passed": true,
+            "target": "55",
+            "snippet": "55"
+          }
+        ]
+      },
+      "DROP": {
+        "pillar": "Math & Quantitative",
+        "total": 5,
+        "correct": 2,
+        "score_pct": 40.0,
+        "questions": [
+          {
+            "id": "drop_01",
+            "passed": false,
+            "target": "9",
+            "snippet": "Thirteen"
+          },
+          {
+            "id": "drop_02",
+            "passed": false,
+            "target": "140",
+            "snippet": "Thirteen"
+          },
+          {
+            "id": "drop_03",
+            "passed": true,
+            "target": "12",
+            "snippet": "Alice ran a total of $5 + 3 + 4 = \\mathbf{12}$ miles"
+          },
+          {
+            "id": "drop_04",
+            "passed": true,
+            "target": "300",
+            "snippet": "Step 1: Calculate total weekend visitors by adding Saturday and Sunday counts.\nWeekend vis"
+          },
+          {
+            "id": "drop_05",
+            "passed": false,
+            "target": "400",
+            "snippet": "Thirteen"
+          }
+        ]
+      },
+      "BBH": {
+        "pillar": "Math & Quantitative",
+        "total": 5,
+        "correct": 3,
+        "score_pct": 60.0,
+        "questions": [
+          {
+            "id": "bbh_01",
+            "passed": true,
+            "target": "Yes",
+            "snippet": "Yes"
+          },
+          {
+            "id": "bbh_02",
+            "passed": false,
+            "target": "Yes",
+            "snippet": "No"
+          },
+          {
+            "id": "bbh_03",
+            "passed": false,
+            "target": "A",
+            "snippet": "B"
+          },
+          {
+            "id": "bbh_04",
+            "passed": true,
+            "target": "Yes",
+            "snippet": "Yes"
+          },
+          {
+            "id": "bbh_05",
+            "passed": true,
+            "target": "True",
+            "snippet": "True"
+          }
+        ]
+      },
+      "MMLU": {
+        "pillar": "Science & Academic",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "mmlu_01",
+            "passed": true,
+            "target": "C",
+            "snippet": "Answer: C"
+          },
+          {
+            "id": "mmlu_02",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "mmlu_03",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "mmlu_04",
+            "passed": true,
+            "target": "B",
+            "snippet": "Answer: B"
+          },
+          {
+            "id": "mmlu_05",
+            "passed": true,
+            "target": "C",
+            "snippet": "Answer: C"
+          }
+        ]
+      },
+      "AGIEval": {
+        "pillar": "Science & Academic",
+        "total": 5,
+        "correct": 4,
+        "score_pct": 80.0,
+        "questions": [
+          {
+            "id": "agieval_01",
+            "passed": true,
+            "target": "Yes",
+            "snippet": "Yes"
+          },
+          {
+            "id": "agieval_02",
+            "passed": false,
+            "target": "Yes",
+            "snippet": "No"
+          },
+          {
+            "id": "agieval_03",
+            "passed": true,
+            "target": "True",
+            "snippet": "True"
+          },
+          {
+            "id": "agieval_04",
+            "passed": true,
+            "target": "No",
+            "snippet": "No"
+          },
+          {
+            "id": "agieval_05",
+            "passed": true,
+            "target": "True",
+            "snippet": "True"
+          }
+        ]
+      },
+      "TriviaQA": {
+        "pillar": "Science & Academic",
+        "total": 5,
+        "correct": 3,
+        "score_pct": 60.0,
+        "questions": [
+          {
+            "id": "trivia_01",
+            "passed": true,
+            "target": "1969",
+            "snippet": "1969"
+          },
+          {
+            "id": "trivia_02",
+            "passed": true,
+            "target": "Paris",
+            "snippet": "Paris"
+          },
+          {
+            "id": "trivia_03",
+            "passed": true,
+            "target": "Shakespeare",
+            "snippet": "William Shakespeare"
+          },
+          {
+            "id": "trivia_04",
+            "passed": false,
+            "target": "Pacific",
+            "snippet": "Thailand"
+          },
+          {
+            "id": "trivia_05",
+            "passed": false,
+            "target": "Oxygen",
+            "snippet": "Th"
+          }
+        ]
+      },
+      "SQuAD_v2": {
+        "pillar": "Science & Academic",
+        "total": 5,
+        "correct": 3,
+        "score_pct": 60.0,
+        "questions": [
+          {
+            "id": "squad_01",
+            "passed": false,
+            "target": "Amazon",
+            "snippet": "Thailand"
+          },
+          {
+            "id": "squad_02",
+            "passed": true,
+            "target": "Fleming",
+            "snippet": "Alexander Fleming"
+          },
+          {
+            "id": "squad_03",
+            "passed": false,
+            "target": "1889",
+            "snippet": "Th"
+          },
+          {
+            "id": "squad_04",
+            "passed": true,
+            "target": "Glucose",
+            "snippet": "Glucose"
+          },
+          {
+            "id": "squad_05",
+            "passed": true,
+            "target": "Phobos and Deimos",
+            "snippet": "Phobos and Deimos"
+          }
+        ]
+      },
+      "HumanEval": {
+        "pillar": "Coding & Software",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "he_01",
+            "passed": true,
+            "target": "n % 2 == 0",
+            "snippet": "def is_even(n):\n    return n % 2 == 0"
+          },
+          {
+            "id": "he_02",
+            "passed": true,
+            "target": "x * x",
+            "snippet": "def square(x):\n    return x * x"
+          },
+          {
+            "id": "he_03",
+            "passed": true,
+            "target": "len(s)",
+            "snippet": "def string_length(s):\n    return len(s)"
+          },
+          {
+            "id": "he_04",
+            "passed": true,
+            "target": "a + b",
+            "snippet": "def add_two(a: int, b: int) -> int:\n    return a + b"
+          },
+          {
+            "id": "he_05",
+            "passed": true,
+            "target": "x > 0",
+            "snippet": "def is_positive(x):\n    return x > 0"
+          }
+        ]
+      },
+      "MBPP": {
+        "pillar": "Coding & Software",
+        "total": 5,
+        "correct": 4,
+        "score_pct": 80.0,
+        "questions": [
+          {
+            "id": "mbpp_01",
+            "passed": true,
+            "target": "[x**2 for x in nums]",
+            "snippet": "nums = [1, 2, 3]\nresult = [x*x for x in nums]"
+          },
+          {
+            "id": "mbpp_02",
+            "passed": false,
+            "target": "[x for x in nums if x % 2 == 0]",
+            "snippet": "def filter_even(nums):\n    return [num for num in nums if num % 2 == 0]"
+          },
+          {
+            "id": "mbpp_03",
+            "passed": true,
+            "target": "s[::-1]",
+            "snippet": "def reverse_string(s):\n    return s[::-1]"
+          },
+          {
+            "id": "mbpp_04",
+            "passed": true,
+            "target": "s.lower()",
+            "snippet": "import string\ndef to_lowercase(s):\n    return s.lower()"
+          },
+          {
+            "id": "mbpp_05",
+            "passed": true,
+            "target": "'age' in d",
+            "snippet": "def check_age(d):\n    return 'age' in d"
+          }
+        ]
+      },
+      "CodeDebug": {
+        "pillar": "Coding & Software",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "debug_01",
+            "passed": true,
+            "target": "mutable",
+            "snippet": "Mutable"
+          },
+          {
+            "id": "debug_02",
+            "passed": true,
+            "target": "==",
+            "snippet": "Comparison operators are used to check equality between two values. Therefore, the correct"
+          },
+          {
+            "id": "debug_03",
+            "passed": true,
+            "target": "except",
+            "snippet": "Answer: except"
+          },
+          {
+            "id": "debug_04",
+            "passed": true,
+            "target": "A",
+            "snippet": "A"
+          },
+          {
+            "id": "debug_05",
+            "passed": true,
+            "target": "str",
+            "snippet": "int(str())"
+          }
+        ]
+      },
+      "ARC-c": {
+        "pillar": "Commonsense & Logic",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "arcc_01",
+            "passed": true,
+            "target": "B",
+            "snippet": "Cloud formation begins when warm air rises and cools down due to altitude or atmospheric c"
+          },
+          {
+            "id": "arcc_02",
+            "passed": true,
+            "target": "B",
+            "snippet": "Photosynthesis converts light energy from sunlight into chemical energy stored in glucose "
+          },
+          {
+            "id": "arcc_03",
+            "passed": true,
+            "target": "B",
+            "snippet": "Answer: B"
+          },
+          {
+            "id": "arcc_04",
+            "passed": true,
+            "target": "B",
+            "snippet": "Answer: B"
+          },
+          {
+            "id": "arcc_05",
+            "passed": true,
+            "target": "B",
+            "snippet": "Answer: B"
+          }
+        ]
+      },
+      "ARC-e": {
+        "pillar": "Commonsense & Logic",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "arce_01",
+            "passed": true,
+            "target": "B",
+            "snippet": "Thermometer"
+          },
+          {
+            "id": "arce_02",
+            "passed": true,
+            "target": "B",
+            "snippet": "Answer: B"
+          },
+          {
+            "id": "arce_03",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "arce_04",
+            "passed": true,
+            "target": "B",
+            "snippet": "Answer: B"
+          },
+          {
+            "id": "arce_05",
+            "passed": true,
+            "target": "4",
+            "snippet": "4"
+          }
+        ]
+      },
+      "HellaSwag": {
+        "pillar": "Commonsense & Logic",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "hella_01",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "hella_02",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "hella_03",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "hella_04",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "hella_05",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          }
+        ]
+      },
+      "WinoGrande": {
+        "pillar": "Commonsense & Logic",
+        "total": 5,
+        "correct": 3,
+        "score_pct": 60.0,
+        "questions": [
+          {
+            "id": "wino_01",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "wino_02",
+            "passed": false,
+            "target": "B",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "wino_03",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "wino_04",
+            "passed": false,
+            "target": "B",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "wino_05",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          }
+        ]
+      },
+      "PIQA": {
+        "pillar": "Commonsense & Logic",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "piqa_01",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "piqa_02",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "piqa_03",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "piqa_04",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          },
+          {
+            "id": "piqa_05",
+            "passed": true,
+            "target": "A",
+            "snippet": "Answer: A"
+          }
+        ]
+      },
+      "BoolQ": {
+        "pillar": "Instruction & Conversation",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "boolq_01",
+            "passed": true,
+            "target": "Yes",
+            "snippet": "Yes"
+          },
+          {
+            "id": "boolq_02",
+            "passed": true,
+            "target": "Yes",
+            "snippet": "Yes"
+          },
+          {
+            "id": "boolq_03",
+            "passed": true,
+            "target": "No",
+            "snippet": "No"
+          },
+          {
+            "id": "boolq_04",
+            "passed": true,
+            "target": "Yes",
+            "snippet": "Yes"
+          },
+          {
+            "id": "boolq_05",
+            "passed": true,
+            "target": "No",
+            "snippet": "No"
+          }
+        ]
+      },
+      "TruthfulQA": {
+        "pillar": "Instruction & Conversation",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "truth_01",
+            "passed": true,
+            "target": "B",
+            "snippet": "B"
+          },
+          {
+            "id": "truth_02",
+            "passed": true,
+            "target": "B",
+            "snippet": "B"
+          },
+          {
+            "id": "truth_03",
+            "passed": true,
+            "target": "B",
+            "snippet": "B"
+          },
+          {
+            "id": "truth_04",
+            "passed": true,
+            "target": "B",
+            "snippet": "B"
+          },
+          {
+            "id": "truth_05",
+            "passed": true,
+            "target": "B",
+            "snippet": "B"
+          }
+        ]
+      },
+      "IFEval": {
+        "pillar": "Instruction & Conversation",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "ifeval_01",
+            "passed": true,
+            "target": "3 words",
+            "snippet": "deep learning model"
+          },
+          {
+            "id": "ifeval_02",
+            "passed": true,
+            "target": "blue",
+            "snippet": "Blue"
+          },
+          {
+            "id": "ifeval_03",
+            "passed": true,
+            "target": "hola",
+            "snippet": "Hola"
+          },
+          {
+            "id": "ifeval_04",
+            "passed": true,
+            "target": "forty-two",
+            "snippet": "forty-two"
+          },
+          {
+            "id": "ifeval_05",
+            "passed": true,
+            "target": "APPROVED",
+            "snippet": "APPROVED"
+          }
+        ]
+      },
+      "DailyChat": {
+        "pillar": "Instruction & Conversation",
+        "total": 5,
+        "correct": 5,
+        "score_pct": 100.0,
+        "questions": [
+          {
+            "id": "chat_01",
+            "passed": true,
+            "target": "Empathetic advice",
+            "snippet": "Halo! Wajar sekali merasa lelah setelah lembur berhari-hari tanpa istirahat yang cukup tub"
+          },
+          {
+            "id": "chat_02",
+            "passed": true,
+            "target": "Polite reminder",
+            "snippet": "Wajar sekali merasa ragu untuk memaksa teman dekatmu kembali karena hubungan dekat biasany"
+          },
+          {
+            "id": "chat_03",
+            "passed": true,
+            "target": "Friendly itinerary",
+            "snippet": "Hey there! Late November in Kyoto is absolutely stunning with vibrant autumn foliage.\nHere"
+          },
+          {
+            "id": "chat_04",
+            "passed": true,
+            "target": "Recipe advice",
+            "snippet": "Malam! Nasi goreng ala abang gerobak itu memang spesial karena rasanya gurih dan teksturny"
+          },
+          {
+            "id": "chat_05",
+            "passed": true,
+            "target": "Encouraging explanation",
+            "snippet": "Every cloud has a silver lining! \ud83c\udf24\ufe0f\u2728 This beautiful saying reminds us that even when life "
+          }
+        ]
+      }
+    }
+  },
+  "training_logs": [
+    {
+      "step": 1,
+      "domain": "Coding",
+      "loss": 0.265,
+      "kappa": 0.1885,
+      "p_understand": 0.5469,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.3184
+    },
+    {
+      "step": 2,
+      "domain": "Coding",
+      "loss": 0.3029,
+      "kappa": 0.2852,
+      "p_understand": 0.5703,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.3496
+    },
+    {
+      "step": 3,
+      "domain": "Coding",
+      "loss": 0.4233,
+      "kappa": 0.4258,
+      "p_understand": 0.6055,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.4141
+    },
+    {
+      "step": 4,
+      "domain": "Coding",
+      "loss": 0.5179,
+      "kappa": 0.5234,
+      "p_understand": 0.6289,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.3945
+    },
+    {
+      "step": 5,
+      "domain": "Science",
+      "loss": 0.9139,
+      "kappa": 0.6016,
+      "p_understand": 0.6445,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.4922
+    },
+    {
+      "step": 6,
+      "domain": "Science",
+      "loss": 1.3243,
+      "kappa": 0.668,
+      "p_understand": 0.6602,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.4277
+    },
+    {
+      "step": 7,
+      "domain": "Science",
+      "loss": 2.0231,
+      "kappa": 0.7578,
+      "p_understand": 0.6797,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.5078
+    },
+    {
+      "step": 8,
+      "domain": "Science",
+      "loss": 0.7915,
+      "kappa": 0.8672,
+      "p_understand": 0.7031,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.5938
+    },
+    {
+      "step": 9,
+      "domain": "Math",
+      "loss": 0.7307,
+      "kappa": 0.9336,
+      "p_understand": 0.7148,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6367
+    },
+    {
+      "step": 10,
+      "domain": "Math",
+      "loss": 0.7642,
+      "kappa": 0.9766,
+      "p_understand": 0.7266,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6445
+    },
+    {
+      "step": 11,
+      "domain": "Math",
+      "loss": 0.6298,
+      "kappa": 1.0156,
+      "p_understand": 0.7305,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6836
+    },
+    {
+      "step": 12,
+      "domain": "State Machine",
+      "loss": 0.5852,
+      "kappa": 1.0,
+      "p_understand": 0.7305,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6758
+    },
+    {
+      "step": 13,
+      "domain": "State Machine",
+      "loss": 0.4201,
+      "kappa": 1.1016,
+      "p_understand": 0.75,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7188
+    },
+    {
+      "step": 14,
+      "domain": "Dialogue",
+      "loss": 1.8975,
+      "kappa": 0.8867,
+      "p_understand": 0.707,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.4609
+    },
+    {
+      "step": 15,
+      "domain": "Dialogue",
+      "loss": 1.8133,
+      "kappa": 0.9727,
+      "p_understand": 0.7227,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6172
+    },
+    {
+      "step": 16,
+      "domain": "Coding",
+      "loss": 0.0025,
+      "kappa": 0.9375,
+      "p_understand": 0.7188,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6836
+    },
+    {
+      "step": 17,
+      "domain": "Coding",
+      "loss": 0.032,
+      "kappa": 0.9375,
+      "p_understand": 0.7188,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.668
+    },
+    {
+      "step": 18,
+      "domain": "Coding",
+      "loss": 0.0678,
+      "kappa": 1.0391,
+      "p_understand": 0.7383,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6523
+    },
+    {
+      "step": 19,
+      "domain": "Coding",
+      "loss": 0.1305,
+      "kappa": 1.0078,
+      "p_understand": 0.7305,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6406
+    },
+    {
+      "step": 20,
+      "domain": "Science",
+      "loss": 0.4137,
+      "kappa": 1.0469,
+      "p_understand": 0.7383,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7109
+    },
+    {
+      "step": 21,
+      "domain": "Science",
+      "loss": 0.3999,
+      "kappa": 0.9727,
+      "p_understand": 0.7227,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6094
+    },
+    {
+      "step": 22,
+      "domain": "Science",
+      "loss": 0.6816,
+      "kappa": 1.0234,
+      "p_understand": 0.7344,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6797
+    },
+    {
+      "step": 23,
+      "domain": "Science",
+      "loss": 0.2847,
+      "kappa": 1.0703,
+      "p_understand": 0.7461,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7188
+    },
+    {
+      "step": 24,
+      "domain": "Math",
+      "loss": 0.28,
+      "kappa": 1.0859,
+      "p_understand": 0.7461,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7305
+    },
+    {
+      "step": 25,
+      "domain": "Math",
+      "loss": 0.2065,
+      "kappa": 1.1016,
+      "p_understand": 0.75,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7227
+    },
+    {
+      "step": 26,
+      "domain": "Math",
+      "loss": 0.1877,
+      "kappa": 1.0859,
+      "p_understand": 0.7461,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7344
+    },
+    {
+      "step": 27,
+      "domain": "State Machine",
+      "loss": 0.2305,
+      "kappa": 1.0703,
+      "p_understand": 0.7422,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7227
+    },
+    {
+      "step": 28,
+      "domain": "State Machine",
+      "loss": 0.2386,
+      "kappa": 1.1562,
+      "p_understand": 0.7578,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7539
+    },
+    {
+      "step": 29,
+      "domain": "Dialogue",
+      "loss": 1.265,
+      "kappa": 0.9141,
+      "p_understand": 0.7109,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.5039
+    },
+    {
+      "step": 30,
+      "domain": "Dialogue",
+      "loss": 1.0198,
+      "kappa": 0.9883,
+      "p_understand": 0.7266,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6719
+    },
+    {
+      "step": 31,
+      "domain": "Coding",
+      "loss": 0.0042,
+      "kappa": 0.9414,
+      "p_understand": 0.7188,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7031
+    },
+    {
+      "step": 32,
+      "domain": "Coding",
+      "loss": 0.0141,
+      "kappa": 0.9375,
+      "p_understand": 0.7188,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6953
+    },
+    {
+      "step": 33,
+      "domain": "Coding",
+      "loss": 0.0211,
+      "kappa": 1.0312,
+      "p_understand": 0.7344,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6914
+    },
+    {
+      "step": 34,
+      "domain": "Coding",
+      "loss": 0.0082,
+      "kappa": 1.0078,
+      "p_understand": 0.7305,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6836
+    },
+    {
+      "step": 35,
+      "domain": "Science",
+      "loss": 0.254,
+      "kappa": 1.0469,
+      "p_understand": 0.7383,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7344
+    },
+    {
+      "step": 36,
+      "domain": "Science",
+      "loss": 0.0897,
+      "kappa": 0.9648,
+      "p_understand": 0.7227,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6836
+    },
+    {
+      "step": 37,
+      "domain": "Science",
+      "loss": 0.1021,
+      "kappa": 1.0156,
+      "p_understand": 0.7305,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7148
+    },
+    {
+      "step": 38,
+      "domain": "Science",
+      "loss": 0.1397,
+      "kappa": 1.0703,
+      "p_understand": 0.7422,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7383
+    },
+    {
+      "step": 39,
+      "domain": "Math",
+      "loss": 0.1676,
+      "kappa": 1.0781,
+      "p_understand": 0.7461,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7422
+    },
+    {
+      "step": 40,
+      "domain": "Math",
+      "loss": 0.0695,
+      "kappa": 1.0938,
+      "p_understand": 0.7461,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7422
+    },
+    {
+      "step": 41,
+      "domain": "Math",
+      "loss": 0.0656,
+      "kappa": 1.0781,
+      "p_understand": 0.7422,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7383
+    },
+    {
+      "step": 42,
+      "domain": "State Machine",
+      "loss": 0.0916,
+      "kappa": 1.0625,
+      "p_understand": 0.7422,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7383
+    },
+    {
+      "step": 43,
+      "domain": "State Machine",
+      "loss": 0.1487,
+      "kappa": 1.1484,
+      "p_understand": 0.7578,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7578
+    },
+    {
+      "step": 44,
+      "domain": "Dialogue",
+      "loss": 0.6904,
+      "kappa": 0.9023,
+      "p_understand": 0.7109,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.5977
+    },
+    {
+      "step": 45,
+      "domain": "Dialogue",
+      "loss": 0.5049,
+      "kappa": 0.9805,
+      "p_understand": 0.7266,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7031
+    },
+    {
+      "step": 46,
+      "domain": "Coding",
+      "loss": 0.0051,
+      "kappa": 0.9336,
+      "p_understand": 0.7148,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7109
+    },
+    {
+      "step": 47,
+      "domain": "Coding",
+      "loss": 0.0094,
+      "kappa": 0.9297,
+      "p_understand": 0.7148,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7031
+    },
+    {
+      "step": 48,
+      "domain": "Coding",
+      "loss": 0.0184,
+      "kappa": 1.0312,
+      "p_understand": 0.7344,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.707
+    },
+    {
+      "step": 49,
+      "domain": "Coding",
+      "loss": 0.0064,
+      "kappa": 1.0,
+      "p_understand": 0.7305,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7031
+    },
+    {
+      "step": 50,
+      "domain": "Science",
+      "loss": 0.1611,
+      "kappa": 1.0469,
+      "p_understand": 0.7383,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7344
+    },
+    {
+      "step": 51,
+      "domain": "Science",
+      "loss": 0.0389,
+      "kappa": 0.957,
+      "p_understand": 0.7227,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7031
+    },
+    {
+      "step": 52,
+      "domain": "Science",
+      "loss": 0.0611,
+      "kappa": 1.0078,
+      "p_understand": 0.7305,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7266
+    },
+    {
+      "step": 53,
+      "domain": "Science",
+      "loss": 0.058,
+      "kappa": 1.0625,
+      "p_understand": 0.7422,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7383
+    },
+    {
+      "step": 54,
+      "domain": "Math",
+      "loss": 0.0845,
+      "kappa": 1.0781,
+      "p_understand": 0.7422,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7422
+    },
+    {
+      "step": 55,
+      "domain": "Math",
+      "loss": 0.0333,
+      "kappa": 1.0859,
+      "p_understand": 0.7461,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7422
+    },
+    {
+      "step": 56,
+      "domain": "Math",
+      "loss": 0.0287,
+      "kappa": 1.0781,
+      "p_understand": 0.7461,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7461
+    },
+    {
+      "step": 57,
+      "domain": "State Machine",
+      "loss": 0.0638,
+      "kappa": 1.0625,
+      "p_understand": 0.7422,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7383
+    },
+    {
+      "step": 58,
+      "domain": "State Machine",
+      "loss": 0.1079,
+      "kappa": 1.1484,
+      "p_understand": 0.7578,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7578
+    },
+    {
+      "step": 59,
+      "domain": "Dialogue",
+      "loss": 1.0054,
+      "kappa": 0.8984,
+      "p_understand": 0.7109,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6367
+    },
+    {
+      "step": 60,
+      "domain": "Dialogue",
+      "loss": 0.7495,
+      "kappa": 0.9805,
+      "p_understand": 0.7266,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7109
+    },
+    {
+      "step": 61,
+      "domain": "Coding",
+      "loss": 0.0013,
+      "kappa": 0.9336,
+      "p_understand": 0.7148,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7109
+    },
+    {
+      "step": 62,
+      "domain": "Coding",
+      "loss": 0.0068,
+      "kappa": 0.9297,
+      "p_understand": 0.7148,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.707
+    },
+    {
+      "step": 63,
+      "domain": "Coding",
+      "loss": 0.022,
+      "kappa": 1.0312,
+      "p_understand": 0.7344,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7148
+    },
+    {
+      "step": 64,
+      "domain": "Coding",
+      "loss": 0.0383,
+      "kappa": 0.9961,
+      "p_understand": 0.7266,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7031
+    },
+    {
+      "step": 65,
+      "domain": "Science",
+      "loss": 0.2783,
+      "kappa": 1.0469,
+      "p_understand": 0.7383,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7344
+    },
+    {
+      "step": 66,
+      "domain": "Science",
+      "loss": 0.0352,
+      "kappa": 0.957,
+      "p_understand": 0.7227,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7031
+    },
+    {
+      "step": 67,
+      "domain": "Science",
+      "loss": 0.0883,
+      "kappa": 1.0078,
+      "p_understand": 0.7305,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7266
+    },
+    {
+      "step": 68,
+      "domain": "Science",
+      "loss": 0.0713,
+      "kappa": 1.0625,
+      "p_understand": 0.7422,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7383
+    },
+    {
+      "step": 69,
+      "domain": "Math",
+      "loss": 0.0546,
+      "kappa": 1.0781,
+      "p_understand": 0.7422,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7422
+    },
+    {
+      "step": 70,
+      "domain": "Math",
+      "loss": 0.1106,
+      "kappa": 1.0859,
+      "p_understand": 0.7461,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7422
+    },
+    {
+      "step": 71,
+      "domain": "Math",
+      "loss": 0.0186,
+      "kappa": 1.0703,
+      "p_understand": 0.7422,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7422
+    },
+    {
+      "step": 72,
+      "domain": "State Machine",
+      "loss": 0.063,
+      "kappa": 1.0625,
+      "p_understand": 0.7422,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7383
+    },
+    {
+      "step": 73,
+      "domain": "State Machine",
+      "loss": 0.0875,
+      "kappa": 1.1484,
+      "p_understand": 0.7578,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7578
+    },
+    {
+      "step": 74,
+      "domain": "Dialogue",
+      "loss": 0.8604,
+      "kappa": 0.8945,
+      "p_understand": 0.707,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6367
+    },
+    {
+      "step": 75,
+      "domain": "Dialogue",
+      "loss": 0.387,
+      "kappa": 0.9766,
+      "p_understand": 0.7266,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7109
+    },
+    {
+      "step": 76,
+      "domain": "Coding",
+      "loss": 0.0166,
+      "kappa": 0.9297,
+      "p_understand": 0.7148,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7109
+    },
+    {
+      "step": 77,
+      "domain": "Coding",
+      "loss": 0.0209,
+      "kappa": 0.9258,
+      "p_understand": 0.7148,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.707
+    },
+    {
+      "step": 78,
+      "domain": "Coding",
+      "loss": 0.1459,
+      "kappa": 1.0234,
+      "p_understand": 0.7344,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7148
+    },
+    {
+      "step": 79,
+      "domain": "Coding",
+      "loss": 0.1245,
+      "kappa": 0.9883,
+      "p_understand": 0.7266,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7031
+    },
+    {
+      "step": 80,
+      "domain": "Science",
+      "loss": 0.7301,
+      "kappa": 1.0391,
+      "p_understand": 0.7383,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7344
+    }
+  ]
+}

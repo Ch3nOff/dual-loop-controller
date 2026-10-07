@@ -1,0 +1,48 @@
+{
+  "device": "cuda:0",
+  "model_id": "Qwen/Qwen3.5-2B",
+  "perplexity": {
+    "baseline": 6.426,
+    "naive_ft": 6.396,
+    "hadl_v44": 7.085,
+    "delta_naive": -0.03,
+    "delta_hadl": 0.658
+  },
+  "benchmarks": {
+    "MMLU": {
+      "base": 75.0,
+      "naive_ft": 100.0,
+      "hadl_v44": 75.0,
+      "delta_naive": 25.0,
+      "delta_hadl": 0.0
+    },
+    "GSM8k/MATH": {
+      "base": 25.0,
+      "naive_ft": 25.0,
+      "hadl_v44": 50.0,
+      "delta_naive": 0.0,
+      "delta_hadl": 25.0
+    },
+    "HumanEval/MBPP": {
+      "base": 100.0,
+      "naive_ft": 100.0,
+      "hadl_v44": 100.0,
+      "delta_naive": 0.0,
+      "delta_hadl": 0.0
+    },
+    "ARC/HellaSwag": {
+      "base": 100.0,
+      "naive_ft": 75.0,
+      "hadl_v44": 100.0,
+      "delta_naive": -25.0,
+      "delta_hadl": 0.0
+    },
+    "Target Domain (Axiomatic Science)": {
+      "base": 75.0,
+      "naive_ft": 50.0,
+      "hadl_v44": 75.0,
+      "delta_naive": -25.0,
+      "delta_hadl": 0.0
+    }
+  }
+}

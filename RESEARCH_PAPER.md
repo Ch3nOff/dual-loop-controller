@@ -274,7 +274,7 @@ Under 40 deceptive adversarial prompts, uncalibrated softmax confidence reached 
 
 To move beyond small-sample validation, we execute the comprehensive `HADL-SCALE-2026` benchmark suite consisting of $N = 2,500$ authentic in-memory tensor evaluations across calibration distributions, deployment use cases, and kernel micro-benchmarks.
 
-![HADL Large-Scale Empirical Validation & 6-Use-Case Benchmark](large_scale_usecase_benchmark_graph.png)
+![HADL Large-Scale Empirical Validation & 6-Use-Case Benchmark](docs/images/archive_v24/large_scale_usecase_benchmark_graph.png)
 
 #### 1. Large-Scale Epistemic Calibration ($N = 1,000$ Samples)
 We evaluate $N = 1,000$ continuous representations split into $600$ in-distribution samples and $400$ out-of-distribution adversarial edge cases:

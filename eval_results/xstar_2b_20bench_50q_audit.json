@@ -1,0 +1,186 @@
+{
+  "architecture": "HADL v4.5 Dual-Cup 27B-Grade Distillation (20 Benchmarks x 50 Questions)",
+  "model_name": "X-Star-2B-27B-OmniReason",
+  "base_model": "Qwen/Qwen3.5-2B",
+  "hardware": "cuda:0 (NVIDIA GeForce RTX 5060 Laptop GPU)",
+  "checkpoint_path": "C:\\Users\\Matthew Chen\\Documents\\X-Star\\checkpoints\\xstar_2b_omnireason_27b_grade_checkpoint.pt",
+  "metrics": {
+    "base": {
+      "total_score": "539/1000",
+      "accuracy": 0.539,
+      "wikipedia_ppl": 3.803,
+      "peak_vram_mb": 3833.3,
+      "throughput_tok_sec": 24.63
+    },
+    "hadl_27b_distilled": {
+      "total_score": "539/1000",
+      "accuracy": 0.539,
+      "delta_correct": 0,
+      "wikipedia_ppl": 3.803,
+      "peak_vram_mb": 4129.5,
+      "throughput_tok_sec": 24.11
+    }
+  },
+  "benchmarks": {
+    "GSM8K": {
+      "pillar": "Math & Quantitative",
+      "base_score": "17/50",
+      "base_acc": 0.34,
+      "hadl_score": "17/50",
+      "hadl_acc": 0.34,
+      "delta": 0.0
+    },
+    "MATH": {
+      "pillar": "Math & Quantitative",
+      "base_score": "16/50",
+      "base_acc": 0.32,
+      "hadl_score": "16/50",
+      "hadl_acc": 0.32,
+      "delta": 0.0
+    },
+    "DROP": {
+      "pillar": "Math & Quantitative",
+      "base_score": "30/50",
+      "base_acc": 0.6,
+      "hadl_score": "30/50",
+      "hadl_acc": 0.6,
+      "delta": 0.0
+    },
+    "BBH": {
+      "pillar": "Math & Quantitative",
+      "base_score": "26/50",
+      "base_acc": 0.52,
+      "hadl_score": "26/50",
+      "hadl_acc": 0.52,
+      "delta": 0.0
+    },
+    "MMLU": {
+      "pillar": "Science & Academic",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta": 0.0
+    },
+    "AGIEval": {
+      "pillar": "Science & Academic",
+      "base_score": "0/50",
+      "base_acc": 0.0,
+      "hadl_score": "0/50",
+      "hadl_acc": 0.0,
+      "delta": 0.0
+    },
+    "TriviaQA": {
+      "pillar": "Science & Academic",
+      "base_score": "20/50",
+      "base_acc": 0.4,
+      "hadl_score": "20/50",
+      "hadl_acc": 0.4,
+      "delta": 0.0
+    },
+    "SQuAD_v2": {
+      "pillar": "Science & Academic",
+      "base_score": "0/50",
+      "base_acc": 0.0,
+      "hadl_score": "0/50",
+      "hadl_acc": 0.0,
+      "delta": 0.0
+    },
+    "ARC-c": {
+      "pillar": "Science & Academic",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta": 0.0
+    },
+    "HumanEval": {
+      "pillar": "Coding & Software",
+      "base_score": "20/50",
+      "base_acc": 0.4,
+      "hadl_score": "20/50",
+      "hadl_acc": 0.4,
+      "delta": 0.0
+    },
+    "MBPP": {
+      "pillar": "Coding & Software",
+      "base_score": "40/50",
+      "base_acc": 0.8,
+      "hadl_score": "40/50",
+      "hadl_acc": 0.8,
+      "delta": 0.0
+    },
+    "CodeDebug": {
+      "pillar": "Coding & Software",
+      "base_score": "20/50",
+      "base_acc": 0.4,
+      "hadl_score": "20/50",
+      "hadl_acc": 0.4,
+      "delta": 0.0
+    },
+    "ARC-e": {
+      "pillar": "Commonsense & Logic",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta": 0.0
+    },
+    "HellaSwag": {
+      "pillar": "Commonsense & Logic",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta": 0.0
+    },
+    "WinoGrande": {
+      "pillar": "Commonsense & Logic",
+      "base_score": "0/50",
+      "base_acc": 0.0,
+      "hadl_score": "0/50",
+      "hadl_acc": 0.0,
+      "delta": 0.0
+    },
+    "PIQA": {
+      "pillar": "Commonsense & Logic",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta": 0.0
+    },
+    "BoolQ": {
+      "pillar": "Instruction & Chat",
+      "base_score": "10/50",
+      "base_acc": 0.2,
+      "hadl_score": "10/50",
+      "hadl_acc": 0.2,
+      "delta": 0.0
+    },
+    "TruthfulQA": {
+      "pillar": "Instruction & Chat",
+      "base_score": "20/50",
+      "base_acc": 0.4,
+      "hadl_score": "20/50",
+      "hadl_acc": 0.4,
+      "delta": 0.0
+    },
+    "IFEval": {
+      "pillar": "Instruction & Chat",
+      "base_score": "40/50",
+      "base_acc": 0.8,
+      "hadl_score": "40/50",
+      "hadl_acc": 0.8,
+      "delta": 0.0
+    },
+    "DailyChat": {
+      "pillar": "Instruction & Chat",
+      "base_score": "30/50",
+      "base_acc": 0.6,
+      "hadl_score": "30/50",
+      "hadl_acc": 0.6,
+      "delta": 0.0
+    }
+  }
+}

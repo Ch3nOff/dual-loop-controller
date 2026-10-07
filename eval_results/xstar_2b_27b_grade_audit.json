@@ -1,0 +1,90 @@
+{
+  "architecture": "HADL v4.5 Dual-Cup 27B-Grade Distillation",
+  "model_name": "X-Star-2B-27B-OmniReason",
+  "base_model": "Qwen/Qwen3.5-2B",
+  "hardware": "cuda:0 (NVIDIA GeForce RTX 5060 Laptop GPU)",
+  "checkpoint_path": "C:\\Users\\Matthew Chen\\Documents\\X-Star\\checkpoints\\xstar_2b_omnireason_27b_grade_checkpoint.pt",
+  "checkpoint_size_mb": 148.16,
+  "metrics": {
+    "base": {
+      "total_score": "2/10",
+      "accuracy": 0.2,
+      "wikipedia_ppl": 3.552,
+      "peak_vram_mb": 3796.0,
+      "throughput_tok_sec": 25.46
+    },
+    "hadl_27b_distilled": {
+      "total_score": "3/10",
+      "accuracy": 0.3,
+      "delta_correct": 1,
+      "wikipedia_ppl": 3.552,
+      "peak_vram_mb": 4513.5,
+      "throughput_tok_sec": 23.0
+    }
+  },
+  "category_results": {
+    "Abstract Group Theory": {
+      "base_score": "0/1",
+      "base_acc": 0.0,
+      "hadl_score": "1/1",
+      "hadl_acc": 1.0,
+      "delta": 1.0
+    },
+    "Bytecode Stack VM": {
+      "base_score": "0/1",
+      "base_acc": 0.0,
+      "hadl_score": "0/1",
+      "hadl_acc": 0.0,
+      "delta": 0.0
+    },
+    "Cryptographic Permutation": {
+      "base_score": "0/1",
+      "base_acc": 0.0,
+      "hadl_score": "0/1",
+      "hadl_acc": 0.0,
+      "delta": 0.0
+    },
+    "Olympiad Math CoT": {
+      "base_score": "0/2",
+      "base_acc": 0.0,
+      "hadl_score": "0/2",
+      "hadl_acc": 0.0,
+      "delta": 0.0
+    },
+    "Physical Invariant": {
+      "base_score": "0/1",
+      "base_acc": 0.0,
+      "hadl_score": "0/1",
+      "hadl_acc": 0.0,
+      "delta": 0.0
+    },
+    "Epistemic Trap": {
+      "base_score": "0/1",
+      "base_acc": 0.0,
+      "hadl_score": "0/1",
+      "hadl_acc": 0.0,
+      "delta": 0.0
+    },
+    "Algorithmic Code": {
+      "base_score": "0/1",
+      "base_acc": 0.0,
+      "hadl_score": "0/1",
+      "hadl_acc": 0.0,
+      "delta": 0.0
+    },
+    "Casual Empathy (ID)": {
+      "base_score": "1/1",
+      "base_acc": 1.0,
+      "hadl_score": "1/1",
+      "hadl_acc": 1.0,
+      "delta": 0.0
+    },
+    "Casual Empathy (EN)": {
+      "base_score": "1/1",
+      "base_acc": 1.0,
+      "hadl_score": "1/1",
+      "hadl_acc": 1.0,
+      "delta": 0.0
+    }
+  }
+}

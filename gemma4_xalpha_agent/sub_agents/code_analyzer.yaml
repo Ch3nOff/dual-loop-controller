@@ -1,15 +1,8 @@
 name: code_analyzer
 model: gemma-4-31b-it-qat-w4a16-ct
-description: Read-only code navigator. Give it the issue; it returns the files, root cause and fix plan.
-instruction: !include analyzer.md
-generate_content_config:
-  temperature: 0.2
-  top_p: 0.95
-  top_k: 40
-  max_output_tokens: 8192
-  thinking_config:
-    thinking_budget: 4096
-    include_thoughts: false
+description: Read-only code navigator. Given an issue, returns the exact location, root cause and a fix plan.
+instruction: !include ../prompts/analyzer.md
+generate_content_config: !include ../configs/sampling.yaml
 tools:
   - run_command
   - read_file

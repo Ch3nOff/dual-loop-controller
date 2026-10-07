@@ -1,0 +1,154 @@
+{
+  "benchmark_title": "Qwen3.5-2B Retraining on 27B-Grade Reasoning Distillation",
+  "timestamp": "2026-10-04 11:34:41",
+  "hardware": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "model_id": "Qwen/Qwen3.5-2B",
+  "adapter_architecture": "SquareCloud Dynamic Cognitive Engine (Layer 11)",
+  "trainable_parameters": 27299841,
+  "base_parameters": 1881825088,
+  "parameter_ratio_pct": 1.451,
+  "training_epochs": 15,
+  "training_duration_sec": 37.39,
+  "loss_progression": {
+    "initial_loss": 0.6479,
+    "final_loss": 0.5977,
+    "loss_reduction_pct": 7.75,
+    "history": [
+      0.6479,
+      0.6012,
+      0.5864,
+      0.5844,
+      0.5837,
+      0.5787,
+      0.5789,
+      0.5859,
+      0.5896,
+      0.5893,
+      0.5888,
+      0.5939,
+      0.5962,
+      0.597,
+      0.5977
+    ]
+  },
+  "scoreboard": {
+    "baseline_accuracy_pct": 40.0,
+    "dualloop_accuracy_pct": 20.0,
+    "net_gain_pct": -20.0,
+    "isometry_error": 0.0
+  },
+  "baseline_tasks": [
+    {
+      "task_id": "eval_alg_01",
+      "name": "Exotic Non-Abelian Algebraic Reduction",
+      "domain": "Non-Abelian Algebra",
+      "is_correct": false,
+      "ground_truth": "I",
+      "extracted": "MISMATCH",
+      "speed_tok_s": 19.99,
+      "generated_preview": "To simplify the expression $E = A * (B * D) * (C * B) * A$, we will use the given axioms and lemmas to perform step-by-step substitutions.\n\n",
+      "full_output": "To simplify the expression $E = A * (B * D) * (C * B) * A$, we will use the given axioms and lemmas to perform step-by-step substitutions.\n\n**Given Axioms and Lemmas:**\n1.  **Multiplication Rules:**\n    *   $A * B = C$\n    *   $B * A = D$\n    *   $C * D = A$\n    *   $D * C = B$\n2.  **Identity Rules:**\n    *   $X * X = I$\n    *   $X * I = I$\n    *   $I * X = X$\n3.  **Derived Lemmas:**\n    *   $B * D = A$\n    *   $C * B = A$\n    *   $D * A = B$\n    *   $C * A = D$\n\n**Step-by-Step Simplification:**\n\n1.  **Analyze the inner terms:**\n    The expression is $E = A * (B * D) * (C * B) * A$.\n    Let's look at the second and third factors: $(B * D)$ and $(C * B)$.\n    From the **Lemma** $B * D = A$, we can substitute $A$ for $(B * D)$.\n    From the **Lemma** $C * B = A$, we can substitute $A$ for $(C * B)$.\n\n    So, the expression becomes:\n    $E = A * A * A * A$\n\n2.  **Simplify the product of four A's:**\n    We have $A * A * A * A$.\n    Using the axiom $X * X = I$, we know that $A * A = I$.\n    Therefore:\n    $A * A * A * A = (A * A) * (A * A) = I * I$\n\n    Using the axiom $X * I = X$ (or $I * X = X$), we get:\n    $I *"
+    },
+    {
+      "task_id": "eval_vm_02",
+      "name": "Reversible Stack Bytecode Machine Simulation",
+      "domain": "Bytecode VM Simulation",
+      "is_correct": true,
+      "ground_truth": "[7, 8, 0]",
+      "extracted": "[7, 8, 0]",
+      "speed_tok_s": 23.91,
+      "generated_preview": "Let's trace the execution step by step.\n\n**Initial Stack:** `[]`\n\n1.  **PUSH 7**\n    -   Stack: `[7]`\n\n2.  **DUP_ODD**\n    -   Top is `7`. I",
+      "full_output": "Let's trace the execution step by step.\n\n**Initial Stack:** `[]`\n\n1.  **PUSH 7**\n    -   Stack: `[7]`\n\n2.  **DUP_ODD**\n    -   Top is `7`. Is it odd? Yes.\n    -   Action: Duplicate it.\n    -   Stack: `[7, 7]`\n\n3.  **PUSH 4**\n    -   Stack: `[7, 7, 4]`\n\n4.  **SWAP_TOP**\n    -   Top two elements are `7` and `4`.\n    -   Action: Swap them.\n    -   Stack: `[7, 4, 7]`\n\n5.  **ADD_FOLD**\n    -   Pops top two: `A = 7`, `B = 4`.\n    -   Action: Push `(B + A) % 10`.\n    -   Calculation: `(4 + 7) % 10 = 11 % 10 = 1`.\n    -   Stack: `[7, 1]`\n\n6.  **PUSH 9**\n    -   Stack: `[7, 1, 9]`\n\n7.  **SUB_FOLD**\n    -   Pops top two: `A = 9`, `B = 1`.\n    -   Action: Push `abs(B - A)`.\n    -   Calculation: `abs(1 - 9) = abs(-8) = 8`.\n    -   Stack: `[7, 8]`\n\n8.  **DUP_ODD**\n    -   Top is `8`. Is it odd? No (it's even).\n    -   Action: Push `0`.\n    -   Stack: `[7, 8, 0]`\n\n**Final Stack: [7, 8, 0]**"
+    },
+    {
+      "task_id": "eval_hash_03",
+      "name": "Synthetic Cryptographic Hash Round State Transformation",
+      "domain": "Cryptographic Permutation",
+      "is_correct": false,
+      "ground_truth": "[1, 7, 1, 7]",
+      "extracted": "MISMATCH",
+      "speed_tok_s": 24.96,
+      "generated_preview": "Here is the step-by-step execution of the 'X-Hash' permutation for the input state $S = [2, 5, 0, 7]$.\n\n### Step 1: Apply the Linear Transfo",
+      "full_output": "Here is the step-by-step execution of the 'X-Hash' permutation for the input state $S = [2, 5, 0, 7]$.\n\n### Step 1: Apply the Linear Transformation\nThe rule is $S_i' = (S_i \\times 3 + 1) \\pmod{16}$.\n\n*   **$S_0$**: $2 \\times 3 + 1 = 7 \\pmod{16} = 7$\n*   **$S_1$**: $5 \\times 3 + 1 = 16 \\pmod{16} = 0$\n*   **$S_2$**: $0 \\times 3 + 1 = 1 \\pmod{16} = 1$\n*   **$S_3$**: $7 \\times 3 + 1 = 22 \\pmod{16} = 6$\n\n**Intermediate State ($S'$):** $[7, 0, 1, 6]$\n\n---\n\n### Step 2: Calculate Intermediate Values ($T_0, T_1, T_2, T_3$)\nThe rules are:\n*   $T_0 = (S_0' + S_1') \\pmod{16}$\n*   $T_1 = S_1' \\text{ XOR } S_2'$\n*   $T_2 = (S_2' + S_3') \\pmod{16}$\n*   $T_3 = S_3' \\text{ XOR } S_0'$\n\nUsing the values from Step 1 ($S' = [7, 0, 1, 6]$):\n\n*   **Calculate $T_0$**:\n    $T_0 = (7 + 0) \\pmod{16} = 7$\n\n*   **Calculate $T_1$**:\n    $S_1' = 0$, $S_2' = 1$\n    $T_"
+    },
+    {
+      "task_id": "eval_math_04",
+      "name": "Modular Exponentiation & Prime Order Deduction",
+      "domain": "Olympiad Math CoT",
+      "is_correct": false,
+      "ground_truth": "1",
+      "extracted": "MISMATCH",
+      "speed_tok_s": 23.84,
+      "generated_preview": "To find the remainder when $3^{2028}$ is divided by $13$, we can use Fermat's Little Theorem.\n\n**Step 1: State Fermat's Little Theorem**\nFer",
+      "full_output": "To find the remainder when $3^{2028}$ is divided by $13$, we can use Fermat's Little Theorem.\n\n**Step 1: State Fermat's Little Theorem**\nFermat's Little Theorem states that if $p$ is a prime number and $a$ is an integer not divisible by $p$, then:\n$$a^{p-1} \\equiv 1 \\pmod{p}$$\n\n**Step 2: Identify the parameters**\nIn this problem:\n- The base $a = 3$\n- The modulus $p = 13$\n\nSince $13$ is a prime number and $3$ is not a multiple of $13$, we can apply the theorem.\n\n**Step 3: Calculate the exponent**\nAccording to the theorem, the base raised to the power of $p-1$ is congruent to $1$ modulo $p$.\n$$p - 1 = 13 - 1 = 12$$\nSo, we know that:\n$$3^{12} \\equiv 1 \\pmod{13}$$\n\n**Step 4: Reduce the large exponent**\nWe need to find $3^{2028} \\pmod{13}$. We can express the exponent $2028$ as a multiple of $12$ plus a remainder.\n$$2028 \\div 12 = 169 \\text{ with a remainder of } 0$$\n$$2028 = 169 \\times 12 + 0$$\n\n**Step 5: Apply the theorem**\nSubstitute this back into the original expression:\n$$3^{2028} = 3^{169 \\times 12 + 0} = (3^{12})^{169} \\times 3^0$$\n$$3^{2028} = (3^{12})^{169} \\times 1$$\n\nSince $3^{12} \\equiv 1 \\p"
+    },
+    {
+      "task_id": "eval_trap_05",
+      "name": "Thermal Equilibrium Invariant Verification",
+      "domain": "Epistemic Trap Invalidation",
+      "is_correct": true,
+      "ground_truth": "20",
+      "extracted": "20",
+      "speed_tok_s": 24.09,
+      "generated_preview": "To find the final equilibrium temperature, we use the principle of conservation of energy, which states that the heat lost by the hot water ",
+      "full_output": "To find the final equilibrium temperature, we use the principle of conservation of energy, which states that the heat lost by the hot water equals the heat gained by the cold water.\n\n1.  **Identify the given values:**\n    *   Volume of water 1 ($V_1$) = 100 L\n    *   Initial temperature of water 1 ($T_1$) = 20\u00b0C\n    *   Volume of water 2 ($V_2$) = 100 L\n    *   Initial temperature of water 2 ($T_2$) = 20\u00b0C\n    *   Specific heat capacity of water ($c$) is constant for both.\n\n2.  **Analyze the process:**\n    *   Since both containers hold water at the same initial temperature (20\u00b0C), there is no temperature difference between the two bodies of water.\n    *   Adding water at the same temperature to another body of water at the same temperature results in no net heat transfer. The system remains in thermal equilibrium immediately.\n\n3.  **Calculate the final temperature:**\n    *   $T_{final} = T_1 = T_2 = 20^\\circ\\text{C}$\n\nFinal Temperature: 20 C"
+    }
+  ],
+  "dualloop_tasks": [
+    {
+      "task_id": "eval_alg_01",
+      "name": "Exotic Non-Abelian Algebraic Reduction",
+      "domain": "Non-Abelian Algebra",
+      "is_correct": false,
+      "ground_truth": "I",
+      "extracted": "MISMATCH",
+      "speed_tok_s": 23.97,
+      "generated_preview": "To simplify the expression $E = A * (B * D) * (C * B) * A$, we will proceed step-by-step using the given axioms.\n\n**Given Axioms:**\n1.  $A *",
+      "full_output": "To simplify the expression $E = A * (B * D) * (C * B) * A$, we will proceed step-by-step using the given axioms.\n\n**Given Axioms:**\n1.  $A * B = C$\n2.  $B * A = D$\n3.  $C * D = A$\n4.  $D * C = B$\n5.  $X * X = I$ (Identity)\n6.  $X * I = I$\n7.  $I * X = X$\n\n**Given Lemmas:**\n1.  $B * D = A$\n2.  $C * B = A$\n3.  $D * A = B$\n4.  $C * A = D$\n\n**Expression:**\n$E = A * (B * D) * (C * B) * A$\n\n**Step 1: Simplify the innermost parentheses.**\nWe have the term $(B * D)$. According to the Lemma $B*D = A$.\nSubstitute $A$ for $(B * D)$:\n$E = A * A * (C * B) * A$\n\n**Step 2: Simplify the next term $(C * B)$.**\nWe have the term $(C * B)$. According to the Lemma $C*B = A$.\nSubstitute $A$ for $(C * B)$:\n$E = A * A * A * A$\n\n**Step 3: Simplify the product of four $A$'s.**\nWe need to calculate $A * A * A * A$.\nFirst, apply the axiom $X * X = I$ where $X = A$:\n$A * A = I$\nSo, $A * A * A * A = (A * A) * A * A = I * A * A$\n\nNext, apply the axiom $X * X = I$ again:\n$I * A = A$\nSo, $A * A = A$.\n\nNow substitute back:\n$A"
+    },
+    {
+      "task_id": "eval_vm_02",
+      "name": "Reversible Stack Bytecode Machine Simulation",
+      "domain": "Bytecode VM Simulation",
+      "is_correct": false,
+      "ground_truth": "[7, 8, 0]",
+      "extracted": "MISMATCH",
+      "speed_tok_s": 24.18,
+      "generated_preview": "1. PUSH 7 -> Stack: [7]\n2. DUP_ODD -> 7 is odd, so push 7. Stack: [7, 7]\n3. PUSH 4 -> Stack: [7, 7, 4]\n4. SWAP_TOP -> Swaps top two (7 and 4",
+      "full_output": "1. PUSH 7 -> Stack: [7]\n2. DUP_ODD -> 7 is odd, so push 7. Stack: [7, 7]\n3. PUSH 4 -> Stack: [7, 7, 4]\n4. SWAP_TOP -> Swaps top two (7 and 4). Stack: [7, 7, 4, 7]\n5. ADD_FOLD -> Pops 7 (top) and 7 (second). Push (7 + 7) % 10 = 14 % 10 = 4. Stack: [7, 7, 4]\n6. PUSH 9 -> Stack: [7, 7, 4, 9]\n7. SUB_FOLD -> Pops 9 (top) and 4 (second). Push abs(4 - 9) = abs(-5) = 5. Stack: [7, 7, 5]\n8. DUP_ODD -> 5 is odd, so push 5. Stack: [7, 7, 5, 5]\n\nFinal Stack: [7, 7, 5, 5]"
+    },
+    {
+      "task_id": "eval_hash_03",
+      "name": "Synthetic Cryptographic Hash Round State Transformation",
+      "domain": "Cryptographic Permutation",
+      "is_correct": false,
+      "ground_truth": "[1, 7, 1, 7]",
+      "extracted": "MISMATCH",
+      "speed_tok_s": 23.68,
+      "generated_preview": "### Step 1: Apply the Linear Transformation\nFirst, we calculate the new state $S'$ for each index $i$ using the formula $S_i' = (S_i \\times ",
+      "full_output": "### Step 1: Apply the Linear Transformation\nFirst, we calculate the new state $S'$ for each index $i$ using the formula $S_i' = (S_i \\times 3 + 1) \\pmod{16}$.\n\nGiven Input State: $S = [2, 5, 0, 7]$\n\n- **Index 0**: $S_0' = (2 \\times 3 + 1) \\pmod{16} = 7 \\pmod{16} = 7$\n- **Index 1**: $S_1' = (5 \\times 3 + 1) \\pmod{16} = 16 \\pmod{16} = 0$\n- **Index 2**: $S_2' = (0 \\times 3 + 1) \\pmod{16} = 1 \\pmod{16} = 1$\n- **Index 3**: $S_3' = (7 \\times 3 + 1) \\pmod{16} = 22 \\pmod{16} = 6$\n\n**Result of Step 1**: $S' = [7, 0, 1, 6]$\n\n---\n\n### Step 2: Calculate Intermediate Values $T_0, T_1, T_2, T_3$\nNow we apply the second rule using the values from Step 1.\n\n- **$T_0$**: $T_0 = (S_0' + S_1') \\pmod{16}$\n  $$T_0 = (7 + 0) \\pmod{16} = 7$$\n\n- **$T_1$**: $T_1 = S_1' \\text{ XOR } S_2'$\n  $$T_1 = 0 \\text{ XOR } 1 = 1$$\n\n- **$T_2$**: $T_2 = (S_2' + S_3') \\pmod{16"
+    },
+    {
+      "task_id": "eval_math_04",
+      "name": "Modular Exponentiation & Prime Order Deduction",
+      "domain": "Olympiad Math CoT",
+      "is_correct": false,
+      "ground_truth": "1",
+      "extracted": "MISMATCH",
+      "speed_tok_s": 24.28,
+      "generated_preview": "To find the remainder when $3^{2028}$ is divided by $13$, we can use Fermat's Little Theorem.\n\n**Step 1: State Fermat's Little Theorem**\nFer",
+      "full_output": "To find the remainder when $3^{2028}$ is divided by $13$, we can use Fermat's Little Theorem.\n\n**Step 1: State Fermat's Little Theorem**\nFermat's Little Theorem states that if $p$ is a prime number and $a$ is an integer not divisible by $p$, then:\n$$a^{p-1} \\equiv 1 \\pmod{p}$$\nIn this problem, $p = 13$ and $a = 3$. Since 3 is not divisible by 13, we can apply the theorem.\n\n**Step 2: Calculate the exponent**\nAccording to the theorem, the powers of 3 repeat with a period of $13 - 1 = 12$. This means:\n$$3^{12} \\equiv 1 \\pmod{13}$$\n\n**Step 3: Reduce the exponent**\nWe need to find $3^{2028} \\pmod{13}$. We can do this by dividing the exponent 2028 by the period 12 and looking at the remainder.\n$$2028 \\div 12 = 169 \\text{ with a remainder of } 0$$\nSo, $2028 = 169 \\times 12 + 0$.\n\n**Step 4: Apply the theorem**\nSubstituting this back into the expression:\n$$3^{2028} = 3^{169 \\times 12 + 0} = (3^{12})^{169} \\times 3^0$$\nUsing the property of exponents and the result from Step 1 ($3^{12} \\equiv 1 \\pmod{13}$):\n$$3^{2028} \\equiv (1)^{169} \\times 3^0 \\pmod{13}$$\n$$3^{2028} \\equiv 1 \\times 1 \\pmod{13}$$"
+    },
+    {
+      "task_id": "eval_trap_05",
+      "name": "Thermal Equilibrium Invariant Verification",
+      "domain": "Epistemic Trap Invalidation",
+      "is_correct": true,
+      "ground_truth": "20",
+      "extracted": "20",
+      "speed_tok_s": 21.68,
+      "generated_preview": "Final Temperature: 20 C",
+      "full_output": "Final Temperature: 20 C"
+    }
+  ]
+}

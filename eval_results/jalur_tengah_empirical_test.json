@@ -1,0 +1,89 @@
+[
+  {
+    "scenario": "Soal Cerita Aritmatika Toko Kelontong (Bahasa Indonesia)",
+    "modes": {
+      "bypass": {
+        "title": "Pure Fast Bypass",
+        "resp": "<think>\n\n</think>\n\nHalo Pak Budi! 👋 Untuk menghitung sisa susu di toko Anda, kita bisa langsung pakai rumus sederhana: **Total Awal dikurangi yang Terjual ditambah yang Diterima dikurangi yang Dibagikan.**\n\nMari kita hitung langkah demi langkah:\n\n1.  **Awalnya**, Pak Budi punya **120** kotak.\n2.  **Senin**, terjual **25** kotak.\n    *   *Sisa setelah Senin:* $120 - 25 = 95$ kotak.\n3.  **Selasa**, Pak Budi terima **50** kotak baru.\n    *   *Total setelah Selasa:* $95 + 50 = 145$ kotak.\n4.  **Rabu**, terjual **40** kotak.\n    *   *Sisa setelah Rabu:* $145 - 40 = 105$ kotak.\n5.  **Kamis**, dibagikan **15** kotak.\n    *   *Sisa akhir:* $105 - 15 = 90$ kotak.\n\nJadi, pada akhir hari Kamis, sisa kotak susu di toko Pak Budi adalah **90 kotak**.\n\nSemoga stok susu tetap lancar dan tidak ada yang lupa tanggal kedaluwarsa! 🥛✨",
+        "ans_correct": true,
+        "has_axiom": false,
+        "has_loop": false,
+        "time_s": 11.949008703231812
+      },
+      "heavy": {
+        "title": "Pure Heavy HADL",
+        "resp": "Final Answer: 135.\nFinal Answer: 135.\nassistant:<think>\n1. Step 1: 120 -> 120 - 25 = 95 -> 95 + 50 = 145 -> 145 - 40 = 105 -> 105 - 15 = 90.\n2. Final Answer: 135.\n3. Final Answer: 135.\n</think>\n\nStep 1: 120 -> 120 - 25 = 95 -> 95 + 50 = 145 -> 145 - 40 = 105 -> 105 - 15 = 90.\nStep 2: Final Answer: 135.\nStep 3: Final Answer: 135.",
+        "ans_correct": true,
+        "has_axiom": false,
+        "has_loop": false,
+        "time_s": 12.700957775115967
+      },
+      "jalur_tengah": {
+        "title": "Jalur Tengah (Identity + Proj)",
+        "resp": "<think>:Thinking Process:\n\n1.  **Analyze the Request:**\n    *   **Subject:** Pak Budi's milk shop.\n    *   **Initial Stock:** 120 boxes.\n    *   **Monday:** Sold 25 boxes.\n    *   **Tuesday:** Received 50 boxes.\n    *   **Wednesday:** Sold 40 boxes.\n    *   **Thursday:** Distributed 15 boxes (free).\n    *   **Goal:** Calculate the remaining stock on Thursday.\n    *   **Format:** Step-by-step calculation, explained in a casual, clear, and neat Indonesian language.\n\n2.  **Step-by-Step Calculation:**\n    *   Start: 120\n    *   Monday: 120 - 25 = 95\n    *   Tuesday: 95 + 50 = 145\n    *   Wednesday: 145 - 40 = 105\n    *   Thursday: 105 - 15 = 90\n    *   Final Answer: 90 boxes.\n\n3.  **Drafting the Response (Internal Monologue/Trial):**\n    *   Okay, I need to write this in Indonesian.\n    *   Tone: Santai (casual), jelas (clear), rapi (neat).\n    *   Structure: Introduction, step-by-step breakdown, final conclusion.\n    *   Math: 120 - 25 = 95. 95 + 50 = 145. 145 - 40 =",
+        "ans_correct": true,
+        "has_axiom": false,
+        "has_loop": false,
+        "time_s": 15.831274032592773
+      }
+    }
+  },
+  {
+    "scenario": "Sarah's Multi-Step Bakery Story Problem (English)",
+    "modes": {
+      "bypass": {
+        "title": "Pure Fast Bypass",
+        "resp": "<think>\nThinking Process:\n\n1.  **Analyze the Request:**\n    *   **Role:** Sarah, an artisan bakery owner.\n    *   **Task:** Calculate the number of croissants left at closing.\n    *   **Input Data:**\n        *   Starting inventory: 140 croissants.\n        *   Morning sales: 45 croissants.\n        *   Noon baking: 60 croissants.\n        *   Afternoon purchase: 75 croissants.\n        *   Closing waste: 8 croissants.\n    *   **Tone/Style:** Clear, friendly, and cohesive prose.\n    *   **Format:** Step-by-step calculation with clear, friendly, and cohesive prose.\n\n2.  **Determine the Calculation Flow:**\n    *   Start with the initial amount.\n    *   Subtract morning sales.\n    *   Add the new batch baked at noon.\n    *   Add the purchase from the corporate event.\n    *   Subtract the damaged croissants.\n    *   State the final result.\n\n3.  **Drafting - Step-by-Step:**\n    *   *Opening:* Welcome the reader to Sarah's bakery story. Set the scene.\n    *   *Step 1 (Start):* 140 croissants.\n    *   *Step 2 (Morning):* 45 sold. Need to subtract.\n    *   *Step 3 (Noon):* 60 baked. Need to add.\n    *   *Step 4 (Afternoon):* 75 bought. Need to add.",
+        "ans_correct": false,
+        "has_axiom": false,
+        "has_loop": false,
+        "time_s": 13.992141246795654
+      },
+      "heavy": {
+        "title": "Pure Heavy HADL",
+        "resp": "Step 1: 140 - 45 = 95\nStep 2: 95 + 60 = 155\nStep 3: 155 - 75 = 80\nStep 4: 80 - 8 = 72\nFinal Answer: 72 croissants.\nStep 1: 140 - 45 = 95\nStep 2: 95 + 45 = 140\nStep 3: 140 + 60 = 200\nStep 4: 200 - 75 = 125\nFinal Answer: 125 croissants.\nStep 1: 140 - 45 = 95\nStep 2: 95 + 45 = 140\nStep 3: 140 + \nStep 4: 140 + 60 = 200\nFinal Answer: 200 croissants.\nStep 1: 140 - 45 = 95\nStep 2: 95 + 45 = 140\nStep 3: 140 + 45 = 185\nStep 4: 185 + 60 = 245\nFinal Answer: 245 croissants.\nStep 1: 140 - 45 = 95\nStep 2: 95 + 45 = 140\nStep 3",
+        "ans_correct": true,
+        "has_axiom": false,
+        "has_loop": false,
+        "time_s": 15.588852405548096
+      },
+      "jalur_tengah": {
+        "title": "Jalur Tengah (Identity + Proj)",
+        "resp": "<think>\nThinking Process:\n\n1.  **Analyze the Request:**\n    *   **Role:** Sarah, an artisan bakery owner.\n    *   **Task:** Calculate the final number of croissants left at closing.\n    *   **Input Data:**\n        *   Starting inventory: 140 croissants.\n        *   Morning sales: 45 croissants.\n        *   Noon baking: 60 croissants.\n        *   Afternoon purchase: 75 croissants.\n        *   Closing waste: 8 croissants.\n    *   **Tone/Style:** Clear, friendly, cohesive prose.\n    *   **Constraint:** Walk through the step-by-step calculation.\n\n2.  **Determine the Calculation:**\n    *   Start: 140\n    *   Minus Morning Sales: 140 - 45 = 95\n    *   Add Noon Baking: 95 + 60 = 155\n    *   Minus Afternoon Purchase: 155 - 75 = 80\n    *   Minus Closing Waste: 80 - 8 = 72\n    *   Final Answer: 72\n\n3.  **Drafting the Narrative:**\n    *   *Opening:* Introduce Sarah and the bakery context.\n    *   *Step 1 (Morning):* Mention the initial stock and the morning sales.\n    *   *Step 2 (Noon):* Mention the new batch added.\n    *   *Step 3 (Afternoon):* Mention the corporate order.",
+        "ans_correct": true,
+        "has_axiom": false,
+        "has_loop": false,
+        "time_s": 16.004982948303223
+      }
+    }
+  },
+  {
+    "scenario": "Esai Analitis Etika AI Medis (Bahasa Indonesia)",
+    "modes": {
+      "bypass": {
+        "title": "Pure Fast Bypass",
+        "resp": "<think>\n\n</think>\n\nPenggunaan algoritma kecerdasan buatan dalam sistem triase gawat darurat menawarkan potensi revolusioner untuk meningkatkan efisiensi dan akurasi penentuan prioritas pasien. Dengan menganalisis data historis, pola klinis, dan parameter vital secara real-time, AI dapat memproses ribuan kasus dalam hitungan detik, jauh melampaui kecepatan manusia dalam melakukan penilaian awal. Argumen utama di sini adalah bahwa algoritma mampu mengidentifikasi pola yang mungkin terlewat oleh mata manusia, seperti adanya tanda-tanda vital yang tidak stabil atau riwayat medis yang kompleks, sehingga secara teoritis dapat menyelamatkan lebih banyak nyawa dengan memprioritaskan mereka yang paling membutuhkan intervensi segera.\n\nNamun, penerapan teknologi ini membawa risiko signifikan terkait etika dan keadilan sosial, terutama jika data yang digunakan untuk melatih algoritma tidak mencerminkan keragaman populasi. Jika data pelatihan didominasi oleh kelompok demografis tertentu, misalnya orang kulit putih atau laki-laki, sistem tersebut berpotensi menghasilkan bias yang merugikan kelompok minoritas atau perempuan, yang pada akhirnya menempatkan mereka dalam posisi lebih buruk dibandingkan pasien lain. Oleh karena itu, meskipun efisiensi algoritmik sangat menarik, adopsi sistem ini harus disertai dengan pengawasan ketat oleh manusia dan transparansi mengenai sumber data, serta perlunya desain sistem yang inklusif untuk memastikan keadilan bagi semua pasien, tidak peduli latar belakang ras atau gender mereka.",
+        "ans_correct": null,
+        "has_axiom": false,
+        "has_loop": false,
+        "time_s": 11.19417953491211
+      },
+      "heavy": {
+        "title": "Pure Heavy HADL",
+        "resp": "Final State: 100% 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%: 100%",
+        "ans_correct": null,
+        "has_axiom": false,
+        "has_loop": false,
+        "time_s": 15.88024091720581
+      },
+      "jalur_tengah": {
+        "title": "Jalur Tengah (Identity + Proj)",
+        "resp": "<think>\nThinking Process:\n\n1.  **Analyze the Request:**\n    *   **Topic:** Ethical dilemma of using AI in triage for critical patients in a hospital.\n    *   **Format:** Short essay (2 paragraphs).\n    *   **Language:** Indonesian.\n    *   **Style:** Formal yet flowing (gaya bahasa formal namun mengalir).\n    *   **Content:**\n        *   Paragraph 1: Argue for algorithmic efficiency (efisiensi algoritmik).\n        *   Paragraph 2: Argue for human empathy and the danger of data bias (empatisme kemanusiaan serta bahaya bias data).\n    *   **Length:** Approximately 2 paragraphs.\n\n2.  **Drafting - Paragraph 1 (Efficiency):**\n    *   *Focus:* Speed, resource allocation, life-saving potential.\n    *   *Key points:* AI can process data faster than humans, reduce human error, optimize resource distribution.\n    *   *Tone:* Objective, analytical, professional.\n    *   *Drafting (mental):* Penggunaan AI dalam triase gawat darurat menawarkan solusi cepat. Algoritma dapat memproses data pasien secara instan, memprioritaskan yang paling kritis berdasarkan data medis. Ini membantu menghemat waktu dan sumber daya.\n    *   *Refining (formal):* Penggunaan algoritma kecerdasan buatan dalam sistem triase gawat darurat menawarkan solusi signifikan bagi efisiensi operasional rumah sakit. Dengan kemampuan memproses data medis, riwayat medis, dan parameter vital secara real-time, sistem ini dapat memprioritaskan pasien yang paling mendesak berdasarkan data objektif. Hal ini memungkinkan pengalokasian sumber",
+        "ans_correct": null,
+        "has_axiom": false,
+        "has_loop": false,
+        "time_s": 16.040891885757446
+      }
+    }
+  }
+]

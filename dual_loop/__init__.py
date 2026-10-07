@@ -1,11 +1,12 @@
 """
-Dual-Loop Cognitive Controller v3.2.0 (SquareCloud NextGen)
+Dual-Loop Cognitive Controller v4.5.0 (HADL Car-Lift Edition)
 ============================================================
 A hardware-aligned, manifold-preserving latent reasoning framework
-for Transformer architectures.
+with Two-Piston Hydraulic Equilibrium, Porous Orifice Firewall,
+and 100% Frozen Foundation Model Architecture.
 """
 
-__version__ = "3.2.0"
+__version__ = "4.5.0"
 
 try:
     import torch
@@ -92,6 +93,30 @@ if _HAS_TORCH:
         LogDetVolumeSimilarity,
         NullspaceMemoryAppend,
         VexdoorClosedLoopWrapper
+    )
+    from .callearn_oc_engine import (
+        HADLv4ModelWrapper,
+        PolynomialEmbeddedRouting,
+        FastEmbeddedRouting,
+        attach_dual_loop_v4
+    )
+    from .id_smil_engine import (
+        IncoherentDiffuseRouter,
+        LocalAffordanceGate,
+        SMILBackgroundUnit,
+        IDSMILController,
+        HADLIDSMILModelWrapper,
+        attach_hadl_idsmil
+    )
+    from .dual_cup_poly_engine import (
+        PolynomialAffordanceStack,
+        PhaseShiftPrimeRouter,
+        LowRankSVDGhostLayer,
+        DualCupHydraulicUnit,
+        FormatDissector,
+        HADLv45DualCupController,
+        HADLv45ModelWrapper,
+        attach_hadl_v45_dualcup
     )
     # Convenient shorthand alias for users: default to Universal Adapter in v3.0!
     attach = attach_universal_dual_loop
@@ -197,7 +222,16 @@ if _HAS_TORCH:
         "SquareCloudModelWrapper",
         "SelectiveIdentityMatrixRouter",
         "DynamicMovingPointModulator",
-        "KnowledgeSyringe"
+        "KnowledgeSyringe",
+        "HADLv4ModelWrapper",
+        "PolynomialEmbeddedRouting",
+        "attach_dual_loop_v4",
+        "IncoherentDiffuseRouter",
+        "LocalAffordanceGate",
+        "SMILBackgroundUnit",
+        "IDSMILController",
+        "HADLIDSMILModelWrapper",
+        "attach_hadl_idsmil"
     ]
 
 else:

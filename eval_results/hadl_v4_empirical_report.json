@@ -1,0 +1,112 @@
+{
+  "benchmark_title": "HADL v4.1 Unified Architecture Empirical Evaluation",
+  "timestamp": "2026-10-04 14:46:36",
+  "hardware": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "model_id": "Qwen/Qwen3.5-2B",
+  "adapter_architecture": "HADLv4UnifiedEngine + HCDL Loss",
+  "trainable_parameters": 75619845,
+  "base_parameters": 1881825088,
+  "parameter_ratio_pct": 4.018,
+  "training_epochs": 15,
+  "training_duration_sec": 54.52,
+  "loss_progression": {
+    "initial_loss": 0.566,
+    "final_loss": 0.476,
+    "history": [
+      0.566,
+      0.4792,
+      0.4762,
+      0.4761,
+      0.4757,
+      0.4765,
+      0.4755,
+      0.4757,
+      0.4753,
+      0.4758,
+      0.4759,
+      0.476,
+      0.4759,
+      0.4764,
+      0.476
+    ]
+  },
+  "scoreboard": {
+    "baseline_accuracy_pct": 40.0,
+    "hadl_v34_accuracy_pct": 20.0,
+    "hadl_v35_accuracy_pct": 40.0,
+    "hadl_v41_accuracy_pct": 80.0,
+    "net_gain_vs_baseline_pct": 40.0,
+    "net_gain_vs_v35_pct": 40.0
+  },
+  "telemetry": {
+    "callearn_conflict": 1.046875,
+    "oc_dimension_open_scale": 0.099609375,
+    "signed_attention_min_weight": -0.1513671875,
+    "signed_attention_max_weight": -0.0035552978515625,
+    "hopfield_mean_energy": 18304.0,
+    "isometry_error": 0.0,
+    "latency_us": 2713.699999731034
+  },
+  "task_results": [
+    {
+      "task_id": "eval_alg_01",
+      "name": "Exotic Non-Abelian Algebraic Reduction",
+      "domain": "Non-Abelian Algebra",
+      "is_correct": true,
+      "ground_truth": "I",
+      "extracted": "I",
+      "num_tokens": 592,
+      "speed_tok_s": 22.24,
+      "generated_preview": "To simplify the expression $E = A * (B * D) * (C * B) * A$, we will use the given axioms and lemmas to perform step-by-step substitutions.\n\n",
+      "full_output": "To simplify the expression $E = A * (B * D) * (C * B) * A$, we will use the given axioms and lemmas to perform step-by-step substitutions.\n\n**Given Axioms:**\n1.  $A * B = C$\n2.  $B * A = D$\n3.  $C * D = A$\n4.  $D * C = B$\n5.  $X * X = I$ (Identity)\n6.  $X * I = I$\n7.  $I * X = X$\n\n**Given Lemmas:**\n1.  $B * D = A$\n2.  $C * B = A$\n3.  $D * A = B$\n4.  $C * A = D$\n\n**Expression:**\n$E = A * (B * D) * (C * B) * A$\n\n**Step 1: Simplify the inner terms using the lemmas.**\nThe expression contains two sub-expressions in parentheses: $(B * D)$ and $(C * B)$.\nAccording to the lemma $B * D = A$, we can replace the first parenthesis:\n$E = A * A * (C * B) * A$\n\nAccording to the lemma $C * B = A$, we can replace the second parenthesis:\n$E = A * A * A * A$\n\n**Step 2: Simplify the resulting product.**\nNow the expression is a product of four identical elements: $A * A * A * A$.\nWe know from the axiom $X * X = I$ that $A * A = I$.\nTherefore:\n$A * A = I$\nSubstituting this into the expression:\n$E = (A * A) * A * A = I * A * A$\n\nUsing the axiom $I * X = X$:\n$E = I * A = A$\nUsing the axiom $X * I = X$:\n$E = A * A = I$\n\nAlternatively, we can group them differently:\n$A * A = I$\n$A * A = I$\n$E = I * I = I$\n\nLet's re-verify the chain carefully:\n$E = A * (B * D) * (C * B) * A$\nSubstitute $B*D=A$: $E = A * A * (C * B) * A$\nSubstitute $C*B=A$: $E = A * A * A * A$\nSince $A * A = I$:\n$E = I * A * A$\n$E = A * A$\n$E = I$\n\n**Final Answer: I**"
+    },
+    {
+      "task_id": "eval_vm_02",
+      "name": "Reversible Stack Bytecode Machine Simulation",
+      "domain": "Bytecode VM Simulation",
+      "is_correct": false,
+      "ground_truth": "[7, 8, 0]",
+      "extracted": "MISMATCH",
+      "num_tokens": 293,
+      "speed_tok_s": 23.97,
+      "generated_preview": "1. PUSH 7\n   Stack: [7]\n\n2. DUP_ODD\n   Top is 7 (odd). Dup it.\n   Stack: [7, 7]\n\n3. PUSH 4\n   Stack: [7, 7, 4]\n\n4. SWAP_TOP\n   Swaps top two",
+      "full_output": "1. PUSH 7\n   Stack: [7]\n\n2. DUP_ODD\n   Top is 7 (odd). Dup it.\n   Stack: [7, 7]\n\n3. PUSH 4\n   Stack: [7, 7, 4]\n\n4. SWAP_TOP\n   Swaps top two elements (7 and 4).\n   Stack: [7, 7, 4, 7]\n\n5. ADD_FOLD\n   Pops top two: A=7, B=7.\n   Pushes (7 + 7) % 10 = 14 % 10 = 4.\n   Stack: [7, 7, 4, 4]\n\n6. PUSH 9\n   Stack: [7, 7, 4, 4, 9]\n\n7. SUB_FOLD\n   Pops top two: A=4, B=9.\n   Pushes abs(9 - 4) = 5.\n   Stack: [7, 7, 4, 5]\n\n8. DUP_ODD\n   Top is 5 (odd). Dup it.\n   Stack: [7, 7, 4, 5, 5]\n\nFinal Stack: [7, 7, 4, 5, 5]"
+    },
+    {
+      "task_id": "eval_hash_03",
+      "name": "Synthetic Cryptographic Hash Round State Transformation",
+      "domain": "Cryptographic Permutation",
+      "is_correct": true,
+      "ground_truth": "[1, 7, 1, 7]",
+      "extracted": "[1, 7, 1, 7]",
+      "num_tokens": 592,
+      "speed_tok_s": 23.73,
+      "generated_preview": "### Step 1: Apply $S_i' = (S_i \\times 3 + 1) \\pmod{16}$\n\nGiven Input State: $S = [2, 5, 0, 7]$\n\nCalculations for each index:\n- $S_0' = (2 \\t",
+      "full_output": "### Step 1: Apply $S_i' = (S_i \\times 3 + 1) \\pmod{16}$\n\nGiven Input State: $S = [2, 5, 0, 7]$\n\nCalculations for each index:\n- $S_0' = (2 \\times 3 + 1) \\pmod{16} = 7 \\pmod{16} = 7$\n- $S_1' = (5 \\times 3 + 1) \\pmod{16} = 16 \\pmod{16} = 0$\n- $S_2' = (0 \\times 3 + 1) \\pmod{16} = 1 \\pmod{16} = 1$\n- $S_3' = (7 \\times 3 + 1) \\pmod{16} = 22 \\pmod{16} = 6$\n\nResulting State after Step 1: $[7, 0, 1, 6]$\n\n---\n\n### Step 2: Compute Intermediate Values $T_0, T_1, T_2, T_3$\n\nUsing the state from Step 1: $S_0'=7, S_1'=0, S_2'=1, S_3'=6$\n\nCalculations:\n- $T_0 = (S_0' + S_1') \\pmod{16} = (7 + 0) \\pmod{16} = 7$\n- $T_1 = S_1' \\text{ XOR } S_2' = 0 \\text{ XOR } 1 = 1$\n- $T_2 = (S_2' + S_3') \\pmod{16} = (1 + 6) \\pmod{16} = 7$\n- $T_3 = S_3' \\text{ XOR } S_0' = 6 \\text{ XOR } 7 = 1$\n\nResulting Intermediate Values: $[7, 1, 7, 1]$\n\n---\n\n### Step 3: Construct Final Output\n\nThe output is defined as $[T_1, T_2, T_3, T_0]$.\n\nSubstituting the values:\n- $T_1 = 1$\n- $T_2 = 7$\n- $T_3 = 1$\n- $T_0 = 7$\n\nFinal Output: $[1, 7, 1, 7]$\n\nFinal State: [1, 7, 1, 7]"
+    },
+    {
+      "task_id": "eval_math_04",
+      "name": "Modular Exponentiation & Prime Order Deduction",
+      "domain": "Olympiad Math CoT",
+      "is_correct": true,
+      "ground_truth": "1",
+      "extracted": "1",
+      "num_tokens": 436,
+      "speed_tok_s": 21.98,
+      "generated_preview": "To find the remainder when $3^{2028}$ is divided by $13$, we can use Fermat's Little Theorem.\n\n**Step 1: State Fermat's Little Theorem**\nFer",
+      "full_output": "To find the remainder when $3^{2028}$ is divided by $13$, we can use Fermat's Little Theorem.\n\n**Step 1: State Fermat's Little Theorem**\nFermat's Little Theorem states that if $p$ is a prime number and $a$ is an integer not divisible by $p$, then:\n$$a^{p-1} \\equiv 1 \\pmod{p}$$\n\n**Step 2: Apply the theorem to our specific values**\nHere, $a = 3$ and $p = 13$.\nSince 13 is a prime number and 3 is not divisible by 13, we can apply the theorem:\n$$3^{13-1} \\equiv 1 \\pmod{13}$$\n$$3^{12} \\equiv 1 \\pmod{13}$$\n\n**Step 3: Simplify the exponent**\nWe need to evaluate $3^{2028} \\pmod{13}$. We can rewrite the exponent 2028 as a multiple of 12 plus a remainder.\n$$2028 \\div 12 = 169 \\text{ with a remainder of } 0$$\nSo, $2028 = 169 \\times 12$.\n\n**Step 4: Calculate the remainder**\nSubstitute this back into the original expression:\n$$3^{2028} = 3^{169 \\times 12} = (3^{12})^{169}$$\n\nFrom Step 2, we know that $3^{12} \\equiv 1 \\pmod{13}$. Therefore:\n$$(3^{12})^{169} \\equiv 1^{169} \\pmod{13}$$\n$$1^{169} = 1$$\n\nThus, the remainder is 1.\n\nFinal Answer: 1"
+    },
+    {
+      "task_id": "eval_trap_05",
+      "name": "Thermal Equilibrium Invariant Verification",
+      "domain": "Epistemic Trap Invalidation",
+      "is_correct": true,
+      "ground_truth": "20",
+      "extracted": "20",
+      "num_tokens": 10,
+      "speed_tok_s": 19.88,
+      "generated_preview": "Final Temperature: 20 C",
+      "full_output": "Final Temperature: 20 C"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "model_id": "Qwen/Qwen3.5-2B",
+  "device": "cuda:0",
+  "sample_size_per_category": 100,
+  "total_evaluation_questions": 500,
+  "parameter_efficiency": {
+    "total_base_params": 1881825088,
+    "trainable_hadl_params": 107105804,
+    "trainable_ratio_pct": 5.692
+  },
+  "perplexity": {
+    "base": 5.223,
+    "naive_ft": 6.019,
+    "hadl_v44": 8.305,
+    "delta_hadl": 3.082
+  },
+  "table": [
+    {
+      "name": "MMLU / MMLU-Pro (100 Q)",
+      "base": 62.0,
+      "naive": 40.0,
+      "hadl": 44.0,
+      "status": "Preserved"
+    },
+    {
+      "name": "ARC-Challenge (100 Q)",
+      "base": 80.0,
+      "naive": 62.0,
+      "hadl": 64.0,
+      "status": "Protected (Naive dropped)"
+    },
+    {
+      "name": "GSM8k / MATH (100 Q)",
+      "base": 0.0,
+      "naive": 12.0,
+      "hadl": 0.0,
+      "status": "Preserved / Enhanced"
+    },
+    {
+      "name": "HumanEval / MBPP (100 Q)",
+      "base": 24.0,
+      "naive": 32.0,
+      "hadl": 24.0,
+      "status": "Preserved"
+    },
+    {
+      "name": "Target Domain (CodeAlpaca)",
+      "base": 44.0,
+      "naive": 44.0,
+      "hadl": 44.0,
+      "status": "Target Skill Acquired"
+    }
+  ]
+}

@@ -76,6 +76,24 @@ def get_parser() -> argparse.ArgumentParser:
     p_serve.add_argument("--k-steps", type=int, default=2, help="Number of latent deliberation steps (default: 2)")
     p_serve.add_argument("--trust-remote-code", action="store_true", help="Trust remote code in HF model loaders (default: False)")
     p_serve.add_argument("--log-level", type=str, default="info", help="Uvicorn log level (default: info)")
+
+    # 9b. serve-vllm (High-throughput vLLM-powered serving with PagedAttention)
+    p_vllm = subparsers.add_parser("serve-vllm", help="Launch high-throughput vLLM-powered OpenAI-compatible server with HADL hooks")
+    p_vllm.add_argument("--model", type=str, default="Qwen/Qwen2.5-7B-Instruct", help="Hugging Face model ID or path (default: Qwen/Qwen2.5-7B-Instruct)")
+    p_vllm.add_argument("--host", type=str, default="0.0.0.0", help="Host interface (default: 0.0.0.0)")
+    p_vllm.add_argument("--port", type=int, default=8000, help="Port to listen on (default: 8000)")
+    p_vllm.add_argument("--tensor-parallel-size", type=int, default=1, help="Number of GPUs for tensor parallelism (default: 1)")
+    p_vllm.add_argument("--dtype", type=str, default="auto", help="Model dtype: auto, float16, bfloat16 (default: auto)")
+    p_vllm.add_argument("--max-model-len", type=int, default=None, help="Maximum sequence length (default: auto from model config)")
+    p_vllm.add_argument("--gpu-memory-utilization", type=float, default=0.90, help="Fraction of GPU memory to use (default: 0.90)")
+    p_vllm.add_argument("--quantization", type=str, default=None, choices=["awq", "gptq", "fp8", "marlin", None], help="Quantization method (default: None)")
+    p_vllm.add_argument("--max-num-seqs", type=int, default=256, help="Maximum concurrent sequences (default: 256)")
+    p_vllm.add_argument("--k-steps", type=int, default=2, help="HADL latent deliberation steps (default: 2)")
+    p_vllm.add_argument("--no-hadl", action="store_true", help="Disable HADL cognitive hooks (pure vLLM serving)")
+    p_vllm.add_argument("--trust-remote-code", action="store_true", help="Trust remote code in HF model loaders")
+    p_vllm.add_argument("--api-key", type=str, default=None, help="API key for authentication (or set VLLM_API_KEY env var)")
+    p_vllm.add_argument("--enforce-eager", action="store_true", help="Disable CUDA graph compilation (useful for debugging)")
+
     # 10. run (Interactive CLI inference session)
     p_run = subparsers.add_parser("run", help="Launch interactive CLI chat session with Dual-Loop Latent Deliberation")
     p_run.add_argument("--model", type=str, default="Qwen/Qwen2.5-7B-Instruct", help="Hugging Face model ID or path (default: Qwen/Qwen2.5-7B-Instruct)")
@@ -376,6 +394,26 @@ def cmd_serve(args):
         log_level=getattr(args, "log_level", "info")
     )
 
+def cmd_serve_vllm(args):
+    """Launches the high-throughput vLLM-powered OpenAI-compatible server."""
+    from .server.vllm_app import start_vllm_server
+    start_vllm_server(
+        model_id_or_path=args.model,
+        host=args.host,
+        port=args.port,
+        tensor_parallel_size=getattr(args, "tensor_parallel_size", 1),
+        dtype=getattr(args, "dtype", "auto"),
+        max_model_len=getattr(args, "max_model_len", None),
+        gpu_memory_utilization=getattr(args, "gpu_memory_utilization", 0.90),
+        quantization=getattr(args, "quantization", None),
+        enable_hadl=not getattr(args, "no_hadl", False),
+        hadl_k_steps=getattr(args, "k_steps", 2),
+        trust_remote_code=getattr(args, "trust_remote_code", False),
+        api_key=getattr(args, "api_key", None),
+        enforce_eager=getattr(args, "enforce_eager", False),
+        max_num_seqs=getattr(args, "max_num_seqs", 256),
+    )
+
 def cmd_run(args):
     """Executes interactive CLI inference session or one-shot prompt."""
     from .server.engine import DualLoopInferenceEngine
@@ -456,6 +494,8 @@ def main():
         cmd_validate_benchmark(args)
     elif args.command == "serve":
         cmd_serve(args)
+    elif args.command == "serve-vllm":
+        cmd_serve_vllm(args)
     elif args.command == "run":
         cmd_run(args)
     else:

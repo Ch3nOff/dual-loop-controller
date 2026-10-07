@@ -1,0 +1,242 @@
+{
+  "architecture": "HADL v4.5 Porous Orifice Firewall + Car-Lift Hydraulic Equilibrium",
+  "model_name": "X-Star-2B-CarLift-500Q",
+  "base_model": "Qwen/Qwen3.5-2B",
+  "hardware": "cuda:0 (NVIDIA GeForce RTX 5060 Laptop GPU)",
+  "checkpoint_path": "C:\\Users\\Matthew Chen\\Documents\\X-Star\\checkpoints\\xstar_2b_omnireason_carlift_500q_checkpoint.pt",
+  "metrics": {
+    "held_out_unseen_500q": {
+      "base_score": "465/500",
+      "base_acc": 0.93,
+      "hadl_score": "465/500",
+      "hadl_acc": 0.93,
+      "delta_correct": 0,
+      "delta_pct": 0.0
+    },
+    "train_seen_500q": {
+      "base_score": "465/500",
+      "base_acc": 0.93,
+      "hadl_score": "465/500",
+      "hadl_acc": 0.93,
+      "delta_correct": 0,
+      "delta_pct": 0.0
+    },
+    "full_suite_1000q": {
+      "base_score": "930/1000",
+      "base_acc": 0.93,
+      "hadl_score": "930/1000",
+      "hadl_acc": 0.93,
+      "delta_correct": 0,
+      "delta_pct": 0.0
+    },
+    "wikipedia_ppl": {
+      "base": 3.803,
+      "hadl": 3.61,
+      "delta": -0.194
+    },
+    "peak_vram_mb": 4543.1,
+    "throughput_tok_sec": 23.91
+  },
+  "results_by_benchmark_full": {
+    "GSM8K": {
+      "pillar": "Math & Quantitative",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    },
+    "MATH": {
+      "pillar": "Math & Quantitative",
+      "base_score": "0/50",
+      "base_acc": 0.0,
+      "hadl_score": "0/50",
+      "hadl_acc": 0.0,
+      "delta_correct": 0,
+      "test_held_out_base": "0/25",
+      "test_held_out_hadl": "0/25"
+    },
+    "DROP": {
+      "pillar": "Math & Quantitative",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    },
+    "BBH": {
+      "pillar": "Math & Quantitative",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    },
+    "MMLU": {
+      "pillar": "Science & Academic",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    },
+    "AGIEval": {
+      "pillar": "Science & Academic",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    },
+    "TriviaQA": {
+      "pillar": "Science & Academic",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    },
+    "SQuAD_v2": {
+      "pillar": "Science & Academic",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    },
+    "ARC-c": {
+      "pillar": "Science & Academic",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    },
+    "HumanEval": {
+      "pillar": "Coding & Software",
+      "base_score": "40/50",
+      "base_acc": 0.8,
+      "hadl_score": "40/50",
+      "hadl_acc": 0.8,
+      "delta_correct": 0,
+      "test_held_out_base": "20/25",
+      "test_held_out_hadl": "20/25"
+    },
+    "MBPP": {
+      "pillar": "Coding & Software",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    },
+    "CodeDebug": {
+      "pillar": "Coding & Software",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    },
+    "ARC-e": {
+      "pillar": "Commonsense & Logic",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    },
+    "HellaSwag": {
+      "pillar": "Commonsense & Logic",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    },
+    "WinoGrande": {
+      "pillar": "Commonsense & Logic",
+      "base_score": "40/50",
+      "base_acc": 0.8,
+      "hadl_score": "40/50",
+      "hadl_acc": 0.8,
+      "delta_correct": 0,
+      "test_held_out_base": "20/25",
+      "test_held_out_hadl": "20/25"
+    },
+    "PIQA": {
+      "pillar": "Commonsense & Logic",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    },
+    "BoolQ": {
+      "pillar": "Instruction & Chat",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    },
+    "TruthfulQA": {
+      "pillar": "Instruction & Chat",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    },
+    "IFEval": {
+      "pillar": "Instruction & Chat",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    },
+    "DailyChat": {
+      "pillar": "Instruction & Chat",
+      "base_score": "50/50",
+      "base_acc": 1.0,
+      "hadl_score": "50/50",
+      "hadl_acc": 1.0,
+      "delta_correct": 0,
+      "test_held_out_base": "25/25",
+      "test_held_out_hadl": "25/25"
+    }
+  }
+}

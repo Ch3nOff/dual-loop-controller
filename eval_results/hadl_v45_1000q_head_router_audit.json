@@ -1,0 +1,67 @@
+{
+  "architecture": "HADL v4.5 with Incoherent Phase-Aperture Head Router (IPA-HR)",
+  "model_name": "X-Star-2B-OmniReason-v4.5-IPARouter",
+  "base_model": "Qwen/Qwen3.5-2B",
+  "hardware": "cuda:0 (NVIDIA GeForce RTX 5060 Laptop GPU)",
+  "checkpoint_path": "C:\\Users\\Matthew Chen\\Documents\\X-Star\\checkpoints\\xstar_2b_hadl_v45_1000q_checkpoint.pt",
+  "checkpoint_size_mb": 148.16,
+  "metrics": {
+    "base": {
+      "total_score": "443/1000",
+      "accuracy": 0.443,
+      "wikipedia_ppl": 3.803,
+      "peak_vram_mb": 3833.3,
+      "throughput_tok_sec": 25.07
+    },
+    "hadl_v45_ipa": {
+      "total_score": "463/1000",
+      "accuracy": 0.463,
+      "delta_correct": 20,
+      "wikipedia_ppl": 3.803,
+      "peak_vram_mb": 4515.4,
+      "throughput_tok_sec": 23.85
+    }
+  },
+  "benchmarks": {
+    "GSM8K": {
+      "base_score": "112/200",
+      "base_acc": 0.56,
+      "hadl_score": "112/200",
+      "hadl_acc": 0.56,
+      "delta": 0.0,
+      "hadl_avg_aperture": 0.105
+    },
+    "DROP": {
+      "base_score": "62/200",
+      "base_acc": 0.31,
+      "hadl_score": "62/200",
+      "hadl_acc": 0.31,
+      "delta": 0.0,
+      "hadl_avg_aperture": 0.105
+    },
+    "MMLU": {
+      "base_score": "5/200",
+      "base_acc": 0.025,
+      "hadl_score": "5/200",
+      "hadl_acc": 0.025,
+      "delta": 0.0,
+      "hadl_avg_aperture": 0.105
+    },
+    "HumanEval": {
+      "base_score": "124/200",
+      "base_acc": 0.62,
+      "hadl_score": "124/200",
+      "hadl_acc": 0.62,
+      "delta": 0.0,
+      "hadl_avg_aperture": 0.105
+    },
+    "DailyChat": {
+      "base_score": "140/200",
+      "base_acc": 0.7,
+      "hadl_score": "160/200",
+      "hadl_acc": 0.8,
+      "delta": 0.1,
+      "hadl_avg_aperture": 0.1365
+    }
+  }
+}

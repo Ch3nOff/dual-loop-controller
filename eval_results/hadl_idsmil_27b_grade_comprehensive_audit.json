@@ -1,0 +1,733 @@
+{
+  "metadata": {
+    "model_id": "Qwen/Qwen3.5-2B",
+    "device": "cuda:0",
+    "peak_vram_mb": 5990.5,
+    "base_vram_mb": 3590.0,
+    "parameter_efficiency": {
+      "total_base_parameters": 1881825088,
+      "trainable_id_smil_parameters": 108289676,
+      "trainable_ratio_pct": 5.755
+    }
+  },
+  "baseline": {
+    "reasoning_27b_accuracy": 20.0,
+    "reasoning_speed_tok_s": 23.0,
+    "conversation_integrity_score": 75.0,
+    "wikipedia_ppl": 12.765,
+    "arc_challenge": 75.0,
+    "mmlu_cs": 45.0,
+    "humaneval": 20.0,
+    "reasoning_details": [
+      {
+        "task_id": "eval_alg_01",
+        "name": "Non-Abelian Group Axiom Reduction",
+        "domain": "Non-Abelian Algebra",
+        "passed": false,
+        "speed_tok_s": 17.0,
+        "snippet": "To simplify the expression $E = A * (B * D) * (C * B) * A$, we will use the given axioms and lemmas "
+      },
+      {
+        "task_id": "eval_vm_02",
+        "name": "Reversible Stack VM Simulation",
+        "domain": "Bytecode VM Simulation",
+        "passed": false,
+        "speed_tok_s": 24.9,
+        "snippet": "Let's trace the execution step by step:\n\n**Initial Stack:** `[]`\n\n1.  **PUSH 7**\n    -   Stack: `[7]"
+      },
+      {
+        "task_id": "eval_hash_03",
+        "name": "X-Hash Permutation State Tracking",
+        "domain": "Cryptographic Permutation",
+        "passed": false,
+        "speed_tok_s": 24.1,
+        "snippet": "To execute the 'X-Hash' permutation, we will follow the steps strictly based on the input state $S ="
+      },
+      {
+        "task_id": "eval_math_04",
+        "name": "Modular Exponentiation Deduction",
+        "domain": "Olympiad Math CoT",
+        "passed": false,
+        "speed_tok_s": 24.0,
+        "snippet": "To find the remainder when $3^{2028}$ is divided by $13$, we can use Fermat's Little Theorem.\n\n**Ste"
+      },
+      {
+        "task_id": "eval_trap_05",
+        "name": "Thermal Equilibrium Premise Invariant",
+        "domain": "Epistemic Trap Invalidation",
+        "passed": true,
+        "speed_tok_s": 25.2,
+        "snippet": "To find the final equilibrium temperature, we use the principle of conservation of energy, which sta"
+      }
+    ],
+    "conversation_details": [
+      {
+        "id": "chat_01_weekend_burnout",
+        "name": "Empathetic Burnout & Relaxation Advice (Bahasa Indonesia)",
+        "fluent": false,
+        "style_bleed_detected": false,
+        "matched_keywords": 1,
+        "sample_snippet": "Halo! Senang sekali bisa membantu. \ud83d\ude0a\n\nMemang sangat wajar merasa lelah setelah kerja lembur tanpa henti. Tubuh"
+      },
+      {
+        "id": "chat_02_polite_debt_reminder",
+        "name": "Polite Debt Collection Advice (Bahasa Indonesia)",
+        "fluent": true,
+        "style_bleed_detected": false,
+        "matched_keywords": 2,
+        "sample_snippet": "Situasi ini memang sangat membingungkan dan menyakitkan hati, terutama karena temanmu adalah orang yang paling"
+      },
+      {
+        "id": "chat_03_travel_kyoto",
+        "name": "Kyoto Autumn 3-Day Travel Itinerary (English)",
+        "fluent": true,
+        "style_bleed_detected": false,
+        "matched_keywords": 3,
+        "sample_snippet": "Hey there! That sounds like a fantastic plan. Late November in Kyoto is actually one of the most magical times"
+      },
+      {
+        "id": "chat_04_culinary_recipe",
+        "name": "Comfort Food Nasi Goreng Recipe (Bahasa Indonesia)",
+        "fluent": true,
+        "style_bleed_detected": false,
+        "matched_keywords": 6,
+        "sample_snippet": "Malam! Senang sekali bisa bantu. Nasi goreng ala abang-abang gerobak itu memang punya segarnya sendiri: **guri"
+      }
+    ]
+  },
+  "idsmil_post_sft": {
+    "reasoning_27b_accuracy": 20.0,
+    "reasoning_speed_tok_s": 23.0,
+    "conversation_integrity_score": 75.0,
+    "wikipedia_ppl": 13.503,
+    "arc_challenge": 70.0,
+    "mmlu_cs": 45.0,
+    "humaneval": 30.0,
+    "reasoning_details": [
+      {
+        "task_id": "eval_alg_01",
+        "name": "Non-Abelian Group Axiom Reduction",
+        "domain": "Non-Abelian Algebra",
+        "passed": false,
+        "speed_tok_s": 22.3,
+        "snippet": "Step 1: By Lemma, C * B = A.\nStep 2: By Axiom 4, D * C = B.\nStep 3: By Axiom 2, B * A = D.\nStep 4: B"
+      },
+      {
+        "task_id": "eval_vm_02",
+        "name": "Reversible Stack VM Simulation",
+        "domain": "Bytecode VM Simulation",
+        "passed": false,
+        "speed_tok_s": 23.9,
+        "snippet": "1. PUSH 7 -> [7]\n2. DUP_ODD -> top 7 is odd, dup 7 -> [7, 7]\n3. PUSH 4 -> [7, 7, 4]\n4. SWAP_TOP -> ["
+      },
+      {
+        "task_id": "eval_hash_03",
+        "name": "X-Hash Permutation State Tracking",
+        "domain": "Cryptographic Permutation",
+        "passed": false,
+        "speed_tok_s": 22.5,
+        "snippet": "Step 1:\nS0' = (2*3+1)%16 = 7\nS1' = (5*3+1)%16 = 16 = 0\nS2' = (0*3+1)%16 = 1\nS3' = (7*3+1)%16 = 22 = "
+      },
+      {
+        "task_id": "eval_math_04",
+        "name": "Modular Exponentiation Deduction",
+        "domain": "Olympiad Math CoT",
+        "passed": false,
+        "speed_tok_s": 23.3,
+        "snippet": "By Fermat's Little Theorem, 3^12 = 1 (mod 13).\nWe calculate 2028 mod 12: 2028 = 12 * 169, so 2028 = "
+      },
+      {
+        "task_id": "eval_trap_05",
+        "name": "Thermal Equilibrium Premise Invariant",
+        "domain": "Epistemic Trap Invalidation",
+        "passed": true,
+        "speed_tok_s": 22.9,
+        "snippet": "Final Temperature: 20 C"
+      }
+    ],
+    "conversation_details": [
+      {
+        "id": "chat_01_weekend_burnout",
+        "name": "Empathetic Burnout & Relaxation Advice (Bahasa Indonesia)",
+        "fluent": true,
+        "style_bleed_detected": false,
+        "matched_keywords": 2,
+        "sample_snippet": "Halo! Senang banget bisa membantu. \ud83d\ude0a\nKerja lembur tanpa henti memang bikin tubuh dan pikiran butuh \"reset\" yan"
+      },
+      {
+        "id": "chat_02_polite_debt_reminder",
+        "name": "Polite Debt Collection Advice (Bahasa Indonesia)",
+        "fluent": false,
+        "style_bleed_detected": false,
+        "matched_keywords": 0,
+        "sample_snippet": "Situasi ini memang sangat membingungkan dan melelahkan. Rasa segan dan kesepian yang kamu rasakan wajar, terut"
+      },
+      {
+        "id": "chat_03_travel_kyoto",
+        "name": "Kyoto Autumn 3-Day Travel Itinerary (English)",
+        "fluent": true,
+        "style_bleed_detected": false,
+        "matched_keywords": 3,
+        "sample_snippet": "Hey! That sounds like a fantastic plan. Late November in Kyoto is *chef's kiss*\u2014the air is crisp, the leaves a"
+      },
+      {
+        "id": "chat_04_culinary_recipe",
+        "name": "Comfort Food Nasi Goreng Recipe (Bahasa Indonesia)",
+        "fluent": true,
+        "style_bleed_detected": false,
+        "matched_keywords": 7,
+        "sample_snippet": "Malam! Senang sekali bisa membantu. Nasi goreng ala abang-abang gerobak itu memang ciri khasnya: **gurih, wang"
+      }
+    ]
+  },
+  "deltas": {
+    "reasoning_27b_gain": 0.0,
+    "conversation_delta": 0.0,
+    "ppl_delta": 0.738,
+    "arc_delta": -5.0,
+    "mmlu_delta": 0.0,
+    "humaneval_delta": 10.0
+  },
+  "training_logs": [
+    {
+      "step": 1,
+      "domain": "Non-Abelian Algebra",
+      "loss": 1.0433,
+      "kappa": 0.0928,
+      "p_understand": 0.5234,
+      "bounce_ratio": 0.0101,
+      "specialist_weight": 0.2656
+    },
+    {
+      "step": 2,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.907,
+      "kappa": 0.2451,
+      "p_understand": 0.5625,
+      "bounce_ratio": 0.0048,
+      "specialist_weight": 0.3262
+    },
+    {
+      "step": 3,
+      "domain": "Non-Abelian Algebra",
+      "loss": 1.1676,
+      "kappa": 0.3906,
+      "p_understand": 0.5977,
+      "bounce_ratio": 0.0054,
+      "specialist_weight": 0.3809
+    },
+    {
+      "step": 4,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.7941,
+      "kappa": 0.5391,
+      "p_understand": 0.6328,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.459
+    },
+    {
+      "step": 5,
+      "domain": "Bytecode VM Simulation",
+      "loss": 0.623,
+      "kappa": 0.6055,
+      "p_understand": 0.6484,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.4629
+    },
+    {
+      "step": 6,
+      "domain": "Bytecode VM Simulation",
+      "loss": 0.5215,
+      "kappa": 0.7344,
+      "p_understand": 0.6758,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.5078
+    },
+    {
+      "step": 7,
+      "domain": "Bytecode VM Simulation",
+      "loss": 0.3622,
+      "kappa": 0.8438,
+      "p_understand": 0.6992,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.5469
+    },
+    {
+      "step": 8,
+      "domain": "Cryptographic Permutation",
+      "loss": 0.4395,
+      "kappa": 0.9492,
+      "p_understand": 0.7188,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6406
+    },
+    {
+      "step": 9,
+      "domain": "Cryptographic Permutation",
+      "loss": 0.4437,
+      "kappa": 1.0234,
+      "p_understand": 0.7344,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.668
+    },
+    {
+      "step": 10,
+      "domain": "Olympiad Math CoT",
+      "loss": 0.5708,
+      "kappa": 0.9102,
+      "p_understand": 0.7109,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6445
+    },
+    {
+      "step": 11,
+      "domain": "Olympiad Math CoT",
+      "loss": 0.4643,
+      "kappa": 0.9727,
+      "p_understand": 0.7227,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.668
+    },
+    {
+      "step": 12,
+      "domain": "Epistemic Trap Invalidation",
+      "loss": 2.227,
+      "kappa": 0.9023,
+      "p_understand": 0.7109,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.5469
+    },
+    {
+      "step": 13,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.6693,
+      "kappa": 1.0391,
+      "p_understand": 0.7383,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6875
+    },
+    {
+      "step": 14,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.3137,
+      "kappa": 1.0859,
+      "p_understand": 0.7461,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6953
+    },
+    {
+      "step": 15,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.428,
+      "kappa": 1.0859,
+      "p_understand": 0.7461,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6836
+    },
+    {
+      "step": 16,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.2513,
+      "kappa": 1.1016,
+      "p_understand": 0.75,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6914
+    },
+    {
+      "step": 17,
+      "domain": "Bytecode VM Simulation",
+      "loss": 0.1297,
+      "kappa": 1.0625,
+      "p_understand": 0.7422,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6172
+    },
+    {
+      "step": 18,
+      "domain": "Bytecode VM Simulation",
+      "loss": 0.1019,
+      "kappa": 1.0859,
+      "p_understand": 0.7461,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.625
+    },
+    {
+      "step": 19,
+      "domain": "Bytecode VM Simulation",
+      "loss": 0.088,
+      "kappa": 1.1094,
+      "p_understand": 0.75,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.625
+    },
+    {
+      "step": 20,
+      "domain": "Cryptographic Permutation",
+      "loss": 0.1923,
+      "kappa": 1.1719,
+      "p_understand": 0.7617,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6914
+    },
+    {
+      "step": 21,
+      "domain": "Cryptographic Permutation",
+      "loss": 0.2532,
+      "kappa": 1.1875,
+      "p_understand": 0.7656,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6953
+    },
+    {
+      "step": 22,
+      "domain": "Olympiad Math CoT",
+      "loss": 0.2036,
+      "kappa": 1.0312,
+      "p_understand": 0.7344,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6562
+    },
+    {
+      "step": 23,
+      "domain": "Olympiad Math CoT",
+      "loss": 0.2105,
+      "kappa": 1.0547,
+      "p_understand": 0.7383,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6602
+    },
+    {
+      "step": 24,
+      "domain": "Epistemic Trap Invalidation",
+      "loss": 1.0048,
+      "kappa": 0.9648,
+      "p_understand": 0.7227,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.5078
+    },
+    {
+      "step": 25,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.4568,
+      "kappa": 1.1016,
+      "p_understand": 0.75,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7031
+    },
+    {
+      "step": 26,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.2305,
+      "kappa": 1.125,
+      "p_understand": 0.7539,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7109
+    },
+    {
+      "step": 27,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.2716,
+      "kappa": 1.1094,
+      "p_understand": 0.75,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7031
+    },
+    {
+      "step": 28,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.0939,
+      "kappa": 1.1172,
+      "p_understand": 0.75,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7148
+    },
+    {
+      "step": 29,
+      "domain": "Bytecode VM Simulation",
+      "loss": 0.0568,
+      "kappa": 1.0781,
+      "p_understand": 0.7461,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6641
+    },
+    {
+      "step": 30,
+      "domain": "Bytecode VM Simulation",
+      "loss": 0.0649,
+      "kappa": 1.0938,
+      "p_understand": 0.75,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6719
+    },
+    {
+      "step": 31,
+      "domain": "Bytecode VM Simulation",
+      "loss": 0.0501,
+      "kappa": 1.1172,
+      "p_understand": 0.75,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6797
+    },
+    {
+      "step": 32,
+      "domain": "Cryptographic Permutation",
+      "loss": 0.126,
+      "kappa": 1.1719,
+      "p_understand": 0.7617,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7305
+    },
+    {
+      "step": 33,
+      "domain": "Cryptographic Permutation",
+      "loss": 0.1832,
+      "kappa": 1.1875,
+      "p_understand": 0.7656,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7344
+    },
+    {
+      "step": 34,
+      "domain": "Olympiad Math CoT",
+      "loss": 0.1038,
+      "kappa": 1.0312,
+      "p_understand": 0.7344,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7031
+    },
+    {
+      "step": 35,
+      "domain": "Olympiad Math CoT",
+      "loss": 0.1099,
+      "kappa": 1.0547,
+      "p_understand": 0.7383,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.707
+    },
+    {
+      "step": 36,
+      "domain": "Epistemic Trap Invalidation",
+      "loss": 0.3665,
+      "kappa": 0.9648,
+      "p_understand": 0.7227,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6172
+    },
+    {
+      "step": 37,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.3681,
+      "kappa": 1.0938,
+      "p_understand": 0.7461,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7227
+    },
+    {
+      "step": 38,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.2311,
+      "kappa": 1.125,
+      "p_understand": 0.7539,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7344
+    },
+    {
+      "step": 39,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.161,
+      "kappa": 1.1094,
+      "p_understand": 0.75,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7227
+    },
+    {
+      "step": 40,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.086,
+      "kappa": 1.1172,
+      "p_understand": 0.75,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7305
+    },
+    {
+      "step": 41,
+      "domain": "Bytecode VM Simulation",
+      "loss": 0.0251,
+      "kappa": 1.0859,
+      "p_understand": 0.7461,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7031
+    },
+    {
+      "step": 42,
+      "domain": "Bytecode VM Simulation",
+      "loss": 0.0221,
+      "kappa": 1.1016,
+      "p_understand": 0.75,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7031
+    },
+    {
+      "step": 43,
+      "domain": "Bytecode VM Simulation",
+      "loss": 0.0286,
+      "kappa": 1.1172,
+      "p_understand": 0.75,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7148
+    },
+    {
+      "step": 44,
+      "domain": "Cryptographic Permutation",
+      "loss": 0.0838,
+      "kappa": 1.1797,
+      "p_understand": 0.7617,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7461
+    },
+    {
+      "step": 45,
+      "domain": "Cryptographic Permutation",
+      "loss": 0.125,
+      "kappa": 1.1953,
+      "p_understand": 0.7656,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.75
+    },
+    {
+      "step": 46,
+      "domain": "Olympiad Math CoT",
+      "loss": 0.0476,
+      "kappa": 1.0391,
+      "p_understand": 0.7383,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7188
+    },
+    {
+      "step": 47,
+      "domain": "Olympiad Math CoT",
+      "loss": 0.0888,
+      "kappa": 1.0625,
+      "p_understand": 0.7422,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7266
+    },
+    {
+      "step": 48,
+      "domain": "Epistemic Trap Invalidation",
+      "loss": 0.168,
+      "kappa": 0.9727,
+      "p_understand": 0.7227,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6602
+    },
+    {
+      "step": 49,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.2066,
+      "kappa": 1.1016,
+      "p_understand": 0.75,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7344
+    },
+    {
+      "step": 50,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.1485,
+      "kappa": 1.1328,
+      "p_understand": 0.7539,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7383
+    },
+    {
+      "step": 51,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.2911,
+      "kappa": 1.1172,
+      "p_understand": 0.75,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7305
+    },
+    {
+      "step": 52,
+      "domain": "Non-Abelian Algebra",
+      "loss": 0.1634,
+      "kappa": 1.125,
+      "p_understand": 0.7539,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7383
+    },
+    {
+      "step": 53,
+      "domain": "Bytecode VM Simulation",
+      "loss": 0.0156,
+      "kappa": 1.0859,
+      "p_understand": 0.7461,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7188
+    },
+    {
+      "step": 54,
+      "domain": "Bytecode VM Simulation",
+      "loss": 0.0162,
+      "kappa": 1.1016,
+      "p_understand": 0.75,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7148
+    },
+    {
+      "step": 55,
+      "domain": "Bytecode VM Simulation",
+      "loss": 0.028,
+      "kappa": 1.1172,
+      "p_understand": 0.7539,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7188
+    },
+    {
+      "step": 56,
+      "domain": "Cryptographic Permutation",
+      "loss": 0.0798,
+      "kappa": 1.1797,
+      "p_understand": 0.7656,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7539
+    },
+    {
+      "step": 57,
+      "domain": "Cryptographic Permutation",
+      "loss": 0.0835,
+      "kappa": 1.1953,
+      "p_understand": 0.7656,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7539
+    },
+    {
+      "step": 58,
+      "domain": "Olympiad Math CoT",
+      "loss": 0.0616,
+      "kappa": 1.0391,
+      "p_understand": 0.7383,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7266
+    },
+    {
+      "step": 59,
+      "domain": "Olympiad Math CoT",
+      "loss": 0.0284,
+      "kappa": 1.0625,
+      "p_understand": 0.7422,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.7344
+    },
+    {
+      "step": 60,
+      "domain": "Epistemic Trap Invalidation",
+      "loss": 0.0719,
+      "kappa": 0.9727,
+      "p_understand": 0.7227,
+      "bounce_ratio": 0.0,
+      "specialist_weight": 0.6719
+    }
+  ]
+}
