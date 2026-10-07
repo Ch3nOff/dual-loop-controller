@@ -1,10 +1,10 @@
 @echo off
 setlocal enabledelayedexpansion
-title Dual-Loop Autonomous Inference Server (OpenAI Compatible)
+title Dual-Loop Autonomous Inference Server (vLLM OpenAI Compatible)
 
 echo ===============================================================================
-echo      DUAL-LOOP COGNITIVE OS INFERENCE SERVER (vLLM / Ollama Alternative)
-echo      Hardware-Aligned Dynamic VRAM Auto-Tuning ^& Zero OOM Guarantee
+echo      DUAL-LOOP HIGH-THROUGHPUT vLLM INFERENCE SERVER (Car-Lift v4.5)
+echo      PagedAttention, Continuous Batching ^& Dual-Loop Latent Deliberation
 echo ===============================================================================
 echo.
 
@@ -23,39 +23,28 @@ if errorlevel 1 (
 )
 
 echo.
-echo [*] Analyzing Hardware Profile and Available VRAM...
-"%PYTHON_EXE%" -c "from dual_loop.server.vram_tuner import VRAMAutoTuner; hw = VRAMAutoTuner.profile_hardware(); print(f'    GPU Detected   : {hw.device_name}\n    Total VRAM     : {hw.total_vram_gib} GiB\n    Free VRAM      : {hw.free_vram_gib} GiB\n    Host RAM Total : {hw.host_ram_total_gib} GiB')"
-echo.
-
 echo -------------------------------------------------------------------------------
 echo Select Model to Host:
-echo   [1] Qwen/Qwen3.5-2B (Instant Local Cache - 1.91 GiB VRAM on RTX 5060!)
-echo   [2] meta-llama/Llama-3.1-8B-Instruct (4-bit NF4 / BF16 Auto-Adapted)
-echo   [3] Qwen/Qwen2.5-7B-Instruct (4-bit NF4 / BF16 Auto-Adapted)
-echo   [4] Qwen/Qwen2.5-3B-Instruct (Ultra Fast Latent Deliberation)
-echo   [5] Enter Custom Hugging Face Model ID
+echo   [1] Qwen/Qwen2.5-7B-Instruct (Recommended Production Baseline)
+echo   [2] meta-llama/Llama-3.1-8B-Instruct (Meta LLaMA 3.1 8B)
+echo   [3] Qwen/Qwen2.5-3B-Instruct (Ultra Fast Latent Deliberation)
+echo   [4] Enter Custom Hugging Face Model ID
 echo -------------------------------------------------------------------------------
-set /p MODEL_CHOICE="Enter choice [1-5, Default=1]: "
+set /p MODEL_CHOICE="Enter choice [1-4, Default=1]: "
 
 if "%MODEL_CHOICE%"=="2" (
     set "SELECTED_MODEL=meta-llama/Llama-3.1-8B-Instruct"
 ) else if "%MODEL_CHOICE%"=="3" (
-    set "SELECTED_MODEL=Qwen/Qwen2.5-7B-Instruct"
-) else if "%MODEL_CHOICE%"=="4" (
     set "SELECTED_MODEL=Qwen/Qwen2.5-3B-Instruct"
-) else if "%MODEL_CHOICE%"=="5" (
-    set /p SELECTED_MODEL="Enter Hugging Face Model ID (e.g. meta-llama/Llama-3.1-8B-Instruct): "
+) else if "%MODEL_CHOICE%"=="4" (
+    set /p SELECTED_MODEL="Enter Hugging Face Model ID: "
 ) else (
-    set "SELECTED_MODEL=Qwen/Qwen3.5-2B"
+    set "SELECTED_MODEL=Qwen/Qwen2.5-7B-Instruct"
 )
 
 echo.
 echo [Selected Model]: %SELECTED_MODEL%
 echo.
-set /p USER_HEADROOM="Enter VRAM Safety Headroom in GiB (e.g. 4.0 for 12GB GPU, or 'auto') [Default=auto]: "
-if "%USER_HEADROOM%"=="" (
-    set "USER_HEADROOM=auto"
-)
 
 set /p USER_PORT="Enter Server Port [Default=8000]: "
 if "%USER_PORT%"=="" (
@@ -64,15 +53,15 @@ if "%USER_PORT%"=="" (
 
 echo.
 echo ===============================================================================
-echo Starting Dual-Loop Inference Engine on http://127.0.0.1:%USER_PORT%/v1 ...
+echo Starting Dual-Loop vLLM Inference Engine on http://127.0.0.1:%USER_PORT%/v1 ...
 echo ===============================================================================
 echo.
-echo Hermes Agent / OpenAI Client Configuration:
+echo OpenAI Client / Hermes Agent Configuration:
 echo   - Base URL: http://localhost:%USER_PORT%/v1
 echo   - Model   : %SELECTED_MODEL%
-echo   - API Key : not-needed (or any string)
+echo   - API Key : not-needed (or any string on localhost)
 echo.
 
-"%PYTHON_EXE%" -m dual_loop.cli serve --model "%SELECTED_MODEL%" --port %USER_PORT% --headroom "%USER_HEADROOM%"
+"%PYTHON_EXE%" -m dual_loop.cli serve --model "%SELECTED_MODEL%" --port %USER_PORT%
 
 pause

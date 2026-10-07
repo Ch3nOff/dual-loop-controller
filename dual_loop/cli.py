@@ -66,41 +66,43 @@ def get_parser() -> argparse.ArgumentParser:
     p_val.add_argument("--quarantine", action="store_true", help="Automatically quarantine failing files")
     p_val.add_argument("--quarantine-dir", type=str, default="eval_results/archive_deprecated", help="Quarantine directory")
 
-    # 9. serve (OpenAI-compatible inference server with VRAM auto-tuning)
-    p_serve = subparsers.add_parser("serve", help="Launch OpenAI-compatible inference server with dynamic VRAM auto-tuning")
-    p_serve.add_argument("--model", type=str, default="Qwen/Qwen2.5-7B-Instruct", help="Hugging Face model ID or path (default: Qwen/Qwen2.5-7B-Instruct)")
-    p_serve.add_argument("--host", type=str, default="127.0.0.1", help="Host interface to bind (default: 127.0.0.1; specify 0.0.0.0 for external access)")
-    p_serve.add_argument("--port", type=int, default=8000, help="Port to listen on (default: 8000)")
-    p_serve.add_argument("--api-key", type=str, default=None, help="API key for Bearer token authentication (or set DUAL_LOOP_API_KEY env var)")
-    p_serve.add_argument("--regime", type=str, choices=["auto", "bf16", "int8", "nf4"], default="auto", help="Force specific quantization regime (default: auto)")
-    p_serve.add_argument("--k-steps", type=int, default=2, help="Number of latent deliberation steps (default: 2)")
-    p_serve.add_argument("--trust-remote-code", action="store_true", help="Trust remote code in HF model loaders (default: False)")
-    p_serve.add_argument("--log-level", type=str, default="info", help="Uvicorn log level (default: info)")
+    # 9. serve (High-throughput vLLM-powered serving with HADL cognitive hooks)
+    def _add_serve_args(p):
+        p.add_argument("--model", type=str, default="Qwen/Qwen2.5-7B-Instruct", help="Hugging Face model ID or path (default: Qwen/Qwen2.5-7B-Instruct)")
+        p.add_argument("--host", type=str, default="127.0.0.1", help="Host interface to bind (default: 127.0.0.1; specify 0.0.0.0 for external access)")
+        p.add_argument("--port", type=int, default=8000, help="Port to listen on (default: 8000)")
+        p.add_argument("--tensor-parallel-size", type=int, default=1, help="Number of GPUs for tensor parallelism (default: 1)")
+        p.add_argument("--dtype", type=str, default="auto", help="Model dtype: auto, float16, bfloat16 (default: auto)")
+        p.add_argument("--max-model-len", type=int, default=None, help="Maximum sequence length (default: auto from model config)")
+        p.add_argument("--gpu-memory-utilization", type=float, default=0.90, help="Fraction of GPU memory to use (default: 0.90)")
+        p.add_argument("--quantization", type=str, default=None, choices=["awq", "gptq", "fp8", "marlin", None], help="Quantization method (default: None)")
+        p.add_argument("--max-num-seqs", type=int, default=256, help="Maximum concurrent sequences (default: 256)")
+        p.add_argument("--k-steps", type=int, default=2, help="HADL latent deliberation steps (default: 2)")
+        p.add_argument("--hadl-version", type=str, default="v4.5", choices=["v4.5", "v3.0"], help="HADL architecture edition (default: v4.5 Car-Lift)")
+        p.add_argument("--checkpoint", type=str, default=None, help="Path to distilled HADL weights checkpoint")
+        p.add_argument("--no-hadl", action="store_true", help="Disable HADL cognitive hooks (pure vLLM serving)")
+        p.add_argument("--trust-remote-code", action="store_true", help="Trust remote code in HF model loaders")
+        p.add_argument("--api-key", type=str, default=None, help="API key for authentication (or set VLLM_API_KEY env var; mandatory if non-loopback)")
+        p.add_argument("--enforce-eager", action="store_true", help="Disable CUDA graph compilation (useful for debugging)")
 
-    # 9b. serve-vllm (High-throughput vLLM-powered serving with PagedAttention)
-    p_vllm = subparsers.add_parser("serve-vllm", help="Launch high-throughput vLLM-powered OpenAI-compatible server with HADL hooks")
-    p_vllm.add_argument("--model", type=str, default="Qwen/Qwen2.5-7B-Instruct", help="Hugging Face model ID or path (default: Qwen/Qwen2.5-7B-Instruct)")
-    p_vllm.add_argument("--host", type=str, default="127.0.0.1", help="Host interface to bind (default: 127.0.0.1; specify 0.0.0.0 for external access)")
-    p_vllm.add_argument("--port", type=int, default=8000, help="Port to listen on (default: 8000)")
-    p_vllm.add_argument("--tensor-parallel-size", type=int, default=1, help="Number of GPUs for tensor parallelism (default: 1)")
-    p_vllm.add_argument("--dtype", type=str, default="auto", help="Model dtype: auto, float16, bfloat16 (default: auto)")
-    p_vllm.add_argument("--max-model-len", type=int, default=None, help="Maximum sequence length (default: auto from model config)")
-    p_vllm.add_argument("--gpu-memory-utilization", type=float, default=0.90, help="Fraction of GPU memory to use (default: 0.90)")
-    p_vllm.add_argument("--quantization", type=str, default=None, choices=["awq", "gptq", "fp8", "marlin", None], help="Quantization method (default: None)")
-    p_vllm.add_argument("--max-num-seqs", type=int, default=256, help="Maximum concurrent sequences (default: 256)")
-    p_vllm.add_argument("--k-steps", type=int, default=2, help="HADL latent deliberation steps (default: 2)")
-    p_vllm.add_argument("--no-hadl", action="store_true", help="Disable HADL cognitive hooks (pure vLLM serving)")
-    p_vllm.add_argument("--trust-remote-code", action="store_true", help="Trust remote code in HF model loaders")
-    p_vllm.add_argument("--api-key", type=str, default=None, help="API key for authentication (or set VLLM_API_KEY env var; mandatory if non-loopback)")
-    p_vllm.add_argument("--enforce-eager", action="store_true", help="Disable CUDA graph compilation (useful for debugging)")
+    p_serve = subparsers.add_parser("serve", help="Launch high-throughput vLLM OpenAI-compatible server with HADL cognitive hooks")
+    _add_serve_args(p_serve)
 
-    # 10. run (Interactive CLI inference session)
-    p_run = subparsers.add_parser("run", help="Launch interactive CLI chat session with Dual-Loop Latent Deliberation")
+    p_vllm = subparsers.add_parser("serve-vllm", help="Alias for 'hadl serve' (vLLM-powered high-throughput server)")
+    _add_serve_args(p_vllm)
+
+    # 10. run (Interactive CLI inference session powered by vLLM)
+    p_run = subparsers.add_parser("run", help="Launch interactive CLI chat session with Dual-Loop Latent Deliberation via vLLM")
     p_run.add_argument("--model", type=str, default="Qwen/Qwen2.5-7B-Instruct", help="Hugging Face model ID or path (default: Qwen/Qwen2.5-7B-Instruct)")
-    p_run.add_argument("--headroom", type=str, default="auto", help="VRAM safety headroom in GiB (e.g. 4.0 or auto, default: auto)")
-    p_run.add_argument("--regime", type=str, choices=["auto", "bf16", "int8", "nf4"], default="auto", help="Force specific quantization regime (default: auto)")
+    p_run.add_argument("--tensor-parallel-size", type=int, default=1, help="Number of GPUs for tensor parallelism (default: 1)")
+    p_run.add_argument("--dtype", type=str, default="auto", help="Model dtype (default: auto)")
+    p_run.add_argument("--quantization", type=str, default=None, help="Quantization method")
+    p_run.add_argument("--gpu-memory-utilization", type=float, default=0.90, help="Fraction of GPU memory to use (default: 0.90)")
     p_run.add_argument("--k-steps", type=int, default=2, help="Number of latent deliberation steps (default: 2)")
-    p_run.add_argument("--trust-remote-code", action="store_true", help="Trust remote code in HF model loaders (default: False)")
+    p_run.add_argument("--hadl-version", type=str, default="v4.5", choices=["v4.5", "v3.0"], help="HADL architecture edition (default: v4.5)")
+    p_run.add_argument("--checkpoint", type=str, default=None, help="Path to distilled HADL weights checkpoint")
+    p_run.add_argument("--no-hadl", action="store_true", help="Disable HADL cognitive hooks")
+    p_run.add_argument("--trust-remote-code", action="store_true", help="Trust remote code in HF model loaders")
     p_run.add_argument("--prompt", type=str, default=None, help="One-shot prompt to execute and exit")
 
     return parser
@@ -379,23 +381,11 @@ def cmd_sleep_cycle(args):
     print(f"[OK] Sleep consolidation completed in {telem.get('latency_ms', 0.0):.2f} ms")
 
 def cmd_serve(args):
-    from .server import start_server
-    headroom = "auto" if str(args.headroom).lower() == "auto" else float(args.headroom)
-    regime = None if str(args.regime).lower() == "auto" else args.regime.upper()
-    start_server(
-        model_id_or_path=args.model,
-        host=args.host,
-        port=args.port,
-        headroom_gib=headroom,
-        forced_regime=regime,
-        k_steps=getattr(args, "k_steps", 2),
-        trust_remote_code=getattr(args, "trust_remote_code", False),
-        api_key=getattr(args, "api_key", None),
-        log_level=getattr(args, "log_level", "info")
-    )
+    """Launches the high-throughput vLLM-powered OpenAI-compatible server with HADL hooks."""
+    return cmd_serve_vllm(args)
 
 def cmd_serve_vllm(args):
-    """Launches the high-throughput vLLM-powered OpenAI-compatible server."""
+    """Launches the high-throughput vLLM-powered OpenAI-compatible server with HADL hooks."""
     from .server.vllm_app import start_vllm_server
     start_vllm_server(
         model_id_or_path=args.model,
@@ -407,7 +397,9 @@ def cmd_serve_vllm(args):
         gpu_memory_utilization=getattr(args, "gpu_memory_utilization", 0.90),
         quantization=getattr(args, "quantization", None),
         enable_hadl=not getattr(args, "no_hadl", False),
+        hadl_version=getattr(args, "hadl_version", "v4.5"),
         hadl_k_steps=getattr(args, "k_steps", 2),
+        checkpoint=getattr(args, "checkpoint", None),
         trust_remote_code=getattr(args, "trust_remote_code", False),
         api_key=getattr(args, "api_key", None),
         enforce_eager=getattr(args, "enforce_eager", False),
@@ -415,16 +407,19 @@ def cmd_serve_vllm(args):
     )
 
 def cmd_run(args):
-    """Executes interactive CLI inference session or one-shot prompt."""
-    from .server.engine import DualLoopInferenceEngine
-    headroom = "auto" if str(args.headroom).lower() == "auto" else float(args.headroom)
-    regime = None if str(args.regime).lower() == "auto" else args.regime.upper()
-    engine = DualLoopInferenceEngine(
+    """Executes interactive CLI inference session or one-shot prompt powered by vLLM."""
+    from .server.vllm_engine import VLLMInferenceEngine
+    engine = VLLMInferenceEngine(
         model_id_or_path=args.model,
-        headroom_gib=headroom,
-        forced_regime=regime,
-        k_steps=getattr(args, "k_steps", 2),
-        trust_remote_code=getattr(args, "trust_remote_code", False)
+        tensor_parallel_size=getattr(args, "tensor_parallel_size", 1),
+        dtype=getattr(args, "dtype", "auto"),
+        quantization=getattr(args, "quantization", None),
+        gpu_memory_utilization=getattr(args, "gpu_memory_utilization", 0.90),
+        enable_hadl=not getattr(args, "no_hadl", False),
+        hadl_version=getattr(args, "hadl_version", "v4.5"),
+        hadl_k_steps=getattr(args, "k_steps", 2),
+        checkpoint=getattr(args, "checkpoint", None),
+        trust_remote_code=getattr(args, "trust_remote_code", False),
     )
     engine.load_model()
 
@@ -437,7 +432,7 @@ def cmd_run(args):
         return
 
     print("\n" + "=" * 60)
-    print(f"  Dual-Loop Interactive Terminal ({engine.model_id})")
+    print(f"  Dual-Loop Interactive Terminal ({engine.model_id}) [vLLM Serving]")
     print("  Type 'exit', 'quit', or press Ctrl+C to terminate.")
     print("=" * 60 + "\n")
 

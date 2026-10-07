@@ -38,7 +38,9 @@ def start_vllm_server(
     gpu_memory_utilization: float = 0.90,
     quantization: Optional[str] = None,
     enable_hadl: bool = True,
+    hadl_version: str = "v4.5",
     hadl_k_steps: int = 2,
+    checkpoint: Optional[str] = None,
     trust_remote_code: bool = False,
     api_key: Optional[str] = None,
     enforce_eager: bool = False,
@@ -59,11 +61,16 @@ def start_vllm_server(
     """
     # SEC-02: Mandate authentication if binding to a non-loopback / public interface
     is_loopback = host in ("127.0.0.1", "localhost", "::1")
-    resolved_api_key = api_key or os.environ.get("VLLM_API_KEY", "").strip() or None
+    resolved_api_key = (
+        api_key
+        or os.environ.get("VLLM_API_KEY", "").strip()
+        or os.environ.get("DUAL_LOOP_API_KEY", "").strip()
+        or None
+    )
     if not is_loopback and not resolved_api_key:
         raise ValueError(
             f"Binding to non-loopback host '{host}' requires an API key for authentication. "
-            "Please provide --api-key or set the VLLM_API_KEY environment variable."
+            "Please provide --api-key or set VLLM_API_KEY / DUAL_LOOP_API_KEY environment variable."
         )
 
     if not _check_vllm_available():
@@ -86,7 +93,10 @@ def start_vllm_server(
     # Set environment variables that the HADL vLLM plugin reads
     if enable_hadl:
         os.environ["HADL_VLLM_ENABLED"] = "1"
+        os.environ["HADL_VLLM_VERSION"] = hadl_version
         os.environ["HADL_VLLM_K_STEPS"] = str(hadl_k_steps)
+        if checkpoint:
+            os.environ["HADL_VLLM_CHECKPOINT"] = checkpoint
     else:
         os.environ["HADL_VLLM_ENABLED"] = "0"
 
@@ -96,7 +106,9 @@ def start_vllm_server(
     print("=" * 80)
     print(f"[*] LAUNCHING vLLM + HADL HIGH-THROUGHPUT SERVER")
     print(f"[*] Model              : {model_id_or_path}")
-    print(f"[*] HADL Augmentation  : {'ENABLED (k={})'.format(hadl_k_steps) if enable_hadl else 'DISABLED'}")
+    print(f"[*] HADL Augmentation  : {'ENABLED ({}, k={})'.format(hadl_version, hadl_k_steps) if enable_hadl else 'DISABLED'}")
+    if checkpoint:
+        print(f"[*] HADL Checkpoint    : {checkpoint}")
     print(f"[*] Tensor Parallel    : {tensor_parallel_size}")
     print(f"[*] Quantization       : {quantization or 'None (native precision)'}")
     print(f"[*] Max Concurrent Seq : {max_num_seqs}")

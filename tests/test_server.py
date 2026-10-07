@@ -1,200 +1,207 @@
 """
-Unit tests for Dual-Loop Inference Engine Server & VRAM Auto-Tuner
+Unit tests for Dual-Loop vLLM Inference Server and Engine Customization
+========================================================================
+Validates vLLM server configuration, security bindings, HADL v4.5 hooks,
+logits processing, memory state resets, and batch generation.
 """
 
+import os
 import unittest
 from unittest.mock import MagicMock, patch
-from starlette.testclient import TestClient
+import torch
 
-from dual_loop.server.vram_tuner import VRAMAutoTuner, HardwareProfile, ModelSpec, AllocationPlan
-from dual_loop.server.engine import DualLoopInferenceEngine
-from dual_loop.server.app import create_app
-
-
-class TestVRAMAutoTuner(unittest.TestCase):
-    def test_hardware_profiling(self):
-        hw = VRAMAutoTuner.profile_hardware()
-        self.assertIsInstance(hw, HardwareProfile)
-        self.assertGreaterEqual(hw.total_vram_gib, 0.0)
-        self.assertGreaterEqual(hw.host_ram_total_gib, 0.0)
-
-    def test_estimate_model_spec_known(self):
-        spec_7b = VRAMAutoTuner.estimate_model_spec("Qwen/Qwen2.5-7B-Instruct")
-        self.assertEqual(spec_7b.hidden_size, 3584)
-        self.assertAlmostEqual(spec_7b.parameters_billion, 7.61, delta=0.5)
-        self.assertGreater(spec_7b.vram_bf16_gib, 14.0)
-
-        spec_3b = VRAMAutoTuner.estimate_model_spec("Qwen/Qwen2.5-3B-Instruct")
-        self.assertEqual(spec_3b.hidden_size, 2048)
-        self.assertAlmostEqual(spec_3b.parameters_billion, 3.40, delta=0.5)
-
-    def test_calculate_plan_auto_and_custom_headroom(self):
-        # Test plan generation with custom 4.0 GiB headroom
-        plan = VRAMAutoTuner.calculate_plan("Qwen/Qwen2.5-7B-Instruct", headroom_gib=4.0)
-        self.assertEqual(plan.requested_headroom_gib, 4.0)
-        self.assertIn(plan.selected_regime, ["BF16", "INT8", "NF4"])
-        self.assertTrue(plan.enable_allostasis)
-
-    def test_forced_regime(self):
-        plan = VRAMAutoTuner.calculate_plan("Qwen/Qwen2.5-7B-Instruct", forced_regime="NF4")
-        self.assertEqual(plan.selected_regime, "NF4")
-        self.assertTrue(plan.load_in_4bit)
-        self.assertFalse(plan.load_in_8bit)
+from dual_loop.server import (
+    start_server,
+    start_vllm_server,
+    VLLMInferenceEngine,
+    vllm_batch_generate,
+    vllm_compare_base_vs_hadl,
+)
+from dual_loop.vllm_plugin import (
+    register as register_vllm_plugin,
+    HADLDeliberationLogitsProcessor,
+    create_hadl_logits_processor,
+)
 
 
-class TestInferenceServerAPI(unittest.TestCase):
+class TestVLLMServerSecurityAndConfig(unittest.TestCase):
     def setUp(self):
-        # Setup mock engine to avoid loading real GPU weights during fast unit testing
-        self.mock_engine = MagicMock(spec=DualLoopInferenceEngine)
-        self.mock_engine.model_id = "Qwen/Qwen2.5-7B-Instruct"
-        self.mock_engine.k_steps = 2
-        self.mock_engine.total_tokens_generated = 128
-        self.mock_engine.total_generation_time_sec = 2.5
+        self._orig_env = dict(os.environ)
 
-        hw = HardwareProfile(
-            device_id=0,
-            device_name="NVIDIA GeForce RTX 4070 (Simulated)",
-            total_vram_gib=12.0,
-            free_vram_gib=11.2,
-            host_ram_total_gib=32.0,
-            host_ram_avail_gib=24.0,
-            cuda_available=True
+    def tearDown(self):
+        os.environ.clear()
+        os.environ.update(self._orig_env)
+
+    def test_security_mandates_api_key_on_public_interface(self):
+        """Binding to non-loopback interface (0.0.0.0) without API key must raise ValueError."""
+        old_vllm = os.environ.pop("VLLM_API_KEY", None)
+        old_dual = os.environ.pop("DUAL_LOOP_API_KEY", None)
+        try:
+            with self.assertRaises(ValueError) as ctx:
+                start_vllm_server(host="0.0.0.0", api_key=None)
+            self.assertIn("requires an API key", str(ctx.exception))
+
+            # Also check start_server entrypoint alias
+            with self.assertRaises(ValueError) as ctx2:
+                start_server(host="0.0.0.0", api_key=None)
+            self.assertIn("requires an API key", str(ctx2.exception))
+        finally:
+            if old_vllm:
+                os.environ["VLLM_API_KEY"] = old_vllm
+            if old_dual:
+                os.environ["DUAL_LOOP_API_KEY"] = old_dual
+
+    @patch("dual_loop.server.vllm_app._check_vllm_available", return_value=True)
+    def test_security_allows_public_interface_with_api_key(self, mock_check):
+        """Binding to non-loopback interface with an explicit API key passes auth check."""
+        with patch("subprocess.run"):
+            with patch("sys.argv", ["vllm", "serve"]):
+                try:
+                    start_vllm_server(host="0.0.0.0", api_key="secret-token-xyz")
+                except (SystemExit, Exception):
+                    pass
+                self.assertEqual(os.environ.get("VLLM_API_KEY"), "secret-token-xyz")
+
+    @patch("dual_loop.server.vllm_app._check_vllm_available", return_value=True)
+    def test_environment_variables_configured_for_plugin(self, mock_check):
+        """start_vllm_server sets environment variables expected by dual_loop_vllm_plugin."""
+        with patch("subprocess.run"):
+            try:
+                start_vllm_server(
+                    host="127.0.0.1",
+                    enable_hadl=True,
+                    hadl_version="v4.5",
+                    hadl_k_steps=3,
+                    checkpoint="checkpoints/hadl_distilled.pt",
+                )
+            except (SystemExit, Exception):
+                pass
+
+            self.assertEqual(os.environ.get("HADL_VLLM_ENABLED"), "1")
+            self.assertEqual(os.environ.get("HADL_VLLM_VERSION"), "v4.5")
+            self.assertEqual(os.environ.get("HADL_VLLM_K_STEPS"), "3")
+            self.assertEqual(os.environ.get("HADL_VLLM_CHECKPOINT"), "checkpoints/hadl_distilled.pt")
+
+
+class TestVLLMInferenceEngine(unittest.TestCase):
+    def setUp(self):
+        self.engine = VLLMInferenceEngine(
+            model_id_or_path="Qwen/Qwen2.5-7B-Instruct",
+            enable_hadl=True,
+            hadl_version="v4.5",
+            hadl_k_steps=2,
         )
-        spec = VRAMAutoTuner.estimate_model_spec("Qwen/Qwen2.5-7B-Instruct")
-        self.mock_engine.plan = AllocationPlan(
-            model_id="Qwen/Qwen2.5-7B-Instruct",
-            hardware=hw,
-            model_spec=spec,
-            requested_headroom_gib=4.0,
-            effective_budget_gib=8.0,
-            selected_regime="NF4",
-            estimated_model_vram_gib=4.19,
-            projected_free_vram_gib=7.81,
-            enable_allostasis=True,
-            torch_dtype="bfloat16",
-            load_in_4bit=True,
-            load_in_8bit=False,
-            description="4-bit NormalFloat (NF4) quantization + Dual-Loop Deliberation"
-        )
 
-        self.mock_engine.format_chat_prompt.side_effect = lambda msgs: "<|im_start|>user\nHello<|im_end|>\n<|im_start|>assistant\n"
-        self.mock_engine.generate_sync.return_value = {
-            "text": "Hello! I am Dual-Loop Deliberative Agent.",
-            "prompt_tokens": 10,
-            "completion_tokens": 8,
-            "total_tokens": 18,
-            "elapsed_seconds": 0.15,
-            "tokens_per_second": 53.3,
-            "regime": "NF4"
-        }
-        self.mock_engine.generate_stream.return_value = iter(["Hello", "! ", "I ", "am ", "Dual-Loop."])
+    def test_initialization_defaults(self):
+        self.assertEqual(self.engine.model_id, "Qwen/Qwen2.5-7B-Instruct")
+        self.assertTrue(self.engine.enable_hadl)
+        self.assertEqual(self.engine.hadl_version, "v4.5")
+        self.assertEqual(self.engine.hadl_k_steps, 2)
+        self.assertFalse(self.engine.is_loaded)
 
-        app = create_app(self.mock_engine)
-        self.client = TestClient(app)
+    def test_telemetry_reporting(self):
+        telem = self.engine.get_telemetry()
+        self.assertEqual(telem["engine"], "vllm")
+        self.assertEqual(telem["model_id"], "Qwen/Qwen2.5-7B-Instruct")
+        self.assertTrue(telem["hadl_enabled"])
+        self.assertEqual(telem["hadl_version"], "v4.5")
+        self.assertEqual(telem["hadl_k_steps"], 2)
+        self.assertEqual(telem["total_tokens_generated"], 0)
 
-    def test_root_dashboard(self):
-        resp = self.client.get("/")
-        self.assertEqual(resp.status_code, 200)
-        self.assertIn("Dual-Loop Inference Engine", resp.text)
-        self.assertIn("Qwen/Qwen2.5-7B-Instruct", resp.text)
+    def test_format_chat_prompt_fallback(self):
+        messages = [
+            {"role": "user", "content": "What is latent deliberation?"},
+        ]
+        formatted = self.engine.format_chat_prompt(messages)
+        self.assertIn("<|im_start|>user", formatted)
+        self.assertIn("What is latent deliberation?", formatted)
+        self.assertIn("<|im_start|>assistant", formatted)
 
-    def test_models_endpoint(self):
-        resp = self.client.get("/v1/models")
-        self.assertEqual(resp.status_code, 200)
-        data = resp.json()
-        self.assertEqual(data["object"], "list")
-        self.assertEqual(len(data["data"]), 1)
-        self.assertEqual(data["data"][0]["id"], "Qwen/Qwen2.5-7B-Instruct")
-        self.assertEqual(data["data"][0]["dual_loop_regime"], "NF4")
-        self.assertEqual(data["data"][0]["vram_headroom_gib"], 4.0)
+    def test_reset_memory_states_leakage_prevention(self):
+        """Verify reset_memory_states clears all associative memory traces."""
+        from dual_loop.plasticity import HeteroAssociativePlasticMemory
 
-    def test_health_endpoint(self):
-        resp = self.client.get("/v1/health")
-        self.assertEqual(resp.status_code, 200)
-        data = resp.json()
-        self.assertEqual(data["status"], "healthy")
-        self.assertEqual(data["regime"], "NF4")
-        self.assertEqual(data["vram_headroom_reserved_gib"], 4.0)
+        cross_mem = HeteroAssociativePlasticMemory(d_model=32, rank=8)
+        cross_mem.bind_concept(torch.randn(1, 4, 32), torch.randn(1, 4, 32))
+        self.assertIsNotNone(cross_mem.last_m_cross)
 
-    def test_chat_completions_non_streaming(self):
-        payload = {
-            "model": "Qwen/Qwen2.5-7B-Instruct",
-            "messages": [
-                {"role": "user", "content": "Explain active inference."}
-            ],
-            "stream": False
-        }
-        resp = self.client.post("/v1/chat/completions", json=payload)
-        self.assertEqual(resp.status_code, 200)
-        data = resp.json()
-        self.assertEqual(data["object"], "chat.completion")
-        self.assertEqual(data["choices"][0]["message"]["content"], "Hello! I am Dual-Loop Deliberative Agent.")
-        self.assertEqual(data["usage"]["total_tokens"], 18)
-        self.assertIn("dual_loop_telemetry", data)
+        # Inject into engine's simulated adapter
+        mock_adapter = MagicMock()
+        mock_adapter.plastic_memory = cross_mem
+        self.engine._hadl_adapter = mock_adapter
 
-    def test_chat_completions_streaming(self):
-        payload = {
-            "model": "Qwen/Qwen2.5-7B-Instruct",
-            "messages": [
-                {"role": "user", "content": "Explain active inference."}
-            ],
-            "stream": True
-        }
-        resp = self.client.post("/v1/chat/completions", json=payload)
-        self.assertEqual(resp.status_code, 200)
-        self.assertIn("text/event-stream", resp.headers["content-type"])
-        chunks = resp.text.split("\n\n")
-        self.assertTrue(any("data: [DONE]" in c for c in chunks))
-        self.assertTrue(any("Hello" in c for c in chunks))
+        self.engine.reset_memory_states(force=True)
+        self.assertIsNone(cross_mem.last_m_cross)
 
-    def test_legacy_completions(self):
-        payload = {
-            "prompt": "Once upon a time",
-            "max_tokens": 50
-        }
-        resp = self.client.post("/v1/completions", json=payload)
-        self.assertEqual(resp.status_code, 200)
-        data = resp.json()
-        self.assertEqual(data["object"], "text_completion")
-        self.assertEqual(data["choices"][0]["text"], "Hello! I am Dual-Loop Deliberative Agent.")
+    def test_generate_sync_and_stream_with_mocked_llm(self):
+        """Verify synchronous and streaming generation using mocked vLLM LLM output."""
+        mock_output = MagicMock()
+        mock_inner = MagicMock()
+        mock_inner.text = "Latent deliberation improves cognitive reasoning."
+        mock_inner.token_ids = [101, 102, 103, 104, 105]
+        mock_inner.finish_reason = "stop"
+        mock_output.outputs = [mock_inner]
+        mock_output.prompt_token_ids = [1, 2, 3]
 
-    def test_api_key_authentication(self):
-        # SEC-01: When api_key is configured, unauthenticated requests must be rejected with 401
-        protected_app = create_app(self.mock_engine, api_key="secret-token-xyz")
-        protected_client = TestClient(protected_app)
+        self.engine.llm = MagicMock()
+        self.engine.llm.generate.return_value = [mock_output]
+        self.engine.is_loaded = True
 
-        # 1. Health check should remain accessible
-        resp_health = protected_client.get("/health")
-        self.assertEqual(resp_health.status_code, 200)
+        # Test generate_sync
+        res = self.engine.generate_sync("Explain HADL.", max_tokens=64)
+        self.assertEqual(len(res), 1)
+        self.assertEqual(res[0]["text"], "Latent deliberation improves cognitive reasoning.")
+        self.assertEqual(res[0]["completion_tokens"], 5)
+        self.assertEqual(res[0]["prompt_tokens"], 3)
+        self.assertEqual(res[0]["engine"], "vllm")
+        self.assertEqual(res[0]["hadl_version"], "v4.5")
 
-        # 2. Protected endpoint without token should return 401
-        resp_unauth = protected_client.get("/v1/models")
-        self.assertEqual(resp_unauth.status_code, 401)
-        self.assertIn("invalid_api_key", resp_unauth.text)
+        # Test generate_stream
+        chunks = list(self.engine.generate_stream("Explain HADL.", max_tokens=64))
+        full_stream_text = "".join(chunks)
+        self.assertEqual(full_stream_text, "Latent deliberation improves cognitive reasoning.")
 
-        # 3. Protected endpoint with invalid token should return 401
-        resp_bad = protected_client.get("/v1/models", headers={"Authorization": "Bearer wrong-token"})
-        self.assertEqual(resp_bad.status_code, 401)
 
-        # 4. Protected endpoint with valid Bearer token should succeed
-        resp_ok = protected_client.get("/v1/models", headers={"Authorization": "Bearer secret-token-xyz"})
-        self.assertEqual(resp_ok.status_code, 200)
+class TestHADLLogitsProcessor(unittest.TestCase):
+    def test_deliberation_logits_processor(self):
+        """Verifies HADLDeliberationLogitsProcessor applies repetition dampening."""
+        proc = HADLDeliberationLogitsProcessor(repetition_penalty=1.20)
+        input_ids = [10, 20, 30]
+        logits = torch.zeros(50)
+        logits[30] = 5.0  # Already generated token
+        logits[40] = 5.0  # Fresh token
 
-        # 5. Protected endpoint with valid x-api-key header should succeed
-        resp_key_ok = protected_client.get("/v1/models", headers={"x-api-key": "secret-token-xyz"})
-        self.assertEqual(resp_key_ok.status_code, 200)
+        modified = proc(input_ids, logits)
+        # Token 30 should be dampened (5.0 / 1.20 ≈ 4.167)
+        self.assertLess(modified[30].item(), modified[40].item())
+        self.assertAlmostEqual(modified[40].item(), 5.0, places=4)
 
-    def test_cors_configuration(self):
-        # SEC-01: Test CORS middleware default headers
-        resp = self.client.options(
-            "/v1/models",
-            headers={"Origin": "http://localhost:3000", "Access-Control-Request-Method": "GET"}
-        )
-        self.assertEqual(resp.status_code, 200)
-        # When allow_origins=["*"], allow-credentials must NOT be true
-        self.assertNotEqual(resp.headers.get("access-control-allow-credentials"), "true")
+    def test_create_hadl_logits_processor_factory(self):
+        proc = create_hadl_logits_processor(repetition_penalty=1.15)
+        self.assertIsInstance(proc, HADLDeliberationLogitsProcessor)
+        self.assertEqual(proc.repetition_penalty, 1.15)
+
+
+class TestVLLMOfflineHelpers(unittest.TestCase):
+    @patch("dual_loop.server.vllm_engine.VLLMInferenceEngine.load_model")
+    @patch("dual_loop.server.vllm_engine.VLLMInferenceEngine.generate_sync")
+    def test_vllm_batch_generate_and_compare(self, mock_gen, mock_load):
+        mock_gen.return_value = [
+            {"text": "Response 1", "tokens_per_second": 120.0, "total_tokens": 50, "prompt_tokens": 10, "completion_tokens": 40, "finish_reason": "stop"}
+        ]
+
+        # Test vllm_batch_generate
+        results = vllm_batch_generate("mock-model", prompts="Hello world", enable_hadl=True)
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]["text"], "Response 1")
+
+        # Test vllm_compare_base_vs_hadl
+        comp = vllm_compare_base_vs_hadl("mock-model", prompts=["Hello"], hadl_k_steps=2)
+        self.assertIn("base_results", comp)
+        self.assertIn("hadl_results", comp)
+        self.assertIn("comparison", comp)
+        self.assertEqual(comp["comparison"]["hadl_k_steps"], 2)
 
 
 if __name__ == "__main__":
     unittest.main()
-

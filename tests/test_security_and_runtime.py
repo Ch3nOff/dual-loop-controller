@@ -333,30 +333,29 @@ class SecurityAndRuntimeTests(unittest.TestCase):
         from dual_loop.server.vllm_app import start_vllm_server
         from dual_loop.server import start_server
 
-        # vLLM server: binding to 0.0.0.0 without API key must raise ValueError
+        # Pop both keys so neither leaks into either check
         old_vllm_key = os.environ.pop("VLLM_API_KEY", None)
+        old_dl_key = os.environ.pop("DUAL_LOOP_API_KEY", None)
         try:
+            # vLLM server: binding to 0.0.0.0 without API key must raise ValueError
             with self.assertRaises(ValueError) as ctx:
                 start_vllm_server(host="0.0.0.0", api_key=None)
             self.assertIn("requires an API key", str(ctx.exception))
+
+            # Standard server: binding to 0.0.0.0 without API key must raise ValueError
+            with self.assertRaises(ValueError) as ctx2:
+                start_server(host="0.0.0.0", api_key=None)
+            self.assertIn("requires an API key", str(ctx2.exception))
         finally:
             if old_vllm_key:
                 os.environ["VLLM_API_KEY"] = old_vllm_key
-
-        # Standard server: binding to 0.0.0.0 without API key must raise ValueError
-        old_dl_key = os.environ.pop("DUAL_LOOP_API_KEY", None)
-        try:
-            with self.assertRaises(ValueError) as ctx:
-                start_server(host="0.0.0.0", api_key=None)
-            self.assertIn("requires an API key", str(ctx.exception))
-        finally:
             if old_dl_key:
                 os.environ["DUAL_LOOP_API_KEY"] = old_dl_key
 
     def test_scorecard_04_cross_request_plasticity_reset(self):
         """SCORECARD-04: Plasticity memory traces must be reset across generation requests."""
         from dual_loop.plasticity import PlasticFastWeightUnit, HeteroAssociativePlasticMemory
-        from dual_loop.server.engine import DualLoopInferenceEngine
+        from dual_loop.server.vllm_engine import VLLMInferenceEngine
 
         # Test PlasticFastWeightUnit
         mem = PlasticFastWeightUnit(d_model=32, rank=8)
@@ -382,7 +381,7 @@ class SecurityAndRuntimeTests(unittest.TestCase):
             def __init__(self):
                 self.adapter = MockAdapter()
 
-        engine = DualLoopInferenceEngine(model_id_or_path="mock")
+        engine = VLLMInferenceEngine(model_id_or_path="mock")
         engine.model = MockModel()
         cross.bind_concept(torch.randn(1, 4, 32), torch.randn(1, 4, 32))
         self.assertIsNotNone(cross.last_m_cross)
