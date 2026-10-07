@@ -105,6 +105,14 @@ def get_parser() -> argparse.ArgumentParser:
     p_run.add_argument("--trust-remote-code", action="store_true", help="Trust remote code in HF model loaders")
     p_run.add_argument("--prompt", type=str, default=None, help="One-shot prompt to execute and exit")
 
+    # 11. export-gguf (Export HADL model with weight fusion to GGUF format for llama.cpp & Ollama)
+    p_gguf = subparsers.add_parser("export-gguf", help="Fuse HADL cognitive weights and export as GGUF for llama.cpp & Ollama")
+    p_gguf.add_argument("--model", type=str, default="Qwen/Qwen3.5-2B", help="Base model ID or path (default: Qwen/Qwen3.5-2B)")
+    p_gguf.add_argument("--checkpoint", type=str, default="checkpoints/xstar_2b_omnireason_carlift_500q_checkpoint.pt", help="HADL distilled checkpoint (.pt)")
+    p_gguf.add_argument("--output", type=str, default="dist/xstar_2b_carlift_q8_0.gguf", help="Output GGUF file path (default: dist/xstar_2b_carlift_q8_0.gguf)")
+    p_gguf.add_argument("--outtype", type=str, default="q8_0", choices=["f32", "f16", "bf16", "q8_0", "auto"], help="GGUF precision/quantization (default: q8_0)")
+    p_gguf.add_argument("--staging-dir", type=str, default="dist/staging_hf_fused", help="Staging directory for fused model")
+
     return parser
 
 def cmd_setup(args):
@@ -462,6 +470,17 @@ def cmd_run(args):
         except Exception as e:
             print(f"\n[Error] {e}")
 
+def cmd_export_gguf(args):
+    """Fuses HADL cognitive weights into base model and converts to GGUF format."""
+    from .export_gguf import export_hadl_to_gguf
+    export_hadl_to_gguf(
+        model_id_or_path=args.model,
+        checkpoint_path=args.checkpoint,
+        output_gguf_path=args.output,
+        outtype=args.outtype,
+        work_dir=args.staging_dir,
+    )
+
 def main():
     parser = get_parser()
     if len(sys.argv) == 1:
@@ -493,6 +512,8 @@ def main():
         cmd_serve_vllm(args)
     elif args.command == "run":
         cmd_run(args)
+    elif args.command == "export-gguf":
+        cmd_export_gguf(args)
     else:
         parser.print_help(sys.stderr)
         sys.exit(1)
