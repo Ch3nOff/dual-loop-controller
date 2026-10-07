@@ -51,6 +51,23 @@ class TestHADLGGUFExport(unittest.TestCase):
 
         self.assertTrue(torch.allclose(new_weight, orig_weight + delta))
 
+    def test_fuse_delta_into_linear_attn_layer(self):
+        # Test modern hybrid architectures like Qwen3.5 linear_attn
+        class DummyLinearAttnLayer(nn.Module):
+            def __init__(self, d_model):
+                super().__init__()
+                self.linear_attn = nn.Module()
+                self.linear_attn.out_proj = nn.Linear(d_model, d_model, bias=False)
+
+        layer = DummyLinearAttnLayer(self.d_model)
+        orig_weight = layer.linear_attn.out_proj.weight.clone()
+        delta = torch.ones(self.d_model, self.d_model) * 0.08
+
+        _fuse_delta_into_layer(layer, delta, "Linear Attn Delta")
+        new_weight = layer.linear_attn.out_proj.weight
+
+        self.assertTrue(torch.allclose(new_weight, orig_weight + delta))
+
     def test_fuse_hadl_weights_from_checkpoint(self):
         with tempfile.NamedTemporaryFile(suffix=".pt", delete=False) as f:
             ckpt_path = f.name

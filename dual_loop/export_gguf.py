@@ -117,12 +117,24 @@ def fuse_hadl_weights(
 
 
 def _fuse_delta_into_layer(layer: nn.Module, delta: torch.Tensor, name: str) -> None:
-    """Fuses (D, D) delta into the layer's output projection (o_proj or dense)."""
+    """Fuses (D, D) delta into the layer's output projection (o_proj, out_proj, or dense)."""
     target_param = None
     target_name = ""
 
-    # Check common attention output projection names
-    for path in ["self_attn.o_proj", "attention.o_proj", "self_attention.o_proj", "attn.c_proj", "self_attn.dense"]:
+    # Check common attention output projection paths
+    candidate_paths = [
+        "self_attn.o_proj",
+        "linear_attn.out_proj",
+        "linear_attn.o_proj",
+        "linear_attention.out_proj",
+        "attention.o_proj",
+        "self_attention.o_proj",
+        "attn.c_proj",
+        "self_attn.dense",
+        "attn.out_proj",
+    ]
+
+    for path in candidate_paths:
         parts = path.split(".")
         curr = layer
         for p in parts:
@@ -134,6 +146,15 @@ def _fuse_delta_into_layer(layer: nn.Module, delta: torch.Tensor, name: str) -> 
             target_name = path
             break
 
+    # Fallback: scan layer for any projection weight matching delta shape
+    if target_param is None:
+        for p_name, param in layer.named_parameters():
+            if any(k in p_name.lower() for k in ["o_proj", "out_proj", "c_proj", "dense"]):
+                if param.shape == delta.shape:
+                    target_param = param
+                    target_name = p_name
+                    break
+
     if target_param is not None:
         delta_cast = delta.to(device=target_param.device, dtype=target_param.dtype)
         if target_param.shape == delta_cast.shape:
@@ -142,7 +163,7 @@ def _fuse_delta_into_layer(layer: nn.Module, delta: torch.Tensor, name: str) -> 
         else:
             print(f"  [!] Shape mismatch for {target_name}: {target_param.shape} vs {delta_cast.shape}")
     else:
-        print(f"  [!] Could not locate o_proj in target layer for {name}")
+        print(f"  [!] Could not locate output projection in target layer for {name}")
 
 
 def export_hadl_to_gguf(
