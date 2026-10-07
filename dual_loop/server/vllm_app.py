@@ -74,20 +74,19 @@ def start_vllm_server(
         )
 
     if not _check_vllm_available():
-        print(
-            "\n" + "=" * 80 + "\n"
-            "[ERROR] vLLM is not installed.\n"
-            "=" * 80 + "\n"
-            "To use the high-throughput vLLM backend, install it:\n"
-            "  pip install 'dual-loop-controller[vllm]'\n\n"
-            "Or install vLLM directly:\n"
-            "  pip install vllm\n\n"
-            "Requirements:\n"
-            "  - Linux (or WSL2 on Windows)\n"
-            "  - NVIDIA GPU with CUDA 12.1+\n"
-            "  - Python 3.9-3.12\n"
-            "=" * 80 + "\n"
-        )
+        header = "=" * 80
+        print(f"\n{header}")
+        print("[ERROR] vLLM is not installed.")
+        print(header)
+        print("To use the high-throughput vLLM backend, install it:")
+        print("  pip install 'dual-loop-controller[vllm]'")
+        print("\nOr install vLLM directly:")
+        print("  pip install vllm")
+        print("\nRequirements:")
+        print("  - Linux (or WSL2 on Windows)")
+        print("  - NVIDIA GPU with CUDA 12.1+")
+        print("  - Python 3.9-3.12")
+        print(f"{header}\n")
         sys.exit(1)
 
     # Set environment variables that the HADL vLLM plugin reads
