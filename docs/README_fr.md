@@ -78,7 +78,7 @@ Les architectures modulaires conventionnelles étaient prises au piège d'un dil
 
 Mesuré en conditions réelles sur GPU NVIDIA GeForce RTX 5060 Laptop (8 Go VRAM) sur `Qwen/Qwen3.5-2B` (100% Figé) :
 
-| N° | Benchmark | Domaine Cognitif | Base Qwen-2B | HADL v4.5 Car-Lift | Évolution ($\Delta$) | Comportement et Statut |
+| N° | Benchmark | Domaine Cognitif | Base Qwen-2B | HADL v4.5 Car-Lift | Évolution (Δ) | Comportement et Statut |
 | :-: | :--- | :--- | :---: | :---: | :---: | :--- |
 | 1 | **GSM8K** | Mathématiques & Quantitatif | 17/50 (34.0%) | **50/50 (100.0%)** | **+66.0% (+33)** | CoT arithmétique multi-étapes |
 | 2 | **MATH** | Mathématiques & Quantitatif | 16/50 (32.0%) | **50/50 (100.0%)\*** | **+68.0% (+34)** | Résolution algébrique polynomiale\* |
@@ -102,7 +102,7 @@ Mesuré en conditions réelles sur GPU NVIDIA GeForce RTX 5060 Laptop (8 Go VRAM
 | 20 | **DailyChat** | Instruction & Dialogue | 30/50 (60.0%) | **50/50 (100.0%)** | **+40.0% (+20)** | Conversation naturelle empathique |
 | — | **TOTAL** | **Ensemble des 20 Benchmarks** | **539/1000 (53.9%)** | **930/1000 (93.0%)** | **+39.1% (+391 Qs)** | **SAUT COGNITIF MAJEUR** |
 
-*\*Note sur MATH :* Avec une limite standard ($\ge 35$ tokens), MATH atteint $50/50$ ($100.0\%$), portant le score global à **$980/1000$ ($98.0\%$)**.
+*\*Note sur MATH :* Avec une limite standard (≥ 35 tokens), MATH atteint 50/50 (100.0%), portant le score global à **980/1000 (98.0%)**.
 
 ### 2. Preuve de Généralisation sur Données Non Vues (500 Questions de Test)
 * **Jeu de test non vu (500 questions exclues de l'entraînement) :**
@@ -111,10 +111,10 @@ Mesuré en conditions réelles sur GPU NVIDIA GeForce RTX 5060 Laptop (8 Go VRAM
   * **Gain net de généralisation :** **+195 questions (+39.0%)**, confirmant une véritable capacité d'induction logique et non un apprentissage par cœur.
 
 ### 3. Télémétrie Matérielle et Invariance de la Perplexité Linguistique
-* **Perplexité Wikipedia (PPL)** : Base $3.803 \to$ HADL **$3.610$ ($\Delta = -0.194$, plus fluide !)**.
-* **Empathie de conversation (DailyChat)** : $100\%$ ($50/50$) fluidité naturelle préservée.
-* **Débit de génération** : **$23.91\text{ tok/s}$** (Base $23.12\text{ tok/s}$, surcharge de latence nulle).
-* **VRAM maximale** : **$4 543,1\text{ Mo}$** (parfaitement adapté à l'enveloppe de 8 Go de la RTX 5060).
+* **Perplexité Wikipedia (PPL)** : Base 3.803 → HADL **3.610 (Δ = -0.194, plus fluide !)**.
+* **Empathie de conversation (DailyChat)** : 100% (50/50) fluidité naturelle préservée.
+* **Débit de génération** : **23.91 tok/s** (Base 23.12 tok/s, surcharge de latence nulle).
+* **VRAM maximale** : **4 543,1 Mo** (parfaitement adapté à l'enveloppe de 8 Go de la RTX 5060).
 
 ---
 

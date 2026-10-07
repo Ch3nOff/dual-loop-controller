@@ -37,18 +37,18 @@
 
 ## 💡 Executive Summary & The Representation Deadlock Breakthrough
 
-The **Dual-Loop Cognitive Controller (HADL v4.5 Car-Lift Edition)** transitions state-of-the-art frozen foundation models (such as `Qwen/Qwen3.5-2B`) into an **Autonomous Dual-Process Cognitive Operating System** without modifying or unfreezing a single pre-trained base weight ($100\%$ frozen).
+The **Dual-Loop Cognitive Controller (HADL v4.5 Car-Lift Edition)** transitions state-of-the-art frozen foundation models (such as `Qwen/Qwen3.5-2B`) into an **Autonomous Dual-Process Cognitive Operating System** without modifying or unfreezing a single pre-trained base weight (100% frozen).
 
 ### The Representation Deadlock Paradox Solved
 Prior modular controllers face a fundamental dilemma:
 1. **Catastrophic Soft-Leakage:** Adapters bleed into casual dialogue, causing language perplexity explosions ($\text{PPL} \gg 4.0$) and destroying conversational empathy.
-2. **Router Clamping Deadlock:** Imposing strict zero-leakage deadzones ($w_{\text{byp}} > 0.70 \implies 1.0$) slams the firewall shut on complex reasoning prompts, forcing $100\%$ bypass execution ($0$ FLOPs executed), yielding identical baseline scores ($53.9\% \to 53.9\%$).
+2. **Router Clamping Deadlock:** Imposing strict zero-leakage deadzones ($w_{\text{byp}} > 0.70 \implies 1.0$) slams the firewall shut on complex reasoning prompts, forcing 100% bypass execution (0 FLOPs executed), yielding identical baseline scores ($53.9\% \to 53.9\%$).
 
 **HADL v4.5 breaks this deadlock through two physical principles:**
 * **Porous Orifice Prime Firewall:** Replaces binary hard-clamping with a tunable permeability aperture ($\phi_{\text{porous}} = 0.20$), allowing latent reasoning gradients to communicate without ever triggering soft-leakage on general dialogue.
 * **Two-Piston Car-Lift Hydraulic Equilibrium Unit:** Models latent adaptation as a coupled Pascalian hydraulic lift: Piston 1 (Upper Cup) lifts the heavy reasoning manifold, while Piston 2 (Lower Cup) contracts base grounding resistance, achieving dynamic balance at $E_{\text{eq}} = 0.5$ via a continuous fluid reservoir bridge.
 
-**Empirical Result:** On a massive 20-benchmark evaluation suite (1,000 questions), HADL achieves an authentic **$+39.1\%$ intelligence uplift** ($539/1000 \to 930/1000$, and $98.0\%$ under standard token limits) while **Wikipedia Perplexity improves from $3.803$ to $3.610$** and conversational empathy remains $100\%$ intact.
+**Empirical Result:** On a massive 20-benchmark evaluation suite (1,000 questions), HADL achieves an authentic **+39.1% intelligence uplift** (539/1000 → 930/1000, and 98.0% under standard token limits) while **Wikipedia Perplexity improves from 3.803 to 3.610** and conversational empathy remains 100% intact.
 
 ---
 
@@ -63,29 +63,52 @@ Prior modular controllers face a fundamental dilemma:
 </p>
 
 ### 1. Porous Orifice Prime Firewall (Permeability Mechanics)
-Instead of a rigid barrier, the firewall incorporates a $20\%$ permeability orifice ($\phi_{\text{porous}} = 0.20$) coupled with 4-phase destructive wave cancellation:
-$$\theta_k = \frac{2\pi k}{4}, \quad z_{\text{balanced}} = z_{\text{raw}} + 0.15 \sum_{k=0}^3 \sin(\theta_k), \quad w = \text{Softmax}(z_{\text{balanced}})$$
-$$\tilde{w}_{\text{spec}} = \begin{cases} w_{\text{spec}} \cdot (1.0 + \phi_{\text{porous}}), & \text{if } w_{\text{spec}} < \delta_{\text{dead}} \\ w_{\text{spec}}, & \text{otherwise} \end{cases}$$
+
+Instead of a rigid barrier, the firewall incorporates a 20% permeability orifice ($\phi_{\text{porous}} = 0.20$) coupled with 4-phase destructive wave cancellation:
+
+$$
+\theta_k = \frac{2\pi k}{4}, \quad z_{\text{balanced}} = z_{\text{raw}} + 0.15 \sum_{k=0}^3 \sin(\theta_k), \quad w = \text{Softmax}(z_{\text{balanced}})
+$$
+
+$$
+\tilde{w}_{\text{spec}} = \begin{cases} w_{\text{spec}} \cdot (1.0 + \phi_{\text{porous}}), & \text{if } w_{\text{spec}} < \delta_{\text{dead}} \\ w_{\text{spec}}, & \text{otherwise} \end{cases}
+$$
+
 This prevents router deadlock and maintains active sensitivity for downstream reasoning demands.
 
 ### 2. Two-Piston Car-Lift Hydraulic Equilibrium Unit
+
 Modeled after a dual-cylinder hydraulic car lift:
-$$P_{\text{drive}} = \kappa + 0.8 \cdot w_{\text{spec}}$$
-$$p_{\text{lift}} = \sigma\left(\frac{P_{\text{drive}} - E_{\text{eq}}}{\tau_{\text{hydro}}}\right)$$
+
+$$
+P_{\text{drive}} = \kappa + 0.8 \cdot w_{\text{spec}}
+$$
+
+$$
+p_{\text{lift}} = \sigma\left(\frac{P_{\text{drive}} - E_{\text{eq}}}{\tau_{\text{hydro}}}\right)
+$$
+
 * **Piston 1 (Upper Cup - Reasoning Lift):** $h_{\text{upper}} = p_{\text{lift}} \cdot h$. Lifts specialized dual-loop parameters ($p_{\text{upper}} \to 1.0$) on Olympiad Math, Code, Logic, and Science.
 * **Piston 2 (Lower Cup - Grounding Valve):** $p_{\text{lower}} = 1.0 - p_{\text{lift}}$. Contracts base resistance and neutralizes noise through the SMIL background unit.
 * **Dynamic Equilibrium Point ($E_{\text{eq}} = 0.5$):** Neutral rest state where both streams meet at harmonic 50/50 balance.
 
 ### 3. Continuous Fluid Reservoir Coupling Bridge
+
 Both cylinders share a continuous fluid shear bridge:
-$$h_{\text{cross\_fluid}} = 0.10 \cdot \tanh\left(W_{\text{bridge}} (h_{\text{upper}} - h_{\text{lower}})\right)$$
+
+$$
+h_{\text{cross\_fluid}} = 0.10 \cdot \tanh\left(W_{\text{bridge}} (h_{\text{upper}} - h_{\text{lower}})\right)
+$$
+
 Ensuring that representations are permanently interconnected ("semua tetap berhubungan"), preventing semantic dislocation or catastrophic forgetting.
 
 ### 4. Chebyshev Polynomial Affordance Stack (LEA 2.0)
-Evaluates orthogonal Chebyshev polynomials of the first kind $T_0 \dots T_3(x)$ across $6$ semantic domains to compute cognitive resonance pressure $\kappa \in \mathbb{R}$.
+
+Evaluates orthogonal Chebyshev polynomials of the first kind $T_0 \dots T_3(x)$ across 6 semantic domains to compute cognitive resonance pressure $\kappa \in \mathbb{R}$.
 
 ### 5. SVD Rank-32 Streaming Ghost Layer & IPA-HR Head Router
-Compresses hidden state $h_{11}$ ($D=2048 \to 32$) using semi-orthogonal Stiefel projection $U_{32}$, slashing inter-layer VRAM retention by $98.4\%$. At Layer 23, the **Incoherent Phase-Aperture Head Router (IPA-HR)** damps discursive preamble tags (`<think>`) via anti-phase wave projection.
+
+Compresses hidden state $h_{11}$ ($D=2048 \to 32$) using semi-orthogonal Stiefel projection $U_{32}$, slashing inter-layer VRAM retention by 98.4%. At Layer 23, the **Incoherent Phase-Aperture Head Router (IPA-HR)** damps discursive preamble tags (`<think>`) via anti-phase wave projection.
 
 ---
 
@@ -99,7 +122,7 @@ Compresses hidden state $h_{11}$ ($D=2048 \to 32$) using semi-orthogonal Stiefel
 
 Evaluated head-to-head on an NVIDIA GeForce RTX 5060 Laptop GPU (8GB VRAM) on `Qwen/Qwen3.5-2B` (100% Frozen):
 
-| No | Benchmark | Cognitive Domain | Base Qwen-2B (Frozen) | HADL v4.5 Car-Lift | Delta ($\Delta$) | Status |
+| No | Benchmark | Cognitive Domain | Base Qwen-2B (Frozen) | HADL v4.5 Car-Lift | Delta (Δ) | Status |
 | :-: | :--- | :--- | :---: | :---: | :---: | :--- |
 | 1 | **GSM8K** | Math & Quantitative | 17/50 (34.0%) | **50/50 (100.0%)** | **+66.0% (+33)** | Multi-step Arithmetic CoT |
 | 2 | **MATH** | Math & Quantitative | 16/50 (32.0%) | **50/50 (100.0%)\*** | **+68.0% (+34)** | Polynomial Substitution\* |
@@ -123,7 +146,7 @@ Evaluated head-to-head on an NVIDIA GeForce RTX 5060 Laptop GPU (8GB VRAM) on `Q
 | 20 | **DailyChat** | Instruction & Chat | 30/50 (60.0%) | **50/50 (100.0%)** | **+40.0% (+20)** | Warm Conversational Empathy |
 | — | **TOTAL** | **20 Benchmarks** | **539/1000 (53.9%)** | **930/1000 (93.0%)** | **+39.1% (+391 Qs)** | **MASSIVE INTELLIGENCE UPLIFT** |
 
-*\*Note on MATH:* Under standard token limits ($\ge 35$ tokens), MATH achieves $50/50$ ($100.0\%$), bringing total capacity to **$980/1000$ ($98.0\%$)**.
+*\*Note on MATH:* Under standard token limits (≥ 35 tokens), MATH achieves 50/50 (100.0%), bringing total capacity to **980/1000 (98.0%)**.
 
 ### 2. Unseen Generalization Proof (500 Held-Out Questions)
 * **Held-Out Unseen Test (500 Unseen Questions):**
@@ -133,10 +156,10 @@ Evaluated head-to-head on an NVIDIA GeForce RTX 5060 Laptop GPU (8GB VRAM) on `Q
   Proving true inductive generalization rather than superficial memorization.
 
 ### 3. Telemetry, Perplexity & Hardware Invariance
-* **Wikipedia Perplexity (Natural Language Fluency):** Base $3.803 \to$ HADL **$3.610$ ($\Delta = -0.194$, improved!)**.
-* **DailyChat Empathy:** $100\%$ ($50/50$) natural conversational fluency (Indonesian & English).
-* **Generation Throughput:** **$23.91\text{ tok/s}$** (vs Base $23.12\text{ tok/s}$, zero latency overhead).
-* **VRAM Allocation:** **$4,543.1\text{ MB}$** (comfortably within 8GB GPU memory budget).
+* **Wikipedia Perplexity (Natural Language Fluency):** Base 3.803 → HADL **3.610 (Δ = -0.194, improved!)**.
+* **DailyChat Empathy:** 100% (50/50) natural conversational fluency (Indonesian & English).
+* **Generation Throughput:** **23.91 tok/s** (vs Base 23.12 tok/s, zero latency overhead).
+* **VRAM Allocation:** **4,543.1 MB** (comfortably within 8GB GPU memory budget).
 
 ---
 

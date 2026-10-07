@@ -42,13 +42,13 @@
 ### Mengatasi Paradoks Deadlock Representasi
 Arsitektur modular sebelumnya selalu terjebak dalam dilema yang tidak terhindarkan:
 1. **Kebocoran Halus Katastropik (*Soft-Leakage*):** Modul adaptasi bocor ke dalam teks santai, menyebabkan pembengkakan perplexity ($\text{PPL} \gg 4.0$) dan merusak empati percakapan alami.
-2. **Kuncian Biner Firewall (*Router Clamping Deadlock*):** Ketika ambang batas proteksi disetel ketat ($w_{\text{byp}} > 0.70 \implies 1.0$), router terkunci total ke Bypass saat menerima soal penalaran rumit ($0$ FLOPs dieksekusi), sehingga skor model tidak meningkat sama sekali ($53.9\% \to 53.9\%$).
+2. **Kuncian Biner Firewall (*Router Clamping Deadlock*):** Ketika ambang batas proteksi disetel ketat ($w_{\text{byp}} > 0.70 \implies 1.0$), router terkunci total ke Bypass saat menerima soal penalaran rumit (0 FLOPs dieksekusi), sehingga skor model tidak meningkat sama sekali (53.9% → 53.9%).
 
 **HADL v4.5 memecahkan kebuntuan ini melalui dua prinsip fisika fluida:**
 * **Firewall Berpori (*Porous Orifice Prime Firewall*):** Mengganti klem biner kaku dengan lubang permeabilitas kontinu ($\phi_{\text{porous}} = 0.20$), menjaga tekanan laten penalaran tetap mengalir tanpa pernah membocorkan representasi pada percakapan santai.
 * **Unit Hidrolik Lift Mobil 2-Silinder (*Car-Lift Hydraulic Unit*):** Memodelkan adaptasi representasi sebagai sistem dongkrak/lift mobil Pascal: Piston 1 (Upper Cup) mengangkat manifold penalaran khusus, sedangkan Piston 2 (Lower Cup) menurunkan resistensi dasar, mencapai titik keseimbangan dinamis ($E_{\text{eq}} = 0.5$) dengan jembatan fluida kontinu (*fluid bridge*) agar semua representasi tetap saling terhubung (*"semua tetap berhubungan"*).
 
-**Hasil Empiris GPU:** Pada 20 benchmark kanonikal (1.000 butir soal), HADL mencetak **lonjakan kecerdasan nyata $+39.1\%$** ($539/1000 \to 930/1000$, dan $98.0\%$ pada batas token standar), sementara **Wikipedia Perplexity justru membaik dari $3.803$ menjadi $3.610$** dan kelancaran percakapan sehari-hari (DailyChat) bertahan $100\%$ sempurna.
+**Hasil Empiris GPU:** Pada 20 benchmark kanonikal (1.000 butir soal), HADL mencetak **lonjakan kecerdasan nyata +39.1%** (539/1000 → 930/1000, dan 98.0% pada batas token standar), sementara **Wikipedia Perplexity justru membaik dari 3.803 menjadi 3.610** dan kelancaran percakapan sehari-hari (DailyChat) bertahan 100% sempurna.
 
 ---
 
@@ -63,29 +63,52 @@ Arsitektur modular sebelumnya selalu terjebak dalam dilema yang tidak terhindark
 </p>
 
 ### 1. Firewall Berpori (Porous Orifice Permeability)
-Alih-alih dinding beton biner yang kaku, firewall dilengkapi lubang pori $20\%$ ($\phi_{\text{porous}} = 0.20$) dengan pembatalan gelombang destruktif 4-fase:
-$$\theta_k = \frac{2\pi k}{4}, \quad z_{\text{balanced}} = z_{\text{raw}} + 0.15 \sum_{k=0}^3 \sin(\theta_k), \quad w = \text{Softmax}(z_{\text{balanced}})$$
-$$\tilde{w}_{\text{spec}} = \begin{cases} w_{\text{spec}} \cdot (1.0 + \phi_{\text{porous}}), & \text{jika } w_{\text{spec}} < \delta_{\text{dead}} \\ w_{\text{spec}}, & \text{lainnya} \end{cases}$$
+
+Alih-alih dinding beton biner yang kaku, firewall dilengkapi lubang pori 20% ($\phi_{\text{porous}} = 0.20$) dengan pembatalan gelombang destruktif 4-fase:
+
+$$
+\theta_k = \frac{2\pi k}{4}, \quad z_{\text{balanced}} = z_{\text{raw}} + 0.15 \sum_{k=0}^3 \sin(\theta_k), \quad w = \text{Softmax}(z_{\text{balanced}})
+$$
+
+$$
+\tilde{w}_{\text{spec}} = \begin{cases} w_{\text{spec}} \cdot (1.0 + \phi_{\text{porous}}), & \text{jika } w_{\text{spec}} < \delta_{\text{dead}} \\ w_{\text{spec}}, & \text{lainnya} \end{cases}
+$$
+
 Ini menjamin sinyal penalaran selalu memiliki jalur komunikasi aktif ke tumpukan polinomial.
 
 ### 2. Unit Keseimbangan Hidrolik Lift Mobil 2-Silinder
+
 Terinspirasi dari sistem lift dongkrak mobil Pascal dua silinder:
-$$P_{\text{drive}} = \kappa + 0.8 \cdot w_{\text{spec}}$$
-$$p_{\text{lift}} = \sigma\left(\frac{P_{\text{drive}} - E_{\text{eq}}}{\tau_{\text{hydro}}}\right)$$
+
+$$
+P_{\text{drive}} = \kappa + 0.8 \cdot w_{\text{spec}}
+$$
+
+$$
+p_{\text{lift}} = \sigma\left(\frac{P_{\text{drive}} - E_{\text{eq}}}{\tau_{\text{hydro}}}\right)
+$$
+
 * **Piston 1 (Upper Cup - Pengangkat Beban Penalaran):** $h_{\text{upper}} = p_{\text{lift}} \cdot h$. Mengangkat parameter spesialis dwi-proses saat menghadapi matematika CoT, logika formal, kode, dan sains ($p_{\text{upper}} \to 1.0$).
 * **Piston 2 (Lower Cup - Katup Grounding Dasar):** $p_{\text{lower}} = 1.0 - p_{\text{lift}}$. Menutup resistensi dasar dan menetralkan kebisingan melalui unit SMIL ($p_{\text{lower}} \to 1.0$ pada obrolan santai).
 * **Titik Keseimbangan Dinamis ($E_{\text{eq}} = 0.5$):** Titik istirahat netral di mana kedua aliran bertemu seimbang 50/50 tanpa guncangan diskrit.
 
 ### 3. Jembatan Fluida Kontinu (Shared Fluid Reservoir Bridge)
+
 Kedua silinder dihubungkan oleh jembatan viskositas fluida laten bersama:
-$$h_{\text{cross\_fluid}} = 0.10 \cdot \tanh\left(W_{\text{bridge}} (h_{\text{upper}} - h_{\text{lower}})\right)$$
+
+$$
+h_{\text{cross\_fluid}} = 0.10 \cdot \tanh\left(W_{\text{bridge}} (h_{\text{upper}} - h_{\text{lower}})\right)
+$$
+
 Menjamin representasi tidak pernah terputus secara fisik (*"semua tetap berhubungan"*), meniadakan risiko amnesia katastropik.
 
 ### 4. Tumpukan Resonansi Polinomial Chebyshev (LEA 2.0)
+
 Memproyeksikan hidden state ke polinomial ortogonal Chebyshev jenis pertama $T_0 \dots T_3(x)$ di 6 domain semantik untuk menghitung tekanan resonansi kognitif $\kappa \in \mathbb{R}$.
 
 ### 5. SVD Ghost Layer Rank-32 & Incoherent Head Router (IPA-HR)
-Mengompresi hidden state $h_{11}$ ($D=2048 \to 32$) dengan proyeksi Stiefel isometrik, memangkas VRAM antar-layer sebesar $98.4\%$. Di Layer 23, **Incoherent Phase-Aperture Head Router (IPA-HR)** meredam tag ocehan repetitif (`<think>`) menggunakan proyeksi gelombang anti-fase.
+
+Mengompresi hidden state $h_{11}$ ($D=2048 \to 32$) dengan proyeksi Stiefel isometrik, memangkas VRAM antar-layer sebesar 98.4%. Di Layer 23, **Incoherent Phase-Aperture Head Router (IPA-HR)** meredam tag ocehan repetitif (`<think>`) menggunakan proyeksi gelombang anti-fase.
 
 ---
 
@@ -99,7 +122,7 @@ Mengompresi hidden state $h_{11}$ ($D=2048 \to 32$) dengan proyeksi Stiefel isom
 
 Diuji secara *head-to-head* pada NVIDIA GeForce RTX 5060 Laptop GPU (8GB VRAM) dengan `Qwen/Qwen3.5-2B` (100% Frozen):
 
-| No | Benchmark | Pilar Kognitif | Base Qwen-2B (Frozen) | HADL v4.5 Car-Lift | Delta ($\Delta$) | Status Kinerja |
+| No | Benchmark | Pilar Kognitif | Base Qwen-2B (Frozen) | HADL v4.5 Car-Lift | Delta (Δ) | Status Kinerja |
 | :-: | :--- | :--- | :---: | :---: | :---: | :--- |
 | 1 | **GSM8K** | Math & Quantitative | 17/50 (34.0%) | **50/50 (100.0%)** | **+66.0% (+33)** | Penalaran CoT Multi-Langkah |
 | 2 | **MATH** | Math & Quantitative | 16/50 (32.0%) | **50/50 (100.0%)\*** | **+68.0% (+34)** | Substitusi Polinomial Sempurna\* |
@@ -123,7 +146,7 @@ Diuji secara *head-to-head* pada NVIDIA GeForce RTX 5060 Laptop GPU (8GB VRAM) d
 | 20 | **DailyChat** | Instruction & Chat | 30/50 (60.0%) | **50/50 (100.0%)** | **+40.0% (+20)** | Percakapan Ramah & Empatik |
 | — | **TOTAL** | **20 Benchmark** | **539/1000 (53.9%)** | **930/1000 (93.0%)** | **+39.1% (+391 Soal)** | **LONJAKAN KECERDASAN MASIF** |
 
-*\*Catatan Khusus MATH:* Pada pengujian dengan ruang token memadai ($\ge 35$ token), MATH mencetak $50/50$ ($100.0\%$), membawa total kapasitas kecerdasan ke **$980/1000$ ($98.0\%$)**.
+*\*Catatan Khusus MATH:* Pada pengujian dengan ruang token memadai (≥ 35 token), MATH mencetak 50/50 (100.0%), membawa total kapasitas kecerdasan ke **980/1000 (98.0%)**.
 
 ### 2. Pembuktian Generalisasi Soal Baru (500 Soal Held-Out)
 * **Held-Out Unseen Test (500 Butir Soal Baru yang Belum Pernah Dilihat):**
@@ -133,10 +156,10 @@ Diuji secara *head-to-head* pada NVIDIA GeForce RTX 5060 Laptop GPU (8GB VRAM) d
   Membuktikan kemampuan generalisasi induktif murni, bukan sekadar menghafal (*overfitting*).
 
 ### 3. Telemetri Hardware & Ketahanan Perplexity Bahasa
-* **Wikipedia Perplexity (Kefasihan Bahasa Alami):** Base $3.803 \to$ HADL **$3.610$ ($\Delta = -0.194$, membaik!)**.
-* **DailyChat Empathy:** $100\%$ ($50/50$) respons percakapan sangat alami (Bahasa Indonesia & Inggris).
-* **Throughput Generasi:** **$23.91\text{ tok/s}$** (vs Base $23.12\text{ tok/s}$, tanpa penalti latensi).
-* **Alokasi VRAM:** **$4,543.1\text{ MB}$** (sangat dingin dan aman pada GPU laptop 8GB).
+* **Wikipedia Perplexity (Kefasihan Bahasa Alami):** Base 3.803 → HADL **3.610 (Δ = -0.194, membaik!)**.
+* **DailyChat Empathy:** 100% (50/50) respons percakapan sangat alami (Bahasa Indonesia & Inggris).
+* **Throughput Generasi:** **23.91 tok/s** (vs Base 23.12 tok/s, tanpa penalti latensi).
+* **Alokasi VRAM:** **4,543.1 MB** (sangat dingin dan aman pada GPU laptop 8GB).
 
 ---
 

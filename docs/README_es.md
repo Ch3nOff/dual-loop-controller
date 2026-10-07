@@ -78,7 +78,7 @@ Los controladores modulares anteriores se enfrentaban a un dilema irresoluble:
 
 Evaluado en GPU física NVIDIA GeForce RTX 5060 Laptop (8GB VRAM) sobre `Qwen/Qwen3.5-2B` (100% Congelado):
 
-| N.º | Benchmark | Dominio Cognitivo | Base Qwen-2B | HADL v4.5 Car-Lift | Incremento ($\Delta$) | Estado y Comportamiento |
+| N.º | Benchmark | Dominio Cognitivo | Base Qwen-2B | HADL v4.5 Car-Lift | Incremento (Δ) | Estado y Comportamiento |
 | :-: | :--- | :--- | :---: | :---: | :---: | :--- |
 | 1 | **GSM8K** | Matemáticas y Cuantitativo | 17/50 (34.0%) | **50/50 (100.0%)** | **+66.0% (+33)** | CoT aritmético multietapa |
 | 2 | **MATH** | Matemáticas y Cuantitativo | 16/50 (32.0%) | **50/50 (100.0%)\*** | **+68.0% (+34)** | Resolución de álgebra polinomial\* |
@@ -102,7 +102,7 @@ Evaluado en GPU física NVIDIA GeForce RTX 5060 Laptop (8GB VRAM) sobre `Qwen/Qw
 | 20 | **DailyChat** | Instrucción y Chat | 30/50 (60.0%) | **50/50 (100.0%)** | **+40.0% (+20)** | Diálogo empático natural |
 | — | **TOTAL** | **Los 20 Benchmarks** | **539/1000 (53.9%)** | **930/1000 (93.0%)** | **+39.1% (+391 preg.)** | **SALTO COGNITIVO COMPROBADO** |
 
-*\*Nota en MATH:* En límites de tokens estándar ($\ge 35$ tokens), MATH alcanza $50/50$ ($100.0\%$), llevando la capacidad total al **$980/1000$ ($98.0\%$)**.
+*\*Nota en MATH:* En límites de tokens estándar (≥ 35 tokens), MATH alcanza 50/50 (100.0%), llevando la capacidad total al **980/1000 (98.0%)**.
 
 ### 2. Prueba de Generalización en Datos No Vistos (500 Preguntas de Prueba)
 * **Datos de prueba no vistos (500 preguntas):**
@@ -111,10 +111,10 @@ Evaluado en GPU física NVIDIA GeForce RTX 5060 Laptop (8GB VRAM) sobre `Qwen/Qw
   * **Ganancia neta de generalización:** **+195 preguntas (+39.0%)**, demostrando razonamiento inductivo genuino y no memorización.
 
 ### 3. Telemetría de Hardware e Invarianza de Perplejidad del Lenguaje
-* **Perplejidad en Wikipedia (PPL)**: Base $3.803 \to$ HADL **$3.610$ ($\Delta = -0.194$, ¡más fluido!)**.
-* **Empatía conversacional (DailyChat)**: $100\%$ ($50/50$) fluidez natural conversacional.
-* **Rendimiento de generación**: **$23.91\text{ tok/s}$** (Base $23.12\text{ tok/s}$, sobrecarga nula).
-* **VRAM máxima**: **$4.543,1\text{ MB}$** (holgadamente dentro del presupuesto de 8GB VRAM).
+* **Perplejidad en Wikipedia (PPL)**: Base 3.803 → HADL **3.610 (Δ = -0.194, ¡más fluido!)**.
+* **Empatía conversacional (DailyChat)**: 100% (50/50) fluidez natural conversacional.
+* **Rendimiento de generación**: **23.91 tok/s** (Base 23.12 tok/s, sobrecarga nula).
+* **VRAM máxima**: **4.543,1 MB** (holgadamente dentro del presupuesto de 8GB VRAM).
 
 ---
 

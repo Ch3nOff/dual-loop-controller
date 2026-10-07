@@ -23,17 +23,32 @@ We evaluate HADL v4.5 across a massive 20-benchmark canonical evaluation suite c
 
 ## 1. Introduction: The Representation Deadlock Paradox
 
-Adapting pre-trained foundation models $M_{\text{base}}$ to absorb high-density reasoning (such as 27B-grade multi-step logic) while freezing $100\%$ of base weights usually relies on parameter-efficient adapters or auxiliary hidden loops:
-$$h_{L} = h_{L}^{\text{base}} + \Delta(h_{L})$$
+Adapting pre-trained foundation models $M_{\text{base}}$ to absorb high-density reasoning (such as 27B-grade multi-step logic) while freezing 100% of base weights usually relies on parameter-efficient adapters or auxiliary hidden loops:
+
+$$
+h_{L} = h_{L}^{\text{base}} + \Delta(h_{L})
+$$
 
 However, when applied to multi-domain deployment (where the model must simultaneously excel at Olympiad math and casual empathetic conversation), two degenerative failure modes emerge:
 
 1. **Catastrophic Soft-Leakage:** Unconstrained adaptation $\Delta(h_L)$ leaks into general conversational distributions, corrupting syntax, destroying conversational empathy, and escalating language perplexity:
-   $$\text{PPL}(h_{\text{text}}) \gg \text{PPL}_{\text{base}}$$
+
+   $$
+   \text{PPL}(h_{\text{text}}) \gg \text{PPL}_{\text{base}}
+   $$
+
 2. **Router Clamping Deadlock (The "Smoking Gun"):** To combat soft-leakage, practitioners introduce hard deadzones or firewall thresholds:
-   $$w_{\text{spec}} = 0 \quad \text{if } w_{\text{byp}} > \tau_{\text{thresh}}$$
+
+   $$
+   w_{\text{spec}} = 0 \quad \text{if } w_{\text{byp}} > \tau_{\text{thresh}}
+   $$
+
    When $\tau_{\text{thresh}}$ is calibrated conservatively (e.g., $0.70$), standard softmax outputs on complex queries (which typically initialize around $w_{\text{byp}} \in [0.80, 0.95]$) get completely clamped to zero. The short-circuit bypass triggers unconditionally:
-   $$h_{\text{out}} \equiv h_{\text{base}}$$
+
+   $$
+   h_{\text{out}} \equiv h_{\text{base}}
+   $$
+
    The controller executes zero FLOPs, resulting in exactly zero score uplift across canonical benchmarks.
 
 To break this deadlock, we discard discrete, uncoupled routing in favor of continuous physical fluid dynamics: **A Porous Orifice Firewall** and **A Two-Piston Car-Lift Hydraulic Equilibrium Unit**.
@@ -50,50 +65,107 @@ To break this deadlock, we discard discrete, uncoupled routing in favor of conti
 
 Rather than enforcing a binary wall, the firewall is formulated with an orifice permeability aperture $\phi_{\text{porous}} \in (0, 1)$ coupled with 4-phase destructive wave cancellation:
 
-$$\theta_k = \frac{2\pi k}{4}, \quad k \in \{0, 1, 2, 3\}$$
-$$z_{\text{balanced}} = z_{\text{raw}} + 0.15 \sum_{k=0}^3 \sin(\theta_k)$$
-$$w = \text{Softmax}(z_{\text{balanced}})$$
+$$
+\theta_k = \frac{2\pi k}{4}, \quad k \in \{0, 1, 2, 3\}
+$$
+
+$$
+z_{\text{balanced}} = z_{\text{raw}} + 0.15 \sum_{k=0}^3 \sin(\theta_k)
+$$
+
+$$
+w = \text{Softmax}(z_{\text{balanced}})
+$$
 
 For specialist pathways $w_{\text{spec}} = [w_{\text{mid}}, w_{\text{hvy}}]$ below the noise deadzone $\delta_{\text{dead}} = 0.12$, instead of hard-clamping to $0.0$, the porous orifice maintains continuous fluid leakage:
-$$\tilde{w}_{\text{spec}} = \begin{cases} w_{\text{spec}} \cdot (1.0 + \phi_{\text{porous}}), & \text{if } w_{\text{spec}} < \delta_{\text{dead}} \\ w_{\text{spec}}, & \text{otherwise} \end{cases}$$
-$$w_{\text{dispatch}} = \frac{[w_{\text{byp}}, \tilde{w}_{\text{spec}}]}{\sum [w_{\text{byp}}, \tilde{w}_{\text{spec}}]}$$
+
+$$
+\tilde{w}_{\text{spec}} = \begin{cases} w_{\text{spec}} \cdot (1.0 + \phi_{\text{porous}}), & \text{if } w_{\text{spec}} < \delta_{\text{dead}} \\ w_{\text{spec}}, & \text{otherwise} \end{cases}
+$$
+
+$$
+w_{\text{dispatch}} = \frac{[w_{\text{byp}}, \tilde{w}_{\text{spec}}]}{\sum [w_{\text{byp}}, \tilde{w}_{\text{spec}}]}
+$$
 
 This guarantees non-zero gradient flow and ensures that latent reasoning pressure can communicate downstream to the polynomial affordance stack without deadlocking.
 
 ### 2.2 Chebyshev Polynomial Affordance Stack (LEA 2.0)
 
 Representational fitness is projected onto orthogonal Chebyshev polynomials of the first kind $T_n(x)$ over $[-1, 1]$ across $K=6$ semantic domains (Math, Code, Logic, Science, Extraction, Dialogue):
-$$T_0(x) = 1, \quad T_1(x) = x, \quad T_2(x) = 2x^2 - 1, \quad T_3(x) = 4x^3 - 3x$$
-$$\kappa = 2.5 \cdot \max_{k} \Phi_k(h) - (\sigma(W_{\text{entropy}} h) - 0.5)$$
+
+$$
+T_0(x) = 1, \quad T_1(x) = x, \quad T_2(x) = 2x^2 - 1, \quad T_3(x) = 4x^3 - 3x
+$$
+
+$$
+\kappa = 2.5 \cdot \max_{k} \Phi_k(h) - (\sigma(W_{\text{entropy}} h) - 0.5)
+$$
+
 Where $\kappa \in \mathbb{R}$ represents cognitive resonance pressure.
 
 ### 2.3 Two-Piston Car-Lift Hydraulic Equilibrium Unit
 
 In a classical Pascalian hydraulic car lift, two fluid-coupled cylinders satisfy $P_1 = P_2 = F/A$. In HADL v4.5, hidden representation $h$ is split across two coupled pistons governed by pressure $P_{\text{drive}}$:
-$$P_{\text{drive}} = \kappa + 0.8 \cdot w_{\text{spec}}$$
+
+$$
+P_{\text{drive}} = \kappa + 0.8 \cdot w_{\text{spec}}
+$$
+
 The lifting pressure factor $p_{\text{lift}}$ is given by:
-$$p_{\text{lift}} = \sigma\left(\frac{P_{\text{drive}} - E_{\text{eq}}}{\tau_{\text{hydro}}}\right) \in (0, 1)$$
+
+$$
+p_{\text{lift}} = \sigma\left(\frac{P_{\text{drive}} - E_{\text{eq}}}{\tau_{\text{hydro}}}\right) \in (0, 1)
+$$
 
 - **Piston 1 (Upper Cup - Reasoning Lift):** Lifts specialized parameters as pressure rises:
-  $$h_{\text{upper}} = p_{\text{lift}} \cdot h$$
-  $$h_{\text{engine}} = \mathcal{F}_{\text{spec}}(h_{\text{upper}}), \quad \Delta_{\text{spec}} = h_{\text{engine}} - h_{\text{upper}}$$
+
+  $$
+  h_{\text{upper}} = p_{\text{lift}} \cdot h
+  $$
+
+  $$
+  h_{\text{engine}} = \mathcal{F}_{\text{spec}}(h_{\text{upper}}), \quad \Delta_{\text{spec}} = h_{\text{engine}} - h_{\text{upper}}
+  $$
+
 - **Piston 2 (Lower Cup - Grounding Valve):** Inversely contracts base resistance to ground unaligned noise:
-  $$p_{\text{lower}} = 1.0 - p_{\text{lift}}$$
-  $$h_{\text{lower}} = p_{\text{lower}} \cdot h$$
-  $$h_{\text{grounded}} = \text{SMIL}(h, h_{\text{lower}})$$
+
+  $$
+  p_{\text{lower}} = 1.0 - p_{\text{lift}}
+  $$
+
+  $$
+  h_{\text{lower}} = p_{\text{lower}} \cdot h
+  $$
+
+  $$
+  h_{\text{grounded}} = \text{SMIL}(h, h_{\text{lower}})
+  $$
+
 - **Dynamic Equilibrium Point ($E_{\text{eq}} = 0.5$):** At $P_{\text{drive}} = E_{\text{eq}}$, both pistons exert equal force ($p_{\text{upper}} = p_{\text{lower}} = 0.5$), enabling smooth harmonic transitions without discrete switching artifacts.
 - **Continuous Fluid Reservoir Bridge ("Semua Tetap Berhubungan"):**
   To prevent semantic disconnection, both chambers share a fluid cross-shear viscosity bridge:
-  $$h_{\text{cross\_fluid}} = 0.10 \cdot \tanh\left(W_{\text{bridge}} (h_{\text{upper}} - h_{\text{lower}})\right)$$
+
+  $$
+  h_{\text{cross\_fluid}} = 0.10 \cdot \tanh\left(W_{\text{bridge}} (h_{\text{upper}} - h_{\text{lower}})\right)
+  $$
+
   The final recombined representation is:
-  $$h_{\text{out}} = (1.0 - w_{\text{act}}) \cdot h_{\text{grounded}} + w_{\text{act}} \cdot (h + \Delta_{\text{spec}}) + h_{\text{cross\_fluid}}$$
+
+  $$
+  h_{\text{out}} = (1.0 - w_{\text{act}}) \cdot h_{\text{grounded}} + w_{\text{act}} \cdot (h + \Delta_{\text{spec}}) + h_{\text{cross\_fluid}}
+  $$
+
   Where $w_{\text{act}} = \text{clamp}(w_{\text{spec}} \cdot p_{\text{upper}}, 0, 1)$.
 
 ### 2.4 SVD Rank-32 Streaming Ghost Layer & Incoherent Head Router
 
 Inter-layer memory retention is compressed via semi-orthogonal Stiefel projection $U_{32} \in \mathbb{R}^{2048 \times 32}$:
-$$z_{32} = \text{LayerNorm}(h_{11}) \cdot U_{32}$$
-Slashing inter-layer VRAM retention across Layers 12 to 23 by $98.4\%$. At Layer 23, the stream is verified and modulated by the **Incoherent Phase-Aperture Head Router (IPA-HR)**, which neutralizes discursive preamble energy ($\langle\text{think}\rangle$ tags) using destructive anti-phase projection.
+
+$$
+z_{32} = \text{LayerNorm}(h_{11}) \cdot U_{32}
+$$
+
+Slashing inter-layer VRAM retention across Layers 12 to 23 by 98.4%. At Layer 23, the stream is verified and modulated by the **Incoherent Phase-Aperture Head Router (IPA-HR)**, which neutralizes discursive preamble energy (`<think>` tags) using destructive anti-phase projection.
 
 ---
 
@@ -109,7 +181,7 @@ Slashing inter-layer VRAM retention across Layers 12 to 23 by $98.4\%$. At Layer
 
 ### 3.2 Master Scoreboard (1,000 Questions)
 
-| Benchmark | Category | Base Qwen-2B (Frozen) | HADL v4.5 Car-Lift | Absolute Delta ($\Delta$) |
+| Benchmark | Category | Base Qwen-2B (Frozen) | HADL v4.5 Car-Lift | Absolute Delta (Δ) |
 | :--- | :--- | :---: | :---: | :---: |
 | **GSM8K** | Math & Quantitative | 17/50 (34.0%) | **50/50 (100.0%)** | **+66.0%** |
 | **MATH** | Math & Quantitative | 16/50 (32.0%) | **50/50 (100.0%)\*** | **+68.0%** |
@@ -133,14 +205,14 @@ Slashing inter-layer VRAM retention across Layers 12 to 23 by $98.4\%$. At Layer
 | **DailyChat** | Instruction & Chat | 30/50 (60.0%) | **50/50 (100.0%)** | **+40.0%** |
 | **TOTAL** | **All 20 Benchmarks** | **539/1000 (53.9%)** | **930/1000 (93.0%)** | **+39.1% (+391 Questions)** |
 
-*\*At $40$ max new tokens, MATH achieves $50/50$ ($100.0\%$), bringing total capacity to $980/1000$ ($98.0\%$).*
+*\*At 40 max new tokens, MATH achieves 50/50 (100.0%), bringing total capacity to 980/1000 (98.0%).*
 
 ### 3.3 Generalization vs. Overfitting Proof
 
 - **Unseen Held-Out Test (500 Questions):**
-  - Base Model: $270/500$ ($54.0\%$)
-  - HADL v4.5 Car-Lift: **$465/500$ ($93.0\%$)**
-  - **Net Generalization Uplift:** **$+195$ Questions ($+39.0\%$)**
+  - Base Model: 270/500 (54.0%)
+  - HADL v4.5 Car-Lift: **465/500 (93.0%)**
+  - **Net Generalization Uplift:** **+195 Questions (+39.0%)**
   This confirms that the model generalizes axiomatic reasoning patterns across unseen test prompts rather than merely memorizing training inputs.
 
 ---
@@ -149,10 +221,10 @@ Slashing inter-layer VRAM retention across Layers 12 to 23 by $98.4\%$. At Layer
 
 | Metrik | Base Qwen-2B | HADL v4.5 Car-Lift | Impact |
 | :--- | :---: | :---: | :--- |
-| **Wikipedia Perplexity** | $3.803$ | **$3.610$** | **$-0.194$ (Fluency Improved)** |
-| **DailyChat Empathy** | $30/50$ ($60.0\%$) | **$50/50$ ($100.0\%$)** | **Zero Degenerative Drift** |
-| **Peak VRAM** | $3,833.3\text{ MB}$ | **$4,543.1\text{ MB}$** | **$+709.8\text{ MB}$ (Fits in 8GB GPU)** |
-| **Inference Throughput** | $23.12\text{ tok/s}$ | **$23.91\text{ tok/s}$** | **$0.0\%$ Latency Penalty** |
+| **Wikipedia Perplexity** | 3.803 | **3.610** | **-0.194 (Fluency Improved)** |
+| **DailyChat Empathy** | 30/50 (60.0%) | **50/50 (100.0%)** | **Zero Degenerative Drift** |
+| **Peak VRAM** | 3,833.3 MB | **4,543.1 MB** | **+709.8 MB (Fits in 8GB GPU)** |
+| **Inference Throughput** | 23.12 tok/s | **23.91 tok/s** | **0.0% Latency Penalty** |
 
 ---
 

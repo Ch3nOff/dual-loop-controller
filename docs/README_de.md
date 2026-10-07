@@ -78,7 +78,7 @@ Bisherige modulare Adapterarchitekturen standen vor einem unlösbaren Dilemma:
 
 Getestet auf einer physischen NVIDIA GeForce RTX 5060 Laptop GPU (8GB VRAM) mit `Qwen/Qwen3.5-2B` (100% Frozen):
 
-| Nr. | Benchmark | Kognitive Domäne | Basis Qwen-2B | HADL v4.5 Car-Lift | Differenz ($\Delta$) | Status & Verhalten |
+| Nr. | Benchmark | Kognitive Domäne | Basis Qwen-2B | HADL v4.5 Car-Lift | Differenz (Δ) | Status & Verhalten |
 | :-: | :--- | :--- | :---: | :---: | :---: | :--- |
 | 1 | **GSM8K** | Mathematik & Quantitativ | 17/50 (34.0%) | **50/50 (100.0%)** | **+66.0% (+33)** | Mehrstufige Arithmetik CoT |
 | 2 | **MATH** | Mathematik & Quantitativ | 16/50 (32.0%) | **50/50 (100.0%)\*** | **+68.0% (+34)** | Polynomielle Algebralösung\* |
@@ -102,7 +102,7 @@ Getestet auf einer physischen NVIDIA GeForce RTX 5060 Laptop GPU (8GB VRAM) mit 
 | 20 | **DailyChat** | Instruktion & Dialog | 30/50 (60.0%) | **50/50 (100.0%)** | **+40.0% (+20)** | Natürliche empathische Konversation |
 | — | **GESAMT** | **Alle 20 Benchmarks** | **539/1000 (53.9%)** | **930/1000 (93.0%)** | **+39.1% (+391 Fr.)** | **SIGNIFIKANTER INTELLIGENZSPRUNG** |
 
-*\*Hinweis zu MATH:* Bei regulärem Token-Limit ($\ge 35$ Tokens) erreicht MATH $50/50$ ($100.0\%$), wodurch die Gesamtkapazität auf **$980/1000$ ($98.0\%$)** ansteigt.
+*\*Hinweis zu MATH:* Bei regulärem Token-Limit (≥ 35 Tokens) erreicht MATH 50/50 (100.0%), wodurch die Gesamtkapazität auf **980/1000 (98.0%)** ansteigt.
 
 ### 2. Generalisierungsnachweis auf ungesehenen Testdaten (500 Fragen Hold-Out)
 * **Ungesehene Testfragen (500 Fragen):**
@@ -111,10 +111,10 @@ Getestet auf einer physischen NVIDIA GeForce RTX 5060 Laptop GPU (8GB VRAM) mit 
   * **Netto-Generalisierungsgewinn:** **+195 Fragen (+39.0%)**, ein empirischer Beweis für echtes induktives Denken statt Auswendiglernen.
 
 ### 3. Hardware-Telemetrie & Perplexitäts-Invarianz natürlicher Sprache
-* **Wikipedia Perplexität (PPL)**: Basis $3.803 \to$ HADL **$3.610$ ($\Delta = -0.194$, noch natürlicher!)**.
-* **DailyChat Empathie**: $100\%$ ($50/50$) unverändert lebendige Dialogführung.
-* **Durchsatz**: **$23.91\text{ tok/s}$** (Basis $23.12\text{ tok/s}$, keine Latenzverzögerung).
-* **VRAM-Spitzenlast**: **$4.543,1\text{ MB}$** (mühelos innerhalb des 8GB-Budgets der RTX 5060).
+* **Wikipedia Perplexität (PPL)**: Basis 3.803 → HADL **3.610 (Δ = -0.194, noch natürlicher!)**.
+* **DailyChat Empathie**: 100% (50/50) unverändert lebendige Dialogführung.
+* **Durchsatz**: **23.91 tok/s** (Basis 23.12 tok/s, keine Latenzverzögerung).
+* **VRAM-Spitzenlast**: **4.543,1 MB** (mühelos innerhalb des 8GB-Budgets der RTX 5060).
 
 ---
 
