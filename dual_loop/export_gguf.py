@@ -214,6 +214,8 @@ def export_hadl_to_gguf(
     # 4. Save Fused Model to Staging HF Directory
     print(f"\n[4/5] Saving fused model to staging directory: {work_dir}")
     os.makedirs(work_dir, exist_ok=True)
+    if hasattr(model.config, "mtp_num_hidden_layers"):
+        model.config.mtp_num_hidden_layers = 0
     model.save_pretrained(work_dir, max_shard_size="5GB")
     tokenizer.save_pretrained(work_dir)
 
@@ -238,6 +240,7 @@ def export_hadl_to_gguf(
         os.path.abspath(output_gguf_path),
         "--outtype",
         outtype,
+        "--no-mtp",
     ]
 
     print(f"[*] Executing converter: {' '.join(cmd)}")
