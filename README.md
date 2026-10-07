@@ -55,6 +55,10 @@ Prior modular controllers face a fundamental dilemma:
 ## 🏛️ System Architecture (HADL v4.5 Car-Lift Edition)
 
 <p align="center">
+  <img src="docs/images/hadl_v45_complete_technical_schematic.png" alt="HADL v4.5 Complete End-to-End Technical Schematic" width="100%">
+</p>
+
+<p align="center">
   <img src="docs/images/hadl_v45_carlift_architecture_technical.png" alt="HADL v4.5 Car-Lift Architecture Diagram" width="100%">
 </p>
 
@@ -113,6 +117,10 @@ Compresses hidden state $h_{11}$ ($D=2048 \to 32$) using semi-orthogonal Stiefel
 ---
 
 ## 📊 Physical Empirical GPU Benchmarks (RTX 5060)
+
+<p align="center">
+  <img src="docs/images/hadl_v45_frontier_model_comparison.png" alt="HADL v4.5 vs Frontier SOTA Models Benchmark" width="100%">
+</p>
 
 <p align="center">
   <img src="docs/images/xstar_2b_carlift_500q_audit.png" alt="20 Benchmarks Audit Chart" width="100%">

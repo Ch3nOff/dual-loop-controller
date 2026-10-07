@@ -57,6 +57,8 @@ To break this deadlock, we discard discrete, uncoupled routing in favor of conti
 
 ## 2. Mathematical Formulation & Architecture
 
+![HADL v4.5 Complete Technical Schematic](images/hadl_v45_complete_technical_schematic.png)
+
 ![HADL v4.5 Car-Lift Technical Architecture](images/hadl_v45_carlift_architecture_technical.png)
 
 ![HADL v4.5 Paradigm Evolution & Hydraulic Mechanics](images/hadl_v45_evolution_and_hydraulic_mechanics.png)
@@ -170,6 +172,8 @@ Slashing inter-layer VRAM retention across Layers 12 to 23 by 98.4%. At Layer 23
 ---
 
 ## 3. Empirical Validation Across 20 Canonical Benchmarks
+
+![HADL v4.5 vs Frontier SOTA Models](images/hadl_v45_frontier_model_comparison.png)
 
 ![20 Benchmarks Head to Head Evaluation](images/xstar_2b_carlift_500q_audit.png)
 

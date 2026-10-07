@@ -55,6 +55,10 @@ Arsitektur modular sebelumnya selalu terjebak dalam dilema yang tidak terhindark
 ## 🏛️ Arsitektur Sistem (HADL v4.5 Edisi Car-Lift)
 
 <p align="center">
+  <img src="images/hadl_v45_complete_technical_schematic.png" alt="Skematik Teknis Lengkap HADL v4.5 Car-Lift" width="100%">
+</p>
+
+<p align="center">
   <img src="images/hadl_v45_carlift_architecture_technical.png" alt="Diagram Arsitektur HADL v4.5 Car-Lift" width="100%">
 </p>
 
@@ -113,6 +117,10 @@ Mengompresi hidden state $h_{11}$ ($D=2048 \to 32$) dengan proyeksi Stiefel isom
 ---
 
 ## 📊 Benchmark Empiris GPU Fisik (NVIDIA RTX 5060)
+
+<p align="center">
+  <img src="images/hadl_v45_frontier_model_comparison.png" alt="Perbandingan HADL v4.5 vs Model Frontier SOTA" width="100%">
+</p>
 
 <p align="center">
   <img src="images/xstar_2b_carlift_500q_audit.png" alt="Grafik Audit 20 Benchmark" width="100%">
