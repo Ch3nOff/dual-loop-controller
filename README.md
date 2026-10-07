@@ -74,6 +74,96 @@ Prior modular controllers face a fundamental dilemma:
   </a>
 </p>
 
+### 📐 Complete End-to-End Architectural Blueprint (Full Tensor Flow & Module Walkthrough)
+
+Below is the complete, interactive structural specification of HADL v4.5 Car-Lift Edition, detailing every computational phase from token embedding to final logits:
+
+```mermaid
+flowchart TD
+    subgraph Phase1 ["Phase 1: Input & Early Foundation Stream (Layers 0 - 10)"]
+        IN["Input Tokens x_t"] --> EMB["Frozen Embedding Matrix"]
+        EMB --> L0["Layers 0 to 10 (Frozen Base Transformer)"]
+        L0 --> H_MID["Midway Hidden State h_mid in R^{B x L x D}"]
+    end
+
+    subgraph Phase2 ["Phase 2: Piston 1 (Hydraulic Lift & Porous Firewall)"]
+        H_MID --> SURP["Fast-Slow Surprisal Sensor S(x)"]
+        H_MID --> CHEB["Chebyshev Polynomial Affordance Stack T_0..T_3(x)"]
+        SURP & CHEB --> P_DRIVE["Hydraulic Drive Pressure P_drive"]
+        P_DRIVE --> PISTON1["Piston 1 Hydraulic Lift: p_lift = σ((P_drive - E_eq)/τ)"]
+        H_MID --> POROUS["Porous Orifice Prime Firewall (φ_porous = 0.20)"]
+        PISTON1 & POROUS --> FLUID["Continuous Fluid Reservoir Bridge h_cross"]
+        FLUID --> H_MID_MOD["Modulated Midpoint Activation h_mid + Δh_1"]
+    end
+
+    subgraph Phase3 ["Phase 3: Latent Context Thread Engine & Intermediate Layers"]
+        H_MID_MOD --> OCDIM["OC-Dim Expansion (D -> 2D)"]
+        OCDIM --> THREADS["Latent Context Thread Engine (Macro-Chunking)"]
+        THREADS --> L11["Layers 12 to 21 (Frozen Intermediate Transformer)"]
+        L11 --> H_DEEP["Deep Latent Representation h_deep"]
+    end
+
+    subgraph Phase4 ["Phase 4: Piston 2 (Ghost SVD Verification & Dual-Store Memory)"]
+        H_DEEP --> GHOST["SVD Rank-32 Ghost Verifier: U in R^{D x 32}, V in R^{32 x D}"]
+        H_DEEP --> DUAL_MEM["Dual-Store Cognitive Memory"]
+        subgraph MemInternal ["Dual-Store Internal Mechanics"]
+            STM["Short-Term Working Buffer (Recent L Tokens)"]
+            LTM["Long-Term Plastic Difference Matrix M_long with Adaptive Decay λ(t)"]
+            DIFF["Dynamic Difference Vectors Δv = v_t - μ_context"]
+        end
+        DUAL_MEM --- MemInternal
+        GHOST & DUAL_MEM --> CONTRACTION["Contraction Mapping Operator (||Δh|| < 1.0)"]
+        CONTRACTION --> H_DEEP_MOD["Verified Deep Representation h_deep + Δh_ghost + Δh_mem"]
+    end
+
+    subgraph Phase5 ["Phase 5: Output Projection & Anti-Phase Preamble Damping"]
+        H_DEEP_MOD --> L23["Final Layer 23 & RMSNorm"]
+        L23 --> IPA_HR["IPA-HR Head Router (Anti-Phase Wave Damping)"]
+        IPA_HR --> LOGITS["Output Logits & Next Token Prediction"]
+    end
+```
+
+#### Detailed End-to-End ASCII Tensor Map
+```text
+  [Input Tokens: x_1 ... x_T]
+               │
+               ▼
+  ┌─────────────────────────┐
+  │  Base Layers 0 - 10     │  (100% Frozen Foundation Weights)
+  └────────────┬────────────┘
+               │  h_mid ∈ ℝ^{B × T × D}
+               ▼
+  ╔══════════════════════════════════════════════════════════════════════════════════════════╗
+  ║  PISTON 1: HYDRAULIC EQUILIBRIUM & POROUS FIREWALL (Layer 11)                           ║
+  ║  • Hydraulic Sensor  : P_drive = κ + 0.8·w_spec,  p_lift = σ((P_drive - 0.5)/τ)        ║
+  ║  • Porous Firewall   : φ_porous = 0.20 (eliminates binary router deadlock)              ║
+  ║  • Fluid Bridge      : h_cross = 0.10·tanh(W_bridge (h_upper - h_lower))                ║
+  ║  • OC-Dim Expansion  : ℝ^D ──► ℝ^{2D} ──► Latent Context Threads (Eliminates Dispersion)║
+  ╚══════════════════════════════════════════════════════════════════════════════════════════╝
+               │  h_mid + Δh_1
+               ▼
+  ┌─────────────────────────┐
+  │  Base Layers 12 - 21    │  (Intermediate Frozen Layers)
+  └────────────┬────────────┘
+               │  h_deep ∈ ℝ^{B × T × D}
+               ▼
+  ╔══════════════════════════════════════════════════════════════════════════════════════════╗
+  ║  PISTON 2: GHOST SVD VERIFICATION & DUAL-STORE MEMORY (Layer 22)                         ║
+  ║  • SVD Ghost Layer   : U ∈ ℝ^{D × 32}, V ∈ ℝ^{32 × D} (98.4% VRAM Reduction)            ║
+  ║  • Dual-Store Memory : Short-Term Buffer + Plastic Associative Matrix M_long             ║
+  ║  • Non-Saturating    : Adaptive Decay λ(t) = λ_0·(1 + γ·log(1 + t/W))                   ║
+  ║  • Contraction Bound : ||Δh_2|| < 1.0 (Strict Energy Conservation)                       ║
+  ╚══════════════════════════════════════════════════════════════════════════════════════════╝
+               │  h_deep + Δh_ghost + Δh_mem
+               ▼
+  ┌─────────────────────────┐
+  │  Base Layer 23 & Head   │  (Final Foundation Layer)
+  └────────────┬────────────┘
+               │  Logits ∈ ℝ^{B × T × V}
+               ▼
+  [IPA-HR Anti-Phase Damping ──► Preamble Suppression ──► Final Clean Tokens]
+```
+
 ### 1. Porous Orifice Prime Firewall (Permeability Mechanics)
 
 Instead of a rigid barrier, the firewall incorporates a 20% permeability orifice ($\phi_{\text{porous}} = 0.20$) coupled with 4-phase destructive wave cancellation:

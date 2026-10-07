@@ -74,6 +74,96 @@ Arsitektur modular sebelumnya selalu terjebak dalam dilema yang tidak terhindark
   </a>
 </p>
 
+### 📐 Skematik Arsitektur Lengkap End-to-End (Alur Tensor & Rincian Modul)
+
+Di bawah ini adalah spesifikasi struktural lengkap HADL v4.5 Edisi Car-Lift, merinci setiap fase komputasi dari embedding token hingga logit akhir:
+
+```mermaid
+flowchart TD
+    subgraph Fase1 ["Fase 1: Input & Arus Awal Model Dasar (Layer 0 - 10)"]
+        IN["Input Token x_t"] --> EMB["Embedding Matriks Beku"]
+        EMB --> L0["Layer 0 s/d 10 (Transformer Dasar 100% Beku)"]
+        L0 --> H_MID["Aktivasi Tengah h_mid ∈ R^{B x L x D}"]
+    end
+
+    subgraph Fase2 ["Fase 2: Piston 1 (Tekanan Hidrolik & Firewall Berpori)"]
+        H_MID --> SURP["Sensor Surprisal Cepat-Lambat S(x)"]
+        H_MID --> CHEB["Stack Afordansi Polinomial Chebyshev T_0..T_3(x)"]
+        SURP & CHEB --> P_DRIVE["Tekanan Pendorong Hidrolik P_drive"]
+        P_DRIVE --> PISTON1["Piston 1 Hydraulic Lift: p_lift = σ((P_drive - E_eq)/τ)"]
+        H_MID --> POROUS["Firewall Berpori Porous Orifice (φ_porous = 0.20)"]
+        PISTON1 & POROUS --> FLUID["Jembatan Fluida Kontinu h_cross"]
+        FLUID --> H_MID_MOD["Aktivasi Termodulasi h_mid + Δh_1"]
+    end
+
+    subgraph Fase3 ["Fase 3: Engine Thread Konteks Laten & Layer Menengah"]
+        H_MID_MOD --> OCDIM["Perluasan Dimensi OC-Dim (D -> 2D)"]
+        OCDIM --> THREADS["Latent Context Thread Engine (Macro-Chunking)"]
+        THREADS --> L11["Layer 12 s/d 21 (Transformer Antara 100% Beku)"]
+        L11 --> H_DEEP["Representasi Laten Mendalam h_deep"]
+    end
+
+    subgraph Fase4 ["Fase 4: Piston 2 (Verifikasi SVD Ghost & Memori Dual-Store)"]
+        H_DEEP --> GHOST["Verifikator SVD Ghost Rank-32: U ∈ R^{D x 32}, V ∈ R^{32 x D}"]
+        H_DEEP --> DUAL_MEM["Memori Kognitif Dual-Store"]
+        subgraph MemInternal ["Mekanisme Internal Dual-Store"]
+            STM["Buffer Kerja Cepat Jangka Pendek (L Token Terakhir)"]
+            LTM["Matriks Selisih Plastis Jangka Panjang M_long dengan Peluruhan Adaptif λ(t)"]
+            DIFF["Vektor Selisih Dinamis Δv = v_t - μ_context"]
+        end
+        DUAL_MEM --- MemInternal
+        GHOST & DUAL_MEM --> CONTRACTION["Operator Pemetaan Kontraksi (||Δh|| < 1.0)"]
+        CONTRACTION --> H_DEEP_MOD["Representasi Terverifikasi h_deep + Δh_ghost + Δh_mem"]
+    end
+
+    subgraph Fase5 ["Fase 5: Proyeksi Output & Peredam Gelombang Anti-Fase"]
+        H_DEEP_MOD --> L23["Layer Terakhir 23 & RMSNorm"]
+        L23 --> IPA_HR["IPA-HR Head Router (Peredaman Gelombang Anti-Fase)"]
+        IPA_HR --> LOGITS["Logit Output & Prediksi Token"]
+    end
+```
+
+#### Peta Alur Tensor Detail (ASCII)
+```text
+  [Input Token: x_1 ... x_T]
+               │
+               ▼
+  ┌─────────────────────────┐
+  │  Layer Dasar 0 - 10     │  (Bobot Model Dasar 100% Beku)
+  └────────────┬────────────┘
+               │  h_mid ∈ ℝ^{B × T × D}
+               ▼
+  ╔══════════════════════════════════════════════════════════════════════════════════════════╗
+  ║  PISTON 1: KESEIMBANGAN HIDROLIK & FIREWALL BERPORI (Layer 11)                           ║
+  ║  • Sensor Hidrolik   : P_drive = κ + 0.8·w_spec,  p_lift = σ((P_drive - 0.5)/τ)        ║
+  ║  • Firewall Berpori  : φ_porous = 0.20 (menghilangkan kebuntuan biner router)            ║
+  ║  • Jembatan Fluida   : h_cross = 0.10·tanh(W_bridge (h_upper - h_lower))                ║
+  ║  • Ekspansi OC-Dim   : ℝ^D ──► ℝ^{2D} ──► Latent Context Threads (Hapus Dispersi)       ║
+  ╚══════════════════════════════════════════════════════════════════════════════════════════╝
+               │  h_mid + Δh_1
+               ▼
+  ┌─────────────────────────┐
+  │  Layer Dasar 12 - 21    │  (Layer Menengah 100% Beku)
+  └────────────┬────────────┘
+               │  h_deep ∈ ℝ^{B × T × D}
+               ▼
+  ╔══════════════════════════════════════════════════════════════════════════════════════════╗
+  ║  PISTON 2: VERIFIKASI SVD GHOST & MEMORI DUAL-STORE (Layer 22)                           ║
+  ║  • Layer SVD Ghost   : U ∈ ℝ^{D × 32}, V ∈ ℝ^{32 × D} (Hemat VRAM 98.4%)                 ║
+  ║  • Memori Dual-Store : Buffer Jangka Pendek + Matriks Asosiatif Plastis M_long           ║
+  ║  • Non-Saturasi      : Peluruhan Adaptif λ(t) = λ_0·(1 + γ·log(1 + t/W))                 ║
+  ║  • Batas Kontraksi   : ||Δh_2|| < 1.0 (Konservasi Energi Ketat)                          ║
+  ╚══════════════════════════════════════════════════════════════════════════════════════════╝
+               │  h_deep + Δh_ghost + Δh_mem
+               ▼
+  ┌─────────────────────────┐
+  │  Layer Dasar 23 & Head  │  (Layer Akhir Model Dasar)
+  └────────────┬────────────┘
+               │  Logits ∈ ℝ^{B × T × V}
+               ▼
+  [Peredam Anti-Fase IPA-HR ──► Penekanan Preamble <think> ──► Token Bersih Final]
+```
+
 ### 1. Firewall Berpori (Porous Orifice Permeability)
 
 Alih-alih dinding beton biner yang kaku, firewall dilengkapi lubang pori 20% ($\phi_{\text{porous}} = 0.20$) dengan pembatalan gelombang destruktif 4-fase:
