@@ -260,7 +260,7 @@ In standard unconstrained deliberation, models often suffer from associative dis
 
 * **Base Model Failure**: Generates almost identical log-likelihoods for `[A] weasel` ($-8.4076$) and `[B] willow` ($-8.4091$) — a negligible margin of only $0.0015$.
 * **Unconstrained System 2 Overthinking**: The model associates willow branches waving in the wind with locomotion, erroneously selecting `[B] willow` ($-5.9615$).
-* **HADL Grounding Resolution**: The Context Directional Router detects a biological locomotion inquiry ($\rho \le 0 \to \text{DOWN\_COMMONSENSE}$). The compact prototype prior ($M_{cs}$) injects active locomotion energy credits ($+2.20$ for fauna vs $-0.80$ for flora). HADL selects `[A] weasel` with a decisive margin ($-6.5766$ vs $-6.7421$), successfully rescuing the query.
+* **HADL Grounding Resolution**: The Context Directional Router detects a biological locomotion inquiry ($\rho \le 0 \to \text{DOWN-COMMONSENSE}$). The compact prototype prior ($M_{cs}$) injects active locomotion energy credits ($+2.20$ for fauna vs $-0.80$ for flora). HADL selects `[A] weasel` with a decisive margin ($-6.5766$ vs $-6.7421$), successfully rescuing the query.
 
 #### 2. Lifelong Retention under Sequential Domain Learning
 When 10 abstract domain concepts are sequentially stored into memory, standard unconstrained gradient updates cause catastrophic forgetting, reducing Domain 1 retention to **47.96%**. Under HADL's Orthogonal Nullspace Projection ($P_{\perp}$), Domain 1 representation retention remains at **100.0%**, maintaining a mathematically proven cosine overlap of **0.000000**.

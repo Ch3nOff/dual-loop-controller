@@ -210,8 +210,8 @@ Let $N$ denote prompt length, $N_{\text{params}} = 2.31 \times 10^9$, and $D = 2
   $$\text{FLOPs}_{\text{CoT}} \approx 2 \cdot T_{\text{CoT}} \cdot N_{\text{params}}$$
   For $T_{\text{CoT}} = 300\text{ tokens}$, this introduces $\mathbf{1,386\text{ GFLOPs}}$ and adds $\mathbf{3,529\text{ ms}}$ of serial decode latency (at 85 tok/s).
 * **Dual-Loop Latent Deliberation Overhead**: Deliberation occurs entirely inside Layer 12 during prefill across $L_{\text{thought}} = 8$ virtual tokens and $M = 16$ CWM slots:
-  $$\text{FLOPs}_{\text{outer}} \approx K \cdot \left[4 L_{\text{thought}} D^2 + 4 L_{\text{thought}} M D + 4 L_{\text{thought}} D D_{\text{adapter\_ff}}\right]$$
-  For $D = 2048$, $D_{\text{adapter\_ff}} = 4096$, and $K = 3\text{ steps}$:
+  $$\text{FLOPs}_{\text{outer}} \approx K \cdot \left[4 L_{\text{thought}} D^2 + 4 L_{\text{thought}} M D + 4 L_{\text{thought}} D D_{\text{adapter-ff}}\right]$$
+  For $D = 2048$, $D_{\text{adapter-ff}} = 4096$, and $K = 3\text{ steps}$:
   $$\text{FLOPs}_{\text{outer}} \approx 3 \times 0.134\text{ GFLOPs} \approx \mathbf{0.402\text{ GFLOPs}}$$
   This constitutes **$< 0.04\%$ of standard prompt prefill FLOPs**, adding only **$+3.8\text{ ms}$ of Time-to-First-Token (TTFT)** latency with **$0\text{ ms}$ decode penalty** (KV-cache size and decode throughput remain identical at 84.6 tokens/sec).
 

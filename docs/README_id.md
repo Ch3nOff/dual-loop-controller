@@ -97,7 +97,7 @@ $$
 Kedua silinder dihubungkan oleh jembatan viskositas fluida laten bersama:
 
 $$
-h_{\text{cross\_fluid}} = 0.10 \cdot \tanh\left(W_{\text{bridge}} (h_{\text{upper}} - h_{\text{lower}})\right)
+h_{\text{cross-fluid}} = 0.10 \cdot \tanh\left(W_{\text{bridge}} (h_{\text{upper}} - h_{\text{lower}})\right)
 $$
 
 Menjamin representasi tidak pernah terputus secara fisik (*"semua tetap berhubungan"*), meniadakan risiko amnesia katastropik.

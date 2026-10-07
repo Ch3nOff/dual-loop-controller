@@ -146,13 +146,13 @@ $$
   To prevent semantic disconnection, both chambers share a fluid cross-shear viscosity bridge:
 
   $$
-  h_{\text{cross\_fluid}} = 0.10 \cdot \tanh\left(W_{\text{bridge}} (h_{\text{upper}} - h_{\text{lower}})\right)
+  h_{\text{cross-fluid}} = 0.10 \cdot \tanh\left(W_{\text{bridge}} (h_{\text{upper}} - h_{\text{lower}})\right)
   $$
 
   The final recombined representation is:
 
   $$
-  h_{\text{out}} = (1.0 - w_{\text{act}}) \cdot h_{\text{grounded}} + w_{\text{act}} \cdot (h + \Delta_{\text{spec}}) + h_{\text{cross\_fluid}}
+  h_{\text{out}} = (1.0 - w_{\text{act}}) \cdot h_{\text{grounded}} + w_{\text{act}} \cdot (h + \Delta_{\text{spec}}) + h_{\text{cross-fluid}}
   $$
 
   Where $w_{\text{act}} = \text{clamp}(w_{\text{spec}} \cdot p_{\text{upper}}, 0, 1)$.

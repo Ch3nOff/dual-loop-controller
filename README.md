@@ -97,7 +97,7 @@ $$
 Both cylinders share a continuous fluid shear bridge:
 
 $$
-h_{\text{cross\_fluid}} = 0.10 \cdot \tanh\left(W_{\text{bridge}} (h_{\text{upper}} - h_{\text{lower}})\right)
+h_{\text{cross-fluid}} = 0.10 \cdot \tanh\left(W_{\text{bridge}} (h_{\text{upper}} - h_{\text{lower}})\right)
 $$
 
 Ensuring that representations are permanently interconnected ("semua tetap berhubungan"), preventing semantic dislocation or catastrophic forgetting.
