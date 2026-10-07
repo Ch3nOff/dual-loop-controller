@@ -212,6 +212,35 @@ class DualLoopInferenceEngine:
         formatted += "<|im_start|>assistant\n"
         return formatted
 
+    def reset_memory_states(self, force: bool = True) -> None:
+        """
+        Resets in-situ fast plasticity working memory traces across generation requests
+        to prevent cross-query Hebbian associative leakage.
+        """
+        if not hasattr(self, "model") or self.model is None:
+            return
+
+        # 1. Inspect wrapper.adapter
+        adapter = getattr(self.model, "adapter", None)
+        if adapter is not None:
+            if hasattr(adapter, "plastic_memory") and adapter.plastic_memory is not None:
+                if hasattr(adapter.plastic_memory, "reset_state"):
+                    adapter.plastic_memory.reset_state(force=force)
+            if hasattr(adapter, "controller") and adapter.controller is not None:
+                if hasattr(adapter.controller, "reset_state"):
+                    adapter.controller.reset_state(force=force)
+                if hasattr(adapter.controller, "plastic_unit") and adapter.controller.plastic_unit is not None:
+                    if hasattr(adapter.controller.plastic_unit, "reset_state"):
+                        adapter.controller.plastic_unit.reset_state(force=force)
+
+        # 2. Inspect root model directly
+        if hasattr(self.model, "plastic_memory") and self.model.plastic_memory is not None:
+            if hasattr(self.model.plastic_memory, "reset_state"):
+                self.model.plastic_memory.reset_state(force=force)
+        if hasattr(self.model, "controller") and self.model.controller is not None:
+            if hasattr(self.model.controller, "reset_state"):
+                self.model.controller.reset_state(force=force)
+
     def generate_sync(
         self,
         prompt: str,
@@ -223,6 +252,9 @@ class DualLoopInferenceEngine:
         """Synchronous text generation returning complete output and telemetry."""
         if not self.is_loaded:
             self.load_model()
+
+        # Prevent cross-request fast weight associative state leakage
+        self.reset_memory_states(force=True)
 
         t0 = time.time()
         inputs = self.tokenizer(prompt, return_tensors="pt")
@@ -279,6 +311,9 @@ class DualLoopInferenceEngine:
         """
         if not self.is_loaded:
             self.load_model()
+
+        # Prevent cross-request fast weight associative state leakage
+        self.reset_memory_states(force=True)
 
         inputs = self.tokenizer(prompt, return_tensors="pt")
         if torch.cuda.is_available():

@@ -302,7 +302,7 @@ def main():
 
     # Load engine and router weights
     if CHECKPOINT_ENGINE.exists():
-        ckpt_eng = torch.load(CHECKPOINT_ENGINE, map_location=device)
+        ckpt_eng = torch.load(CHECKPOINT_ENGINE, map_location=device, weights_only=True)
         wrapper.engine.load_state_dict(ckpt_eng["engine"])
         wrapper.ghost.load_state_dict(ckpt_eng["ghost"])
         print(f"[OK] Loaded trained engine weights from: {CHECKPOINT_ENGINE}")

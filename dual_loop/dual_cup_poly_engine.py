@@ -104,10 +104,15 @@ class PolynomialAffordanceStack(nn.Module):
 
         # Kappa: polynomial resonance minus uncertainty
         kappa = 2.5 * best_res - (entropy - 0.5)
-        kappa_mean = float(kappa.mean().item())
-        best_domain_idx = int(best_domain.flatten().mode().values.item()) if best_domain.numel() > 0 else 0
+        kappa_mean_tensor = kappa.mean().detach()
 
-        return kappa.to(dtype=h.dtype), kappa.mean().detach(), best_domain_idx
+        # PERF-02: Avoid CUDA-CPU stream stalls during forward execution
+        if not self.training and not h.is_cuda and best_domain.numel() > 0:
+            best_domain_idx = int(best_domain.flatten().mode().values.item())
+        else:
+            best_domain_idx = 0
+
+        return kappa.to(dtype=h.dtype), kappa_mean_tensor, best_domain_idx
 
 
 class PhaseShiftPrimeRouter(nn.Module):
@@ -162,20 +167,17 @@ class PhaseShiftPrimeRouter(nn.Module):
 
         dispatch_weights = F.softmax(z_balanced.float(), dim=-1).to(target_dtype)
 
-        # POROUS PERFORATED PRIME FIREWALL (Lubang Orifice & Continuous Fluid Permeability)
-        # Permeable orifice ("lubang") allows latent reasoning pressure to communicate continuously
-        # without hard binary choke-off, preserving sensitivity for downstream polynomial affordance.
+        # POROUS PERFORATED PRIME FIREWALL (Deadzone Clamping & Fluid Permeability)
+        # Sub-threshold weights below leakage_deadzone are clamped to 0.0 to guarantee 100% complete bypass
+        # on standard dialogue tokens without unintended specialist bleed.
         w_byp = dispatch_weights[:, 0:1]
         w_mid = dispatch_weights[:, 1:2]
         w_hvy = dispatch_weights[:, 2:3]
 
-        # Orifice permeability factor ("lubang pada firewall")
-        # Guarantees specialist paths receive non-zero gradient & signal flow
-        orifice_porosity = 0.20
-        w_mid_porous = torch.where(w_mid < self.leakage_deadzone, w_mid * (1.0 + orifice_porosity), w_mid)
-        w_hvy_porous = torch.where(w_hvy < self.leakage_deadzone, w_hvy * (1.0 + orifice_porosity), w_hvy)
+        w_mid_clamped = torch.where(w_mid < self.leakage_deadzone, torch.zeros_like(w_mid), w_mid)
+        w_hvy_clamped = torch.where(w_hvy < self.leakage_deadzone, torch.zeros_like(w_hvy), w_hvy)
 
-        dispatch_stacked = torch.cat([w_byp, w_mid_porous, w_hvy_porous], dim=-1)
+        dispatch_stacked = torch.cat([w_byp, w_mid_clamped, w_hvy_clamped], dim=-1)
         dispatch_weights = dispatch_stacked / torch.sum(dispatch_stacked, dim=-1, keepdim=True)
 
         firewall_active = bool(float(dispatch_weights[:, 0].mean().item()) > 0.95)
@@ -184,7 +186,7 @@ class PhaseShiftPrimeRouter(nn.Module):
             "dispatch_weights": [round(float(w), 4) for w in dispatch_weights[0].tolist()],
             "firewall_active": firewall_active,
             "pure_bypass": bool(dispatch_weights[0, 0] > 0.999),
-            "orifice_lubang_active": True
+            "orifice_lubang_active": bool(dispatch_weights[0, 0] < 0.999)
         }
         return dispatch_weights, telem
 

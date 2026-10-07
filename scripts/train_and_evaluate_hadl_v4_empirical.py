@@ -819,7 +819,7 @@ def main():
     if CHECKPOINT_OUTPUT.exists():
         print(f"\n[*] Found existing trained checkpoint at: {CHECKPOINT_OUTPUT}")
         print("    Loading trained weights for Layer 11 Engine and Layer 23 Parallel Ghost Layer...")
-        ckpt = torch.load(CHECKPOINT_OUTPUT, map_location=device)
+        ckpt = torch.load(CHECKPOINT_OUTPUT, map_location=device, weights_only=True)
         adv_model.engine.load_state_dict(ckpt["engine"])
         adv_model.ghost.load_state_dict(ckpt["ghost"])
         print("[OK] Weights loaded successfully into GPU memory!")

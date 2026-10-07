@@ -311,6 +311,137 @@ class SecurityAndRuntimeTests(unittest.TestCase):
         for val in telem_b3["acceptance_beta"]:
             self.assertIsInstance(val, float)
 
+    def test_scorecard_01_router_rejects_malicious_pickle(self):
+        """SCORECARD-01: PolynomialEmbeddedRouting.load_routing_weights must enforce weights_only=True."""
+        from dual_loop.callearn_oc_engine import PolynomialEmbeddedRouting
+        router = PolynomialEmbeddedRouting(d_model=32, num_routes=3)
+        
+        temp_fd, temp_path = tempfile.mkstemp(suffix=".pt")
+        os.close(temp_fd)
+        try:
+            payload = {"weight": MaliciousExploit(), "bias": torch.zeros(3)}
+            torch.save(payload, temp_path)
+            # Must raise RuntimeError or pickle UnpicklingError due to weights_only=True
+            with self.assertRaises(Exception):
+                router.load_routing_weights(temp_path)
+        finally:
+            if os.path.exists(temp_path):
+                os.remove(temp_path)
+
+    def test_scorecard_02_vllm_and_server_require_auth_for_non_loopback(self):
+        """SCORECARD-02: Serving on non-loopback interfaces (e.g. 0.0.0.0) mandates api_key."""
+        from dual_loop.server.vllm_app import start_vllm_server
+        from dual_loop.server import start_server
+
+        # vLLM server: binding to 0.0.0.0 without API key must raise ValueError
+        old_vllm_key = os.environ.pop("VLLM_API_KEY", None)
+        try:
+            with self.assertRaises(ValueError) as ctx:
+                start_vllm_server(host="0.0.0.0", api_key=None)
+            self.assertIn("requires an API key", str(ctx.exception))
+        finally:
+            if old_vllm_key:
+                os.environ["VLLM_API_KEY"] = old_vllm_key
+
+        # Standard server: binding to 0.0.0.0 without API key must raise ValueError
+        old_dl_key = os.environ.pop("DUAL_LOOP_API_KEY", None)
+        try:
+            with self.assertRaises(ValueError) as ctx:
+                start_server(host="0.0.0.0", api_key=None)
+            self.assertIn("requires an API key", str(ctx.exception))
+        finally:
+            if old_dl_key:
+                os.environ["DUAL_LOOP_API_KEY"] = old_dl_key
+
+    def test_scorecard_04_cross_request_plasticity_reset(self):
+        """SCORECARD-04: Plasticity memory traces must be reset across generation requests."""
+        from dual_loop.plasticity import PlasticFastWeightUnit, HeteroAssociativePlasticMemory
+        from dual_loop.server.engine import DualLoopInferenceEngine
+
+        # Test PlasticFastWeightUnit
+        mem = PlasticFastWeightUnit(d_model=32, rank=8)
+        u = torch.randn(1, 4, 32)
+        disc = torch.randn(1, 4, 32)
+        mem(u, disc)
+        self.assertIsNotNone(mem.last_m_fast)
+        mem.reset_state(force=True)
+        self.assertIsNone(mem.last_m_fast)
+
+        # Test HeteroAssociativePlasticMemory
+        cross = HeteroAssociativePlasticMemory(d_model=32, rank=8)
+        cross.bind_concept(torch.randn(1, 4, 32), torch.randn(1, 4, 32))
+        self.assertIsNotNone(cross.last_m_cross)
+        cross.reset_state(force=True)
+        self.assertIsNone(cross.last_m_cross)
+
+        # Test engine reset_memory_states helper
+        class MockAdapter:
+            def __init__(self):
+                self.plastic_memory = cross
+        class MockModel:
+            def __init__(self):
+                self.adapter = MockAdapter()
+
+        engine = DualLoopInferenceEngine(model_id_or_path="mock")
+        engine.model = MockModel()
+        cross.bind_concept(torch.randn(1, 4, 32), torch.randn(1, 4, 32))
+        self.assertIsNotNone(cross.last_m_cross)
+        engine.reset_memory_states(force=True)
+        self.assertIsNone(cross.last_m_cross)
+
+    def test_scorecard_05_id_smil_centroid_registered_as_buffer(self):
+        """SCORECARD-05: LocalAffordanceGate centroid must be a buffer, not nn.Parameter."""
+        from dual_loop.id_smil_engine import LocalAffordanceGate
+        gate = LocalAffordanceGate(d_model=32)
+        # Verify centroid is in buffers and NOT in parameters
+        buffer_names = [name for name, _ in gate.named_buffers()]
+        param_names = [name for name, _ in gate.named_parameters()]
+        self.assertIn("centroid", buffer_names)
+        self.assertNotIn("centroid", param_names)
+
+        # Verify training update modifies buffer cleanly without error
+        gate.train()
+        h = torch.randn(2, 4, 32)
+        old_centroid = gate.centroid.clone()
+        gate.evaluate_affordance(h)
+        self.assertFalse(torch.equal(gate.centroid, old_centroid))
+
+    def test_scorecard_06_contractive_picard_and_poly_affordance(self):
+        """SCORECARD-06: Contractive Picard and Polynomial Affordance run without stalls."""
+        from dual_loop.contractive_hopfield_engine import ContractiveFixedPointDeliberator
+        from dual_loop.dual_cup_poly_engine import PolynomialAffordanceStack
+
+        delib = ContractiveFixedPointDeliberator(d_model=32, max_iterations=3)
+        h = torch.randn(1, 4, 32)
+        h_star, iters, residual = delib(h)
+        self.assertEqual(h_star.shape, h.shape)
+        self.assertIsInstance(residual, float)
+
+        stack = PolynomialAffordanceStack(d_model=32, num_domains=4)
+        kappa, kappa_mean, domain_idx = stack(h)
+        self.assertEqual(kappa.shape, (1, 4, 1))
+        self.assertIsInstance(kappa_mean, torch.Tensor)
+        self.assertIsInstance(domain_idx, int)
+
+    def test_scorecard_07_porous_firewall_subthreshold_clamping(self):
+        """SCORECARD-07: PhaseShiftPrimeRouter must clamp sub-threshold deadzone weights to 0.0."""
+        from dual_loop.dual_cup_poly_engine import PhaseShiftPrimeRouter
+        router = PhaseShiftPrimeRouter(d_model=32, num_paths=3)
+        
+        # Craft an input where sub-threshold weights are below leakage_deadzone (0.12)
+        with torch.no_grad():
+            # Strongly bias toward path 0 (bypass)
+            router.bias.data = torch.tensor([10.0, -10.0, -10.0])
+
+        x = torch.randn(1, 4, 32)
+        weights, telem = router(embed_tensor=x)
+        
+        # Sub-threshold weights for path 1 and 2 must be clamped to strictly 0.0
+        self.assertEqual(float(weights[0, 1].item()), 0.0)
+        self.assertEqual(float(weights[0, 2].item()), 0.0)
+        self.assertEqual(float(weights[0, 0].item()), 1.0)
+        self.assertTrue(telem["pure_bypass"])
+
 
 if __name__ == "__main__":
     unittest.main()

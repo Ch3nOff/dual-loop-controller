@@ -518,7 +518,7 @@ def main():
     )
 
     if CHECKPOINT_PATH.exists():
-        ckpt = torch.load(CHECKPOINT_PATH, map_location=DEVICE)
+        ckpt = torch.load(CHECKPOINT_PATH, map_location=DEVICE, weights_only=True)
         hadl_model.controller.load_state_dict(ckpt["controller_state_dict"])
         print(f"[Checkpoint Loaded] Successfully restored from {CHECKPOINT_PATH}")
     else:

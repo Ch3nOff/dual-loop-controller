@@ -117,8 +117,8 @@ class LocalAffordanceGate(nn.Module):
         self.d_model = d_model
         self.intrinsic_scale = intrinsic_scale
 
-        # Learned Affordance Centroid: represents domain manifold resonance
-        self.centroid = nn.Parameter(torch.randn(d_model) * 0.02)
+        # Learned Affordance Centroid: represents domain manifold resonance (registered buffer)
+        self.register_buffer("centroid", torch.randn(d_model) * 0.02)
         # Epistemic uncertainty projection
         self.w_uncertainty = nn.Linear(d_model, 64)
         self.w_entropy = nn.Linear(64, 1)
@@ -140,7 +140,7 @@ class LocalAffordanceGate(nn.Module):
             with torch.no_grad():
                 h_mean_dir = h_norm.mean(dim=(0, 1))
                 h_mean_dir = F.normalize(h_mean_dir, p=2, dim=-1)
-                self.centroid.data = 0.90 * self.centroid.data + 0.10 * h_mean_dir
+                self.centroid.copy_(0.90 * self.centroid + 0.10 * h_mean_dir.detach())
                 c_norm = F.normalize(self.centroid, p=2, dim=-1)
 
         cos_res = torch.sum(h_norm * c_norm, dim=-1, keepdim=True)  # [B, S, 1]

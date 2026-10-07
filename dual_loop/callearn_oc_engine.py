@@ -518,7 +518,7 @@ class PolynomialEmbeddedRouting(nn.Module):
         from pathlib import Path
         p = Path(path)
         if p.exists():
-            state = torch.load(p, map_location="cpu")
+            state = torch.load(p, map_location="cpu", weights_only=True)
             if "weight" in state and "bias" in state:
                 with torch.no_grad():
                     w = state["weight"]  # [num_routes, D]

@@ -30,7 +30,7 @@ def _check_vllm_available():
 
 def start_vllm_server(
     model_id_or_path: str = "Qwen/Qwen2.5-7B-Instruct",
-    host: str = "0.0.0.0",
+    host: str = "127.0.0.1",
     port: int = 8000,
     tensor_parallel_size: int = 1,
     dtype: str = "auto",
@@ -57,6 +57,15 @@ def start_vllm_server(
 
     HADL hooks are injected via the vLLM plugin system (dual_loop_vllm_plugin).
     """
+    # SEC-02: Mandate authentication if binding to a non-loopback / public interface
+    is_loopback = host in ("127.0.0.1", "localhost", "::1")
+    resolved_api_key = api_key or os.environ.get("VLLM_API_KEY", "").strip() or None
+    if not is_loopback and not resolved_api_key:
+        raise ValueError(
+            f"Binding to non-loopback host '{host}' requires an API key for authentication. "
+            "Please provide --api-key or set the VLLM_API_KEY environment variable."
+        )
+
     if not _check_vllm_available():
         print(
             "\n" + "=" * 80 + "\n"
@@ -81,8 +90,8 @@ def start_vllm_server(
     else:
         os.environ["HADL_VLLM_ENABLED"] = "0"
 
-    if api_key:
-        os.environ["VLLM_API_KEY"] = api_key
+    if resolved_api_key:
+        os.environ["VLLM_API_KEY"] = resolved_api_key
 
     print("=" * 80)
     print(f"[*] LAUNCHING vLLM + HADL HIGH-THROUGHPUT SERVER")

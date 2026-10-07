@@ -28,7 +28,16 @@ def start_server(
     api_key: str | None = None,
     log_level: str = "info"
 ) -> None:
-    """Initializes the DualLoopInferenceEngine and serves the OpenAI-compatible FastAPI server via uvicorn."""
+    # SEC-02: Mandate authentication if binding to a non-loopback / public interface
+    import os
+    is_loopback = host in ("127.0.0.1", "localhost", "::1")
+    resolved_api_key = api_key or os.environ.get("DUAL_LOOP_API_KEY", "").strip() or None
+    if not is_loopback and not resolved_api_key:
+        raise ValueError(
+            f"Binding to non-loopback host '{host}' requires an API key for authentication. "
+            "Please provide --api-key or set the DUAL_LOOP_API_KEY environment variable."
+        )
+
     if DualLoopInferenceEngine is None or create_app is None:
         raise ImportError(
             "PyTorch and transformers are required to run the standard DualLoopInferenceEngine server.\n"

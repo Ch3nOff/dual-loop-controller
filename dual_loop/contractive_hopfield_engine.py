@@ -184,7 +184,7 @@ class ContractiveFixedPointDeliberator(nn.Module):
         h_current = h_init
         context = h_init * (1.0 - self.gamma)
         num_iter = 0
-        residual = 1.0
+        h_prev = h_current
 
         for k in range(self.max_iterations):
             num_iter += 1
@@ -192,15 +192,22 @@ class ContractiveFixedPointDeliberator(nn.Module):
             
             # Damped step: h^(k+1) = (1 - alpha) * h^(k) + alpha * h_next
             h_damped = (1.0 - self.alpha) * h_current + self.alpha * h_next
-            
-            # Compute Cauchy residual: ||h^(k+1) - h^(k)|| / ||h^(k)||
-            diff = torch.norm(h_damped - h_current, dim=-1).mean()
-            norm = torch.norm(h_current, dim=-1).mean() + 1e-6
-            residual = (diff / norm).item()
-
+            h_prev = h_current
             h_current = h_damped
-            if residual < self.tolerance:
-                break
+            
+            # PERF-02: Avoid CPU-GPU synchronization stalls (.item()) on CUDA streams during iteration:
+            # Only evaluate scalar tolerance on CPU when not training
+            if not h_init.is_cuda and not self.training:
+                diff = torch.norm(h_current - h_prev, dim=-1).mean()
+                norm = torch.norm(h_prev, dim=-1).mean() + 1e-6
+                residual = float((diff / norm).item())
+                if residual < self.tolerance:
+                    return h_current, num_iter, residual
+
+        # Compute Cauchy residual once outside the iteration loop to prevent CUDA stalls
+        diff = torch.norm(h_current - h_prev, dim=-1).mean()
+        norm = torch.norm(h_prev, dim=-1).mean() + 1e-6
+        residual = float((diff / norm).detach().item())
 
         return h_current, num_iter, residual
 

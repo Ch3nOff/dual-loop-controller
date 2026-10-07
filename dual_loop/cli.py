@@ -80,7 +80,7 @@ def get_parser() -> argparse.ArgumentParser:
     # 9b. serve-vllm (High-throughput vLLM-powered serving with PagedAttention)
     p_vllm = subparsers.add_parser("serve-vllm", help="Launch high-throughput vLLM-powered OpenAI-compatible server with HADL hooks")
     p_vllm.add_argument("--model", type=str, default="Qwen/Qwen2.5-7B-Instruct", help="Hugging Face model ID or path (default: Qwen/Qwen2.5-7B-Instruct)")
-    p_vllm.add_argument("--host", type=str, default="0.0.0.0", help="Host interface (default: 0.0.0.0)")
+    p_vllm.add_argument("--host", type=str, default="127.0.0.1", help="Host interface to bind (default: 127.0.0.1; specify 0.0.0.0 for external access)")
     p_vllm.add_argument("--port", type=int, default=8000, help="Port to listen on (default: 8000)")
     p_vllm.add_argument("--tensor-parallel-size", type=int, default=1, help="Number of GPUs for tensor parallelism (default: 1)")
     p_vllm.add_argument("--dtype", type=str, default="auto", help="Model dtype: auto, float16, bfloat16 (default: auto)")
@@ -91,7 +91,7 @@ def get_parser() -> argparse.ArgumentParser:
     p_vllm.add_argument("--k-steps", type=int, default=2, help="HADL latent deliberation steps (default: 2)")
     p_vllm.add_argument("--no-hadl", action="store_true", help="Disable HADL cognitive hooks (pure vLLM serving)")
     p_vllm.add_argument("--trust-remote-code", action="store_true", help="Trust remote code in HF model loaders")
-    p_vllm.add_argument("--api-key", type=str, default=None, help="API key for authentication (or set VLLM_API_KEY env var)")
+    p_vllm.add_argument("--api-key", type=str, default=None, help="API key for authentication (or set VLLM_API_KEY env var; mandatory if non-loopback)")
     p_vllm.add_argument("--enforce-eager", action="store_true", help="Disable CUDA graph compilation (useful for debugging)")
 
     # 10. run (Interactive CLI inference session)

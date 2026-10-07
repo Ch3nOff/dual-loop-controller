@@ -463,7 +463,7 @@ def run_large_scale_benchmark():
     hadl_wrapped = attach_dual_loop_v4(clean_base_model)
     ckpt = Path("checkpoints/hadl_v42_ghost_unified.pt")
     if ckpt.exists():
-        state = torch.load(ckpt, map_location="cpu")
+        state = torch.load(ckpt, map_location="cpu", weights_only=True)
         if "engine" in state:
             hadl_wrapped.engine.load_state_dict(state["engine"], strict=False)
         if "ghost" in state:

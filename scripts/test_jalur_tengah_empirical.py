@@ -45,7 +45,7 @@ def test_jalur_tengah():
     wrapper = HADLv4ModelWrapper(base_model, target_layer_idx=11, ghost_layer_idx=23)
     ckpt_path = Path("checkpoints/hadl_v42_ghost_unified.pt")
     if ckpt_path.exists():
-        state = torch.load(ckpt_path, map_location="cpu")
+        state = torch.load(ckpt_path, map_location="cpu", weights_only=True)
         if "engine" in state:
             wrapper.engine.load_state_dict(state["engine"], strict=False)
         if "ghost" in state:
