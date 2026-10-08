@@ -24,6 +24,7 @@ from typing import Optional, Dict, Any, Generator, Tuple
 from .context_threads import LatentContextThreadEngine, DualStoreMemory
 from ..imagination_canvas import EmergentLatentCanvas
 from ..adapters.universal_adapter import DynamicGraphIntrospector
+from ..cognitive_organs import SemanticAffinityEnergyMatrix, HierarchicalPlanCache
 
 
 class DynamicHydraulicPiston(nn.Module):
@@ -115,6 +116,10 @@ class HADLDynamicRuntime(nn.Module):
         self.dual_memory = DualStoreMemory(self.d_model, short_term_capacity=256, rank=32)
         self.canvas = EmergentLatentCanvas(self.d_model, num_fragments=8, dream_steps=2)
         
+        # Living Cognitive Organs: Semantic Slot Affinity & Hierarchical Plan Cache
+        self.saem = SemanticAffinityEnergyMatrix(self.d_model, num_slots=16)
+        self.plan_cache = HierarchicalPlanCache(self.d_model, num_waypoints=4)
+        
         # Ghost SVD Verifier
         self.ghost_u = nn.Linear(self.d_model, 32, bias=False)
         self.ghost_v = nn.Linear(32, self.d_model, bias=False)
@@ -157,8 +162,11 @@ class HADLDynamicRuntime(nn.Module):
             self.ghost_v.weight.data.copy_(w_ver.to(dtype=self.ghost_v.weight.dtype))
             
     def reset_state(self):
-        """Clears associative memory between independent queries."""
+        """Clears associative memory, active plans, and sensor history between queries."""
         self.dual_memory.reset_state()
+        self.plan_cache.reset_plan()
+        if hasattr(self.canvas, "adaptive_sensor") and self.canvas.adaptive_sensor is not None:
+            self.canvas.adaptive_sensor.reset_history()
         
     def _hook_piston1(self, module, args, output):
         if not self._active:
@@ -166,13 +174,19 @@ class HADLDynamicRuntime(nn.Module):
         h = output[0] if isinstance(output, tuple) else output
         delta, p = self.piston1(h)
         
-        # Emergent Latent Imagination Canvas:
+        # 1. Executive Plan Guidance (if active or warranted)
+        delta_plan, _ = self.plan_cache(h)
+        
+        # 2. Parsimonious Concept-Slot Binding (Ockham's Razor)
+        delta_saem, _ = self.saem(h)
+        
+        # 3. Emergent Latent Imagination Canvas:
         # Activated dynamically proportional to cognitive reasoning pressure p_lift
         if self.enable_canvas:
             delta_dream, _ = self.canvas(h)
-            h_mod = h + delta + p * delta_dream
+            h_mod = h + delta + delta_plan + delta_saem + p * delta_dream
         else:
-            h_mod = h + delta
+            h_mod = h + delta + delta_plan + delta_saem
         
         if isinstance(output, tuple):
             return (h_mod,) + output[1:]

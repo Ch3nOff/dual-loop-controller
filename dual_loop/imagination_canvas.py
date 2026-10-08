@@ -23,6 +23,11 @@ import torch.nn as nn
 import torch.nn.functional as F
 from typing import Optional, Tuple, Dict, Any
 
+try:
+    from dual_loop.cognitive_organs import DynamicAdaptiveConfusionSensor
+except ImportError:
+    DynamicAdaptiveConfusionSensor = None
+
 
 class EmergentLatentCanvas(nn.Module):
     """
@@ -40,7 +45,8 @@ class EmergentLatentCanvas(nn.Module):
         contraction_factor: float = 0.20,
         enable_stochastic_flux: bool = False,
         confusion_tolerance: float = 0.54,
-        enable_confusion_gating: bool = True
+        enable_confusion_gating: bool = True,
+        use_adaptive_sensor: bool = False
     ):
         super().__init__()
         # Adaptive fragment sizing if d_model is not evenly divisible
@@ -58,6 +64,7 @@ class EmergentLatentCanvas(nn.Module):
         self.enable_stochastic_flux = enable_stochastic_flux
         self.confusion_tolerance = float(confusion_tolerance)
         self.enable_confusion_gating = enable_confusion_gating
+        self.use_adaptive_sensor = use_adaptive_sensor
         
         assert d_model % num_fragments == 0, (
             f"d_model ({d_model}) must be divisible by num_fragments ({num_fragments})"
@@ -68,6 +75,16 @@ class EmergentLatentCanvas(nn.Module):
         self.w_confusion = nn.Linear(d_model, 1, bias=True)
         nn.init.normal_(self.w_confusion.weight, std=0.01)
         nn.init.constant_(self.w_confusion.bias, 0.0)
+        
+        # Dynamic Adaptive Sensor (if enabled)
+        if self.use_adaptive_sensor and DynamicAdaptiveConfusionSensor is not None:
+            self.adaptive_sensor = DynamicAdaptiveConfusionSensor(
+                d_model=self.d_model,
+                num_heads=min(8, max(1, self.d_model // 16)),
+                k_sigma=0.50
+            )
+        else:
+            self.adaptive_sensor = None
         
         # 2. Fragment Deconstructor (D -> M x d_frag)
         self.w_unroll = nn.Linear(d_model, d_model, bias=False)
@@ -121,9 +138,13 @@ class EmergentLatentCanvas(nn.Module):
         confusion_gate = None
         confusion_scores = None
         if self.enable_confusion_gating:
-            confusion_raw = torch.sigmoid(self.w_confusion(h))  # (B, L, 1)
-            confusion_scores = confusion_raw
-            is_confused = confusion_raw > self.confusion_tolerance  # (B, L, 1)
+            if self.use_adaptive_sensor and self.adaptive_sensor is not None:
+                confusion_gate, confusion_scores, dynamic_tau = self.adaptive_sensor(h, update_stats=True)
+                is_confused = confusion_scores > dynamic_tau
+            else:
+                confusion_raw = torch.sigmoid(self.w_confusion(h))  # (B, L, 1)
+                confusion_scores = confusion_raw
+                is_confused = confusion_raw > self.confusion_tolerance  # (B, L, 1)
             
             # If no token in the sequence exceeds the confusion tolerance threshold,
             # bypass dream cycles completely (model understands clearly, zero imagination overhead)!
@@ -142,12 +163,13 @@ class EmergentLatentCanvas(nn.Module):
                     return delta_dream, energy, confusion_scores
                 return delta_dream, energy
                 
-            # Gate scales smoothly with excess confusion above tolerance:
-            confusion_gate = torch.where(
-                is_confused,
-                (confusion_raw - self.confusion_tolerance) / max(1e-4, 1.0 - self.confusion_tolerance),
-                torch.zeros_like(confusion_raw)
-            )
+            # Gate scales smoothly with excess confusion above tolerance (if not already set by adaptive sensor):
+            if confusion_gate is None:
+                confusion_gate = torch.where(
+                    is_confused,
+                    (confusion_raw - self.confusion_tolerance) / max(1e-4, 1.0 - self.confusion_tolerance),
+                    torch.zeros_like(confusion_raw)
+                )
 
         # 1. Deconstruct into M free-form concept fragments: (N_tokens, M, d_frag)
         h_flat = h.reshape(N_tokens, D)
