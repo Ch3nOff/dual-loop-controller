@@ -123,5 +123,31 @@ class TestImaginationCanvas(unittest.TestCase):
         self.assertFalse(runtime._active)
 
 
+    def test_confusion_tolerance_gating(self):
+        """Verifies that imagination is only triggered when confusion exceeds tolerance."""
+        canvas = EmergentLatentCanvas(
+            d_model=self.d_model,
+            num_fragments=self.num_fragments,
+            confusion_tolerance=0.50,
+            enable_confusion_gating=True
+        )
+        # Mock low confusion by setting bias negative
+        canvas.w_confusion.bias.data.fill_(-10.0)
+        h_clear = torch.randn(self.B, self.L, self.d_model)
+        delta_clear, energy_clear, conf_clear = canvas(h_clear, return_confusion=True)
+        # Should be bypassed (all zeros)
+        self.assertTrue((delta_clear == 0.0).all())
+        self.assertTrue((conf_clear < 0.50).all())
+        
+        # Mock high confusion by setting bias positive and non-zero collapse projection
+        canvas.w_collapse.weight.data.normal_(0.0, 0.02)
+        canvas.w_confusion.bias.data.fill_(10.0)
+        h_confused = torch.randn(self.B, self.L, self.d_model)
+        delta_confused, energy_confused, conf_confused = canvas(h_confused, return_confusion=True)
+        # Should engage dream cycles (non-zero delta)
+        self.assertTrue((conf_confused > 0.50).all())
+        self.assertFalse((delta_confused == 0.0).all())
+
+
 if __name__ == "__main__":
     unittest.main()

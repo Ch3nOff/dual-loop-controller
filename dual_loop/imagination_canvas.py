@@ -38,7 +38,9 @@ class EmergentLatentCanvas(nn.Module):
         num_fragments: int = 8,
         dream_steps: int = 2,
         contraction_factor: float = 0.20,
-        enable_stochastic_flux: bool = False
+        enable_stochastic_flux: bool = False,
+        confusion_tolerance: float = 0.50,
+        enable_confusion_gating: bool = True
     ):
         super().__init__()
         # Adaptive fragment sizing if d_model is not evenly divisible
@@ -54,21 +56,29 @@ class EmergentLatentCanvas(nn.Module):
         self.dream_steps = dream_steps
         self.contraction_factor = float(contraction_factor)
         self.enable_stochastic_flux = enable_stochastic_flux
+        self.confusion_tolerance = float(confusion_tolerance)
+        self.enable_confusion_gating = enable_confusion_gating
         
         assert d_model % num_fragments == 0, (
             f"d_model ({d_model}) must be divisible by num_fragments ({num_fragments})"
         )
         
-        # 1. Fragment Deconstructor (D -> M x d_frag)
+        # 1. Cognitive Confusion & Context Ambiguity Sensor:
+        # Measures whether the meaning/context of a token is ambiguous ("bingung")
+        self.w_confusion = nn.Linear(d_model, 1, bias=True)
+        nn.init.normal_(self.w_confusion.weight, std=0.01)
+        nn.init.constant_(self.w_confusion.bias, 0.0)
+        
+        # 2. Fragment Deconstructor (D -> M x d_frag)
         self.w_unroll = nn.Linear(d_model, d_model, bias=False)
         self.norm_fragments = nn.LayerNorm(self.d_frag)
         
-        # 2. Continuous Associative Flux Tensor (Asymmetric Causal Directionality)
+        # 3. Continuous Associative Flux Tensor (Asymmetric Causal Directionality)
         self.w_flux = nn.Linear(self.d_frag, self.d_frag, bias=False)
         self.w_evolve = nn.Linear(self.d_frag, self.d_frag, bias=False)
         self.norm_evolve = nn.LayerNorm(self.d_frag)
         
-        # 3. Holographic Canvas Collapse (M x d_frag -> D)
+        # 4. Holographic Canvas Collapse (M x d_frag -> D)
         self.w_collapse = nn.Linear(d_model, d_model, bias=False)
         self.norm_collapse = nn.LayerNorm(d_model)
         
@@ -86,7 +96,8 @@ class EmergentLatentCanvas(nn.Module):
     def forward(
         self,
         h: torch.Tensor,
-        return_energy: bool = False
+        return_energy: bool = False,
+        return_confusion: bool = False
     ) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
         """
         Executes emergent mental simulation on hidden representation h.
@@ -106,6 +117,31 @@ class EmergentLatentCanvas(nn.Module):
         B, L, D = h.shape
         N_tokens = B * L
         
+        # 0. Cognitive Confusion Assessment (Bingung / Ambiguitas Konteks):
+        confusion_gate = None
+        confusion_scores = None
+        if self.enable_confusion_gating:
+            confusion_raw = torch.sigmoid(self.w_confusion(h))  # (B, L, 1)
+            confusion_scores = confusion_raw
+            is_confused = confusion_raw > self.confusion_tolerance  # (B, L, 1)
+            
+            # If no token in the sequence exceeds the confusion tolerance threshold,
+            # bypass dream cycles completely (model understands clearly, zero imagination overhead)!
+            if not is_confused.any():
+                delta_dream = torch.zeros(B, L, D, device=h.device, dtype=h.dtype)
+                if len(orig_shape) == 2:
+                    delta_dream = delta_dream.squeeze(1)
+                if return_confusion:
+                    return delta_dream, None, confusion_scores
+                return delta_dream, None
+                
+            # Gate scales smoothly with excess confusion above tolerance:
+            confusion_gate = torch.where(
+                is_confused,
+                (confusion_raw - self.confusion_tolerance) / max(1e-4, 1.0 - self.confusion_tolerance),
+                torch.zeros_like(confusion_raw)
+            )
+
         # 1. Deconstruct into M free-form concept fragments: (N_tokens, M, d_frag)
         h_flat = h.reshape(N_tokens, D)
         unrolled = F.gelu(self.w_unroll(h_flat))
@@ -148,7 +184,13 @@ class EmergentLatentCanvas(nn.Module):
         delta_dream = torch.tanh(self.alpha_canvas) * self.w_collapse(self.norm_collapse(collapsed_flat))
         delta_dream = delta_dream.reshape(B, L, D)
         
+        # Modulate dream contribution by confusion gate:
+        if confusion_gate is not None:
+            delta_dream = delta_dream * confusion_gate
+        
         if len(orig_shape) == 2:
             delta_dream = delta_dream.squeeze(1)
             
+        if return_confusion:
+            return delta_dream, energy, confusion_scores
         return delta_dream, energy

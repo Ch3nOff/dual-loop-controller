@@ -77,11 +77,13 @@ class HADLDynamicRuntime(nn.Module):
         checkpoint_path: Optional[str] = None,
         d_model: Optional[int] = None,
         device: str = "cpu",
-        dtype: Optional[torch.dtype] = None
+        dtype: Optional[torch.dtype] = None,
+        enable_canvas: bool = True
     ):
         super().__init__()
         self.base_model = base_model
         self.device = device
+        self.enable_canvas = enable_canvas
         
         # Discover model structure
         container_path, layer_list, total_layers = (
@@ -166,8 +168,11 @@ class HADLDynamicRuntime(nn.Module):
         
         # Emergent Latent Imagination Canvas:
         # Activated dynamically proportional to cognitive reasoning pressure p_lift
-        delta_dream, _ = self.canvas(h)
-        h_mod = h + delta + p * delta_dream
+        if self.enable_canvas:
+            delta_dream, _ = self.canvas(h)
+            h_mod = h + delta + p * delta_dream
+        else:
+            h_mod = h + delta
         
         if isinstance(output, tuple):
             return (h_mod,) + output[1:]
