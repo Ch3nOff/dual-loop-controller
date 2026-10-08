@@ -25,3 +25,5 @@ submission.zip
 results/
 scripts/competitor_dumps/
 scripts/*.txt
+external/
+
