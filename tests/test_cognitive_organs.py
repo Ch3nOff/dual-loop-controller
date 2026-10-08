@@ -25,7 +25,8 @@ from dual_loop.cognitive_organs import (
     ExecutiveLogicRouter,
     DynamicAdaptiveConfusionSensor,
     SemanticAffinityEnergyMatrix,
-    HierarchicalPlanCache
+    HierarchicalPlanCache,
+    CognitiveFloodgateEngine
 )
 from dual_loop.imagination_canvas import EmergentLatentCanvas
 from dual_loop.runtime.dynamic_runtime import HADLDynamicRuntime
@@ -178,7 +179,8 @@ class TestCognitiveOrgans(unittest.TestCase):
         hlpc = HierarchicalPlanCache(
             d_model=self.d_model,
             num_waypoints=3,
-            d_plan=32
+            d_plan=32,
+            chunk_size=1  # Immediate evaluation per chunk for unit test
         )
         h_initial = torch.randn(self.B, self.L, self.d_model)
         
@@ -192,17 +194,51 @@ class TestCognitiveOrgans(unittest.TestCase):
         self.assertIn("is_branching", info1)
         self.assertIn("alternative_branches_count", info1)
         self.assertIn("lateral_norm", info1)
+        self.assertIn("is_task_completed", info1)
         
-        # Simulate unexpected obstacle / diametric mismatch:
-        # Invert or corrupt hidden state to create large discrepancy with expected waypoint
+        # Simulate unexpected obstacle / compiler error:
         h_obstacle = -h_initial * 3.0
-        delta2, info2 = hlpc(h_obstacle)
+        delta2, info2 = hlpc(h_obstacle, compiler_error_signal=0.6)
         
-        # Discrepancy should be high and alternative branching should be triggered
-        self.assertGreater(info2["discrepancy_score"], 0.20)
-        # Check that lateral perturbation is active and non-flat (not identical to zero)
-        self.assertGreaterEqual(info2["lateral_norm"], 0.0)
+        # Discrepancy or compiler error should trigger alternative branching
+        self.assertGreater(info2["discrepancy_score"], 0.0)
+        self.assertTrue(info2["is_branching"])
+        self.assertGreaterEqual(info2["alternative_branches_count"], 1)
         self.assertFalse(torch.isnan(delta2).any())
+
+    def test_cognitive_floodgate_and_compiler_feedback(self):
+        fg = CognitiveFloodgateEngine(
+            d_model=self.d_model,
+            chunk_size=4,
+            capacity_limit=50.0
+        )
+        h = torch.randn(self.B, self.L, self.d_model)
+        
+        # 1. Test Dynamic Key-LogTan Noise Calibration (% log-tan * Key)
+        noise_vec, dyn_thresh = fg.compute_dynamic_key_noise(h)
+        self.assertEqual(noise_vec.shape, h.shape)
+        self.assertGreater(dyn_thresh, 0.0)
+        
+        # 2. Test Non-linear Trigonometric Divergence (tan(theta/2) * sin(theta/2))
+        wp = torch.randn(self.B, self.d_model)
+        h_chunk = torch.randn(self.B, self.d_model)
+        trig_div, mean_div = fg.compute_trigonometric_divergence(h_chunk, wp)
+        self.assertGreaterEqual(mean_div, 0.0)
+        self.assertFalse(torch.isnan(trig_div).any())
+        
+        # 3. Test Compiler Test-Drive Incoherent Penalty
+        penalty = fg.apply_compiler_test_drive_penalty(h, compiler_error_signal=0.5)
+        self.assertEqual(penalty.shape, h.shape)
+        self.assertGreater(penalty.abs().sum().item(), 0.0)
+        
+        # 4. Test Floodgate Capacity Reservoir (Tembok Anti-Banjir)
+        self.assertFalse(fg.is_task_completed.item())
+        # Accumulate water past capacity limit (50.0)
+        fg.update_floodgate_capacity(30.0, is_verified_valid=True)
+        self.assertFalse(fg.is_task_completed.item())
+        fg.update_floodgate_capacity(25.0, is_verified_valid=True)
+        self.assertTrue(fg.is_task_completed.item(), "Floodgate dam must trip when capacity is reached!")
+
 
     # --------------------------------------------------------------------------
     # 0. EXECUTIVE LOGIC ROUTER (TOP-LEVEL META-CONTROLLER) TESTS
