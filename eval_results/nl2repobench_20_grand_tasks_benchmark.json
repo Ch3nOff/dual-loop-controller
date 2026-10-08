@@ -1,0 +1,702 @@
+{
+  "timestamp": "2026-10-08 21:16:23",
+  "device": "cuda:0",
+  "model": "/mnt/c/Users/Matthew Chen/Documents/X-Star/dist/staging_hf_fused",
+  "benchmark_source": "multimodal-art-projection/NL2RepoBench",
+  "num_tasks": 20,
+  "baseline": {
+    "tasks": {
+      "pyperclip": {
+        "task_id": "pyperclip",
+        "name": "Pyperclip Clipboard Engine",
+        "category": "System Utilities",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "src/pyperclip/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 50.0,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 90.0
+      },
+      "coverage_shield": {
+        "task_id": "coverage_shield",
+        "name": "Coverage Shield Badge Generator",
+        "category": "DevOps & Tooling",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "coverage_shield/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 50.0,
+        "api_specification_compliance_pct": 66.7,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 76.7
+      },
+      "trimming": {
+        "task_id": "trimming",
+        "name": "Trimming Text Formatter",
+        "category": "Text & Formatting",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "trimming/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 100.0,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 93.3
+      },
+      "autorccar": {
+        "task_id": "autorccar",
+        "name": "AutoRCCar Autonomous Vehicle Driver",
+        "category": "Robotics & Hardware",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "autorccar/__init__.py",
+          "autorccar/driver.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 100.0,
+        "api_specification_compliance_pct": 75.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 95.0
+      },
+      "jsonlines": {
+        "task_id": "jsonlines",
+        "name": "JSONLines Streaming Reader/Writer",
+        "category": "Data & Serializers",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "jsonlines/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 50.0,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 83.3
+      },
+      "markupsafe": {
+        "task_id": "markupsafe",
+        "name": "MarkupSafe HTML Escape Guard",
+        "category": "Web & Security",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "markupsafe/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 50.0,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 83.3
+      },
+      "markdownify": {
+        "task_id": "markdownify",
+        "name": "Markdownify HTML to Markdown Converter",
+        "category": "Text & Formatting",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "markdownify/__init__.py",
+          "markdownify/converter.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 100.0,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 100.0
+      },
+      "frontmatter": {
+        "task_id": "frontmatter",
+        "name": "Python Frontmatter Document Parser",
+        "category": "Data & Serializers",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "frontmatter/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 50.0,
+        "api_specification_compliance_pct": 50.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 73.3
+      },
+      "fuzzywuzzy": {
+        "task_id": "fuzzywuzzy",
+        "name": "FuzzyWuzzy String Matching Engine",
+        "category": "Algorithms",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "fuzzywuzzy/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 50.0,
+        "api_specification_compliance_pct": 66.7,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 76.7
+      },
+      "python_slugify": {
+        "task_id": "python_slugify",
+        "name": "Python Slugify Unicode Normalizer",
+        "category": "Text & Formatting",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "slugify/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 50.0,
+        "ast_syntax_integrity_pct": 0.0,
+        "api_specification_compliance_pct": 50.0,
+        "cross_module_consistency_pct": 0.0,
+        "composite_score_pct": 33.3
+      },
+      "tinydb": {
+        "task_id": "tinydb",
+        "name": "TinyDB Document Database Engine",
+        "category": "Databases & Storage",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "tinydb/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 50.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 50.0,
+        "api_specification_compliance_pct": 60.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 72.0
+      },
+      "python_dotenv": {
+        "task_id": "python_dotenv",
+        "name": "Python-Dotenv Environment Parser",
+        "category": "System Utilities",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "dotenv/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 50.0,
+        "api_specification_compliance_pct": 25.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 68.3
+      },
+      "retrying": {
+        "task_id": "retrying",
+        "name": "Retrying Resilient Call Decorator",
+        "category": "DevOps & Tooling",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "retrying/__init__.py",
+          "retrying/retrying.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
+        "api_specification_compliance_pct": 66.7,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 86.7
+      },
+      "humanize": {
+        "task_id": "humanize",
+        "name": "Humanize Natural Text Formatter",
+        "category": "Text & Formatting",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "humanize/__init__.py",
+          "humanize/filesize.py"
+        ],
+        "multi_file_structural_coherence_pct": 75.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 100.0,
+        "api_specification_compliance_pct": 66.7,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 88.3
+      },
+      "ftfy": {
+        "task_id": "ftfy",
+        "name": "FTFY Unicode Mojibake Fixer",
+        "category": "Algorithms",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "ftfy/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 50.0,
+        "api_specification_compliance_pct": 33.3,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 70.0
+      },
+      "databases": {
+        "task_id": "databases",
+        "name": "Databases Async Query Interface",
+        "category": "Databases & Storage",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "databases/__init__.py",
+          "databases/core.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
+        "api_specification_compliance_pct": 50.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 83.3
+      },
+      "cerberus": {
+        "task_id": "cerberus",
+        "name": "Cerberus Extensible Schema Validator",
+        "category": "Validation & Schemas",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "cerberus/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 100.0,
+        "api_specification_compliance_pct": 33.3,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 80.0
+      },
+      "cookiecutter": {
+        "task_id": "cookiecutter",
+        "name": "Cookiecutter Project Templater",
+        "category": "System Utilities",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "cookiecutter/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 50.0,
+        "api_specification_compliance_pct": 33.3,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 70.0
+      },
+      "jinja": {
+        "task_id": "jinja",
+        "name": "Jinja Template Engine Core",
+        "category": "Web & Security",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "jinja2/__init__.py",
+          "jinja2/environment.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
+        "api_specification_compliance_pct": 66.7,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 86.7
+      },
+      "boltons": {
+        "task_id": "boltons",
+        "name": "Boltons Pure-Python Utility Collection",
+        "category": "Algorithms",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "boltons/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 50.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 50.0,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 80.0
+      }
+    },
+    "macro": {
+      "mean_structure_pct": 75.4,
+      "mean_setup_pct": 97.5,
+      "mean_ast_syntax_pct": 62.5,
+      "mean_api_spec_pct": 67.2,
+      "mean_consistency_pct": 95.0,
+      "mean_composite_pct": 79.5
+    },
+    "total_tokens": 8363,
+    "total_time_sec": 270.26,
+    "avg_latency_sec": 13.51,
+    "throughput_tps": 30.95
+  },
+  "hadl_elic": {
+    "tasks": {
+      "pyperclip": {
+        "task_id": "pyperclip",
+        "name": "Pyperclip Clipboard Engine",
+        "category": "System Utilities",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "src/pyperclip/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 100.0,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 100.0
+      },
+      "coverage_shield": {
+        "task_id": "coverage_shield",
+        "name": "Coverage Shield Badge Generator",
+        "category": "DevOps & Tooling",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "coverage_shield/__init__.py",
+          "coverage_shield/unittest_coverage_functions.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 93.3
+      },
+      "trimming": {
+        "task_id": "trimming",
+        "name": "Trimming Text Formatter",
+        "category": "Text & Formatting",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "trimming/__init__.py",
+          "trimming/core.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 93.3
+      },
+      "autorccar": {
+        "task_id": "autorccar",
+        "name": "AutoRCCar Autonomous Vehicle Driver",
+        "category": "Robotics & Hardware",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "autorccar/__init__.py",
+          "autorccar/driver.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 93.3
+      },
+      "jsonlines": {
+        "task_id": "jsonlines",
+        "name": "JSONLines Streaming Reader/Writer",
+        "category": "Data & Serializers",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "jsonlines/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 50.0,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 83.3
+      },
+      "markupsafe": {
+        "task_id": "markupsafe",
+        "name": "MarkupSafe HTML Escape Guard",
+        "category": "Web & Security",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "markupsafe/__init__.py",
+          "markupsafe/_speedups.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 100.0,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 100.0
+      },
+      "markdownify": {
+        "task_id": "markdownify",
+        "name": "Markdownify HTML to Markdown Converter",
+        "category": "Text & Formatting",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "markdownify/__init__.py",
+          "markdownify/converter.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 93.3
+      },
+      "frontmatter": {
+        "task_id": "frontmatter",
+        "name": "Python Frontmatter Document Parser",
+        "category": "Data & Serializers",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "frontmatter/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 50.0,
+        "api_specification_compliance_pct": 75.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 78.3
+      },
+      "fuzzywuzzy": {
+        "task_id": "fuzzywuzzy",
+        "name": "FuzzyWuzzy String Matching Engine",
+        "category": "Algorithms",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "fuzzywuzzy/__init__.py",
+          "fuzzywuzzy/fuzz.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 100.0,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 100.0
+      },
+      "python_slugify": {
+        "task_id": "python_slugify",
+        "name": "Python Slugify Unicode Normalizer",
+        "category": "Text & Formatting",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "slugify/__init__.py",
+          "slugify/slugify.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 93.3
+      },
+      "tinydb": {
+        "task_id": "tinydb",
+        "name": "TinyDB Document Database Engine",
+        "category": "Databases & Storage",
+        "files_generated_count": 4,
+        "files_list": [
+          "setup.py",
+          "tinydb/__init__.py",
+          "tinydb/database.py",
+          "tinydb/queries.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 75.0,
+        "api_specification_compliance_pct": 80.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 91.0
+      },
+      "python_dotenv": {
+        "task_id": "python_dotenv",
+        "name": "Python-Dotenv Environment Parser",
+        "category": "System Utilities",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "dotenv/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 50.0,
+        "api_specification_compliance_pct": 25.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 68.3
+      },
+      "retrying": {
+        "task_id": "retrying",
+        "name": "Retrying Resilient Call Decorator",
+        "category": "DevOps & Tooling",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "retrying/__init__.py",
+          "retrying/retrying.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
+        "api_specification_compliance_pct": 33.3,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 80.0
+      },
+      "humanize": {
+        "task_id": "humanize",
+        "name": "Humanize Natural Text Formatter",
+        "category": "Text & Formatting",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "humanize/__init__.py",
+          "humanize/filesize.py"
+        ],
+        "multi_file_structural_coherence_pct": 75.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 100.0,
+        "api_specification_compliance_pct": 66.7,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 88.3
+      },
+      "ftfy": {
+        "task_id": "ftfy",
+        "name": "FTFY Unicode Mojibake Fixer",
+        "category": "Algorithms",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "ftfy/__init__.py",
+          "ftfy/fixes.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
+        "api_specification_compliance_pct": 66.7,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 86.7
+      },
+      "databases": {
+        "task_id": "databases",
+        "name": "Databases Async Query Interface",
+        "category": "Databases & Storage",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "databases/__init__.py",
+          "databases/core.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 100.0,
+        "api_specification_compliance_pct": 75.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 95.0
+      },
+      "cerberus": {
+        "task_id": "cerberus",
+        "name": "Cerberus Extensible Schema Validator",
+        "category": "Validation & Schemas",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "cerberus/__init__.py",
+          "cerberus/validator.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
+        "api_specification_compliance_pct": 66.7,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 86.7
+      },
+      "cookiecutter": {
+        "task_id": "cookiecutter",
+        "name": "Cookiecutter Project Templater",
+        "category": "System Utilities",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "cookiecutter/__init__.py",
+          "cookiecutter/main.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
+        "api_specification_compliance_pct": 33.3,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 80.0
+      },
+      "jinja": {
+        "task_id": "jinja",
+        "name": "Jinja Template Engine Core",
+        "category": "Web & Security",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "jinja2/__init__.py",
+          "jinja2/environment.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
+        "api_specification_compliance_pct": 66.7,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 86.7
+      },
+      "boltons": {
+        "task_id": "boltons",
+        "name": "Boltons Pure-Python Utility Collection",
+        "category": "Algorithms",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "boltons/__init__.py",
+          "boltons/iterutils.py"
+        ],
+        "multi_file_structural_coherence_pct": 75.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
+        "api_specification_compliance_pct": 66.7,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 81.7
+      }
+    },
+    "macro": {
+      "mean_structure_pct": 92.5,
+      "mean_setup_pct": 100.0,
+      "mean_ast_syntax_pct": 72.9,
+      "mean_api_spec_pct": 77.8,
+      "mean_consistency_pct": 100.0,
+      "mean_composite_pct": 88.6
+    },
+    "total_tokens": 8463,
+    "total_time_sec": 343.74,
+    "avg_latency_sec": 17.18,
+    "throughput_tps": 24.62
+  }
+}
