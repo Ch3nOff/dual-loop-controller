@@ -23,6 +23,89 @@ from typing import Optional, Tuple, Dict, Any, List
 
 
 # ==============================================================================
+# 0. EXECUTIVE LOGIC ROUTER (TOP-LEVEL META-CONTROLLER)
+# ==============================================================================
+
+class ExecutiveLogicRouter(nn.Module):
+    """
+    Top-Level Cognitive Logic Router (Executive Meta-Controller).
+    
+    Acts as the primary decision-making brain center at the highest hierarchy level.
+    Instead of hardcoding static parsimony or static expansion, the Router dynamically
+    evaluates context and decides the operating regime:
+    - Mode 0: Fast & Solid (compact, direct, parsimonious execution)
+    - Mode 1: Balanced Reasoning (standard deliberate synthesis)
+    - Mode 2: Long & Detailed (multi-module, expansive architecture, state-machine synthesis)
+    
+    Generates continuous modulation parameters:
+    - parsimony_scale: in [0.05, 1.50] (modulates SAEM vertical penalty)
+    - elaboration_scale: in [0.30, 2.00] (modulates ELIC imagination canvas capacity)
+    - planning_urgency: in [0.10, 0.95] (modulates HLPC plan formulation hurdle)
+    """
+    def __init__(self, d_model: int = 2048):
+        super().__init__()
+        self.d_model = d_model
+        
+        # Meta-Routing Network: evaluates pooled context & representation dispersion
+        self.meta_net = nn.Sequential(
+            nn.Linear(d_model, max(64, d_model // 4), bias=True),
+            nn.LayerNorm(max(64, d_model // 4)),
+            nn.GELU(),
+            nn.Linear(max(64, d_model // 4), 3, bias=True)  # [Fast&Solid, Balanced, Long&Detailed]
+        )
+        
+        # Initialize cleanly
+        nn.init.orthogonal_(self.meta_net[0].weight, gain=0.1)
+        nn.init.zeros_(self.meta_net[0].bias)
+        nn.init.normal_(self.meta_net[3].weight, std=0.01)
+        nn.init.constant_(self.meta_net[3].bias, 0.0)
+
+    def forward(self, h: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, Any]]:
+        """
+        Determines the dynamic cognitive regime from input representations.
+        
+        Args:
+            h: Hidden state tensor (B, L, D) or (B, D)
+            
+        Returns:
+            regime_probs: Categorical regime probabilities (B, 3)
+            regime_params: Dictionary of continuous modulation scales
+        """
+        orig_ndim = h.ndim
+        if orig_ndim == 3:
+            h_mean = h.mean(dim=1)  # (B, D)
+        else:
+            h_mean = h
+            
+        B = h_mean.shape[0]
+        logits = self.meta_net(h_mean)  # (B, 3)
+        probs = F.softmax(logits, dim=-1)  # (B, 3)
+        
+        # Probs components: [p_fast, p_balanced, p_detailed]
+        p_fast = probs[:, 0:1]
+        p_bal = probs[:, 1:2]
+        p_detail = probs[:, 2:3]
+        
+        # Smooth continuous modulation scales:
+        parsimony_scale = (p_fast * 1.50 + p_bal * 0.85 + p_detail * 0.10).squeeze(-1)
+        elaboration_scale = (p_fast * 0.40 + p_bal * 1.00 + p_detail * 1.80).squeeze(-1)
+        planning_urgency = (p_fast * 0.15 + p_bal * 0.50 + p_detail * 0.90).squeeze(-1)
+        
+        dominant_idx = torch.argmax(probs, dim=-1)[0].item()
+        regime_names = ["Fast & Solid", "Balanced Reasoning", "Long & Detailed"]
+        dominant_mode = regime_names[dominant_idx]
+        
+        info = {
+            "dominant_mode": dominant_mode,
+            "parsimony_scale": float(parsimony_scale.mean().item()),
+            "elaboration_scale": float(elaboration_scale.mean().item()),
+            "planning_urgency": float(planning_urgency.mean().item()),
+            "probabilities": probs.detach().cpu()
+        }
+        return probs, info
+
+
+# ==============================================================================
 # 1. DYNAMIC ADAPTIVE CONFUSION SENSOR (DACS)
 # ==============================================================================
 
@@ -122,19 +205,19 @@ class DynamicAdaptiveConfusionSensor(nn.Module):
         raw_confusion = 0.5 * (mean_head_conf + ctx_ambiguity)               # (B, L, 1)
         
         # 4. Update online EMA statistics across tokens
-        current_batch_mean = raw_confusion.detach().mean()
+        current_batch_mean = raw_confusion.detach().mean().float()
         if update_stats and self.training:
             # Batch mode update
             diff = current_batch_mean - self.running_mean
-            self.running_mean += self.ema_momentum * diff
-            self.running_var += self.ema_momentum * (diff ** 2 - self.running_var)
+            self.running_mean.copy_(self.running_mean + self.ema_momentum * diff)
+            self.running_var.copy_(self.running_var + self.ema_momentum * (diff ** 2 - self.running_var))
             self.step_count += 1
         elif update_stats and not self.training:
             # Inference mode autoregressive smoothing
             diff = current_batch_mean - self.running_mean
             alpha = max(0.01, self.ema_momentum / (1.0 + 0.05 * float(self.step_count.item())))
-            self.running_mean += alpha * diff
-            self.running_var += alpha * (diff ** 2 - self.running_var)
+            self.running_mean.copy_(self.running_mean + alpha * diff)
+            self.running_var.copy_(self.running_var + alpha * (diff ** 2 - self.running_var))
             self.step_count += 1
             
         # 5. Compute dynamic adaptive threshold
@@ -204,7 +287,8 @@ class SemanticAffinityEnergyMatrix(nn.Module):
     def forward(
         self,
         h: torch.Tensor,
-        return_energy: bool = False
+        return_energy: bool = False,
+        parsimony_scale: Optional[float] = None
     ) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
         """
         Binds input representations into minimal-energy parsimonious slots.
@@ -212,6 +296,7 @@ class SemanticAffinityEnergyMatrix(nn.Module):
         Args:
             h: Hidden representation (B, L, D) or (B, D)
             return_energy: Whether to return vertical energy distribution
+            parsimony_scale: Optional continuous scale from Executive Router (never hardcoded)
             
         Returns:
             delta_parsimonious: Parsimonious modulation vector (B, L, D) or (B, D)
@@ -226,19 +311,22 @@ class SemanticAffinityEnergyMatrix(nn.Module):
         q_vals = self.w_val_proj(h)   # (B, L, d_slot)
         
         # Compute Euclidean Hamiltonian Distance to each functional slot
-        # Distance squared: ||q - slot_k||^2
-        dist_sq = torch.cdist(q_keys, self.slot_keys.unsqueeze(0).expand(B, -1, -1), p=2) ** 2
+        # Using float32 for cdist to support bfloat16 on CUDA seamlessly
+        q_keys_f = q_keys.float()
+        slots_f = self.slot_keys.float().unsqueeze(0).expand(B, -1, -1)
+        dist_sq = (torch.cdist(q_keys_f, slots_f, p=2) ** 2).to(dtype=q_keys.dtype)
         
-        # Energy formulation: Base distance + Vertical Hierarchy Penalty
-        # Top = high energy (ill-fitting/mubazir), Bottom = ground state (parsimonious)
-        energy = (dist_sq / math.sqrt(self.d_slot)) + (self.vertical_penalty * 2.0)
+        # Energy formulation: Base distance + Vertical Hierarchy Penalty modulated by parsimony_scale
+        scale = 1.0 if parsimony_scale is None else float(parsimony_scale)
+        penalty = (self.vertical_penalty.to(dtype=q_keys.dtype) * 2.0) * scale
+        energy = (dist_sq / math.sqrt(self.d_slot)) + penalty
         
         # Boltzmann Probability Routing: P(slot) ~ exp(-Energy / T)
         # Lowest energy slots receive highest activation probability (Ockham's Razor)
         routing_weights = F.softmax(-energy / self.temperature, dim=-1)  # (B, L, num_slots)
         
         # Extract parsimonious slot values
-        slot_v_expanded = self.slot_values.unsqueeze(0).expand(B, -1, -1)  # (B, num_slots, d_slot)
+        slot_v_expanded = self.slot_values.unsqueeze(0).expand(B, -1, -1).to(dtype=q_keys.dtype)  # (B, num_slots, d_slot)
         routed_val = torch.bmm(routing_weights.reshape(B * L, 1, self.num_slots),
                                slot_v_expanded.repeat_interleave(L, dim=0)).reshape(B, L, self.d_slot)
         
@@ -320,11 +408,15 @@ class HierarchicalPlanCache(nn.Module):
         self.current_step_idx.zero_()
         self.is_plan_active.fill_(False)
 
-    def should_formulate_plan(self, h: torch.Tensor) -> Tuple[bool, float]:
+    def should_formulate_plan(self, h: torch.Tensor, planning_urgency: Optional[float] = None) -> Tuple[bool, float]:
         """Evaluates Context Engine to determine if task requires planning."""
         h_pool = h.mean(dim=1) if h.ndim == 3 else h
         gate_score = torch.sigmoid(self.w_plan_gate(h_pool)).mean().item()
-        needs_plan = gate_score >= self.plan_threshold
+        if planning_urgency is not None:
+            effective_threshold = self.plan_threshold * (1.5 - float(planning_urgency))
+        else:
+            effective_threshold = self.plan_threshold
+        needs_plan = gate_score >= effective_threshold
         return needs_plan, gate_score
 
     def formulate_plan(self, h: torch.Tensor) -> torch.Tensor:
@@ -381,7 +473,8 @@ class HierarchicalPlanCache(nn.Module):
 
     def forward(
         self,
-        h: torch.Tensor
+        h: torch.Tensor,
+        planning_urgency: Optional[float] = None
     ) -> Tuple[torch.Tensor, Dict[str, Any]]:
         """
         Applies latent plan guidance if planning is active or warranted.
@@ -395,7 +488,7 @@ class HierarchicalPlanCache(nn.Module):
             h = h.unsqueeze(1)
             
         B, L, D = h.shape
-        needs_plan, gate_score = self.should_formulate_plan(h)
+        needs_plan, gate_score = self.should_formulate_plan(h, planning_urgency=planning_urgency)
         
         # If plan is not currently active, but complexity is high, formulate now!
         if not self.is_plan_active and needs_plan:
@@ -404,9 +497,16 @@ class HierarchicalPlanCache(nn.Module):
         delta_plan = torch.zeros(B, L, D, device=h.device, dtype=h.dtype)
         if self.is_plan_active:
             curr_step = min(int(self.current_step_idx.item()), self.num_waypoints - 1)
-            target_waypoint = self.active_plan[:, curr_step, :]  # (B, d_plan)
-            # Re-expand to sequence
-            guidance = self.w_plan_guidance(target_waypoint).unsqueeze(1)  # (B, 1, D)
+            plan_b = self.active_plan.shape[0]
+            if plan_b == B:
+                target_waypoint = self.active_plan[:, curr_step, :]
+            elif plan_b == 1:
+                target_waypoint = self.active_plan[0:1, curr_step, :].expand(B, -1)
+            else:
+                target_waypoint = self.active_plan[:min(B, plan_b), curr_step, :]
+                if target_waypoint.shape[0] < B:
+                    target_waypoint = target_waypoint.repeat(B // target_waypoint.shape[0] + 1, 1)[:B]
+            guidance = self.w_plan_guidance(target_waypoint.to(dtype=h.dtype)).unsqueeze(1)  # (B, 1, D)
             delta_plan = torch.tanh(self.alpha_plan) * guidance.expand(B, L, D)
             
         if orig_ndim == 2:

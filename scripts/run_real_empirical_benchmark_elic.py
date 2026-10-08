@@ -606,6 +606,15 @@ def main():
         device=device,
         dtype=torch.bfloat16
     )
+    # Enable Living Cognitive Organ System: Dynamic Adaptive Confusion Sensor (DACS)
+    runtime.canvas.use_adaptive_sensor = True
+    if runtime.canvas.adaptive_sensor is None:
+        from dual_loop.cognitive_organs import DynamicAdaptiveConfusionSensor
+        runtime.canvas.adaptive_sensor = DynamicAdaptiveConfusionSensor(
+            d_model=base_model.config.hidden_size,
+            num_heads=min(8, max(1, base_model.config.hidden_size // 16)),
+            k_sigma=0.50
+        ).to(device=device, dtype=torch.bfloat16)
     
     results = {
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),

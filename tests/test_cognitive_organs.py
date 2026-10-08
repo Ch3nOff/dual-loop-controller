@@ -22,6 +22,7 @@ import torch
 import torch.nn as nn
 
 from dual_loop.cognitive_organs import (
+    ExecutiveLogicRouter,
     DynamicAdaptiveConfusionSensor,
     SemanticAffinityEnergyMatrix,
     HierarchicalPlanCache
@@ -174,6 +175,27 @@ class TestCognitiveOrgans(unittest.TestCase):
         self.assertFalse(torch.isnan(torch.tensor(score)))
 
     # --------------------------------------------------------------------------
+    # 0. EXECUTIVE LOGIC ROUTER (TOP-LEVEL META-CONTROLLER) TESTS
+    # --------------------------------------------------------------------------
+    def test_executive_logic_router(self):
+        router = ExecutiveLogicRouter(d_model=self.d_model)
+        h_3d = torch.randn(self.B, self.L, self.d_model)
+        probs, info = router(h_3d)
+        
+        self.assertEqual(probs.shape, (self.B, 3))
+        # Probabilities should sum to 1 across regimes
+        self.assertTrue(torch.allclose(probs.sum(dim=-1), torch.ones(self.B), atol=1e-5))
+        
+        # Verify continuous modulation parameters exist and are bounded
+        self.assertIn("dominant_mode", info)
+        self.assertIn("parsimony_scale", info)
+        self.assertIn("elaboration_scale", info)
+        self.assertIn("planning_urgency", info)
+        self.assertGreater(info["parsimony_scale"], 0.0)
+        self.assertGreater(info["elaboration_scale"], 0.0)
+        self.assertGreater(info["planning_urgency"], 0.0)
+
+    # --------------------------------------------------------------------------
     # 4. RUNTIME INTEGRATION TEST
     # --------------------------------------------------------------------------
     def test_runtime_integration_with_organs(self):
@@ -181,6 +203,7 @@ class TestCognitiveOrgans(unittest.TestCase):
         runtime = HADLDynamicRuntime(base_model=base_model, device="cpu")
         
         # Verify new organs exist in runtime
+        self.assertTrue(hasattr(runtime, "router"))
         self.assertTrue(hasattr(runtime, "saem"))
         self.assertTrue(hasattr(runtime, "plan_cache"))
         

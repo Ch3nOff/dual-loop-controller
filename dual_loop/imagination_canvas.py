@@ -114,7 +114,8 @@ class EmergentLatentCanvas(nn.Module):
         self,
         h: torch.Tensor,
         return_energy: bool = False,
-        return_confusion: bool = False
+        return_confusion: bool = False,
+        elaboration_scale: Optional[float] = None
     ) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
         """
         Executes emergent mental simulation on hidden representation h.
@@ -213,9 +214,12 @@ class EmergentLatentCanvas(nn.Module):
         delta_dream = torch.tanh(self.alpha_canvas) * self.w_collapse(self.norm_collapse(collapsed_flat))
         delta_dream = delta_dream.reshape(B, L, D)
         
-        # Modulate dream contribution by confusion gate:
+        # Modulate dream contribution by confusion gate and elaboration scale:
+        elab = 1.0 if elaboration_scale is None else float(elaboration_scale)
         if confusion_gate is not None:
-            delta_dream = delta_dream * confusion_gate
+            delta_dream = delta_dream * confusion_gate * elab
+        else:
+            delta_dream = delta_dream * elab
         
         if len(orig_shape) == 2:
             delta_dream = delta_dream.squeeze(1)
