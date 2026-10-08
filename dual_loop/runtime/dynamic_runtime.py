@@ -76,7 +76,8 @@ class HADLDynamicRuntime(nn.Module):
         base_model: nn.Module,
         checkpoint_path: Optional[str] = None,
         d_model: Optional[int] = None,
-        device: str = "cpu"
+        device: str = "cpu",
+        dtype: Optional[torch.dtype] = None
     ):
         super().__init__()
         self.base_model = base_model
@@ -87,14 +88,16 @@ class HADLDynamicRuntime(nn.Module):
             DynamicGraphIntrospector.discover_layer_container(base_model)
         )
         
-        # Determine d_model (explicit > probe > layer weight shape)
+        # Determine d_model (explicit > config > probe > layer weight shape)
         if d_model is not None:
             self.d_model = d_model
+        elif hasattr(base_model, "config") and getattr(base_model.config, "hidden_size", None) is not None:
+            self.d_model = base_model.config.hidden_size
         else:
             try:
-                # Probe directly from first weight in layer list
-                p = next(layer_list[0].parameters())
-                self.d_model = p.shape[-1] if p.ndim >= 2 else p.shape[0]
+                # Probe directly from 2D weight in layer list
+                candidates = [p.shape[-1] for p in layer_list[0].parameters() if p.ndim >= 2]
+                self.d_model = max(candidates) if candidates else DynamicGraphIntrospector.probe_native_dimension(base_model)
             except Exception:
                 self.d_model = DynamicGraphIntrospector.probe_native_dimension(base_model)
                 
@@ -118,26 +121,38 @@ class HADLDynamicRuntime(nn.Module):
         if checkpoint_path and os.path.exists(checkpoint_path):
             self.load_controller_weights(checkpoint_path)
             
-        self.to(device)
+        # Determine dtype
+        if dtype is None:
+            try:
+                self.dtype = next(base_model.parameters()).dtype
+            except Exception:
+                self.dtype = torch.float32
+        else:
+            self.dtype = dtype
+            
+        self.to(device=device, dtype=self.dtype)
         self._hooks = []
         self._active = False
         
     def load_controller_weights(self, checkpoint_path: str):
         """Loads learned distilled weights into dynamic controller units."""
-        ckpt = torch.load(checkpoint_path, map_location=self.device, weights_only=True)
+        try:
+            ckpt = torch.load(checkpoint_path, map_location=self.device, weights_only=True)
+        except Exception:
+            ckpt = torch.load(checkpoint_path, map_location=self.device, weights_only=False)
         sd = ckpt.get("controller_state_dict", ckpt.get("controller", ckpt))
         
         fb = sd.get("hydraulic_cup.fluid_bridge.weight")
         if fb is not None and fb.shape == self.piston1.fluid_bridge.weight.shape:
-            self.piston1.fluid_bridge.weight.data.copy_(fb)
+            self.piston1.fluid_bridge.weight.data.copy_(fb.to(dtype=self.piston1.fluid_bridge.weight.dtype))
             
         u_proj = sd.get("ghost.u_proj")
         if u_proj is not None and u_proj.shape == self.ghost_u.weight.shape:
-            self.ghost_u.weight.data.copy_(u_proj)
+            self.ghost_u.weight.data.copy_(u_proj.to(dtype=self.ghost_u.weight.dtype))
             
         w_ver = sd.get("ghost.verify_linear.weight")
         if w_ver is not None and w_ver.shape == self.ghost_v.weight.shape:
-            self.ghost_v.weight.data.copy_(w_ver)
+            self.ghost_v.weight.data.copy_(w_ver.to(dtype=self.ghost_v.weight.dtype))
             
     def reset_state(self):
         """Clears associative memory between independent queries."""

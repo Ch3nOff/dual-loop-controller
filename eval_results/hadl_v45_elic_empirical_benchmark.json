@@ -1,0 +1,155 @@
+{
+  "timestamp": "2026-10-08 08:41:07",
+  "device": "cuda:0",
+  "model": "C:\\Users\\Matthew Chen\\Documents\\X-Star\\dist\\staging_hf_fused",
+  "baseline": {
+    "gsm8k": {
+      "accuracy_pct": 10.0,
+      "correct": 1,
+      "total": 10,
+      "avg_latency_sec": 6.906,
+      "tokens_per_sec": 18.54
+    },
+    "registers": {
+      "register_accuracy_pct": 0.0,
+      "correct_registers": 0,
+      "total_registers": 8,
+      "details": [
+        {
+          "task": "reg_10_step",
+          "pred": {
+            "A": 18,
+            "B": 24,
+            "C": 24,
+            "D": 1
+          },
+          "ground_truth": {
+            "A": 28,
+            "B": 98,
+            "C": 74,
+            "D": 15
+          },
+          "score": "0/4"
+        },
+        {
+          "task": "reg_15_step",
+          "pred": {
+            "A": 10,
+            "B": 10,
+            "C": 20,
+            "D": 10
+          },
+          "ground_truth": {
+            "A": 60,
+            "B": 36,
+            "C": 33,
+            "D": 119
+          },
+          "score": "0/4"
+        }
+      ]
+    },
+    "disambiguation": {
+      "semantic_adherence_pct": 61.11,
+      "cross_domain_bleed_pct": 0.0,
+      "mean_latent_coherence_energy": 14.2917
+    },
+    "code": {
+      "syntax_validity_pct": 50.0,
+      "structural_completeness_pct": 90.0,
+      "details": [
+        {
+          "task": "code_lru_cache",
+          "syntax_valid": true,
+          "structural_completeness_pct": 80.0
+        },
+        {
+          "task": "code_pubsub_bus",
+          "syntax_valid": false,
+          "structural_completeness_pct": 100.0
+        }
+      ]
+    },
+    "stability": {
+      "mean_norm": 5.607,
+      "std_norm": 0.608,
+      "max_drift": 2.667,
+      "stability_score_pct": 89.16
+    }
+  },
+  "hadl_elic": {
+    "gsm8k": {
+      "accuracy_pct": 20.0,
+      "correct": 2,
+      "total": 10,
+      "avg_latency_sec": 6.92,
+      "tokens_per_sec": 18.5
+    },
+    "registers": {
+      "register_accuracy_pct": 0.0,
+      "correct_registers": 0,
+      "total_registers": 8,
+      "details": [
+        {
+          "task": "reg_10_step",
+          "pred": {
+            "A": 18,
+            "B": 24,
+            "C": 30,
+            "D": 10
+          },
+          "ground_truth": {
+            "A": 28,
+            "B": 98,
+            "C": 74,
+            "D": 15
+          },
+          "score": "0/4"
+        },
+        {
+          "task": "reg_15_step",
+          "pred": {
+            "A": 20,
+            "B": 12,
+            "C": 18,
+            "D": 20
+          },
+          "ground_truth": {
+            "A": 60,
+            "B": 36,
+            "C": 33,
+            "D": 119
+          },
+          "score": "0/4"
+        }
+      ]
+    },
+    "disambiguation": {
+      "semantic_adherence_pct": 61.11,
+      "cross_domain_bleed_pct": 0.0,
+      "mean_latent_coherence_energy": 14.2917
+    },
+    "code": {
+      "syntax_validity_pct": 0.0,
+      "structural_completeness_pct": 100.0,
+      "details": [
+        {
+          "task": "code_lru_cache",
+          "syntax_valid": false,
+          "structural_completeness_pct": 100.0
+        },
+        {
+          "task": "code_pubsub_bus",
+          "syntax_valid": false,
+          "structural_completeness_pct": 100.0
+        }
+      ]
+    },
+    "stability": {
+      "mean_norm": 5.801,
+      "std_norm": 0.512,
+      "max_drift": 2.701,
+      "stability_score_pct": 91.17
+    }
+  }
+}

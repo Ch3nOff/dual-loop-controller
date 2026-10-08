@@ -142,12 +142,14 @@ class DualStoreMemory(nn.Module):
         
         # Update running centroid
         with torch.no_grad():
+            if self.running_centroid.device != device or self.running_centroid.dtype != dtype:
+                self.running_centroid = self.running_centroid.to(device=device, dtype=dtype)
             batch_mean = current_state.mean(dim=(0, 1))
-            self.running_centroid.copy_(0.95 * self.running_centroid + 0.05 * batch_mean.to(self.running_centroid.dtype))
+            self.running_centroid.copy_(0.95 * self.running_centroid + 0.05 * batch_mean)
             self.centroid_count.add_(1.0)
             
         # 1. Compute Dynamic Difference Vector Delta v = v_t - centroid
-        diff_vectors = current_state - self.running_centroid.unsqueeze(0).unsqueeze(0).to(dtype)
+        diff_vectors = current_state - self.running_centroid.unsqueeze(0).unsqueeze(0)
         
         # 2. Project into low-rank factor space
         k_factors = self.proj_key(current_state)  # (B, L, rank)
