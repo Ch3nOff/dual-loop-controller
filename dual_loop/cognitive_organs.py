@@ -38,38 +38,52 @@ class ExecutiveLogicRouter(nn.Module):
     - Mode 2: Long & Detailed (multi-module, expansive architecture, state-machine synthesis)
     
     Generates continuous modulation parameters:
-    - parsimony_scale: in [0.05, 1.50] (modulates SAEM vertical penalty)
-    - elaboration_scale: in [0.30, 2.00] (modulates ELIC imagination canvas capacity)
+    - parsimony_scale: in [0.10, 1.50] (modulates SAEM vertical penalty)
+    - elaboration_scale: in [0.35, 1.80] (modulates ELIC imagination canvas capacity)
     - planning_urgency: in [0.10, 0.95] (modulates HLPC plan formulation hurdle)
+    - delta_anchor: Structural namespace grounding tensor to preserve package directory hierarchy
     """
     def __init__(self, d_model: int = 2048):
         super().__init__()
         self.d_model = d_model
         
-        # Meta-Routing Network: evaluates pooled context & representation dispersion
+        # Dual-Axis Evaluator:
+        # Axis 1: Structural Scope (0=Micro/Single-turn, 1=Macro/Multi-file)
+        # Axis 2: Density Pressure (0=Expansive, 1=Dense/Brevity-constrained)
+        self.w_scope = nn.Linear(d_model, 1, bias=True)
+        self.w_density = nn.Linear(d_model, 1, bias=True)
+        
+        # Meta-Routing Network: evaluates coupled interaction (S x D)
         self.meta_net = nn.Sequential(
             nn.Linear(d_model, max(64, d_model // 4), bias=True),
             nn.LayerNorm(max(64, d_model // 4)),
             nn.GELU(),
-            nn.Linear(max(64, d_model // 4), 3, bias=True)  # [Fast&Solid, Balanced, Long&Detailed]
+            nn.Linear(max(64, d_model // 4), 4, bias=True)
+            # [Fast & Direct, Balanced, Dense Structural Plan, Expansive Detailed]
         )
+        
+        # Structural Namespace Anchor Projector (helps ground package hierarchy)
+        self.w_namespace_anchor = nn.Linear(d_model, d_model, bias=False)
+        self.alpha_anchor = nn.Parameter(torch.tensor(0.04))
         
         # Initialize cleanly
         nn.init.orthogonal_(self.meta_net[0].weight, gain=0.1)
         nn.init.zeros_(self.meta_net[0].bias)
         nn.init.normal_(self.meta_net[3].weight, std=0.01)
         nn.init.constant_(self.meta_net[3].bias, 0.0)
+        nn.init.normal_(self.w_scope.weight, std=0.01)
+        nn.init.constant_(self.w_scope.bias, 0.0)
+        nn.init.normal_(self.w_density.weight, std=0.01)
+        nn.init.constant_(self.w_density.bias, 0.2)
+        nn.init.normal_(self.w_namespace_anchor.weight, std=0.01)
 
-    def forward(self, h: torch.Tensor) -> Tuple[torch.Tensor, Dict[str, Any]]:
+    def forward(
+        self,
+        h: torch.Tensor,
+        current_step_idx: Optional[int] = None
+    ) -> Tuple[torch.Tensor, Dict[str, Any]]:
         """
-        Determines the dynamic cognitive regime from input representations.
-        
-        Args:
-            h: Hidden state tensor (B, L, D) or (B, D)
-            
-        Returns:
-            regime_probs: Categorical regime probabilities (B, 3)
-            regime_params: Dictionary of continuous modulation scales
+        Determines the dynamic cognitive regime and namespace anchors from input representations.
         """
         orig_ndim = h.ndim
         if orig_ndim == 3:
@@ -78,28 +92,49 @@ class ExecutiveLogicRouter(nn.Module):
             h_mean = h
             
         B = h_mean.shape[0]
-        logits = self.meta_net(h_mean)  # (B, 3)
-        probs = F.softmax(logits, dim=-1)  # (B, 3)
+        scope_score = torch.sigmoid(self.w_scope(h_mean))      # 1 = Multi-file repo
+        density_score = torch.sigmoid(self.w_density(h_mean))  # 1 = Concise/dense target
         
-        # Probs components: [p_fast, p_balanced, p_detailed]
-        p_fast = probs[:, 0:1]
-        p_bal = probs[:, 1:2]
-        p_detail = probs[:, 2:3]
+        logits = self.meta_net(h_mean)  # (B, 4)
+        probs = F.softmax(logits, dim=-1)  # (B, 4)
         
-        # Smooth continuous modulation scales:
-        parsimony_scale = (p_fast * 1.50 + p_bal * 0.85 + p_detail * 0.10).squeeze(-1)
-        elaboration_scale = (p_fast * 0.40 + p_bal * 1.00 + p_detail * 1.80).squeeze(-1)
-        planning_urgency = (p_fast * 0.15 + p_bal * 0.50 + p_detail * 0.90).squeeze(-1)
+        p_fast = probs[:, 0:1]        # Fast & Direct
+        p_bal = probs[:, 1:2]         # Balanced
+        p_dense_plan = probs[:, 2:3]  # Dense Structural Plan (Besar namun Singkat-Padat)
+        p_expansive = probs[:, 3:4]   # Expansive Detailed
         
+        # Coupled Cross-Talk Modulation (A <-> B):
+        # Step-dependent density modulation: setup.py & __init__.py kept tight, core given space
+        step_factor = 1.0
+        if current_step_idx is not None:
+            if current_step_idx == 0:
+                step_factor = 1.25  # setup.py: tight metadata
+            elif current_step_idx == 1:
+                step_factor = 1.15  # __init__.py: exports
+            else:
+                step_factor = 0.85  # core module: allow implementation
+                
+        parsimony_scale = (p_fast * 1.50 + p_bal * 0.85 + p_dense_plan * 0.85 + p_expansive * 0.15).squeeze(-1) * step_factor
+        elaboration_scale = (p_fast * 0.35 + p_bal * 1.00 + p_dense_plan * 1.10 + p_expansive * 1.80).squeeze(-1)
+        planning_urgency = (p_fast * 0.10 + p_bal * 0.45 + p_dense_plan * 0.95 + p_expansive * 0.85).squeeze(-1)
+        
+        # Structural Namespace Anchor Delta (injects directory/package tree grounding)
+        delta_anchor = torch.tanh(self.alpha_anchor) * self.w_namespace_anchor(h) * scope_score.unsqueeze(1)
+        if orig_ndim == 2:
+            delta_anchor = delta_anchor.squeeze(1)
+            
         dominant_idx = torch.argmax(probs, dim=-1)[0].item()
-        regime_names = ["Fast & Solid", "Balanced Reasoning", "Long & Detailed"]
+        regime_names = ["Fast & Direct", "Balanced", "Dense Structural Plan", "Expansive Detailed"]
         dominant_mode = regime_names[dominant_idx]
         
         info = {
             "dominant_mode": dominant_mode,
+            "scope_score": float(scope_score.mean().item()),
+            "density_score": float(density_score.mean().item()),
             "parsimony_scale": float(parsimony_scale.mean().item()),
             "elaboration_scale": float(elaboration_scale.mean().item()),
             "planning_urgency": float(planning_urgency.mean().item()),
+            "delta_anchor": delta_anchor,
             "probabilities": probs.detach().cpu()
         }
         return probs, info

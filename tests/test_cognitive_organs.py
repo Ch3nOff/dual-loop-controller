@@ -182,18 +182,22 @@ class TestCognitiveOrgans(unittest.TestCase):
         h_3d = torch.randn(self.B, self.L, self.d_model)
         probs, info = router(h_3d)
         
-        self.assertEqual(probs.shape, (self.B, 3))
+        self.assertEqual(probs.shape, (self.B, 4))
         # Probabilities should sum to 1 across regimes
         self.assertTrue(torch.allclose(probs.sum(dim=-1), torch.ones(self.B), atol=1e-5))
         
         # Verify continuous modulation parameters exist and are bounded
         self.assertIn("dominant_mode", info)
+        self.assertIn("scope_score", info)
+        self.assertIn("density_score", info)
+        self.assertIn("delta_anchor", info)
         self.assertIn("parsimony_scale", info)
         self.assertIn("elaboration_scale", info)
         self.assertIn("planning_urgency", info)
         self.assertGreater(info["parsimony_scale"], 0.0)
         self.assertGreater(info["elaboration_scale"], 0.0)
         self.assertGreater(info["planning_urgency"], 0.0)
+        self.assertEqual(info["delta_anchor"].shape, h_3d.shape)
 
     # --------------------------------------------------------------------------
     # 4. RUNTIME INTEGRATION TEST
