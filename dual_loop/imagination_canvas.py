@@ -39,7 +39,7 @@ class EmergentLatentCanvas(nn.Module):
         dream_steps: int = 2,
         contraction_factor: float = 0.20,
         enable_stochastic_flux: bool = False,
-        confusion_tolerance: float = 0.50,
+        confusion_tolerance: float = 0.54,
         enable_confusion_gating: bool = True
     ):
         super().__init__()
@@ -129,11 +129,18 @@ class EmergentLatentCanvas(nn.Module):
             # bypass dream cycles completely (model understands clearly, zero imagination overhead)!
             if not is_confused.any():
                 delta_dream = torch.zeros(B, L, D, device=h.device, dtype=h.dtype)
+                energy = None
+                if return_energy:
+                    h_flat = h.reshape(N_tokens, D)
+                    unrolled = F.gelu(self.w_unroll(h_flat))
+                    frags = self.norm_fragments(unrolled.reshape(N_tokens, self.num_fragments, self.d_frag))
+                    centroid = frags.mean(dim=1, keepdim=True)
+                    energy = torch.mean(torch.norm(frags - centroid, p=2, dim=-1))
                 if len(orig_shape) == 2:
                     delta_dream = delta_dream.squeeze(1)
                 if return_confusion:
-                    return delta_dream, None, confusion_scores
-                return delta_dream, None
+                    return delta_dream, energy, confusion_scores
+                return delta_dream, energy
                 
             # Gate scales smoothly with excess confusion above tolerance:
             confusion_gate = torch.where(

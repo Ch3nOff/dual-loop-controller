@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-08 08:41:07",
+  "timestamp": "2026-10-08 10:50:24",
   "device": "cuda:0",
   "model": "C:\\Users\\Matthew Chen\\Documents\\X-Star\\dist\\staging_hf_fused",
   "baseline": {
@@ -7,8 +7,8 @@
       "accuracy_pct": 10.0,
       "correct": 1,
       "total": 10,
-      "avg_latency_sec": 6.906,
-      "tokens_per_sec": 18.54
+      "avg_latency_sec": 4.682,
+      "tokens_per_sec": 27.34
     },
     "registers": {
       "register_accuracy_pct": 0.0,
@@ -52,7 +52,7 @@
     "disambiguation": {
       "semantic_adherence_pct": 61.11,
       "cross_domain_bleed_pct": 0.0,
-      "mean_latent_coherence_energy": 14.2917
+      "mean_latent_coherence_energy": 13.75
     },
     "code": {
       "syntax_validity_pct": 50.0,
@@ -79,11 +79,11 @@
   },
   "hadl_elic": {
     "gsm8k": {
-      "accuracy_pct": 20.0,
-      "correct": 2,
+      "accuracy_pct": 30.0,
+      "correct": 3,
       "total": 10,
-      "avg_latency_sec": 6.92,
-      "tokens_per_sec": 18.5
+      "avg_latency_sec": 4.419,
+      "tokens_per_sec": 26.54
     },
     "registers": {
       "register_accuracy_pct": 0.0,
@@ -92,12 +92,7 @@
       "details": [
         {
           "task": "reg_10_step",
-          "pred": {
-            "A": 18,
-            "B": 24,
-            "C": 30,
-            "D": 10
-          },
+          "pred": {},
           "ground_truth": {
             "A": 28,
             "B": 98,
@@ -108,12 +103,7 @@
         },
         {
           "task": "reg_15_step",
-          "pred": {
-            "A": 20,
-            "B": 12,
-            "C": 18,
-            "D": 20
-          },
+          "pred": {},
           "ground_truth": {
             "A": 60,
             "B": 36,
@@ -125,31 +115,31 @@
       ]
     },
     "disambiguation": {
-      "semantic_adherence_pct": 61.11,
+      "semantic_adherence_pct": 66.67,
       "cross_domain_bleed_pct": 0.0,
-      "mean_latent_coherence_energy": 14.2917
+      "mean_latent_coherence_energy": 13.75
     },
     "code": {
-      "syntax_validity_pct": 0.0,
-      "structural_completeness_pct": 100.0,
+      "syntax_validity_pct": 100.0,
+      "structural_completeness_pct": 87.5,
       "details": [
         {
           "task": "code_lru_cache",
-          "syntax_valid": false,
+          "syntax_valid": true,
           "structural_completeness_pct": 100.0
         },
         {
           "task": "code_pubsub_bus",
-          "syntax_valid": false,
-          "structural_completeness_pct": 100.0
+          "syntax_valid": true,
+          "structural_completeness_pct": 75.0
         }
       ]
     },
     "stability": {
-      "mean_norm": 5.801,
-      "std_norm": 0.512,
-      "max_drift": 2.701,
-      "stability_score_pct": 91.17
+      "mean_norm": 5.878,
+      "std_norm": 0.554,
+      "max_drift": 2.765,
+      "stability_score_pct": 90.58
     }
   }
 }
