@@ -50,7 +50,10 @@ CHECKPOINT_PATH = PROJECT_ROOT / "checkpoints" / "xstar_2b_omnireason_carlift_50
 NL2REPO_DIR = PROJECT_ROOT / "external" / "NL2RepoBench" / "test_files"
 JSON_OUT = PROJECT_ROOT / "eval_results" / "nl2repobench_long_horizon_benchmark.json"
 GRAPH_OUT = PROJECT_ROOT / "docs" / "images" / "nl2repobench_long_horizon_benchmark.png"
-ARTIFACT_DIR = Path(r"C:\Users\Matthew Chen\.gemini\antigravity\brain\19bea55e-42a6-476a-af5b-9c25391e2be9")
+if sys.platform == "win32":
+    ARTIFACT_DIR = Path(r"C:\Users\Matthew Chen\.gemini\antigravity\brain\19bea55e-42a6-476a-af5b-9c25391e2be9")
+else:
+    ARTIFACT_DIR = Path("/mnt/c/Users/Matthew Chen/.gemini/antigravity/brain/19bea55e-42a6-476a-af5b-9c25391e2be9")
 
 
 # ==============================================================================
@@ -432,6 +435,9 @@ def run_nl2repo_suite(model, tokenizer, runtime: HADLDynamicRuntime, is_hadl: bo
         
     for task in BENCHMARK_TASKS:
         tid = task["id"]
+        if is_hadl:
+            runtime.reset_state()
+            
         messages = [
             {"role": "system", "content": "You are a precise, production-grade software engineer building repositories from scratch."},
             {"role": "user", "content": task["prompt"]}
@@ -458,7 +464,9 @@ def run_nl2repo_suite(model, tokenizer, runtime: HADLDynamicRuntime, is_hadl: bo
         
         eval_metrics = evaluate_task_generation(task, decoded)
         task_results[tid] = eval_metrics
+        sample_preview = decoded.replace("\n", " ")[:100]
         print(f"  -> Task [{tid}]: Composite={eval_metrics['composite_score_pct']}% | AST Valid={eval_metrics['ast_syntax_integrity_pct']}% | Files={eval_metrics['files_generated_count']}")
+        print(f"     [Preview]: {sample_preview}...")
         
     if is_hadl:
         runtime.detach()

@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-10-08 14:51:54",
+  "timestamp": "2026-10-08 18:06:55",
   "device": "cuda:0",
-  "model": "C:\\Users\\Matthew Chen\\Documents\\X-Star\\dist\\staging_hf_fused",
+  "model": "/mnt/c/Users/Matthew Chen/Documents/X-Star/dist/staging_hf_fused",
   "benchmark_source": "multimodal-art-projection/NL2RepoBench",
   "baseline": {
     "tasks": {
@@ -14,10 +14,10 @@
         ],
         "multi_file_structural_coherence_pct": 100.0,
         "package_setup_validity_pct": 100.0,
-        "ast_syntax_integrity_pct": 100.0,
+        "ast_syntax_integrity_pct": 50.0,
         "api_specification_compliance_pct": 0.0,
         "cross_module_consistency_pct": 100.0,
-        "composite_score_pct": 80.0
+        "composite_score_pct": 70.0
       },
       "coverage_shield": {
         "task_id": "coverage_shield",
@@ -58,22 +58,22 @@
         ],
         "multi_file_structural_coherence_pct": 100.0,
         "package_setup_validity_pct": 100.0,
-        "ast_syntax_integrity_pct": 66.7,
+        "ast_syntax_integrity_pct": 100.0,
         "api_specification_compliance_pct": 75.0,
         "cross_module_consistency_pct": 100.0,
-        "composite_score_pct": 88.3
+        "composite_score_pct": 95.0
       }
     },
     "macro": {
       "mean_structure_pct": 91.7,
       "mean_setup_pct": 100.0,
-      "mean_ast_syntax_pct": 79.2,
+      "mean_ast_syntax_pct": 75.0,
       "mean_api_spec_pct": 50.0,
       "mean_consistency_pct": 100.0,
-      "mean_composite_pct": 84.2
+      "mean_composite_pct": 83.3
     },
-    "avg_latency_sec": 17.42,
-    "throughput_tps": 25.83
+    "avg_latency_sec": 15.9,
+    "throughput_tps": 28.3
   },
   "hadl_elic": {
     "tasks": {
@@ -86,41 +86,39 @@
         ],
         "multi_file_structural_coherence_pct": 100.0,
         "package_setup_validity_pct": 100.0,
-        "ast_syntax_integrity_pct": 50.0,
+        "ast_syntax_integrity_pct": 100.0,
         "api_specification_compliance_pct": 66.7,
         "cross_module_consistency_pct": 100.0,
-        "composite_score_pct": 83.3
+        "composite_score_pct": 93.3
       },
       "coverage_shield": {
         "task_id": "coverage_shield",
         "files_generated_count": 3,
         "files_list": [
           "setup.py",
-          "__init__.py",
+          "coverage_shield/__init__.py",
           "unittest_coverage_functions.py"
         ],
-        "multi_file_structural_coherence_pct": 33.3,
-        "package_setup_validity_pct": 100.0,
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 50.0,
         "ast_syntax_integrity_pct": 66.7,
         "api_specification_compliance_pct": 100.0,
-        "cross_module_consistency_pct": 50.0,
-        "composite_score_pct": 70.0
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 76.7
       },
       "trimming": {
         "task_id": "trimming",
-        "files_generated_count": 4,
+        "files_generated_count": 2,
         "files_list": [
           "setup.py",
-          "trimming/__init__.py",
-          "trimming/core.py",
-          "trimming/cli.py"
+          "trimming/__init__.py"
         ],
-        "multi_file_structural_coherence_pct": 100.0,
+        "multi_file_structural_coherence_pct": 66.7,
         "package_setup_validity_pct": 100.0,
-        "ast_syntax_integrity_pct": 50.0,
+        "ast_syntax_integrity_pct": 100.0,
         "api_specification_compliance_pct": 100.0,
         "cross_module_consistency_pct": 100.0,
-        "composite_score_pct": 90.0
+        "composite_score_pct": 93.3
       },
       "autorccar": {
         "task_id": "autorccar",
@@ -132,21 +130,21 @@
         ],
         "multi_file_structural_coherence_pct": 100.0,
         "package_setup_validity_pct": 100.0,
-        "ast_syntax_integrity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
         "api_specification_compliance_pct": 100.0,
         "cross_module_consistency_pct": 100.0,
-        "composite_score_pct": 100.0
+        "composite_score_pct": 93.3
       }
     },
     "macro": {
       "mean_structure_pct": 83.3,
-      "mean_setup_pct": 100.0,
-      "mean_ast_syntax_pct": 66.7,
+      "mean_setup_pct": 87.5,
+      "mean_ast_syntax_pct": 83.3,
       "mean_api_spec_pct": 91.7,
-      "mean_consistency_pct": 87.5,
-      "mean_composite_pct": 85.8
+      "mean_consistency_pct": 100.0,
+      "mean_composite_pct": 89.2
     },
-    "avg_latency_sec": 18.87,
-    "throughput_tps": 23.84
+    "avg_latency_sec": 15.13,
+    "throughput_tps": 24.07
   }
 }
