@@ -22,6 +22,7 @@ import torch.nn.functional as F
 from typing import Optional, Dict, Any, Generator, Tuple
 
 from .context_threads import LatentContextThreadEngine, DualStoreMemory
+from ..imagination_canvas import EmergentLatentCanvas
 from ..adapters.universal_adapter import DynamicGraphIntrospector
 
 
@@ -107,6 +108,7 @@ class HADLDynamicRuntime(nn.Module):
         self.piston1 = DynamicHydraulicPiston(self.d_model, porous_factor=0.20)
         self.context_threads = LatentContextThreadEngine(self.d_model, chunk_size=16)
         self.dual_memory = DualStoreMemory(self.d_model, short_term_capacity=256, rank=32)
+        self.canvas = EmergentLatentCanvas(self.d_model, num_fragments=8, dream_steps=2)
         
         # Ghost SVD Verifier
         self.ghost_u = nn.Linear(self.d_model, 32, bias=False)
@@ -146,7 +148,12 @@ class HADLDynamicRuntime(nn.Module):
             return output
         h = output[0] if isinstance(output, tuple) else output
         delta, p = self.piston1(h)
-        h_mod = h + delta
+        
+        # Emergent Latent Imagination Canvas:
+        # Activated dynamically proportional to cognitive reasoning pressure p_lift
+        delta_dream, _ = self.canvas(h)
+        h_mod = h + delta + p * delta_dream
+        
         if isinstance(output, tuple):
             return (h_mod,) + output[1:]
         return h_mod

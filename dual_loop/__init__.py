@@ -46,6 +46,7 @@ if _HAS_TORCH:
     from .multimodal_transport import ProcrustesOptimalManifoldTransport
     from .topological_cwm import SpatioTemporalEntropicCWM
     from .plasticity import HeteroAssociativePlasticMemory
+    from .imagination_canvas import EmergentLatentCanvas
     from .adapters.latent_adapter import LatentDeliberationAdapter
     from .adapters.qwen_adapter import (
         DualLoopQwenModel,
@@ -231,7 +232,8 @@ if _HAS_TORCH:
         "SMILBackgroundUnit",
         "IDSMILController",
         "HADLIDSMILModelWrapper",
-        "attach_hadl_idsmil"
+        "attach_hadl_idsmil",
+        "EmergentLatentCanvas"
     ]
 
 else:

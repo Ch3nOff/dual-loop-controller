@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-10-07 21:34:34",
+  "model": "dist/staging_hf_fused",
+  "device": "cuda:0",
+  "results": {
+    "state_tracking": {
+      "task": "15-Step Register Machine Tracking",
+      "ground_truth": {
+        "A": 60,
+        "B": 36,
+        "C": 33,
+        "D": 119
+      },
+      "response": "{\"A\": 10, \"B\": 15, \"C\": 30, \"D\": 10}",
+      "latency_sec": 2.6027932999422774,
+      "tokens_gen": 31
+    },
+    "code_synthesis": {
+      "task": "Long-Horizon Code Synthesis (Thread-Safe TTL LRU Cache)",
+      "has_class": true,
+      "has_rlock": true,
+      "has_get": true,
+      "has_put": true,
+      "has_cleanup": false,
+      "is_valid_syntax": false,
+      "syntax_error": "unterminated triple-quoted string literal (detected at line 71) (<string>, line 62)",
+      "latency_sec": 22.86710499995388,
+      "tokens_gen": 650,
+      "response_preview": "```python\nimport threading\nfrom typing import Any, Dict, Optional, Tuple\n\n\nclass LRUTTLCache:\n    \"\"\"\n    A thread-safe Least Recently Used (LRU) cache that supports time-to-live (TTL) expiration.\n\n    This implementation uses an OrderedDict to maintain insertion order and track usage times.\n    It ensures strict adherence to the eviction policy where expired items are treated as \n    \"never used\"..."
+    },
+    "latent_energy_stability": {
+      "task": "Latent Energy Stability Audit (250 tokens rollout)",
+      "tokens_gen": 250,
+      "elapsed_sec": 9.404129200032912,
+      "mid_layer_idx": 11,
+      "ghost_layer_idx": 22,
+      "mid_layer_mean_norm": 5.832,
+      "mid_layer_norm_drift": 2.5,
+      "ghost_layer_mean_norm": 30.617,
+      "ghost_layer_norm_drift": 13.5,
+      "is_numerically_stable": true
+    }
+  }
+}
