@@ -420,6 +420,9 @@ class CognitiveFloodgateEngine(nn.Module):
         self.capacity_limit = float(capacity_limit)
         self.ema_momentum = float(ema_momentum)
         
+        # 0. Neutral Identity Matrix Anchor (Poin 1)
+        self.register_buffer("eye_d", torch.eye(d_model))
+        
         # 1. Compiler Test-Drive Penalty Projections (Incoherent multi-channel)
         self.w_err_proj = nn.Linear(d_model, d_model, bias=False)
         self.incoherent_weight_mask = nn.Parameter(torch.randn(d_model) * 0.05 + 1.0)
@@ -462,12 +465,19 @@ class CognitiveFloodgateEngine(nn.Module):
         """
         Calibrates noise dynamically per token: % of log-tan multiplied by key vector.
         Formula: Noise_t = log(1 + tan(pi/4 * alpha_t)) * (W_k h_t)
+        Anchored by Identity Matrix (Poin 1).
         """
         orig_ndim = h.ndim
         h_flat = h.reshape(-1, self.d_model) if orig_ndim == 3 else h
         
-        alpha = torch.sigmoid(self.w_noise_gate(h_flat))  # in [0, 1]
-        k_vec = self.w_key(h_flat)                        # (N, d_model)
+        # Multiply with identity matrix anchor first (Poin 1)
+        if self.eye_d.shape[0] == h_flat.shape[-1]:
+            h_neutral = torch.matmul(h_flat, self.eye_d)
+        else:
+            h_neutral = h_flat
+            
+        alpha = torch.sigmoid(self.w_noise_gate(h_neutral))  # in [0, 1]
+        k_vec = self.w_key(h_neutral)                        # (N, d_model)
         
         # % of log(tan) scaling: log(1 + tan(pi/4 * alpha))
         tan_term = torch.tan(alpha * (math.pi / 4.0))
@@ -530,9 +540,13 @@ class CognitiveFloodgateEngine(nn.Module):
         err_clamped = min(max(float(compiler_error_signal), 0.0), 0.95)
         p_base = math.log1p(math.tan(err_clamped * (math.pi / 4.0)))
         
-        # Incoherent heterogeneous projection across model weights
+        # Incoherent heterogeneous projection across model weights anchored by Identity (Poin 1)
         h_flat = h.reshape(-1, self.d_model)
-        proj = self.w_err_proj(h_flat) * self.incoherent_weight_mask.unsqueeze(0)
+        if self.eye_d.shape[0] == h_flat.shape[-1]:
+            h_neutral = torch.matmul(h_flat, self.eye_d)
+        else:
+            h_neutral = h_flat
+        proj = self.w_err_proj(h_neutral) * self.incoherent_weight_mask.unsqueeze(0)
         penalty = torch.tanh(self.alpha_compiler_penalty) * p_base * proj
         
         return penalty.reshape(h.shape)
@@ -628,7 +642,9 @@ class CognitiveFloodgateEngine(nn.Module):
 class HierarchicalPlanCache(nn.Module):
     """
     Hierarchical Latent Plan Cache (HLPC), Dynamic Alternative Brancher & LostPlan Staging Register.
-    Integrated with Cognitive Floodgate Engine & Compiler Test-Drive Feedback.
+    Integrated with Cognitive Floodgate Engine, Compiler Test-Drive Feedback,
+    Identity Matrix Neutral Anchoring (Poin 1), and Candidate Overlay Projection with
+    Selective Blending ("Proyeksi Timpa & Dipilihlah yang Bagus", Poin 2).
     """
     def __init__(
         self,
@@ -638,7 +654,8 @@ class HierarchicalPlanCache(nn.Module):
         plan_threshold: float = 0.50,
         decay_factor: float = 0.80,
         chunk_size: int = 16,
-        capacity_limit: float = 100.0
+        capacity_limit: float = 100.0,
+        temperature: float = 0.15
     ):
         super().__init__()
         self.d_model = d_model
@@ -646,50 +663,53 @@ class HierarchicalPlanCache(nn.Module):
         self.d_plan = d_plan
         self.plan_threshold = float(plan_threshold)
         self.decay_factor = float(decay_factor)
+        self.temperature = float(temperature)
+        
+        # 0. Neutral Identity Matrix Anchor (Poin 1)
+        self.register_buffer("eye_d", torch.eye(d_model))
+        self.register_buffer("eye_plan", torch.eye(d_plan))
         
         # 1. Context Engine Plan Necessity Gate (PNG: 1=Plan, 0=Direct)
         self.w_plan_gate = nn.Linear(d_model, 1, bias=True)
         nn.init.normal_(self.w_plan_gate.weight, std=0.01)
         nn.init.constant_(self.w_plan_gate.bias, -0.2)
         
-        # 2. Plan Formulator (Compact Latent Waypoints)
-        self.w_plan_encoder = nn.Linear(d_model, num_waypoints * d_plan, bias=False)
+        # 2. Shared Metric Projector (Identity-Anchored Shared Metric Space)
+        self.w_metric_proj = nn.Linear(d_model, d_plan, bias=False)
+        nn.init.orthogonal_(self.w_metric_proj.weight, gain=0.1)
+        
+        # 3. Plan Formulator (Waypoints Expansion)
+        self.w_plan_expansion = nn.Linear(d_plan, num_waypoints * d_plan, bias=False)
+        nn.init.zeros_(self.w_plan_expansion.weight)
+        with torch.no_grad():
+            self.w_plan_expansion.weight[:d_plan, :d_plan] = torch.eye(d_plan)
         self.norm_plan = nn.LayerNorm(d_plan)
         
-        # 3. Dynamic Reality Projector & Expectation Mismatch Sensor
-        self.w_reality_proj = nn.Linear(d_model, d_plan, bias=False)
-        
         # 4. Dynamic Alternative Route Branching Projector (Plan B Synthesizer)
+        # Inputs: target_wp (d_plan) + h_obs (d_plan) + z_incoherent (d_plan) + err_feat (1) = 3 * d_plan + 1
         self.w_alt_branch = nn.Sequential(
-            nn.Linear(d_plan * 2 + 1, d_plan, bias=True),
+            nn.Linear(d_plan * 3 + 1, d_plan, bias=True),
             nn.LayerNorm(d_plan),
             nn.GELU(),
             nn.Linear(d_plan, d_plan, bias=True)
         )
+        nn.init.orthogonal_(self.w_alt_branch[0].weight, gain=0.1)
+        nn.init.zeros_(self.w_alt_branch[0].bias)
+        nn.init.normal_(self.w_alt_branch[3].weight, std=0.01)
+        nn.init.constant_(self.w_alt_branch[3].bias, 0.0)
         
-        # 5. Stochastic Lateral Divergence ("Incoherent" Exploration Jump)
-        self.alpha_lateral = nn.Parameter(torch.tensor(0.06))
-        
-        # 6. Plan Guidance Projector back to d_model
+        # 5. Plan Guidance Projector back to d_model
         self.w_plan_guidance = nn.Linear(d_plan, d_model, bias=False)
+        nn.init.orthogonal_(self.w_plan_guidance.weight, gain=0.1)
         self.alpha_plan = nn.Parameter(torch.tensor(0.08))
+        self.alpha_alt = nn.Parameter(torch.tensor(0.08))
         
-        # 7. Goal Verifier
-        self.w_goal_verifier = nn.CosineSimilarity(dim=-1)
-        
-        # 8. Connected Cognitive Floodgate Engine (Tembok Anti-Banjir)
+        # 6. Connected Cognitive Floodgate Engine (Tembok Anti-Banjir)
         self.floodgate = CognitiveFloodgateEngine(
             d_model=d_model,
             chunk_size=chunk_size,
             capacity_limit=capacity_limit
         )
-        
-        # Initialize projections cleanly
-        nn.init.orthogonal_(self.w_reality_proj.weight, gain=0.1)
-        nn.init.orthogonal_(self.w_alt_branch[0].weight, gain=0.1)
-        nn.init.zeros_(self.w_alt_branch[0].bias)
-        nn.init.normal_(self.w_alt_branch[3].weight, std=0.01)
-        nn.init.constant_(self.w_alt_branch[3].bias, 0.0)
         
         # Staging Buffers & State
         self.register_buffer("active_plan", torch.zeros(1, num_waypoints, d_plan))
@@ -700,6 +720,7 @@ class HierarchicalPlanCache(nn.Module):
         self.register_buffer("alternative_branches_count", torch.tensor(0, dtype=torch.long))
         self.register_buffer("last_discrepancy", torch.tensor(0.0))
         self.register_buffer("is_branching", torch.tensor(False, dtype=torch.bool))
+        self.register_buffer("overlay_weights", torch.tensor([1.0, 0.0, 0.0]))
 
     def reset_plan(self):
         """Clears active plan, LostPlan staging registers, and resets floodgate."""
@@ -711,6 +732,7 @@ class HierarchicalPlanCache(nn.Module):
         self.alternative_branches_count.zero_()
         self.last_discrepancy.zero_()
         self.is_branching.fill_(False)
+        self.overlay_weights.copy_(torch.tensor([1.0, 0.0, 0.0]))
         self.floodgate.reset_state()
 
     def should_formulate_plan(self, h: torch.Tensor, planning_urgency: Optional[float] = None) -> Tuple[bool, float]:
@@ -726,11 +748,19 @@ class HierarchicalPlanCache(nn.Module):
 
     def formulate_plan(self, h: torch.Tensor) -> torch.Tensor:
         """
-        Formulates a compact latent plan of K waypoints (<2 KB VRAM).
+        Formulates a compact latent plan of K waypoints (<2 KB VRAM)
+        anchored by Identity Matrix and Shared Metric Projection.
         """
-        h_pool = h.mean(dim=1) if h.ndim == 3 else h
-        B = h_pool.shape[0]
-        waypoints = self.w_plan_encoder(h_pool).reshape(B, self.num_waypoints, self.d_plan)
+        orig_ndim = h.ndim
+        h_pool = h.mean(dim=1) if orig_ndim == 3 else h
+        if self.eye_d.shape[0] == h_pool.shape[-1]:
+            h_neutral = torch.matmul(h_pool, self.eye_d)
+        else:
+            h_neutral = h_pool
+            
+        B = h_neutral.shape[0]
+        h_goal = self.norm_plan(self.w_metric_proj(h_neutral))
+        waypoints = self.w_plan_expansion(h_goal).reshape(B, self.num_waypoints, self.d_plan)
         waypoints = self.norm_plan(waypoints)
         
         self.active_plan = waypoints.detach()
@@ -769,11 +799,11 @@ class HierarchicalPlanCache(nn.Module):
         h: torch.Tensor,
         curr_step: int,
         compiler_error_signal: float = 0.0
-    ) -> Tuple[torch.Tensor, float, bool]:
+    ) -> Tuple[torch.Tensor, torch.Tensor, float, bool]:
         """
         Evaluates whether observed semantic chunk matches the planned waypoint using
         trigonometric tan(theta/2) * sin(theta/2) formulation and dynamic Key-LogTan noise threshold.
-        Evaluates on semantic chunks (bukan per-token!), preventing myopic thrashing.
+        Returns: (target_wp, alt_wp, mean_div, is_branching)
         """
         B = h.shape[0] if h.ndim == 3 else (h.shape[0] if h.ndim == 2 else 1)
         plan_b = self.active_plan.shape[0]
@@ -792,30 +822,39 @@ class HierarchicalPlanCache(nn.Module):
         # If still accumulating inside chunk and no compiler error, maintain current plan smoothly
         if not is_chunk_ready and compiler_error_signal <= 0.05:
             self.is_branching.fill_(False)
-            return target_wp, float(self.last_discrepancy.item()), False
+            return target_wp, target_wp, float(self.last_discrepancy.item()), False
             
         # 2. Semantic chunk is ready or compiler error reported: evaluate divergence
         h_eval = h_chunk if (is_chunk_ready and h_chunk is not None) else (h.mean(dim=1) if h.ndim == 3 else h)
-        h_obs = self.norm_plan(self.w_reality_proj(h_eval))  # (B, d_plan)
+        if self.eye_d.shape[0] == h_eval.shape[-1]:
+            h_eval_neutral = torch.matmul(h_eval, self.eye_d)
+        else:
+            h_eval_neutral = h_eval
+        h_obs = self.norm_plan(self.w_metric_proj(h_eval_neutral))  # (B, d_plan)
         
         # 3. Trigonometric non-linear divergence: tan(theta/2) * sin(theta/2) (Poin 2)
         _, mean_div = self.floodgate.compute_trigonometric_divergence(h_obs, target_wp)
         self.last_discrepancy.fill_(mean_div)
         
         # 4. Calibrate against dynamic Key-LogTan noise threshold (Poin 3)
-        _, dyn_thresh = self.floodgate.compute_dynamic_key_noise(h_eval)
+        _, dyn_thresh = self.floodgate.compute_dynamic_key_noise(h_eval_neutral)
         
-        # Trigger alternative branching if divergence > dynamic threshold OR real compiler failure occurred (Poin 1)
+        # Trigger alternative branching if divergence > dynamic threshold OR real compiler failure occurred
         is_mismatch = (mean_div > dyn_thresh) or (compiler_error_signal > 0.15)
+        
+        # Compute real residual deviation vector (Poin 2: Menghilangkan incoherent yang berbelok)
+        r_dev = target_wp - h_obs  # (B, d_plan)
+        # Deterministic multi-channel heterogeneity without random white noise
+        channel_freq = torch.cos(torch.linspace(0, math.pi, self.d_plan, device=h.device, dtype=target_wp.dtype))
+        channel_mask = 1.0 + 0.10 * channel_freq.unsqueeze(0)
+        z_incoherent = r_dev * channel_mask
+        
+        err_feat = torch.tensor([[compiler_error_signal]], device=h.device, dtype=target_wp.dtype).expand(B, 1)
+        branch_input = torch.cat([target_wp, h_obs, z_incoherent, err_feat], dim=-1)
+        alt_waypoint = self.norm_plan(self.w_alt_branch(branch_input))
         
         if is_mismatch:
             self.lost_plan[:, curr_step:curr_step+1, :] = target_wp[:self.lost_plan.shape[0]].unsqueeze(1) * 0.50
-            
-            err_feat = torch.tensor([[compiler_error_signal]], device=h.device, dtype=target_wp.dtype).expand(B, 1)
-            branch_input = torch.cat([target_wp, h_obs, err_feat], dim=-1)
-            alt_waypoint = self.w_alt_branch(branch_input)
-            alt_waypoint = self.norm_plan(alt_waypoint)
-            
             if self.active_plan.shape[0] == B:
                 self.active_plan[:, curr_step, :] = alt_waypoint.detach()
             else:
@@ -823,11 +862,11 @@ class HierarchicalPlanCache(nn.Module):
                 
             self.alternative_branches_count += 1
             self.is_branching.fill_(True)
-            return alt_waypoint, mean_div, True
+            return target_wp, alt_waypoint, mean_div, True
         else:
             self.floodgate.update_floodgate_capacity(12.5, is_verified_valid=True)
             self.is_branching.fill_(False)
-            return target_wp, mean_div, False
+            return target_wp, alt_waypoint, mean_div, False
 
     def verify_goal_satisfaction(self, h_goal: torch.Tensor) -> Tuple[bool, float]:
         """
@@ -847,7 +886,8 @@ class HierarchicalPlanCache(nn.Module):
         compiler_error_signal: float = 0.0
     ) -> Tuple[torch.Tensor, Dict[str, Any]]:
         """
-        Applies dynamic latent plan guidance with Cognitive Floodgate & Compiler Test-Drive Feedback.
+        Applies dynamic latent plan guidance with Identity Matrix Anchoring,
+        Candidate Overlay Projection & Selective Blending ("Proyeksi Timpa & Dipilihlah yang Bagus").
         """
         orig_ndim = h.ndim
         if orig_ndim == 2:
@@ -859,35 +899,75 @@ class HierarchicalPlanCache(nn.Module):
         if not self.is_plan_active and needs_plan:
             self.formulate_plan(h)
             
-        delta_plan = torch.zeros(B, L, D, device=h.device, dtype=h.dtype)
+        # 1. Identity Matrix Neutral Baseline (Poin 1: Netral Anchor)
+        if self.eye_d.shape[0] == D:
+            y_0 = torch.matmul(h, self.eye_d)
+        else:
+            y_0 = h.clone()
+            
+        # Compiler test-drive dynamic penalty injection (Poin 1)
+        delta_compiler = self.floodgate.apply_compiler_test_drive_penalty(h, compiler_error_signal)
+        
         discrepancy_score = 0.0
         is_branching = False
         lateral_norm = 0.0
-        
-        # 1. Compiler test-drive dynamic penalty injection (Poin 1)
-        delta_compiler = self.floodgate.apply_compiler_test_drive_penalty(h, compiler_error_signal)
+        weights_selected = [1.0, 0.0, 0.0]
         
         if self.is_plan_active:
             curr_step = min(int(self.current_step_idx.item()), self.num_waypoints - 1)
             
             # Check expectation-reality match at semantic chunk boundaries
-            target_waypoint, discrepancy_score, is_branching = self.check_and_branch_alternative(
+            target_wp, alt_wp, discrepancy_score, is_branching = self.check_and_branch_alternative(
                 h, curr_step, compiler_error_signal=compiler_error_signal
             )
             
-            guidance = self.w_plan_guidance(target_waypoint.to(dtype=h.dtype)).unsqueeze(1)
+            # 2. Candidate Overlay Projections (Poin 2: Proyeksi Timpa)
+            # Candidate 1: Macro Plan Guidance Overlay
+            guidance_plan = self.w_plan_guidance(target_wp.to(dtype=h.dtype)).unsqueeze(1).expand(B, L, D)
+            y_1 = y_0 + torch.tanh(self.alpha_plan) * guidance_plan
             
-            # Incoherent Lateral Perturbation only active when true branching occurs
-            if is_branching:
-                noise = torch.randn_like(guidance)
-                lateral_jump = torch.tanh(noise) * float(discrepancy_score)
-                lateral_perturbation = torch.tanh(self.alpha_lateral) * lateral_jump
-                lateral_norm = float(lateral_perturbation.norm().item())
-                guidance_total = guidance + lateral_perturbation
-            else:
-                guidance_total = guidance
+            # Candidate 2: Alternative Recovery Overlay
+            guidance_alt = self.w_plan_guidance(alt_wp.to(dtype=h.dtype)).unsqueeze(1).expand(B, L, D)
+            y_2 = y_0 + torch.tanh(self.alpha_alt) * guidance_alt - delta_compiler
+            
+            # 3. Quality Evaluation & Boundary Check ("dipilihlah yang bagus")
+            candidates = [y_0, y_1, y_2]
+            q_scores = []
+            
+            for k, y_cand in enumerate(candidates):
+                # A. Syntax Fidelity Boundary (cosine similarity with neutral y_0)
+                cos_syntax = F.cosine_similarity(y_cand, y_0, dim=-1).mean(dim=-1)  # (B,)
+                # Hard boundary barrier: below 0.90 is heavily penalized to protect Python grammar
+                syntax_pen = torch.where(cos_syntax >= 0.90, cos_syntax, cos_syntax - 6.0 * (0.90 - cos_syntax))
                 
-            delta_plan = torch.tanh(self.alpha_plan) * guidance_total.expand(B, L, D) + delta_compiler
+                # B. Goal Specification Affinity
+                goal_target = y_0 + guidance_plan
+                cos_goal = F.cosine_similarity(y_cand, goal_target, dim=-1).mean(dim=-1)  # (B,)
+                
+                # C. Compiler Error Penalty
+                if compiler_error_signal > 0.01:
+                    err_target = y_0 + delta_compiler
+                    err_penalty = compiler_error_signal * torch.relu(F.cosine_similarity(y_cand, err_target, dim=-1).mean(dim=-1))
+                else:
+                    err_penalty = torch.zeros(B, device=h.device, dtype=h.dtype)
+                    
+                # Candidate Fitness Score
+                q_k = 2.0 * syntax_pen + 1.0 * cos_goal - 2.0 * err_penalty
+                q_scores.append(q_k)
+                
+            q_stack = torch.stack(q_scores, dim=-1)  # (B, 3)
+            weights = F.softmax(q_stack / self.temperature, dim=-1)  # (B, 3)
+            weights_selected = [float(weights[0, 0].item()), float(weights[0, 1].item()), float(weights[0, 2].item())]
+            self.overlay_weights.copy_(weights[0].detach())
+            
+            # Selective Overlay Combination ("dipilihlah yang bagus")
+            y_star = (
+                weights[:, 0:1, None] * y_0 +
+                weights[:, 1:2, None] * y_1 +
+                weights[:, 2:3, None] * y_2
+            )
+            delta_plan = y_star - h
+            lateral_norm = float((y_2 - y_1).norm().item()) / max(1, B * L)
         else:
             delta_plan = delta_compiler
             
@@ -905,6 +985,7 @@ class HierarchicalPlanCache(nn.Module):
             "lateral_norm": float(lateral_norm),
             "is_task_completed": bool(self.floodgate.is_task_completed.item()),
             "accumulated_water": float(self.floodgate.accumulated_water.item()),
-            "capacity_limit": self.floodgate.capacity_limit
+            "capacity_limit": self.floodgate.capacity_limit,
+            "overlay_weights": weights_selected
         }
         return delta_plan, info

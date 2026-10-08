@@ -189,12 +189,12 @@ class HADLDynamicRuntime(nn.Module):
         # 2. Parsimonious Slot Binding modulated by router (never hardcoded!)
         delta_saem, _ = self.saem(h, parsimony_scale=parsimony_scale)
         
-        # 3. Emergent Latent Imagination Canvas modulated by router
+        # 3. Emergent Latent Imagination Canvas modulated by router & hydraulic pressure
         if self.enable_canvas:
             delta_dream, _ = self.canvas(h, elaboration_scale=elaboration_scale)
-            h_mod = h + delta + delta_plan + delta_saem + delta_anchor + p * delta_dream
+            h_mod = h + delta + delta_plan + p * (delta_saem + delta_anchor + delta_dream)
         else:
-            h_mod = h + delta + delta_plan + delta_saem + delta_anchor
+            h_mod = h + delta + delta_plan + p * (delta_saem + delta_anchor)
         
         if isinstance(output, tuple):
             return (h_mod,) + output[1:]

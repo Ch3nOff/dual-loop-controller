@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-08 18:06:55",
+  "timestamp": "2026-10-08 20:54:09",
   "device": "cuda:0",
   "model": "/mnt/c/Users/Matthew Chen/Documents/X-Star/dist/staging_hf_fused",
   "benchmark_source": "multimodal-art-projection/NL2RepoBench",
@@ -72,8 +72,8 @@
       "mean_consistency_pct": 100.0,
       "mean_composite_pct": 83.3
     },
-    "avg_latency_sec": 15.9,
-    "throughput_tps": 28.3
+    "avg_latency_sec": 14.77,
+    "throughput_tps": 30.46
   },
   "hadl_elic": {
     "tasks": {
@@ -87,9 +87,9 @@
         "multi_file_structural_coherence_pct": 100.0,
         "package_setup_validity_pct": 100.0,
         "ast_syntax_integrity_pct": 100.0,
-        "api_specification_compliance_pct": 66.7,
+        "api_specification_compliance_pct": 50.0,
         "cross_module_consistency_pct": 100.0,
-        "composite_score_pct": 93.3
+        "composite_score_pct": 90.0
       },
       "coverage_shield": {
         "task_id": "coverage_shield",
@@ -97,36 +97,22 @@
         "files_list": [
           "setup.py",
           "coverage_shield/__init__.py",
-          "unittest_coverage_functions.py"
+          "coverage_shield/unittest_coverage_functions.py"
         ],
-        "multi_file_structural_coherence_pct": 66.7,
-        "package_setup_validity_pct": 50.0,
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
         "ast_syntax_integrity_pct": 66.7,
-        "api_specification_compliance_pct": 100.0,
+        "api_specification_compliance_pct": 50.0,
         "cross_module_consistency_pct": 100.0,
-        "composite_score_pct": 76.7
+        "composite_score_pct": 83.3
       },
       "trimming": {
         "task_id": "trimming",
-        "files_generated_count": 2,
-        "files_list": [
-          "setup.py",
-          "trimming/__init__.py"
-        ],
-        "multi_file_structural_coherence_pct": 66.7,
-        "package_setup_validity_pct": 100.0,
-        "ast_syntax_integrity_pct": 100.0,
-        "api_specification_compliance_pct": 100.0,
-        "cross_module_consistency_pct": 100.0,
-        "composite_score_pct": 93.3
-      },
-      "autorccar": {
-        "task_id": "autorccar",
         "files_generated_count": 3,
         "files_list": [
           "setup.py",
-          "autorccar/__init__.py",
-          "autorccar/driver.py"
+          "trimming/__init__.py",
+          "trimming/core.py"
         ],
         "multi_file_structural_coherence_pct": 100.0,
         "package_setup_validity_pct": 100.0,
@@ -134,17 +120,31 @@
         "api_specification_compliance_pct": 100.0,
         "cross_module_consistency_pct": 100.0,
         "composite_score_pct": 93.3
+      },
+      "autorccar": {
+        "task_id": "autorccar",
+        "files_generated_count": 2,
+        "files_list": [
+          "autorccar/__init__.py",
+          "autorccar/driver.py"
+        ],
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 0.0,
+        "ast_syntax_integrity_pct": 100.0,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 73.3
       }
     },
     "macro": {
-      "mean_structure_pct": 83.3,
-      "mean_setup_pct": 87.5,
+      "mean_structure_pct": 91.7,
+      "mean_setup_pct": 75.0,
       "mean_ast_syntax_pct": 83.3,
-      "mean_api_spec_pct": 91.7,
+      "mean_api_spec_pct": 75.0,
       "mean_consistency_pct": 100.0,
-      "mean_composite_pct": 89.2
+      "mean_composite_pct": 85.0
     },
-    "avg_latency_sec": 15.13,
-    "throughput_tps": 24.07
+    "avg_latency_sec": 15.49,
+    "throughput_tps": 26.49
   }
 }
