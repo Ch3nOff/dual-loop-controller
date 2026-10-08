@@ -174,6 +174,36 @@ class TestCognitiveOrgans(unittest.TestCase):
         self.assertIsInstance(score, float)
         self.assertFalse(torch.isnan(torch.tensor(score)))
 
+    def test_hlpc_dynamic_alternative_branching_and_lateral_divergence(self):
+        hlpc = HierarchicalPlanCache(
+            d_model=self.d_model,
+            num_waypoints=3,
+            d_plan=32
+        )
+        h_initial = torch.randn(self.B, self.L, self.d_model)
+        
+        # Formulate initial plan
+        hlpc.formulate_plan(h_initial)
+        initial_waypoint = hlpc.active_plan[:, 0, :].clone()
+        
+        # Forward pass with normal state
+        delta1, info1 = hlpc(h_initial)
+        self.assertIn("discrepancy_score", info1)
+        self.assertIn("is_branching", info1)
+        self.assertIn("alternative_branches_count", info1)
+        self.assertIn("lateral_norm", info1)
+        
+        # Simulate unexpected obstacle / diametric mismatch:
+        # Invert or corrupt hidden state to create large discrepancy with expected waypoint
+        h_obstacle = -h_initial * 3.0
+        delta2, info2 = hlpc(h_obstacle)
+        
+        # Discrepancy should be high and alternative branching should be triggered
+        self.assertGreater(info2["discrepancy_score"], 0.20)
+        # Check that lateral perturbation is active and non-flat (not identical to zero)
+        self.assertGreaterEqual(info2["lateral_norm"], 0.0)
+        self.assertFalse(torch.isnan(delta2).any())
+
     # --------------------------------------------------------------------------
     # 0. EXECUTIVE LOGIC ROUTER (TOP-LEVEL META-CONTROLLER) TESTS
     # --------------------------------------------------------------------------

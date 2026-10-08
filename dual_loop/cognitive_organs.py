@@ -421,27 +421,55 @@ class HierarchicalPlanCache(nn.Module):
         self.w_plan_encoder = nn.Linear(d_model, num_waypoints * d_plan, bias=False)
         self.norm_plan = nn.LayerNorm(d_plan)
         
-        # 3. Plan Guidance Projector back to d_model
+        # 3. Dynamic Reality Projector & Expectation Mismatch Sensor (ACC Discrepancy Detector)
+        self.w_reality_proj = nn.Linear(d_model, d_plan, bias=False)
+        self.mismatch_threshold = float(0.40)
+        
+        # 4. Dynamic Alternative Route Branching Projector (Plan B Synthesizer)
+        self.w_alt_branch = nn.Sequential(
+            nn.Linear(d_plan * 2 + 1, d_plan, bias=True),
+            nn.LayerNorm(d_plan),
+            nn.GELU(),
+            nn.Linear(d_plan, d_plan, bias=True)
+        )
+        
+        # 5. Stochastic Lateral Divergence ("Incoherent" & Non-Flat Exploration Jump)
+        self.alpha_lateral = nn.Parameter(torch.tensor(0.06))
+        
+        # 6. Plan Guidance Projector back to d_model
         self.w_plan_guidance = nn.Linear(d_plan, d_model, bias=False)
         self.alpha_plan = nn.Parameter(torch.tensor(0.08))
         
-        # 4. Goal Verifier
+        # 7. Goal Verifier
         self.w_goal_verifier = nn.CosineSimilarity(dim=-1)
         
-        # Staging Buffers
+        # Initialize projections cleanly
+        nn.init.orthogonal_(self.w_reality_proj.weight, gain=0.1)
+        nn.init.orthogonal_(self.w_alt_branch[0].weight, gain=0.1)
+        nn.init.zeros_(self.w_alt_branch[0].bias)
+        nn.init.normal_(self.w_alt_branch[3].weight, std=0.01)
+        nn.init.constant_(self.w_alt_branch[3].bias, 0.0)
+        
+        # Staging Buffers & State
         self.register_buffer("active_plan", torch.zeros(1, num_waypoints, d_plan))
         self.register_buffer("lost_plan", torch.zeros(1, num_waypoints, d_plan))
         self.register_buffer("completed_mask", torch.zeros(1, num_waypoints, dtype=torch.bool))
         self.register_buffer("current_step_idx", torch.tensor(0, dtype=torch.long))
         self.register_buffer("is_plan_active", torch.tensor(False, dtype=torch.bool))
+        self.register_buffer("alternative_branches_count", torch.tensor(0, dtype=torch.long))
+        self.register_buffer("last_discrepancy", torch.tensor(0.0))
+        self.register_buffer("is_branching", torch.tensor(False, dtype=torch.bool))
 
     def reset_plan(self):
-        """Clears active plan and LostPlan staging registers."""
+        """Clears active plan, LostPlan staging registers, and branch counters."""
         self.active_plan.zero_()
         self.lost_plan.zero_()
         self.completed_mask.zero_()
         self.current_step_idx.zero_()
         self.is_plan_active.fill_(False)
+        self.alternative_branches_count.zero_()
+        self.last_discrepancy.zero_()
+        self.is_branching.fill_(False)
 
     def should_formulate_plan(self, h: torch.Tensor, planning_urgency: Optional[float] = None) -> Tuple[bool, float]:
         """Evaluates Context Engine to determine if task requires planning."""
@@ -469,6 +497,9 @@ class HierarchicalPlanCache(nn.Module):
         self.completed_mask.zero_()
         self.current_step_idx.zero_()
         self.is_plan_active.fill_(True)
+        self.alternative_branches_count.zero_()
+        self.last_discrepancy.zero_()
+        self.is_branching.fill_(False)
         return waypoints
 
     def advance_substep(self, step_idx: Optional[int] = None):
@@ -492,6 +523,59 @@ class HierarchicalPlanCache(nn.Module):
         if self.current_step_idx.item() >= self.num_waypoints:
             self.is_plan_active.fill_(False)
 
+    def check_and_branch_alternative(
+        self,
+        h_pool: torch.Tensor,
+        curr_step: int
+    ) -> Tuple[torch.Tensor, float, bool]:
+        """
+        Evaluates whether observed latent reality matches the planned waypoint.
+        If discrepancy exceeds threshold (hal yang tidak sesuai), creates an alternative branch (Plan B).
+        """
+        B = h_pool.shape[0]
+        h_obs = self.norm_plan(self.w_reality_proj(h_pool))  # (B, d_plan)
+        
+        plan_b = self.active_plan.shape[0]
+        if plan_b == B:
+            target_wp = self.active_plan[:, curr_step, :]
+        elif plan_b == 1:
+            target_wp = self.active_plan[0:1, curr_step, :].expand(B, -1)
+        else:
+            target_wp = self.active_plan[:min(B, plan_b), curr_step, :]
+            if target_wp.shape[0] < B:
+                target_wp = target_wp.repeat(B // target_wp.shape[0] + 1, 1)[:B]
+                
+        # Cosine similarity between expectation and reality
+        cos_sim = F.cosine_similarity(h_obs, target_wp, dim=-1)  # (B,)
+        # Discrepancy metric in [0, 2] (0 = exact match, 1 = orthogonal, >1 = diametric)
+        discrepancy = (1.0 - cos_sim).clamp(min=0.0)
+        mean_disc = float(discrepancy.mean().item())
+        self.last_discrepancy.fill_(mean_disc)
+        
+        is_mismatch = mean_disc > self.mismatch_threshold
+        if is_mismatch:
+            # 1. Demote failed static expectation into LostPlan with penalty trace
+            self.lost_plan[:, curr_step:curr_step+1, :] = target_wp[:self.lost_plan.shape[0]].unsqueeze(1) * 0.50
+            
+            # 2. Synthesize Alternative Route Waypoint (Plan B)
+            disc_feat = discrepancy.unsqueeze(-1).to(dtype=target_wp.dtype)  # (B, 1)
+            branch_input = torch.cat([target_wp, h_obs, disc_feat], dim=-1)  # (B, 2*d_plan + 1)
+            alt_waypoint = self.w_alt_branch(branch_input)  # (B, d_plan)
+            alt_waypoint = self.norm_plan(alt_waypoint)
+            
+            # 3. Update active plan dynamically
+            if self.active_plan.shape[0] == B:
+                self.active_plan[:, curr_step, :] = alt_waypoint.detach()
+            else:
+                self.active_plan[0, curr_step, :] = alt_waypoint[0:1].detach()
+                
+            self.alternative_branches_count += 1
+            self.is_branching.fill_(True)
+            return alt_waypoint, mean_disc, True
+        else:
+            self.is_branching.fill_(False)
+            return target_wp, mean_disc, False
+
     def verify_goal_satisfaction(self, h_goal: torch.Tensor) -> Tuple[bool, float]:
         """
         Cross-checks accumulated LostPlan against original goal representation.
@@ -512,11 +596,11 @@ class HierarchicalPlanCache(nn.Module):
         planning_urgency: Optional[float] = None
     ) -> Tuple[torch.Tensor, Dict[str, Any]]:
         """
-        Applies latent plan guidance if planning is active or warranted.
+        Applies dynamic latent plan guidance with alternative branching and non-flat lateral divergence.
         
         Returns:
             delta_plan: Latent planning modulation vector (B, L, D) or (B, D)
-            info_dict: Metadata including plan_active, gate_score, and step_idx
+            info_dict: Metadata including plan_active, gate_score, discrepancy, and branching status
         """
         orig_ndim = h.ndim
         if orig_ndim == 2:
@@ -530,19 +614,30 @@ class HierarchicalPlanCache(nn.Module):
             self.formulate_plan(h)
             
         delta_plan = torch.zeros(B, L, D, device=h.device, dtype=h.dtype)
+        discrepancy_score = 0.0
+        is_branching = False
+        lateral_norm = 0.0
+        
         if self.is_plan_active:
             curr_step = min(int(self.current_step_idx.item()), self.num_waypoints - 1)
-            plan_b = self.active_plan.shape[0]
-            if plan_b == B:
-                target_waypoint = self.active_plan[:, curr_step, :]
-            elif plan_b == 1:
-                target_waypoint = self.active_plan[0:1, curr_step, :].expand(B, -1)
-            else:
-                target_waypoint = self.active_plan[:min(B, plan_b), curr_step, :]
-                if target_waypoint.shape[0] < B:
-                    target_waypoint = target_waypoint.repeat(B // target_waypoint.shape[0] + 1, 1)[:B]
+            h_pool = h.mean(dim=1)  # (B, D)
+            
+            # Check expectation-reality match and branch alternative if mismatched
+            target_waypoint, discrepancy_score, is_branching = self.check_and_branch_alternative(h_pool, curr_step)
+            
             guidance = self.w_plan_guidance(target_waypoint.to(dtype=h.dtype)).unsqueeze(1)  # (B, 1, D)
-            delta_plan = torch.tanh(self.alpha_plan) * guidance.expand(B, L, D)
+            
+            # Incoherent Lateral Stochastic Perturbation (breaks flat, monotonous dead-ends)
+            if discrepancy_score > 0.15 or self.training:
+                noise = torch.randn_like(guidance)
+                lateral_jump = torch.tanh(noise) * float(discrepancy_score)
+                lateral_perturbation = torch.tanh(self.alpha_lateral) * lateral_jump
+                lateral_norm = float(lateral_perturbation.norm().item())
+                guidance_total = guidance + lateral_perturbation
+            else:
+                guidance_total = guidance
+                
+            delta_plan = torch.tanh(self.alpha_plan) * guidance_total.expand(B, L, D)
             
         if orig_ndim == 2:
             delta_plan = delta_plan.squeeze(1)
@@ -551,6 +646,10 @@ class HierarchicalPlanCache(nn.Module):
             "is_plan_active": bool(self.is_plan_active.item()),
             "gate_score": float(gate_score),
             "current_step_idx": int(self.current_step_idx.item()),
-            "completed_count": int(self.completed_mask.sum().item())
+            "completed_count": int(self.completed_mask.sum().item()),
+            "discrepancy_score": float(discrepancy_score),
+            "is_branching": bool(is_branching),
+            "alternative_branches_count": int(self.alternative_branches_count.item()),
+            "lateral_norm": float(lateral_norm)
         }
         return delta_plan, info

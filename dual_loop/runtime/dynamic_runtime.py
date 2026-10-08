@@ -175,13 +175,15 @@ class HADLDynamicRuntime(nn.Module):
         h = output[0] if isinstance(output, tuple) else output
         delta, p = self.piston1(h)
         
-        # 0. Executive Logic Router: The Brain's Primary Decision (Fast & Solid vs Long & Detailed)
-        _, regime = self.router(h)
+        # 0. Executive Logic Router: Coupled Dual-Axis Decision (Scope x Density)
+        curr_step = int(self.plan_cache.current_step_idx.item()) if self.plan_cache.is_plan_active else None
+        _, regime = self.router(h, current_step_idx=curr_step)
         parsimony_scale = regime["parsimony_scale"]
         elaboration_scale = regime["elaboration_scale"]
         planning_urgency = regime["planning_urgency"]
+        delta_anchor = regime.get("delta_anchor", 0.0)
         
-        # 1. Executive Plan Guidance modulated by router directive
+        # 1. Executive Plan Guidance with Dynamic Alternative Branching & Lateral Divergence
         delta_plan, _ = self.plan_cache(h, planning_urgency=planning_urgency)
         
         # 2. Parsimonious Slot Binding modulated by router (never hardcoded!)
@@ -190,9 +192,9 @@ class HADLDynamicRuntime(nn.Module):
         # 3. Emergent Latent Imagination Canvas modulated by router
         if self.enable_canvas:
             delta_dream, _ = self.canvas(h, elaboration_scale=elaboration_scale)
-            h_mod = h + delta + delta_plan + delta_saem + p * delta_dream
+            h_mod = h + delta + delta_plan + delta_saem + delta_anchor + p * delta_dream
         else:
-            h_mod = h + delta + delta_plan + delta_saem
+            h_mod = h + delta + delta_plan + delta_saem + delta_anchor
         
         if isinstance(output, tuple):
             return (h_mod,) + output[1:]
