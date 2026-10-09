@@ -6,6 +6,5 @@ generate_content_config: !include ../configs/sampling.yaml
 tools:
   - run_command
   - read_file
-  - search_similar_code
   - get_code_neighbors
   - get_code_subgraph

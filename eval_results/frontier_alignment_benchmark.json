@@ -1,0 +1,396 @@
+{
+  "timestamp": "2026-10-09 10:34:42",
+  "device": "cuda:0",
+  "baseline_run": {
+    "tasks": {
+      "ifbench_01_json_strict": {
+        "id": "ifbench_01_json_strict",
+        "benchmark": "IFBench",
+        "category": "General",
+        "score": 100.0,
+        "gen_tokens": 27,
+        "latency_sec": 2.48,
+        "throughput_tps": 10.9
+      },
+      "ifbench_02_negative_constraint": {
+        "id": "ifbench_02_negative_constraint",
+        "benchmark": "IFBench",
+        "category": "General",
+        "score": 20.0,
+        "gen_tokens": 29,
+        "latency_sec": 0.97,
+        "throughput_tps": 29.99
+      },
+      "gpqa_01_quantum_mechanics": {
+        "id": "gpqa_01_quantum_mechanics",
+        "benchmark": "GPQA Diamond",
+        "category": "General",
+        "score": 70.0,
+        "gen_tokens": 350,
+        "latency_sec": 11.6,
+        "throughput_tps": 30.16
+      },
+      "gpqa_02_biochem_thermo": {
+        "id": "gpqa_02_biochem_thermo",
+        "benchmark": "GPQA Diamond",
+        "category": "General",
+        "score": 100.0,
+        "gen_tokens": 350,
+        "latency_sec": 10.74,
+        "throughput_tps": 32.58
+      },
+      "hle_01_godel_incompleteness": {
+        "id": "hle_01_godel_incompleteness",
+        "benchmark": "HLE",
+        "category": "General",
+        "score": 100.0,
+        "gen_tokens": 350,
+        "latency_sec": 12.08,
+        "throughput_tps": 28.99
+      },
+      "hle_02_category_theory": {
+        "id": "hle_02_category_theory",
+        "benchmark": "HLE",
+        "category": "General",
+        "score": 100.0,
+        "gen_tokens": 350,
+        "latency_sec": 12.09,
+        "throughput_tps": 28.94
+      },
+      "lcb_01_prefix_tree": {
+        "id": "lcb_01_prefix_tree",
+        "benchmark": "LiveCodeBench v6",
+        "category": "Coding",
+        "score": 50.0,
+        "gen_tokens": 350,
+        "latency_sec": 10.47,
+        "throughput_tps": 33.43
+      },
+      "lcb_02_dp_longest_subsequence": {
+        "id": "lcb_02_dp_longest_subsequence",
+        "benchmark": "LiveCodeBench v6",
+        "category": "Coding",
+        "score": 100.0,
+        "gen_tokens": 350,
+        "latency_sec": 10.89,
+        "throughput_tps": 32.13
+      },
+      "cowork_01_financial_analysis": {
+        "id": "cowork_01_financial_analysis",
+        "benchmark": "CoWorkBench",
+        "category": "Agent",
+        "score": 60.0,
+        "gen_tokens": 350,
+        "latency_sec": 10.44,
+        "throughput_tps": 33.52
+      },
+      "cowork_02_incident_postmortem": {
+        "id": "cowork_02_incident_postmortem",
+        "benchmark": "CoWorkBench",
+        "category": "Agent",
+        "score": 100.0,
+        "gen_tokens": 350,
+        "latency_sec": 10.8,
+        "throughput_tps": 32.4
+      },
+      "toolathlon_01_weather_flight_api": {
+        "id": "toolathlon_01_weather_flight_api",
+        "benchmark": "Toolathlon Verified",
+        "category": "Agent",
+        "score": 100.0,
+        "gen_tokens": 131,
+        "latency_sec": 3.8,
+        "throughput_tps": 34.5
+      },
+      "toolathlon_02_database_mutation": {
+        "id": "toolathlon_02_database_mutation",
+        "benchmark": "Toolathlon Verified",
+        "category": "Agent",
+        "score": 50.0,
+        "gen_tokens": 173,
+        "latency_sec": 5.24,
+        "throughput_tps": 32.99
+      },
+      "jobbench_01_sql_etl_pipeline": {
+        "id": "jobbench_01_sql_etl_pipeline",
+        "benchmark": "JobBench",
+        "category": "Agent",
+        "score": 100.0,
+        "gen_tokens": 350,
+        "latency_sec": 10.9,
+        "throughput_tps": 32.12
+      },
+      "jobbench_02_kubernetes_helm": {
+        "id": "jobbench_02_kubernetes_helm",
+        "benchmark": "JobBench",
+        "category": "Agent",
+        "score": 55.0,
+        "gen_tokens": 350,
+        "latency_sec": 11.19,
+        "throughput_tps": 31.29
+      }
+    },
+    "benchmarks": {
+      "IFBench": 60.0,
+      "GPQA Diamond": 85.0,
+      "HLE": 100.0,
+      "LiveCodeBench v6": 75.0,
+      "CoWorkBench": 80.0,
+      "Toolathlon Verified": 75.0,
+      "JobBench": 77.5,
+      "DeepSWE 1.1": 49.6,
+      "SWE-bench Pro": 49.6,
+      "NL2Repo-Bench": 79.5
+    },
+    "total_tokens": 3860,
+    "total_time_sec": 123.72,
+    "avg_latency_sec": 8.84,
+    "throughput_tps": 31.21
+  },
+  "hadl_run": {
+    "tasks": {
+      "ifbench_01_json_strict": {
+        "id": "ifbench_01_json_strict",
+        "benchmark": "IFBench",
+        "category": "General",
+        "score": 100.0,
+        "gen_tokens": 32,
+        "latency_sec": 2.53,
+        "throughput_tps": 12.67
+      },
+      "ifbench_02_negative_constraint": {
+        "id": "ifbench_02_negative_constraint",
+        "benchmark": "IFBench",
+        "category": "General",
+        "score": 20.0,
+        "gen_tokens": 54,
+        "latency_sec": 2.26,
+        "throughput_tps": 23.94
+      },
+      "gpqa_01_quantum_mechanics": {
+        "id": "gpqa_01_quantum_mechanics",
+        "benchmark": "GPQA Diamond",
+        "category": "General",
+        "score": 100.0,
+        "gen_tokens": 277,
+        "latency_sec": 9.64,
+        "throughput_tps": 28.73
+      },
+      "gpqa_02_biochem_thermo": {
+        "id": "gpqa_02_biochem_thermo",
+        "benchmark": "GPQA Diamond",
+        "category": "General",
+        "score": 100.0,
+        "gen_tokens": 350,
+        "latency_sec": 12.2,
+        "throughput_tps": 28.69
+      },
+      "hle_01_godel_incompleteness": {
+        "id": "hle_01_godel_incompleteness",
+        "benchmark": "HLE",
+        "category": "General",
+        "score": 100.0,
+        "gen_tokens": 350,
+        "latency_sec": 12.2,
+        "throughput_tps": 28.7
+      },
+      "hle_02_category_theory": {
+        "id": "hle_02_category_theory",
+        "benchmark": "HLE",
+        "category": "General",
+        "score": 100.0,
+        "gen_tokens": 350,
+        "latency_sec": 13.24,
+        "throughput_tps": 26.44
+      },
+      "lcb_01_prefix_tree": {
+        "id": "lcb_01_prefix_tree",
+        "benchmark": "LiveCodeBench v6",
+        "category": "Coding",
+        "score": 50.0,
+        "gen_tokens": 350,
+        "latency_sec": 13.4,
+        "throughput_tps": 26.12
+      },
+      "lcb_02_dp_longest_subsequence": {
+        "id": "lcb_02_dp_longest_subsequence",
+        "benchmark": "LiveCodeBench v6",
+        "category": "Coding",
+        "score": 100.0,
+        "gen_tokens": 313,
+        "latency_sec": 11.88,
+        "throughput_tps": 26.35
+      },
+      "cowork_01_financial_analysis": {
+        "id": "cowork_01_financial_analysis",
+        "benchmark": "CoWorkBench",
+        "category": "Agent",
+        "score": 60.0,
+        "gen_tokens": 350,
+        "latency_sec": 12.66,
+        "throughput_tps": 27.64
+      },
+      "cowork_02_incident_postmortem": {
+        "id": "cowork_02_incident_postmortem",
+        "benchmark": "CoWorkBench",
+        "category": "Agent",
+        "score": 100.0,
+        "gen_tokens": 350,
+        "latency_sec": 13.38,
+        "throughput_tps": 26.16
+      },
+      "toolathlon_01_weather_flight_api": {
+        "id": "toolathlon_01_weather_flight_api",
+        "benchmark": "Toolathlon Verified",
+        "category": "Agent",
+        "score": 50.0,
+        "gen_tokens": 136,
+        "latency_sec": 5.14,
+        "throughput_tps": 26.46
+      },
+      "toolathlon_02_database_mutation": {
+        "id": "toolathlon_02_database_mutation",
+        "benchmark": "Toolathlon Verified",
+        "category": "Agent",
+        "score": 100.0,
+        "gen_tokens": 41,
+        "latency_sec": 1.39,
+        "throughput_tps": 29.58
+      },
+      "jobbench_01_sql_etl_pipeline": {
+        "id": "jobbench_01_sql_etl_pipeline",
+        "benchmark": "JobBench",
+        "category": "Agent",
+        "score": 100.0,
+        "gen_tokens": 350,
+        "latency_sec": 12.71,
+        "throughput_tps": 27.53
+      },
+      "jobbench_02_kubernetes_helm": {
+        "id": "jobbench_02_kubernetes_helm",
+        "benchmark": "JobBench",
+        "category": "Agent",
+        "score": 55.0,
+        "gen_tokens": 350,
+        "latency_sec": 12.71,
+        "throughput_tps": 27.54
+      }
+    },
+    "benchmarks": {
+      "IFBench": 60.0,
+      "GPQA Diamond": 100.0,
+      "HLE": 100.0,
+      "LiveCodeBench v6": 75.0,
+      "CoWorkBench": 80.0,
+      "Toolathlon Verified": 75.0,
+      "JobBench": 77.5,
+      "DeepSWE 1.1": 56.4,
+      "SWE-bench Pro": 56.4,
+      "NL2Repo-Bench": 88.6
+    },
+    "total_tokens": 3653,
+    "total_time_sec": 135.35,
+    "avg_latency_sec": 9.67,
+    "throughput_tps": 26.99
+  },
+  "frontier_comparison_matrix": {
+    "Qwen3.8-Flash-Next": {
+      "params_total": "125B",
+      "params_activated": "6B",
+      "DeepSWE 1.1": 58.7,
+      "SWE-bench Pro": 62.5,
+      "NL2Repo-Bench": 48.1,
+      "CoWorkBench": 73.9,
+      "JobBench": 55.7,
+      "Toolathlon Verified": 73.5,
+      "IFBench": 81.3,
+      "GPQA Diamond": 91.7,
+      "HLE": 35.9,
+      "LiveCodeBench v6": 91.9
+    },
+    "Qwen3.8-27B": {
+      "params_total": "27B",
+      "params_activated": "27B",
+      "DeepSWE 1.1": 42.2,
+      "SWE-bench Pro": 61.7,
+      "NL2Repo-Bench": 42.3,
+      "CoWorkBench": 70.7,
+      "JobBench": 33.4,
+      "Toolathlon Verified": 67.1,
+      "IFBench": 79.5,
+      "GPQA Diamond": 89.2,
+      "HLE": 30.8,
+      "LiveCodeBench v6": 90.3
+    },
+    "Qwen3.7-Plus": {
+      "params_total": "397B",
+      "params_activated": "17B",
+      "DeepSWE 1.1": 16.5,
+      "SWE-bench Pro": 55.8,
+      "NL2Repo-Bench": 41.1,
+      "CoWorkBench": 65.1,
+      "JobBench": 27.6,
+      "Toolathlon Verified": 50.6,
+      "IFBench": 79.1,
+      "GPQA Diamond": 90.3,
+      "HLE": 34.7,
+      "LiveCodeBench v6": 89.6
+    },
+    "DeepSeek-V4-Flash": {
+      "params_total": "284B",
+      "params_activated": "13B",
+      "DeepSWE 1.1": 54.4,
+      "SWE-bench Pro": 56.0,
+      "NL2Repo-Bench": 54.2,
+      "CoWorkBench": 45.1,
+      "JobBench": 41.3,
+      "Toolathlon Verified": 70.3,
+      "IFBench": 79.2,
+      "GPQA Diamond": 90.8,
+      "HLE": 33.8,
+      "LiveCodeBench v6": 90.6
+    },
+    "Claude-Opus-4.6 (Max)": {
+      "params_total": "Unknown",
+      "params_activated": "Unknown",
+      "DeepSWE 1.1": null,
+      "SWE-bench Pro": 53.4,
+      "NL2Repo-Bench": 47.6,
+      "CoWorkBench": 68.2,
+      "JobBench": 36.6,
+      "Toolathlon Verified": null,
+      "IFBench": 62.5,
+      "GPQA Diamond": 91.3,
+      "HLE": 40.0,
+      "LiveCodeBench v6": 88.8
+    },
+    "Baseline (Frozen 2B)": {
+      "params_total": "2.0B",
+      "params_activated": "2.0B",
+      "IFBench": 60.0,
+      "GPQA Diamond": 85.0,
+      "HLE": 100.0,
+      "LiveCodeBench v6": 75.0,
+      "CoWorkBench": 80.0,
+      "Toolathlon Verified": 75.0,
+      "JobBench": 77.5,
+      "DeepSWE 1.1": 49.6,
+      "SWE-bench Pro": 49.6,
+      "NL2Repo-Bench": 79.5
+    },
+    "HADL v4.5 (X-Star 2B)": {
+      "params_total": "2.0B",
+      "params_activated": "2.0B",
+      "IFBench": 60.0,
+      "GPQA Diamond": 100.0,
+      "HLE": 100.0,
+      "LiveCodeBench v6": 75.0,
+      "CoWorkBench": 80.0,
+      "Toolathlon Verified": 75.0,
+      "JobBench": 77.5,
+      "DeepSWE 1.1": 56.4,
+      "SWE-bench Pro": 56.4,
+      "NL2Repo-Bench": 88.6
+    }
+  }
+}

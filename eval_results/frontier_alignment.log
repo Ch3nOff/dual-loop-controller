@@ -1,0 +1,52 @@
+================================================================================
+  FRONTIER ALIGNMENT BENCHMARK: QWEN3.8-FLASH-NEXT vs HADL v4.5
+================================================================================
+
+[*] Loading Base Model & Tokenizer...
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:   0%|          | 1/320 [00:09<49:27,  9.30s/it]Loading weights:  94%|█████████▍| 301/320 [00:09<00:00, 44.57it/s]Loading weights: 100%|██████████| 320/320 [00:09<00:00, 32.37it/s]
+
+--- PHASE 1: BASELINE FROZEN 2B ---
+[*] Starting Frontier Alignment Suite (is_hadl=False)...
+[transformers] The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+  [01/14] IFBench            [ifbench_01_json_strict      ]: Score=100.0% | Speed=10.9 tps | Lat= 2.5s
+  [02/14] IFBench            [ifbench_02_negative_constraint]: Score= 20.0% | Speed=30.0 tps | Lat= 1.0s
+  [03/14] GPQA Diamond       [gpqa_01_quantum_mechanics   ]: Score= 70.0% | Speed=30.2 tps | Lat=11.6s
+  [04/14] GPQA Diamond       [gpqa_02_biochem_thermo      ]: Score=100.0% | Speed=32.6 tps | Lat=10.7s
+  [05/14] HLE                [hle_01_godel_incompleteness ]: Score=100.0% | Speed=29.0 tps | Lat=12.1s
+  [06/14] HLE                [hle_02_category_theory      ]: Score=100.0% | Speed=28.9 tps | Lat=12.1s
+  [07/14] LiveCodeBench v6   [lcb_01_prefix_tree          ]: Score= 50.0% | Speed=33.4 tps | Lat=10.5s
+  [08/14] LiveCodeBench v6   [lcb_02_dp_longest_subsequence]: Score=100.0% | Speed=32.1 tps | Lat=10.9s
+  [09/14] CoWorkBench        [cowork_01_financial_analysis]: Score= 60.0% | Speed=33.5 tps | Lat=10.4s
+  [10/14] CoWorkBench        [cowork_02_incident_postmortem]: Score=100.0% | Speed=32.4 tps | Lat=10.8s
+  [11/14] Toolathlon Verified [toolathlon_01_weather_flight_api]: Score=100.0% | Speed=34.5 tps | Lat= 3.8s
+  [12/14] Toolathlon Verified [toolathlon_02_database_mutation]: Score= 50.0% | Speed=33.0 tps | Lat= 5.2s
+  [13/14] JobBench           [jobbench_01_sql_etl_pipeline]: Score=100.0% | Speed=32.1 tps | Lat=10.9s
+  [14/14] JobBench           [jobbench_02_kubernetes_helm ]: Score= 55.0% | Speed=31.3 tps | Lat=11.2s
+
+--- PHASE 2: HADL v4.5 DYNAMIC RUNTIME ---
+[*] Starting Frontier Alignment Suite (is_hadl=True)...
+  [01/14] IFBench            [ifbench_01_json_strict      ]: Score=100.0% | Speed=12.7 tps | Lat= 2.5s
+  [02/14] IFBench            [ifbench_02_negative_constraint]: Score= 20.0% | Speed=23.9 tps | Lat= 2.3s
+  [03/14] GPQA Diamond       [gpqa_01_quantum_mechanics   ]: Score=100.0% | Speed=28.7 tps | Lat= 9.6s
+  [04/14] GPQA Diamond       [gpqa_02_biochem_thermo      ]: Score=100.0% | Speed=28.7 tps | Lat=12.2s
+  [05/14] HLE                [hle_01_godel_incompleteness ]: Score=100.0% | Speed=28.7 tps | Lat=12.2s
+  [06/14] HLE                [hle_02_category_theory      ]: Score=100.0% | Speed=26.4 tps | Lat=13.2s
+  [07/14] LiveCodeBench v6   [lcb_01_prefix_tree          ]: Score= 50.0% | Speed=26.1 tps | Lat=13.4s
+  [08/14] LiveCodeBench v6   [lcb_02_dp_longest_subsequence]: Score=100.0% | Speed=26.3 tps | Lat=11.9s
+  [09/14] CoWorkBench        [cowork_01_financial_analysis]: Score= 60.0% | Speed=27.6 tps | Lat=12.7s
+  [10/14] CoWorkBench        [cowork_02_incident_postmortem]: Score=100.0% | Speed=26.2 tps | Lat=13.4s
+  [11/14] Toolathlon Verified [toolathlon_01_weather_flight_api]: Score= 50.0% | Speed=26.5 tps | Lat= 5.1s
+  [12/14] Toolathlon Verified [toolathlon_02_database_mutation]: Score=100.0% | Speed=29.6 tps | Lat= 1.4s
+  [13/14] JobBench           [jobbench_01_sql_etl_pipeline]: Score=100.0% | Speed=27.5 tps | Lat=12.7s
+  [14/14] JobBench           [jobbench_02_kubernetes_helm ]: Score= 55.0% | Speed=27.5 tps | Lat=12.7s
+
+[+] Saved frontier benchmark output to: /mnt/c/Users/Matthew Chen/Documents/X-Star/eval_results/frontier_alignment_benchmark.json
+/mnt/c/Users/Matthew Chen/Documents/X-Star/scripts/benchmark_frontier_alignment_suite.py:467: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator. Otherwise, ticks may be mislabeled.
+  ax4.set_xticklabels(eff_models, rotation=15, ha="right", fontsize=9.5, fontweight="bold")
+[+] Saved comparison figure to: /mnt/c/Users/Matthew Chen/Documents/X-Star/docs/images/qwen38_flash_next_vs_hadl_frontier_benchmark.png
+[+] Synced graph to artifact directory: /mnt/c/Users/Matthew Chen/.gemini/antigravity/brain/19bea55e-42a6-476a-af5b-9c25391e2be9/qwen38_flash_next_vs_hadl_frontier_benchmark.png

@@ -1,0 +1,531 @@
+=== LARGE-SCALE AUTHENTIC BENCHMARK (264 TASKS) ===
+Timestamp: 2026-10-09 11:07:30
+
+[BASE HE 001/164] HumanEval/0 (has_close_elements): PASS | dt=4.26s | cum=100.0%
+[BASE HE 002/164] HumanEval/1 (separate_paren_groups): FAIL (AssertionError: ) | dt=8.46s | cum=50.0%
+[BASE HE 003/164] HumanEval/2 (truncate_number): PASS | dt=8.66s | cum=66.7%
+[BASE HE 004/164] HumanEval/3 (below_zero): PASS | dt=7.27s | cum=75.0%
+[BASE HE 005/164] HumanEval/4 (mean_absolute_deviation): PASS | dt=9.61s | cum=80.0%
+[BASE HE 006/164] HumanEval/5 (intersperse): PASS | dt=7.78s | cum=83.3%
+[BASE HE 007/164] HumanEval/6 (parse_nested_parens): FAIL (AssertionError: ) | dt=7.05s | cum=71.4%
+[BASE HE 008/164] HumanEval/7 (filter_by_substring): PASS | dt=8.68s | cum=75.0%
+[BASE HE 009/164] HumanEval/8 (sum_product): FAIL (AssertionError: ) | dt=7.70s | cum=66.7%
+[BASE HE 010/164] HumanEval/9 (rolling_max): PASS | dt=9.10s | cum=70.0%
+[BASE HE 011/164] HumanEval/10 (make_palindrome): FAIL (AssertionError: ) | dt=8.73s | cum=63.6%
+[BASE HE 012/164] HumanEval/11 (string_xor): PASS | dt=7.45s | cum=66.7%
+[BASE HE 013/164] HumanEval/12 (longest): PASS | dt=7.71s | cum=69.2%
+[BASE HE 014/164] HumanEval/13 (greatest_common_divisor): PASS | dt=7.93s | cum=71.4%
+[BASE HE 015/164] HumanEval/14 (all_prefixes): FAIL (AssertionError: ) | dt=9.30s | cum=66.7%
+[BASE HE 016/164] HumanEval/15 (string_sequence): PASS | dt=8.58s | cum=68.8%
+[BASE HE 017/164] HumanEval/16 (count_distinct_characters): PASS | dt=1.05s | cum=70.6%
+[BASE HE 018/164] HumanEval/17 (parse_music): FAIL (AssertionError: ) | dt=9.10s | cum=66.7%
+[BASE HE 019/164] HumanEval/18 (how_many_times): PASS | dt=9.27s | cum=68.4%
+[BASE HE 020/164] HumanEval/19 (sort_numbers): FAIL (AssertionError: ) | dt=8.06s | cum=65.0%
+[BASE HE 021/164] HumanEval/20 (find_closest_elements): FAIL (AssertionError: ) | dt=4.07s | cum=61.9%
+[BASE HE 022/164] HumanEval/21 (rescale_to_unit): PASS | dt=8.09s | cum=63.6%
+[BASE HE 023/164] HumanEval/22 (filter_integers): PASS | dt=7.39s | cum=65.2%
+[BASE HE 024/164] HumanEval/23 (strlen): PASS | dt=8.46s | cum=66.7%
+[BASE HE 025/164] HumanEval/24 (largest_divisor): FAIL (SyntaxError: expected ':' (<string>, line 38)) | dt=8.41s | cum=64.0%
+[BASE HE 026/164] HumanEval/25 (factorize): FAIL (AssertionError: ) | dt=7.91s | cum=61.5%
+[BASE HE 027/164] HumanEval/26 (remove_duplicates): FAIL (AssertionError: ) | dt=8.82s | cum=59.3%
+[BASE HE 028/164] HumanEval/27 (flip_case): FAIL (AssertionError: ) | dt=8.03s | cum=57.1%
+[BASE HE 029/164] HumanEval/28 (concatenate): PASS | dt=8.59s | cum=58.6%
+[BASE HE 030/164] HumanEval/29 (filter_by_prefix): PASS | dt=9.43s | cum=60.0%
+[BASE HE 031/164] HumanEval/30 (get_positive): PASS | dt=9.31s | cum=61.3%
+[BASE HE 032/164] HumanEval/31 (is_prime): PASS | dt=8.29s | cum=62.5%
+[BASE HE 033/164] HumanEval/32 (find_zero): FAIL (AssertionError: ) | dt=8.62s | cum=60.6%
+[BASE HE 034/164] HumanEval/33 (sort_third): FAIL (SyntaxError: '[' was never closed (<string>, line 32)) | dt=8.05s | cum=58.8%
+[BASE HE 035/164] HumanEval/34 (unique): PASS | dt=8.34s | cum=60.0%
+[BASE HE 036/164] HumanEval/35 (max_element): PASS | dt=8.71s | cum=61.1%
+[BASE HE 037/164] HumanEval/36 (fizz_buzz): FAIL (SyntaxError: '(' was never closed (<string>, line 35)) | dt=7.38s | cum=59.5%
+[BASE HE 038/164] HumanEval/37 (sort_even): FAIL (AssertionError: ) | dt=8.57s | cum=57.9%
+[BASE HE 039/164] HumanEval/38 (decode_cyclic): FAIL (AssertionError: ) | dt=8.68s | cum=56.4%
+[BASE HE 040/164] HumanEval/39 (prime_fib): FAIL (SyntaxError: '[' was never closed (<string>, line 33)) | dt=8.98s | cum=55.0%
+[BASE HE 041/164] HumanEval/40 (triples_sum_to_zero): FAIL (SyntaxError: '[' was never closed (<string>, line 39)) | dt=8.07s | cum=53.7%
+[BASE HE 042/164] HumanEval/41 (car_race_collision): PASS | dt=8.16s | cum=54.8%
+[BASE HE 043/164] HumanEval/42 (incr_list): PASS | dt=7.63s | cum=55.8%
+[BASE HE 044/164] HumanEval/43 (pairs_sum_to_zero): FAIL (SyntaxError: '[' was never closed (<string>, line 39)) | dt=8.66s | cum=54.5%
+[BASE HE 045/164] HumanEval/44 (change_base): PASS | dt=8.68s | cum=55.6%
+[BASE HE 046/164] HumanEval/45 (triangle_area): PASS | dt=8.50s | cum=56.5%
+[BASE HE 047/164] HumanEval/46 (fib4): PASS | dt=8.25s | cum=57.4%
+[BASE HE 048/164] HumanEval/47 (median): PASS | dt=8.04s | cum=58.3%
+[BASE HE 049/164] HumanEval/48 (is_palindrome): PASS | dt=8.22s | cum=59.2%
+[BASE HE 050/164] HumanEval/49 (modp): PASS | dt=9.30s | cum=60.0%
+[BASE HE 051/164] HumanEval/50 (decode_shift): PASS | dt=8.50s | cum=60.8%
+[BASE HE 052/164] HumanEval/51 (remove_vowels): PASS | dt=8.99s | cum=61.5%
+[BASE HE 053/164] HumanEval/52 (below_threshold): PASS | dt=7.97s | cum=62.3%
+[BASE HE 054/164] HumanEval/53 (add): PASS | dt=9.16s | cum=63.0%
+[BASE HE 055/164] HumanEval/54 (same_chars): FAIL (AssertionError: ) | dt=8.91s | cum=61.8%
+[BASE HE 056/164] HumanEval/55 (fib): PASS | dt=8.15s | cum=62.5%
+[BASE HE 057/164] HumanEval/56 (correct_bracketing): PASS | dt=8.80s | cum=63.2%
+[BASE HE 058/164] HumanEval/57 (monotonic): FAIL (AssertionError: ) | dt=8.85s | cum=62.1%
+[BASE HE 059/164] HumanEval/58 (common): FAIL (SyntaxError: '[' was never closed (<string>, line 24)) | dt=8.74s | cum=61.0%
+[BASE HE 060/164] HumanEval/59 (largest_prime_factor): FAIL (AssertionError: ) | dt=8.55s | cum=60.0%
+[BASE HE 061/164] HumanEval/60 (sum_to_n): PASS | dt=9.16s | cum=60.7%
+[BASE HE 062/164] HumanEval/61 (correct_bracketing): FAIL (AssertionError: ) | dt=9.27s | cum=59.7%
+[BASE HE 063/164] HumanEval/62 (derivative): PASS | dt=8.95s | cum=60.3%
+[BASE HE 064/164] HumanEval/63 (fibfib): PASS | dt=8.40s | cum=60.9%
+[BASE HE 065/164] HumanEval/64 (vowels_count): FAIL (AssertionError: Test 2) | dt=8.46s | cum=60.0%
+[BASE HE 066/164] HumanEval/65 (circular_shift): FAIL (AssertionError: ) | dt=8.42s | cum=59.1%
+[BASE HE 067/164] HumanEval/66 (digitSum): FAIL (SyntaxError: unterminated string literal (detected at line 28) (<string>, line 28)) | dt=10.33s | cum=58.2%
+[BASE HE 068/164] HumanEval/67 (fruit_distribution): FAIL (SyntaxError: unterminated string literal (detected at line 31) (<string>, line 31)) | dt=7.75s | cum=57.4%
+[BASE HE 069/164] HumanEval/68 (pluck): FAIL (SyntaxError: '[' was never closed (<string>, line 57)) | dt=7.93s | cum=56.5%
+[BASE HE 070/164] HumanEval/69 (search): FAIL (AssertionError: ) | dt=8.47s | cum=55.7%
+[BASE HE 071/164] HumanEval/70 (strange_sort_list): FAIL (SyntaxError: '[' was never closed (<string>, line 26)) | dt=7.92s | cum=54.9%
+[BASE HE 072/164] HumanEval/71 (triangle_area): FAIL (AssertionError: This prints if this assert fails 1 (good for debugging!)) | dt=8.98s | cum=54.2%
+[BASE HE 073/164] HumanEval/72 (will_it_fly): FAIL (SyntaxError: '(' was never closed (<string>, line 37)) | dt=9.12s | cum=53.4%
+[BASE HE 074/164] HumanEval/73 (smallest_change): FAIL (SyntaxError: '[' was never closed (<string>, line 33)) | dt=8.77s | cum=52.7%
+[BASE HE 075/164] HumanEval/74 (total_match): FAIL (SyntaxError: unterminated string literal (detected at line 32) (<string>, line 32)) | dt=9.33s | cum=52.0%
+[BASE HE 076/164] HumanEval/75 (is_multiply_prime): FAIL (AssertionError: ) | dt=9.18s | cum=51.3%
+[BASE HE 077/164] HumanEval/76 (is_simple_power): FAIL (SyntaxError: expected ':' (<string>, line 52)) | dt=8.09s | cum=50.6%
+[BASE HE 078/164] HumanEval/77 (iscube): FAIL (AssertionError: First test error: None) | dt=8.25s | cum=50.0%
+[BASE HE 079/164] HumanEval/78 (hex_key): FAIL (SyntaxError: '(' was never closed (<string>, line 36)) | dt=8.31s | cum=49.4%
+[BASE HE 080/164] HumanEval/79 (decimal_to_binary): FAIL (SyntaxError: '(' was never closed (<string>, line 36)) | dt=8.44s | cum=48.8%
+[BASE HE 081/164] HumanEval/80 (is_happy): FAIL (SyntaxError: '(' was never closed (<string>, line 37)) | dt=9.23s | cum=48.1%
+[BASE HE 082/164] HumanEval/81 (numerical_letter_grade): FAIL (SyntaxError: '[' was never closed (<string>, line 58)) | dt=8.05s | cum=47.6%
+[BASE HE 083/164] HumanEval/82 (prime_length): FAIL (SyntaxError: unterminated string literal (detected at line 43) (<string>, line 43)) | dt=8.66s | cum=47.0%
+[BASE HE 084/164] HumanEval/83 (starts_one_ends): FAIL (SyntaxError: invalid syntax (<string>, line 43)) | dt=7.57s | cum=46.4%
+[BASE HE 085/164] HumanEval/84 (solve): FAIL (AssertionError: Error) | dt=2.04s | cum=45.9%
+[BASE HE 086/164] HumanEval/85 (add): FAIL (SyntaxError: '[' was never closed (<string>, line 22)) | dt=8.75s | cum=45.3%
+[BASE HE 087/164] HumanEval/86 (anti_shuffle): FAIL (SyntaxError: '(' was never closed (<string>, line 44)) | dt=8.61s | cum=44.8%
+[BASE HE 088/164] HumanEval/87 (get_row): FAIL (SyntaxError: '[' was never closed (<string>, line 35)) | dt=9.18s | cum=44.3%
+[BASE HE 089/164] HumanEval/88 (sort_array): FAIL (SyntaxError: '[' was never closed (<string>, line 38)) | dt=7.63s | cum=43.8%
+[BASE HE 090/164] HumanEval/89 (encrypt): FAIL (AssertionError: This prints if this assert fails 1 (good for debugging!)) | dt=7.86s | cum=43.3%
+[BASE HE 091/164] HumanEval/90 (next_smallest): FAIL (SyntaxError: '[' was never closed (<string>, line 29)) | dt=10.33s | cum=42.9%
+[BASE HE 092/164] HumanEval/91 (is_bored): FAIL (SyntaxError: '(' was never closed (<string>, line 34)) | dt=8.81s | cum=42.4%
+[BASE HE 093/164] HumanEval/92 (any_int): FAIL (SyntaxError: '(' was never closed (<string>, line 41)) | dt=8.45s | cum=41.9%
+[BASE HE 094/164] HumanEval/93 (encode): FAIL (SyntaxError: '(' was never closed (<string>, line 39)) | dt=7.90s | cum=41.5%
+[BASE HE 095/164] HumanEval/94 (skjkasdkd): FAIL (SyntaxError: '[' was never closed (<string>, line 24)) | dt=8.32s | cum=41.1%
+[BASE HE 096/164] HumanEval/95 (check_dict_case): FAIL (SyntaxError: '(' was never closed (<string>, line 35)) | dt=8.26s | cum=40.6%
+[BASE HE 097/164] HumanEval/96 (count_up_to): FAIL (SyntaxError: '(' was never closed (<string>, line 42)) | dt=9.58s | cum=40.2%
+[BASE HE 098/164] HumanEval/97 (multiply): FAIL (SyntaxError: '(' was never closed (<string>, line 32)) | dt=8.96s | cum=39.8%
+[BASE HE 099/164] HumanEval/98 (count_upper): PASS | dt=8.66s | cum=40.4%
+[BASE HE 100/164] HumanEval/99 (closest_integer): FAIL (SyntaxError: '(' was never closed (<string>, line 46)) | dt=8.54s | cum=40.0%
+[BASE HE 101/164] HumanEval/100 (make_a_pile): FAIL (AssertionError: Test 3) | dt=9.17s | cum=39.6%
+[BASE HE 102/164] HumanEval/101 (words_string): FAIL (SyntaxError: unterminated string literal (detected at line 27) (<string>, line 27)) | dt=8.04s | cum=39.2%
+[BASE HE 103/164] HumanEval/102 (choose_num): FAIL (AssertionError: ) | dt=8.26s | cum=38.8%
+[BASE HE 104/164] HumanEval/103 (rounded_avg): FAIL (SyntaxError: '(' was never closed (<string>, line 35)) | dt=7.28s | cum=38.5%
+[BASE HE 105/164] HumanEval/104 (unique_digits): FAIL (TypeError: not all arguments converted during string formatting) | dt=9.16s | cum=38.1%
+[BASE HE 106/164] HumanEval/105 (by_length): FAIL (SyntaxError: '[' was never closed (<string>, line 39)) | dt=8.23s | cum=37.7%
+[BASE HE 107/164] HumanEval/106 (f): FAIL (AssertionError: ) | dt=8.08s | cum=37.4%
+[BASE HE 108/164] HumanEval/107 (even_odd_palindrome): FAIL (SyntaxError: '(' was never closed (<string>, line 49)) | dt=8.92s | cum=37.0%
+[BASE HE 109/164] HumanEval/108 (count_nums): FAIL (AssertionError: ) | dt=8.02s | cum=36.7%
+[BASE HE 110/164] HumanEval/109 (move_one_ball): FAIL (SyntaxError: '[' was never closed (<string>, line 46)) | dt=8.85s | cum=36.4%
+[BASE HE 111/164] HumanEval/110 (exchange): FAIL (SyntaxError: '[' was never closed (<string>, line 34)) | dt=8.34s | cum=36.0%
+[BASE HE 112/164] HumanEval/111 (histogram): FAIL (AssertionError: This prints if this assert fails 1 (good for debugging!)) | dt=8.72s | cum=35.7%
+[BASE HE 113/164] HumanEval/112 (reverse_delete): FAIL (SyntaxError: unterminated string literal (detected at line 40) (<string>, line 40)) | dt=8.07s | cum=35.4%
+[BASE HE 114/164] HumanEval/113 (odd_count): FAIL (AssertionError: Test 1) | dt=8.70s | cum=35.1%
+[BASE HE 115/164] HumanEval/114 (minSubArraySum): FAIL (SyntaxError: '(' was never closed (<string>, line 29)) | dt=9.34s | cum=34.8%
+[BASE HE 116/164] HumanEval/115 (max_fill): FAIL (AssertionError: Error) | dt=9.15s | cum=34.5%
+[BASE HE 117/164] HumanEval/116 (sort_array): FAIL (SyntaxError: '[' was never closed (<string>, line 32)) | dt=8.03s | cum=34.2%
+[BASE HE 118/164] HumanEval/117 (select_words): FAIL (SyntaxError: '[' was never closed (<string>, line 45)) | dt=8.42s | cum=33.9%
+[BASE HE 119/164] HumanEval/118 (get_closest_vowel): FAIL (SyntaxError: '(' was never closed (<string>, line 36)) | dt=9.45s | cum=33.6%
+[BASE HE 120/164] HumanEval/119 (match_parens): FAIL (SyntaxError: '(' was never closed (<string>, line 48)) | dt=9.34s | cum=33.3%
+[BASE HE 121/164] HumanEval/120 (maximum): FAIL (SyntaxError: '(' was never closed (<string>, line 42)) | dt=8.78s | cum=33.1%
+[BASE HE 122/164] HumanEval/121 (solution): FAIL (SyntaxError: '[' was never closed (<string>, line 24)) | dt=8.89s | cum=32.8%
+[BASE HE 123/164] HumanEval/122 (add_elements): FAIL (SyntaxError: '[' was never closed (<string>, line 49)) | dt=7.97s | cum=32.5%
+[BASE HE 124/164] HumanEval/123 (get_odd_collatz): FAIL (AssertionError: ) | dt=8.83s | cum=32.3%
+[BASE HE 125/164] HumanEval/124 (valid_date): FAIL (SyntaxError: unterminated string literal (detected at line 37) (<string>, line 37)) | dt=9.91s | cum=32.0%
+[BASE HE 126/164] HumanEval/125 (split_words): FAIL (SyntaxError: unterminated string literal (detected at line 41) (<string>, line 41)) | dt=9.25s | cum=31.7%
+[BASE HE 127/164] HumanEval/126 (is_sorted): FAIL (AssertionError: This prints if this assert fails 5 (good for debugging!)) | dt=10.26s | cum=31.5%
+[BASE HE 128/164] HumanEval/127 (intersection): FAIL (AssertionError: ) | dt=9.77s | cum=31.2%
+[BASE HE 129/164] HumanEval/128 (prod_signs): FAIL (SyntaxError: '[' was never closed (<string>, line 37)) | dt=7.83s | cum=31.0%
+[BASE HE 130/164] HumanEval/129 (minPath): FAIL (SyntaxError: invalid syntax (<string>, line 65)) | dt=7.02s | cum=30.8%
+[BASE HE 131/164] HumanEval/130 (tri): FAIL (AssertionError: ) | dt=10.67s | cum=30.5%
+[BASE HE 132/164] HumanEval/131 (digits): FAIL (SyntaxError: '(' was never closed (<string>, line 27)) | dt=13.57s | cum=30.3%
+[BASE HE 133/164] HumanEval/132 (is_nested): FAIL (SyntaxError: invalid syntax (<string>, line 49)) | dt=13.82s | cum=30.1%
+[BASE HE 134/164] HumanEval/133 (sum_squares): FAIL (SyntaxError: '[' was never closed (<string>, line 30)) | dt=13.18s | cum=29.9%
+[BASE HE 135/164] HumanEval/134 (check_if_last_char_is_a_letter): FAIL (SyntaxError: '(' was never closed (<string>, line 38)) | dt=13.50s | cum=29.6%
+[BASE HE 136/164] HumanEval/135 (can_arrange): FAIL (SyntaxError: '[' was never closed (<string>, line 32)) | dt=12.86s | cum=29.4%
+[BASE HE 137/164] HumanEval/136 (largest_smallest_integers): FAIL (SyntaxError: '[' was never closed (<string>, line 32)) | dt=12.05s | cum=29.2%
+[BASE HE 138/164] HumanEval/137 (compare_one): FAIL (SyntaxError: unterminated string literal (detected at line 39) (<string>, line 39)) | dt=13.50s | cum=29.0%
+[BASE HE 139/164] HumanEval/138 (is_equal_to_sum_even): PASS | dt=13.18s | cum=29.5%
+[BASE HE 140/164] HumanEval/139 (special_factorial): FAIL (SyntaxError: '(' was never closed (<string>, line 37)) | dt=13.36s | cum=29.3%
+[BASE HE 141/164] HumanEval/140 (fix_spaces): FAIL (SyntaxError: unterminated string literal (detected at line 29) (<string>, line 29)) | dt=12.58s | cum=29.1%
+[BASE HE 142/164] HumanEval/141 (file_name_check): FAIL (SyntaxError: '(' was never closed (<string>, line 44)) | dt=13.01s | cum=28.9%
+[BASE HE 143/164] HumanEval/142 (sum_squares): FAIL (SyntaxError: '[' was never closed (<string>, line 30)) | dt=8.45s | cum=28.7%
+[BASE HE 144/164] HumanEval/143 (words_in_sentence): FAIL (SyntaxError: unterminated string literal (detected at line 43) (<string>, line 43)) | dt=10.71s | cum=28.5%
+[BASE HE 145/164] HumanEval/144 (simplify): FAIL (SyntaxError: '(' was never closed (<string>, line 35)) | dt=9.34s | cum=28.3%
+[BASE HE 146/164] HumanEval/145 (order_by_points): FAIL (SyntaxError: '[' was never closed (<string>, line 27)) | dt=9.54s | cum=28.1%
+[BASE HE 147/164] HumanEval/146 (specialFilter): FAIL (SyntaxError: '[' was never closed (<string>, line 24)) | dt=9.36s | cum=27.9%
+[BASE HE 148/164] HumanEval/147 (get_max_triples): FAIL (AssertionError: ) | dt=9.52s | cum=27.7%
+[BASE HE 149/164] HumanEval/148 (bf): FAIL (SyntaxError: unterminated string literal (detected at line 39) (<string>, line 39)) | dt=9.10s | cum=27.5%
+[BASE HE 150/164] HumanEval/149 (sorted_list_sum): FAIL (SyntaxError: unterminated string literal (detected at line 30) (<string>, line 30)) | dt=9.06s | cum=27.3%
+[BASE HE 151/164] HumanEval/150 (x_or_y): FAIL (AssertionError: ) | dt=10.69s | cum=27.2%
+[BASE HE 152/164] HumanEval/151 (double_the_difference): PASS | dt=6.89s | cum=27.6%
+[BASE HE 153/164] HumanEval/152 (compare): FAIL (SyntaxError: '[' was never closed (<string>, line 28)) | dt=9.14s | cum=27.5%
+[BASE HE 154/164] HumanEval/153 (Strongest_Extension): FAIL (SyntaxError: invalid syntax (<string>, line 49)) | dt=12.08s | cum=27.3%
+[BASE HE 155/164] HumanEval/154 (cycpattern_check): FAIL (SyntaxError: unterminated string literal (detected at line 37) (<string>, line 37)) | dt=8.56s | cum=27.1%
+[BASE HE 156/164] HumanEval/155 (even_odd_count): FAIL (SyntaxError: '(' was never closed (<string>, line 29)) | dt=9.94s | cum=26.9%
+[BASE HE 157/164] HumanEval/156 (int_to_mini_roman): FAIL (AssertionError: ) | dt=9.01s | cum=26.8%
+[BASE HE 158/164] HumanEval/157 (right_angle_triangle): FAIL (SyntaxError: '(' was never closed (<string>, line 28)) | dt=8.19s | cum=26.6%
+[BASE HE 159/164] HumanEval/158 (find_max): FAIL (AssertionError: t2) | dt=7.97s | cum=26.4%
+[BASE HE 160/164] HumanEval/159 (eat): FAIL (SyntaxError: '(' was never closed (<string>, line 49)) | dt=8.77s | cum=26.2%
+[BASE HE 161/164] HumanEval/160 (do_algebra): FAIL (AssertionError: ) | dt=8.50s | cum=26.1%
+[BASE HE 162/164] HumanEval/161 (solve): FAIL (SyntaxError: unterminated string literal (detected at line 33) (<string>, line 33)) | dt=10.64s | cum=25.9%
+[BASE HE 163/164] HumanEval/162 (string_to_md5): FAIL (SyntaxError: unterminated string literal (detected at line 17) (<string>, line 17)) | dt=8.11s | cum=25.8%
+[BASE HE 164/164] HumanEval/163 (generate_integers): FAIL (SyntaxError: '(' was never closed (<string>, line 27)) | dt=8.41s | cum=25.6%
+[HADL HE 001/164] HumanEval/0 (has_close_elements): PASS | dt=6.73s | cum=100.0%
+[HADL HE 002/164] HumanEval/1 (separate_paren_groups): FAIL (SyntaxError: '(' was never closed (<string>, line 50)) | dt=10.43s | cum=50.0%
+[HADL HE 003/164] HumanEval/2 (truncate_number): PASS | dt=9.94s | cum=66.7%
+[HADL HE 004/164] HumanEval/3 (below_zero): PASS | dt=10.22s | cum=75.0%
+[HADL HE 005/164] HumanEval/4 (mean_absolute_deviation): FAIL (SyntaxError: '(' was never closed (<string>, line 31)) | dt=10.52s | cum=60.0%
+[HADL HE 006/164] HumanEval/5 (intersperse): FAIL (AssertionError: ) | dt=5.93s | cum=50.0%
+[HADL HE 007/164] HumanEval/6 (parse_nested_parens): FAIL (AssertionError: ) | dt=10.27s | cum=42.9%
+[HADL HE 008/164] HumanEval/7 (filter_by_substring): PASS | dt=7.26s | cum=50.0%
+[HADL HE 009/164] HumanEval/8 (sum_product): PASS | dt=9.87s | cum=55.6%
+[HADL HE 010/164] HumanEval/9 (rolling_max): FAIL (AssertionError: ) | dt=9.54s | cum=50.0%
+[HADL HE 011/164] HumanEval/10 (make_palindrome): FAIL (AssertionError: ) | dt=8.89s | cum=45.5%
+[HADL HE 012/164] HumanEval/11 (string_xor): PASS | dt=8.36s | cum=50.0%
+[HADL HE 013/164] HumanEval/12 (longest): PASS | dt=9.77s | cum=53.8%
+[HADL HE 014/164] HumanEval/13 (greatest_common_divisor): PASS | dt=9.33s | cum=57.1%
+[HADL HE 015/164] HumanEval/14 (all_prefixes): FAIL (AssertionError: ) | dt=10.60s | cum=53.3%
+[HADL HE 016/164] HumanEval/15 (string_sequence): FAIL (TypeError: sequence item 0: expected str instance, int found) | dt=1.60s | cum=50.0%
+[HADL HE 017/164] HumanEval/16 (count_distinct_characters): FAIL (AssertionError: ) | dt=1.72s | cum=47.1%
+[HADL HE 018/164] HumanEval/17 (parse_music): FAIL (AssertionError: ) | dt=10.79s | cum=44.4%
+[HADL HE 019/164] HumanEval/18 (how_many_times): FAIL (SyntaxError: '(' was never closed (<string>, line 30)) | dt=10.00s | cum=42.1%
+[HADL HE 020/164] HumanEval/19 (sort_numbers): FAIL (ValueError: invalid literal for int() with base 10: 'three') | dt=5.66s | cum=40.0%
+[HADL HE 021/164] HumanEval/20 (find_closest_elements): FAIL (ValueError: numbers list cannot be empty) | dt=10.79s | cum=38.1%
+[HADL HE 022/164] HumanEval/21 (rescale_to_unit): PASS | dt=9.77s | cum=40.9%
+[HADL HE 023/164] HumanEval/22 (filter_integers): PASS | dt=9.75s | cum=43.5%
+[HADL HE 024/164] HumanEval/23 (strlen): PASS | dt=10.55s | cum=45.8%
+[HADL HE 025/164] HumanEval/24 (largest_divisor): FAIL (AssertionError: ) | dt=9.06s | cum=44.0%
+[HADL HE 026/164] HumanEval/25 (factorize): FAIL (AssertionError: ) | dt=10.10s | cum=42.3%
+[HADL HE 027/164] HumanEval/26 (remove_duplicates): FAIL (AssertionError: ) | dt=9.58s | cum=40.7%
+[HADL HE 028/164] HumanEval/27 (flip_case): FAIL (SyntaxError: '(' was never closed (<string>, line 41)) | dt=9.05s | cum=39.3%
+[HADL HE 029/164] HumanEval/28 (concatenate): PASS | dt=9.37s | cum=41.4%
+[HADL HE 030/164] HumanEval/29 (filter_by_prefix): PASS | dt=11.13s | cum=43.3%
+[HADL HE 031/164] HumanEval/30 (get_positive): PASS | dt=11.43s | cum=45.2%
+[HADL HE 032/164] HumanEval/31 (is_prime): PASS | dt=9.73s | cum=46.9%
+[HADL HE 033/164] HumanEval/32 (find_zero): FAIL (AssertionError: ) | dt=10.93s | cum=45.5%
+[HADL HE 034/164] HumanEval/33 (sort_third): FAIL (IndexError: list index out of range) | dt=6.30s | cum=44.1%
+[HADL HE 035/164] HumanEval/34 (unique): PASS | dt=12.23s | cum=45.7%
+[HADL HE 036/164] HumanEval/35 (max_element): PASS | dt=11.10s | cum=47.2%
+[HADL HE 037/164] HumanEval/36 (fizz_buzz): PASS | dt=10.33s | cum=48.6%
+[HADL HE 038/164] HumanEval/37 (sort_even): FAIL (IndexError: list index out of range) | dt=10.75s | cum=47.4%
+[HADL HE 039/164] HumanEval/38 (decode_cyclic): FAIL (SyntaxError: invalid syntax (<string>, line 26)) | dt=11.69s | cum=46.2%
+[HADL HE 040/164] HumanEval/39 (prime_fib): FAIL (IndexError: list index out of range) | dt=7.66s | cum=45.0%
+[HADL HE 041/164] HumanEval/40 (triples_sum_to_zero): FAIL (AssertionError: ) | dt=10.00s | cum=43.9%
+[HADL HE 042/164] HumanEval/41 (car_race_collision): FAIL (AssertionError: ) | dt=11.36s | cum=42.9%
+[HADL HE 043/164] HumanEval/42 (incr_list): PASS | dt=10.54s | cum=44.2%
+[HADL HE 044/164] HumanEval/43 (pairs_sum_to_zero): FAIL (AssertionError: ) | dt=9.92s | cum=43.2%
+[HADL HE 045/164] HumanEval/44 (change_base): FAIL (TypeError: sequence item 0: expected str instance, int found) | dt=6.92s | cum=42.2%
+[HADL HE 046/164] HumanEval/45 (triangle_area): PASS | dt=10.55s | cum=43.5%
+[HADL HE 047/164] HumanEval/46 (fib4): PASS | dt=3.96s | cum=44.7%
+[HADL HE 048/164] HumanEval/47 (median): FAIL (IndexError: list index out of range) | dt=10.55s | cum=43.8%
+[HADL HE 049/164] HumanEval/48 (is_palindrome): PASS | dt=8.59s | cum=44.9%
+[HADL HE 050/164] HumanEval/49 (modp): PASS | dt=10.23s | cum=46.0%
+[HADL HE 051/164] HumanEval/50 (decode_shift): FAIL (SyntaxError: invalid syntax (<string>, line 18)) | dt=11.64s | cum=45.1%
+[HADL HE 052/164] HumanEval/51 (remove_vowels): FAIL (AssertionError: ) | dt=4.05s | cum=44.2%
+[HADL HE 053/164] HumanEval/52 (below_threshold): PASS | dt=10.07s | cum=45.3%
+[HADL HE 054/164] HumanEval/53 (add): PASS | dt=8.47s | cum=46.3%
+[HADL HE 055/164] HumanEval/54 (same_chars): FAIL (RecursionError: maximum recursion depth exceeded) | dt=11.25s | cum=45.5%
+[HADL HE 056/164] HumanEval/55 (fib): FAIL (AssertionError: ) | dt=11.13s | cum=44.6%
+[HADL HE 057/164] HumanEval/56 (correct_bracketing): FAIL (SyntaxError: '(' was never closed (<string>, line 51)) | dt=10.32s | cum=43.9%
+[HADL HE 058/164] HumanEval/57 (monotonic): FAIL (AssertionError: ) | dt=9.00s | cum=43.1%
+[HADL HE 059/164] HumanEval/58 (common): PASS | dt=7.89s | cum=44.1%
+[HADL HE 060/164] HumanEval/59 (largest_prime_factor): FAIL (SyntaxError: '(' was never closed (<string>, line 39)) | dt=10.53s | cum=43.3%
+[HADL HE 061/164] HumanEval/60 (sum_to_n): PASS | dt=10.88s | cum=44.3%
+[HADL HE 062/164] HumanEval/61 (correct_bracketing): PASS | dt=10.89s | cum=45.2%
+[HADL HE 063/164] HumanEval/62 (derivative): FAIL (AssertionError: ) | dt=10.56s | cum=44.4%
+[HADL HE 064/164] HumanEval/63 (fibfib): FAIL (AssertionError: ) | dt=9.29s | cum=43.8%
+[HADL HE 065/164] HumanEval/64 (vowels_count): FAIL (SyntaxError: unterminated string literal (detected at line 41) (<string>, line 41)) | dt=10.56s | cum=43.1%
+[HADL HE 066/164] HumanEval/65 (circular_shift): FAIL (SyntaxError: '(' was never closed (<string>, line 26)) | dt=10.09s | cum=42.4%
+[HADL HE 067/164] HumanEval/66 (digitSum): FAIL (SyntaxError: cannot assign to function call (<string>, line 21)) | dt=9.37s | cum=41.8%
+[HADL HE 068/164] HumanEval/67 (fruit_distribution): FAIL (AssertionError: ) | dt=10.26s | cum=41.2%
+[HADL HE 069/164] HumanEval/68 (pluck): FAIL (AssertionError: Error) | dt=10.73s | cum=40.6%
+[HADL HE 070/164] HumanEval/69 (search): FAIL (AssertionError: ) | dt=5.29s | cum=40.0%
+[HADL HE 071/164] HumanEval/70 (strange_sort_list): FAIL (SyntaxError: '[' was never closed (<string>, line 39)) | dt=9.83s | cum=39.4%
+[HADL HE 072/164] HumanEval/71 (triangle_area): PASS | dt=5.91s | cum=40.3%
+[HADL HE 073/164] HumanEval/72 (will_it_fly): PASS | dt=4.25s | cum=41.1%
+[HADL HE 074/164] HumanEval/73 (smallest_change): FAIL (AssertionError: ) | dt=6.98s | cum=40.5%
+[HADL HE 075/164] HumanEval/74 (total_match): FAIL (AssertionError: ) | dt=6.23s | cum=40.0%
+[HADL HE 076/164] HumanEval/75 (is_multiply_prime): FAIL (SyntaxError: invalid syntax (<string>, line 39)) | dt=9.27s | cum=39.5%
+[HADL HE 077/164] HumanEval/76 (is_simple_power): FAIL (AssertionError: This prints if this assert fails 1 (good for debugging!)) | dt=9.59s | cum=39.0%
+[HADL HE 078/164] HumanEval/77 (iscube): FAIL (TypeError: type complex doesn't define __round__ method) | dt=10.44s | cum=38.5%
+[HADL HE 079/164] HumanEval/78 (hex_key): PASS | dt=10.97s | cum=39.2%
+[HADL HE 080/164] HumanEval/79 (decimal_to_binary): PASS | dt=3.42s | cum=40.0%
+[HADL HE 081/164] HumanEval/80 (is_happy): FAIL (AssertionError: iopaxioi) | dt=6.60s | cum=39.5%
+[HADL HE 082/164] HumanEval/81 (numerical_letter_grade): FAIL (SyntaxError: '[' was never closed (<string>, line 58)) | dt=12.01s | cum=39.0%
+[HADL HE 083/164] HumanEval/82 (prime_length): FAIL (AssertionError: ) | dt=4.57s | cum=38.6%
+[HADL HE 084/164] HumanEval/83 (starts_one_ends): FAIL (AssertionError: ) | dt=10.32s | cum=38.1%
+[HADL HE 085/164] HumanEval/84 (solve): FAIL (AssertionError: Error) | dt=12.81s | cum=37.6%
+[HADL HE 086/164] HumanEval/85 (add): FAIL (AssertionError: ) | dt=8.95s | cum=37.2%
+[HADL HE 087/164] HumanEval/86 (anti_shuffle): FAIL (SyntaxError: invalid syntax (<string>, line 21)) | dt=11.38s | cum=36.8%
+[HADL HE 088/164] HumanEval/87 (get_row): FAIL (SyntaxError: closing parenthesis ')' does not match opening parenthesis '[' (<string>, line 34)) | dt=10.90s | cum=36.4%
+[HADL HE 089/164] HumanEval/88 (sort_array): FAIL (IndexError: list index out of range) | dt=9.99s | cum=36.0%
+[HADL HE 090/164] HumanEval/89 (encrypt): FAIL (AssertionError: This prints if this assert fails 1 (good for debugging!)) | dt=11.97s | cum=35.6%
+[HADL HE 091/164] HumanEval/90 (next_smallest): FAIL (AssertionError: ) | dt=5.57s | cum=35.2%
+[HADL HE 092/164] HumanEval/91 (is_bored): FAIL (AssertionError: Test 3) | dt=10.52s | cum=34.8%
+[HADL HE 093/164] HumanEval/92 (any_int): FAIL (AssertionError: This prints if this assert fails 3 (good for debugging!)) | dt=4.73s | cum=34.4%
+[HADL HE 094/164] HumanEval/93 (encode): FAIL (TypeError: can only concatenate str (not "int") to str) | dt=12.08s | cum=34.0%
+[HADL HE 095/164] HumanEval/94 (skjkasdkd): FAIL (SyntaxError: '[' was never closed (<string>, line 40)) | dt=11.23s | cum=33.7%
+[HADL HE 096/164] HumanEval/95 (check_dict_case): FAIL (SyntaxError: unterminated string literal (detected at line 36) (<string>, line 36)) | dt=10.06s | cum=33.3%
+[HADL HE 097/164] HumanEval/96 (count_up_to): PASS | dt=10.83s | cum=34.0%
+[HADL HE 098/164] HumanEval/97 (multiply): FAIL (SyntaxError: 'return' outside function (<string>, line 22)) | dt=5.15s | cum=33.7%
+[HADL HE 099/164] HumanEval/98 (count_upper): FAIL (AssertionError: ) | dt=3.45s | cum=33.3%
+[HADL HE 100/164] HumanEval/99 (closest_integer): FAIL (SyntaxError: unterminated string literal (detected at line 42) (<string>, line 42)) | dt=11.19s | cum=33.0%
+[HADL HE 101/164] HumanEval/100 (make_a_pile): PASS | dt=11.12s | cum=33.7%
+[HADL HE 102/164] HumanEval/101 (words_string): FAIL (SyntaxError: invalid syntax (<string>, line 14)) | dt=10.23s | cum=33.3%
+[HADL HE 103/164] HumanEval/102 (choose_num): FAIL (SyntaxError: '(' was never closed (<string>, line 38)) | dt=10.65s | cum=33.0%
+[HADL HE 104/164] HumanEval/103 (rounded_avg): FAIL (AssertionError: ) | dt=10.84s | cum=32.7%
+[HADL HE 105/164] HumanEval/104 (unique_digits): FAIL (AssertionError: ) | dt=11.56s | cum=32.4%
+[HADL HE 106/164] HumanEval/105 (by_length): FAIL (SyntaxError: invalid syntax (<string>, line 36)) | dt=9.46s | cum=32.1%
+[HADL HE 107/164] HumanEval/106 (f): FAIL (AssertionError: ) | dt=10.82s | cum=31.8%
+[HADL HE 108/164] HumanEval/107 (even_odd_palindrome): FAIL (SyntaxError: '(' was never closed (<string>, line 47)) | dt=10.16s | cum=31.5%
+[HADL HE 109/164] HumanEval/108 (count_nums): FAIL (AssertionError: ) | dt=10.66s | cum=31.2%
+[HADL HE 110/164] HumanEval/109 (move_one_ball): FAIL (SyntaxError: '[' was never closed (<string>, line 53)) | dt=13.04s | cum=30.9%
+[HADL HE 111/164] HumanEval/110 (exchange): FAIL (AssertionError: ) | dt=10.39s | cum=30.6%
+[HADL HE 112/164] HumanEval/111 (histogram): FAIL (ValueError: max() iterable argument is empty) | dt=6.73s | cum=30.4%
+[HADL HE 113/164] HumanEval/112 (reverse_delete): FAIL (SyntaxError: invalid syntax (<string>, line 18)) | dt=11.90s | cum=30.1%
+[HADL HE 114/164] HumanEval/113 (odd_count): FAIL (AssertionError: Test 1) | dt=12.90s | cum=29.8%
+[HADL HE 115/164] HumanEval/114 (minSubArraySum): FAIL (AssertionError: ) | dt=10.53s | cum=29.6%
+[HADL HE 116/164] HumanEval/115 (max_fill): FAIL (TypeError: unsupported operand type(s) for +: 'int' and 'list') | dt=6.52s | cum=29.3%
+[HADL HE 117/164] HumanEval/116 (sort_array): FAIL (SyntaxError: '[' was never closed (<string>, line 32)) | dt=12.10s | cum=29.1%
+[HADL HE 118/164] HumanEval/117 (select_words): FAIL (SyntaxError: unterminated string literal (detected at line 36) (<string>, line 36)) | dt=9.76s | cum=28.8%
+[HADL HE 119/164] HumanEval/118 (get_closest_vowel): FAIL (AssertionError: ) | dt=10.46s | cum=28.6%
+[HADL HE 120/164] HumanEval/119 (match_parens): FAIL (AssertionError: ) | dt=11.50s | cum=28.3%
+[HADL HE 121/164] HumanEval/120 (maximum): FAIL (SyntaxError: invalid syntax (<string>, line 34)) | dt=11.33s | cum=28.1%
+[HADL HE 122/164] HumanEval/121 (solution): FAIL (AssertionError: ) | dt=5.63s | cum=27.9%
+[HADL HE 123/164] HumanEval/122 (add_elements): FAIL (IndexError: list index out of range) | dt=12.27s | cum=27.6%
+[HADL HE 124/164] HumanEval/123 (get_odd_collatz): FAIL (AssertionError: ) | dt=9.79s | cum=27.4%
+[HADL HE 125/164] HumanEval/124 (valid_date): FAIL (SyntaxError: invalid syntax (<string>, line 45)) | dt=10.22s | cum=27.2%
+[HADL HE 126/164] HumanEval/125 (split_words): FAIL (AssertionError: ) | dt=3.91s | cum=27.0%
+[HADL HE 127/164] HumanEval/126 (is_sorted): FAIL (AssertionError: This prints if this assert fails 7 (good for debugging!)) | dt=10.98s | cum=26.8%
+[HADL HE 128/164] HumanEval/127 (intersection): FAIL (SyntaxError: '(' was never closed (<string>, line 53)) | dt=11.36s | cum=26.6%
+[HADL HE 129/164] HumanEval/128 (prod_signs): PASS | dt=5.98s | cum=27.1%
+[HADL HE 130/164] HumanEval/129 (minPath): FAIL (AssertionError: ) | dt=11.35s | cum=26.9%
+[HADL HE 131/164] HumanEval/130 (tri): FAIL (AssertionError: ) | dt=11.43s | cum=26.7%
+[HADL HE 132/164] HumanEval/131 (digits): FAIL (AssertionError: ) | dt=6.45s | cum=26.5%
+[HADL HE 133/164] HumanEval/132 (is_nested): FAIL (AssertionError: This prints if this assert fails 1 (good for debugging!)) | dt=9.37s | cum=26.3%
+[HADL HE 134/164] HumanEval/133 (sum_squares): FAIL (AssertionError: This prints if this assert fails 1 (good for debugging!)) | dt=4.26s | cum=26.1%
+[HADL HE 135/164] HumanEval/134 (check_if_last_char_is_a_letter): FAIL (AssertionError: ) | dt=6.31s | cum=25.9%
+[HADL HE 136/164] HumanEval/135 (can_arrange): FAIL (AssertionError: ) | dt=5.76s | cum=25.7%
+[HADL HE 137/164] HumanEval/136 (largest_smallest_integers): PASS | dt=8.79s | cum=26.3%
+[HADL HE 138/164] HumanEval/137 (compare_one): FAIL (TypeError: '>' not supported between instances of 'int' and 'str') | dt=13.07s | cum=26.1%
+[HADL HE 139/164] HumanEval/138 (is_equal_to_sum_even): FAIL (AssertionError: ) | dt=7.59s | cum=25.9%
+[HADL HE 140/164] HumanEval/139 (special_factorial): FAIL (AssertionError: Test 4) | dt=11.42s | cum=25.7%
+[HADL HE 141/164] HumanEval/140 (fix_spaces): FAIL (SyntaxError: invalid syntax (<string>, line 44)) | dt=9.18s | cum=25.5%
+[HADL HE 142/164] HumanEval/141 (file_name_check): FAIL (SyntaxError: unterminated string literal (detected at line 39) (<string>, line 39)) | dt=9.73s | cum=25.4%
+[HADL HE 143/164] HumanEval/142 (sum_squares): FAIL (AssertionError: ) | dt=10.74s | cum=25.2%
+[HADL HE 144/164] HumanEval/143 (words_in_sentence): FAIL (SyntaxError: invalid syntax (<string>, line 38)) | dt=5.86s | cum=25.0%
+[HADL HE 145/164] HumanEval/144 (simplify): FAIL (SyntaxError: unterminated string literal (detected at line 36) (<string>, line 36)) | dt=10.55s | cum=24.8%
+[HADL HE 146/164] HumanEval/145 (order_by_points): FAIL (ValueError: invalid literal for int() with base 10: '-') | dt=7.18s | cum=24.7%
+[HADL HE 147/164] HumanEval/146 (specialFilter): FAIL (SyntaxError: '(' was never closed (<string>, line 29)) | dt=10.66s | cum=24.5%
+[HADL HE 148/164] HumanEval/147 (get_max_triples): FAIL (AssertionError: ) | dt=10.71s | cum=24.3%
+[HADL HE 149/164] HumanEval/148 (bf): FAIL (SyntaxError: unterminated string literal (detected at line 38) (<string>, line 38)) | dt=11.74s | cum=24.2%
+[HADL HE 150/164] HumanEval/149 (sorted_list_sum): FAIL (TypeError: 'then' is an invalid keyword argument for sort()) | dt=9.74s | cum=24.0%
+[HADL HE 151/164] HumanEval/150 (x_or_y): FAIL (SyntaxError: '(' was never closed (<string>, line 33)) | dt=11.04s | cum=23.8%
+[HADL HE 152/164] HumanEval/151 (double_the_difference): FAIL (AssertionError: This prints if this assert fails 5 (also good for debugging!)) | dt=5.15s | cum=23.7%
+[HADL HE 153/164] HumanEval/152 (compare): PASS | dt=4.97s | cum=24.2%
+[HADL HE 154/164] HumanEval/153 (Strongest_Extension): FAIL (SyntaxError: '(' was never closed (<string>, line 36)) | dt=8.15s | cum=24.0%
+[HADL HE 155/164] HumanEval/154 (cycpattern_check): FAIL (AssertionError: test #1) | dt=10.94s | cum=23.9%
+[HADL HE 156/164] HumanEval/155 (even_odd_count): FAIL (IndentationError: expected an indented block after 'elif' statement on line 43 (<string>, line 46)) | dt=11.29s | cum=23.7%
+[HADL HE 157/164] HumanEval/156 (int_to_mini_roman): FAIL (AssertionError: ) | dt=10.14s | cum=23.6%
+[HADL HE 158/164] HumanEval/157 (right_angle_triangle): FAIL (AssertionError: ) | dt=10.12s | cum=23.4%
+[HADL HE 159/164] HumanEval/158 (find_max): FAIL (AssertionError: t2) | dt=4.26s | cum=23.3%
+[HADL HE 160/164] HumanEval/159 (eat): FAIL (AssertionError: Error) | dt=4.15s | cum=23.1%
+[HADL HE 161/164] HumanEval/160 (do_algebra): FAIL (SyntaxError: '(' was never closed (<string>, line 48)) | dt=12.03s | cum=23.0%
+[HADL HE 162/164] HumanEval/161 (solve): FAIL (SyntaxError: unterminated string literal (detected at line 40) (<string>, line 40)) | dt=10.60s | cum=22.8%
+[HADL HE 163/164] HumanEval/162 (string_to_md5): FAIL (NameError: name 'hashlib' is not defined) | dt=4.78s | cum=22.7%
+[HADL HE 164/164] HumanEval/163 (generate_integers): FAIL (SyntaxError: '(' was never closed (<string>, line 30)) | dt=10.85s | cum=22.6%
+[BASE GSM 001/100] Task 0: INCORRECT (pred=5, gt=18) | dt=8.28s | cum=0.0%
+[BASE GSM 002/100] Task 1: CORRECT (pred=3, gt=3) | dt=8.11s | cum=50.0%
+[BASE GSM 003/100] Task 2: INCORRECT (pred=195000, gt=70000) | dt=9.01s | cum=33.3%
+[BASE GSM 004/100] Task 3: CORRECT (pred=540, gt=540) | dt=7.80s | cum=50.0%
+[BASE GSM 005/100] Task 4: INCORRECT (pred=2, gt=20) | dt=8.16s | cum=40.0%
+[BASE GSM 006/100] Task 5: INCORRECT (pred=0.60, gt=64) | dt=10.08s | cum=33.3%
+[BASE GSM 007/100] Task 6: INCORRECT (pred=4, gt=260) | dt=10.10s | cum=28.6%
+[BASE GSM 008/100] Task 7: INCORRECT (pred=2, gt=160) | dt=8.38s | cum=25.0%
+[BASE GSM 009/100] Task 8: INCORRECT (pred=30, gt=45) | dt=9.04s | cum=22.2%
+[BASE GSM 010/100] Task 9: INCORRECT (pred=12, gt=460) | dt=8.27s | cum=20.0%
+[BASE GSM 011/100] Task 10: INCORRECT (pred=54, gt=366) | dt=8.50s | cum=18.2%
+[BASE GSM 012/100] Task 11: INCORRECT (pred=55, gt=694) | dt=8.27s | cum=16.7%
+[BASE GSM 013/100] Task 12: INCORRECT (pred=10.50, gt=13) | dt=7.83s | cum=15.4%
+[BASE GSM 014/100] Task 13: INCORRECT (pred=2, gt=18) | dt=8.43s | cum=14.3%
+[BASE GSM 015/100] Task 14: INCORRECT (pred=4, gt=60) | dt=8.91s | cum=13.3%
+[BASE GSM 016/100] Task 15: INCORRECT (pred=3, gt=125) | dt=8.39s | cum=12.5%
+[BASE GSM 017/100] Task 16: CORRECT (pred=230, gt=230) | dt=7.40s | cum=17.6%
+[BASE GSM 018/100] Task 17: INCORRECT (pred=3, gt=57500) | dt=9.22s | cum=16.7%
+[BASE GSM 019/100] Task 18: INCORRECT (pred=4, gt=7) | dt=7.73s | cum=15.8%
+[BASE GSM 020/100] Task 19: INCORRECT (pred=5, gt=6) | dt=8.02s | cum=15.0%
+[BASE GSM 021/100] Task 20: INCORRECT (pred=3, gt=15) | dt=9.42s | cum=14.3%
+[BASE GSM 022/100] Task 21: INCORRECT (pred=23, gt=14) | dt=9.87s | cum=13.6%
+[BASE GSM 023/100] Task 22: INCORRECT (pred=0, gt=7) | dt=8.04s | cum=13.0%
+[BASE GSM 024/100] Task 23: CORRECT (pred=8, gt=8) | dt=8.88s | cum=16.7%
+[BASE GSM 025/100] Task 24: INCORRECT (pred=0.75, gt=26) | dt=8.48s | cum=16.0%
+[BASE GSM 026/100] Task 25: INCORRECT (pred=50, gt=2) | dt=8.91s | cum=15.4%
+[BASE GSM 027/100] Task 26: INCORRECT (pred=67, gt=243) | dt=7.84s | cum=14.8%
+[BASE GSM 028/100] Task 27: INCORRECT (pred=4, gt=16) | dt=8.58s | cum=14.3%
+[BASE GSM 029/100] Task 28: INCORRECT (pred=20, gt=25) | dt=9.26s | cum=13.8%
+[BASE GSM 030/100] Task 29: INCORRECT (pred=66, gt=104) | dt=8.18s | cum=13.3%
+[BASE GSM 031/100] Task 30: INCORRECT (pred=162, gt=109) | dt=9.95s | cum=12.9%
+[BASE GSM 032/100] Task 31: INCORRECT (pred=20, gt=80) | dt=8.61s | cum=12.5%
+[BASE GSM 033/100] Task 32: INCORRECT (pred=7, gt=35) | dt=8.71s | cum=12.1%
+[BASE GSM 034/100] Task 33: INCORRECT (pred=40, gt=70) | dt=9.04s | cum=11.8%
+[BASE GSM 035/100] Task 34: CORRECT (pred=23, gt=23) | dt=7.84s | cum=14.3%
+[BASE GSM 036/100] Task 35: INCORRECT (pred=2, gt=9) | dt=10.01s | cum=13.9%
+[BASE GSM 037/100] Task 36: INCORRECT (pred=30, gt=75) | dt=9.33s | cum=13.5%
+[BASE GSM 038/100] Task 37: INCORRECT (pred=195, gt=2) | dt=7.99s | cum=13.2%
+[BASE GSM 039/100] Task 38: INCORRECT (pred=6, gt=10) | dt=10.37s | cum=12.8%
+[BASE GSM 040/100] Task 39: INCORRECT (pred=6, gt=18) | dt=9.00s | cum=12.5%
+[BASE GSM 041/100] Task 40: INCORRECT (pred=4, gt=8) | dt=9.32s | cum=12.2%
+[BASE GSM 042/100] Task 41: INCORRECT (pred=3, gt=200) | dt=9.61s | cum=11.9%
+[BASE GSM 043/100] Task 42: CORRECT (pred=26, gt=26) | dt=8.62s | cum=14.0%
+[BASE GSM 044/100] Task 43: INCORRECT (pred=4, gt=48) | dt=8.00s | cum=13.6%
+[BASE GSM 045/100] Task 44: INCORRECT (pred=4, gt=20) | dt=8.81s | cum=13.3%
+[BASE GSM 046/100] Task 45: INCORRECT (pred=3, gt=104) | dt=9.63s | cum=13.0%
+[BASE GSM 047/100] Task 46: INCORRECT (pred=4, gt=163) | dt=8.18s | cum=12.8%
+[BASE GSM 048/100] Task 47: INCORRECT (pred=50, gt=800) | dt=8.68s | cum=12.5%
+[BASE GSM 049/100] Task 48: INCORRECT (pred=4, gt=8) | dt=9.05s | cum=12.2%
+[BASE GSM 050/100] Task 49: INCORRECT (pred=90, gt=30) | dt=8.83s | cum=12.0%
+[BASE GSM 051/100] Task 50: INCORRECT (pred=7, gt=294) | dt=9.17s | cum=11.8%
+[BASE GSM 052/100] Task 51: INCORRECT (pred=10, gt=5) | dt=8.39s | cum=11.5%
+[BASE GSM 053/100] Task 52: INCORRECT (pred=7.5, gt=15) | dt=7.69s | cum=11.3%
+[BASE GSM 054/100] Task 53: CORRECT (pred=40, gt=40) | dt=8.78s | cum=13.0%
+[BASE GSM 055/100] Task 54: INCORRECT (pred=5, gt=40) | dt=8.02s | cum=12.7%
+[BASE GSM 056/100] Task 55: CORRECT (pred=14, gt=14) | dt=7.15s | cum=14.3%
+[BASE GSM 057/100] Task 56: CORRECT (pred=3, gt=3) | dt=7.84s | cum=15.8%
+[BASE GSM 058/100] Task 57: INCORRECT (pred=12, gt=83) | dt=9.10s | cum=15.5%
+[BASE GSM 059/100] Task 58: INCORRECT (pred=5, gt=57) | dt=9.39s | cum=15.3%
+[BASE GSM 060/100] Task 59: CORRECT (pred=187, gt=187) | dt=7.39s | cum=16.7%
+[BASE GSM 061/100] Task 60: INCORRECT (pred=5, gt=17) | dt=8.80s | cum=16.4%
+[BASE GSM 062/100] Task 61: INCORRECT (pred=0.10, gt=1430) | dt=9.01s | cum=16.1%
+[BASE GSM 063/100] Task 62: INCORRECT (pred=5, gt=25000) | dt=8.84s | cum=15.9%
+[BASE GSM 064/100] Task 63: INCORRECT (pred=126, gt=1596) | dt=9.32s | cum=15.6%
+[BASE GSM 065/100] Task 64: INCORRECT (pred=25, gt=300) | dt=9.81s | cum=15.4%
+[BASE GSM 066/100] Task 65: INCORRECT (pred=4, gt=36) | dt=8.66s | cum=15.2%
+[BASE GSM 067/100] Task 66: INCORRECT (pred=12, gt=48) | dt=7.10s | cum=14.9%
+[BASE GSM 068/100] Task 67: INCORRECT (pred=4, gt=595) | dt=8.53s | cum=14.7%
+[BASE GSM 069/100] Task 68: INCORRECT (pred=1, gt=36) | dt=9.16s | cum=14.5%
+[BASE GSM 070/100] Task 69: INCORRECT (pred=40, gt=60) | dt=8.59s | cum=14.3%
+[BASE GSM 071/100] Task 70: INCORRECT (pred=15.00, gt=7425) | dt=8.68s | cum=14.1%
+[BASE GSM 072/100] Task 71: CORRECT (pred=60, gt=60) | dt=8.63s | cum=15.3%
+[BASE GSM 073/100] Task 72: INCORRECT (pred=22, gt=221) | dt=9.40s | cum=15.1%
+[BASE GSM 074/100] Task 73: INCORRECT (pred=3, gt=255) | dt=10.36s | cum=14.9%
+[BASE GSM 075/100] Task 74: INCORRECT (pred=7, gt=88) | dt=8.33s | cum=14.7%
+[BASE GSM 076/100] Task 75: INCORRECT (pred=2, gt=60) | dt=9.53s | cum=14.5%
+[BASE GSM 077/100] Task 76: INCORRECT (pred=185, gt=5) | dt=9.03s | cum=14.3%
+[BASE GSM 078/100] Task 77: INCORRECT (pred=4, gt=100) | dt=9.17s | cum=14.1%
+[BASE GSM 079/100] Task 78: INCORRECT (pred=3, gt=6) | dt=8.69s | cum=13.9%
+[BASE GSM 080/100] Task 79: CORRECT (pred=70, gt=70) | dt=9.28s | cum=15.0%
+[BASE GSM 081/100] Task 80: INCORRECT (pred=1, gt=10) | dt=9.43s | cum=14.8%
+[BASE GSM 082/100] Task 81: CORRECT (pred=17, gt=17) | dt=8.93s | cum=15.9%
+[BASE GSM 083/100] Task 82: CORRECT (pred=623, gt=623) | dt=7.54s | cum=16.9%
+[BASE GSM 084/100] Task 83: CORRECT (pred=600, gt=600) | dt=8.80s | cum=17.9%
+[BASE GSM 085/100] Task 84: INCORRECT (pred=7, gt=15) | dt=9.42s | cum=17.6%
+[BASE GSM 086/100] Task 85: INCORRECT (pred=4, gt=44) | dt=8.70s | cum=17.4%
+[BASE GSM 087/100] Task 86: INCORRECT (pred=4, gt=22) | dt=9.25s | cum=17.2%
+[BASE GSM 088/100] Task 87: INCORRECT (pred=1, gt=9360) | dt=8.69s | cum=17.0%
+[BASE GSM 089/100] Task 88: INCORRECT (pred=80, gt=8000) | dt=8.52s | cum=16.9%
+[BASE GSM 090/100] Task 89: INCORRECT (pred=0, gt=24) | dt=8.63s | cum=16.7%
+[BASE GSM 091/100] Task 90: INCORRECT (pred=5, gt=225) | dt=8.98s | cum=16.5%
+[BASE GSM 092/100] Task 91: INCORRECT (pred=4, gt=28) | dt=9.10s | cum=16.3%
+[BASE GSM 093/100] Task 92: INCORRECT (pred=11, gt=4) | dt=9.30s | cum=16.1%
+[BASE GSM 094/100] Task 93: INCORRECT (pred=2, gt=36) | dt=8.51s | cum=16.0%
+[BASE GSM 095/100] Task 94: INCORRECT (pred=12, gt=348) | dt=8.14s | cum=15.8%
+[BASE GSM 096/100] Task 95: INCORRECT (pred=120, gt=40) | dt=7.32s | cum=15.6%
+[BASE GSM 097/100] Task 96: CORRECT (pred=3, gt=3) | dt=6.18s | cum=16.5%
+[BASE GSM 098/100] Task 97: INCORRECT (pred=6, gt=12) | dt=6.65s | cum=16.3%
+[BASE GSM 099/100] Task 98: INCORRECT (pred=4, gt=5) | dt=7.30s | cum=16.2%
+[BASE GSM 100/100] Task 99: INCORRECT (pred=2, gt=58) | dt=7.21s | cum=16.0%
+[HADL GSM 001/100] Task 0: INCORRECT (pred=26, gt=18) | dt=4.82s | cum=0.0%
+[HADL GSM 002/100] Task 1: CORRECT (pred=3, gt=3) | dt=7.06s | cum=50.0%
+[HADL GSM 003/100] Task 2: INCORRECT (pred=1, gt=70000) | dt=8.97s | cum=33.3%
+[HADL GSM 004/100] Task 3: INCORRECT (pred=180, gt=540) | dt=3.96s | cum=25.0%
+[HADL GSM 005/100] Task 4: INCORRECT (pred=1, gt=20) | dt=8.41s | cum=20.0%
+[HADL GSM 006/100] Task 5: INCORRECT (pred=72, gt=64) | dt=8.94s | cum=16.7%
+[HADL GSM 007/100] Task 6: CORRECT (pred=260, gt=260) | dt=5.20s | cum=28.6%
+[HADL GSM 008/100] Task 7: INCORRECT (pred=100, gt=160) | dt=9.01s | cum=25.0%
+[HADL GSM 009/100] Task 8: INCORRECT (pred=40, gt=45) | dt=8.25s | cum=22.2%
+[HADL GSM 010/100] Task 9: CORRECT (pred=460, gt=460) | dt=6.91s | cum=30.0%
+[HADL GSM 011/100] Task 10: CORRECT (pred=366, gt=366) | dt=8.93s | cum=36.4%
+[HADL GSM 012/100] Task 11: INCORRECT (pred=3, gt=694) | dt=8.53s | cum=33.3%
+[HADL GSM 013/100] Task 12: INCORRECT (pred=90, gt=13) | dt=8.96s | cum=30.8%
+[HADL GSM 014/100] Task 13: INCORRECT (pred=5, gt=18) | dt=9.12s | cum=28.6%
+[HADL GSM 015/100] Task 14: INCORRECT (pred=10, gt=60) | dt=8.85s | cum=26.7%
+[HADL GSM 016/100] Task 15: CORRECT (pred=125, gt=125) | dt=7.11s | cum=31.2%
+[HADL GSM 017/100] Task 16: INCORRECT (pred=28900, gt=230) | dt=8.40s | cum=29.4%
+[HADL GSM 018/100] Task 17: CORRECT (pred=57500, gt=57500) | dt=6.89s | cum=33.3%
+[HADL GSM 019/100] Task 18: INCORRECT (pred=4, gt=7) | dt=8.68s | cum=31.6%
+[HADL GSM 020/100] Task 19: CORRECT (pred=6, gt=6) | dt=8.68s | cum=35.0%
+[HADL GSM 021/100] Task 20: INCORRECT (pred=6, gt=15) | dt=8.86s | cum=33.3%
+[HADL GSM 022/100] Task 21: INCORRECT (pred=23, gt=14) | dt=8.78s | cum=31.8%
+[HADL GSM 023/100] Task 22: CORRECT (pred=7, gt=7) | dt=5.04s | cum=34.8%
+[HADL GSM 024/100] Task 23: CORRECT (pred=8, gt=8) | dt=5.53s | cum=37.5%
+[HADL GSM 025/100] Task 24: INCORRECT (pred=79.50, gt=26) | dt=8.80s | cum=36.0%
+[HADL GSM 026/100] Task 25: INCORRECT (pred=6, gt=2) | dt=8.99s | cum=34.6%
+[HADL GSM 027/100] Task 26: INCORRECT (pred=3, gt=243) | dt=8.76s | cum=33.3%
+[HADL GSM 028/100] Task 27: INCORRECT (pred=15, gt=16) | dt=8.32s | cum=32.1%
+[HADL GSM 029/100] Task 28: INCORRECT (pred=45, gt=25) | dt=9.56s | cum=31.0%
+[HADL GSM 030/100] Task 29: CORRECT (pred=104, gt=104) | dt=8.90s | cum=33.3%
+[HADL GSM 031/100] Task 30: INCORRECT (pred=18, gt=109) | dt=8.78s | cum=32.3%
+[HADL GSM 032/100] Task 31: INCORRECT (pred=24, gt=80) | dt=8.58s | cum=31.2%
+[HADL GSM 033/100] Task 32: CORRECT (pred=35, gt=35) | dt=7.16s | cum=33.3%
+[HADL GSM 034/100] Task 33: INCORRECT (pred=110, gt=70) | dt=8.47s | cum=32.4%
+[HADL GSM 035/100] Task 34: CORRECT (pred=23, gt=23) | dt=6.94s | cum=34.3%
+[HADL GSM 036/100] Task 35: CORRECT (pred=9, gt=9) | dt=8.27s | cum=36.1%
+[HADL GSM 037/100] Task 36: CORRECT (pred=75, gt=75) | dt=7.27s | cum=37.8%
+[HADL GSM 038/100] Task 37: INCORRECT (pred=195, gt=2) | dt=8.77s | cum=36.8%
+[HADL GSM 039/100] Task 38: CORRECT (pred=10, gt=10) | dt=6.11s | cum=38.5%
+[HADL GSM 040/100] Task 39: INCORRECT (pred=2, gt=18) | dt=8.54s | cum=37.5%
+[HADL GSM 041/100] Task 40: CORRECT (pred=8, gt=8) | dt=4.47s | cum=39.0%
+[HADL GSM 042/100] Task 41: CORRECT (pred=200, gt=200) | dt=8.57s | cum=40.5%
+[HADL GSM 043/100] Task 42: CORRECT (pred=26, gt=26) | dt=7.50s | cum=41.9%
+[HADL GSM 044/100] Task 43: INCORRECT (pred=3, gt=48) | dt=8.68s | cum=40.9%
+[HADL GSM 045/100] Task 44: INCORRECT (pred=200, gt=20) | dt=8.72s | cum=40.0%
+[HADL GSM 046/100] Task 45: INCORRECT (pred=14, gt=104) | dt=8.60s | cum=39.1%
+[HADL GSM 047/100] Task 46: INCORRECT (pred=220, gt=163) | dt=9.13s | cum=38.3%
+[HADL GSM 048/100] Task 47: INCORRECT (pred=600, gt=800) | dt=8.79s | cum=37.5%
+[HADL GSM 049/100] Task 48: CORRECT (pred=8, gt=8) | dt=7.63s | cum=38.8%
+[HADL GSM 050/100] Task 49: INCORRECT (pred=3, gt=30) | dt=8.43s | cum=38.0%
+[HADL GSM 051/100] Task 50: INCORRECT (pred=480, gt=294) | dt=8.56s | cum=37.3%
+[HADL GSM 052/100] Task 51: CORRECT (pred=5, gt=5) | dt=6.85s | cum=38.5%
+[HADL GSM 053/100] Task 52: CORRECT (pred=15, gt=15) | dt=8.88s | cum=39.6%
+[HADL GSM 054/100] Task 53: INCORRECT (pred=200, gt=40) | dt=8.82s | cum=38.9%
+[HADL GSM 055/100] Task 54: CORRECT (pred=40, gt=40) | dt=7.40s | cum=40.0%
+[HADL GSM 056/100] Task 55: CORRECT (pred=14, gt=14) | dt=5.65s | cum=41.1%
+[HADL GSM 057/100] Task 56: CORRECT (pred=3, gt=3) | dt=6.30s | cum=42.1%
+[HADL GSM 058/100] Task 57: INCORRECT (pred=1245, gt=83) | dt=8.83s | cum=41.4%
+[HADL GSM 059/100] Task 58: CORRECT (pred=57.00, gt=57) | dt=8.51s | cum=42.4%
+[HADL GSM 060/100] Task 59: CORRECT (pred=187, gt=187) | dt=4.76s | cum=43.3%
+[HADL GSM 061/100] Task 60: INCORRECT (pred=100, gt=17) | dt=8.43s | cum=42.6%
+[HADL GSM 062/100] Task 61: INCORRECT (pred=1400, gt=1430) | dt=4.99s | cum=41.9%
+[HADL GSM 063/100] Task 62: INCORRECT (pred=30, gt=25000) | dt=8.74s | cum=41.3%
+[HADL GSM 064/100] Task 63: INCORRECT (pred=14, gt=1596) | dt=8.73s | cum=40.6%
+[HADL GSM 065/100] Task 64: INCORRECT (pred=4, gt=300) | dt=9.02s | cum=40.0%
+[HADL GSM 066/100] Task 65: INCORRECT (pred=12, gt=36) | dt=6.98s | cum=39.4%
+[HADL GSM 067/100] Task 66: INCORRECT (pred=20, gt=48) | dt=8.69s | cum=38.8%
+[HADL GSM 068/100] Task 67: CORRECT (pred=595, gt=595) | dt=8.75s | cum=39.7%
+[HADL GSM 069/100] Task 68: CORRECT (pred=36, gt=36) | dt=8.18s | cum=40.6%
+[HADL GSM 070/100] Task 69: CORRECT (pred=60, gt=60) | dt=7.39s | cum=41.4%
+[HADL GSM 071/100] Task 70: INCORRECT (pred=225, gt=7425) | dt=8.73s | cum=40.8%
+[HADL GSM 072/100] Task 71: CORRECT (pred=60, gt=60) | dt=4.29s | cum=41.7%
+[HADL GSM 073/100] Task 72: INCORRECT (pred=90, gt=221) | dt=8.57s | cum=41.1%
+[HADL GSM 074/100] Task 73: INCORRECT (pred=55, gt=255) | dt=8.52s | cum=40.5%
+[HADL GSM 075/100] Task 74: CORRECT (pred=88, gt=88) | dt=8.67s | cum=41.3%
+[HADL GSM 076/100] Task 75: INCORRECT (pred=4, gt=60) | dt=8.39s | cum=40.8%
+[HADL GSM 077/100] Task 76: INCORRECT (pred=370, gt=5) | dt=9.15s | cum=40.3%
+[HADL GSM 078/100] Task 77: INCORRECT (pred=2, gt=100) | dt=8.69s | cum=39.7%
+[HADL GSM 079/100] Task 78: INCORRECT (pred=9.00, gt=6) | dt=8.73s | cum=39.2%
+[HADL GSM 080/100] Task 79: CORRECT (pred=70, gt=70) | dt=5.55s | cum=40.0%
+[HADL GSM 081/100] Task 80: INCORRECT (pred=1, gt=10) | dt=8.43s | cum=39.5%
+[HADL GSM 082/100] Task 81: CORRECT (pred=17, gt=17) | dt=5.67s | cum=40.2%
+[HADL GSM 083/100] Task 82: CORRECT (pred=623, gt=623) | dt=8.92s | cum=41.0%
+[HADL GSM 084/100] Task 83: CORRECT (pred=600, gt=600) | dt=5.98s | cum=41.7%
+[HADL GSM 085/100] Task 84: CORRECT (pred=15, gt=15) | dt=8.65s | cum=42.4%
+[HADL GSM 086/100] Task 85: INCORRECT (pred=12, gt=44) | dt=9.47s | cum=41.9%
+[HADL GSM 087/100] Task 86: CORRECT (pred=22, gt=22) | dt=8.85s | cum=42.5%
+[HADL GSM 088/100] Task 87: INCORRECT (pred=660, gt=9360) | dt=9.16s | cum=42.0%
+[HADL GSM 089/100] Task 88: CORRECT (pred=8000, gt=8000) | dt=9.43s | cum=42.7%
+[HADL GSM 090/100] Task 89: INCORRECT (pred=12, gt=24) | dt=9.20s | cum=42.2%
+[HADL GSM 091/100] Task 90: CORRECT (pred=225, gt=225) | dt=9.09s | cum=42.9%
+[HADL GSM 092/100] Task 91: INCORRECT (pred=24, gt=28) | dt=9.55s | cum=42.4%
+[HADL GSM 093/100] Task 92: CORRECT (pred=4, gt=4) | dt=5.94s | cum=43.0%
+[HADL GSM 094/100] Task 93: INCORRECT (pred=44, gt=36) | dt=9.75s | cum=42.6%
+[HADL GSM 095/100] Task 94: CORRECT (pred=348, gt=348) | dt=10.18s | cum=43.2%
+[HADL GSM 096/100] Task 95: INCORRECT (pred=3, gt=40) | dt=12.65s | cum=42.7%
+[HADL GSM 097/100] Task 96: CORRECT (pred=3, gt=3) | dt=10.12s | cum=43.3%
+[HADL GSM 098/100] Task 97: INCORRECT (pred=2, gt=12) | dt=10.05s | cum=42.9%
+[HADL GSM 099/100] Task 98: INCORRECT (pred=45, gt=5) | dt=9.85s | cum=42.4%
+[HADL GSM 100/100] Task 99: INCORRECT (pred=62, gt=58) | dt=9.78s | cum=42.0%
