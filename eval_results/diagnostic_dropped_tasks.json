@@ -1,0 +1,234 @@
+{
+  "baseline": {
+    "autorccar": {
+      "metrics": {
+        "task_id": "autorccar",
+        "name": "AutoRCCar Autonomous Vehicle Driver",
+        "category": "Robotics & Hardware",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "autorccar/__init__.py",
+          "autorccar/driver.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 100.0,
+        "api_specification_compliance_pct": 75.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 95.0
+      },
+      "gen_tokens": 450,
+      "hit_max_tokens": true,
+      "file_ast_status": {
+        "setup.py": {
+          "valid": true,
+          "error": null,
+          "length_chars": 321
+        },
+        "autorccar/__init__.py": {
+          "valid": true,
+          "error": null,
+          "length_chars": 72
+        },
+        "autorccar/driver.py": {
+          "valid": true,
+          "error": null,
+          "length_chars": 1135
+        }
+      },
+      "last_150_chars": "  if self.state == RCState.FORWARD:\n                self.speed += new_speed\n            elif self.state == RCState.REVERSE:\n                self.speed"
+    },
+    "markdownify": {
+      "metrics": {
+        "task_id": "markdownify",
+        "name": "Markdownify HTML to Markdown Converter",
+        "category": "Text & Formatting",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "markdownify/__init__.py",
+          "markdownify/converter.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 100.0,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 100.0
+      },
+      "gen_tokens": 450,
+      "hit_max_tokens": true,
+      "file_ast_status": {
+        "setup.py": {
+          "valid": true,
+          "error": null,
+          "length_chars": 157
+        },
+        "markdownify/__init__.py": {
+          "valid": true,
+          "error": null,
+          "length_chars": 151
+        },
+        "markdownify/converter.py": {
+          "valid": true,
+          "error": null,
+          "length_chars": 1420
+        }
+      },
+      "last_150_chars": "erns:\n            matches = list(re.finditer(pattern, text))\n            if matches:\n                start_idx = 0\n                end_idx = len(text)"
+    },
+    "retrying": {
+      "metrics": {
+        "task_id": "retrying",
+        "name": "Retrying Resilient Call Decorator",
+        "category": "DevOps & Tooling",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "retrying/__init__.py",
+          "retrying/retrying.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
+        "api_specification_compliance_pct": 66.7,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 86.7
+      },
+      "gen_tokens": 450,
+      "hit_max_tokens": true,
+      "file_ast_status": {
+        "setup.py": {
+          "valid": true,
+          "error": null,
+          "length_chars": 192
+        },
+        "retrying/__init__.py": {
+          "valid": true,
+          "error": null,
+          "length_chars": 55
+        },
+        "retrying/retrying.py": {
+          "valid": false,
+          "error": "invalid syntax (<unknown>, line 44)",
+          "length_chars": 1493
+        }
+      },
+      "last_150_chars": "ter this many seconds regardless of attempts.\n            kwargs: Additional arguments passed to the wrapped function.\n        \"\"\"\n        self.func ="
+    }
+  },
+  "hadl": {
+    "autorccar": {
+      "metrics": {
+        "task_id": "autorccar",
+        "name": "AutoRCCar Autonomous Vehicle Driver",
+        "category": "Robotics & Hardware",
+        "files_generated_count": 2,
+        "files_list": [
+          "setup.py",
+          "autorccar/__init__.py"
+        ],
+        "multi_file_structural_coherence_pct": 66.7,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 100.0,
+        "api_specification_compliance_pct": 50.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 83.3
+      },
+      "gen_tokens": 396,
+      "hit_max_tokens": false,
+      "file_ast_status": {
+        "setup.py": {
+          "valid": true,
+          "error": null,
+          "length_chars": 176
+        },
+        "autorccar/__init__.py": {
+          "valid": true,
+          "error": null,
+          "length_chars": 397
+        }
+      },
+      "last_150_chars": "ult instance for convenience\n_default_driver = RCDriver()\n\ndef get_default_driver():\n    return _default_driver\n\n__all__ = ['RCDriver', 'RCState']\n```"
+    },
+    "markdownify": {
+      "metrics": {
+        "task_id": "markdownify",
+        "name": "Markdownify HTML to Markdown Converter",
+        "category": "Text & Formatting",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "markdownify/__init__.py",
+          "markdownify/converter.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 100.0,
+        "api_specification_compliance_pct": 100.0,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 100.0
+      },
+      "gen_tokens": 390,
+      "hit_max_tokens": false,
+      "file_ast_status": {
+        "setup.py": {
+          "valid": true,
+          "error": null,
+          "length_chars": 207
+        },
+        "markdownify/__init__.py": {
+          "valid": true,
+          "error": null,
+          "length_chars": 101
+        },
+        "markdownify/converter.py": {
+          "valid": true,
+          "error": null,
+          "length_chars": 1089
+        }
+      },
+      "last_150_chars": "turn result\n\n# Expose instance globally for convenience\nmarkdown_converter = MarkdownConverter()\n__all__ = ['MarkdownConverter', 'markdown_converter']"
+    },
+    "retrying": {
+      "metrics": {
+        "task_id": "retrying",
+        "name": "Retrying Resilient Call Decorator",
+        "category": "DevOps & Tooling",
+        "files_generated_count": 3,
+        "files_list": [
+          "setup.py",
+          "retrying/__init__.py",
+          "retrying/retrying.py"
+        ],
+        "multi_file_structural_coherence_pct": 100.0,
+        "package_setup_validity_pct": 100.0,
+        "ast_syntax_integrity_pct": 66.7,
+        "api_specification_compliance_pct": 33.3,
+        "cross_module_consistency_pct": 100.0,
+        "composite_score_pct": 80.0
+      },
+      "gen_tokens": 450,
+      "hit_max_tokens": true,
+      "file_ast_status": {
+        "setup.py": {
+          "valid": true,
+          "error": null,
+          "length_chars": 897
+        },
+        "retrying/__init__.py": {
+          "valid": true,
+          "error": null,
+          "length_chars": 70
+        },
+        "retrying/retrying.py": {
+          "valid": false,
+          "error": "expected an indented block after 'try' statement on line 29 (<unknown>, line 29)",
+          "length_chars": 678
+        }
+      },
+      "last_150_chars": " def wrapper(*args, **kwargs):\n            last_exception = None\n            retry_count = 0\n            \n            while True:\n                try:"
+    }
+  }
+}

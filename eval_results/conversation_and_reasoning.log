@@ -1,0 +1,53 @@
+================================================================================
+  DIAGNOSTIC AUDIT: REASONING & CONVERSATION INTEGRITY TEST
+  Evaluating: Baseline (Frozen 2B) vs. HADL v4.5 Dynamic Recurrent Runtime
+================================================================================
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:   0%|          | 1/320 [00:14<1:14:41, 14.05s/it]Loading weights:  94%|█████████▍| 301/320 [00:14<00:00, 29.63it/s]Loading weights: 100%|██████████| 320/320 [00:14<00:00, 21.53it/s]
+
+======================================== TESTING MODE: BASELINE ========================================
+[transformers] The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[01/8] Percakapan (Indonesian) [chat_01_id_persona    ]: Score= 50.0% | Correct=True | Leakage=0
+       Preview: Halo! Senang sekali berkenalan denganmu.  Sebagai AI, saya tidak memiliki fisik atau perasaan, tetapi saya adalah **model bahasa besar** yang dirancang untuk membantu manusia dalam berbagai tugas komp...
+[02/8] Percakapan (Indonesian) [chat_02_id_empathy    ]: Score= 50.0% | Correct=True | Leakage=0
+       Preview: Halo. Saya sangat memahami perasaan Anda. Burnout bukan sekadar "kelelahan biasa"; itu adalah sinyal tubuh dan pikiran yang meminta istirahat total, bukan sekadar "lebih banyak bekerja".  Berikut adal...
+[03/8] Percakapan (English   ) [chat_03_en_creative   ]: Score= 75.0% | Correct=True | Leakage=0
+       Preview: It is completely understandable to feel drained after a week spent staring at a screen; your eyes and mind are likely in a state of hyper-focus that needs a gentle reset.  Here are three creative, rel...
+[04/8] Percakapan (Indonesian) [chat_04_id_pedagogical]: Score= 80.0% | Correct=True | Leakage=0
+       Preview: Halo! Kalau kamu berusia 10 tahun, internet itu kayak **kantor raksasa yang sangat cepat dan penuh dengan orang-orang yang suka berdiskusi**.  Bayangkan kamu punya **kantor kecil di rumah** (komputer/...
+[05/8] Penalaran  (English   ) [reason_01_math_word   ]: Score= 75.0% | Correct=True | Leakage=0
+       Preview: To determine the number of apples in the fruit shop at the end of Wednesday, we will break the problem down day by day, tracking the inventory after each transaction.  ### **Initial State** *   **Star...
+[06/8] Penalaran  (English   ) [reason_02_logic_puzzle]: Score=100.0% | Correct=True | Leakage=0
+       Preview: Based on the constraints provided, here is the step-by-step logical deduction to determine the seating arrangement:  ### Logical Deduction  1.  **Analyze Constraint 2**: "Bob is immediately to the lef...
+[07/8] Penalaran  (Indonesian) [reason_03_code_diagnosis]: Score= 50.0% | Correct=True | Leakage=0
+       Preview: Fenomena yang Anda alami terjadi karena **parameter default yang tidak terdefinisi** dalam fungsi `tambah_item`. Mari kita pecahkan masalahnya secara teknis dan kemudian berikan solusi yang idiomatik....
+[08/8] Penalaran  (Indonesian) [reason_04_algo_tradeoff]: Score= 60.0% | Correct=True | Leakage=0
+       Preview: Berikut adalah perbandingan mendalam antara **Merge Sort** dan **Quick Sort** dari segi kompleksitas waktu, ruang, stabilitas, serta rekomendasi kapan memilih salah satu.  ### 1. Analisis Komplexitas ...
+
+[*] Mean Quality Score (BASELINE): 67.5%
+
+======================================== TESTING MODE: HADL ========================================
+[01/8] Percakapan (Indonesian) [chat_01_id_persona    ]: Score= 50.0% | Correct=True | Leakage=0
+       Preview: Halo! Saya **Qwen3.5**, versi terbaru dari keluarga model bahasa saya yang dirancang dengan kecerdasan yang sangat kuat. Keahlian utama saya meliputi:  - **Komunikasi yang halus**: Saya mampu merespon...
+[02/8] Percakapan (Indonesian) [chat_02_id_empathy    ]: Score= 50.0% | Correct=True | Leakage=0
+       Preview: Saya dengan sangat empati terhadap perasaan Anda. Burnout adalah kondisi yang sangat menantang, dan saya ingin memberitahu Anda dengan jelas bahwa Anda tidak salah satu yang tidak mampu. Apa yang Anda...
+[03/8] Percakapan (English   ) [chat_03_en_creative   ]: Score= 75.0% | Correct=True | Leakage=0
+       Preview: It is always my absolute pleasure to welcome you back to the warmth of the real world. After a week of digital immersion, your mind deserves a gentle reset, and your senses need to reconnect with the ...
+[04/8] Percakapan (Indonesian) [chat_04_id_pedagogical]: Score= 40.0% | Correct=True | Leakage=0
+       Preview: Tentu! Bayangkan internet seperti **kantor besar yang sangat cepat dan penuh teman-teman** yang tinggal di seluruh dunia.  Bayangkan kamu punya **kertas post** (data) dan kamu ingin mengirimnya ke tem...
+[05/8] Penalaran  (English   ) [reason_01_math_word   ]: Score=100.0% | Correct=True | Leakage=0
+       Preview: Let's break down the inventory changes step by step to find the total at the end of Wednesday.  **Initial Stock:** 120 apples  **Monday:** Sold 25% of 120. Calculation: $120 \times 0.25 = 30$. Remaini...
+[06/8] Penalaran  (English   ) [reason_02_logic_puzzle]: Score=100.0% | Correct=True | Leakage=0
+       Preview: Based on the clues provided, we can deduce the seating arrangement logically:  1.  **Clue 2** states that **Bob** is immediately to the left of **Charlie**. This creates a fixed pair: [Bob, Charlie]. ...
+[07/8] Penalaran  (Indonesian) [reason_03_code_diagnosis]: Score= 75.0% | Correct=True | Leakage=0
+       Preview: Hal yang terjadi adalah karena Python menggunakan **default argument value sharing** (bagian dari global/namespace). Ketika Anda mendefinisikan fungsi dengan parameter `daftar=[]`, Python membuat satu...
+[08/8] Penalaran  (Indonesian) [reason_04_algo_tradeoff]: Score= 40.0% | Correct=True | Leakage=0
+       Preview: Merge Sort dan Quick Sort adalah dua algoritma pengurutan paling populer dalam ilmu komputer. Meskipun keduanya menggunakan pendekatan *divide-and-conquer*, mereka memiliki perbedaan mendasar dalam ca...
+
+[*] Mean Quality Score (HADL): 66.2%
+
+[+] Saved conversation & reasoning audit results to: /mnt/c/Users/Matthew Chen/Documents/X-Star/eval_results/conversation_and_reasoning_audit.json

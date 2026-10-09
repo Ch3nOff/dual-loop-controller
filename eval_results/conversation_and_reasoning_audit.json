@@ -1,0 +1,257 @@
+{
+  "baseline": {
+    "chat_01_id_persona": {
+      "id": "chat_01_id_persona",
+      "category": "Percakapan",
+      "language": "Indonesian",
+      "quality_score_pct": 50.0,
+      "checks_matched": [
+        "AI",
+        "membantu"
+      ],
+      "anti_patterns_found": [],
+      "is_correct_logic": true,
+      "response_length_words": 177,
+      "response_preview": "Halo! Senang sekali berkenalan denganmu.  Sebagai AI, saya tidak memiliki fisik atau perasaan, tetapi saya adalah **model bahasa besar** yang dirancang untuk membantu manusia dalam berbagai tugas komp...",
+      "full_text": "Halo! Senang sekali berkenalan denganmu.\n\nSebagai AI, saya tidak memiliki fisik atau perasaan, tetapi saya adalah **model bahasa besar** yang dirancang untuk membantu manusia dalam berbagai tugas kompleks. Keahlian utama saya meliputi:\n\n*   **Analisis & Penulisan:** Saya bisa membantu menulis artikel, novel, kode program, atau memformat dokumen dengan presisi.\n*   **Penyelesaian Masalah:** Dari perhitungan matematika rumit hingga debugging kode, saya bisa membantu memecahkan masalah logika.\n*   **Kreativitas & Ideasi:** Saya bisa membantu brainstorming ide, menulis cerita, atau merancang strategi bisnis.\n*   **Pembelajaran & Edukasi:** Saya bisa menjelaskan konsep rumit dengan mudah atau membantu belajar bahasa asing.\n*   **Kecerdasan Buatan (AI):** Saya juga bisa membantu merancang sistem AI atau memproses data.\n\n**Bagaimana saya bisa membantumu hari ini?**\n\nSilakan beritahu saya apa yang sedang kamu butuhkan. Apakah kamu ingin:\n1.  **Membantu menulis** sesuatu (email, proposal, puisi, dll)?\n2.  **Mengecek** informasi atau fakta?\n3.  **Membuat** rencana atau strategi?\n4.  **Membaca** dan menjelaskan teks yang sulit dipahami?\n5.  **Membuat** kode program atau script?\n6.  **Membantu** belajar atau memahami topik tertentu?\n\nSilakan pilih topik atau deskripsikan tugasmu, dan saya akan segera membantu!"
+    },
+    "chat_02_id_empathy": {
+      "id": "chat_02_id_empathy",
+      "category": "Percakapan",
+      "language": "Indonesian",
+      "quality_score_pct": 50.0,
+      "checks_matched": [
+        "istirahat",
+        "prioritas"
+      ],
+      "anti_patterns_found": [],
+      "is_correct_logic": true,
+      "response_length_words": 214,
+      "response_preview": "Halo. Saya sangat memahami perasaan Anda. Burnout bukan sekadar \"kelelahan biasa\"; itu adalah sinyal tubuh dan pikiran yang meminta istirahat total, bukan sekadar \"lebih banyak bekerja\".  Berikut adal...",
+      "full_text": "Halo. Saya sangat memahami perasaan Anda. Burnout bukan sekadar \"kelelahan biasa\"; itu adalah sinyal tubuh dan pikiran yang meminta istirahat total, bukan sekadar \"lebih banyak bekerja\".\n\nBerikut adalah beberapa saran praktis dan langkah-langkah konkret yang bisa Anda coba mulai hari ini untuk menenangkan pikiran dan memulihkan diri:\n\n### 1. Lakukan \"Digital Detox\" Total\nKekhawatiran terbesar saat burnout adalah kecemasan akan tugas yang belum selesai.\n*   **Batalkan Notifikasi:** Matikan notifikasi email, chat, dan media sosial selama 24 jam. Biarkan pekerjaan \"berhenti\" secara digital.\n*   **Hapus Tugas Prioritas:** Jika Anda merasa terburu-buru, coba tulis semua tugas yang harus diselesaikan dalam satu kertas atau aplikasi. Setelah itu, biarkan kertas itu di tempat yang tidak terlihat. Ini membantu otak Anda berhenti mengira bahwa pekerjaan itu masih \"menunggu\".\n\n### 2. Ubah Pola Tidur dan Makan\nKetika tubuh lelah, otak akan menjadi lebih mudah terobsesi.\n*   **Tidur Lebih Awal:** Coba taruh jam tidur Anda 30 menit lebih awal. Tidur berkualitas adalah satu-satunya cara untuk membersihkan \"neurotoksin\" dari pikiran Anda.\n*   **Makanan Ringan:** Hindari makanan berat atau gula yang bisa membuat Anda lebih lelah. Minum air putih yang cukup juga membantu menjaga fokus tanpa membuat Anda stres.\n\n### 3. Teknik \"Grounding\" untuk Mengurangi Kecemasan\nSaat pikiran berputar tentang pekerjaan, coba teknik ini saat Anda duduk di tempat yang tenang:\n*   **5-4-3-2-1"
+    },
+    "chat_03_en_creative": {
+      "id": "chat_03_en_creative",
+      "category": "Percakapan",
+      "language": "English",
+      "quality_score_pct": 75.0,
+      "checks_matched": [
+        "screen",
+        "relax",
+        "creative"
+      ],
+      "anti_patterns_found": [],
+      "is_correct_logic": true,
+      "response_length_words": 252,
+      "response_preview": "It is completely understandable to feel drained after a week spent staring at a screen; your eyes and mind are likely in a state of hyper-focus that needs a gentle reset.  Here are three creative, rel...",
+      "full_text": "It is completely understandable to feel drained after a week spent staring at a screen; your eyes and mind are likely in a state of hyper-focus that needs a gentle reset.\n\nHere are three creative, relaxing weekend hobbies designed to break that digital loop, along with the specific benefits of each:\n\n### 1. The \"Digital Detox\" Nature Walk\nInstead of just going to a park, try a **guided nature hike** or a **forest walk** where you are encouraged to leave your phone behind. You can even bring a small notebook and pen to sketch the trees, birds, or the changing light.\n\n*   **Why it's beneficial:**\n    *   **Biological Reset:** Exposure to natural light and greenery triggers the release of serotonin and dopamine, directly countering the \"blue light\" fatigue and stress hormones associated with screens.\n    *   **Sensory Grounding:** Nature forces you to slow down and notice small details (textures of bark, sounds of insects) that your computer screen has completely ignored, helping to re-engage your senses.\n    *   **Mental Clarity:** The physical act of walking away from the screen provides a necessary cognitive break, allowing your brain to switch from \"processing data\" to \"processing the environment.\"\n\n### 2. Analog Craft: Pottery or Clay Modeling\nIf you prefer a tactile activity, try **pottery throwing** or **clay modeling**. You can use a simple wheel or a hand-building tool to create a small sculpture, a mug, or a simple bowl.\n\n*   **Why it's beneficial:**\n    *   **Tactile Engagement:** Unlike the smooth, cold interface of a computer, clay is warm"
+    },
+    "chat_04_id_pedagogical": {
+      "id": "chat_04_id_pedagogical",
+      "category": "Percakapan",
+      "language": "Indonesian",
+      "quality_score_pct": 80.0,
+      "checks_matched": [
+        "pesan",
+        "komputer",
+        "kabel",
+        "jaringan"
+      ],
+      "anti_patterns_found": [],
+      "is_correct_logic": true,
+      "response_length_words": 201,
+      "response_preview": "Halo! Kalau kamu berusia 10 tahun, internet itu kayak **kantor raksasa yang sangat cepat dan penuh dengan orang-orang yang suka berdiskusi**.  Bayangkan kamu punya **kantor kecil di rumah** (komputer/...",
+      "full_text": "Halo! Kalau kamu berusia 10 tahun, internet itu kayak **kantor raksasa yang sangat cepat dan penuh dengan orang-orang yang suka berdiskusi**.\n\nBayangkan kamu punya **kantor kecil di rumah** (komputer/laptop). Di kantor itu, ada banyak **karyawan** (orang lain) yang sedang bekerja.\n\nBerikut cara kerja internetnya, disederhanakan jadi cerita:\n\n### 1. Kamu \"Membuka Pintu\" (Menghubungkan)\nKetika kamu klik tombol \"Buka\" di internet, kamu sedang bilang ke kantor: *\"Ayo, kita masuk ke gedung ini!\"*\n*   **Di rumah:** Kamu punya satu pintu (kabel internet).\n*   **Di internet:** Kamu punya banyak pintu (kabel internet) yang terhubung ke gedung raksasa.\n\n### 2. Kamu \"Membawa Pesan\" (Mengirim Data)\nSekarang kamu punya pesan yang ingin dikirim. Misalnya, kamu ingin bertanya: *\"Siapa yang bisa menjelaskan cara membuat kue?\"*\n*   Kamu tidak mengirim kertas. Kamu mengirim **pesan digital** (seperti email atau chat).\n*   Pesan ini langsung sampai ke **kantor** (server internet) dengan sangat cepat, seperti pesan WhatsApp yang langsung terkirim.\n\n### 3. Kantor \"Membaca Pesan\" (Server & Jaringan)\nKetika pesan sampai ke kantor, ada **karyawan** yang bertugas membaca dan menyimpannya.\n*   Mereka tidak membaca kertas, mereka membaca **kode-kode kecil** yang mewakili kata-kata kamu.\n*   Mereka juga menyimpan semua pesan yang masuk dan pesan yang keluar di dalam gedung itu.\n\n### 4."
+    },
+    "reason_01_math_word": {
+      "id": "reason_01_math_word",
+      "category": "Penalaran",
+      "language": "English",
+      "quality_score_pct": 75.0,
+      "checks_matched": [
+        "90",
+        "70",
+        "120"
+      ],
+      "anti_patterns_found": [],
+      "is_correct_logic": true,
+      "response_length_words": 143,
+      "response_preview": "To determine the number of apples in the fruit shop at the end of Wednesday, we will break the problem down day by day, tracking the inventory after each transaction.  ### **Initial State** *   **Star...",
+      "full_text": "To determine the number of apples in the fruit shop at the end of Wednesday, we will break the problem down day by day, tracking the inventory after each transaction.\n\n### **Initial State**\n*   **Starting Stock:** 120 apples.\n\n---\n\n### **Monday**\n*   **Action:** Sold 25% of the stock.\n*   **Calculation:**\n    *   $25\\% \\text{ of } 120 = 0.25 \\times 120 = 30$ apples.\n*   **Remaining Stock:**\n    *   $120 - 30 = 90$ apples.\n\n### **Tuesday**\n*   **Action:** Sold 20 more apples.\n*   **Calculation:**\n    *   $90 - 20 = 70$ apples.\n*   **Current Stock:** 70 apples.\n\n### **Wednesday**\n*   **Action:** A new shipment of 50 apples arrived.\n*   **Calculation:**\n    *   Add the new shipment to the remaining stock: $70 + 50 = 120$ apples.\n*   **Current Stock:** 120 apples.\n\n---\n\n### **Final Conclusion**\nAt the end of Wednesday, the fruit shop has **120** apples."
+    },
+    "reason_02_logic_puzzle": {
+      "id": "reason_02_logic_puzzle",
+      "category": "Penalaran",
+      "language": "English",
+      "quality_score_pct": 100.0,
+      "checks_matched": [
+        "Alice",
+        "Bob",
+        "Charlie"
+      ],
+      "anti_patterns_found": [],
+      "is_correct_logic": true,
+      "response_length_words": 185,
+      "response_preview": "Based on the constraints provided, here is the step-by-step logical deduction to determine the seating arrangement:  ### Logical Deduction  1.  **Analyze Constraint 2**: \"Bob is immediately to the lef...",
+      "full_text": "Based on the constraints provided, here is the step-by-step logical deduction to determine the seating arrangement:\n\n### Logical Deduction\n\n1.  **Analyze Constraint 2**: \"Bob is immediately to the left of Charlie.\"\n    *   In a line of three people (Position 1, Position 2, Position 3), the only way for Bob to be immediately to the left of Charlie is if they occupy **Position 2** and **Position 3**.\n    *   This leaves **Position 1** for the remaining person, Alice.\n    *   *Current Arrangement*: [Alice, Bob, Charlie]\n\n2.  **Analyze Constraint 1**: \"Alice is not on the far right.\"\n    *   In our current arrangement, Alice is on the far left (Position 1).\n    *   Since Position 1 is not the far right (Position 3), this condition is satisfied.\n\n3.  **Verification**:\n    *   Is Alice on the far right? No (she is on the left).\n    *   Is Bob immediately to the left of Charlie? Yes (Bob is at 2, Charlie is at 3).\n    *   Are there three people? Yes.\n\n### Final Conclusion\n\nThe exact seating arrangement from left to right is:\n\n**Position 1: Alice**\n**Position 2: Bob**\n**Position 3: Charlie**\n\n**Arrangement:** Alice, Bob, Charlie"
+    },
+    "reason_03_code_diagnosis": {
+      "id": "reason_03_code_diagnosis",
+      "category": "Penalaran",
+      "language": "Indonesian",
+      "quality_score_pct": 50.0,
+      "checks_matched": [
+        "default",
+        "None"
+      ],
+      "anti_patterns_found": [],
+      "is_correct_logic": true,
+      "response_length_words": 182,
+      "response_preview": "Fenomena yang Anda alami terjadi karena **parameter default yang tidak terdefinisi** dalam fungsi `tambah_item`. Mari kita pecahkan masalahnya secara teknis dan kemudian berikan solusi yang idiomatik....",
+      "full_text": "Fenomena yang Anda alami terjadi karena **parameter default yang tidak terdefinisi** dalam fungsi `tambah_item`. Mari kita pecahkan masalahnya secara teknis dan kemudian berikan solusi yang idiomatik.\n\n### 1. Analisis Teknis: Mengapa Output Tidak Terduga?\n\nDalam kode Anda:\n```python\ndef tambah_item(item, daftar=[]):\n    daftar.append(item)\n    return daftar\n```\nParameter `daftar` memiliki default value `[]`. Namun, di Python, **default value yang didefinisikan secara eksplisit tidak otomatis menjadi nilai default global**.\n\nBerikut adalah alur logika yang terjadi saat fungsi dipanggil berulang kali:\n\n1.  **Konteks Eksekusi**: Setiap kali fungsi dipanggil, Python akan mencari nilai default untuk parameter `daftar`.\n2.  **Kondisi 1: Parameter Baru Didefinisikan**. Jika Anda memanggil fungsi dengan argumen baru (misalnya `tambah_item('a')`), Python akan membuat parameter `daftar` baru dengan nilai default `[]`.\n    *   *Hasil*: Fungsi bekerja seperti biasa, menambah 'a' ke list baru, dan mengembalikan list baru.\n3.  **Kondisi 2: Parameter Tidak Didefinisikan (None)**. Jika Anda memanggil fungsi tanpa argumen (misalnya `tambah_item()`), Python tidak menemukan nilai default.\n    *   *Hasil*: Python akan menggunakan nilai default yang didefinisikan di **baris atas** fungsi tersebut, yaitu `[]`.\n    *   *Hasil Akhir*: Fungsi mengembalikan `[]` (list kosong).\n\n**Contoh Kasus:**\n```python\ndef tambah_item(item, daftar"
+    },
+    "reason_04_algo_tradeoff": {
+      "id": "reason_04_algo_tradeoff",
+      "category": "Penalaran",
+      "language": "Indonesian",
+      "quality_score_pct": 60.0,
+      "checks_matched": [
+        "O(n^2)",
+        "O(n)",
+        "stabil"
+      ],
+      "anti_patterns_found": [],
+      "is_correct_logic": true,
+      "response_length_words": 177,
+      "response_preview": "Berikut adalah perbandingan mendalam antara **Merge Sort** dan **Quick Sort** dari segi kompleksitas waktu, ruang, stabilitas, serta rekomendasi kapan memilih salah satu.  ### 1. Analisis Komplexitas ...",
+      "full_text": "Berikut adalah perbandingan mendalam antara **Merge Sort** dan **Quick Sort** dari segi kompleksitas waktu, ruang, stabilitas, serta rekomendasi kapan memilih salah satu.\n\n### 1. Analisis Komplexitas\n\n#### **A. Worst-case & Average-case Time Complexity**\n*   **Merge Sort:**\n    *   **Worst-case:** $O(n \\log n)$\n    *   **Average-case:** $O(n \\log n)$\n    *   **Analisis:** Merge Sort memiliki struktur yang sangat terduga. Ia selalu melakukan $n$ perbandingan untuk membagi data menjadi dua, dan kemudian melakukan penggabungan (merge) yang juga linear terhadap jumlah elemen. Tidak peduli seberapa buruk data yang diberikan (misalnya, data yang sudah terurut atau terbalik), performanya tetap konsisten.\n*   **Quick Sort:**\n    *   **Worst-case:** $O(n^2)$\n    *   **Average-case:** $O(n \\log n)$\n    *   **Analisis:** Quick Sort sangat bergantung pada pemilihan pivot (pembagi). Jika pivot dipilih secara acak, performanya rata-rata $O(n \\log n)$. Namun, jika data sudah terurut atau hampir terurut, dan pivot dipilih secara tidak bijak (misalnya, selalu elemen terkecil atau terbesar), algoritma akan melakukan *dividing* yang sangat sedikit dan *merging* yang sangat banyak, menyebabkan waktu menjadi $O(n^2)$.\n\n#### **B. Space Complexity**\n*   **Merge Sort:**\n    *   **Space Complexity:** $O(n)$ (terlalu baik untuk *in-place*).\n    *   **Analisis"
+    }
+  },
+  "hadl": {
+    "chat_01_id_persona": {
+      "id": "chat_01_id_persona",
+      "category": "Percakapan",
+      "language": "Indonesian",
+      "quality_score_pct": 50.0,
+      "checks_matched": [
+        "AI",
+        "membantu"
+      ],
+      "anti_patterns_found": [],
+      "is_correct_logic": true,
+      "response_length_words": 136,
+      "response_preview": "Halo! Saya **Qwen3.5**, versi terbaru dari keluarga model bahasa saya yang dirancang dengan kecerdasan yang sangat kuat. Keahlian utama saya meliputi:  - **Komunikasi yang halus**: Saya mampu merespon...",
+      "full_text": "Halo! Saya **Qwen3.5**, versi terbaru dari keluarga model bahasa saya yang dirancang dengan kecerdasan yang sangat kuat. Keahlian utama saya meliputi:\n\n- **Komunikasi yang halus**: Saya mampu merespons Anda dengan ramah dan mudah dipahami.\n- **Analisis mendalam**: Bisa memecahkan masalah kompleks atau memberikan wawasan yang komprehensif.\n- **Kreativitas yang inovatif**: Menghasilkan ide segar, terutama dalam bidang seni atau penulisan.\n- **Multitasking yang efisien**: Mengelola banyak tugas sekaligus tanpa kehilangan ketepatan.\n- **Bahasa yang inklusif**: Memastikan respons Anda jelas dan sesuai dengan preferensi pengguna.\n\nHari ini, saya siap membantu Anda dengan:\n- Menuliskan cerita yang inspiratif atau menjawab pertanyaan dengan cermat.\n- Memberikan saran praktis untuk memecahkan masalah sehari-hari.\n- Mengkonversi ide kompleks menjadi langkah-langkah yang mudah dipahami.\n\nSilakan beri tahu saya dengan santai apa yang Anda butuhkan, dan saya akan dengan penuh semangat membantu Anda! \ud83c\udf1f"
+    },
+    "chat_02_id_empathy": {
+      "id": "chat_02_id_empathy",
+      "category": "Percakapan",
+      "language": "Indonesian",
+      "quality_score_pct": 50.0,
+      "checks_matched": [
+        "istirahat",
+        "waktu"
+      ],
+      "anti_patterns_found": [],
+      "is_correct_logic": true,
+      "response_length_words": 231,
+      "response_preview": "Saya dengan sangat empati terhadap perasaan Anda. Burnout adalah kondisi yang sangat menantang, dan saya ingin memberitahu Anda dengan jelas bahwa Anda tidak salah satu yang tidak mampu. Apa yang Anda...",
+      "full_text": "Saya dengan sangat empati terhadap perasaan Anda. Burnout adalah kondisi yang sangat menantang, dan saya ingin memberitahu Anda dengan jelas bahwa Anda tidak salah satu yang tidak mampu. Apa yang Anda rasakan adalah tanda bahwa Anda telah bekerja terlalu keras dan perlu istirahat yang mendalam, bukan sekadar \"waktu luang\" yang singkat.\n\nBerikut beberapa saran praktis dan langkah-langkah kecil yang bisa Anda ambil untuk menenangkan pikiran:\n\n1. **Buat satu \"hiburan kecil\" yang tidak produktif**\n   Jangan mencoba menyelesaikan semua pekerjaan. Cukup minum segelas air hangat atau menonton satu episode film yang tidak perlu. Tujuannya hanya untuk mengembalikan rasa normal.\n\n2. **Tetapkan batas waktu nyata**\n   Jika Anda bekerja 8 jam, biarkan hanya 6 jam. Tambahkan 1 jam untuk waktu di mana Anda benar-benar tidak boleh menghubungi pekerjaan.\n\n3. **Tulis 3 hal kecil yang menyenangkan**\n   Cari 3 hal kecil yang bisa Anda lakukan (misalnya: menyikat gigi, mengambil buah segar, atau mendengarkan musik lembut). Ini membantu mengembalikan fokus positif.\n\n4. **Buat ruang \"istirahat total\"**\n   Cari satu tempat yang tenang di mana Anda tidak akan dipanggil. Biarkan diri Anda benar-benar berhenti bekerja selama 30 menit.\n\n5. **Bersihkan mental dengan menulis**\n   Tulis semua pikiran yang membebani Anda dalam satu surat. Ini membantu memisahkan beban dari diri Anda sendiri.\n\n6. **Hidupkan ritme tidur yang baik**\n   Pastikan Anda tidur 7 jam untuk membantu pemulihan otak.\n\nIngatkan saya: Anda tidak perlu memperbaiki semuanya sekarang. Cukup ambil satu langkah kecil yang memanjakan"
+    },
+    "chat_03_en_creative": {
+      "id": "chat_03_en_creative",
+      "category": "Percakapan",
+      "language": "English",
+      "quality_score_pct": 75.0,
+      "checks_matched": [
+        "screen",
+        "relax",
+        "creative"
+      ],
+      "anti_patterns_found": [],
+      "is_correct_logic": true,
+      "response_length_words": 286,
+      "response_preview": "It is always my absolute pleasure to welcome you back to the warmth of the real world. After a week of digital immersion, your mind deserves a gentle reset, and your senses need to reconnect with the ...",
+      "full_text": "It is always my absolute pleasure to welcome you back to the warmth of the real world. After a week of digital immersion, your mind deserves a gentle reset, and your senses need to reconnect with the physical world.\n\nHere are three creative and relaxing hobbies tailored for you, along with the benefits of each:\n\n### 1. Analog Sketching or Nature Photography\nInstead of scrolling through endless feeds, pick up a physical sketchbook or a camera lens. Spend an hour capturing the light in your garden or the texture of a warm cup of tea.\n*   **Why it's beneficial:** This practice combats \"screen fatigue\" by grounding you in the present moment. The tactile feel of paper and the visual clarity of a photograph help clear your digital clutter and restore your sense of observation, reminding you that beauty exists outside the algorithm.\n\n### 2. Warm Bath Time Storytelling\nFill your bathtub with hot water and read a physical book or listen to a soothing audiobook while you soak. Let the steam relax your muscles and use the time to create a cozy narrative without any interruptions.\n*   **Why it's beneficial:** This is a perfect way to unwind your mind. The combination of heat and storytelling lowers cortisol levels, while the act of listening to a story allows your imagination to wander freely, freeing your brain from the need to solve problems or check emails.\n\n### 3. Foraging for Fruits or Making a Simple Tea\nGo outside to pick fresh berries, leaves, or simply brew a cup of your favorite herbal tea. Engage your senses to identify the colors, smells, and tastes of the natural world.\n*   **Why it's beneficial:** This reconnects you with the basics of"
+    },
+    "chat_04_id_pedagogical": {
+      "id": "chat_04_id_pedagogical",
+      "category": "Percakapan",
+      "language": "Indonesian",
+      "quality_score_pct": 40.0,
+      "checks_matched": [
+        "pesan",
+        "komputer"
+      ],
+      "anti_patterns_found": [],
+      "is_correct_logic": true,
+      "response_length_words": 157,
+      "response_preview": "Tentu! Bayangkan internet seperti **kantor besar yang sangat cepat dan penuh teman-teman** yang tinggal di seluruh dunia.  Bayangkan kamu punya **kertas post** (data) dan kamu ingin mengirimnya ke tem...",
+      "full_text": "Tentu! Bayangkan internet seperti **kantor besar yang sangat cepat dan penuh teman-teman** yang tinggal di seluruh dunia.\n\nBayangkan kamu punya **kertas post** (data) dan kamu ingin mengirimnya ke teman di Australia. Kamu tidak bisa menulisnya di kertas, jadi kamu kirimkannya lewat **internet**.\n\n1. **Kamu mengetik pesan** di komputer kamu (seperti menulis di kertas).\n2. **Kamu klik \"Kirim\"** (seperti meletakkan kertas di pos).\n3. **Internet** seperti **peta jalan super cepat** yang membawa pesan itu dari kantor kamu ke kantor teman di Australia.\n4. **Teman di Australia** menerima pesan itu, membukanya, dan menjawab dengan cara mereka sendiri (seperti mereka menulis balasan di kertas mereka).\n\n**Intinya:**\n- **Kamu** = Anak yang bermain di rumah.\n- **Internet** = Jalan raya yang sangat cepat dan aman.\n- **Server/Website** = Kantor-kantor teman yang menerima pesan.\n- **Data** = Pesan atau gambar yang kamu kirim.\n\nJadi, internet itu cara kamu bisa **bermain bersama teman-teman di seluruh dunia** dengan cepat, tanpa harus menunggu lama! \ud83c\udf10\u2728"
+    },
+    "reason_01_math_word": {
+      "id": "reason_01_math_word",
+      "category": "Penalaran",
+      "language": "English",
+      "quality_score_pct": 100.0,
+      "checks_matched": [
+        "90",
+        "70",
+        "120",
+        "step"
+      ],
+      "anti_patterns_found": [],
+      "is_correct_logic": true,
+      "response_length_words": 81,
+      "response_preview": "Let's break down the inventory changes step by step to find the total at the end of Wednesday.  **Initial Stock:** 120 apples  **Monday:** Sold 25% of 120. Calculation: $120 \\times 0.25 = 30$. Remaini...",
+      "full_text": "Let's break down the inventory changes step by step to find the total at the end of Wednesday.\n\n**Initial Stock:** 120 apples\n\n**Monday:** Sold 25% of 120.\nCalculation: $120 \\times 0.25 = 30$.\nRemaining after Monday: $120 - 30 = 90$.\n\n**Tuesday:** Sold 20 apples.\nRemaining after Tuesday: $90 - 20 = 70$.\n\n**Wednesday:** A new shipment of 50 apples arrived.\nCalculation: $70 + 50 = 120$.\n\n**Final Answer:** 120\n\nThe fruit shop had 120 apples at the end of Wednesday."
+    },
+    "reason_02_logic_puzzle": {
+      "id": "reason_02_logic_puzzle",
+      "category": "Penalaran",
+      "language": "English",
+      "quality_score_pct": 100.0,
+      "checks_matched": [
+        "Alice",
+        "Bob",
+        "Charlie"
+      ],
+      "anti_patterns_found": [],
+      "is_correct_logic": true,
+      "response_length_words": 138,
+      "response_preview": "Based on the clues provided, we can deduce the seating arrangement logically:  1.  **Clue 2** states that **Bob** is immediately to the left of **Charlie**. This creates a fixed pair: [Bob, Charlie]. ...",
+      "full_text": "Based on the clues provided, we can deduce the seating arrangement logically:\n\n1.  **Clue 2** states that **Bob** is immediately to the left of **Charlie**. This creates a fixed pair: [Bob, Charlie].\n2.  Since there are only three seats (Position 1, Position 2, Position 3) and Bob must be immediately left of Charlie, the only possible arrangement for them is [Bob, Charlie].\n3.  **Clue 1** states that **Alice** is **not** on the far right (Position 3).\n4. Therefore, Alice must be in Position 1 or Position 2. Since Position 2 is occupied by Charlie, Alice must be in Position 1.\n\nThe final arrangement is:\n**Position 1: Alice**\n**Position 2: Bob**\n**Position 3: Charlie**\n\nThis satisfies all conditions: Alice is not on the far right (she is on the left), and Bob is immediately to the left of Charlie."
+    },
+    "reason_03_code_diagnosis": {
+      "id": "reason_03_code_diagnosis",
+      "category": "Penalaran",
+      "language": "Indonesian",
+      "quality_score_pct": 75.0,
+      "checks_matched": [
+        "default",
+        "None",
+        "daftar is None"
+      ],
+      "anti_patterns_found": [],
+      "is_correct_logic": true,
+      "response_length_words": 184,
+      "response_preview": "Hal yang terjadi adalah karena Python menggunakan **default argument value sharing** (bagian dari global/namespace). Ketika Anda mendefinisikan fungsi dengan parameter `daftar=[]`, Python membuat satu...",
+      "full_text": "Hal yang terjadi adalah karena Python menggunakan **default argument value sharing** (bagian dari global/namespace). Ketika Anda mendefinisikan fungsi dengan parameter `daftar=[]`, Python membuat satu daftar kosong baru dan mereferensikan parameter tersebut ke objek yang sama di stack memory.\n\nJika Anda memanggil `tambah_item(item1, [])` lalu `tambah_item(item2, [])`, kedua panggilan akan mengappend ke daftar yang sama. Akibatnya, kedua item akan muncul dalam daftar tunggal tersebut.\n\n### Penjelasan Teknis\n\n```python\ndef tambah_item(item, daftar=[]):\n    daftar.append(item)\n    return daftar\n```\n\nJika Anda jalankan:\n```python\nhasil1 = tambah_item('a')\nhasil2 = tambah_item('b')\n```\n\nOutputnya akan menjadi: `['a', 'b']`, bukan `['a']` atau `['b']`.\n\nAlasannya:\n1. Saat definisi `daftar=[]` diparse, Python membuat satu daftar kosong `[]`.\n2. Parameter `daftar` di setiap panggilan fungsi akan menjadi referensi yang sama ke objek `[]` tersebut.\n3. Setiap `append` menambahkan item ke objek yang sama, sehingga semua perubahan terlihat di semua panggilan.\n\n### Solusi Idiomatik: Default Argument Value Copy\n\nUntuk menghindari masalah ini, Anda harus membuat **salinan** dari default value saat mendefinisikan fungsi:\n\n```python\ndef tambah_item(item, daftar=None):\n    if daftar is None:\n        daftar = []\n    daftar.append(item)\n    return daftar\n```\n\nAtau lebih singkat (tetapi tetap idiomatik):\n\n```python\ndef tambah_item(item, daftar"
+    },
+    "reason_04_algo_tradeoff": {
+      "id": "reason_04_algo_tradeoff",
+      "category": "Penalaran",
+      "language": "Indonesian",
+      "quality_score_pct": 40.0,
+      "checks_matched": [
+        "O(n)",
+        "stabil"
+      ],
+      "anti_patterns_found": [],
+      "is_correct_logic": true,
+      "response_length_words": 203,
+      "response_preview": "Merge Sort dan Quick Sort adalah dua algoritma pengurutan paling populer dalam ilmu komputer. Meskipun keduanya menggunakan pendekatan *divide-and-conquer*, mereka memiliki perbedaan mendasar dalam ca...",
+      "full_text": "Merge Sort dan Quick Sort adalah dua algoritma pengurutan paling populer dalam ilmu komputer. Meskipun keduanya menggunakan pendekatan *divide-and-conquer*, mereka memiliki perbedaan mendasar dalam cara mereka membagi data, memproses sub-problem, dan kembali ke hasil akhir.\n\nBerikut adalah perbandingan mendalam antara kedua algoritma tersebut:\n\n### 1. Time Complexity\n\n| Aspek | Merge Sort | Quick Sort |\n| :--- | :--- | :--- |\n| **Worst-case Time Complexity** | $O(n \\log n)$ | $O(n \\log n)$ |\n| **Average-case Time Complexity** | $O(n \\log n)$ | $O(n \\log n)$ |\n| **Best-case Time Complexity** | $O(n \\log n)$ | $O(n \\log n)$ |\n| **Stability** | **Stable** | **Unstable** |\n\n*   **Penjelasan:**\n    *   **Merge Sort** selalu menjaga stabilitas karena ia menggabungkan dua array yang sudah terurut secara aman.\n    *   **Quick Sort** tidak selalu stabil. Jika ada dua elemen dengan nilai yang sama, urutan mereka dalam hasil akhir tidak akan terjaga (tergantung implementasi dan randomisasi pivot).\n\n### 2. Space Complexity\n\n| Aspek | Merge Sort | Quick Sort |\n| :--- | :--- | :--- |\n| **Space Complexity** | $O(n)$ | $O(n)$ (rekursif) / $O(h)$ (h = depth, rata-rata) |\n| **Detail** | Selalu menggunakan $O(n)$ untuk buffer sementara saat penggabungan. | Menggunakan $O(n"
+    }
+  }
+}
