@@ -232,26 +232,45 @@ flowchart LR
 ```
 
 ### 1. 2レジーム動的コンテキスト切替器 (分岐実行レジーム)
-* **数学的定式化：** 初期隠れ状態 $h_{\text{mid}}$ に条件付けられたタスク粒度判別ゲート $\mathcal{G}_{\text{task}} \in [0, 1]$ を導入：
-  $$\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right)$$
-* **分岐実行レジーム：**
-  * **レジーム 0 (スカラー・マイクロ関数モード, $\mathcal{G} \to 0$):** 単一関数補全（HumanEval、MBPP）。防御的ラッパーの挿入を無効化し、型検証制約を緩和して、純粋なネイティブ Python 式を出力。
-  * **レジーム 1 (マクロ・リポジトリモード, $\mathcal{G} \to 1$):** 複数ファイルアーキテクチャ（SWE-bench、NL2Repo）。Car-Lift 油圧リフト、深層計画キャッシュ、AST 境界検証を最大稼働。
+
+初期隠れ状態 $h_{\text{mid}}$ に条件付けられたタスク粒度判別ゲート $\mathcal{G}_{\text{task}} \in [0, 1]$ を導入：
+
+$$
+\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right)
+$$
+
+**分岐実行レジーム：**
+* **レジーム 0 (スカラー・マイクロ関数モード, $\mathcal{G} \to 0$):** 単一関数補全（HumanEval、MBPP）。防御的ラッパーの挿入を無効化し、型検証制約を緩和して、純粋なネイティブ Python 式を出力。
+* **レジーム 1 (マクロ・リポジトリモード, $\mathcal{G} \to 1$):** 複数ファイルアーキテクチャ（SWE-bench、NL2Repo）。Car-Lift 油圧リフト、深層計画キャッシュ、AST 境界検証を最大稼働。
 
 ### 2. 弾性出力ホライゾンとエントロピー駆動型トークン割り当て
-* **数学的定式化：** 静的なトークン上限を、コードトポロジーエントロピー $\mathcal{H}_{\text{repo}}$ に連動する動的割り当て関数へ置換：
-  $$T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i$$
+
+静的なトークン上限を、コードトポロジーエントロピー $\mathcal{H}_{\text{repo}}$ に連動する動的割り当て関数へ置換：
+
+$$
+T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i
+$$
+
 * **効果：** 複数ファイル合成時に最大 2,048 トークンを柔軟に割り当て、トークン枯渇による構文エラーを完全排除。
 
 ### 3. 軽量プロセス報酬検証器 (PRM-21M) と潜在探索
-* **数学的定式化：** 推論の中間ステップの論理性を評価する 21M パラメータのステップ級価値推定器 $r_t = \text{PRM}(h_t) \in [0, 1]$ を学習。
-* **テスト時探索アルゴリズム：** 動的枝刈りを伴う潜在 Best-of-$N$ 探索を導入：
-  $$\mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}$$
+
+推論の中間ステップの論理性を評価する 21M パラメータのステップ級価値推定器 $r_t = \text{PRM}(h_t) \in [0, 1]$ を学習し、動的枝刈りを伴う潜在 Best-of-$N$ 探索を導入：
+
+$$
+\mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}
+$$
+
 * **目標：** 2B 凍結基底モデルにおいて、GSM8K およびオリンピック数学の正解率を **42.0% から 70% 以上** へ引き上げる。
 
 ### 4. マルチターンKVキャッシュ状態デカップリングとエントロピー浄化
-* **メカニズム：** 対話ターン間の認知状態擾乱 $\Delta h$ を物理的に隔離。高強度推論から日常対話へ遷移する際、KVキャッシュを恒等多様体へ射影・浄化：
-  $$h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})$$
+
+対話ターン間の認知状態擾乱 $\Delta h$ を物理的に隔離。高強度推論から日常対話へ遷移する際、KVキャッシュを恒等多様体へ射影・浄化：
+
+$$
+h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})
+$$
+
 * **目標：** 長期マルチターン対話においても、共感性と自然言語パープレキシティの 100% 不変性を維持。
 
 ---

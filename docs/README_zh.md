@@ -232,26 +232,45 @@ flowchart LR
 ```
 
 ### 1. 双机制动态上下文分流器 (分叉执行机制)
-* **数学形式化：** 基于前序隐藏状态 $h_{\text{mid}}$ 引入潜在判别式任务粒度门控 $\mathcal{G}_{\text{task}} \in [0, 1]$：
-  $$\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right)$$
-* **分叉执行机制：**
-  * **机制 0 (标量微函数模式, $\mathcal{G} \to 0$)：** 用于单函数补全（HumanEval、MBPP）。主动解除防御性捕获包装，放宽类型校验约束，直接输出纯粹的原生 Python 表达式。
-  * **机制 1 (宏观代码仓库模式, $\mathcal{G} \to 1$)：** 用于跨文件系统架构（SWE-bench、NL2Repo）。全力激活 Car-Lift 液压抬升、深层计划缓存与 AST 边界不变量校验。
+
+基于前序隐藏状态 $h_{\text{mid}}$ 引入潜在判别式任务粒度门控 $\mathcal{G}_{\text{task}} \in [0, 1]$：
+
+$$
+\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right)
+$$
+
+**分叉执行机制：**
+* **机制 0 (标量微函数模式, $\mathcal{G} \to 0$)：** 用于单函数补全（HumanEval、MBPP）。主动解除防御性捕获包装，放宽类型校验约束，直接输出纯粹的原生 Python 表达式。
+* **机制 1 (宏观代码仓库模式, $\mathcal{G} \to 1$)：** 用于跨文件系统架构（SWE-bench、NL2Repo）。全力激活 Car-Lift 液压抬升、深层计划缓存与 AST 边界不变量校验。
 
 ### 2. 弹性输出跨度与拓扑熵控代币分配
-* **数学形式化：** 用与输入代码拓扑熵 $\mathcal{H}_{\text{repo}}$ 动态关联的自适应分配函数取代固定的代币上限：
-  $$T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i$$
+
+用与输入代码拓扑熵 $\mathcal{H}_{\text{repo}}$ 动态关联的自适应分配函数取代固定的代币上限：
+
+$$
+T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i
+$$
+
 * **工程效果：** 在处理复杂模块化工程时动态扩展至最多 2,048 个代币，彻底根除截断导致的缩进语法错误。
 
 ### 3. 轻量化过程奖励验证器 (PRM-21M) 与潜在搜索
-* **数学形式化：** 训练参数量仅为 21M 的步级价值估计器 $r_t = \text{PRM}(h_t) \in [0, 1]$，在推理中间步骤实时估算逻辑合理性。
-* **测试时搜索算法：** 部署带有动态剪枝的潜在 Best-of-$N$ 路径重排序：
-  $$\mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}$$
+
+训练参数量仅为 21M 的步级价值估计器 $r_t = \text{PRM}(h_t) \in [0, 1]$，在推理中间步骤实时估算逻辑合理性，并通过潜在 Best-of-$N$ 路径重排序执行动态剪枝：
+
+$$
+\mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}
+$$
+
 * **技术目标：** 在完全冻结的 2B 参数基座上，将 GSM8K 与奥数解题准确率从 **42.0% 提升至 70%+**。
 
 ### 4. 多轮对话 KV 缓存解耦与熵清洗
-* **机制：** 在不同对话轮次之间物理隔离认知扰动 $\Delta h$。当系统从高强度符号推理切回日常对话时，执行投影清洗算子：
-  $$h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})$$
+
+在不同对话轮次之间物理隔离认知扰动 $\Delta h$。当系统从高强度符号推理切回日常对话时，执行投影清洗算子：
+
+$$
+h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})
+$$
+
 * **技术目标：** 确保多轮交互后，日常对话的共情力与自然语言困惑度实现 100% 绝对不变性。
 
 ---

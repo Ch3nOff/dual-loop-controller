@@ -232,26 +232,45 @@ flowchart LR
 ```
 
 ### 1. Conmutador Dinámico de Contexto de Doble Régimen (Regímenes Bifurcados)
-* **Formulación Matemática:** Introducir una compuerta discriminativa latente de granularidad $\mathcal{G}_{\text{task}} \in [0, 1]$ condicionada en los estados ocultos iniciales $h_{\text{mid}}$:
-  $$\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right)$$
-* **Regímenes de Ejecución Bifurcados:**
-  * **Régimen 0 (Modo Microfunción Escalar, $\mathcal{G} \to 0$):** Para funciones únicas (HumanEval, MBPP). Desactiva las defensas automáticas, relaja las restricciones de tipo y emite código Python nativo puro.
-  * **Régimen 1 (Modo Macro-Repositorio, $\mathcal{G} \to 1$):** Para arquitecturas multifichero (SWE-bench, NL2Repo). Activa el elevador hidráulico completo, la memoria caché de planes y la verificación AST.
+
+Introducir una compuerta discriminativa latente de granularidad $\mathcal{G}_{\text{task}} \in [0, 1]$ condicionada en los estados ocultos iniciales $h_{\text{mid}}$:
+
+$$
+\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right)
+$$
+
+**Regímenes de Ejecución Bifurcados:**
+* **Régimen 0 (Modo Microfunción Escalar, $\mathcal{G} \to 0$):** Para funciones únicas (HumanEval, MBPP). Desactiva las defensas automáticas, relaja las restricciones de tipo y emite código Python nativo puro.
+* **Régimen 1 (Modo Macro-Repositorio, $\mathcal{G} \to 1$):** Para arquitecturas multifichero (SWE-bench, NL2Repo). Activa el elevador hidráulico completo, la memoria caché de planes y la verificación AST.
 
 ### 2. Horizonte Elástico de Salida y Asignación de Tokens Guiada por Entropía
-* **Formulación Matemática:** Sustituir los límites fijos por una función de asignación adaptativa ligada a la entropía topológica $\mathcal{H}_{\text{repo}}$:
-  $$T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i$$
+
+Sustituir los límites fijos por una función de asignación adaptativa ligada a la entropía topológica $\mathcal{H}_{\text{repo}}$:
+
+$$
+T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i
+$$
+
 * **Impacto:** Permite expandir dinámicamente hasta 2.048 tokens en repositorios modulares complejos, eliminando de raíz los errores de indentación.
 
 ### 3. Verificador Ligero de Recompensa de Proceso (PRM-21M) y Búsqueda Latente
-* **Formulación Matemática:** Entrenar un estimador de valor por pasos de 21M parámetros $r_t = \text{PRM}(h_t) \in [0, 1]$ para evaluar la validez lógica de cada paso intermedio.
-* **Algoritmo de Búsqueda:** Desplegar una búsqueda Best-of-$N$ latente con poda:
-  $$\mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}$$
+
+Entrenar un estimador de valor por pasos de 21M parámetros $r_t = \text{PRM}(h_t) \in [0, 1]$ para evaluar la validez lógica de cada paso intermedio, desplegado mediante búsqueda Best-of-$N$ latente con poda:
+
+$$
+\mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}
+$$
+
 * **Meta Técnica:** Elevar la precisión en GSM8K y matemáticas de olimpiada del **42.0% al 70%+** sobre el modelo base de 2B congelado.
 
 ### 4. Desacoplamiento de Estado de Caché KV Multiturno y Purificación de Entropía
-* **Mecanismo:** Aislar la perturbación latente $\Delta h$ entre turnos de conversación. Al alternar entre razonamiento complejo y diálogo común, un operador proyecta la caché KV hacia la variedad identidad:
-  $$h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})$$
+
+Aislar la perturbación latente $\Delta h$ entre turnos de conversación. Al alternar entre razonamiento complejo y diálogo común, un operador proyecta la caché KV hacia la variedad identidad:
+
+$$
+h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})
+$$
+
 * **Meta Técnica:** Garantizar al 100% la invarianza de empatía conversacional y perplejidad natural a lo largo de diálogos multiturno extensos.
 
 ---

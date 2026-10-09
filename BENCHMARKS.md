@@ -172,24 +172,45 @@ To systematically eliminate the diagnosed failure modes, four research pillars a
 ```
 
 ### Pillar 1: Dual-Regime Dynamic Context Switcher
-Implements a latent classification gate $\mathcal{G}_{\text{task}}(x) \in [0, 1]$ before adapter invocation:
-* $\mathcal{G}_{\text{task}} = 0$ (**Regime 0: Minimalist Functional Synthesis**): Disables defensive try-except scaffolding for pure scalar algorithms (HumanEval, LiveCodeBench), allowing raw exception propagation.
-* $\mathcal{G}_{\text{task}} = 1$ (**Regime 1: Enterprise Repository Architecture**): Activates full hydraulic lift and cross-module AST verification for complex codebases (NL2Repo, DeepSWE).
+
+Implements a latent classification gate before adapter invocation:
+
+$$
+\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right), \quad \mathcal{G}_{\text{task}} \in [0, 1]
+$$
+
+* **Regime 0 (Minimalist Functional Synthesis, $\mathcal{G} \to 0$):** Disables defensive try-except scaffolding for pure scalar algorithms (HumanEval, LiveCodeBench), allowing raw exception propagation.
+* **Regime 1 (Enterprise Repository Architecture, $\mathcal{G} \to 1$):** Activates full hydraulic lift and cross-module AST verification for complex codebases (NL2Repo, DeepSWE).
 
 ### Pillar 2: Elastic Output Horizon & Entropy-Gated Budget Allocation
-Replaces the static budget $T_{\text{max}} = 450$ with an entropy-informed dynamic allocation:
-$$T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right)$$
-allocating up to $2,048$ tokens for intricate packaging scripts and preventing unexpected EOF truncations.
+
+Replaces the static budget with an entropy-informed dynamic allocation:
+
+$$
+T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i
+$$
+
+Allocates up to $2,048$ tokens dynamically for intricate packaging scripts and multi-module architectures, preventing unexpected EOF truncations.
 
 ### Pillar 3: Lightweight Process Reward Verifier (PRM-21M) & Test-Time Search
-Integrates a 21M-parameter value head to score intermediate mathematical steps:
-$$r_t = \text{PRM}(s_t) \in [0, 1]$$
+
+Integrates a 21M-parameter value head to score intermediate mathematical steps via Best-of-$N$ latent search:
+
+$$
+r_t = \text{PRM}(s_t) \in [0, 1], \quad \mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}
+$$
+
 Enables Best-of-$N$ latent path selection to elevate GSM8K from $42.0\%$ toward $70\%+$.
 
 ### Pillar 4: Multi-Turn KV-Cache State Decoupling & Entropy Cleansing
-Applies an identity projection operator:
-$$h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})$$
-preserving conversational empathy, persona adherence, and zero cross-turn cognitive drift.
+
+Applies an orthogonal identity projection operator:
+
+$$
+h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})
+$$
+
+Preserves conversational empathy, persona adherence, and zero cross-turn cognitive drift.
 
 ---
 

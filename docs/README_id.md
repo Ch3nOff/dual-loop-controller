@@ -378,26 +378,45 @@ flowchart LR
 ```
 
 ### 1. Pengalih Konteks Dinamis Dwi-Regim (Bifurcated Execution Regimes)
-* **Formulasi Matematis:** Mengintegrasikan gerbang diskriminatif granularitas task laten $\mathcal{G}_{\text{task}} \in [0, 1]$ yang dikondisikan pada hidden state awal $h_{\text{mid}}$:
-  $$\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right)$$
-* **Regim Eksekusi Terbifurkasi:**
-  * **Regim 0 (Mode Fungsi Mikro Skalar, $\mathcal{G} \to 0$):** Digunakan untuk penyelesaian fungsi tunggal (HumanEval, MBPP). Menonaktifkan injeksi pembungkus defensif, melonggarkan batasan type-check, dan memancarkan ekspresi primitif Python murni.
-  * **Regim 1 (Mode Arsitektur Repositori Makro, $\mathcal{G} \to 1$):** Digunakan untuk sistem multi-berkas (SWE-bench, NL2Repo). Mengaktifkan daya angkat hidrolik Car-Lift penuh, cache rencana mendalam, dan barier verifikasi AST.
+
+Mengintegrasikan gerbang diskriminatif granularitas task laten $\mathcal{G}_{\text{task}} \in [0, 1]$ yang dikondisikan pada hidden state awal $h_{\text{mid}}$:
+
+$$
+\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right)
+$$
+
+**Regim Eksekusi Terbifurkasi:**
+* **Regim 0 (Mode Fungsi Mikro Skalar, $\mathcal{G} \to 0$):** Digunakan untuk penyelesaian fungsi tunggal (HumanEval, MBPP). Menonaktifkan injeksi pembungkus defensif, melonggarkan batasan type-check, dan memancarkan ekspresi primitif Python murni.
+* **Regim 1 (Mode Arsitektur Repositori Makro, $\mathcal{G} \to 1$):** Digunakan untuk sistem multi-berkas (SWE-bench, NL2Repo). Mengaktifkan daya angkat hidrolik Car-Lift penuh, cache rencana mendalam, dan barier verifikasi AST.
 
 ### 2. Horizon Output Elastis & Alokasi Token Berbasis Entropi
-* **Formulasi Matematis:** Mengganti batas token statis dengan fungsi alokasi adaptif yang diskalakan terhadap entropi topologi input $\mathcal{H}_{\text{repo}}$:
-  $$T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i$$
+
+Mengganti batas token statis dengan fungsi alokasi adaptif yang diskalakan terhadap entropi topologi input $\mathcal{H}_{\text{repo}}$:
+
+$$
+T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i
+$$
+
 * **Dampak Teknis:** Meniadakan pemotongan token pada sintesis multi-berkas dengan mengalokasikan hingga $2.048$ token secara dinamis untuk struktur repositori modular sembari mempertahankan generasi cepat $128$ token untuk kueri pendek.
 
 ### 3. Verifikator Nilai Langkah Ringan (PRM-21M) & Pencarian Laten
-* **Formulasi Matematis:** Melatih estimator nilai tingkat langkah kompak $21\text{M}$ parameter $r_t = \text{PRM}(h_t) \in [0, 1]$ yang mengevaluasi token penalaran perantara.
-* **Algoritma Pencarian Waktu Uji:** Menggelar pencarian Best-of-$N$ laten dengan pemangkasan trajektori:
-  $$\mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}$$
+
+Melatih estimator nilai tingkat langkah kompak $21\text{M}$ parameter $r_t = \text{PRM}(h_t) \in [0, 1]$ yang mengevaluasi token penalaran perantara, digelar melalui pencarian Best-of-$N$ laten dengan pemangkasan trajektori:
+
+$$
+\mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}
+$$
+
 * **Dampak Teknis:** Menjembatani kesenjangan kapasitas parametrik pada GSM8K dan Olimpiade MATH, menargetkan peningkatan akurasi dari **42.0% menuju 70%+** pada backbone 2B beku tanpa menambah ukuran model fondasi.
 
 ### 4. Pemisahan Status KV-Cache Antar-Turn & Purifikasi Entropi
-* **Mekanisme:** Mengisolasi perturbasi keadaan kognitif laten $\Delta h$ antar-turn percakapan pengguna. Saat bertransisi dari penalaran intensif ke percakapan umum, operator pembersihan memproyeksikan kembali KV-cache ke manifold identitas netral:
-  $$h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})$$
+
+Mengisolasi perturbasi keadaan kognitif laten $\Delta h$ antar-turn percakapan pengguna. Saat bertransisi dari penalaran intensif ke percakapan umum, operator pembersihan memproyeksikan kembali KV-cache ke manifold identitas netral:
+
+$$
+h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})
+$$
+
 * **Dampak Teknis:** Menjamin invariansi empati percakapan dan kefasihan bahasa alami 100% pada sesi interaksi multi-turn yang panjang.
 
 ---

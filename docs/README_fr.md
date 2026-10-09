@@ -232,26 +232,45 @@ flowchart LR
 ```
 
 ### 1. Commutateur Dynamique de Contexte à Double Régime (Régimes Bifurqués)
-* **Formulation Mathématique :** Intégration d'une porte discriminative de granularité latente $\mathcal{G}_{\text{task}} \in [0, 1]$ conditionnée sur les états cachés initiaux $h_{\text{mid}}$ :
-  $$\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right)$$
-* **Régimes d'Exécution Bifurqués :**
-  * **Régime 0 (Mode Micro-Fonction Scalaire, $\mathcal{G} \to 0$) :** Pour les fonctions isolées (HumanEval, MBPP). Désactive les barrières défensives, assouplit le typage et émet du code Python natif pur.
-  * **Régime 1 (Mode Macro-Dépôt, $\mathcal{G} \to 1$) :** Pour les architectures multi-fichiers (SWE-bench, NL2Repo). Active pleinement le pont élévateur hydraulique Car-Lift, le cache de plan et les barrières AST.
+
+Intégration d'une porte discriminative de granularité latente $\mathcal{G}_{\text{task}} \in [0, 1]$ conditionnée sur les états cachés initiaux $h_{\text{mid}}$ :
+
+$$
+\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right)
+$$
+
+**Régimes d'Exécution Bifurqués :**
+* **Régime 0 (Mode Micro-Fonction Scalaire, $\mathcal{G} \to 0$) :** Pour les fonctions isolées (HumanEval, MBPP). Désactive les barrières défensives, assouplit le typage et émet du code Python natif pur.
+* **Régime 1 (Mode Macro-Dépôt, $\mathcal{G} \to 1$) :** Pour les architectures multi-fichiers (SWE-bench, NL2Repo). Active pleinement le pont élévateur hydraulique Car-Lift, le cache de plan et les barrières AST.
 
 ### 2. Horizon Élastique de Sortie et Allocation de Tokens Pilotée par l'Entropie
-* **Formulation Mathématique :** Remplacement des limites statiques par une fonction d'allocation adaptative proportionnelle à l'entropie topologique du code $\mathcal{H}_{\text{repo}}$ :
-  $$T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i$$
+
+Remplacement des limites statiques par une fonction d'allocation adaptative proportionnelle à l'entropie topologique du code $\mathcal{H}_{\text{repo}}$ :
+
+$$
+T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i
+$$
+
 * **Impact :** Allocation dynamique pouvant atteindre jusqu'à 2 048 tokens pour les structures complexes, éradiquant les erreurs d'indentation dues à la troncature.
 
 ### 3. Vérificateur Léger de Récompense de Processus (PRM-21M) et Recherche Latente
-* **Formulation Mathématique :** Entraînement d'un estimateur de valeur par étape de 21M de paramètres $r_t = \text{PRM}(h_t) \in [0, 1]$ évaluant la cohérence logique intermédiaire.
-* **Algorithme de Recherche :** Déploiement d'une recherche Best-of-$N$ latente avec élagage :
-  $$\mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}$$
+
+Entraînement d'un estimateur de valeur par étape de 21M de paramètres $r_t = \text{PRM}(h_t) \in [0, 1]$ évaluant la cohérence logique intermédiaire, déployé via une recherche Best-of-$N$ latente avec élagage :
+
+$$
+\mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}
+$$
+
 * **Objectif :** Porter la précision sur GSM8K et les problèmes mathématiques de haut niveau de **42.0% à plus de 70%** sur notre base de 2B figée.
 
 ### 4. Découplage d'État de Cache KV Multi-Tours et Purification d'Entropie
-* **Mécanisme :** Isolation de la perturbation cognitive latente $\Delta h$ entre les tours de conversation. Lors du retour d'un raisonnement complexe à un dialogue informel, application d'un opérateur de projection :
-  $$h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})$$
+
+Isolation de la perturbation cognitive latente $\Delta h$ entre les tours de conversation. Lors du retour d'un raisonnement complexe à un dialogue informel, application d'un opérateur de projection :
+
+$$
+h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})
+$$
+
 * **Objectif :** Garantir une invariance totale à 100% de la fluidité et de l'empathie naturelle tout au long des conversations multi-tours.
 
 ---

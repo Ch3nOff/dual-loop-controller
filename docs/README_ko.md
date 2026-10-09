@@ -232,26 +232,45 @@ flowchart LR
 ```
 
 ### 1. 이중 체제 동적 컨텍스트 전환기 (분기 실행 체제)
-* **수학적 공식화:** 초기 은닉 상태 $h_{\text{mid}}$ 에 조건화된 잠재 판별 작업 세분성 게이트 $\mathcal{G}_{\text{task}} \in [0, 1]$ 도입:
-  $$\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right)$$
-* **분기 실행 체제:**
-  * **체제 0 (스칼라 마이크로 함수 모드, $\mathcal{G} \to 0$):** 단일 함수 완성(HumanEval, MBPP). 방어적 래퍼 삽입을 비활성화하고 타입 검증을 완화하여 순수 네이티브 Python 표현식 출력.
-  * **체제 1 (매크로 레포지토리 모드, $\mathcal{G} \to 1$):** 다중 파일 아키텍처(SWE-bench, NL2Repo). Car-Lift 유압 리프트, 심층 계획 캐시 및 AST 경계 검증을 최대로 가동.
+
+초기 은닉 상태 $h_{\text{mid}}$ 에 조건화된 잠재 판별 작업 세분성 게이트 $\mathcal{G}_{\text{task}} \in [0, 1]$ 도입:
+
+$$
+\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right)
+$$
+
+**분기 실행 체제:**
+* **체제 0 (스칼라 마이크로 함수 모드, $\mathcal{G} \to 0$):** 단일 함수 완성(HumanEval, MBPP). 방어적 래퍼 삽입을 비활성화하고 타입 검증을 완화하여 순수 네이티브 Python 표현식 출력.
+* **체제 1 (매크로 레포지토리 모드, $\mathcal{G} \to 1$):** 다중 파일 아키텍처(SWE-bench, NL2Repo). Car-Lift 유압 리프트, 심층 계획 캐시 및 AST 경계 검증을 최대로 가동.
 
 ### 2. 탄력적 출력 지평 및 엔트로피 기반 토큰 할당
-* **수학적 공식화:** 정적 토큰 한도를 코드 토폴로지 엔트로피 $\mathcal{H}_{\text{repo}}$ 와 연동되는 동적 할당 함수로 대체:
-  $$T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i$$
+
+정적 토큰 한도를 코드 토폴로지 엔트로피 $\mathcal{H}_{\text{repo}}$ 와 연동되는 동적 할당 함수로 대체:
+
+$$
+T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i
+$$
+
 * **기술적 효과:** 모듈러 저장소 구조 생성 시 최대 2,048 토큰까지 유연하게 확장하여 잘림으로 인한 구문 오류를 원천 차단.
 
 ### 3. 경량화 프로세스 보상 검증기 (PRM-21M) 및 잠재 탐색
-* **수학적 공식화:** 추론 중간 단계의 논리적 타당성을 평가하는 21M 매개변수 스텝 단위 가치 추정기 $r_t = \text{PRM}(h_t) \in [0, 1]$ 학습.
-* **추론 시점 탐색 알고리즘:** 동적 가지치기를 동반한 잠재 Best-of-$N$ 재정렬 배포:
-  $$\mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}$$
+
+추론 중간 단계의 논리적 타당성을 평가하는 21M 매개변수 스텝 단위 가치 추정기 $r_t = \text{PRM}(h_t) \in [0, 1]$ 학습 및 동적 가지치기를 동반한 잠재 Best-of-$N$ 재정렬 배포:
+
+$$
+\mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}
+$$
+
 * **목표:** 2B 동결 기반 모델에서 GSM8K 및 올림피아드 수학 점수를 **42.0%에서 70% 이상**으로 견인.
 
 ### 4. 다중 턴 KV 캐시 상태 분리 및 엔트로피 정화
-* **메커니즘:** 대화 턴 간의 인지 상태 섭동 $\Delta h$ 를 물리적으로 격리. 고강도 추론에서 일상 대화로 전환될 때 사영 정화 연산자 적용:
-  $$h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})$$
+
+대화 턴 간의 인지 상태 섭동 $\Delta h$ 를 물리적으로 격리. 고강도 추론에서 일상 대화로 전환될 때 사영 정화 연산자 적용:
+
+$$
+h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})
+$$
+
 * **목표:** 장기 다중 턴 대화에서도 공감성과 자연어 펄플렉시티의 100% 불변성을 보장.
 
 ---

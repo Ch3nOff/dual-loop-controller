@@ -232,26 +232,45 @@ flowchart LR
 ```
 
 ### 1. Dynamischer Zwei-Regime-Kontextschalter (Bifurkierte Regime)
-* **Mathematische Formulierung:** Integration eines latenten diskriminativen Aufgabengranularitäts-Gates $\mathcal{G}_{\text{task}} \in [0, 1]$, konditioniert auf frühen Hidden States $h_{\text{mid}}$:
-  $$\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right)$$
-* **Bifurkierte Ausführungsregime:**
-  * **Regime 0 (Skalarer Mikrofunktions-Modus, $\mathcal{G} \to 0$):** Für Einzelfunktionen (HumanEval, MBPP). Deaktiviert defensive Exception-Wrapper, lockert Typprüfungen und emittiert reinen Python-Code.
-  * **Regime 1 (Makro-Repository-Modus, $\mathcal{G} \to 1$):** Für Multi-Datei-Systeme (SWE-bench, NL2Repo). Volle Aktivierung des Car-Lift-Hydraulikhubs, tiefer Plancaches und AST-Verifikationsschranken.
+
+Integration eines latenten diskriminativen Aufgabengranularitäts-Gates $\mathcal{G}_{\text{task}} \in [0, 1]$, konditioniert auf frühen Hidden States $h_{\text{mid}}$:
+
+$$
+\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right)
+$$
+
+**Bifurkierte Ausführungsregime:**
+* **Regime 0 (Skalarer Mikrofunktions-Modus, $\mathcal{G} \to 0$):** Für Einzelfunktionen (HumanEval, MBPP). Deaktiviert defensive Exception-Wrapper, lockert Typprüfungen und emittiert reinen Python-Code.
+* **Regime 1 (Makro-Repository-Modus, $\mathcal{G} \to 1$):** Für Multi-Datei-Systeme (SWE-bench, NL2Repo). Volle Aktivierung des Car-Lift-Hydraulikhubs, tiefer Plancaches und AST-Verifikationsschranken.
 
 ### 2. Elastischer Ausgabehorizont & Entropiegesteuerte Tokenallokation
-* **Mathematische Formulierung:** Dynamische Allokationsfunktion basierend auf der topologischen Entropie $\mathcal{H}_{\text{repo}}$:
-  $$T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i$$
+
+Dynamische Allokationsfunktion basierend auf der topologischen Entropie $\mathcal{H}_{\text{repo}}$:
+
+$$
+T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i
+$$
+
 * **Wirkung:** Dynamische Erweiterung auf bis zu 2.048 Tokens für komplexe Repository-Strukturen, wodurch Einrückungs- und Syntaxfehler vollständig verhindert werden.
 
 ### 3. Leichtgewichtiger Prozess-Belohnungsverifizierer (PRM-21M)
-* **Mathematische Formulierung:** Training eines kompakten 21M-Schrittwert-Schätzers $r_t = \text{PRM}(h_t) \in [0, 1]$ zur logischen Zwischenschrittbewertung.
-* **Suchalgorithmus zur Testzeit:** Latente Best-of-$N$-Pfadsuche mit dynamischem Pruning:
-  $$\mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}$$
+
+Training eines kompakten 21M-Schrittwert-Schätzers $r_t = \text{PRM}(h_t) \in [0, 1]$ zur logischen Zwischenschrittbewertung, gekoppelt an eine latente Best-of-$N$-Pfadsuche mit dynamischem Pruning:
+
+$$
+\mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}
+$$
+
 * **Zielgröße:** Steigerung der GSM8K-Genauigkeit von **42.0% auf über 70%** auf dem eingefrorenen 2B-Backbone.
 
 ### 4. Multi-Turn-KV-Cache-Zustandsentkopplung & Entropiebereinigung
-* **Mechanismus:** Isolierung kognitiver Zustandsstörungen $\Delta h$ zwischen Benutzerinteraktions-Turns. Beim Wechsel von intensiver Inferenz zu Alltagsdialog projiziert ein Bereinigungsoperator den KV-Cache auf die Identitätsmannigfaltigkeit:
-  $$h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})$$
+
+Isolierung kognitiver Zustandsstörungen $\Delta h$ zwischen Benutzerinteraktions-Turns. Beim Wechsel von intensiver Inferenz zu Alltagsdialog projiziert ein Bereinigungsoperator den KV-Cache auf die Identitätsmannigfaltigkeit:
+
+$$
+h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})
+$$
+
 * **Zielgröße:** 100%ige Erhaltung der konversationellen Empathie und natürlichen Sprachperplexität über lange Dialogverläufe.
 
 ---

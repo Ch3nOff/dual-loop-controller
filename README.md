@@ -378,26 +378,45 @@ flowchart LR
 ```
 
 ### 1. Dual-Regime Dynamic Context Switcher (Bifurcated Regimes)
-* **Mathematical Formulation:** Introduce a latent discriminative task-granularity gate $\mathcal{G}_{\text{task}} \in [0, 1]$ conditioned on early hidden states $h_{\text{mid}}$:
-  $$\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right)$$
-* **Bifurcated Execution Regimes:**
-  * **Regime 0 (Scalar Micro-Function Mode, $\mathcal{G} \to 0$):** Used for single-function completions (HumanEval, MBPP). Deactivates defensive wrapper injections, relaxes type-check constraints, and outputs raw primitive Python expressions.
-  * **Regime 1 (Macro Repository Architecture Mode, $\mathcal{G} \to 1$):** Used for multi-file systems (SWE-bench, NL2Repo). Engages the full Car-Lift hydraulic lift, deep plan caching, and AST verification barriers.
+
+Introduce a latent discriminative task-granularity gate $\mathcal{G}_{\text{task}} \in [0, 1]$ conditioned on early hidden states $h_{\text{mid}}$:
+
+$$
+\mathcal{G}_{\text{task}} = \sigma\left(W_g^\top \left[\frac{1}{L}\sum_{t=1}^L h_t, \, \mathcal{S}_{\text{AST}}(x)\right]\right)
+$$
+
+**Bifurcated Execution Regimes:**
+* **Regime 0 (Scalar Micro-Function Mode, $\mathcal{G} \to 0$):** Used for single-function completions (HumanEval, MBPP). Deactivates defensive wrapper injections, relaxes type-check constraints, and outputs raw primitive Python expressions.
+* **Regime 1 (Macro Repository Architecture Mode, $\mathcal{G} \to 1$):** Used for multi-file systems (SWE-bench, NL2Repo). Engages the full Car-Lift hydraulic lift, deep plan caching, and AST verification barriers.
 
 ### 2. Elastic Output Horizon & Dynamic Entropy-Gated Token Allocation
-* **Mathematical Formulation:** Replace fixed token limits with an adaptive allocation function scaling with input topological entropy $\mathcal{H}_{\text{repo}}$:
-  $$T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i$$
+
+Replace fixed token limits with an adaptive allocation function scaling with input topological entropy $\mathcal{H}_{\text{repo}}$:
+
+$$
+T_{\text{alloc}} = T_{\text{base}} \cdot \left(1 + \alpha \cdot \mathcal{H}_{\text{repo}}(x)\right), \quad \mathcal{H}_{\text{repo}}(x) = -\sum_{i} p_i \log_2 p_i
+$$
+
 * **Impact:** Eliminates discrete token budget starvation in multi-file synthesis by allocating up to $2,048$ tokens dynamically for modular repository structures while preserving fast $128$-token generation for single-line queries.
 
 ### 3. Lightweight Process Reward Verifier (PRM-21M) & Test-Time Latent Search
-* **Mathematical Formulation:** Train a compact $21\text{M}$-parameter step-level value estimator $r_t = \text{PRM}(h_t) \in [0, 1]$ evaluated over intermediate reasoning tokens.
-* **Test-Time Search Algorithm:** Deploy Best-of-$N$ latent search with pruning:
-  $$\mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}$$
+
+Train a compact $21\text{M}$-parameter step-level value estimator $r_t = \text{PRM}(h_t) \in [0, 1]$ evaluated over intermediate reasoning tokens, deployed via Best-of-$N$ latent search with pruning:
+
+$$
+\mathbf{y}^* = \arg\max_{\mathbf{y}^{(k)}} \prod_{t=1}^{T_k} r_t^{(k)}
+$$
+
 * **Impact:** Bridges the parametric capacity gap on GSM8K and Olympiad MATH, targeting an elevation from **42.0% to 70%+** on frozen 2B backbones without increasing foundation model parameters.
 
 ### 4. Multi-Turn KV-Cache State Decoupling & Entropy Cleansing
-* **Mechanism:** Isolate latent cognitive state perturbation $\Delta h$ between conversation turns. When transitioning from complex reasoning to general conversation, a purge operator projects the KV-cache back onto the neutral identity manifold:
-  $$h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})$$
+
+Isolate latent cognitive state perturbation $\Delta h$ between conversation turns. When transitioning from complex reasoning to general conversation, a purge operator projects the KV-cache back onto the neutral identity manifold:
+
+$$
+h_{\text{turn}+1} = \Pi_{\mathcal{I}}(h_{\text{turn}})
+$$
+
 * **Impact:** Guarantees 100% conversational empathy and language fluency invariance across arbitrarily long multi-turn sessions.
 
 ## 📄 Scientific Whitepaper & Technical Monograph
