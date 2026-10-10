@@ -1,0 +1,480 @@
+{
+  "timestamp": "2026-10-10 12:21:29",
+  "mode": "autonomous_in_flight_conversation_assimilation",
+  "model": "Qwen/Qwen3.5-2B",
+  "device": "cuda:0",
+  "d_model": 2048,
+  "vgni_capacity": 64,
+  "absorbed_slots": 36,
+  "organically_assimilated_saturation_pct": 56.25,
+  "target_saturation_window": [
+    50.0,
+    60.0
+  ],
+  "banach_contraction": {
+    "measured_lipschitz": 0.6015625,
+    "gamma_limit": 0.85,
+    "is_strictly_contractive": true
+  },
+  "probes": {
+    "total": 6,
+    "passed": 6,
+    "accuracy_pct": 100.0,
+    "mean_tokens_per_sec": 23.68,
+    "total_tokens": 143,
+    "details": [
+      {
+        "id": "probe_gravity",
+        "question": "In which direction does an apple fall from a tree on Earth, and why?",
+        "answer": "An apple falls downward due to gravity, which is the force of attraction between the apple and the Earth.",
+        "passed": true,
+        "generated_tokens": 24,
+        "latency_sec": 1.0343,
+        "tokens_per_sec": 23.2,
+        "telemetry": {
+          "misf": {
+            "fluid_sensitivity": 0.0204,
+            "code_viscosity": 0.6953,
+            "math_viscosity": 0.6875,
+            "logic_viscosity": 0.6953,
+            "discourse_viscosity": 0.6992
+          },
+          "vgni_affinity": 0.3125,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0
+        }
+      },
+      {
+        "id": "probe_ice",
+        "question": "Why does solid ice float on top of liquid water?",
+        "answer": "Solid ice floats on liquid water because its crystalline structure creates a lower density than liquid water, allowing it to remain buoyant.",
+        "passed": true,
+        "generated_tokens": 29,
+        "latency_sec": 1.1163,
+        "tokens_per_sec": 25.98,
+        "telemetry": {
+          "misf": {
+            "fluid_sensitivity": 0.0204,
+            "code_viscosity": 0.6953,
+            "math_viscosity": 0.6875,
+            "logic_viscosity": 0.6953,
+            "discourse_viscosity": 0.6992
+          },
+          "vgni_affinity": 0.3359,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0
+        }
+      },
+      {
+        "id": "probe_fire",
+        "question": "What happens to a candle flame if covered with an airtight jar?",
+        "answer": "The candle flame will extinguish because the oxygen supply is cut off, and the flame cannot sustain combustion without it.",
+        "passed": true,
+        "generated_tokens": 26,
+        "latency_sec": 1.0246,
+        "tokens_per_sec": 25.37,
+        "telemetry": {
+          "misf": {
+            "fluid_sensitivity": 0.0204,
+            "code_viscosity": 0.6953,
+            "math_viscosity": 0.6875,
+            "logic_viscosity": 0.6953,
+            "discourse_viscosity": 0.6992
+          },
+          "vgni_affinity": 0.3145,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0
+        }
+      },
+      {
+        "id": "probe_syllogism",
+        "question": "All humans are mammals. Socrates is a human. Is Socrates a mammal?",
+        "answer": "Yes, Socrates is a mammal because all humans are mammals and he is a human.",
+        "passed": true,
+        "generated_tokens": 22,
+        "latency_sec": 0.8447,
+        "tokens_per_sec": 26.05,
+        "telemetry": {
+          "misf": {
+            "fluid_sensitivity": 0.0204,
+            "code_viscosity": 0.6953,
+            "math_viscosity": 0.6875,
+            "logic_viscosity": 0.6953,
+            "discourse_viscosity": 0.6992
+          },
+          "vgni_affinity": 0.293,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0
+        }
+      },
+      {
+        "id": "probe_vacuum_sound",
+        "question": "Can acoustic sound waves travel across the empty vacuum of space?",
+        "answer": "No, acoustic sound waves cannot travel across the empty vacuum of space because they require a medium (like air or water) to propagate.",
+        "passed": true,
+        "generated_tokens": 30,
+        "latency_sec": 1.1572,
+        "tokens_per_sec": 25.92,
+        "telemetry": {
+          "misf": {
+            "fluid_sensitivity": 0.0204,
+            "code_viscosity": 0.6953,
+            "math_viscosity": 0.6875,
+            "logic_viscosity": 0.6992,
+            "discourse_viscosity": 0.6992
+          },
+          "vgni_affinity": 0.3262,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0
+        }
+      },
+      {
+        "id": "probe_sunrise",
+        "question": "From which cardinal direction does the Sun appear to rise in the morning on Earth?",
+        "answer": "The Sun appears to rise in the east.",
+        "passed": true,
+        "generated_tokens": 12,
+        "latency_sec": 0.4693,
+        "tokens_per_sec": 25.57,
+        "telemetry": {
+          "misf": {
+            "fluid_sensitivity": 0.0204,
+            "code_viscosity": 0.6953,
+            "math_viscosity": 0.6875,
+            "logic_viscosity": 0.6953,
+            "discourse_viscosity": 0.6992
+          },
+          "vgni_affinity": 0.3066,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0
+        }
+      }
+    ]
+  },
+  "stream_history": [
+    {
+      "turn": 1,
+      "prompt": "Why do objects fall when dropped on Earth?",
+      "response": "On Earth, the force of gravity pulls all...",
+      "validity": 0.4824,
+      "assimilated": true,
+      "saturation_pct": 1.5625,
+      "slots_filled": 1
+    },
+    {
+      "turn": 2,
+      "prompt": "How fast do dropped objects accelerate on Earth?",
+      "response": "Objects dropped near Earth accelerate do...",
+      "validity": 0.4844,
+      "assimilated": true,
+      "saturation_pct": 3.125,
+      "slots_filled": 2
+    },
+    {
+      "turn": 3,
+      "prompt": "What is pure water at room temperature?",
+      "response": "Pure water is a liquid state of matter u...",
+      "validity": 0.4883,
+      "assimilated": true,
+      "saturation_pct": 4.6875,
+      "slots_filled": 3
+    },
+    {
+      "turn": 4,
+      "prompt": "When does water freeze into solid ice?",
+      "response": "Water undergoes a phase transition into ...",
+      "validity": 0.4883,
+      "assimilated": true,
+      "saturation_pct": 6.25,
+      "slots_filled": 4
+    },
+    {
+      "turn": 5,
+      "prompt": "When does water boil into steam vapor?",
+      "response": "Water boils into gaseous steam vapor at ...",
+      "validity": 0.4883,
+      "assimilated": true,
+      "saturation_pct": 7.8125,
+      "slots_filled": 5
+    },
+    {
+      "turn": 6,
+      "prompt": "Why does solid ice float on liquid water?",
+      "response": "Solid ice floats because its crystalline...",
+      "validity": 0.4922,
+      "assimilated": true,
+      "saturation_pct": 9.375,
+      "slots_filled": 6
+    },
+    {
+      "turn": 7,
+      "prompt": "Does fire require oxygen to burn?",
+      "response": "Yes, combustion requires oxygen as an ox...",
+      "validity": 0.4883,
+      "assimilated": true,
+      "saturation_pct": 10.9375,
+      "slots_filled": 7
+    },
+    {
+      "turn": 8,
+      "prompt": "Where does the Sun rise on Earth?",
+      "response": "Earth rotates from west to east on its a...",
+      "validity": 0.4844,
+      "assimilated": true,
+      "saturation_pct": 12.5,
+      "slots_filled": 8
+    },
+    {
+      "turn": 9,
+      "prompt": "What causes daytime and nighttime?",
+      "response": "The rotation of Earth on its axis create...",
+      "validity": 0.4883,
+      "assimilated": true,
+      "saturation_pct": 14.0625,
+      "slots_filled": 9
+    },
+    {
+      "turn": 10,
+      "prompt": "What is the maximum speed of light?",
+      "response": "Light propagates through a vacuum at app...",
+      "validity": 0.4922,
+      "assimilated": true,
+      "saturation_pct": 15.625,
+      "slots_filled": 10
+    },
+    {
+      "turn": 11,
+      "prompt": "What happens when surfaces slide together?",
+      "response": "Mechanical friction between contacting s...",
+      "validity": 0.4922,
+      "assimilated": true,
+      "saturation_pct": 17.1875,
+      "slots_filled": 11
+    },
+    {
+      "turn": 12,
+      "prompt": "Can sound propagate in space vacuum?",
+      "response": "No, acoustic sound waves require a physi...",
+      "validity": 0.4883,
+      "assimilated": true,
+      "saturation_pct": 18.75,
+      "slots_filled": 12
+    },
+    {
+      "turn": 13,
+      "prompt": "What gas do plants absorb in daylight?",
+      "response": "Green plants absorb carbon dioxide from ...",
+      "validity": 0.4922,
+      "assimilated": true,
+      "saturation_pct": 20.3125,
+      "slots_filled": 13
+    },
+    {
+      "turn": 14,
+      "prompt": "Can humans breathe underwater without scuba?",
+      "response": "No, humans possess air-breathing lungs r...",
+      "validity": 0.4883,
+      "assimilated": true,
+      "saturation_pct": 21.875,
+      "slots_filled": 14
+    },
+    {
+      "turn": 15,
+      "prompt": "How does heat spontaneously flow?",
+      "response": "Thermal energy spontaneously transfers f...",
+      "validity": 0.4844,
+      "assimilated": true,
+      "saturation_pct": 23.4375,
+      "slots_filled": 15
+    },
+    {
+      "turn": 16,
+      "prompt": "What is inertia according to Newton?",
+      "response": "An object remains at rest or moves with ...",
+      "validity": 0.4883,
+      "assimilated": true,
+      "saturation_pct": 25.0,
+      "slots_filled": 16
+    },
+    {
+      "turn": 17,
+      "prompt": "Does atmospheric pressure decrease with altitude?",
+      "response": "Yes, Earth's atmospheric pressure decrea...",
+      "validity": 0.4883,
+      "assimilated": true,
+      "saturation_pct": 26.5625,
+      "slots_filled": 17
+    },
+    {
+      "turn": 18,
+      "prompt": "What causes ocean tides on Earth?",
+      "response": "The gravitational pull of the Moon and S...",
+      "validity": 0.4941,
+      "assimilated": true,
+      "saturation_pct": 28.125,
+      "slots_filled": 18
+    },
+    {
+      "turn": 19,
+      "prompt": "What causes annual seasons on Earth?",
+      "response": "Earth's 23.5-degree axial tilt relative ...",
+      "validity": 0.4941,
+      "assimilated": true,
+      "saturation_pct": 29.6875,
+      "slots_filled": 19
+    },
+    {
+      "turn": 20,
+      "prompt": "What is the law of non-contradiction?",
+      "response": "In classical formal logic, a proposition...",
+      "validity": 0.4941,
+      "assimilated": true,
+      "saturation_pct": 31.25,
+      "slots_filled": 20
+    },
+    {
+      "turn": 21,
+      "prompt": "What is a deductive syllogism?",
+      "response": "If all humans are mortal and Socrates is...",
+      "validity": 0.4961,
+      "assimilated": true,
+      "saturation_pct": 32.8125,
+      "slots_filled": 21
+    },
+    {
+      "turn": 22,
+      "prompt": "What is modus ponens reasoning?",
+      "response": "If rule P implies Q is true and antecede...",
+      "validity": 0.4922,
+      "assimilated": true,
+      "saturation_pct": 34.375,
+      "slots_filled": 22
+    },
+    {
+      "turn": 23,
+      "prompt": "What is modus tollens reasoning?",
+      "response": "If P implies Q is true and consequent Q ...",
+      "validity": 0.4922,
+      "assimilated": true,
+      "saturation_pct": 35.9375,
+      "slots_filled": 23
+    },
+    {
+      "turn": 24,
+      "prompt": "What is transitivity of relations?",
+      "response": "If element A is greater than B and B is ...",
+      "validity": 0.4961,
+      "assimilated": true,
+      "saturation_pct": 37.5,
+      "slots_filled": 24
+    },
+    {
+      "turn": 25,
+      "prompt": "What is an empty mathematical set?",
+      "response": "An empty set contains exactly zero eleme...",
+      "validity": 0.5,
+      "assimilated": true,
+      "saturation_pct": 39.0625,
+      "slots_filled": 25
+    },
+    {
+      "turn": 26,
+      "prompt": "What is binary search complexity?",
+      "response": "Binary search on a sorted array of size ...",
+      "validity": 0.5,
+      "assimilated": true,
+      "saturation_pct": 40.625,
+      "slots_filled": 26
+    },
+    {
+      "turn": 27,
+      "prompt": "What happens in infinite recursion?",
+      "response": "A recursive function lacking a base term...",
+      "validity": 0.4941,
+      "assimilated": true,
+      "saturation_pct": 42.1875,
+      "slots_filled": 27
+    },
+    {
+      "turn": 28,
+      "prompt": "What is boolean conjunction?",
+      "response": "A boolean AND operation evaluates to tru...",
+      "validity": 0.4922,
+      "assimilated": true,
+      "saturation_pct": 43.75,
+      "slots_filled": 28
+    },
+    {
+      "turn": 29,
+      "prompt": "What is boolean disjunction?",
+      "response": "A boolean OR operation evaluates to true...",
+      "validity": 0.4922,
+      "assimilated": true,
+      "saturation_pct": 45.3125,
+      "slots_filled": 29
+    },
+    {
+      "turn": 30,
+      "prompt": "What is a prime number?",
+      "response": "A prime number is an integer strictly gr...",
+      "validity": 0.4961,
+      "assimilated": true,
+      "saturation_pct": 46.875,
+      "slots_filled": 30
+    },
+    {
+      "turn": 31,
+      "prompt": "Why does a steel ship float on water?",
+      "response": "A hollow steel ship floats because its o...",
+      "validity": 0.4941,
+      "assimilated": true,
+      "saturation_pct": 48.4375,
+      "slots_filled": 31
+    },
+    {
+      "turn": 32,
+      "prompt": "Why do helium balloons rise in air?",
+      "response": "Helium gas has a lower density than the ...",
+      "validity": 0.4922,
+      "assimilated": true,
+      "saturation_pct": 50.0,
+      "slots_filled": 32
+    },
+    {
+      "turn": 33,
+      "prompt": "What is the conservation of energy?",
+      "response": "Energy cannot be created or destroyed, b...",
+      "validity": 0.4922,
+      "assimilated": true,
+      "saturation_pct": 51.5625,
+      "slots_filled": 33
+    },
+    {
+      "turn": 34,
+      "prompt": "How do electrical conductors work?",
+      "response": "Electrical conductors like copper permit...",
+      "validity": 0.4844,
+      "assimilated": true,
+      "saturation_pct": 53.125,
+      "slots_filled": 34
+    },
+    {
+      "turn": 35,
+      "prompt": "Why does glass shatter when impacted?",
+      "response": "Glass has an amorphous non-crystalline b...",
+      "validity": 0.4961,
+      "assimilated": true,
+      "saturation_pct": 54.6875,
+      "slots_filled": 35
+    },
+    {
+      "turn": 36,
+      "prompt": "How do animals obtain metabolic energy?",
+      "response": "Animals consume organic nutrients and ut...",
+      "validity": 0.4883,
+      "assimilated": true,
+      "saturation_pct": 56.25,
+      "slots_filled": 36
+    }
+  ]
+}
