@@ -1,0 +1,195 @@
+{
+  "timestamp": "2026-10-10 11:34:05",
+  "model": "Qwen/Qwen3.5-2B",
+  "device": "cuda:0",
+  "d_model": 2048,
+  "vgni_capacity": 64,
+  "absorbed_entries_count": 36,
+  "absorption_ratio_pct": 56.25,
+  "target_absorption_window": [
+    50.0,
+    60.0
+  ],
+  "banach_contraction": {
+    "measured_lipschitz": 0.6015625,
+    "gamma_limit": 0.85,
+    "is_strictly_contractive": true
+  },
+  "probe_benchmark": {
+    "total_probes": 8,
+    "base_correct": 8,
+    "base_accuracy_pct": 100.0,
+    "stabilized_correct": 8,
+    "stabilized_accuracy_pct": 100.0,
+    "probe_details": [
+      {
+        "probe_id": "probe_gravity",
+        "question": "If an apple is released from a tree branch on Earth, in which direction does it move, and what force causes this motion?",
+        "base_answer": "The apple moves downward due to the force of gravity.",
+        "base_passed": true,
+        "stabilized_answer": "The apple moves downward due to the force of gravity.",
+        "stabilized_passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7969,
+            "code_viscosity": 0.4609,
+            "math_viscosity": 0.1064,
+            "logic_viscosity": 0.2949,
+            "discourse_viscosity": 0.1387,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6406,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0641
+        }
+      },
+      {
+        "probe_id": "probe_water_phase",
+        "question": "Is pure water solid, liquid, or gas at 25 degrees Celsius under standard atmospheric conditions?",
+        "base_answer": "Pure water is a liquid at 25 degrees Celsius under standard atmospheric conditions.",
+        "base_passed": true,
+        "stabilized_answer": "Pure water is a liquid at 25 degrees Celsius under standard atmospheric conditions.",
+        "stabilized_passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7578,
+            "code_viscosity": 0.457,
+            "math_viscosity": 0.1099,
+            "logic_viscosity": 0.291,
+            "discourse_viscosity": 0.1426,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6367,
+          "lbu_conviction": 0.4961,
+          "bias_scale": 0.0632
+        }
+      },
+      {
+        "probe_id": "probe_syllogism",
+        "question": "All humans are mammals. Socrates is a human. Therefore, is Socrates a mammal? Answer yes or no.",
+        "base_answer": "Yes.",
+        "base_passed": true,
+        "stabilized_answer": "Yes.",
+        "stabilized_passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7734,
+            "code_viscosity": 0.4629,
+            "math_viscosity": 0.1152,
+            "logic_viscosity": 0.2773,
+            "discourse_viscosity": 0.1445,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6562,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0656
+        }
+      },
+      {
+        "probe_id": "probe_contradiction",
+        "question": "Can a statement be both completely true and completely false at the same time in classical logic?",
+        "base_answer": "No, a statement cannot be both completely true and completely false at the same time in classical logic, as these are mutually exclusive truth values.",
+        "base_passed": true,
+        "stabilized_answer": "No, a statement cannot be both completely true and completely false at the same time in classical logic, as these are mutually exclusive truth values.",
+        "stabilized_passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7188,
+            "code_viscosity": 0.4551,
+            "math_viscosity": 0.1152,
+            "logic_viscosity": 0.2832,
+            "discourse_viscosity": 0.1455,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6719,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0672
+        }
+      },
+      {
+        "probe_id": "probe_sunrise",
+        "question": "From which cardinal direction does the Sun appear to rise in the morning on Earth?",
+        "base_answer": "The Sun appears to rise in the east.",
+        "base_passed": true,
+        "stabilized_answer": "The Sun appears to rise in the east.",
+        "stabilized_passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7422,
+            "code_viscosity": 0.4531,
+            "math_viscosity": 0.1123,
+            "logic_viscosity": 0.2891,
+            "discourse_viscosity": 0.1455,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6562,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0656
+        }
+      },
+      {
+        "probe_id": "probe_ice_float",
+        "question": "Why does solid ice float on top of liquid water instead of sinking to the bottom?",
+        "base_answer": "Solid ice floats because its crystalline structure creates a lower density than liquid water, allowing it to remain buoyant.",
+        "base_passed": true,
+        "stabilized_answer": "Solid ice floats because its crystalline structure creates a lower density than liquid water, allowing it to remain buoyant.",
+        "stabilized_passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.8047,
+            "code_viscosity": 0.4688,
+            "math_viscosity": 0.1074,
+            "logic_viscosity": 0.291,
+            "discourse_viscosity": 0.1338,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6484,
+          "lbu_conviction": 0.4961,
+          "bias_scale": 0.0643
+        }
+      },
+      {
+        "probe_id": "probe_human_water_breath",
+        "question": "Can a human breathe underwater without specialized scuba equipment like fish do?",
+        "base_answer": "No, humans cannot breathe underwater without specialized equipment because we lack the ability to extract dissolved oxygen from water and do not possess gills. Fish use gills to extract oxygen from water, while humans rely on lungs that require air to function.",
+        "base_passed": true,
+        "stabilized_answer": "No, humans cannot breathe underwater without specialized equipment because we lack the ability to extract dissolved oxygen from water and do not possess gills.",
+        "stabilized_passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7578,
+            "code_viscosity": 0.4629,
+            "math_viscosity": 0.1162,
+            "logic_viscosity": 0.2812,
+            "discourse_viscosity": 0.1406,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6562,
+          "lbu_conviction": 0.498,
+          "bias_scale": 0.0654
+        }
+      },
+      {
+        "probe_id": "probe_fire_oxygen",
+        "question": "What happens to an active candle flame if you cover it with an airtight glass jar?",
+        "base_answer": "The flame will extinguish because the oxygen supply is cut off, and the heat generated by the burning fuel will eventually cause the wax to melt and drip into the jar, extinguishing the flame.",
+        "base_passed": true,
+        "stabilized_answer": "The flame will extinguish because the oxygen supply is cut off, and the heat generated by the burning fuel will eventually cause the wax to melt and drip into the jar, extinguishing the flame.",
+        "stabilized_passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.8594,
+            "code_viscosity": 0.4746,
+            "math_viscosity": 0.1079,
+            "logic_viscosity": 0.2871,
+            "discourse_viscosity": 0.1299,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.668,
+          "lbu_conviction": 0.498,
+          "bias_scale": 0.0665
+        }
+      }
+    ]
+  }
+}
