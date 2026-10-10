@@ -1,0 +1,909 @@
+{
+  "timestamp": "2026-10-10 11:41:38",
+  "hardware": {
+    "device": "cuda:0",
+    "gpu_name": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "torch_dtype": "bfloat16"
+  },
+  "model_architecture": {
+    "name": "Qwen/Qwen3.5-2B",
+    "d_model": 2048,
+    "vgni_capacity": 64,
+    "vgni_absorbed_entries": 36,
+    "absorption_ratio_pct": 56.25
+  },
+  "aggregate_metrics": {
+    "num_test_queries": 20,
+    "base_model": {
+      "total_tokens": 397,
+      "total_time_sec": 17.9378,
+      "mean_tokens_per_sec": 22.13,
+      "mean_latency_sec": 0.8969,
+      "accuracy_pct": 90.0,
+      "passed_count": 18
+    },
+    "stabilized_vgni_lbu": {
+      "total_tokens": 377,
+      "total_time_sec": 17.7775,
+      "mean_tokens_per_sec": 21.21,
+      "mean_latency_sec": 0.8889,
+      "accuracy_pct": 90.0,
+      "passed_count": 18
+    }
+  },
+  "query_details": [
+    {
+      "idx": 1,
+      "id": "q01_gravity_direction",
+      "category": "Terrestrial Physics",
+      "question": "If an apple is released from a tree branch on Earth, in which direction does it move, and what force causes this motion?",
+      "expected_keywords": [
+        "down",
+        "gravity",
+        "earth"
+      ],
+      "prompt_tokens": 48,
+      "base_model": {
+        "generated_tokens": 14,
+        "latency_sec": 0.7421,
+        "tokens_per_sec": 18.86,
+        "answer": "The apple moves downward due to the force of gravity.",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 14,
+        "latency_sec": 0.5938,
+        "tokens_per_sec": 23.58,
+        "answer": "The apple moves downward due to the force of gravity.",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7969,
+            "code_viscosity": 0.3789,
+            "math_viscosity": 0.1758,
+            "logic_viscosity": 0.3496,
+            "discourse_viscosity": 0.0957,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6406,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0641
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 66.67,
+          "loop_detected": false,
+          "orthogonal_residue": 0.1133
+        }
+      }
+    },
+    {
+      "idx": 2,
+      "id": "q02_water_phase_room_temp",
+      "category": "Thermodynamics",
+      "question": "Is pure water solid, liquid, or gas at 25 degrees Celsius under standard atmospheric conditions?",
+      "expected_keywords": [
+        "liquid"
+      ],
+      "prompt_tokens": 42,
+      "base_model": {
+        "generated_tokens": 19,
+        "latency_sec": 0.8545,
+        "tokens_per_sec": 22.24,
+        "answer": "Pure water is a liquid at 25 degrees Celsius under standard atmospheric conditions.",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 19,
+        "latency_sec": 1.0695,
+        "tokens_per_sec": 17.77,
+        "answer": "Pure water is a liquid at 25 degrees Celsius under standard atmospheric conditions.",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7578,
+            "code_viscosity": 0.375,
+            "math_viscosity": 0.1816,
+            "logic_viscosity": 0.3438,
+            "discourse_viscosity": 0.0986,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6367,
+          "lbu_conviction": 0.4961,
+          "bias_scale": 0.0632
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 76.19,
+          "loop_detected": true,
+          "orthogonal_residue": -0.2031
+        }
+      }
+    },
+    {
+      "idx": 3,
+      "id": "q03_ice_floating_density",
+      "category": "Fluid Mechanics",
+      "question": "Why does solid ice float on top of liquid water instead of sinking to the bottom?",
+      "expected_keywords": [
+        "density",
+        "less dense",
+        "crystalline"
+      ],
+      "prompt_tokens": 39,
+      "base_model": {
+        "generated_tokens": 26,
+        "latency_sec": 1.4788,
+        "tokens_per_sec": 17.58,
+        "answer": "Solid ice floats because its crystalline structure creates a lower density than liquid water, allowing it to remain buoyant.",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 26,
+        "latency_sec": 1.2347,
+        "tokens_per_sec": 21.06,
+        "answer": "Solid ice floats because its crystalline structure creates a lower density than liquid water, allowing it to remain buoyant.",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.8047,
+            "code_viscosity": 0.3848,
+            "math_viscosity": 0.1777,
+            "logic_viscosity": 0.3457,
+            "discourse_viscosity": 0.0928,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6484,
+          "lbu_conviction": 0.4961,
+          "bias_scale": 0.0643
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 82.05,
+          "loop_detected": true,
+          "orthogonal_residue": -0.3672
+        }
+      }
+    },
+    {
+      "idx": 4,
+      "id": "q04_sunrise_cardinal_direction",
+      "category": "Earth Science",
+      "question": "From which cardinal direction does the Sun appear to rise in the morning on Earth?",
+      "expected_keywords": [
+        "east"
+      ],
+      "prompt_tokens": 38,
+      "base_model": {
+        "generated_tokens": 12,
+        "latency_sec": 0.4778,
+        "tokens_per_sec": 25.12,
+        "answer": "The Sun appears to rise in the east.",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 12,
+        "latency_sec": 0.5709,
+        "tokens_per_sec": 21.02,
+        "answer": "The Sun appears to rise in the east.",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7422,
+            "code_viscosity": 0.3711,
+            "math_viscosity": 0.1855,
+            "logic_viscosity": 0.3418,
+            "discourse_viscosity": 0.1011,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6562,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0656
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 84.21,
+          "loop_detected": true,
+          "orthogonal_residue": -0.5
+        }
+      }
+    },
+    {
+      "idx": 5,
+      "id": "q05_candle_fire_airtight",
+      "category": "Chemical Physics",
+      "question": "What happens to an active candle flame if you cover it with an airtight glass jar?",
+      "expected_keywords": [
+        "extinguish",
+        "goes out",
+        "oxygen"
+      ],
+      "prompt_tokens": 41,
+      "base_model": {
+        "generated_tokens": 42,
+        "latency_sec": 1.8489,
+        "tokens_per_sec": 22.72,
+        "answer": "The flame will extinguish because the oxygen supply is cut off, and the heat generated by the burning fuel will eventually cause the wax to melt and drip into the jar, extinguishing the flame.",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 42,
+        "latency_sec": 1.7541,
+        "tokens_per_sec": 23.94,
+        "answer": "The flame will extinguish because the oxygen supply is cut off, and the heat generated by the burning fuel will eventually cause the wax to melt and drip into the jar, extinguishing the flame.",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.8594,
+            "code_viscosity": 0.3906,
+            "math_viscosity": 0.1787,
+            "logic_viscosity": 0.3398,
+            "discourse_viscosity": 0.0898,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.668,
+          "lbu_conviction": 0.498,
+          "bias_scale": 0.0665
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 78.05,
+          "loop_detected": true,
+          "orthogonal_residue": -0.2188
+        }
+      }
+    },
+    {
+      "idx": 6,
+      "id": "q06_human_underwater_breathing",
+      "category": "Human Biology",
+      "question": "Can a human breathe underwater without specialized scuba equipment like fish do?",
+      "expected_keywords": [
+        "no",
+        "cannot",
+        "gills",
+        "lungs"
+      ],
+      "prompt_tokens": 36,
+      "base_model": {
+        "generated_tokens": 50,
+        "latency_sec": 2.2661,
+        "tokens_per_sec": 22.06,
+        "answer": "No, humans cannot breathe underwater without specialized equipment because we lack the ability to extract dissolved oxygen from water and do not possess gills. Fish use gills to extract oxygen from water, while humans rely on lungs that require air to function.",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 30,
+        "latency_sec": 1.3843,
+        "tokens_per_sec": 21.67,
+        "answer": "No, humans cannot breathe underwater without specialized equipment because we lack the ability to extract dissolved oxygen from water and do not possess gills.",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7578,
+            "code_viscosity": 0.3789,
+            "math_viscosity": 0.1914,
+            "logic_viscosity": 0.332,
+            "discourse_viscosity": 0.0967,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6562,
+          "lbu_conviction": 0.498,
+          "bias_scale": 0.0654
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 88.89,
+          "loop_detected": true,
+          "orthogonal_residue": -0.1875
+        }
+      }
+    },
+    {
+      "idx": 7,
+      "id": "q07_vacuum_feather_hammer_drop",
+      "category": "Physics",
+      "question": "If a feather and a solid steel hammer are dropped simultaneously in a complete vacuum on Earth, which hits the ground first?",
+      "expected_keywords": [
+        "same time",
+        "simultaneously",
+        "both",
+        "together"
+      ],
+      "prompt_tokens": 46,
+      "base_model": {
+        "generated_tokens": 34,
+        "latency_sec": 1.6629,
+        "tokens_per_sec": 20.45,
+        "answer": "Both the feather and the hammer hit the ground at the exact same time because, in a vacuum, there is no air resistance to slow the falling object.",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 34,
+        "latency_sec": 1.8188,
+        "tokens_per_sec": 18.69,
+        "answer": "Both the feather and the hammer hit the ground at the exact same time because, in a vacuum, there is no air resistance to slow the falling object.",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.8125,
+            "code_viscosity": 0.3848,
+            "math_viscosity": 0.1797,
+            "logic_viscosity": 0.3438,
+            "discourse_viscosity": 0.0923,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6406,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0641
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 69.57,
+          "loop_detected": true,
+          "orthogonal_residue": -0.1094
+        }
+      }
+    },
+    {
+      "idx": 8,
+      "id": "q08_water_boiling_point",
+      "category": "Thermodynamics",
+      "question": "At what temperature in degrees Celsius does pure water boil under 1 standard atmosphere of pressure?",
+      "expected_keywords": [
+        "100",
+        "100\u00b0c"
+      ],
+      "prompt_tokens": 40,
+      "base_model": {
+        "generated_tokens": 21,
+        "latency_sec": 0.8605,
+        "tokens_per_sec": 24.4,
+        "answer": "Pure water boils at 100 degrees Celsius under 1 standard atmosphere of pressure.",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 21,
+        "latency_sec": 0.8529,
+        "tokens_per_sec": 24.62,
+        "answer": "Pure water boils at 100 degrees Celsius under 1 standard atmosphere of pressure.",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7031,
+            "code_viscosity": 0.3672,
+            "math_viscosity": 0.1953,
+            "logic_viscosity": 0.332,
+            "discourse_viscosity": 0.1064,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6445,
+          "lbu_conviction": 0.4961,
+          "bias_scale": 0.0639
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 80.0,
+          "loop_detected": true,
+          "orthogonal_residue": 0.0312
+        }
+      }
+    },
+    {
+      "idx": 9,
+      "id": "q09_socrates_mammal_syllogism",
+      "category": "Formal Logic",
+      "question": "All humans are mammals. Socrates is a human. Therefore, is Socrates a mammal? Answer yes or no.",
+      "expected_keywords": [
+        "yes"
+      ],
+      "prompt_tokens": 47,
+      "base_model": {
+        "generated_tokens": 5,
+        "latency_sec": 0.2557,
+        "tokens_per_sec": 19.55,
+        "answer": "Yes.",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 5,
+        "latency_sec": 0.2031,
+        "tokens_per_sec": 24.61,
+        "answer": "Yes.",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7734,
+            "code_viscosity": 0.3789,
+            "math_viscosity": 0.1914,
+            "logic_viscosity": 0.3281,
+            "discourse_viscosity": 0.1001,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6562,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0656
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 68.09,
+          "loop_detected": false,
+          "orthogonal_residue": 0.168
+        }
+      }
+    },
+    {
+      "idx": 10,
+      "id": "q10_classical_non_contradiction",
+      "category": "Formal Logic",
+      "question": "Can a statement be both completely true and completely false at the same time in classical logic?",
+      "expected_keywords": [
+        "no",
+        "cannot",
+        "impossible"
+      ],
+      "prompt_tokens": 40,
+      "base_model": {
+        "generated_tokens": 31,
+        "latency_sec": 1.5729,
+        "tokens_per_sec": 19.71,
+        "answer": "No, a statement cannot be both completely true and completely false at the same time in classical logic, as these are mutually exclusive truth values.",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 31,
+        "latency_sec": 1.7219,
+        "tokens_per_sec": 18.0,
+        "answer": "No, a statement cannot be both completely true and completely false at the same time in classical logic, as these are mutually exclusive truth values.",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7188,
+            "code_viscosity": 0.373,
+            "math_viscosity": 0.1904,
+            "logic_viscosity": 0.3359,
+            "discourse_viscosity": 0.1006,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6719,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0672
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 80.0,
+          "loop_detected": true,
+          "orthogonal_residue": -0.1016
+        }
+      }
+    },
+    {
+      "idx": 11,
+      "id": "q11_modus_tollens_rain_ground",
+      "category": "Formal Logic",
+      "question": "If it rains, the sidewalk gets wet. The sidewalk is completely dry. Did it rain? Answer yes or no.",
+      "expected_keywords": [
+        "no"
+      ],
+      "prompt_tokens": 46,
+      "base_model": {
+        "generated_tokens": 5,
+        "latency_sec": 0.2112,
+        "tokens_per_sec": 23.68,
+        "answer": "No.",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 5,
+        "latency_sec": 0.2131,
+        "tokens_per_sec": 23.47,
+        "answer": "No.",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.8203,
+            "code_viscosity": 0.3848,
+            "math_viscosity": 0.1865,
+            "logic_viscosity": 0.334,
+            "discourse_viscosity": 0.0957,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6484,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0648
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 69.57,
+          "loop_detected": true,
+          "orthogonal_residue": 0.0195
+        }
+      }
+    },
+    {
+      "idx": 12,
+      "id": "q12_transitivity_height",
+      "category": "Relational Logic",
+      "question": "Tower A is taller than Tower B. Tower B is taller than Tower C. Is Tower A taller than Tower C? Answer yes or no.",
+      "expected_keywords": [
+        "yes"
+      ],
+      "prompt_tokens": 51,
+      "base_model": {
+        "generated_tokens": 5,
+        "latency_sec": 0.2682,
+        "tokens_per_sec": 18.64,
+        "answer": "Yes.",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 5,
+        "latency_sec": 0.2188,
+        "tokens_per_sec": 22.85,
+        "answer": "Yes.",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.8125,
+            "code_viscosity": 0.3828,
+            "math_viscosity": 0.1777,
+            "logic_viscosity": 0.3457,
+            "discourse_viscosity": 0.0938,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6484,
+          "lbu_conviction": 0.498,
+          "bias_scale": 0.0646
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 62.75,
+          "loop_detected": false,
+          "orthogonal_residue": 0.1133
+        }
+      }
+    },
+    {
+      "idx": 13,
+      "id": "q13_empty_set_cardinality",
+      "category": "Mathematical Logic",
+      "question": "How many elements are contained inside an empty mathematical set?",
+      "expected_keywords": [
+        "zero",
+        "0",
+        "none",
+        "empty"
+      ],
+      "prompt_tokens": 33,
+      "base_model": {
+        "generated_tokens": 10,
+        "latency_sec": 0.3924,
+        "tokens_per_sec": 25.48,
+        "answer": "An empty set contains zero elements.",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 10,
+        "latency_sec": 0.3978,
+        "tokens_per_sec": 25.14,
+        "answer": "An empty set contains zero elements.",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7578,
+            "code_viscosity": 0.3789,
+            "math_viscosity": 0.1816,
+            "logic_viscosity": 0.3438,
+            "discourse_viscosity": 0.0947,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6914,
+          "lbu_conviction": 0.4961,
+          "bias_scale": 0.0686
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 96.97,
+          "loop_detected": true,
+          "orthogonal_residue": -0.5547
+        }
+      }
+    },
+    {
+      "idx": 14,
+      "id": "q14_sound_vacuum_propagation",
+      "category": "Wave Physics",
+      "question": "Can acoustic sound waves travel across the empty vacuum of outer space? Answer yes or no.",
+      "expected_keywords": [
+        "no",
+        "cannot",
+        "medium"
+      ],
+      "prompt_tokens": 40,
+      "base_model": {
+        "generated_tokens": 5,
+        "latency_sec": 0.2193,
+        "tokens_per_sec": 22.8,
+        "answer": "No.",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 5,
+        "latency_sec": 0.2152,
+        "tokens_per_sec": 23.24,
+        "answer": "No.",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.8047,
+            "code_viscosity": 0.3828,
+            "math_viscosity": 0.1719,
+            "logic_viscosity": 0.3535,
+            "discourse_viscosity": 0.0918,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6602,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.066
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 80.0,
+          "loop_detected": true,
+          "orthogonal_residue": -0.2031
+        }
+      }
+    },
+    {
+      "idx": 15,
+      "id": "q15_photosynthesis_gas_exchange",
+      "category": "Biology",
+      "question": "During daylight photosynthesis, what gas do green plant leaves absorb from the air, and what gas do they release?",
+      "expected_keywords": [
+        "carbon dioxide",
+        "co2",
+        "oxygen",
+        "o2"
+      ],
+      "prompt_tokens": 45,
+      "base_model": {
+        "generated_tokens": 20,
+        "latency_sec": 0.7919,
+        "tokens_per_sec": 25.26,
+        "answer": "Green plant leaves absorb carbon dioxide from the air and release oxygen during daylight photosynthesis.",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 20,
+        "latency_sec": 1.0003,
+        "tokens_per_sec": 19.99,
+        "answer": "Green plant leaves absorb carbon dioxide from the air and release oxygen during daylight photosynthesis.",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.8203,
+            "code_viscosity": 0.3828,
+            "math_viscosity": 0.1738,
+            "logic_viscosity": 0.3516,
+            "discourse_viscosity": 0.0923,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6406,
+          "lbu_conviction": 0.4961,
+          "bias_scale": 0.0636
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 71.11,
+          "loop_detected": true,
+          "orthogonal_residue": -0.1016
+        }
+      }
+    },
+    {
+      "idx": 16,
+      "id": "q16_thermal_conduction_direction",
+      "category": "Thermodynamics",
+      "question": "When a hot iron block is dropped into cold water, does heat transfer from hot to cold or cold to hot?",
+      "expected_keywords": [
+        "hot to cold",
+        "higher to lower"
+      ],
+      "prompt_tokens": 45,
+      "base_model": {
+        "generated_tokens": 15,
+        "latency_sec": 0.5937,
+        "tokens_per_sec": 25.27,
+        "answer": "Heat transfers from the hot iron block to the cold water.",
+        "passed": false
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 15,
+        "latency_sec": 0.8499,
+        "tokens_per_sec": 17.65,
+        "answer": "Heat transfers from the hot iron block to the cold water.",
+        "passed": false,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7812,
+            "code_viscosity": 0.3848,
+            "math_viscosity": 0.1738,
+            "logic_viscosity": 0.3496,
+            "discourse_viscosity": 0.0908,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6523,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0652
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 71.11,
+          "loop_detected": true,
+          "orthogonal_residue": 0.0312
+        }
+      }
+    },
+    {
+      "idx": 17,
+      "id": "q17_inertia_frictionless_space",
+      "category": "Newtonian Mechanics",
+      "question": "If a probe travels through deep space with zero gravity and zero friction, what happens to its speed if thrusters are turned off?",
+      "expected_keywords": [
+        "constant",
+        "same",
+        "continues",
+        "unchanged",
+        "maintain"
+      ],
+      "prompt_tokens": 48,
+      "base_model": {
+        "generated_tokens": 27,
+        "latency_sec": 1.0909,
+        "tokens_per_sec": 24.75,
+        "answer": "The probe will continue to travel at a constant speed due to inertia, as there are no external forces acting upon it.",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 27,
+        "latency_sec": 1.2146,
+        "tokens_per_sec": 22.23,
+        "answer": "The probe will continue to travel at a constant speed due to inertia, as there are no external forces acting upon it.",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.8203,
+            "code_viscosity": 0.3848,
+            "math_viscosity": 0.1699,
+            "logic_viscosity": 0.3555,
+            "discourse_viscosity": 0.0918,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6406,
+          "lbu_conviction": 0.4961,
+          "bias_scale": 0.0636
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 66.67,
+          "loop_detected": true,
+          "orthogonal_residue": -0.0703
+        }
+      }
+    },
+    {
+      "idx": 18,
+      "id": "q18_binary_search_complexity",
+      "category": "Algorithms",
+      "question": "What is the worst-case time complexity of binary search on a sorted list of N elements in Big-O notation?",
+      "expected_keywords": [
+        "o(log n)",
+        "o(logn)",
+        "logarithmic"
+      ],
+      "prompt_tokens": 44,
+      "base_model": {
+        "generated_tokens": 23,
+        "latency_sec": 0.9113,
+        "tokens_per_sec": 25.24,
+        "answer": "The worst-case time complexity of binary search on a sorted list of N elements is O(log N).",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 23,
+        "latency_sec": 0.8868,
+        "tokens_per_sec": 25.94,
+        "answer": "The worst-case time complexity of binary search on a sorted list of N elements is O(log N).",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7344,
+            "code_viscosity": 0.373,
+            "math_viscosity": 0.1836,
+            "logic_viscosity": 0.3438,
+            "discourse_viscosity": 0.0996,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.668,
+          "lbu_conviction": 0.4961,
+          "bias_scale": 0.0663
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 72.73,
+          "loop_detected": false,
+          "orthogonal_residue": 0.1523
+        }
+      }
+    },
+    {
+      "idx": 19,
+      "id": "q19_recursion_stack_overflow",
+      "category": "Computer Science",
+      "question": "What happens if a recursive function in Python executes without any base case terminating condition?",
+      "expected_keywords": [
+        "stack overflow",
+        "recursion error",
+        "maximum recursion depth",
+        "infinite recursion"
+      ],
+      "prompt_tokens": 38,
+      "base_model": {
+        "generated_tokens": 29,
+        "latency_sec": 1.2739,
+        "tokens_per_sec": 22.76,
+        "answer": "The function will enter an infinite loop, causing the program to crash with a `RecursionError` due to excessive memory usage.",
+        "passed": false
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 29,
+        "latency_sec": 1.4052,
+        "tokens_per_sec": 20.64,
+        "answer": "The function will enter an infinite loop, causing the program to crash with a `RecursionError` due to excessive memory usage.",
+        "passed": false,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.6562,
+            "code_viscosity": 0.3633,
+            "math_viscosity": 0.1895,
+            "logic_viscosity": 0.3438,
+            "discourse_viscosity": 0.105,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6797,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.068
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 84.21,
+          "loop_detected": true,
+          "orthogonal_residue": -0.0625
+        }
+      }
+    },
+    {
+      "idx": 20,
+      "id": "q20_boolean_logic_eval",
+      "category": "Boolean Logic",
+      "question": "What is the truth value of the Boolean expression: True AND (False OR NOT False)? Answer True or False.",
+      "expected_keywords": [
+        "true"
+      ],
+      "prompt_tokens": 45,
+      "base_model": {
+        "generated_tokens": 4,
+        "latency_sec": 0.1649,
+        "tokens_per_sec": 24.26,
+        "answer": "True",
+        "passed": true
+      },
+      "stabilized_vgni_lbu": {
+        "generated_tokens": 4,
+        "latency_sec": 0.1719,
+        "tokens_per_sec": 23.27,
+        "answer": "True",
+        "passed": true,
+        "vgni_telemetry": {
+          "misf": {
+            "fluid_sensitivity": 1.7188,
+            "code_viscosity": 0.3691,
+            "math_viscosity": 0.1865,
+            "logic_viscosity": 0.3438,
+            "discourse_viscosity": 0.1011,
+            "metastable_risk": 0.0
+          },
+          "vgni_affinity": 0.6641,
+          "lbu_conviction": 0.5,
+          "bias_scale": 0.0664
+        },
+        "kv_cloud_audit": {
+          "kv_cloud_ratio_pct": 71.11,
+          "loop_detected": false,
+          "orthogonal_residue": 0.0664
+        }
+      }
+    }
+  ]
+}
