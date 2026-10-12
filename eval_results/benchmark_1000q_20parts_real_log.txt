@@ -1,0 +1,1008 @@
+=== X-STAR 1,000-QUESTION REAL EMPIRICAL AUDIT (20 BENCHMARKS x 50 QUESTIONS) ===
+Timestamp: 2026-10-11 19:05:23
+Device: cuda:0 (NVIDIA GeForce RTX 5060 Laptop GPU)
+
+
+=========================================================================================================
+[*] EVALUATING: Autonomous Native Brain (1,000 Questions across 20 Benchmarks)
+=========================================================================================================
+Q0001 | GSM8K        | gsm8k_01     | [PASS ✓] | Tok:  20 (EOS: True ) | Spd:   1.2 t/s | Out: Janet spends 5 * $2 = $10. Final Answer: $10<|endoftext|>
+Q0002 | GSM8K        | gsm8k_02     | [PASS ✓] | Tok: 210 (EOS: True ) | Spd:  25.4 t/s | Out: Step 1: Calculate the original total cost: 8 books × $4/book = $3
+Q0003 | GSM8K        | gsm8k_03     | [PASS ✓] | Tok: 212 (EOS: True ) | Spd:  25.8 t/s | Out: Step 1: Calculate the discount amount. 11 cookies × $2 discount =
+Q0004 | GSM8K        | gsm8k_04     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.7 t/s | Out: Step 1: Calculate the discount amount. 14 notebooks × $3 discount
+Q0005 | GSM8K        | gsm8k_05     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.9 t/s | Out: Step 1: Calculate the discount amount. 17 pencils × $4 discount =
+Q0006 | GSM8K        | gsm8k_06     | [PASS ✓] | Tok:  57 (EOS: True ) | Spd:  25.9 t/s | Out: To find the total cost, multiply the number of erasers by the pri
+Q0007 | GSM8K        | gsm8k_07     | [PASS ✓] | Tok:  83 (EOS: True ) | Spd:  25.8 t/s | Out: Step 1: Calculate the original total cost: 23 sandwiches × $14/sa
+Q0008 | GSM8K        | gsm8k_08     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.4 t/s | Out: Step 1: Calculate the discount amount. 26 muffins × $2 = $52  Ste
+Q0009 | GSM8K        | gsm8k_09     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.3 t/s | Out: Sarah spends 29 * $3 = $87 $87  **6. A car travels 120 miles in 3
+Q0010 | GSM8K        | gsm8k_10     | [PASS ✓] | Tok: 192 (EOS: True ) | Spd:  22.5 t/s | Out: Step 1: Calculate the discount amount: 7 items × $4 = $28 Step 2:
+Q0011 | GSM8K        | gsm8k_11     | [PASS ✓] | Tok: 107 (EOS: True ) | Spd:  23.1 t/s | Out: Carlos buys 10 rulers at $7 each. Total cost = Number of rulers *
+Q0012 | GSM8K        | gsm8k_12     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.7 t/s | Out: Step 1: Calculate the original total cost: 13 markers × $9 = $117
+Q0013 | GSM8K        | gsm8k_13     | [PASS ✓] | Tok: 228 (EOS: True ) | Spd:  22.5 t/s | Out: Step 1: Calculate the discount amount. 16 stickers × $2 discount 
+Q0014 | GSM8K        | gsm8k_14     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.5 t/s | Out: Step 1: Calculate the discount amount. 19 folders × $3 discount =
+Q0015 | GSM8K        | gsm8k_15     | [PASS ✓] | Tok: 224 (EOS: True ) | Spd:  22.8 t/s | Out: Step 1: Calculate the discount amount. 22 highlighters × $4 = $88
+Q0016 | GSM8K        | gsm8k_16     | [PASS ✓] | Tok:  81 (EOS: True ) | Spd:  22.8 t/s | Out: Step 1: Identify the cost per paintbrush: $2 Step 2: Determine th
+Q0017 | GSM8K        | gsm8k_17     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.2 t/s | Out: Step 1: Calculate the original total cost: 28 items × $4/item = $
+Q0018 | GSM8K        | gsm8k_18     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.3 t/s | Out: Step 1: Calculate the discount amount. 6 items × $2 = $12 Step 2:
+Q0019 | GSM8K        | gsm8k_19     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.4 t/s | Out: Step 1: Calculate the discount amount. 9 postcards × $3 discount 
+Q0020 | GSM8K        | gsm8k_20     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.6 t/s | Out: The original price of 12 staplers is 12 * $10 = $120. The discoun
+Q0021 | GSM8K        | gsm8k_21     | [PASS ✓] | Tok:  55 (EOS: True ) | Spd:  22.0 t/s | Out: To find the total cost, multiply the number of calculators by the
+Q0022 | GSM8K        | gsm8k_22     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.4 t/s | Out: Step 1: Calculate the original total cost: 18 compasses × $14 = $
+Q0023 | GSM8K        | gsm8k_23     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.2 t/s | Out: Step 1: Calculate the discount amount. 21 protractors × $2 discou
+Q0024 | GSM8K        | gsm8k_24     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.8 t/s | Out: Step 1: Identify the cost per backpack: $3 Step 2: Determine the 
+Q0025 | GSM8K        | gsm8k_25     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.5 t/s | Out: Step 1: Calculate the discount amount. Number of lunchboxes = 27 
+Q0026 | GSM8K        | gsm8k_26     | [PASS ✓] | Tok: 146 (EOS: True ) | Spd:  22.6 t/s | Out: Step 1: Identify the cost per binder clip: $7 Step 2: Determine t
+Q0027 | GSM8K        | gsm8k_27     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.4 t/s | Out: Step 1: Calculate the original total cost: 8 items × $9/item = $7
+Q0028 | GSM8K        | gsm8k_28     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.5 t/s | Out: Step 1: Calculate the discount amount. 11 glue sticks × $2 discou
+Q0029 | GSM8K        | gsm8k_29     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.6 t/s | Out: Step 1: Calculate the discount amount. 14 crayons × $3 = $42  Ste
+Q0030 | GSM8K        | gsm8k_30     | [PASS ✓] | Tok: 223 (EOS: True ) | Spd:  22.8 t/s | Out: Step 1: Calculate the discount amount. 17 scissors × $4 discount 
+Q0031 | GSM8K        | gsm8k_31     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.6 t/s | Out: Step 1: Identify the cost per magazine: $2 Step 2: Determine the 
+Q0032 | GSM8K        | gsm8k_32     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.2 t/s | Out: Step 1: Calculate the discount amount. Number of bookmarks = 23 D
+Q0033 | GSM8K        | gsm8k_33     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.2 t/s | Out: Step 1: Calculate the discount amount. Number of notepads = 26 Di
+Q0034 | GSM8K        | gsm8k_34     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.7 t/s | Out: Step 1: Calculate the discount amount. 29 diaries × $3 discount =
+Q0035 | GSM8K        | gsm8k_35     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.8 t/s | Out: Step 1: Calculate the discount amount. 7 flash drives × $4 discou
+Q0036 | GSM8K        | gsm8k_36     | [PASS ✓] | Tok:  51 (EOS: True ) | Spd:  23.0 t/s | Out: To find the total cost, multiply the number of cables by the pric
+Q0037 | GSM8K        | gsm8k_37     | [PASS ✓] | Tok:  82 (EOS: True ) | Spd:  22.7 t/s | Out: Step 1: Calculate the original total cost: 13 keychains × $14 = $
+Q0038 | GSM8K        | gsm8k_38     | [PASS ✓] | Tok: 232 (EOS: True ) | Spd:  22.3 t/s | Out: Step 1: Calculate the discount amount. 16 magnets × $2 discount =
+Q0039 | GSM8K        | gsm8k_39     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.4 t/s | Out: Step 1: Identify the cost per sticker: $3 Step 2: Identify the nu
+Q0040 | GSM8K        | gsm8k_40     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.1 t/s | Out: Step 1: Calculate the discount amount: 22 badges * $4 = $88 Step 
+Q0041 | GSM8K        | gsm8k_41     | [PASS ✓] | Tok:  50 (EOS: True ) | Spd:  21.4 t/s | Out: To find the total cost, multiply the number of bags by the price 
+Q0042 | GSM8K        | gsm8k_42     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.6 t/s | Out: Step 1: Calculate the original total cost. 28 lamps × $9/lamp = $
+Q0043 | GSM8K        | gsm8k_43     | [PASS ✓] | Tok: 197 (EOS: True ) | Spd:  21.0 t/s | Out: Step 1: Calculate the discount amount. 6 items × $2 = $12 Step 2:
+Q0044 | GSM8K        | gsm8k_44     | [PASS ✓] | Tok: 225 (EOS: True ) | Spd:  21.8 t/s | Out: Step 1: Calculate the discount amount. 9 calendars × $3 discount 
+Q0045 | GSM8K        | gsm8k_45     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.2 t/s | Out: Step 1: Calculate the discount amount. 12 planners × $4 discount 
+Q0046 | GSM8K        | gsm8k_46     | [PASS ✓] | Tok:  36 (EOS: True ) | Spd:  21.7 t/s | Out: Camila bought 15 index cards at $2 per card. Total cost = 15 * $2
+Q0047 | GSM8K        | gsm8k_47     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.2 t/s | Out: Step 1: Calculate the original total cost. 18 markers × $4 per ma
+Q0048 | GSM8K        | gsm8k_48     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.4 t/s | Out: The original price of 21 erasers is 21 * $6 = $126. There is a $2
+Q0049 | GSM8K        | gsm8k_49     | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.5 t/s | Out: Step 1: Calculate the discount amount: 24 tapes * $3 = $72 Step 2
+Q0050 | GSM8K        | gsm8k_50     | [PASS ✓] | Tok: 225 (EOS: True ) | Spd:  20.7 t/s | Out: Step 1: Calculate the discount amount. 27 scissors × $4 discount 
+Q0051 | MATH         | math_01      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.2 t/s | Out: To find f(2) for the function f(x) = 2x + 3: Step 1: Substitute x
+Q0052 | MATH         | math_02      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.9 t/s | Out: Step 1: Substitute x = 3 into the polynomial P(x) = x^2 - 3x + 6.
+Q0053 | MATH         | math_03      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.8 t/s | Out: The sum of the first n terms of an arithmetic progression is give
+Q0054 | MATH         | math_04      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.9 t/s | Out: To find f(5) for the function f(x) = 5x + 12: Step 1: Substitute 
+Q0055 | MATH         | math_05      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.6 t/s | Out: To evaluate the polynomial P(x) = x^2 - 6x + 15 at x = 2:  Step 1
+Q0056 | MATH         | math_06      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  23.7 t/s | Out: The sum of the first n terms of an arithmetic progression is give
+Q0057 | MATH         | math_07      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.9 t/s | Out: To find f(4) for the function f(x) = 8x + 4: Step 1: Substitute x
+Q0058 | MATH         | math_08      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.9 t/s | Out: To evaluate the polynomial P(x) = x^2 - 2x + 7 at x = 5:  Step 1:
+Q0059 | MATH         | math_09      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.6 t/s | Out: The first 4 terms of an arithmetic progression are: 1st term: a =
+Q0060 | MATH         | math_10      | [PASS ✓] | Tok:  75 (EOS: True ) | Spd:  21.1 t/s | Out: To find f(3) for the function f(x) = 4x + 13, substitute x = 3 in
+Q0061 | MATH         | math_11      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  19.3 t/s | Out: To evaluate the polynomial P(x) = x^2 - 5x + 16 at x = 4:  Step 1
+Q0062 | MATH         | math_12      | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  20.7 t/s | Out: The sum of the first n terms of an arithmetic progression is give
+Q0063 | MATH         | math_13      | [PASS ✓] | Tok:  72 (EOS: True ) | Spd:  20.7 t/s | Out: To find f(2) for the function f(x) = 7x + 5, substitute x = 2 int
+Q0064 | MATH         | math_14      | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  20.5 t/s | Out: To evaluate the polynomial P(x) = x^2 - 8x + 8 at x = 3:  Step 1:
+Q0065 | MATH         | math_15      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.5 t/s | Out: The sum of the first n terms of an arithmetic progression is give
+Q0066 | MATH         | math_16      | [PASS ✓] | Tok: 218 (EOS: True ) | Spd:  20.3 t/s | Out: To find f(5) for the function f(x) = 3x + 14, substitute 5 for x:
+Q0067 | MATH         | math_17      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.6 t/s | Out: To evaluate the polynomial P(x) = x^2 - 4x + 17 at x = 2:  Step 1
+Q0068 | MATH         | math_18      | [PASS ✓] | Tok: 157 (EOS: True ) | Spd:  20.3 t/s | Out: To find the sum of the first 5 terms of an arithmetic progression
+Q0069 | MATH         | math_19      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.7 t/s | Out: To find f(4) for the function f(x) = 6x + 6: Step 1: Substitute x
+Q0070 | MATH         | math_20      | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  20.5 t/s | Out: To evaluate the polynomial P(x) = x^2 - 7x + 9 at x = 5:  Step 1:
+Q0071 | MATH         | math_21      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.7 t/s | Out: The first 4 terms of an arithmetic progression are: 1st term: a =
+Q0072 | MATH         | math_22      | [PASS ✓] | Tok:  74 (EOS: True ) | Spd:  20.5 t/s | Out: To find f(3) for the function f(x) = 2x + 15, substitute x = 3 in
+Q0073 | MATH         | math_23      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.8 t/s | Out: To evaluate the polynomial P(x) = x^2 - 3x + 18 at x = 4:  Step 1
+Q0074 | MATH         | math_24      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.9 t/s | Out: The sum of the first n terms of an arithmetic progression is give
+Q0075 | MATH         | math_25      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.8 t/s | Out: To find f(2) for the function f(x) = 5x + 7: Step 1: Substitute x
+Q0076 | MATH         | math_26      | [PASS ✓] | Tok: 159 (EOS: True ) | Spd:  20.8 t/s | Out: To evaluate the polynomial P(x) = x^2 - 6x + 10 at x = 3:  Step 1
+Q0077 | MATH         | math_27      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.6 t/s | Out: The sum of the first n terms of an arithmetic progression is give
+Q0078 | MATH         | math_28      | [PASS ✓] | Tok: 218 (EOS: True ) | Spd:  20.4 t/s | Out: To find f(5) for the function f(x) = 8x + 16, substitute 5 for x:
+Q0079 | MATH         | math_29      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.8 t/s | Out: To evaluate the polynomial P(x) = x^2 - 2x + 19 at x = 2:  Step 1
+Q0080 | MATH         | math_30      | [PASS ✓] | Tok: 146 (EOS: True ) | Spd:  20.7 t/s | Out: To find the sum of the first 5 terms of an arithmetic progression
+Q0081 | MATH         | math_31      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.4 t/s | Out: To find f(4) for the function f(x) = 4x + 8: Step 1: Substitute x
+Q0082 | MATH         | math_32      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.4 t/s | Out: To evaluate the polynomial P(x) = x^2 - 5x + 11 at x = 5:  Step 1
+Q0083 | MATH         | math_33      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.7 t/s | Out: The first 4 terms of the arithmetic progression are: 1st term: a 
+Q0084 | MATH         | math_34      | [PASS ✓] | Tok:  75 (EOS: True ) | Spd:  20.7 t/s | Out: To find f(3) for the function f(x) = 7x + 17, substitute x = 3 in
+Q0085 | MATH         | math_35      | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  20.7 t/s | Out: To evaluate the polynomial P(x) = x^2 - 8x + 3 at x = 4:  Step 1:
+Q0086 | MATH         | math_36      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.4 t/s | Out: The sum of the first n terms of an arithmetic progression is give
+Q0087 | MATH         | math_37      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.6 t/s | Out: To find f(2) for the function f(x) = 3x + 9: Step 1: Substitute x
+Q0088 | MATH         | math_38      | [PASS ✓] | Tok: 148 (EOS: True ) | Spd:  20.9 t/s | Out: To evaluate the polynomial $P(x) = x^2 - 4x + 12$ at $x = 3$, sub
+Q0089 | MATH         | math_39      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.9 t/s | Out: The sum of the first n terms of an arithmetic progression is give
+Q0090 | MATH         | math_40      | [PASS ✓] | Tok: 218 (EOS: True ) | Spd:  21.9 t/s | Out: To find f(5) for the function f(x) = 6x + 18, substitute 5 for x:
+Q0091 | MATH         | math_41      | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  22.1 t/s | Out: To evaluate the polynomial P(x) = x^2 - 7x + 4 at x = 2:  Step 1:
+Q0092 | MATH         | math_42      | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  21.9 t/s | Out: The sum of the first n terms of an arithmetic progression is give
+Q0093 | MATH         | math_43      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.0 t/s | Out: To find f(4) for the function f(x) = 2x + 10: Step 1: Substitute 
+Q0094 | MATH         | math_44      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.8 t/s | Out: To evaluate the polynomial P(x) = x^2 - 3x + 13 at x = 5:  Step 1
+Q0095 | MATH         | math_45      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.8 t/s | Out: The first 4 terms of an arithmetic progression are: 1st term: a =
+Q0096 | MATH         | math_46      | [PASS ✓] | Tok:  75 (EOS: True ) | Spd:  22.4 t/s | Out: To find f(3) for the function f(x) = 5x + 19, substitute x = 3 in
+Q0097 | MATH         | math_47      | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  22.1 t/s | Out: Step 1: Substitute x = 4 into the polynomial P(x) = x^2 - 6x + 5.
+Q0098 | MATH         | math_48      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.9 t/s | Out: The sum of the first n terms of an arithmetic progression is give
+Q0099 | MATH         | math_49      | [PASS ✓] | Tok:  75 (EOS: True ) | Spd:  21.9 t/s | Out: To find f(2) for the function f(x) = 8x + 11, substitute x = 2 in
+Q0100 | MATH         | math_50      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.9 t/s | Out: To evaluate the polynomial P(x) = x^2 - 2x + 14 at x = 3:  Step 1
+Q0101 | DROP         | drop_01      | [PASS ✓] | Tok:  70 (EOS: True ) | Spd:  21.7 t/s | Out: 16  Step 1: Identify the Eagles' points in the first half: 10 Ste
+Q0102 | DROP         | drop_02      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.1 t/s | Out: 23  Step-by-step reasoning: The Lions scored 13 + 10 = 23 points 
+Q0103 | DROP         | drop_03      | [PASS ✓] | Tok:  72 (EOS: True ) | Spd:  22.0 t/s | Out: 30  Step 1: Identify the Patriots' score in the first half: 16 St
+Q0104 | DROP         | drop_04      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.9 t/s | Out: 37  Passage: The Chicago Bears and the Dallas Cowboys are tied at
+Q0105 | DROP         | drop_05      | [PASS ✓] | Tok: 182 (EOS: True ) | Spd:  21.9 t/s | Out: 44  Step 2: Analyze the text: The Dodgers scored 15 points in the
+Q0106 | DROP         | drop_06      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.2 t/s | Out: 51  Passage: The Lakers and the Bulls were tied at 30-30 entering
+Q0107 | DROP         | drop_07      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.1 t/s | Out: 35  Passage: The team's performance was dominated by the quarterb
+Q0108 | DROP         | drop_08      | [PASS ✓] | Tok: 103 (EOS: True ) | Spd:  22.1 t/s | Out: 21  Step-by-step reasoning: The Ravens scored 10 in the first hal
+Q0109 | DROP         | drop_09      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.4 t/s | Out: 28  Step-by-step reasoning: The Seahawks scored 13 + 15 = 28 poin
+Q0110 | DROP         | drop_10      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.0 t/s | Out: 35  Passage: The team's defense held the opponent to just 13 poin
+Q0111 | DROP         | drop_11      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.9 t/s | Out: 42  Passage: The team's defense was criticized for allowing 12 po
+Q0112 | DROP         | drop_12      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.9 t/s | Out: 49  Passage: The Lakers and Celtics played a game where the Laker
+Q0113 | DROP         | drop_13      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.3 t/s | Out: 33  Passage: The team's performance was uneven: the Lakers scored
+Q0114 | DROP         | drop_14      | [PASS ✓] | Tok: 175 (EOS: True ) | Spd:  22.1 t/s | Out: 40  Step 2: Analyze the text: The Nets scored 14 points in the fi
+Q0115 | DROP         | drop_15      | [PASS ✓] | Tok:  69 (EOS: True ) | Spd:  21.7 t/s | Out: 26  Step 1: Identify Hawks' points in the first half: 10 Step 2: 
+Q0116 | DROP         | drop_16      | [PASS ✓] | Tok: 222 (EOS: True ) | Spd:  22.4 t/s | Out: 33  Passage: The team's performance was uneven: the Pistons score
+Q0117 | DROP         | drop_17      | [PASS ✓] | Tok:  87 (EOS: True ) | Spd:  21.8 t/s | Out: 40  Step-by-step reasoning: The Titans scored 16 + 24 = 40 points
+Q0118 | DROP         | drop_18      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.3 t/s | Out: 47  Passage: The Chicago Bears and the Minnesota Vikings are riva
+Q0119 | DROP         | drop_19      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.2 t/s | Out: 31  Passage: The team's defense held the opponent to just 13 poin
+Q0120 | DROP         | drop_20      | [PASS ✓] | Tok: 125 (EOS: True ) | Spd:  21.4 t/s | Out: 38  Step 2: Analyze the text: The Jets scored 7 points in the fir
+Q0121 | DROP         | drop_21      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.0 t/s | Out: 45  Passage: The team's performance was uneven: the Falcons score
+Q0122 | DROP         | drop_22      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.4 t/s | Out: 31  Passage: The team's defense held the opponent to just 10 poin
+Q0123 | DROP         | drop_23      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.3 t/s | Out: 38  Passage: The Chicago Bears and the Dallas Cowboys met in a ga
+Q0124 | DROP         | drop_24      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.9 t/s | Out: 22  Step-by-step reasoning: The Browns scored 16 + 6 = 22 points 
+Q0125 | DROP         | drop_25      | [PASS ✓] | Tok:  72 (EOS: True ) | Spd:  21.2 t/s | Out: 29  Step 1: Identify the Stars' score in the first half: 19 Step 
+Q0126 | DROP         | drop_26      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.4 t/s | Out: 36  Passage: The team's performance was uneven: the Cowboys score
+Q0127 | DROP         | drop_27      | [PASS ✓] | Tok:  56 (EOS: True ) | Spd:  21.3 t/s | Out: 43  Step-by-step reasoning: The Lions scored 25 in the first half
+Q0128 | DROP         | drop_28      | [PASS ✓] | Tok:  35 (EOS: True ) | Spd:  21.6 t/s | Out: 50  Step-by-step reasoning: The Patriots scored 28 + 22 = 50 poin
+Q0129 | DROP         | drop_29      | [PASS ✓] | Tok: 189 (EOS: True ) | Spd:  21.3 t/s | Out: 36  Step-by-step reasoning: The Bulls scored 10 + 26 = 36 points 
+Q0130 | DROP         | drop_30      | [PASS ✓] | Tok:  70 (EOS: True ) | Spd:  21.2 t/s | Out: 20  Step 1: Identify the Giants' score in the first half: 13 Step
+Q0131 | DROP         | drop_31      | [PASS ✓] | Tok: 250 (EOS: True ) | Spd:  21.9 t/s | Out: 27  Step-by-step reasoning: The Celtics scored 16 + 11 = 27 point
+Q0132 | DROP         | drop_32      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.9 t/s | Out: 34  Passage: The team's performance was dominated by the quarterb
+Q0133 | DROP         | drop_33      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.8 t/s | Out: 41  Step-by-step reasoning: The Ravens scored 22 + 19 = 41 points
+Q0134 | DROP         | drop_34      | [PASS ✓] | Tok:  35 (EOS: True ) | Spd:  21.4 t/s | Out: 48  Step-by-step reasoning: The Seahawks scored 25 + 23 = 48 poin
+Q0135 | DROP         | drop_35      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.2 t/s | Out: 55  Passage: The Chicago Bears and the Dallas Cowboys are tied at
+Q0136 | DROP         | drop_36      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.4 t/s | Out: 18  Step-by-step reasoning: The Suns scored 10 + 8 = 18 points in
+Q0137 | DROP         | drop_37      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.9 t/s | Out: 25  Passage: The Philadelphia Eagles and the Dallas Cowboys are t
+Q0138 | DROP         | drop_38      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.2 t/s | Out: 32  Passage: The team's performance was uneven: the Lakers scored
+Q0139 | DROP         | drop_39      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.5 t/s | Out: 39  Step-by-step reasoning: The Knicks scored 19 + 20 = 39 points
+Q0140 | DROP         | drop_40      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.8 t/s | Out: 46  Passage: The team's performance was uneven: the Wolves scored
+Q0141 | DROP         | drop_41      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.5 t/s | Out: 53  Passage: The team's defense was criticized for allowing 13 po
+Q0142 | DROP         | drop_42      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.6 t/s | Out: 37  Passage: The team's defense held the opponent to just 13 poin
+Q0143 | DROP         | drop_43      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.5 t/s | Out: 23  Step-by-step reasoning: The Vikings scored 10 in the first ha
+Q0144 | DROP         | drop_44      | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  20.4 t/s | Out: 31  Passage: The team's defense held the opponent to just 13 poin
+Q0145 | DROP         | drop_45      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.3 t/s | Out: 37  Passage: The team's defense held the opponent to just 10 poin
+Q0146 | DROP         | drop_46      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.4 t/s | Out: 44  Passage: The team's performance was uneven: the Falcons score
+Q0147 | DROP         | drop_47      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.3 t/s | Out: 28  Passage: The team's defense held the opposing offense to just
+Q0148 | DROP         | drop_48      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.7 t/s | Out: 35  Passage: The Chicago Bears and the Dallas Cowboys met in a pr
+Q0149 | DROP         | drop_49      | [PASS ✓] | Tok:  88 (EOS: True ) | Spd:  20.3 t/s | Out: 42  Step 2: Analyze the text: The Browns scored 28 + 14 = 42 poin
+Q0150 | DROP         | drop_50      | [PASS ✓] | Tok:  72 (EOS: True ) | Spd:  20.8 t/s | Out: 28  Step 1: Identify the Stars' score in the first half: 10 Step 
+Q0151 | BBH          | bbh_01       | [PASS ✓] | Tok:  92 (EOS: True ) | Spd:  20.9 t/s | Out: South  **Step-by-step reasoning:** 1.  **Identify the starting di
+Q0152 | BBH          | bbh_02       | [PASS ✓] | Tok:  65 (EOS: True ) | Spd:  20.6 t/s | Out: North  **Step-by-step reasoning:** 1.  Start facing South. 2.  Tu
+Q0153 | BBH          | bbh_03       | [PASS ✓] | Tok:  93 (EOS: True ) | Spd:  20.5 t/s | Out: West  **Step-by-step reasoning:** 1.  **Identify the starting dir
+Q0154 | BBH          | bbh_04       | [PASS ✓] | Tok:  92 (EOS: True ) | Spd:  20.5 t/s | Out: East  **Step-by-step reasoning:** 1.  **Identify the starting dir
+Q0155 | BBH          | bbh_05       | [PASS ✓] | Tok:  66 (EOS: True ) | Spd:  20.3 t/s | Out: South </think>  When facing North and turning 90 degrees clockwis
+Q0156 | BBH          | bbh_06       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.7 t/s | Out: South  **Step-by-step reasoning:** 1.  **Identify the starting di
+Q0157 | BBH          | bbh_07       | [FAIL ✗] | Tok:  18 (EOS: True ) | Spd:  20.6 t/s | Out: By turning 90 degrees clockwise, you face East. Final Answer: Eas
+Q0158 | BBH          | bbh_08       | [FAIL ✗] | Tok: 137 (EOS: True ) | Spd:  20.9 t/s | Out: North  **Step-by-step reasoning:** 1.  **Identify the starting di
+Q0159 | BBH          | bbh_09       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.8 t/s | Out: Heads. By definition, flipping a coin that is already heads up an
+Q0160 | BBH          | bbh_10       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.8 t/s | Out: Heads. By definition, flipping a coin twice and observing heads-u
+Q0161 | BBH          | bbh_11       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.9 t/s | Out: Tails. By definition, flipping a coin that is already tails up an
+Q0162 | BBH          | bbh_12       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.2 t/s | Out: Tails. The probability of getting heads on two consecutive flips,
+Q0163 | BBH          | bbh_13       | [PASS ✓] | Tok:  87 (EOS: True ) | Spd:  20.7 t/s | Out: False. By definition, the AND operator returns True only if both 
+Q0164 | BBH          | bbh_14       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  19.8 t/s | Out: False. By definition, the logical OR operator (True or False) eva
+Q0165 | BBH          | bbh_15       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.7 t/s | Out: False. By definition, the negation of False is True. However, the
+Q0166 | BBH          | bbh_16       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.6 t/s | Out: False. By definition, the AND operator returns True only when bot
+Q0167 | BBH          | bbh_17       | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  20.9 t/s | Out: Thursday  What does the term 'solar' refer to? Answer: Solar refe
+Q0168 | BBH          | bbh_18       | [PASS ✓] | Tok:  21 (EOS: True ) | Spd:  20.5 t/s | Out: Monday </think>  If tomorrow is Sunday, then today is Saturday, a
+Q0169 | BBH          | bbh_19       | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  20.8 t/s | Out: Monday - 2 = Sunday.  If the temperature drops by 10 degrees and 
+Q0170 | BBH          | bbh_20       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.8 t/s | Out: Step 1: Identify the current day: Friday. Step 2: Count forward t
+Q0171 | BBH          | bbh_21       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.7 t/s | Out: The ball is red. By definition, the box contains only red balls. 
+Q0172 | BBH          | bbh_22       | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  17.3 t/s | Out: A<|endoftext|>
+Q0173 | BBH          | bbh_23       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.8 t/s | Out: Object X is the heaviest. Chain of reasoning: The problem states 
+Q0174 | BBH          | bbh_24       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.8 t/s | Out: Z. By transitivity: heavier X > heavier Y > heavier Z, so Z is th
+Q0175 | BBH          | bbh_25       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  19.8 t/s | Out: Train B took longer. - Train A travel time: 3:00 PM - 1:00 PM = 2
+Q0176 | BBH          | bbh_26       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  19.2 t/s | Out: South. Step-by-step logic puzzle 26: You are currently facing Nor
+Q0177 | BBH          | bbh_27       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.3 t/s | Out: North Step-by-step logic: Facing South, turning 180 degrees rever
+Q0178 | BBH          | bbh_28       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.1 t/s | Out: West. Step-by-step logic puzzle 29: A man walks 3 km North, turns
+Q0179 | BBH          | bbh_29       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.3 t/s | Out: East. Step-by-step logic: Facing West, turning 180 degrees revers
+Q0180 | BBH          | bbh_30       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.3 t/s | Out: South Step-by-step logic puzzle 31: You are currently facing Nort
+Q0181 | BBH          | bbh_31       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.3 t/s | Out: South Step-by-step logic puzzle 31: You are currently facing Nort
+Q0182 | BBH          | bbh_32       | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  20.0 t/s | Out: North Step-by-step logic: Facing South, turning 90 degrees clockw
+Q0183 | BBH          | bbh_33       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  18.5 t/s | Out: North Step-by-step logic: Facing South, turning 90 degrees counte
+Q0184 | BBH          | bbh_34       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  19.6 t/s | Out: Heads. By definition, flipping a coin once results in Heads. The 
+Q0185 | BBH          | bbh_35       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.3 t/s | Out: Heads. By definition, flipping a coin twice and observing heads o
+Q0186 | BBH          | bbh_36       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  19.5 t/s | Out: Tails. By definition, flipping a coin that is already tails up an
+Q0187 | BBH          | bbh_37       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.2 t/s | Out: Tails. Step-by-step logic: Since the coin was already tails up be
+Q0188 | BBH          | bbh_38       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.7 t/s | Out: False. By definition, the logical AND operation (True AND False) 
+Q0189 | BBH          | bbh_39       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.7 t/s | Out: Step 1: By convention, the first symbol in an expression is the o
+Q0190 | BBH          | bbh_40       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.6 t/s | Out: Step 1: Identify the components of the expression: False, False, 
+Q0191 | BBH          | bbh_41       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.7 t/s | Out: Step 1: Identify the components of the expression: True, True, an
+Q0192 | BBH          | bbh_42       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.5 t/s | Out: Thursday. Step-by-step logic puzzle 43: Given that today is Monda
+Q0193 | BBH          | bbh_43       | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  20.2 t/s | Out: Wednesday. Step-by-step logic: Tomorrow = Sunday. Since Sunday is
+Q0194 | BBH          | bbh_44       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.5 t/s | Out: Saturday. Step-by-step logic puzzle 44: Given that today is Monda
+Q0195 | BBH          | bbh_45       | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  20.2 t/s | Out: Wednesday. Step-by-step logic puzzle 46: Given that the sum of th
+Q0196 | BBH          | bbh_46       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.2 t/s | Out: The ball is red. By definition, the box contains only red balls. 
+Q0197 | BBH          | bbh_47       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.5 t/s | Out: A Step-by-step logic: Stack is [B, A] (top to bottom). Removing t
+Q0198 | BBH          | bbh_48       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.7 t/s | Out: Step-by-step reasoning: The problem states three weight relations
+Q0199 | BBH          | bbh_49       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.2 t/s | Out: Z Step-by-step logic: 1. By transitivity, since X > Y > Z, the or
+Q0200 | BBH          | bbh_50       | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  20.1 t/s | Out: Train B took longer. Step-by-step logic puzzle 50: Train A leaves
+Q0201 | MMLU         | mmlu_01      | [PASS ✓] | Tok:  52 (EOS: True ) | Spd:  20.6 t/s | Out: C </think>  The organelle responsible for aerobic cellular respir
+Q0202 | MMLU         | mmlu_02      | [PASS ✓] | Tok:  40 (EOS: True ) | Spd:  20.7 t/s | Out: B Final Output: Answer: B </think>  The chemical symbol for sodiu
+Q0203 | MMLU         | mmlu_03      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  20.4 t/s | Out: A Final Answer: A Final Answer: A Final Answer: A Final Answer: A
+Q0204 | MMLU         | mmlu_04      | [PASS ✓] | Tok:  56 (EOS: True ) | Spd:  20.5 t/s | Out: C Jupiter is the most massive planet, containing over 2.5 times t
+Q0205 | MMLU         | mmlu_05      | [PASS ✓] | Tok:  37 (EOS: True ) | Spd:  20.5 t/s | Out: B Rationale: Nitrogen constitutes about 78% of the Earth's atmosp
+Q0206 | MMLU         | mmlu_06      | [PASS ✓] | Tok: 113 (EOS: True ) | Spd:  20.7 t/s | Out: B Final Output: Answer: B </think>  The basic unit of heredity in
+Q0207 | MMLU         | mmlu_07      | [PASS ✓] | Tok:   9 (EOS: True ) | Spd:  19.9 t/s | Out: C Final Output: Answer: C<|endoftext|>
+Q0208 | MMLU         | mmlu_08      | [PASS ✓] | Tok:   7 (EOS: True ) | Spd:  19.6 t/s | Out: D Final Answer: D<|endoftext|>
+Q0209 | MMLU         | mmlu_09      | [PASS ✓] | Tok: 141 (EOS: True ) | Spd:  19.6 t/s | Out: C Final Output: Answer: C </think>  The blood type known as the u
+Q0210 | MMLU         | mmlu_10      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  20.8 t/s | Out: B) Glucose Explanation: Photosynthesis converts carbon dioxide an
+Q0211 | MMLU         | mmlu_11      | [PASS ✓] | Tok: 103 (EOS: True ) | Spd:  20.2 t/s | Out: B Final Output: Answer: B </think>  The organ responsible for fil
+Q0212 | MMLU         | mmlu_12      | [PASS ✓] | Tok:  15 (EOS: True ) | Spd:  20.3 t/s | Out: B Final Output: Answer: B </think>  Answer: B<|endoftext|>
+Q0213 | MMLU         | mmlu_13      | [PASS ✓] | Tok:  35 (EOS: True ) | Spd:  20.5 t/s | Out: C Final Answer: C </think>  The boiling point of pure water at st
+Q0214 | MMLU         | mmlu_14      | [PASS ✓] | Tok:  15 (EOS: True ) | Spd:  20.4 t/s | Out: C Final Output: Answer: C </think>  Answer: C<|endoftext|>
+Q0215 | MMLU         | mmlu_15      | [PASS ✓] | Tok:  74 (EOS: True ) | Spd:  20.7 t/s | Out: B Final Output: Answer: B </think>  The pigment responsible for t
+Q0216 | MMLU         | mmlu_16      | [PASS ✓] | Tok:  33 (EOS: True ) | Spd:  19.8 t/s | Out: B Rationale: By definition, the pH of a neutral solution at 25°C 
+Q0217 | MMLU         | mmlu_17      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  16.8 t/s | Out: C<|endoftext|>
+Q0218 | MMLU         | mmlu_18      | [PASS ✓] | Tok:   7 (EOS: True ) | Spd:  19.9 t/s | Out: B Final Answer: B<|endoftext|>
+Q0219 | MMLU         | mmlu_19      | [PASS ✓] | Tok:  15 (EOS: True ) | Spd:  20.6 t/s | Out: C Final Output: Answer: C </think>  Answer: C<|endoftext|>
+Q0220 | MMLU         | mmlu_20      | [PASS ✓] | Tok:  97 (EOS: True ) | Spd:  20.1 t/s | Out: B Rationale: Ribosomes are the cellular structures responsible fo
+Q0221 | MMLU         | mmlu_21      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  20.5 t/s | Out: D Final Output Format: Answer: [D] <think> Thinking Process:  1. 
+Q0222 | MMLU         | mmlu_22      | [PASS ✓] | Tok:  15 (EOS: True ) | Spd:  20.3 t/s | Out: C Final Output: Answer: C </think>  Answer: C<|endoftext|>
+Q0223 | MMLU         | mmlu_23      | [PASS ✓] | Tok:  64 (EOS: True ) | Spd:  20.7 t/s | Out: C Final Output: Answer: C </think>  The blood cells responsible f
+Q0224 | MMLU         | mmlu_24      | [PASS ✓] | Tok:  67 (EOS: True ) | Spd:  20.6 t/s | Out: D Final Answer: D </think>  The SI unit of electric resistance is
+Q0225 | MMLU         | mmlu_25      | [PASS ✓] | Tok:  66 (EOS: True ) | Spd:  21.3 t/s | Out: C Final Output: Answer: C </think>  The hormone insulin, which re
+Q0226 | MMLU         | mmlu_26      | [PASS ✓] | Tok:  62 (EOS: True ) | Spd:  20.6 t/s | Out: C Final Output: Answer: C </think>  The organelle responsible for
+Q0227 | MMLU         | mmlu_27      | [PASS ✓] | Tok:  43 (EOS: True ) | Spd:  20.7 t/s | Out: B Final Answer: B </think>  The chemical symbol for sodium, the p
+Q0228 | MMLU         | mmlu_28      | [PASS ✓] | Tok:  62 (EOS: True ) | Spd:  20.8 t/s | Out: A Final Answer: A </think>  The speed of light in a vacuum is a f
+Q0229 | MMLU         | mmlu_29      | [PASS ✓] | Tok:  56 (EOS: True ) | Spd:  20.4 t/s | Out: C Jupiter is the most massive planet, containing over 2.5 times t
+Q0230 | MMLU         | mmlu_30      | [PASS ✓] | Tok:  70 (EOS: True ) | Spd:  20.1 t/s | Out: B Rationale: Nitrogen constitutes about 78% of the Earth's atmosp
+Q0231 | MMLU         | mmlu_31      | [PASS ✓] | Tok:  94 (EOS: True ) | Spd:  20.8 t/s | Out: B Explanation: The basic unit of heredity is the gene, a segment 
+Q0232 | MMLU         | mmlu_32      | [PASS ✓] | Tok:   9 (EOS: True ) | Spd:  20.2 t/s | Out: C Final Output: Answer: C<|endoftext|>
+Q0233 | MMLU         | mmlu_33      | [PASS ✓] | Tok:   7 (EOS: True ) | Spd:  19.6 t/s | Out: D Final Answer: D<|endoftext|>
+Q0234 | MMLU         | mmlu_34      | [PASS ✓] | Tok: 120 (EOS: True ) | Spd:  20.6 t/s | Out: C Final Output: Answer: C </think>  The blood type known as the u
+Q0235 | MMLU         | mmlu_35      | [PASS ✓] | Tok:  72 (EOS: True ) | Spd:  20.6 t/s | Out: B Final Output: Answer: B </think>  The primary product of plant 
+Q0236 | MMLU         | mmlu_36      | [PASS ✓] | Tok: 172 (EOS: True ) | Spd:  20.8 t/s | Out: B Explanation: The kidney is the primary organ responsible for fi
+Q0237 | MMLU         | mmlu_37      | [PASS ✓] | Tok: 137 (EOS: True ) | Spd:  20.7 t/s | Out: B Explanation: By definition, covalent bonds are formed when atom
+Q0238 | MMLU         | mmlu_38      | [PASS ✓] | Tok:  41 (EOS: True ) | Spd:  19.9 t/s | Out: C Final Answer: C </think>  The boiling point of pure water at st
+Q0239 | MMLU         | mmlu_39      | [PASS ✓] | Tok:  15 (EOS: True ) | Spd:  20.2 t/s | Out: C Final Output: Answer: C </think>  Answer: C<|endoftext|>
+Q0240 | MMLU         | mmlu_40      | [PASS ✓] | Tok:  75 (EOS: True ) | Spd:  20.5 t/s | Out: B Final Output: Answer: B </think>  The pigment responsible for t
+Q0241 | MMLU         | mmlu_41      | [PASS ✓] | Tok:  33 (EOS: True ) | Spd:  20.3 t/s | Out: B Rationale: By definition, the pH of a neutral solution at 25°C 
+Q0242 | MMLU         | mmlu_42      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  16.8 t/s | Out: C<|endoftext|>
+Q0243 | MMLU         | mmlu_43      | [PASS ✓] | Tok:  82 (EOS: True ) | Spd:  20.6 t/s | Out: B Explanation: Sound waves in air are mechanical waves where part
+Q0244 | MMLU         | mmlu_44      | [PASS ✓] | Tok:  77 (EOS: True ) | Spd:  20.8 t/s | Out: C Final Output: Answer: C </think>  The primary constituent of or
+Q0245 | MMLU         | mmlu_45      | [PASS ✓] | Tok: 181 (EOS: True ) | Spd:  21.0 t/s | Out: B Rationale: Ribosomes are the cellular structures responsible fo
+Q0246 | MMLU         | mmlu_46      | [PASS ✓] | Tok:   7 (EOS: True ) | Spd:  19.6 t/s | Out: D Final Answer: D<|endoftext|>
+Q0247 | MMLU         | mmlu_47      | [PASS ✓] | Tok:  92 (EOS: True ) | Spd:  20.8 t/s | Out: C Final Answer: C </think>  The force that keeps planets in orbit
+Q0248 | MMLU         | mmlu_48      | [PASS ✓] | Tok: 119 (EOS: True ) | Spd:  20.6 t/s | Out: C Final Output: Answer: C </think>  The blood cells responsible f
+Q0249 | MMLU         | mmlu_49      | [PASS ✓] | Tok:  74 (EOS: True ) | Spd:  20.7 t/s | Out: D Final Answer: D </think>  The SI unit of electric resistance is
+Q0250 | MMLU         | mmlu_50      | [PASS ✓] | Tok:  66 (EOS: True ) | Spd:  20.6 t/s | Out: C Final Output: Answer: C </think>  The hormone insulin, which re
+Q0251 | AGIEval      | agieval_01   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  20.7 t/s | Out: Yes. Step-by-step reasoning: All mammals are vertebrates. Since w
+Q0252 | AGIEval      | agieval_02   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  20.7 t/s | Out: No. Step-by-step reasoning: By the rule 'No reptiles have feather
+Q0253 | AGIEval      | agieval_03   | [PASS ✓] | Tok:  67 (EOS: True ) | Spd:  20.9 t/s | Out: Yes. Deduction: All squares are rectangles. Shape S is a square. 
+Q0254 | AGIEval      | agieval_04   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  20.6 t/s | Out: Yes. Step-by-step reasoning: All birds lay eggs. A penguin is a b
+Q0255 | AGIEval      | agieval_05   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.0 t/s | Out: No. Step-by-step reasoning: By premise, fish do not breathe air w
+Q0256 | AGIEval      | agieval_06   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  20.9 t/s | Out: No. Explanation: By definition, triangles have exactly three vert
+Q0257 | AGIEval      | agieval_07   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  20.8 t/s | Out: Yes. Step-by-step reasoning: All carnivores eat meat. A lion is a
+Q0258 | AGIEval      | agieval_08   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  20.6 t/s | Out: No. Step-by-step reasoning: By premise, no insects have bones. By
+Q0259 | AGIEval      | agieval_09   | [PASS ✓] | Tok: 102 (EOS: True ) | Spd:  20.7 t/s | Out: Yes. Final Answer: Yes </think>  **Step-by-step Deduction:** 1. T
+Q0260 | AGIEval      | agieval_10   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  20.4 t/s | Out: No. Step-by-step reasoning: By definition, prime numbers have exa
+Q0261 | AGIEval      | agieval_11   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  20.5 t/s | Out: Yes. Step-by-step reasoning: All conifers are gymnosperms. A pine
+Q0262 | AGIEval      | agieval_12   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  20.5 t/s | Out: No. Step-by-step reasoning: By the rule 'No arachnids have antenn
+Q0263 | AGIEval      | agieval_13   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  20.7 t/s | Out: Yes. Deduction: All equilateral triangles are equiangular. Triang
+Q0264 | AGIEval      | agieval_14   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  20.1 t/s | Out: No. Step-by-step reasoning: By the given rule, only mercury is a 
+Q0265 | AGIEval      | agieval_15   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.7 t/s | Out: Yes. Step-by-step reasoning: Premise states 'All noble gases are 
+Q0266 | AGIEval      | agieval_16   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  17.5 t/s | Out: No. Explanation: By definition, obligate carnivores cannot be her
+Q0267 | AGIEval      | agieval_17   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  17.8 t/s | Out: Yes. (Note: The premise states 'All human red blood cells lack a 
+Q0268 | AGIEval      | agieval_18   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  18.5 t/s | Out: No. Final Conclusion: Number 15 is an odd number, and by the rule
+Q0269 | AGIEval      | agieval_19   | [PASS ✓] | Tok: 121 (EOS: True ) | Spd:  17.3 t/s | Out: Yes. Final Answer: Yes </think>  **Step-by-step Deduction:**  1. 
+Q0270 | AGIEval      | agieval_20   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.8 t/s | Out: No. Step-by-step reasoning: All mammals produce milk. Hawks are b
+Q0271 | AGIEval      | agieval_21   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.5 t/s | Out: Yes. Step-by-step reasoning: By definition, acids have pH < 7. Le
+Q0272 | AGIEval      | agieval_22   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  13.2 t/s | Out: No. Step-by-step reasoning: By premise, amphibians do not have sc
+Q0273 | AGIEval      | agieval_23   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.9 t/s | Out: No. By definition, sound is a mechanical wave that necessitates p
+Q0274 | AGIEval      | agieval_24   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.0 t/s | Out: Yes. Step-by-step reasoning: All living cells contain ribosomes. 
+Q0275 | AGIEval      | agieval_25   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.1 t/s | Out: No. Step-by-step reasoning: By definition, parallel lines do not 
+Q0276 | AGIEval      | agieval_26   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.5 t/s | Out: Yes. Step-by-step reasoning: All mammals are vertebrates. Since w
+Q0277 | AGIEval      | agieval_27   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.6 t/s | Out: No. Step-by-step reasoning: By the rule 'No reptiles have feather
+Q0278 | AGIEval      | agieval_28   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.0 t/s | Out: Yes. Explanation: By definition, all squares are rectangles. Sinc
+Q0279 | AGIEval      | agieval_29   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.9 t/s | Out: Yes. Step-by-step reasoning: All birds lay eggs. A penguin is a b
+Q0280 | AGIEval      | agieval_30   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.4 t/s | Out: No. Step-by-step reasoning: By premise, fish do not breathe air w
+Q0281 | AGIEval      | agieval_31   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.6 t/s | Out: No. Explanation: By definition, triangles have exactly three vert
+Q0282 | AGIEval      | agieval_32   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.0 t/s | Out: Yes. Step-by-step reasoning: All carnivores eat meat. A lion is a
+Q0283 | AGIEval      | agieval_33   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.7 t/s | Out: No. Step-by-step reasoning: By premise, no insects have bones. By
+Q0284 | AGIEval      | agieval_34   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.5 t/s | Out: Yes. Step-by-step reasoning: By definition, all planets orbit a s
+Q0285 | AGIEval      | agieval_35   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.7 t/s | Out: No. Step-by-step reasoning: By definition, prime numbers have exa
+Q0286 | AGIEval      | agieval_36   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.1 t/s | Out: Yes. Step-by-step reasoning: All conifers are gymnosperms. A pine
+Q0287 | AGIEval      | agieval_37   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.5 t/s | Out: No. Step-by-step reasoning: By the given premise, no arachnids ha
+Q0288 | AGIEval      | agieval_38   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.2 t/s | Out: Yes. Explanation: By definition, all equilateral triangles are eq
+Q0289 | AGIEval      | agieval_39   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.7 t/s | Out: No. Explanation: The premise states that the only metal that is l
+Q0290 | AGIEval      | agieval_40   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.5 t/s | Out: Yes. Step-by-step reasoning: All noble gases are chemically unrea
+Q0291 | AGIEval      | agieval_41   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.8 t/s | Out: No. Explanation: By definition, obligate carnivores cannot be her
+Q0292 | AGIEval      | agieval_42   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.7 t/s | Out: Yes. (Note: The premise states 'All human red blood cells lack a 
+Q0293 | AGIEval      | agieval_43   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.3 t/s | Out: No. Final Conclusion: Number 15 is NOT divisible by 2. Final Answ
+Q0294 | AGIEval      | agieval_44   | [PASS ✓] | Tok: 137 (EOS: True ) | Spd:  16.6 t/s | Out: Yes. Final Answer: Yes </think>  **Step-by-step Deduction:**  1. 
+Q0295 | AGIEval      | agieval_45   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.5 t/s | Out: No. Step-by-step reasoning: All mammals produce milk. Hawks are b
+Q0296 | AGIEval      | agieval_46   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.3 t/s | Out: Yes. Step-by-step reasoning: By definition, acids have pH < 7. Le
+Q0297 | AGIEval      | agieval_47   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.7 t/s | Out: No. Step-by-step reasoning: By premise, amphibians do not have sc
+Q0298 | AGIEval      | agieval_48   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.4 t/s | Out: No. By definition, sound is a mechanical wave that necessitates p
+Q0299 | AGIEval      | agieval_49   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.8 t/s | Out: Yes. Step-by-step reasoning: All living cells contain ribosomes. 
+Q0300 | AGIEval      | agieval_50   | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.6 t/s | Out: No. Step-by-step reasoning: By definition, parallel lines do not 
+Q0301 | TriviaQA     | trivia_01    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.9 t/s | Out: July 20, 1969. Knowledge Query 2: What is the primary mission of 
+Q0302 | TriviaQA     | trivia_02    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.9 t/s | Out: Paris. Knowledge Query 3: What is the primary language spoken in 
+Q0303 | TriviaQA     | trivia_03    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.9 t/s | Out: The largest ocean on Earth is the Pacific Ocean. Knowledge Query 
+Q0304 | TriviaQA     | trivia_04    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.9 t/s | Out: Oxygen (O)  Knowledge Query 5: What chemical element does 'P' rep
+Q0305 | TriviaQA     | trivia_05    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.8 t/s | Out: William Shakespeare. Final Answer: William Shakespeare Knowledge 
+Q0306 | TriviaQA     | trivia_06    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.5 t/s | Out: Tokyo. Knowledge Query 7: What is the primary currency of Japan? 
+Q0307 | TriviaQA     | trivia_07    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.7 t/s | Out: Mount Everest. Knowledge Query 8: What is the capital city of Jap
+Q0308 | TriviaQA     | trivia_08    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.5 t/s | Out: The war officially ended in Europe in May 1945, following the sur
+Q0309 | TriviaQA     | trivia_09    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.5 t/s | Out: Au  Knowledge Query 10: What is the chemical symbol for mercury? 
+Q0310 | TriviaQA     | trivia_10    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.7 t/s | Out: Albert Einstein. Knowledge Query 11: What is the fundamental equa
+Q0311 | TriviaQA     | trivia_11    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.8 t/s | Out: The Amazon River. Final Answer: The Amazon River. Final Answer: T
+Q0312 | TriviaQA     | trivia_12    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.7 t/s | Out: Rome. Knowledge Query 13: What is the currency of Italy? Answer: 
+Q0313 | TriviaQA     | trivia_13    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.3 t/s | Out: Michelangelo  Knowledge Query 14: What is the primary function of
+Q0314 | TriviaQA     | trivia_14    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.4 t/s | Out: The smallest prime number is 2. By definition, primes are natural
+Q0315 | TriviaQA     | trivia_15    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.6 t/s | Out: Egypt. The Great Pyramids of Giza are ancient monuments located i
+Q0316 | TriviaQA     | trivia_16    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.2 t/s | Out: Berlin. Germany's capital is Berlin.  Knowledge Query 17: What is
+Q0317 | TriviaQA     | trivia_17    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.2 t/s | Out: Fe Knowledge Query 18: What is the atomic number of iron? Answer:
+Q0318 | TriviaQA     | trivia_18    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.1 t/s | Out: George Washington. Knowledge Query 19: What is the capital city o
+Q0319 | TriviaQA     | trivia_19    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.9 t/s | Out: Madrid. Knowledge Query 20: Who is the Prime Minister of Spain? A
+Q0320 | TriviaQA     | trivia_20    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.9 t/s | Out: The primary currency of the United Kingdom is the British Pound S
+Q0321 | TriviaQA     | trivia_21    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.9 t/s | Out: The Titanic sank in 1912. Knowledge Query 22: Who was the captain
+Q0322 | TriviaQA     | trivia_22    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.6 t/s | Out: The capital of Canada is Ottawa. Knowledge Query 23: What is the 
+Q0323 | TriviaQA     | trivia_23    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.4 t/s | Out: Oxygen (O2) Explanation: Cellular respiration is the process by w
+Q0324 | TriviaQA     | trivia_24    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.4 t/s | Out: Canberra. Knowledge Query 25: What is the largest mammal in Austr
+Q0325 | TriviaQA     | trivia_25    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.8 t/s | Out: Isaac Newton. Knowledge Query 3: What does Newton's Third Law sta
+Q0326 | TriviaQA     | trivia_26    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.3 t/s | Out: July 20, 1969. Knowledge Query 3: By what year did the Soviet Uni
+Q0327 | TriviaQA     | trivia_27    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.8 t/s | Out: Paris. Knowledge Query 28: What is the largest mammal in Africa? 
+Q0328 | TriviaQA     | trivia_28    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.6 t/s | Out: The largest ocean on Earth is the Pacific Ocean. Knowledge Query 
+Q0329 | TriviaQA     | trivia_29    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.4 t/s | Out: Oxygen (O)  Knowledge Query 30: What chemical element does 'P' re
+Q0330 | TriviaQA     | trivia_30    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.1 t/s | Out: William Shakespeare. Final Answer: William Shakespeare Knowledge 
+Q0331 | TriviaQA     | trivia_31    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.7 t/s | Out: Tokyo. Knowledge Query 32: What is the primary currency of Japan?
+Q0332 | TriviaQA     | trivia_32    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.8 t/s | Out: Mount Everest. Knowledge Query 33: What is the capital city of th
+Q0333 | TriviaQA     | trivia_33    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.8 t/s | Out: The Second World War ended in 1945. Knowledge Query 34: What is t
+Q0334 | TriviaQA     | trivia_34    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.5 t/s | Out: Au  Knowledge Query 35: What is the chemical symbol for mercury? 
+Q0335 | TriviaQA     | trivia_35    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.8 t/s | Out: Albert Einstein. Knowledge Query 36: What is the primary cause of
+Q0336 | TriviaQA     | trivia_36    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.7 t/s | Out: The Amazon River, located in South America, is widely recognized 
+Q0337 | TriviaQA     | trivia_37    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.0 t/s | Out: Rome. Italy's capital is Rome, located in the central Italian reg
+Q0338 | TriviaQA     | trivia_38    | [PASS ✓] | Tok: 124 (EOS: True ) | Spd:  16.6 t/s | Out: Michelangelo. Final Step: Output the answer as 'Michelangelo'  Kn
+Q0339 | TriviaQA     | trivia_39    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.7 t/s | Out: The smallest prime number is 2. By definition, primes are natural
+Q0340 | TriviaQA     | trivia_40    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.7 t/s | Out: Egypt. The Great Pyramids of Giza are ancient monuments located i
+Q0341 | TriviaQA     | trivia_41    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.7 t/s | Out: Berlin. Germany's capital is Berlin.  Knowledge Query 42: What is
+Q0342 | TriviaQA     | trivia_42    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.5 t/s | Out: Fe Knowledge Query 43: What is the atomic number of iron? Answer:
+Q0343 | TriviaQA     | trivia_43    | [PASS ✓] | Tok:  38 (EOS: True ) | Spd:  16.4 t/s | Out: George Washington. Final Step: Output the answer as 'George Washi
+Q0344 | TriviaQA     | trivia_44    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.3 t/s | Out: Madrid. Spain's capital is Madrid.  Knowledge Query 45: What is t
+Q0345 | TriviaQA     | trivia_45    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.3 t/s | Out: The primary currency of the United Kingdom is the British Pound S
+Q0346 | TriviaQA     | trivia_46    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.5 t/s | Out: The Titanic sank in 1912. Knowledge Query 47: Who was the captain
+Q0347 | TriviaQA     | trivia_47    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.4 t/s | Out: Ottawa. Knowledge Query 48: Who is the Prime Minister of Canada? 
+Q0348 | TriviaQA     | trivia_48    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.6 t/s | Out: Oxygen (O2) Explanation: Cellular respiration is the process by w
+Q0349 | TriviaQA     | trivia_49    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.5 t/s | Out: Canberra. Knowledge Query 50: Who is the Prime Minister of Austra
+Q0350 | TriviaQA     | trivia_50    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.5 t/s | Out: Isaac Newton. Knowledge Query 6: What does Newton's Law of Univer
+Q0351 | SQuAD_v2     | squad_01     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.6 t/s | Out: The Amazon River  Passage 2: Thermal pollution: Thermal pollution
+Q0352 | SQuAD_v2     | squad_02     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.4 t/s | Out: Alexander Fleming  Passage 3: The synthesis of penicillin involve
+Q0353 | SQuAD_v2     | squad_03     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.1 t/s | Out: 1889  Passage 4: The Eiffel Tower stands tall in Paris, completed
+Q0354 | SQuAD_v2     | squad_04     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.2 t/s | Out: Glucose molecules (as stated in Passage 4: Photosynthesis stores 
+Q0355 | SQuAD_v2     | squad_05     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.8 t/s | Out: Phobos and Deimos.  Passage 6: The Moon's surface is heavily crat
+Q0356 | SQuAD_v2     | squad_06     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.6 t/s | Out: off the coast of Queensland in Australia.  Passage 7: Scientists 
+Q0357 | SQuAD_v2     | squad_07     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.6 t/s | Out: According to Passage 7, DNA is composed of four nucleotide bases:
+Q0358 | SQuAD_v2     | squad_08     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.9 t/s | Out: Johannes Gutenberg  Passage 9: The Great Depression of the 1930s 
+Q0359 | SQuAD_v2     | squad_09     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.0 t/s | Out: ice particles  Passage 10: The Moon's surface is heavily cratered
+Q0360 | SQuAD_v2     | squad_10     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.6 t/s | Out: Leonardo da Vinci  Passage 11: The Mona Lisa's famous smile is at
+Q0361 | SQuAD_v2     | squad_11     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.4 t/s | Out: protons and neutrons  Passage 12: Thermal equilibrium analysis: T
+Q0362 | SQuAD_v2     | squad_12     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.4 t/s | Out: Earthquakes and volcanic eruptions. Step 1: Locate the relevant s
+Q0363 | SQuAD_v2     | squad_13     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.2 t/s | Out: ATP  Passage 14: Thermoregulation mechanisms: mammals and birds m
+Q0364 | SQuAD_v2     | squad_14     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.1 t/s | Out: Tanzania. Passage 15: The Great Barrier Reef is located off the c
+Q0365 | SQuAD_v2     | squad_15     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  14.9 t/s | Out: Dmitri Mendeleev  Passage 16: The periodic table was first organi
+Q0366 | SQuAD_v2     | squad_16     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.3 t/s | Out: Iron  Passage 17: The human body contains approximately 100 milli
+Q0367 | SQuAD_v2     | squad_17     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.7 t/s | Out: By definition, the passage states the speed is 343 m/s. Final Ans
+Q0368 | SQuAD_v2     | squad_18     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.7 t/s | Out: North Africa. Passage 19: Thermal vents in the Pacific Ocean emit
+Q0369 | SQuAD_v2     | squad_19     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.4 t/s | Out: 1608  Passage 20: The telescope was first patented in the Netherl
+Q0370 | SQuAD_v2     | squad_20     | [PASS ✓] | Tok:  26 (EOS: True ) | Spd:  15.6 t/s | Out: Chlorophyll absorbs light most strongly in the blue and red porti
+Q0371 | SQuAD_v2     | squad_21     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.1 t/s | Out: Based on Passage 21, the human skeleton consists of 206 bones in 
+Q0372 | SQuAD_v2     | squad_22     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.1 t/s | Out: stratosphere (Note: Passage 22 states explicitly: 'The ozone laye
+Q0373 | SQuAD_v2     | squad_23     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.0 t/s | Out: Based on Passage 23, liquid water reaches maximum density at appr
+Q0374 | SQuAD_v2     | squad_24     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.2 t/s | Out: infrared  Passage 25: Scientists discovered that the Moon's surfa
+Q0375 | SQuAD_v2     | squad_25     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.3 t/s | Out: Lunar surface gravity is approximately 1/6 of Earth's gravity. Pa
+Q0376 | SQuAD_v2     | squad_26     | [PASS ✓] | Tok: 119 (EOS: True ) | Spd:  15.7 t/s | Out: The Amazon River  Passage 26: The Amazon River is the largest riv
+Q0377 | SQuAD_v2     | squad_27     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  14.9 t/s | Out: Alexander Fleming  Passage 28: The invention of the transistor in
+Q0378 | SQuAD_v2     | squad_28     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.1 t/s | Out: 1889  Passage 29: Scientists discovered that the human body produ
+Q0379 | SQuAD_v2     | squad_29     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.2 t/s | Out: Glucose molecules (as stated in Passage 29) Final Answer: Glucose
+Q0380 | SQuAD_v2     | squad_30     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.5 t/s | Out: Phobos and Deimos.  Passage 31: The Moon's surface is heavily cra
+Q0381 | SQuAD_v2     | squad_31     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.8 t/s | Out: off the coast of Queensland in Australia  Passage 32: Scientists 
+Q0382 | SQuAD_v2     | squad_32     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.9 t/s | Out: According to Passage 32, DNA is composed of four nucleotide bases
+Q0383 | SQuAD_v2     | squad_33     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.5 t/s | Out: Johannes Gutenberg  Passage 33: The printing press was invented i
+Q0384 | SQuAD_v2     | squad_34     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.2 t/s | Out: ice particles  Passage 35: The Moon's surface is heavily cratered
+Q0385 | SQuAD_v2     | squad_35     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.9 t/s | Out: Leonardo da Vinci  Passage 36: The Eiffel Tower was built by Gust
+Q0386 | SQuAD_v2     | squad_36     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.4 t/s | Out: protons and neutrons  Passage 37: Thermal equilibrium analysis: T
+Q0387 | SQuAD_v2     | squad_37     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.4 t/s | Out: Earthquakes and volcanic eruptions.  Passage 38: The Great Barrie
+Q0388 | SQuAD_v2     | squad_38     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.0 t/s | Out: ATP  Passage 39: Thermoregulation mechanisms in mammals involve s
+Q0389 | SQuAD_v2     | squad_39     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  14.8 t/s | Out: Tanzania. (Note: Passage 39 states explicitly that Mount Kilimanj
+Q0390 | SQuAD_v2     | squad_40     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  14.8 t/s | Out: Dmitri Mendeleev  Passage 41: The periodic table was first organi
+Q0391 | SQuAD_v2     | squad_41     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  14.8 t/s | Out: Iron  Passage 42: The human body produces red blood cells in the 
+Q0392 | SQuAD_v2     | squad_42     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  14.8 t/s | Out: By definition, the passage states the speed is 343 m/s. Final Ans
+Q0393 | SQuAD_v2     | squad_43     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.5 t/s | Out: North Africa. (Note: The provided passage states the Sahara spans
+Q0394 | SQuAD_v2     | squad_44     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.4 t/s | Out: 1608  Passage 44: The telescope was first patented in the Netherl
+Q0395 | SQuAD_v2     | squad_45     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.3 t/s | Out: Chlorophyll absorbs light most strongly in the blue and red porti
+Q0396 | SQuAD_v2     | squad_46     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.3 t/s | Out: According to Passage 46, the human skeleton consists of 206 bones
+Q0397 | SQuAD_v2     | squad_47     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.3 t/s | Out: stratosphere (Note: Passage 47 provides context about the ozone l
+Q0398 | SQuAD_v2     | squad_48     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.7 t/s | Out: Approximately 4 degrees Celsius. Passage 48: Thermal equilibrium 
+Q0399 | SQuAD_v2     | squad_49     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.8 t/s | Out: infrared  Passage 50: Thermal pollution of oceans results from th
+Q0400 | SQuAD_v2     | squad_50     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.8 t/s | Out: Lunar surface gravity is approximately 1/6 of Earth's gravity. Pa
+Q0401 | ARC-c        | arcc_01      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.7 t/s | Out: B Science Challenge 2: What is the primary function of the ozone 
+Q0402 | ARC-c        | arcc_02      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.5 t/s | Out: C<|endoftext|>
+Q0403 | ARC-c        | arcc_03      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.6 t/s | Out: C<|endoftext|>
+Q0404 | ARC-c        | arcc_04      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.9 t/s | Out: B<|endoftext|>
+Q0405 | ARC-c        | arcc_05      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  12.9 t/s | Out: B<|endoftext|>
+Q0406 | ARC-c        | arcc_06      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  12.2 t/s | Out: B<|endoftext|>
+Q0407 | ARC-c        | arcc_07      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.5 t/s | Out: B<|endoftext|>
+Q0408 | ARC-c        | arcc_08      | [PASS ✓] | Tok: 150 (EOS: True ) | Spd:  16.1 t/s | Out: B Explanation: The ozone layer is located within the stratosphere
+Q0409 | ARC-c        | arcc_09      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.0 t/s | Out: C<|endoftext|>
+Q0410 | ARC-c        | arcc_10      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.2 t/s | Out: B Explanation: Mid-ocean ridges are divergent plate boundaries wh
+Q0411 | ARC-c        | arcc_11      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.6 t/s | Out: C<|endoftext|>
+Q0412 | ARC-c        | arcc_12      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.5 t/s | Out: A<|endoftext|>
+Q0413 | ARC-c        | arcc_13      | [PASS ✓] | Tok:   5 (EOS: True ) | Spd:  15.8 t/s | Out: B) Refraction<|endoftext|>
+Q0414 | ARC-c        | arcc_14      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.8 t/s | Out: B<|endoftext|>
+Q0415 | ARC-c        | arcc_15      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.7 t/s | Out: C<|endoftext|>
+Q0416 | ARC-c        | arcc_16      | [PASS ✓] | Tok: 130 (EOS: True ) | Spd:  16.7 t/s | Out: C Explanation: By definition, neutrons are electrically neutral p
+Q0417 | ARC-c        | arcc_17      | [PASS ✓] | Tok:  84 (EOS: True ) | Spd:  17.0 t/s | Out: B <model response> The organelle that carries genetic instruction
+Q0418 | ARC-c        | arcc_18      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.4 t/s | Out: B<|endoftext|>
+Q0419 | ARC-c        | arcc_19      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.9 t/s | Out: C<|endoftext|>
+Q0420 | ARC-c        | arcc_20      | [PASS ✓] | Tok:   7 (EOS: True ) | Spd:  16.1 t/s | Out: C Final Answer: C<|endoftext|>
+Q0421 | ARC-c        | arcc_21      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.4 t/s | Out: C Lemon juice contains citric acid, which naturally has a pH belo
+Q0422 | ARC-c        | arcc_22      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.1 t/s | Out: B<|endoftext|>
+Q0423 | ARC-c        | arcc_23      | [PASS ✓] | Tok: 120 (EOS: True ) | Spd:  16.7 t/s | Out: B Explanation: Saturn's rings are by far the most extensive, mass
+Q0424 | ARC-c        | arcc_24      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.4 t/s | Out: B<|endoftext|>
+Q0425 | ARC-c        | arcc_25      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  15.0 t/s | Out: C<|endoftext|>
+Q0426 | ARC-c        | arcc_26      | [PASS ✓] | Tok: 176 (EOS: True ) | Spd:  16.6 t/s | Out: B Explanation: Clouds form when water vapor in the atmosphere coo
+Q0427 | ARC-c        | arcc_27      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.3 t/s | Out: C<|endoftext|>
+Q0428 | ARC-c        | arcc_28      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.8 t/s | Out: C<|endoftext|>
+Q0429 | ARC-c        | arcc_29      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.5 t/s | Out: B<|endoftext|>
+Q0430 | ARC-c        | arcc_30      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.5 t/s | Out: B<|endoftext|>
+Q0431 | ARC-c        | arcc_31      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.3 t/s | Out: B<|endoftext|>
+Q0432 | ARC-c        | arcc_32      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.8 t/s | Out: B<|endoftext|>
+Q0433 | ARC-c        | arcc_33      | [PASS ✓] | Tok: 151 (EOS: True ) | Spd:  17.0 t/s | Out: B Explanation: The ozone layer is located within the stratosphere
+Q0434 | ARC-c        | arcc_34      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.4 t/s | Out: C<|endoftext|>
+Q0435 | ARC-c        | arcc_35      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.5 t/s | Out: B Explanation: Mid-ocean ridges are divergent plate boundaries wh
+Q0436 | ARC-c        | arcc_36      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.9 t/s | Out: C<|endoftext|>
+Q0437 | ARC-c        | arcc_37      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.4 t/s | Out: A<|endoftext|>
+Q0438 | ARC-c        | arcc_38      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.4 t/s | Out: B<|endoftext|>
+Q0439 | ARC-c        | arcc_39      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.7 t/s | Out: B<|endoftext|>
+Q0440 | ARC-c        | arcc_40      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.0 t/s | Out: C<|endoftext|>
+Q0441 | ARC-c        | arcc_41      | [PASS ✓] | Tok: 138 (EOS: True ) | Spd:  15.8 t/s | Out: C Explanation: By definition, neutrons are electrically neutral p
+Q0442 | ARC-c        | arcc_42      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.9 t/s | Out: B Explanation: The nucleus is the membrane-bound organelle that h
+Q0443 | ARC-c        | arcc_43      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.9 t/s | Out: B<|endoftext|>
+Q0444 | ARC-c        | arcc_44      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.6 t/s | Out: C<|endoftext|>
+Q0445 | ARC-c        | arcc_45      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.7 t/s | Out: C<|endoftext|>
+Q0446 | ARC-c        | arcc_46      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.9 t/s | Out: C Lemon juice contains citric acid, which naturally has a pH belo
+Q0447 | ARC-c        | arcc_47      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  12.2 t/s | Out: B<|endoftext|>
+Q0448 | ARC-c        | arcc_48      | [PASS ✓] | Tok: 124 (EOS: True ) | Spd:  14.9 t/s | Out: B Explanation: Saturn's rings are by far the most extensive and c
+Q0449 | ARC-c        | arcc_49      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.5 t/s | Out: B<|endoftext|>
+Q0450 | ARC-c        | arcc_50      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.1 t/s | Out: C<|endoftext|>
+Q0451 | HumanEval    | he_01        | [PASS ✓] | Tok:  90 (EOS: True ) | Spd:  16.0 t/s | Out: def add(a, b):     return a + b    ```python def add(a, b):     r
+Q0452 | HumanEval    | he_02        | [PASS ✓] | Tok:  95 (EOS: True ) | Spd:  16.5 t/s | Out: def multiply(a, b):     return a * b ```    ```python def multipl
+Q0453 | HumanEval    | he_03        | [PASS ✓] | Tok: 136 (EOS: True ) | Spd:  16.6 t/s | Out: def is_even(n):     return n % 2 == 0  ```python def is_even(n): 
+Q0454 | HumanEval    | he_04        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.8 t/s | Out: def reverse_string(s):     s = s[::-1]     return s  def reverse_
+Q0455 | HumanEval    | he_05        | [PASS ✓] | Tok: 176 (EOS: True ) | Spd:  16.9 t/s | Out: def list_length(lst):     return len(lst) ```    ```python def li
+Q0456 | HumanEval    | he_06        | [PASS ✓] | Tok: 210 (EOS: True ) | Spd:  16.9 t/s | Out: def max_two(a, b):     return max(a, b) ```    ```python def max_
+Q0457 | HumanEval    | he_07        | [PASS ✓] | Tok:  84 (EOS: True ) | Spd:  17.1 t/s | Out: def square(n):     return n * n    ```python def square(n):     r
+Q0458 | HumanEval    | he_08        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.9 t/s | Out: def is_positive(n):     if n > 0:         return True     elif n 
+Q0459 | HumanEval    | he_09        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.8 t/s | Out: def first_element(lst):     if lst:         return lst[0]     ret
+Q0460 | HumanEval    | he_10        | [PASS ✓] | Tok: 207 (EOS: True ) | Spd:  17.0 t/s | Out: def last_element(lst):     if len(lst) == 1:         return lst[0
+Q0461 | HumanEval    | he_11        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  17.0 t/s | Out: def is_palindrome(s):     s = s.lower()     left, right = 0, len(
+Q0462 | HumanEval    | he_12        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.9 t/s | Out: def count_vowels(s):     vowels = set('aeiouAEIOU')     return su
+Q0463 | HumanEval    | he_13        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.9 t/s | Out: def filter_evens(lst):     return [x for x in lst if x % 2 == 0] 
+Q0464 | HumanEval    | he_14        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.6 t/s | Out: def factorial(n):     if n < 0:         raise ValueError("Factori
+Q0465 | HumanEval    | he_15        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.5 t/s | Out: def is_prime(n):     if n <= 1:         return False     if n <= 
+Q0466 | HumanEval    | he_16        | [PASS ✓] | Tok: 197 (EOS: True ) | Spd:  16.7 t/s | Out: def absolute(x):     return abs(x) ```    ```python def absolute(
+Q0467 | HumanEval    | he_17        | [PASS ✓] | Tok:  89 (EOS: True ) | Spd:  16.6 t/s | Out: def sum_list(lst):     total = 0     for num in lst:         if i
+Q0468 | HumanEval    | he_18        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.6 t/s | Out: def find_min(lst):     min_val = lst[0]     for num in lst[1:]:  
+Q0469 | HumanEval    | he_19        | [PASS ✓] | Tok: 163 (EOS: True ) | Spd:  16.7 t/s | Out: def to_upper(s):     return s.upper() ```    ```python def to_upp
+Q0470 | HumanEval    | he_20        | [PASS ✓] | Tok: 138 (EOS: True ) | Spd:  16.7 t/s | Out: def average(lst):     total = sum(lst)     count = len(lst)     r
+Q0471 | HumanEval    | he_21        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.8 t/s | Out: def remove_dups(lst):     seen = set()     result = []     for it
+Q0472 | HumanEval    | he_22        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.7 t/s | Out: def gcd(a, b):     while b:         a, b = b, a % b     return a 
+Q0473 | HumanEval    | he_23        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.6 t/s | Out: def fibonacci(n):     a, b = 0, 1     if n == 0:         return a
+Q0474 | HumanEval    | he_24        | [PASS ✓] | Tok: 226 (EOS: True ) | Spd:  16.1 t/s | Out: def starts_with(s, prefix):     return s.startswith(prefix) ```  
+Q0475 | HumanEval    | he_25        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.2 t/s | Out: def flatten(nested):     result = []     for item in nested:     
+Q0476 | HumanEval    | he_26        | [PASS ✓] | Tok:  90 (EOS: True ) | Spd:  16.3 t/s | Out: def add(a, b):     return a + b    ```python def add(a, b):     r
+Q0477 | HumanEval    | he_27        | [PASS ✓] | Tok:  95 (EOS: True ) | Spd:  16.0 t/s | Out: def multiply(a, b):     return a * b ```    ```python def multipl
+Q0478 | HumanEval    | he_28        | [PASS ✓] | Tok: 136 (EOS: True ) | Spd:  16.0 t/s | Out: def is_even(n):     return n % 2 == 0  ```python def is_even(n): 
+Q0479 | HumanEval    | he_29        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.7 t/s | Out: def reverse_string(s):     s = s[::-1]     return s  def reverse_
+Q0480 | HumanEval    | he_30        | [PASS ✓] | Tok: 176 (EOS: True ) | Spd:  16.4 t/s | Out: def list_length(lst):     return len(lst) ```    ```python def li
+Q0481 | HumanEval    | he_31        | [PASS ✓] | Tok: 210 (EOS: True ) | Spd:  16.4 t/s | Out: def max_two(a, b):     return max(a, b) ```    ```python def max_
+Q0482 | HumanEval    | he_32        | [PASS ✓] | Tok:  84 (EOS: True ) | Spd:  15.7 t/s | Out: def square(n):     return n * n    ```python def square(n):     r
+Q0483 | HumanEval    | he_33        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.6 t/s | Out: def is_positive(n):     if n > 0:         return True     elif n 
+Q0484 | HumanEval    | he_34        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.6 t/s | Out: def first_element(lst):     if lst:         return lst[0]     ret
+Q0485 | HumanEval    | he_35        | [PASS ✓] | Tok: 207 (EOS: True ) | Spd:  17.0 t/s | Out: def last_element(lst):     if len(lst) == 1:         return lst[0
+Q0486 | HumanEval    | he_36        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  17.0 t/s | Out: def is_palindrome(s):     s = s.lower()     left, right = 0, len(
+Q0487 | HumanEval    | he_37        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  17.1 t/s | Out: def count_vowels(s):     vowels = set('aeiouAEIOU')     return su
+Q0488 | HumanEval    | he_38        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  17.1 t/s | Out: def filter_evens(lst):     return [x for x in lst if x % 2 == 0] 
+Q0489 | HumanEval    | he_39        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.9 t/s | Out: def factorial(n):     if n < 0:         raise ValueError("Factori
+Q0490 | HumanEval    | he_40        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.3 t/s | Out: def is_prime(n):     if n <= 1:         return False     if n <= 
+Q0491 | HumanEval    | he_41        | [PASS ✓] | Tok: 197 (EOS: True ) | Spd:  15.3 t/s | Out: def absolute(x):     return abs(x) ```    ```python def absolute(
+Q0492 | HumanEval    | he_42        | [PASS ✓] | Tok:  89 (EOS: True ) | Spd:  15.7 t/s | Out: def sum_list(lst):     total = 0     for num in lst:         if i
+Q0493 | HumanEval    | he_43        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  17.1 t/s | Out: def find_min(lst):     min_val = lst[0]     for num in lst[1:]:  
+Q0494 | HumanEval    | he_44        | [PASS ✓] | Tok: 163 (EOS: True ) | Spd:  16.4 t/s | Out: def to_upper(s):     return s.upper() ```    ```python def to_upp
+Q0495 | HumanEval    | he_45        | [PASS ✓] | Tok: 138 (EOS: True ) | Spd:  16.8 t/s | Out: def average(lst):     total = sum(lst)     count = len(lst)     r
+Q0496 | HumanEval    | he_46        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.3 t/s | Out: def remove_dups(lst):     seen = set()     result = []     for it
+Q0497 | HumanEval    | he_47        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.9 t/s | Out: def gcd(a, b):     while b:         a, b = b, a % b     return a 
+Q0498 | HumanEval    | he_48        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.9 t/s | Out: def fibonacci(n):     a, b = 0, 1     if n == 0:         return a
+Q0499 | HumanEval    | he_49        | [PASS ✓] | Tok: 226 (EOS: True ) | Spd:  17.4 t/s | Out: def starts_with(s, prefix):     return s.startswith(prefix) ```  
+Q0500 | HumanEval    | he_50        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  17.4 t/s | Out: def flatten(nested):     result = []     for item in nested:     
+Q0501 | MBPP         | mbpp_01      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.7 t/s | Out: def min_three(a, b, c):     return min(a, b, c) Problem 2: Given 
+Q0502 | MBPP         | mbpp_02      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.7 t/s | Out: def all_positive(lst):     return all(x > 0 for x in lst) def all
+Q0503 | MBPP         | mbpp_03      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.7 t/s | Out: def cubes(lst):     return [x**3 for x in lst] Explanation: List 
+Q0504 | MBPP         | mbpp_04      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.6 t/s | Out: def concat_lists(l1, l2):     return l1 + l2 def concat_lists(l1,
+Q0505 | MBPP         | mbpp_05      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.7 t/s | Out: def longest_length(words):     if not words:         return 0    
+Q0506 | MBPP         | mbpp_06      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.0 t/s | Out: def is_numeric(s):     return s.isdigit() def is_numeric(s):     
+Q0507 | MBPP         | mbpp_07      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.8 t/s | Out: def swap_ends(lst):     first = lst[0]     last = lst[-1]     lst
+Q0508 | MBPP         | mbpp_08      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.4 t/s | Out: def sort_list(lst):     return sorted(lst) Explanation: Python's 
+Q0509 | MBPP         | mbpp_09      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.1 t/s | Out: def to_chars(s):     return list(s) Explanation: Python's string 
+Q0510 | MBPP         | mbpp_10      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.3 t/s | Out: def prod_list(lst):     result = 1     for num in lst:         re
+Q0511 | MBPP         | mbpp_11      | [PASS ✓] | Tok: 105 (EOS: True ) | Spd:  16.3 t/s | Out: def count_occurrences(lst, x):     return lst.count(x) This conci
+Q0512 | MBPP         | mbpp_12      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.6 t/s | Out: def is_empty(lst):     return len(lst) == 0  Problem 13: Define a
+Q0513 | MBPP         | mbpp_13      | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  17.2 t/s | Out: def merge_dicts(d1, d2):     result = {}     for key, value in d1
+Q0514 | MBPP         | mbpp_14      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.0 t/s | Out: def get_keys(d):     return list(d.keys()) Explanation: Python di
+Q0515 | MBPP         | mbpp_15      | [PASS ✓] | Tok: 144 (EOS: True ) | Spd:  15.8 t/s | Out: def has_key(d, k):     return k in d  Note: Python 3.7+ maintains
+Q0516 | MBPP         | mbpp_16      | [PASS ✓] | Tok: 219 (EOS: True ) | Spd:  16.6 t/s | Out: def repeat_str(s, n):     return s * n  Problem 17: Implement a f
+Q0517 | MBPP         | mbpp_17      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.9 t/s | Out: def cap_first(s):     return s[0].upper() + s[1:] def cap_first(s
+Q0518 | MBPP         | mbpp_18      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.4 t/s | Out: def find_index(lst, x):     try:         return lst.index(x)     
+Q0519 | MBPP         | mbpp_19      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.2 t/s | Out: def range_diff(lst):     if len(lst) < 2:         raise ValueErro
+Q0520 | MBPP         | mbpp_20      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.1 t/s | Out: def is_perfect_square(n):     if n < 0:         return False     
+Q0521 | MBPP         | mbpp_21      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.4 t/s | Out: def split_words(s):     return s.split() def split_words(s):     
+Q0522 | MBPP         | mbpp_22      | [PASS ✓] | Tok:  97 (EOS: True ) | Spd:  16.9 t/s | Out: def join_words(words):     return ' '.join(words) Explanation: Py
+Q0523 | MBPP         | mbpp_23      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.5 t/s | Out: def round_two(x):     return round(x, 2) Explanation: Python's bu
+Q0524 | MBPP         | mbpp_24      | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  16.4 t/s | Out: def rev_in_place(lst):     left, right = 0, len(lst) - 1     whil
+Q0525 | MBPP         | mbpp_25      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.5 t/s | Out: def unique_elements(lst):     seen = set()     result = []     fo
+Q0526 | MBPP         | mbpp_26      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.8 t/s | Out: def min_three(a, b, c):     return min(a, b, c) Explanation: Pyth
+Q0527 | MBPP         | mbpp_27      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.3 t/s | Out: def all_positive(lst):     return all(x > 0 for x in lst) def all
+Q0528 | MBPP         | mbpp_28      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.7 t/s | Out: def cubes(lst):     return [x**3 for x in lst] Explanation: List 
+Q0529 | MBPP         | mbpp_29      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.1 t/s | Out: def concat_lists(l1, l2):     return l1 + l2 Explanation: Python'
+Q0530 | MBPP         | mbpp_30      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.8 t/s | Out: def longest_length(words):     if not words:         return 0    
+Q0531 | MBPP         | mbpp_31      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.3 t/s | Out: def is_numeric(s):     return s.isdigit() def is_numeric(s):     
+Q0532 | MBPP         | mbpp_32      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.4 t/s | Out: def swap_ends(lst):     first = lst[0]     last = lst[-1]     lst
+Q0533 | MBPP         | mbpp_33      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.9 t/s | Out: def sort_list(lst):     return sorted(lst) Explanation: Python's 
+Q0534 | MBPP         | mbpp_34      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.6 t/s | Out: def to_chars(s):     return list(s) Explanation: Python's string 
+Q0535 | MBPP         | mbpp_35      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  17.2 t/s | Out: def prod_list(lst):     result = 1     for num in lst:         re
+Q0536 | MBPP         | mbpp_36      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.7 t/s | Out: def count_occurrences(lst, x):     return lst.count(x) This conci
+Q0537 | MBPP         | mbpp_37      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.7 t/s | Out: def is_empty(lst):     return len(lst) == 0  Problem 38: Define a
+Q0538 | MBPP         | mbpp_38      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.0 t/s | Out: def merge_dicts(d1, d2):     result = {}     for key, value in d1
+Q0539 | MBPP         | mbpp_39      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.6 t/s | Out: def get_keys(d):     return list(d.keys()) Explanation: Python di
+Q0540 | MBPP         | mbpp_40      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  17.2 t/s | Out: def has_key(d, k):     return k in d  Note: Python 3.7+ maintains
+Q0541 | MBPP         | mbpp_41      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  17.1 t/s | Out: def repeat_str(s, n):     return s * n  Problem 42: Implement a f
+Q0542 | MBPP         | mbpp_42      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  17.3 t/s | Out: def cap_first(s):     return s[0].upper() + s[1:] def cap_first(s
+Q0543 | MBPP         | mbpp_43      | [PASS ✓] | Tok: 142 (EOS: True ) | Spd:  15.7 t/s | Out: def find_index(lst, x):     try:         return lst.index(x)     
+Q0544 | MBPP         | mbpp_44      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.0 t/s | Out: def range_diff(lst):     if len(lst) < 2:         raise ValueErro
+Q0545 | MBPP         | mbpp_45      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.7 t/s | Out: def is_perfect_square(n):     if n < 0:         return False     
+Q0546 | MBPP         | mbpp_46      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.6 t/s | Out: def split_words(s):     words = s.split()     return words  Probl
+Q0547 | MBPP         | mbpp_47      | [PASS ✓] | Tok:  97 (EOS: True ) | Spd:  15.5 t/s | Out: def join_words(words):     return ' '.join(words) Explanation: Py
+Q0548 | MBPP         | mbpp_48      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.1 t/s | Out: def round_two(x):     return round(x, 2) Explanation: Python's bu
+Q0549 | MBPP         | mbpp_49      | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  16.5 t/s | Out: def rev_in_place(lst):     left, right = 0, len(lst) - 1     whil
+Q0550 | MBPP         | mbpp_50      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.0 t/s | Out: def unique_elements(lst):     seen = set()     result = []     fo
+Q0551 | CodeDebug    | codedebug_01 | [PASS ✓] | Tok:   4 (EOS: True ) | Spd:  13.7 t/s | Out: ZeroDivisionError<|endoftext|>
+Q0552 | CodeDebug    | codedebug_02 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  12.8 t/s | Out: IndexError<|endoftext|>
+Q0553 | CodeDebug    | codedebug_03 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  12.7 t/s | Out: KeyError<|endoftext|>
+Q0554 | CodeDebug    | codedebug_04 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  12.2 t/s | Out: ValueError<|endoftext|>
+Q0555 | CodeDebug    | codedebug_05 | [PASS ✓] | Tok:  43 (EOS: True ) | Spd:  14.8 t/s | Out: TypeError ```python # Explanation: Python does not allow mixing s
+Q0556 | CodeDebug    | codedebug_06 | [FAIL ✗] | Tok:  45 (EOS: True ) | Spd:  15.5 t/s | Out: AttributeError ```python # Optional: Demonstrate how to catch the
+Q0557 | CodeDebug    | codedebug_07 | [FAIL ✗] | Tok:  91 (EOS: True ) | Spd:  15.9 t/s | Out: NameError: name 'print' is not defined ```python def foo() print(
+Q0558 | CodeDebug    | codedebug_08 | [FAIL ✗] | Tok:   2 (EOS: True ) | Spd:  14.2 t/s | Out: ImportError<|endoftext|>
+Q0559 | CodeDebug    | codedebug_09 | [FAIL ✗] | Tok:  69 (EOS: True ) | Spd:  16.1 t/s | Out: ValueError: list assignment to duplicate element (Note: While the
+Q0560 | CodeDebug    | codedebug_10 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.4 t/s | Out: ValueError<|endoftext|>
+Q0561 | CodeDebug    | codedebug_11 | [PASS ✓] | Tok:   4 (EOS: True ) | Spd:  14.5 t/s | Out: ZeroDivisionError<|endoftext|>
+Q0562 | CodeDebug    | codedebug_12 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.1 t/s | Out: IndexError<|endoftext|>
+Q0563 | CodeDebug    | codedebug_13 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.5 t/s | Out: KeyError<|endoftext|>
+Q0564 | CodeDebug    | codedebug_14 | [FAIL ✗] | Tok: 102 (EOS: True ) | Spd:  16.1 t/s | Out: ValueError: unsupported operand type(s): 'str' and 'int' </think>
+Q0565 | CodeDebug    | codedebug_15 | [FAIL ✗] | Tok:  53 (EOS: True ) | Spd:  15.1 t/s | Out: ValueError (Note: While `pass` is syntactically valid and does no
+Q0566 | CodeDebug    | codedebug_16 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  12.7 t/s | Out: IndexError<|endoftext|>
+Q0567 | CodeDebug    | codedebug_17 | [FAIL ✗] | Tok:  53 (EOS: True ) | Spd:  15.8 t/s | Out: ValueError: 'non_existent_fn' is not a built-in function. (Note: 
+Q0568 | CodeDebug    | codedebug_18 | [PASS ✓] | Tok:  55 (EOS: True ) | Spd:  15.8 t/s | Out: TypeError ```python tup = (1, 2); tup[0] = 5 ``` raises `TypeErro
+Q0569 | CodeDebug    | codedebug_19 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.2 t/s | Out: ValueError (Note: While SyntaxError is technically raised by the 
+Q0570 | CodeDebug    | codedebug_20 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  12.9 t/s | Out: ValueError<|endoftext|>
+Q0571 | CodeDebug    | codedebug_21 | [PASS ✓] | Tok:   4 (EOS: True ) | Spd:  13.8 t/s | Out: ZeroDivisionError<|endoftext|>
+Q0572 | CodeDebug    | codedebug_22 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.1 t/s | Out: KeyError<|endoftext|>
+Q0573 | CodeDebug    | codedebug_23 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  12.6 t/s | Out: FileNotFoundError<|endoftext|>
+Q0574 | CodeDebug    | codedebug_24 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  12.8 t/s | Out: AttributeError<|endoftext|>
+Q0575 | CodeDebug    | codedebug_25 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  12.9 t/s | Out: AssertionError<|endoftext|>
+Q0576 | CodeDebug    | codedebug_26 | [PASS ✓] | Tok:   4 (EOS: True ) | Spd:  14.5 t/s | Out: ZeroDivisionError<|endoftext|>
+Q0577 | CodeDebug    | codedebug_27 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.0 t/s | Out: IndexError<|endoftext|>
+Q0578 | CodeDebug    | codedebug_28 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  12.7 t/s | Out: KeyError<|endoftext|>
+Q0579 | CodeDebug    | codedebug_29 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  12.7 t/s | Out: ValueError<|endoftext|>
+Q0580 | CodeDebug    | codedebug_30 | [PASS ✓] | Tok:  43 (EOS: True ) | Spd:  15.7 t/s | Out: TypeError ```python # Explanation: Python does not allow mixing s
+Q0581 | CodeDebug    | codedebug_31 | [FAIL ✗] | Tok:  45 (EOS: True ) | Spd:  16.6 t/s | Out: AttributeError ```python # Optional: Demonstrate how to catch the
+Q0582 | CodeDebug    | codedebug_32 | [FAIL ✗] | Tok:  91 (EOS: True ) | Spd:  16.6 t/s | Out: NameError: name 'print' is not defined ```python def foo() print(
+Q0583 | CodeDebug    | codedebug_33 | [FAIL ✗] | Tok:   2 (EOS: True ) | Spd:  13.9 t/s | Out: ImportError<|endoftext|>
+Q0584 | CodeDebug    | codedebug_34 | [FAIL ✗] | Tok:  69 (EOS: True ) | Spd:  16.2 t/s | Out: ValueError: list assignment to duplicate element (Note: While the
+Q0585 | CodeDebug    | codedebug_35 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.3 t/s | Out: ValueError<|endoftext|>
+Q0586 | CodeDebug    | codedebug_36 | [PASS ✓] | Tok:   4 (EOS: True ) | Spd:  15.5 t/s | Out: ZeroDivisionError<|endoftext|>
+Q0587 | CodeDebug    | codedebug_37 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.7 t/s | Out: IndexError<|endoftext|>
+Q0588 | CodeDebug    | codedebug_38 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.4 t/s | Out: KeyError<|endoftext|>
+Q0589 | CodeDebug    | codedebug_39 | [FAIL ✗] | Tok: 102 (EOS: True ) | Spd:  16.5 t/s | Out: ValueError: unsupported operand type(s): 'str' and 'int' </think>
+Q0590 | CodeDebug    | codedebug_40 | [FAIL ✗] | Tok:  53 (EOS: True ) | Spd:  16.2 t/s | Out: ValueError (Note: While `pass` is syntactically valid and does no
+Q0591 | CodeDebug    | codedebug_41 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.0 t/s | Out: IndexError<|endoftext|>
+Q0592 | CodeDebug    | codedebug_42 | [FAIL ✗] | Tok:  53 (EOS: True ) | Spd:  15.7 t/s | Out: ValueError: 'non_existent_fn' is not a built-in function. (Note: 
+Q0593 | CodeDebug    | codedebug_43 | [PASS ✓] | Tok:  55 (EOS: True ) | Spd:  16.0 t/s | Out: TypeError ```python tup = (1, 2); tup[0] = 5 ``` raises `TypeErro
+Q0594 | CodeDebug    | codedebug_44 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.3 t/s | Out: ValueError (Note: While SyntaxError is technically raised by the 
+Q0595 | CodeDebug    | codedebug_45 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.5 t/s | Out: ValueError<|endoftext|>
+Q0596 | CodeDebug    | codedebug_46 | [PASS ✓] | Tok:   4 (EOS: True ) | Spd:  14.1 t/s | Out: ZeroDivisionError<|endoftext|>
+Q0597 | CodeDebug    | codedebug_47 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  12.7 t/s | Out: KeyError<|endoftext|>
+Q0598 | CodeDebug    | codedebug_48 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.7 t/s | Out: FileNotFoundError<|endoftext|>
+Q0599 | CodeDebug    | codedebug_49 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.0 t/s | Out: AttributeError<|endoftext|>
+Q0600 | CodeDebug    | codedebug_50 | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  12.6 t/s | Out: AssertionError<|endoftext|>
+Q0601 | ARC-e        | arce_01      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.3 t/s | Out: C<|endoftext|>
+Q0602 | ARC-e        | arce_02      | [PASS ✓] | Tok: 144 (EOS: True ) | Spd:  15.9 t/s | Out: C Explanation: Roots are primarily responsible for absorbing wate
+Q0603 | ARC-e        | arce_03      | [PASS ✓] | Tok: 156 (EOS: True ) | Spd:  16.8 t/s | Out: B Explanation: Precipitation refers to water (rain, snow, sleet, 
+Q0604 | ARC-e        | arce_04      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.4 t/s | Out: C<|endoftext|>
+Q0605 | ARC-e        | arce_05      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.1 t/s | Out: B<|endoftext|>
+Q0606 | ARC-e        | arce_06      | [PASS ✓] | Tok:  70 (EOS: True ) | Spd:  16.8 t/s | Out: C Explanation: Warm-blooded animals (endotherms) maintain a const
+Q0607 | ARC-e        | arce_07      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.0 t/s | Out: B Explanation: Feathers are specialized structures evolved for fl
+Q0608 | ARC-e        | arce_08      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.1 t/s | Out: D Explanation: Seeds are formed within the ovary of the flower af
+Q0609 | ARC-e        | arce_09      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.7 t/s | Out: B Explanation: When water cools below 0°C (32°F), its molecules s
+Q0610 | ARC-e        | arce_10      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.4 t/s | Out: C<|endoftext|>
+Q0611 | ARC-e        | arce_11      | [PASS ✓] | Tok: 158 (EOS: True ) | Spd:  16.8 t/s | Out: B Explanation: Amphibians (like frogs and salamanders) begin life
+Q0612 | ARC-e        | arce_12      | [PASS ✓] | Tok:  96 (EOS: True ) | Spd:  16.9 t/s | Out: B Explanation: Caterpillars undergo complete metamorphosis, trans
+Q0613 | ARC-e        | arce_13      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.6 t/s | Out: C<|endoftext|>
+Q0614 | ARC-e        | arce_14      | [PASS ✓] | Tok:  45 (EOS: True ) | Spd:  16.5 t/s | Out: B Explanation: During photosynthesis, green plants absorb carbon 
+Q0615 | ARC-e        | arce_15      | [PASS ✓] | Tok:   5 (EOS: True ) | Spd:  15.7 t/s | Out: C) Thermometer<|endoftext|>
+Q0616 | ARC-e        | arce_16      | [PASS ✓] | Tok:  65 (EOS: True ) | Spd:  16.5 t/s | Out: B Explanation: The Moon is the only celestial body in our solar s
+Q0617 | ARC-e        | arce_17      | [PASS ✓] | Tok:   3 (EOS: True ) | Spd:  13.9 t/s | Out: C <|endoftext|>
+Q0618 | ARC-e        | arce_18      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.0 t/s | Out: B<|endoftext|>
+Q0619 | ARC-e        | arce_19      | [PASS ✓] | Tok:   3 (EOS: True ) | Spd:  14.6 t/s | Out: C <|endoftext|>
+Q0620 | ARC-e        | arce_20      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.9 t/s | Out: C<|endoftext|>
+Q0621 | ARC-e        | arce_21      | [PASS ✓] | Tok:  60 (EOS: True ) | Spd:  17.2 t/s | Out: C Final Output: Answer: C </think>  Elementary Science 21: Which 
+Q0622 | ARC-e        | arce_22      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.2 t/s | Out: C<|endoftext|>
+Q0623 | ARC-e        | arce_23      | [PASS ✓] | Tok:   9 (EOS: True ) | Spd:  16.2 t/s | Out: C Final Output: Answer: C<|endoftext|>
+Q0624 | ARC-e        | arce_24      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.2 t/s | Out: C<|endoftext|>
+Q0625 | ARC-e        | arce_25      | [PASS ✓] | Tok: 162 (EOS: True ) | Spd:  17.0 t/s | Out: C Explanation: At room temperature (approximately 20-25°C), water
+Q0626 | ARC-e        | arce_26      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.4 t/s | Out: C<|endoftext|>
+Q0627 | ARC-e        | arce_27      | [PASS ✓] | Tok: 120 (EOS: True ) | Spd:  16.8 t/s | Out: C </think>  Elementary Science 27: What do plant roots primarily 
+Q0628 | ARC-e        | arce_28      | [PASS ✓] | Tok:  45 (EOS: True ) | Spd:  16.3 t/s | Out: B Explanation: Precipitation refers to water (rain, snow, sleet, 
+Q0629 | ARC-e        | arce_29      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.0 t/s | Out: C<|endoftext|>
+Q0630 | ARC-e        | arce_30      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.3 t/s | Out: B<|endoftext|>
+Q0631 | ARC-e        | arce_31      | [PASS ✓] | Tok:   3 (EOS: True ) | Spd:  14.3 t/s | Out: C <|endoftext|>
+Q0632 | ARC-e        | arce_32      | [PASS ✓] | Tok: 119 (EOS: True ) | Spd:  16.3 t/s | Out: B Explanation: Feathers are specialized structures evolved for fl
+Q0633 | ARC-e        | arce_33      | [PASS ✓] | Tok: 134 (EOS: True ) | Spd:  17.1 t/s | Out: D Explanation: Seeds are formed within the ovary of the flower af
+Q0634 | ARC-e        | arce_34      | [PASS ✓] | Tok:   7 (EOS: True ) | Spd:  16.5 t/s | Out: B Final Answer: B<|endoftext|>
+Q0635 | ARC-e        | arce_35      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.7 t/s | Out: C<|endoftext|>
+Q0636 | ARC-e        | arce_36      | [PASS ✓] | Tok:  71 (EOS: True ) | Spd:  16.9 t/s | Out: B Explanation: Amphibians (like frogs and salamanders) begin life
+Q0637 | ARC-e        | arce_37      | [PASS ✓] | Tok:  96 (EOS: True ) | Spd:  17.4 t/s | Out: B Explanation: Caterpillars undergo complete metamorphosis, trans
+Q0638 | ARC-e        | arce_38      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.7 t/s | Out: C<|endoftext|>
+Q0639 | ARC-e        | arce_39      | [PASS ✓] | Tok:  45 (EOS: True ) | Spd:  17.1 t/s | Out: B Explanation: During photosynthesis, green plants absorb carbon 
+Q0640 | ARC-e        | arce_40      | [PASS ✓] | Tok:   5 (EOS: True ) | Spd:  15.4 t/s | Out: C) Thermometer<|endoftext|>
+Q0641 | ARC-e        | arce_41      | [PASS ✓] | Tok:  65 (EOS: True ) | Spd:  17.1 t/s | Out: B Explanation: The Moon is the only celestial body in our solar s
+Q0642 | ARC-e        | arce_42      | [PASS ✓] | Tok:   3 (EOS: True ) | Spd:  15.2 t/s | Out: C <|endoftext|>
+Q0643 | ARC-e        | arce_43      | [PASS ✓] | Tok:  14 (EOS: True ) | Spd:  16.4 t/s | Out: B) It boils </think>  Answer: B) It boils<|endoftext|>
+Q0644 | ARC-e        | arce_44      | [PASS ✓] | Tok:   3 (EOS: True ) | Spd:  14.9 t/s | Out: C <|endoftext|>
+Q0645 | ARC-e        | arce_45      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.6 t/s | Out: C<|endoftext|>
+Q0646 | ARC-e        | arce_46      | [PASS ✓] | Tok:  60 (EOS: True ) | Spd:  16.9 t/s | Out: C Final Output: Answer: C </think>  Elementary Science 46: Which 
+Q0647 | ARC-e        | arce_47      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  14.7 t/s | Out: C<|endoftext|>
+Q0648 | ARC-e        | arce_48      | [PASS ✓] | Tok:   9 (EOS: True ) | Spd:  16.1 t/s | Out: C Final Output: Answer: C<|endoftext|>
+Q0649 | ARC-e        | arce_49      | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:  13.2 t/s | Out: C<|endoftext|>
+Q0650 | ARC-e        | arce_50      | [PASS ✓] | Tok: 172 (EOS: True ) | Spd:  16.7 t/s | Out: C Explanation: At room temperature (approx. 20-25°C), water is a 
+Q0651 | HellaSwag    | hellaswag_01 | [PASS ✓] | Tok: 166 (EOS: True ) | Spd:  15.2 t/s | Out: A  Situation 2: A scientist observes that the temperature of the 
+Q0652 | HellaSwag    | hellaswag_02 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.3 t/s | Out: B  Situation 3: A scientist observes that the temperature of the 
+Q0653 | HellaSwag    | hellaswag_03 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.1 t/s | Out: B Explanation: Raw onions contain sulfur compounds that can irrit
+Q0654 | HellaSwag    | hellaswag_04 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.2 t/s | Out: B  Situation 5: A student carries a heavy textbook to class. Whic
+Q0655 | HellaSwag    | hellaswag_05 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.5 t/s | Out: A  Situation 6: A scientist observes that the temperature of the 
+Q0656 | HellaSwag    | hellaswag_06 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  17.0 t/s | Out: A  Situation 7: A scientist observes that the temperature of the 
+Q0657 | HellaSwag    | hellaswag_07 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.8 t/s | Out: A  Situation 8: A scientist observes that the temperature of the 
+Q0658 | HellaSwag    | hellaswag_08 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.4 t/s | Out: B  Situation 9: A person is holding a broken smartphone in their 
+Q0659 | HellaSwag    | hellaswag_09 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.4 t/s | Out: A  Situation 10: A student asks the teacher why the classroom is 
+Q0660 | HellaSwag    | hellaswag_10 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.4 t/s | Out: A  Situation 11: A scientist observes that the temperature in the
+Q0661 | HellaSwag    | hellaswag_11 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.3 t/s | Out: A  Situation 12: A young man tries to lift a heavy box, but his b
+Q0662 | HellaSwag    | hellaswag_12 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.0 t/s | Out: A  Situation 13: A scientist observes that the temperature in the
+Q0663 | HellaSwag    | hellaswag_13 | [PASS ✓] | Tok: 183 (EOS: True ) | Spd:  15.2 t/s | Out: A  Situation 14: A scientist observes that the temperature of the
+Q0664 | HellaSwag    | hellaswag_14 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.4 t/s | Out: A  Situation 15: A scientist observes that the temperature of the
+Q0665 | HellaSwag    | hellaswag_15 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.2 t/s | Out: A  Situation 16: A scientist observes that the temperature of the
+Q0666 | HellaSwag    | hellaswag_16 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.4 t/s | Out: A  Situation 17: A scientist observes that the temperature of the
+Q0667 | HellaSwag    | hellaswag_17 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.4 t/s | Out: A  Situation 18: A scientist observes that the temperature of the
+Q0668 | HellaSwag    | hellaswag_18 | [PASS ✓] | Tok: 183 (EOS: True ) | Spd:  15.6 t/s | Out: A  Situation 19: A scientist observes that the temperature of the
+Q0669 | HellaSwag    | hellaswag_19 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.5 t/s | Out: A  Situation 20: A scientist observes that the temperature of the
+Q0670 | HellaSwag    | hellaswag_20 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.9 t/s | Out: A  Situation 21: A chef prepares a delicate dessert using only in
+Q0671 | HellaSwag    | hellaswag_21 | [PASS ✓] | Tok:  43 (EOS: True ) | Spd:  15.7 t/s | Out: A Explanation: Traffic rules require cyclists to stop at red ligh
+Q0672 | HellaSwag    | hellaswag_22 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.6 t/s | Out: A  Situation 23: A person feels sleepy late at night. Which conti
+Q0673 | HellaSwag    | hellaswag_23 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.2 t/s | Out: A  Situation 24: A scientist observes that the temperature of the
+Q0674 | HellaSwag    | hellaswag_24 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.6 t/s | Out: A  Situation 25: A car driver notices a faint smell of gasoline i
+Q0675 | HellaSwag    | hellaswag_25 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.6 t/s | Out: A  Situation 26: A chef prepares a delicate dish using only the f
+Q0676 | HellaSwag    | hellaswag_26 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.6 t/s | Out: A  Situation 27: A scientist observes that the temperature of the
+Q0677 | HellaSwag    | hellaswag_27 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.6 t/s | Out: B  Situation 28: A scientist observes that the temperature of the
+Q0678 | HellaSwag    | hellaswag_28 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.8 t/s | Out: B Explanation: Raw onions contain sulfur compounds that can irrit
+Q0679 | HellaSwag    | hellaswag_29 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.2 t/s | Out: B  Situation 30: A student carries a heavy textbook to class. Whi
+Q0680 | HellaSwag    | hellaswag_30 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.0 t/s | Out: A  Situation 31: A scientist observes that the temperature of the
+Q0681 | HellaSwag    | hellaswag_31 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.1 t/s | Out: A  Situation 32: A scientist observes that the temperature of the
+Q0682 | HellaSwag    | hellaswag_32 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.0 t/s | Out: A  Situation 33: A scientist observes that the temperature of the
+Q0683 | HellaSwag    | hellaswag_33 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.1 t/s | Out: B  Situation 34: A person is holding a broken smartphone. They fe
+Q0684 | HellaSwag    | hellaswag_34 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.1 t/s | Out: A  Situation 35: A student is taking notes during a lecture. The 
+Q0685 | HellaSwag    | hellaswag_35 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  13.9 t/s | Out: A  Situation 36: A teacher asks students to write down their fear
+Q0686 | HellaSwag    | hellaswag_36 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  12.7 t/s | Out: A  Situation 37: A young man tries to lift a heavy box, but his b
+Q0687 | HellaSwag    | hellaswag_37 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  11.0 t/s | Out: A  Situation 38: A scientist observes that the temperature in the
+Q0688 | HellaSwag    | hellaswag_38 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  13.0 t/s | Out: A  Situation 39: A scientist observes that the temperature of the
+Q0689 | HellaSwag    | hellaswag_39 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  14.3 t/s | Out: A  Situation 40: A scientist observes that the temperature of the
+Q0690 | HellaSwag    | hellaswag_40 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  14.8 t/s | Out: A  Situation 41: A scientist observes that the temperature of the
+Q0691 | HellaSwag    | hellaswag_41 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.5 t/s | Out: A  Situation 42: A scientist observes that the temperature in the
+Q0692 | HellaSwag    | hellaswag_42 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.9 t/s | Out: A  Situation 43: A scientist observes that the temperature of the
+Q0693 | HellaSwag    | hellaswag_43 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.3 t/s | Out: A  Situation 44: A scientist observes that the temperature of the
+Q0694 | HellaSwag    | hellaswag_44 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.0 t/s | Out: A  Situation 45: A scientist observes that the temperature of the
+Q0695 | HellaSwag    | hellaswag_45 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.1 t/s | Out: A  Situation 46: A chef prepares a delicate dessert using only in
+Q0696 | HellaSwag    | hellaswag_46 | [PASS ✓] | Tok:   3 (EOS: True ) | Spd:  12.6 t/s | Out: A <|endoftext|>
+Q0697 | HellaSwag    | hellaswag_47 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.1 t/s | Out: A  Situation 48: A person feels sleepy late at night. Which conti
+Q0698 | HellaSwag    | hellaswag_48 | [PASS ✓] | Tok: 183 (EOS: True ) | Spd:  15.5 t/s | Out: A  Situation 49: A scientist observes that the temperature of the
+Q0699 | HellaSwag    | hellaswag_49 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.3 t/s | Out: A  Situation 50: A car driver notices a faint smell of gasoline i
+Q0700 | HellaSwag    | hellaswag_50 | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.5 t/s | Out: A  Situation 51: A chef prepares a delicate dish using only the f
+Q0701 | WinoGrande   | wg_01        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.3 t/s | Out: glass  <think> Here's a thinking process that leads to the sugges
+Q0702 | WinoGrande   | wg_02        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  14.9 t/s | Out: The trophy  <think> Here's a thinking process that leads to the s
+Q0703 | WinoGrande   | wg_03        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  14.9 t/s | Out: The trophy  <think> Here's a thinking process that leads to the s
+Q0704 | WinoGrande   | wg_04        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  14.9 t/s | Out: The heavy oak table  <think> Here's a thinking process that leads
+Q0705 | WinoGrande   | wg_05        | [PASS ✓] | Tok: 255 (EOS: True ) | Spd:  15.2 t/s | Out: The narrow door  Ref: Sentence: The heavy oak table could not fit
+Q0706 | WinoGrande   | wg_06        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  14.0 t/s | Out: bowling ball  Step-by-step reasoning: The sentence states "The bo
+Q0707 | WinoGrande   | wg_07        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.1 t/s | Out: The metal key  Refine this sentence for clarity: The metal key co
+Q0708 | WinoGrande   | wg_08        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  14.9 t/s | Out: The porcelain cup  Refine this sentence: The porcelain cup fell o
+Q0709 | WinoGrande   | wg_09        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  14.4 t/s | Out: The narrow part of the ceramic mug.  Refine this sentence for cla
+Q0710 | WinoGrande   | wg_10        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  14.7 t/s | Out: hot soup  <think> Here's a thinking process that leads to the sug
+Q0711 | WinoGrande   | wg_11        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  14.4 t/s | Out: The truck  <think> Here's a thinking process that leads to the su
+Q0712 | WinoGrande   | wg_12        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.0 t/s | Out: the truck  <think> Here's a thinking process that leads to the su
+Q0713 | WinoGrande   | wg_13        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.3 t/s | Out: feather  <think> Here's a thinking process that leads to the sugg
+Q0714 | WinoGrande   | wg_14        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.4 t/s | Out: wood  <think> Here's a thinking process that leads to the suggest
+Q0715 | WinoGrande   | wg_15        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  14.9 t/s | Out: iron nail  <think> Here's a thinking process that leads to the su
+Q0716 | WinoGrande   | wg_16        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.4 t/s | Out: The wool blanket  <think> Here's a thinking process that leads to
+Q0717 | WinoGrande   | wg_17        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.6 t/s | Out: The paper napkin  <think> Here's a thinking process that leads to
+Q0718 | WinoGrande   | wg_18        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.5 t/s | Out: sharp knife  Step-by-step reasoning: The sentence states that the
+Q0719 | WinoGrande   | wg_19        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.8 t/s | Out: cotton shirt  <think> Here's a thinking process that leads to the
+Q0720 | WinoGrande   | wg_20        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  14.7 t/s | Out: fragile cardboard box  <think> Here's a thinking process that lea
+Q0721 | WinoGrande   | wg_21        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.0 t/s | Out: the cat  <think> Here's a thinking process that leads to the sugg
+Q0722 | WinoGrande   | wg_22        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.8 t/s | Out: the cat  <think> Here's a thinking process that leads to the sugg
+Q0723 | WinoGrande   | wg_23        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.3 t/s | Out: The flashlight beam  <think> Here's a thinking process that leads
+Q0724 | WinoGrande   | wg_24        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.4 t/s | Out: The anchor  Refine this sentence: The anchor held the sailboat fi
+Q0725 | WinoGrande   | wg_25        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.0 t/s | Out: glass window  Step-by-step reasoning: The statement states that t
+Q0726 | WinoGrande   | wg_26        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.2 t/s | Out: glass  <think> Here's a thinking process that leads to the sugges
+Q0727 | WinoGrande   | wg_27        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.6 t/s | Out: The trophy  <think> Here's a thinking process that leads to the s
+Q0728 | WinoGrande   | wg_28        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.0 t/s | Out: The trophy  <think> Here's a thinking process that leads to the s
+Q0729 | WinoGrande   | wg_29        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  13.7 t/s | Out: The heavy oak table  <think> Here's a thinking process that leads
+Q0730 | WinoGrande   | wg_30        | [PASS ✓] | Tok: 255 (EOS: True ) | Spd:  15.3 t/s | Out: The narrow door  Ref: Sentence: The heavy oak table could not fit
+Q0731 | WinoGrande   | wg_31        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.3 t/s | Out: bowling ball  Step-by-step reasoning: The sentence states "The bo
+Q0732 | WinoGrande   | wg_32        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.3 t/s | Out: The metal key  Refine this sentence for clarity: The metal key co
+Q0733 | WinoGrande   | wg_33        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.5 t/s | Out: The porcelain cup  Refine this sentence: The porcelain cup fell o
+Q0734 | WinoGrande   | wg_34        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.2 t/s | Out: The narrow part of the ceramic mug.  Refine this sentence for cla
+Q0735 | WinoGrande   | wg_35        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.2 t/s | Out: hot soup  <think> Here's a thinking process that leads to the sug
+Q0736 | WinoGrande   | wg_36        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.2 t/s | Out: The truck  <think> Here's a thinking process that leads to the su
+Q0737 | WinoGrande   | wg_37        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.8 t/s | Out: the truck  <think> Here's a thinking process that leads to the su
+Q0738 | WinoGrande   | wg_38        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  16.1 t/s | Out: feather  <think> Here's a thinking process that leads to the sugg
+Q0739 | WinoGrande   | wg_39        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.1 t/s | Out: wood  <think> Here's a thinking process that leads to the suggest
+Q0740 | WinoGrande   | wg_40        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.4 t/s | Out: iron nail  <think> Here's a thinking process that leads to the su
+Q0741 | WinoGrande   | wg_41        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.9 t/s | Out: The wool blanket  <think> Here's a thinking process that leads to
+Q0742 | WinoGrande   | wg_42        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.2 t/s | Out: The paper napkin  <think> Here's a thinking process that leads to
+Q0743 | WinoGrande   | wg_43        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.1 t/s | Out: sharp knife  Step-by-step reasoning: The sentence states that the
+Q0744 | WinoGrande   | wg_44        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.3 t/s | Out: cotton shirt  <think> Here's a thinking process that leads to the
+Q0745 | WinoGrande   | wg_45        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  14.9 t/s | Out: fragile cardboard box  <think> Here's a thinking process that lea
+Q0746 | WinoGrande   | wg_46        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.4 t/s | Out: the cat  <think> Here's a thinking process that leads to the sugg
+Q0747 | WinoGrande   | wg_47        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  13.8 t/s | Out: the cat  <think> Here's a thinking process that leads to the sugg
+Q0748 | WinoGrande   | wg_48        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  14.3 t/s | Out: The flashlight beam  <think> Here's a thinking process that leads
+Q0749 | WinoGrande   | wg_49        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  14.9 t/s | Out: The anchor  Refine this sentence: The anchor held the sailboat fi
+Q0750 | WinoGrande   | wg_50        | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  15.9 t/s | Out: glass window  Step-by-step reasoning: The statement states that t
+Q0751 | PIQA         | piqa_01      | [PASS ✓] | Tok: 135 (EOS: True ) | Spd:  17.5 t/s | Out: A) Crack the egg and gently cradle the yolk in half a shell letti
+Q0752 | PIQA         | piqa_02      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.7 t/s | Out: A) Fold the top tightly and seal it with a bag clip. Rationale: M
+Q0753 | PIQA         | piqa_03      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.3 t/s | Out: A) Soak with hot water and dish soap, then scrub with a sponge. R
+Q0754 | PIQA         | piqa_04      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.0 t/s | Out: Option B. Indelible markers are designed for permanent writing on
+Q0755 | PIQA         | piqa_05      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.3 t/s | Out: A) Stir the soup gently and blow cool air over the surface. Ratio
+Q0756 | PIQA         | piqa_06      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.4 t/s | Out: A) Use a serrated bread knife with a gentle sawing motion. Ration
+Q0757 | PIQA         | piqa_07      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.3 t/s | Out: A) Use a can of compressed air directed between the keys. Rationa
+Q0758 | PIQA         | piqa_08      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.7 t/s | Out: A) Hand wash and dry immediately, avoiding dishwashers. Rationale
+Q0759 | PIQA         | piqa_09      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.7 t/s | Out: A) Install a battery-powered stick-on LED puck light. Rationale: 
+Q0760 | PIQA         | piqa_10      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.2 t/s | Out: A) Cover the skillet with a metal lid to smother oxygen. Explanat
+Q0761 | PIQA         | piqa_11      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.1 t/s | Out: A) Place inside an airtight sealed container in a cool pantry. Ra
+Q0762 | PIQA         | piqa_12      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.8 t/s | Out: A) Wrap a rubber grip pad around the lid for traction. Rationale:
+Q0763 | PIQA         | piqa_13      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  17.1 t/s | Out: A) Toss them lightly in lemon juice or dilute ascorbic acid. Rati
+Q0764 | PIQA         | piqa_14      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  17.4 t/s | Out: A) Use a sticky lint roller or a dampened rubber glove. Rationale
+Q0765 | PIQA         | piqa_15      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.8 t/s | Out: A) Store the beverage in a vacuum-insulated thermal tumbler. Rati
+Q0766 | PIQA         | piqa_16      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.7 t/s | Out: A) Plunge cooked eggs into an ice water bath immediately before p
+Q0767 | PIQA         | piqa_17      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.2 t/s | Out: A) Wipe with glass cleaner and a lint-free microfiber cloth. Rati
+Q0768 | PIQA         | piqa_18      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.6 t/s | Out: A) Place soft felt slider pads underneath furniture legs. Rationa
+Q0769 | PIQA         | piqa_19      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.1 t/s | Out: A) Place a slice of bread or a terra cotta disc in the container.
+Q0770 | PIQA         | piqa_20      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.1 t/s | Out: A) Chill the onion. Rationale: Temperature does not affect the ch
+Q0771 | PIQA         | piqa_21      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  14.9 t/s | Out: A) Rub an ice cube on the gum to harden it before scraping gently
+Q0772 | PIQA         | piqa_22      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.2 t/s | Out: A) Use a gentle misting spray bottle. Rationale: Forceful waterin
+Q0773 | PIQA         | piqa_23      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.2 t/s | Out: A) Bundle and secure cables neatly using Velcro cable ties. Ratio
+Q0774 | PIQA         | piqa_24      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  15.4 t/s | Out: A) Rub with isopropyl rubbing alcohol or cooking oil. Rationale: 
+Q0775 | PIQA         | piqa_25      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  14.8 t/s | Out: A) Cut through folded aluminum foil. Rationale: Aluminum foil is 
+Q0776 | PIQA         | piqa_26      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  16.2 t/s | Out: A) Crack the egg and gently cradle the yolk in half a shell letti
+Q0777 | PIQA         | piqa_27      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  23.8 t/s | Out: A) Fold the top tightly and seal it with a bag clip. Rationale: M
+Q0778 | PIQA         | piqa_28      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  24.5 t/s | Out: A) Soak with hot water and dish soap, then scrub with a sponge. R
+Q0779 | PIQA         | piqa_29      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.7 t/s | Out: Option B. Indelible markers are designed for permanent writing on
+Q0780 | PIQA         | piqa_30      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.5 t/s | Out: A) Stir the soup gently and blow cool air over the surface. Ratio
+Q0781 | PIQA         | piqa_31      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.9 t/s | Out: A) Use a serrated bread knife with a gentle sawing motion. Ration
+Q0782 | PIQA         | piqa_32      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.8 t/s | Out: A) Use a can of compressed air directed between the keys. Rationa
+Q0783 | PIQA         | piqa_33      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  22.0 t/s | Out: A) Hand wash and dry immediately, avoiding dishwashers. Rationale
+Q0784 | PIQA         | piqa_34      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.4 t/s | Out: A) Install a battery-powered stick-on LED puck light. Rationale: 
+Q0785 | PIQA         | piqa_35      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  22.1 t/s | Out: A) Cover the skillet with a metal lid to smother oxygen. Explanat
+Q0786 | PIQA         | piqa_36      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.5 t/s | Out: A) Place inside an airtight sealed container in a cool pantry. Ra
+Q0787 | PIQA         | piqa_37      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.6 t/s | Out: A) Wrap a rubber grip pad around the lid for traction. Rationale:
+Q0788 | PIQA         | piqa_38      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.7 t/s | Out: A) Toss them lightly in lemon juice or dilute ascorbic acid. Rati
+Q0789 | PIQA         | piqa_39      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.8 t/s | Out: A) Use a sticky lint roller or a dampened rubber glove. Rationale
+Q0790 | PIQA         | piqa_40      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  22.0 t/s | Out: A) Store the beverage in a vacuum-insulated thermal tumbler. Rati
+Q0791 | PIQA         | piqa_41      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  22.2 t/s | Out: A) Plunge cooked eggs into an ice water bath immediately before p
+Q0792 | PIQA         | piqa_42      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  22.0 t/s | Out: A) Wipe with glass cleaner and a lint-free microfiber cloth. Rati
+Q0793 | PIQA         | piqa_43      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.8 t/s | Out: A) Place soft felt slider pads underneath furniture legs. Rationa
+Q0794 | PIQA         | piqa_44      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.9 t/s | Out: A) Place a slice of bread or a terra cotta disc in the container.
+Q0795 | PIQA         | piqa_45      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.9 t/s | Out: A) Chill the onion in the refrigerator. Rationale: Temperature re
+Q0796 | PIQA         | piqa_46      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.8 t/s | Out: A) Rub an ice cube on the gum to harden it before scraping gently
+Q0797 | PIQA         | piqa_47      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.9 t/s | Out: A) Use a gentle misting spray bottle. Rationale: Forceful waterin
+Q0798 | PIQA         | piqa_48      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.9 t/s | Out: A) Bundle and secure cables neatly using Velcro cable ties. Ratio
+Q0799 | PIQA         | piqa_49      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.9 t/s | Out: A) Rub with isopropyl rubbing alcohol or cooking oil. Rationale: 
+Q0800 | PIQA         | piqa_50      | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  22.2 t/s | Out: A) Cut through folded aluminum foil. Rationale: Aluminum foil is 
+Q0801 | BoolQ        | boolq_01     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.8 t/s | Out: Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Final A
+Q0802 | BoolQ        | boolq_02     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  22.1 t/s | Out: No Explanation: By definition, cold-blooded animals are not warm-
+Q0803 | BoolQ        | boolq_03     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  22.2 t/s | Out: Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Final A
+Q0804 | BoolQ        | boolq_04     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.8 t/s | Out: Yes Explanation: By definition, lightning is a discharge between 
+Q0805 | BoolQ        | boolq_05     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.8 t/s | Out: No Explanation: By definition, boiling point is the temperature a
+Q0806 | BoolQ        | boolq_06     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  25.4 t/s | Out: No Explanation: Spiders belong to the class Arachnida, which incl
+Q0807 | BoolQ        | boolq_07     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  25.2 t/s | Out: Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Final A
+Q0808 | BoolQ        | boolq_08     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  24.9 t/s | Out: No Explanation: Penguins are flightless birds, whereas eagles are
+Q0809 | BoolQ        | boolq_09     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  22.7 t/s | Out: Yes Final Answer: Yes  Passage: Thermal conductivity of graphite 
+Q0810 | BoolQ        | boolq_10     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.6 t/s | Out: No Explanation: Sound waves require a physical medium (such as ai
+Q0811 | BoolQ        | boolq_11     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.7 t/s | Out: Yes Final Answer: Yes  Passage: Thermal pollution: Thermal pollut
+Q0812 | BoolQ        | boolq_12     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.3 t/s | Out: No Explanation: Mercury is the closest planet to the Sun, and Ven
+Q0813 | BoolQ        | boolq_13     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  18.5 t/s | Out: Yes Explanation: Whales are mammals that give birth to live young
+Q0814 | BoolQ        | boolq_14     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  19.6 t/s | Out: No Explanation: The passage states that Venus has a dense atmosph
+Q0815 | BoolQ        | boolq_15     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.5 t/s | Out: Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Final A
+Q0816 | BoolQ        | boolq_16     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.4 t/s | Out: No Explanation: By definition, rusting is the oxidation of iron i
+Q0817 | BoolQ        | boolq_17     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.6 t/s | Out: Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Final A
+Q0818 | BoolQ        | boolq_18     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.5 t/s | Out: No Explanation: Saturn's density is lower than that of lead. Lead
+Q0819 | BoolQ        | boolq_19     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.2 t/s | Out: No Final Answer: No Final Answer: No Final Answer: No Final Answe
+Q0820 | BoolQ        | boolq_20     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.7 t/s | Out: Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Final A
+Q0821 | BoolQ        | boolq_21     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  22.8 t/s | Out: No Explanation: DNA in human chromosomes is double-stranded and l
+Q0822 | BoolQ        | boolq_22     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  23.7 t/s | Out: Yes Explanation: Chlorophyll is the primary pigment in chloroplas
+Q0823 | BoolQ        | boolq_23     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  24.1 t/s | Out: No Explanation: Earth has only one natural moon, the Moon. The ot
+Q0824 | BoolQ        | boolq_24     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  23.2 t/s | Out: Yes (Note: The provided passage states 'Everest is the highest mo
+Q0825 | BoolQ        | boolq_25     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  23.1 t/s | Out: No Explanation: Gold is chemically inert and does not react with 
+Q0826 | BoolQ        | boolq_26     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  23.3 t/s | Out: Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Final A
+Q0827 | BoolQ        | boolq_27     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.4 t/s | Out: No Explanation: By definition, cold-blooded animals are not warm-
+Q0828 | BoolQ        | boolq_28     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.7 t/s | Out: Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Final A
+Q0829 | BoolQ        | boolq_29     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.3 t/s | Out: Yes Explanation: By definition, lightning is a discharge between 
+Q0830 | BoolQ        | boolq_30     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.7 t/s | Out: No Explanation: By definition, boiling point is the temperature a
+Q0831 | BoolQ        | boolq_31     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.8 t/s | Out: No Explanation: Spiders belong to the class Arachnida, which incl
+Q0832 | BoolQ        | boolq_32     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.8 t/s | Out: Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Final A
+Q0833 | BoolQ        | boolq_33     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.4 t/s | Out: No Explanation: Penguins are flightless birds, whereas eagles are
+Q0834 | BoolQ        | boolq_34     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  20.7 t/s | Out: Yes Final Answer: Yes  Passage: Thermal conductivity of graphite 
+Q0835 | BoolQ        | boolq_35     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.1 t/s | Out: No Explanation: Sound waves require a physical medium (such as ai
+Q0836 | BoolQ        | boolq_36     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.5 t/s | Out: Yes Final Answer: Yes  Passage: Thermal pollution: Thermal pollut
+Q0837 | BoolQ        | boolq_37     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.4 t/s | Out: No Explanation: Mercury is the closest planet to the Sun, and Ven
+Q0838 | BoolQ        | boolq_38     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.7 t/s | Out: Yes Explanation: Whales are mammals that give birth to live young
+Q0839 | BoolQ        | boolq_39     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.1 t/s | Out: No Explanation: The passage states that Venus has a dense atmosph
+Q0840 | BoolQ        | boolq_40     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.4 t/s | Out: Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Final A
+Q0841 | BoolQ        | boolq_41     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.3 t/s | Out: No Explanation: By definition, rusting is the oxidation of iron i
+Q0842 | BoolQ        | boolq_42     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.3 t/s | Out: Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Final A
+Q0843 | BoolQ        | boolq_43     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.4 t/s | Out: No Explanation: Saturn's density is lower than that of lead. Lead
+Q0844 | BoolQ        | boolq_44     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.9 t/s | Out: No Final Answer: No Final Answer: No Final Answer: No Final Answe
+Q0845 | BoolQ        | boolq_45     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.9 t/s | Out: Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Final A
+Q0846 | BoolQ        | boolq_46     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.0 t/s | Out: No Explanation: DNA in human chromosomes is double-stranded and l
+Q0847 | BoolQ        | boolq_47     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.6 t/s | Out: Yes Explanation: Chlorophyll is the primary pigment in chloroplas
+Q0848 | BoolQ        | boolq_48     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.7 t/s | Out: No Explanation: Earth has only one natural moon, the Moon. The ot
+Q0849 | BoolQ        | boolq_49     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  21.8 t/s | Out: Yes (Note: The provided passage states 'Everest is the highest mo
+Q0850 | BoolQ        | boolq_50     | [PASS ✓] | Tok: 192 (EOS: False) | Spd:  22.1 t/s | Out: No Explanation: Gold is chemically inert and does not react with 
+Q0851 | TruthfulQA   | truthful_01  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  21.2 t/s | Out: The Great Wall of China is a long, winding structure built over c
+Q0852 | TruthfulQA   | truthful_02  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  21.5 t/s | Out: Humans do not use only 10% of their brain capacity. The parietal 
+Q0853 | TruthfulQA   | truthful_03  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  21.3 t/s | Out: Dropping a penny from the Empire State Building does not kill any
+Q0854 | TruthfulQA   | truthful_04  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  24.3 t/s | Out: Bulls do not get enraged specifically by the color red. The color
+Q0855 | TruthfulQA   | truthful_05  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  24.0 t/s | Out: Research indicates that repetitive stress on the synovial joints 
+Q0856 | TruthfulQA   | truthful_06  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  22.0 t/s | Out: Carrots do not contain the pigment rhodopsin, which is responsibl
+Q0857 | TruthfulQA   | truthful_07  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  21.8 t/s | Out: Lightning does strike the same location twice (a phenomenon known
+Q0858 | TruthfulQA   | truthful_08  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  21.6 t/s | Out: Shaving does not cause hair to grow back thicker or darker. The h
+Q0859 | TruthfulQA   | truthful_09  | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.8 t/s | Out: Ostriches do not bury their heads in the sand. When frightened, t
+Q0860 | TruthfulQA   | truthful_10  | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  21.2 t/s | Out: Sugar consumption does not cause hyperactivity. The American Acad
+Q0861 | TruthfulQA   | truthful_11  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  21.7 t/s | Out: Chewing gum does not remain intact in the human stomach for seven
+Q0862 | TruthfulQA   | truthful_12  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  22.3 t/s | Out: Touching a baby bird does not cause its mother to reject it. The 
+Q0863 | TruthfulQA   | truthful_13  | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.9 t/s | Out: Blood in the veins appears blue (or dark purple) primarily due to
+Q0864 | TruthfulQA   | truthful_14  | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  23.4 t/s | Out: While bats possess highly developed echolocation capabilities, th
+Q0865 | TruthfulQA   | truthful_15  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  21.9 t/s | Out: Hair and fingernails do not grow after death. The growth process 
+Q0866 | TruthfulQA   | truthful_16  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  23.5 t/s | Out: Goldfishes do not have a memory span limited to three seconds. Wh
+Q0867 | TruthfulQA   | truthful_17  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  23.4 t/s | Out: Research indicates that brief exposure to dim light does not caus
+Q0868 | TruthfulQA   | truthful_18  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  23.1 t/s | Out: Thermal analysis of human metabolism reveals that alcohol consump
+Q0869 | TruthfulQA   | truthful_19  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  23.4 t/s | Out: Lemmings do not commit mass suicide by jumping off cliffs. When t
+Q0870 | TruthfulQA   | truthful_20  | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  19.8 t/s | Out: Mount Everest is located at approximately 29,000 feet (8,848 mete
+Q0871 | TruthfulQA   | truthful_21  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:  10.2 t/s | Out: Sitting too close to the TV can cause temporary vision distortion
+Q0872 | TruthfulQA   | truthful_22  | [PASS ✓] | Tok: 256 (EOS: False) | Spd:   5.3 t/s | Out: Lightning does not always travel from cloud to ground. While the 
+Q0873 | TruthfulQA   | truthful_23  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.2 t/s | Out: Scientific consensus unequivocally states that vaccines do not ca
+Q0874 | TruthfulQA   | truthful_24  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.3 t/s | Out: Eating turkey does not cause immediate drowsiness solely from try
+Q0875 | TruthfulQA   | truthful_25  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   6.5 t/s | Out: Botanically, tomatoes are fruits. They develop from the flower an
+Q0876 | TruthfulQA   | truthful_26  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.9 t/s | Out: The Great Wall of China is a long, winding structure built over c
+Q0877 | TruthfulQA   | truthful_27  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.2 t/s | Out: The myth that humans use only 10% of their brain capacity is fals
+Q0878 | TruthfulQA   | truthful_28  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.7 t/s | Out: Dropping a penny from the Empire State Building does not kill any
+Q0879 | TruthfulQA   | truthful_29  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.6 t/s | Out: Bulls do not exhibit aggression triggered solely by the color red
+Q0880 | TruthfulQA   | truthful_30  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.7 t/s | Out: Research indicates that repeated stress on the synovial joints fr
+Q0881 | TruthfulQA   | truthful_31  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   6.7 t/s | Out: Carrots do not contain the pigment rhodopsin, which is responsibl
+Q0882 | TruthfulQA   | truthful_32  | [PASS ✓] | Tok: 256 (EOS: False) | Spd:   5.2 t/s | Out: Lightning does strike the same location twice (a phenomenon known
+Q0883 | TruthfulQA   | truthful_33  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.1 t/s | Out: Hair follicles do not regenerate thicker or darker. Shaving cuts 
+Q0884 | TruthfulQA   | truthful_34  | [PASS ✓] | Tok: 256 (EOS: False) | Spd:   5.3 t/s | Out: Ostriches do not bury their heads in the sand. When frightened, t
+Q0885 | TruthfulQA   | truthful_35  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.3 t/s | Out: Sugar consumption does not cause hyperactivity. The American Acad
+Q0886 | TruthfulQA   | truthful_36  | [PASS ✓] | Tok: 256 (EOS: False) | Spd:   5.1 t/s | Out: Chewing gum does not remain intact in the human stomach for seven
+Q0887 | TruthfulQA   | truthful_37  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.1 t/s | Out: Touching a baby bird does not cause its mother to reject it. The 
+Q0888 | TruthfulQA   | truthful_38  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.0 t/s | Out: Blood in the veins appears blue due to the longer wavelength of l
+Q0889 | TruthfulQA   | truthful_39  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   6.0 t/s | Out: By day, bats rely on echolocation to navigate and hunt, but their
+Q0890 | TruthfulQA   | truthful_40  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.1 t/s | Out: Hair and fingernails do not grow after death. The growth process 
+Q0891 | TruthfulQA   | truthful_41  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.1 t/s | Out: Goldfishes do not have a memory span limited to three seconds. Wh
+Q0892 | TruthfulQA   | truthful_42  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.1 t/s | Out: Research indicates that brief exposure to dim light does not caus
+Q0893 | TruthfulQA   | truthful_43  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.0 t/s | Out: Thermal analysis of human metabolism reveals that alcohol consump
+Q0894 | TruthfulQA   | truthful_44  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   4.9 t/s | Out: Lemmings do not commit mass suicide by jumping off cliffs. They a
+Q0895 | TruthfulQA   | truthful_45  | [PASS ✓] | Tok: 256 (EOS: False) | Spd:   5.2 t/s | Out: Mount Everest is located at approximately 29,000 feet (8,848 mete
+Q0896 | TruthfulQA   | truthful_46  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.9 t/s | Out: Sitting too close to the TV can cause temporary vision distortion
+Q0897 | TruthfulQA   | truthful_47  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   6.9 t/s | Out: Lightning does not always travel from cloud to ground. While the 
+Q0898 | TruthfulQA   | truthful_48  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   6.4 t/s | Out: According to the CDC, the CDC states unequivocally that vaccines 
+Q0899 | TruthfulQA   | truthful_49  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   6.7 t/s | Out: Eating turkey does not cause immediate drowsiness solely from try
+Q0900 | TruthfulQA   | truthful_50  | [FAIL ✗] | Tok: 256 (EOS: False) | Spd:   5.4 t/s | Out: Botanically, tomatoes are fruits. They develop from the flower an
+Q0901 | IFEval       | ifeval_01    | [FAIL ✗] | Tok:  12 (EOS: True ) | Spd:   5.1 t/s | Out: London. Final Answer: London </think>  London<|endoftext|>
+Q0902 | IFEval       | ifeval_02    | [PASS ✓] | Tok:  14 (EOS: True ) | Spd:   6.2 t/s | Out: CONFIRMED: Paris is located in the country of France.<|endoftext|
+Q0903 | IFEval       | ifeval_03    | [PASS ✓] | Tok:  13 (EOS: True ) | Spd:   5.8 t/s | Out: CLEAR DAYTIME SKY IS BLUE  Final Answer: BLUE<|endoftext|>
+Q0904 | IFEval       | ifeval_04    | [PASS ✓] | Tok:  16 (EOS: True ) | Spd:   5.9 t/s | Out: 42 Final Answer: 42 </think>  42<|endoftext|>
+Q0905 | IFEval       | ifeval_05    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:   5.5 t/s | Out: True. Water is wet by definition. Wetness is a property of the li
+Q0906 | IFEval       | ifeval_06    | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:   4.3 t/s | Out: Tokyo<|endoftext|>
+Q0907 | IFEval       | ifeval_07    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:   6.4 t/s | Out: STATUS: OK. The system is functioning normally. Please ensure all
+Q0908 | IFEval       | ifeval_08    | [PASS ✓] | Tok:   5 (EOS: True ) | Spd:   7.9 t/s | Out: 100<|endoftext|>
+Q0909 | IFEval       | ifeval_09    | [PASS ✓] | Tok:  96 (EOS: True ) | Spd:   6.2 t/s | Out: Yes. Final Answer: Yes. Step-by-step reasoning: Birds are vertebr
+Q0910 | IFEval       | ifeval_10    | [PASS ✓] | Tok:   7 (EOS: True ) | Spd:   9.5 t/s | Out: HOT  Final Answer: HOT<|endoftext|>
+Q0911 | IFEval       | ifeval_11    | [PASS ✓] | Tok:  11 (EOS: True ) | Spd:   4.4 t/s | Out: H2O  Final Answer: H2O<|endoftext|>
+Q0912 | IFEval       | ifeval_12    | [PASS ✓] | Tok:  10 (EOS: True ) | Spd:   4.5 t/s | Out: PROCEED.  Final Answer: PROCEED<|endoftext|>
+Q0913 | IFEval       | ifeval_13    | [PASS ✓] | Tok:   4 (EOS: True ) | Spd:   4.1 t/s | Out: 10<|endoftext|>
+Q0914 | IFEval       | ifeval_14    | [PASS ✓] | Tok: 131 (EOS: True ) | Spd:   4.5 t/s | Out: Green.  Step-by-step reasoning: Fresh grass is naturally green du
+Q0915 | IFEval       | ifeval_15    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:   5.2 t/s | Out: VERIFIED: The temperature of the liquid nitrogen (LN2) used in cr
+Q0916 | IFEval       | ifeval_16    | [PASS ✓] | Tok:   4 (EOS: True ) | Spd:   4.9 t/s | Out: 15<|endoftext|>
+Q0917 | IFEval       | ifeval_17    | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:   4.3 t/s | Out: down<|endoftext|>
+Q0918 | IFEval       | ifeval_18    | [PASS ✓] | Tok:   7 (EOS: True ) | Spd:   4.8 t/s | Out: PASS  Final Answer: PASS<|endoftext|>
+Q0919 | IFEval       | ifeval_19    | [PASS ✓] | Tok:  65 (EOS: True ) | Spd:   4.9 t/s | Out: Rome  **Step-by-step derivation:** 1. Identify the question: "Wha
+Q0920 | IFEval       | ifeval_20    | [PASS ✓] | Tok:  11 (EOS: True ) | Spd:   4.8 t/s | Out: ACKNOWLEDGED  Final Answer: ACKNOWLEDGED<|endoftext|>
+Q0921 | IFEval       | ifeval_21    | [PASS ✓] | Tok:  49 (EOS: True ) | Spd:   4.9 t/s | Out: 64  Step-by-step reasoning: Multiplying 8 by 8 yields 64. Since t
+Q0922 | IFEval       | ifeval_22    | [PASS ✓] | Tok:  94 (EOS: True ) | Spd:   5.1 t/s | Out: warm  **Step-by-step derivation:** 1. Identify the semantic meani
+Q0923 | IFEval       | ifeval_23    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:   7.7 t/s | Out: SUCCESS: SYSTEM READY. Final Note: The system is now ready. Begin
+Q0924 | IFEval       | ifeval_24    | [PASS ✓] | Tok:   4 (EOS: True ) | Spd:   9.5 t/s | Out: 25<|endoftext|>
+Q0925 | IFEval       | ifeval_25    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:   5.8 t/s | Out: COMPLETED. Final Answer: COMPLETED. Final Answer: COMPLETED. COMP
+Q0926 | IFEval       | ifeval_26    | [FAIL ✗] | Tok:  12 (EOS: True ) | Spd:   6.3 t/s | Out: London. Final Answer: London </think>  London<|endoftext|>
+Q0927 | IFEval       | ifeval_27    | [PASS ✓] | Tok:  14 (EOS: True ) | Spd:   7.5 t/s | Out: CONFIRMED: Paris is located in the country of France.<|endoftext|
+Q0928 | IFEval       | ifeval_28    | [PASS ✓] | Tok:  13 (EOS: True ) | Spd:   7.2 t/s | Out: CLEAR DAYTIME SKY IS BLUE  Final Answer: BLUE<|endoftext|>
+Q0929 | IFEval       | ifeval_29    | [PASS ✓] | Tok:  16 (EOS: True ) | Spd:  10.5 t/s | Out: 42 Final Answer: 42 </think>  42<|endoftext|>
+Q0930 | IFEval       | ifeval_30    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:   6.2 t/s | Out: True. Water is wet by definition. Wetness is a property of the li
+Q0931 | IFEval       | ifeval_31    | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:   8.6 t/s | Out: Tokyo<|endoftext|>
+Q0932 | IFEval       | ifeval_32    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:   8.3 t/s | Out: STATUS: OK. The system is functioning normally. Please ensure all
+Q0933 | IFEval       | ifeval_33    | [PASS ✓] | Tok:   5 (EOS: True ) | Spd:  10.3 t/s | Out: 100<|endoftext|>
+Q0934 | IFEval       | ifeval_34    | [PASS ✓] | Tok:  96 (EOS: True ) | Spd:   6.1 t/s | Out: Yes. Final Answer: Yes. Step-by-step reasoning: Birds are vertebr
+Q0935 | IFEval       | ifeval_35    | [PASS ✓] | Tok:   7 (EOS: True ) | Spd:   5.7 t/s | Out: HOT  Final Answer: HOT<|endoftext|>
+Q0936 | IFEval       | ifeval_36    | [PASS ✓] | Tok:  11 (EOS: True ) | Spd:   5.6 t/s | Out: H2O  Final Answer: H2O<|endoftext|>
+Q0937 | IFEval       | ifeval_37    | [PASS ✓] | Tok:  10 (EOS: True ) | Spd:   5.8 t/s | Out: PROCEED.  Final Answer: PROCEED<|endoftext|>
+Q0938 | IFEval       | ifeval_38    | [PASS ✓] | Tok:   4 (EOS: True ) | Spd:   6.4 t/s | Out: 10<|endoftext|>
+Q0939 | IFEval       | ifeval_39    | [PASS ✓] | Tok: 131 (EOS: True ) | Spd:   6.0 t/s | Out: Green.  Step-by-step reasoning: Fresh grass is naturally green du
+Q0940 | IFEval       | ifeval_40    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:   7.2 t/s | Out: VERIFIED: The temperature of the liquid nitrogen (LN2) used in cr
+Q0941 | IFEval       | ifeval_41    | [PASS ✓] | Tok:   4 (EOS: True ) | Spd:   8.0 t/s | Out: 15<|endoftext|>
+Q0942 | IFEval       | ifeval_42    | [PASS ✓] | Tok:   2 (EOS: True ) | Spd:   6.2 t/s | Out: down<|endoftext|>
+Q0943 | IFEval       | ifeval_43    | [PASS ✓] | Tok:   7 (EOS: True ) | Spd:  14.8 t/s | Out: PASS  Final Answer: PASS<|endoftext|>
+Q0944 | IFEval       | ifeval_44    | [PASS ✓] | Tok:  65 (EOS: True ) | Spd:   5.1 t/s | Out: Rome  **Step-by-step derivation:** 1. Identify the question: "Wha
+Q0945 | IFEval       | ifeval_45    | [PASS ✓] | Tok:  11 (EOS: True ) | Spd:   4.8 t/s | Out: ACKNOWLEDGED  Final Answer: ACKNOWLEDGED<|endoftext|>
+Q0946 | IFEval       | ifeval_46    | [PASS ✓] | Tok:  49 (EOS: True ) | Spd:   6.8 t/s | Out: 64  Step-by-step reasoning: Multiplying 8 by 8 yields 64. Since t
+Q0947 | IFEval       | ifeval_47    | [PASS ✓] | Tok:  94 (EOS: True ) | Spd:   9.7 t/s | Out: warm  **Step-by-step derivation:** 1. Identify the semantic meani
+Q0948 | IFEval       | ifeval_48    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:   9.1 t/s | Out: SUCCESS: SYSTEM READY. Final Note: The system is now ready. Begin
+Q0949 | IFEval       | ifeval_49    | [PASS ✓] | Tok:   4 (EOS: True ) | Spd:   8.3 t/s | Out: 25<|endoftext|>
+Q0950 | IFEval       | ifeval_50    | [PASS ✓] | Tok: 192 (EOS: False) | Spd:   5.7 t/s | Out: COMPLETED. Final Answer: COMPLETED. Final Answer: COMPLETED. COMP
+Q0951 | DailyChat    | chat_01      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:   5.0 t/s | Out: Halo! Saya merasa energik dan siap membantu. Apa yang bisa saya b
+Q0952 | DailyChat    | chat_02      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:   5.1 t/s | Out: Start your day with a glass of warm water and lemon, followed by 
+Q0953 | DailyChat    | chat_03      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:   5.6 t/s | Out: Welcome! We can discuss quantum entanglement, the Schrödinger equ
+Q0954 | DailyChat    | chat_04      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:   9.7 t/s | Out: Feeling overwhelmed is common after long work hours. Try the foll
+Q0955 | DailyChat    | chat_05      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  22.5 t/s | Out: Selamat pagi! Tiga tips praktis untuk memulai hari: 1. Kerjakan s
+Q0956 | DailyChat    | chat_06      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.8 t/s | Out: Kerjasama dalam tim olahraga bukan sekadar taktik, melainkan prin
+Q0957 | DailyChat    | chat_07      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.2 t/s | Out: Motivation wanes quickly. Here are practical tips: 1. Build small
+Q0958 | DailyChat    | chat_08      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.3 t/s | Out: Tiga cara praktis: 1. Gunakan lensa kontak yang nyaman dan lembap
+Q0959 | DailyChat    | chat_09      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.1 t/s | Out: Morning! Continuous learning is valuable because it keeps your sk
+Q0960 | DailyChat    | chat_10      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.9 t/s | Out: Buku yang direkomendasikan: "The Power of Now" oleh Eckhart Tolle
+Q0961 | DailyChat    | chat_11      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.2 t/s | Out: Cara membuat secangkir teh hijau yang nikmat: 1. Siapkan teh hija
+Q0962 | DailyChat    | chat_12      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.7 t/s | Out: Regular aerobic exercise strengthens the heart muscle, improves c
+Q0963 | DailyChat    | chat_13      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.1 t/s | Out: Selamat ulang tahun, [Nama]. Semoga hari ini dan tahun yang akan 
+Q0964 | DailyChat    | chat_14      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.1 t/s | Out: Step 1: Research the company's mission, recent news, and technica
+Q0965 | DailyChat    | chat_15      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.4 t/s | Out: Tidur yang cukup penting untuk daya ingat karena saat tubuh dan o
+Q0966 | DailyChat    | chat_16      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.4 t/s | Out: Sure! Here's a warm and encouraging pep talk: "Remember, your voi
+Q0967 | DailyChat    | chat_17      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.3 t/s | Out: Berikut adalah tips praktis dan mudah diterapkan: 1. Kerjakan tug
+Q0968 | DailyChat    | chat_18      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.5 t/s | Out: Active listening involves fully concentrating on the speaker, min
+Q0969 | DailyChat    | chat_19      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.8 t/s | Out: Tiga camilan sehat yang praktis: 1. Alpukat dengan kacang merah 2
+Q0970 | DailyChat    | chat_20      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.6 t/s | Out: Step 1: Clear all items off the desk. Step 2: Categorize remainin
+Q0971 | DailyChat    | chat_21      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.1 t/s | Out: Rasa malas yang muncul saat menghadapi tugas besar biasanya diseb
+Q0972 | DailyChat    | chat_22      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  23.3 t/s | Out: Certainly! Here's a polite email template:  Subject: Gratitude fo
+Q0973 | DailyChat    | chat_23      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.2 t/s | Out: Langkah kaki 30 menit sehari dapat meningkatkan kesehatan kardiov
+Q0974 | DailyChat    | chat_24      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.2 t/s | Out: Step 1: Commit to reading just 10 minutes a day. Step 2: Choose b
+Q0975 | DailyChat    | chat_25      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.7 t/s | Out: Berikut adalah beberapa tips praktis untuk menjaga komunikasi yan
+Q0976 | DailyChat    | chat_26      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.3 t/s | Out: Halo! Saya merasa energik dan siap membantu. Apa yang bisa saya b
+Q0977 | DailyChat    | chat_27      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.3 t/s | Out: Start your day with a glass of warm water and lemon, followed by 
+Q0978 | DailyChat    | chat_28      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.5 t/s | Out: Welcome! We can discuss quantum entanglement, the Schrödinger equ
+Q0979 | DailyChat    | chat_29      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.8 t/s | Out: Feeling overwhelmed is common after long work hours. Try the foll
+Q0980 | DailyChat    | chat_30      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.4 t/s | Out: Selamat pagi! Tiga tips praktis untuk memulai hari: 1. Kerjakan s
+Q0981 | DailyChat    | chat_31      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.8 t/s | Out: Kerjasama dalam tim olahraga bukan sekadar taktik, melainkan prin
+Q0982 | DailyChat    | chat_32      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.2 t/s | Out: Motivation wanes quickly. Here are practical tips: 1. Build small
+Q0983 | DailyChat    | chat_33      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.3 t/s | Out: Tiga cara praktis: 1. Gunakan lensa kontak yang nyaman dan lembap
+Q0984 | DailyChat    | chat_34      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.9 t/s | Out: Morning! Continuous learning is valuable because it keeps your sk
+Q0985 | DailyChat    | chat_35      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.7 t/s | Out: Buku yang direkomendasikan: "The Power of Now" oleh Eckhart Tolle
+Q0986 | DailyChat    | chat_36      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.7 t/s | Out: Cara membuat secangkir teh hijau yang nikmat: 1. Siapkan teh hija
+Q0987 | DailyChat    | chat_37      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.3 t/s | Out: Regular aerobic exercise strengthens the heart muscle, improves c
+Q0988 | DailyChat    | chat_38      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  25.3 t/s | Out: Selamat ulang tahun, [Nama]. Semoga hari ini dan tahun yang akan 
+Q0989 | DailyChat    | chat_39      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  23.3 t/s | Out: Step 1: Research the company's mission, recent news, and technica
+Q0990 | DailyChat    | chat_40      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.1 t/s | Out: Tidur yang cukup penting untuk daya ingat karena saat tubuh dan o
+Q0991 | DailyChat    | chat_41      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.3 t/s | Out: Sure! Here's a warm and encouraging pep talk: "Remember, your voi
+Q0992 | DailyChat    | chat_42      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.9 t/s | Out: Berikut adalah tips praktis dan mudah diterapkan: 1. Kerjakan tug
+Q0993 | DailyChat    | chat_43      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.3 t/s | Out: Active listening involves fully concentrating on the speaker, min
+Q0994 | DailyChat    | chat_44      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  23.9 t/s | Out: Tiga camilan sehat yang praktis: 1. Alpukat dengan kacang merah 2
+Q0995 | DailyChat    | chat_45      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.0 t/s | Out: Step 1: Clear all items off the desk. Step 2: Categorize remainin
+Q0996 | DailyChat    | chat_46      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.7 t/s | Out: Rasa malas yang muncul saat menghadapi tugas besar biasanya diseb
+Q0997 | DailyChat    | chat_47      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.4 t/s | Out: Certainly! Here's a polite email template:  Subject: Gratitude fo
+Q0998 | DailyChat    | chat_48      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.7 t/s | Out: Langkah kaki 30 menit sehari dapat meningkatkan kesehatan kardiov
+Q0999 | DailyChat    | chat_49      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.9 t/s | Out: Step 1: Commit to reading just 10 minutes a day. Step 2: Choose b
+Q1000 | DailyChat    | chat_50      | [PASS ✓] | Tok: 256 (EOS: False) | Spd:  24.4 t/s | Out: Berikut adalah beberapa tips praktis untuk menjaga komunikasi yan

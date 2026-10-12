@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dual-loop-controller"
-version = "4.5.0"
-description = "HADL v4.5 Car-Lift Edition: Two-Piston Car-Lift Hydraulic Equilibrium, Porous Orifice Firewall, and 100% Frozen Foundation Model Architecture"
+version = "4.6.0"
+description = "X-Star 2B Autonomous Brain & HADL Dual-Loop Cognitive Controller: Endogenous Continuous Plasticity, Layer 11 VGNI Epistemic Grounding, and Commutative Dual-Composition Architecture"
 readme = "README_PYPI.md"
 requires-python = ">=3.9"
 license = "MIT"
@@ -75,6 +75,7 @@ all = [
 ]
 
 [project.scripts]
+xstar = "xstar.cli:main"
 dual-loop = "dual_loop.cli:main"
 hadl = "dual_loop.cli:main"
 
@@ -88,7 +89,7 @@ Repository = "https://github.com/Ch3nOff/dual-loop-controller.git"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["dual_loop*"]
+include = ["xstar*", "dual_loop*"]
 exclude = ["tests*", "dist*", "build*"]
 
 [tool.setuptools.package-data]

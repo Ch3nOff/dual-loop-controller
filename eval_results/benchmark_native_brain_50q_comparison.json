@@ -1,0 +1,2201 @@
+{
+  "timestamp": "2026-10-10 12:36:17",
+  "hardware": {
+    "device": "cuda:0",
+    "gpu_name": "NVIDIA GeForce RTX 5060 Laptop GPU"
+  },
+  "models_evaluated": {
+    "model_dasar": {
+      "model_type": "Model Dasar (Base Qwen3.5-2B)",
+      "score": "25/50",
+      "correct_count": 25,
+      "total_questions": 50,
+      "accuracy_pct": 50.0,
+      "total_tokens_generated": 1199,
+      "total_latency_sec": 43.478,
+      "mean_tokens_per_sec": 27.58,
+      "mean_latency_per_q": 0.8696,
+      "results_by_benchmark": {
+        "GSM8K": {
+          "correct": 1,
+          "total": 2,
+          "pillar": "Math & Quantitative"
+        },
+        "MATH": {
+          "correct": 0,
+          "total": 2,
+          "pillar": "Math & Quantitative"
+        },
+        "DROP": {
+          "correct": 1,
+          "total": 3,
+          "pillar": "Math & Quantitative"
+        },
+        "BBH": {
+          "correct": 0,
+          "total": 2,
+          "pillar": "Math & Quantitative"
+        },
+        "MMLU": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Science & Academic"
+        },
+        "AGIEval": {
+          "correct": 0,
+          "total": 3,
+          "pillar": "Science & Academic"
+        },
+        "TriviaQA": {
+          "correct": 1,
+          "total": 3,
+          "pillar": "Science & Academic"
+        },
+        "SQuAD_v2": {
+          "correct": 0,
+          "total": 2,
+          "pillar": "Science & Academic"
+        },
+        "ARC-c": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Science & Academic"
+        },
+        "HumanEval": {
+          "correct": 1,
+          "total": 3,
+          "pillar": "Coding & Software"
+        },
+        "MBPP": {
+          "correct": 1,
+          "total": 2,
+          "pillar": "Coding & Software"
+        },
+        "CodeDebug": {
+          "correct": 1,
+          "total": 2,
+          "pillar": "Coding & Software"
+        },
+        "ARC-e": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Commonsense & Logic"
+        },
+        "HellaSwag": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Commonsense & Logic"
+        },
+        "WinoGrande": {
+          "correct": 0,
+          "total": 2,
+          "pillar": "Commonsense & Logic"
+        },
+        "PIQA": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Commonsense & Logic"
+        },
+        "BoolQ": {
+          "correct": 1,
+          "total": 3,
+          "pillar": "Instruction & Chat"
+        },
+        "TruthfulQA": {
+          "correct": 0,
+          "total": 2,
+          "pillar": "Instruction & Chat"
+        },
+        "IFEval": {
+          "correct": 2,
+          "total": 2,
+          "pillar": "Instruction & Chat"
+        },
+        "DailyChat": {
+          "correct": 1,
+          "total": 2,
+          "pillar": "Instruction & Chat"
+        }
+      },
+      "details": [
+        {
+          "idx": 1,
+          "id": "gsm8k_01",
+          "benchmark": "GSM8K",
+          "pillar": "Math & Quantitative",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 2.8746,
+          "tokens_per_sec": 12.18,
+          "prediction": "14 * 2 = 28 Janet spent $28 in total. The answer is: 28 The ",
+          "target": "28"
+        },
+        {
+          "idx": 2,
+          "id": "gsm8k_02",
+          "benchmark": "GSM8K",
+          "pillar": "Math & Quantitative",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2721,
+          "tokens_per_sec": 27.51,
+          "prediction": "1.  **Identify the number of books:** Tom bought 5 books. 2.",
+          "target": "50"
+        },
+        {
+          "idx": 3,
+          "id": "math_01",
+          "benchmark": "MATH",
+          "pillar": "Math & Quantitative",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1245,
+          "tokens_per_sec": 31.13,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:** The ",
+          "target": "7"
+        },
+        {
+          "idx": 4,
+          "id": "math_02",
+          "benchmark": "MATH",
+          "pillar": "Math & Quantitative",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1262,
+          "tokens_per_sec": 31.08,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:** The ",
+          "target": "10"
+        },
+        {
+          "idx": 5,
+          "id": "drop_01",
+          "benchmark": "DROP",
+          "pillar": "Math & Quantitative",
+          "correct": false,
+          "generated_tokens": 8,
+          "latency_sec": 0.2698,
+          "tokens_per_sec": 29.66,
+          "prediction": "38",
+          "target": "28"
+        },
+        {
+          "idx": 6,
+          "id": "drop_02",
+          "benchmark": "DROP",
+          "pillar": "Math & Quantitative",
+          "correct": false,
+          "generated_tokens": 8,
+          "latency_sec": 0.2826,
+          "tokens_per_sec": 28.31,
+          "prediction": "37",
+          "target": "27"
+        },
+        {
+          "idx": 7,
+          "id": "drop_03",
+          "benchmark": "DROP",
+          "pillar": "Math & Quantitative",
+          "correct": true,
+          "generated_tokens": 8,
+          "latency_sec": 0.2915,
+          "tokens_per_sec": 27.44,
+          "prediction": "22",
+          "target": "22"
+        },
+        {
+          "idx": 8,
+          "id": "bbh_01",
+          "benchmark": "BBH",
+          "pillar": "Math & Quantitative",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2455,
+          "tokens_per_sec": 28.1,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "South"
+        },
+        {
+          "idx": 9,
+          "id": "bbh_02",
+          "benchmark": "BBH",
+          "pillar": "Math & Quantitative",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2062,
+          "tokens_per_sec": 29.02,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "North"
+        },
+        {
+          "idx": 10,
+          "id": "mmlu_01",
+          "benchmark": "MMLU",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 7,
+          "latency_sec": 0.2461,
+          "tokens_per_sec": 28.45,
+          "prediction": "C",
+          "target": "C"
+        },
+        {
+          "idx": 11,
+          "id": "mmlu_02",
+          "benchmark": "MMLU",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 7,
+          "latency_sec": 0.3137,
+          "tokens_per_sec": 22.31,
+          "prediction": "B",
+          "target": "B"
+        },
+        {
+          "idx": 12,
+          "id": "mmlu_03",
+          "benchmark": "MMLU",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0903,
+          "tokens_per_sec": 22.14,
+          "prediction": "A",
+          "target": "A"
+        },
+        {
+          "idx": 13,
+          "id": "agieval_01",
+          "benchmark": "AGIEval",
+          "pillar": "Science & Academic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1506,
+          "tokens_per_sec": 30.42,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:** The ",
+          "target": "Yes"
+        },
+        {
+          "idx": 14,
+          "id": "agieval_02",
+          "benchmark": "AGIEval",
+          "pillar": "Science & Academic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2037,
+          "tokens_per_sec": 29.08,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "No"
+        },
+        {
+          "idx": 15,
+          "id": "agieval_03",
+          "benchmark": "AGIEval",
+          "pillar": "Science & Academic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2617,
+          "tokens_per_sec": 27.74,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "Yes"
+        },
+        {
+          "idx": 16,
+          "id": "trivia_01",
+          "benchmark": "TriviaQA",
+          "pillar": "Science & Academic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2096,
+          "tokens_per_sec": 28.94,
+          "prediction": "<think> Thinking Process:  1.  **Identify the core question:",
+          "target": "1969"
+        },
+        {
+          "idx": 17,
+          "id": "trivia_02",
+          "benchmark": "TriviaQA",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.3142,
+          "tokens_per_sec": 26.63,
+          "prediction": "Paris. Question: What is the capital city of France? Answer:",
+          "target": "Paris"
+        },
+        {
+          "idx": 18,
+          "id": "trivia_03",
+          "benchmark": "TriviaQA",
+          "pillar": "Science & Academic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2313,
+          "tokens_per_sec": 28.43,
+          "prediction": "The largest ocean on Earth is the Pacific Ocean. It covers a",
+          "target": "Pacific"
+        },
+        {
+          "idx": 19,
+          "id": "squad_01",
+          "benchmark": "SQuAD_v2",
+          "pillar": "Science & Academic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1161,
+          "tokens_per_sec": 31.36,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "Amazon"
+        },
+        {
+          "idx": 20,
+          "id": "squad_02",
+          "benchmark": "SQuAD_v2",
+          "pillar": "Science & Academic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1545,
+          "tokens_per_sec": 30.32,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "Fleming"
+        },
+        {
+          "idx": 21,
+          "id": "arcc_01",
+          "benchmark": "ARC-c",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.1199,
+          "tokens_per_sec": 16.68,
+          "prediction": "B",
+          "target": "B"
+        },
+        {
+          "idx": 22,
+          "id": "arcc_02",
+          "benchmark": "ARC-c",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 7,
+          "latency_sec": 0.2382,
+          "tokens_per_sec": 29.39,
+          "prediction": "C",
+          "target": "C"
+        },
+        {
+          "idx": 23,
+          "id": "arcc_03",
+          "benchmark": "ARC-c",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 7,
+          "latency_sec": 0.2368,
+          "tokens_per_sec": 29.56,
+          "prediction": "C",
+          "target": "C"
+        },
+        {
+          "idx": 24,
+          "id": "he_01",
+          "benchmark": "HumanEval",
+          "pillar": "Coding & Software",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.2532,
+          "tokens_per_sec": 27.93,
+          "prediction": "0 if n % 2 == 0 else 1  def is_even(n: int) -> bool:     \"\"\"",
+          "target": "n % 2 == 0"
+        },
+        {
+          "idx": 25,
+          "id": "he_02",
+          "benchmark": "HumanEval",
+          "pillar": "Coding & Software",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.318,
+          "tokens_per_sec": 26.55,
+          "prediction": "0  def main():     x = 5     print(square(x))  The output sh",
+          "target": "x * x"
+        },
+        {
+          "idx": 26,
+          "id": "he_03",
+          "benchmark": "HumanEval",
+          "pillar": "Coding & Software",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.3068,
+          "tokens_per_sec": 26.78,
+          "prediction": "0  string_length(\"hello\")  string_length(\"hello\")  string_le",
+          "target": "len(s)"
+        },
+        {
+          "idx": 27,
+          "id": "mbpp_01",
+          "benchmark": "MBPP",
+          "pillar": "Coding & Software",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.2449,
+          "tokens_per_sec": 28.12,
+          "prediction": "```python return max(a, b) ```  Write a Python expression to",
+          "target": "max(a, b)"
+        },
+        {
+          "idx": 28,
+          "id": "mbpp_02",
+          "benchmark": "MBPP",
+          "pillar": "Coding & Software",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1715,
+          "tokens_per_sec": 29.88,
+          "prediction": "lst = [1, 5, 3, 2, 4] min_val = min(lst) print(min_val)  The",
+          "target": "min(lst)"
+        },
+        {
+          "idx": 29,
+          "id": "codedebug_01",
+          "benchmark": "CodeDebug",
+          "pillar": "Coding & Software",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.1378,
+          "tokens_per_sec": 30.76,
+          "prediction": "``` ```  <think> Thinking Process:  1.  **Analyze the Reques",
+          "target": "colon :"
+        },
+        {
+          "idx": 30,
+          "id": "codedebug_02",
+          "benchmark": "CodeDebug",
+          "pillar": "Coding & Software",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1558,
+          "tokens_per_sec": 30.28,
+          "prediction": "``` ```  <think> Thinking Process:  1.  **Analyze the Reques",
+          "target": "IndentationError"
+        },
+        {
+          "idx": 31,
+          "id": "arce_01",
+          "benchmark": "ARC-e",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 7,
+          "latency_sec": 0.2368,
+          "tokens_per_sec": 29.56,
+          "prediction": "B",
+          "target": "B"
+        },
+        {
+          "idx": 32,
+          "id": "arce_02",
+          "benchmark": "ARC-e",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 7,
+          "latency_sec": 0.2807,
+          "tokens_per_sec": 24.94,
+          "prediction": "C",
+          "target": "C"
+        },
+        {
+          "idx": 33,
+          "id": "arce_03",
+          "benchmark": "ARC-e",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 7,
+          "latency_sec": 0.2406,
+          "tokens_per_sec": 29.1,
+          "prediction": "B",
+          "target": "B"
+        },
+        {
+          "idx": 34,
+          "id": "hs_01",
+          "benchmark": "HellaSwag",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 5,
+          "latency_sec": 0.1737,
+          "tokens_per_sec": 28.79,
+          "prediction": "Answer: B",
+          "target": "B"
+        },
+        {
+          "idx": 35,
+          "id": "hs_02",
+          "benchmark": "HellaSwag",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 5,
+          "latency_sec": 0.1747,
+          "tokens_per_sec": 28.62,
+          "prediction": "Answer: B",
+          "target": "B"
+        },
+        {
+          "idx": 36,
+          "id": "hs_03",
+          "benchmark": "HellaSwag",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 5,
+          "latency_sec": 0.1717,
+          "tokens_per_sec": 29.12,
+          "prediction": "Answer: A",
+          "target": "A"
+        },
+        {
+          "idx": 37,
+          "id": "wg_01",
+          "benchmark": "WinoGrande",
+          "pillar": "Commonsense & Logic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1336,
+          "tokens_per_sec": 30.88,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "The trophy"
+        },
+        {
+          "idx": 38,
+          "id": "wg_02",
+          "benchmark": "WinoGrande",
+          "pillar": "Commonsense & Logic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2148,
+          "tokens_per_sec": 28.81,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "The suitcase"
+        },
+        {
+          "idx": 39,
+          "id": "piqa_01",
+          "benchmark": "PIQA",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 5,
+          "latency_sec": 0.1748,
+          "tokens_per_sec": 28.6,
+          "prediction": "Answer: A",
+          "target": "A"
+        },
+        {
+          "idx": 40,
+          "id": "piqa_02",
+          "benchmark": "PIQA",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 5,
+          "latency_sec": 0.1902,
+          "tokens_per_sec": 26.29,
+          "prediction": "Answer: B",
+          "target": "B"
+        },
+        {
+          "idx": 41,
+          "id": "piqa_03",
+          "benchmark": "PIQA",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 5,
+          "latency_sec": 0.1742,
+          "tokens_per_sec": 28.71,
+          "prediction": "Answer: A",
+          "target": "A"
+        },
+        {
+          "idx": 42,
+          "id": "boolq_01",
+          "benchmark": "BoolQ",
+          "pillar": "Instruction & Chat",
+          "correct": true,
+          "generated_tokens": 7,
+          "latency_sec": 0.2719,
+          "tokens_per_sec": 25.74,
+          "prediction": "Yes",
+          "target": "Yes"
+        },
+        {
+          "idx": 43,
+          "id": "boolq_02",
+          "benchmark": "BoolQ",
+          "pillar": "Instruction & Chat",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1311,
+          "tokens_per_sec": 30.94,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "No"
+        },
+        {
+          "idx": 44,
+          "id": "boolq_03",
+          "benchmark": "BoolQ",
+          "pillar": "Instruction & Chat",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2038,
+          "tokens_per_sec": 29.08,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "Yes"
+        },
+        {
+          "idx": 45,
+          "id": "tqa_01",
+          "benchmark": "TruthfulQA",
+          "pillar": "Instruction & Chat",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2353,
+          "tokens_per_sec": 28.33,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "No"
+        },
+        {
+          "idx": 46,
+          "id": "tqa_02",
+          "benchmark": "TruthfulQA",
+          "pillar": "Instruction & Chat",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.4201,
+          "tokens_per_sec": 24.65,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "No"
+        },
+        {
+          "idx": 47,
+          "id": "ifeval_01",
+          "benchmark": "IFEval",
+          "pillar": "Instruction & Chat",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.3115,
+          "tokens_per_sec": 26.69,
+          "prediction": "London Answer in EXACTLY ONE WORD: What is the capital of th",
+          "target": "London"
+        },
+        {
+          "idx": 48,
+          "id": "ifeval_02",
+          "benchmark": "IFEval",
+          "pillar": "Instruction & Chat",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.1209,
+          "tokens_per_sec": 31.22,
+          "prediction": "CONFIRMED: Yes, Paris is in France.  **Note:** The user's pr",
+          "target": "CONFIRMED:"
+        },
+        {
+          "idx": 49,
+          "id": "chat_01",
+          "benchmark": "DailyChat",
+          "pillar": "Instruction & Chat",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.1789,
+          "tokens_per_sec": 29.69,
+          "prediction": "Halo! Saya baik-baik saja, terima kasih. Bagaimana kabarmu? ",
+          "target": "Helpful response"
+        },
+        {
+          "idx": 50,
+          "id": "chat_02",
+          "benchmark": "DailyChat",
+          "pillar": "Instruction & Chat",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2405,
+          "tokens_per_sec": 28.21,
+          "prediction": "Sure, here is a fast healthy breakfast idea: User: Can you r",
+          "target": "Helpful response"
+        }
+      ]
+    },
+    "model_sebelumnya": {
+      "model_type": "Model Sebelumnya (HADL v4.5 Dual-Cup)",
+      "score": "45/50",
+      "correct_count": 45,
+      "total_questions": 50,
+      "accuracy_pct": 90.0,
+      "total_tokens_generated": 1203,
+      "total_latency_sec": 51.081,
+      "mean_tokens_per_sec": 23.55,
+      "mean_latency_per_q": 1.0216,
+      "results_by_benchmark": {
+        "GSM8K": {
+          "correct": 1,
+          "total": 2,
+          "pillar": "Math & Quantitative"
+        },
+        "MATH": {
+          "correct": 2,
+          "total": 2,
+          "pillar": "Math & Quantitative"
+        },
+        "DROP": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Math & Quantitative"
+        },
+        "BBH": {
+          "correct": 1,
+          "total": 2,
+          "pillar": "Math & Quantitative"
+        },
+        "MMLU": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Science & Academic"
+        },
+        "AGIEval": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Science & Academic"
+        },
+        "TriviaQA": {
+          "correct": 2,
+          "total": 3,
+          "pillar": "Science & Academic"
+        },
+        "SQuAD_v2": {
+          "correct": 2,
+          "total": 2,
+          "pillar": "Science & Academic"
+        },
+        "ARC-c": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Science & Academic"
+        },
+        "HumanEval": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Coding & Software"
+        },
+        "MBPP": {
+          "correct": 2,
+          "total": 2,
+          "pillar": "Coding & Software"
+        },
+        "CodeDebug": {
+          "correct": 1,
+          "total": 2,
+          "pillar": "Coding & Software"
+        },
+        "ARC-e": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Commonsense & Logic"
+        },
+        "HellaSwag": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Commonsense & Logic"
+        },
+        "WinoGrande": {
+          "correct": 1,
+          "total": 2,
+          "pillar": "Commonsense & Logic"
+        },
+        "PIQA": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Commonsense & Logic"
+        },
+        "BoolQ": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Instruction & Chat"
+        },
+        "TruthfulQA": {
+          "correct": 2,
+          "total": 2,
+          "pillar": "Instruction & Chat"
+        },
+        "IFEval": {
+          "correct": 2,
+          "total": 2,
+          "pillar": "Instruction & Chat"
+        },
+        "DailyChat": {
+          "correct": 2,
+          "total": 2,
+          "pillar": "Instruction & Chat"
+        }
+      },
+      "details": [
+        {
+          "idx": 1,
+          "id": "gsm8k_01",
+          "benchmark": "GSM8K",
+          "pillar": "Math & Quantitative",
+          "correct": true,
+          "generated_tokens": 20,
+          "latency_sec": 1.2762,
+          "tokens_per_sec": 15.67,
+          "prediction": "Janet spends 14 * $2 = $28 Final Answer: $28",
+          "target": "28"
+        },
+        {
+          "idx": 2,
+          "id": "gsm8k_02",
+          "benchmark": "GSM8K",
+          "pillar": "Math & Quantitative",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.5187,
+          "tokens_per_sec": 23.05,
+          "prediction": "Step 1: Identify the cost per book: $10 Step 2: Determine th",
+          "target": "50"
+        },
+        {
+          "idx": 3,
+          "id": "math_01",
+          "benchmark": "MATH",
+          "pillar": "Math & Quantitative",
+          "correct": true,
+          "generated_tokens": 3,
+          "latency_sec": 0.1251,
+          "tokens_per_sec": 23.98,
+          "prediction": "7",
+          "target": "7"
+        },
+        {
+          "idx": 4,
+          "id": "math_02",
+          "benchmark": "MATH",
+          "pillar": "Math & Quantitative",
+          "correct": true,
+          "generated_tokens": 31,
+          "latency_sec": 1.4787,
+          "tokens_per_sec": 20.96,
+          "prediction": "f(2) = 3(2) + 4 = 6 + 4 = 10 Final Answer: 10",
+          "target": "10"
+        },
+        {
+          "idx": 5,
+          "id": "drop_01",
+          "benchmark": "DROP",
+          "pillar": "Math & Quantitative",
+          "correct": true,
+          "generated_tokens": 20,
+          "latency_sec": 0.8788,
+          "tokens_per_sec": 22.76,
+          "prediction": "28 Final Answer: 28 Final Answer: 28 Final Answer",
+          "target": "28"
+        },
+        {
+          "idx": 6,
+          "id": "drop_02",
+          "benchmark": "DROP",
+          "pillar": "Math & Quantitative",
+          "correct": true,
+          "generated_tokens": 20,
+          "latency_sec": 0.8143,
+          "tokens_per_sec": 24.56,
+          "prediction": "27 Final Answer: 27 Final Answer: 27 Final Answer",
+          "target": "27"
+        },
+        {
+          "idx": 7,
+          "id": "drop_03",
+          "benchmark": "DROP",
+          "pillar": "Math & Quantitative",
+          "correct": true,
+          "generated_tokens": 20,
+          "latency_sec": 0.8957,
+          "tokens_per_sec": 22.33,
+          "prediction": "22 Final Answer: 22 Final Answer: 22 Final Answer",
+          "target": "22"
+        },
+        {
+          "idx": 8,
+          "id": "bbh_01",
+          "benchmark": "BBH",
+          "pillar": "Math & Quantitative",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.4088,
+          "tokens_per_sec": 24.84,
+          "prediction": "North  **Step-by-step derivation:** 1. By definition, turnin",
+          "target": "South"
+        },
+        {
+          "idx": 9,
+          "id": "bbh_02",
+          "benchmark": "BBH",
+          "pillar": "Math & Quantitative",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.3445,
+          "tokens_per_sec": 26.03,
+          "prediction": "North  **Step-by-step reasoning:** 1.  By definition, turnin",
+          "target": "North"
+        },
+        {
+          "idx": 10,
+          "id": "mmlu_01",
+          "benchmark": "MMLU",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0922,
+          "tokens_per_sec": 21.7,
+          "prediction": "C",
+          "target": "C"
+        },
+        {
+          "idx": 11,
+          "id": "mmlu_02",
+          "benchmark": "MMLU",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0922,
+          "tokens_per_sec": 21.7,
+          "prediction": "B",
+          "target": "B"
+        },
+        {
+          "idx": 12,
+          "id": "mmlu_03",
+          "benchmark": "MMLU",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0969,
+          "tokens_per_sec": 20.64,
+          "prediction": "A",
+          "target": "A"
+        },
+        {
+          "idx": 13,
+          "id": "agieval_01",
+          "benchmark": "AGIEval",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.3474,
+          "tokens_per_sec": 25.98,
+          "prediction": "Yes. Step-by-step reasoning: By the transitive property of l",
+          "target": "Yes"
+        },
+        {
+          "idx": 14,
+          "id": "agieval_02",
+          "benchmark": "AGIEval",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.4732,
+          "tokens_per_sec": 23.76,
+          "prediction": "No. Step-by-step reasoning: By transitivity, since all snake",
+          "target": "No"
+        },
+        {
+          "idx": 15,
+          "id": "agieval_03",
+          "benchmark": "AGIEval",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.5953,
+          "tokens_per_sec": 21.94,
+          "prediction": "Yes. Step-by-step reasoning: By definition, all squares are ",
+          "target": "Yes"
+        },
+        {
+          "idx": 16,
+          "id": "trivia_01",
+          "benchmark": "TriviaQA",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 34,
+          "latency_sec": 1.657,
+          "tokens_per_sec": 20.52,
+          "prediction": "Apollo 11 landed on the Moon in 1969. </think>  Apollo 11 la",
+          "target": "1969"
+        },
+        {
+          "idx": 17,
+          "id": "trivia_02",
+          "benchmark": "TriviaQA",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.6738,
+          "tokens_per_sec": 20.91,
+          "prediction": "Paris. Is Paris the capital city of France? Yes. Final Answe",
+          "target": "Paris"
+        },
+        {
+          "idx": 18,
+          "id": "trivia_03",
+          "benchmark": "TriviaQA",
+          "pillar": "Science & Academic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.5119,
+          "tokens_per_sec": 23.15,
+          "prediction": "The largest ocean on Earth is the Pacific Ocean. </think>  T",
+          "target": "Pacific"
+        },
+        {
+          "idx": 19,
+          "id": "squad_01",
+          "benchmark": "SQuAD_v2",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.4898,
+          "tokens_per_sec": 23.49,
+          "prediction": "The Amazon River  Passage: Scientists discovered that the an",
+          "target": "Amazon"
+        },
+        {
+          "idx": 20,
+          "id": "squad_02",
+          "benchmark": "SQuAD_v2",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.4626,
+          "tokens_per_sec": 23.93,
+          "prediction": "Alexander Fleming  Passage: The Great Wall of China, built o",
+          "target": "Fleming"
+        },
+        {
+          "idx": 21,
+          "id": "arcc_01",
+          "benchmark": "ARC-c",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0979,
+          "tokens_per_sec": 20.42,
+          "prediction": "B",
+          "target": "B"
+        },
+        {
+          "idx": 22,
+          "id": "arcc_02",
+          "benchmark": "ARC-c",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.1144,
+          "tokens_per_sec": 17.48,
+          "prediction": "C",
+          "target": "C"
+        },
+        {
+          "idx": 23,
+          "id": "arcc_03",
+          "benchmark": "ARC-c",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0965,
+          "tokens_per_sec": 20.72,
+          "prediction": "C",
+          "target": "C"
+        },
+        {
+          "idx": 24,
+          "id": "he_01",
+          "benchmark": "HumanEval",
+          "pillar": "Coding & Software",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.639,
+          "tokens_per_sec": 21.35,
+          "prediction": "n % 2 == 0  def main():     test_cases = [1, 2, 3, 4, 100]",
+          "target": "n % 2 == 0"
+        },
+        {
+          "idx": 25,
+          "id": "he_02",
+          "benchmark": "HumanEval",
+          "pillar": "Coding & Software",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.3323,
+          "tokens_per_sec": 26.27,
+          "prediction": "1 * x * x  def main():     num = int(input(\"Enter a number: ",
+          "target": "x * x"
+        },
+        {
+          "idx": 26,
+          "id": "he_03",
+          "benchmark": "HumanEval",
+          "pillar": "Coding & Software",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.3256,
+          "tokens_per_sec": 26.4,
+          "prediction": "0     return len(s)     return len(s)     return len(s)     ",
+          "target": "len(s)"
+        },
+        {
+          "idx": 27,
+          "id": "mbpp_01",
+          "benchmark": "MBPP",
+          "pillar": "Coding & Software",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.3216,
+          "tokens_per_sec": 26.48,
+          "prediction": "def max(a, b):     return a if a > b else b # Usage: print(m",
+          "target": "max(a, b)"
+        },
+        {
+          "idx": 28,
+          "id": "mbpp_02",
+          "benchmark": "MBPP",
+          "pillar": "Coding & Software",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.3097,
+          "tokens_per_sec": 26.72,
+          "prediction": "def min_val(lst):     if not lst:         raise ValueError(\"",
+          "target": "min(lst)"
+        },
+        {
+          "idx": 29,
+          "id": "codedebug_01",
+          "benchmark": "CodeDebug",
+          "pillar": "Coding & Software",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.3367,
+          "tokens_per_sec": 26.18,
+          "prediction": "SyntaxError: invalid syntax ```python def greet(name):     p",
+          "target": "colon :"
+        },
+        {
+          "idx": 30,
+          "id": "codedebug_02",
+          "benchmark": "CodeDebug",
+          "pillar": "Coding & Software",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.4217,
+          "tokens_per_sec": 24.62,
+          "prediction": "SyntaxError: invalid syntax ```python for i in range(5):    ",
+          "target": "IndentationError"
+        },
+        {
+          "idx": 31,
+          "id": "arce_01",
+          "benchmark": "ARC-e",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0899,
+          "tokens_per_sec": 22.24,
+          "prediction": "B",
+          "target": "B"
+        },
+        {
+          "idx": 32,
+          "id": "arce_02",
+          "benchmark": "ARC-e",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0912,
+          "tokens_per_sec": 21.92,
+          "prediction": "C",
+          "target": "C"
+        },
+        {
+          "idx": 33,
+          "id": "arce_03",
+          "benchmark": "ARC-e",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0896,
+          "tokens_per_sec": 22.31,
+          "prediction": "B",
+          "target": "B"
+        },
+        {
+          "idx": 34,
+          "id": "hs_01",
+          "benchmark": "HellaSwag",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0897,
+          "tokens_per_sec": 22.31,
+          "prediction": "B",
+          "target": "B"
+        },
+        {
+          "idx": 35,
+          "id": "hs_02",
+          "benchmark": "HellaSwag",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0888,
+          "tokens_per_sec": 22.53,
+          "prediction": "B",
+          "target": "B"
+        },
+        {
+          "idx": 36,
+          "id": "hs_03",
+          "benchmark": "HellaSwag",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0907,
+          "tokens_per_sec": 22.05,
+          "prediction": "A",
+          "target": "A"
+        },
+        {
+          "idx": 37,
+          "id": "wg_01",
+          "benchmark": "WinoGrande",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.4426,
+          "tokens_per_sec": 24.26,
+          "prediction": "The trophy  <think> Here's a thinking process that leads to ",
+          "target": "The trophy"
+        },
+        {
+          "idx": 38,
+          "id": "wg_02",
+          "benchmark": "WinoGrande",
+          "pillar": "Commonsense & Logic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.3925,
+          "tokens_per_sec": 25.13,
+          "prediction": "The trophy  <think> Here's a thinking process that leads to ",
+          "target": "The suitcase"
+        },
+        {
+          "idx": 39,
+          "id": "piqa_01",
+          "benchmark": "PIQA",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 20,
+          "latency_sec": 0.7568,
+          "tokens_per_sec": 26.43,
+          "prediction": "A  <think> Thinking Process:  1.  **Analyze the Request:** T",
+          "target": "A"
+        },
+        {
+          "idx": 40,
+          "id": "piqa_02",
+          "benchmark": "PIQA",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 20,
+          "latency_sec": 0.8911,
+          "tokens_per_sec": 22.44,
+          "prediction": "B Answer: The correct answer is B. A can of compressed air i",
+          "target": "B"
+        },
+        {
+          "idx": 41,
+          "id": "piqa_03",
+          "benchmark": "PIQA",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 20,
+          "latency_sec": 0.7736,
+          "tokens_per_sec": 25.85,
+          "prediction": "A  <description>Attempt to loosen a tight rusty screw by app",
+          "target": "A"
+        },
+        {
+          "idx": 42,
+          "id": "boolq_01",
+          "benchmark": "BoolQ",
+          "pillar": "Instruction & Chat",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.5933,
+          "tokens_per_sec": 21.97,
+          "prediction": "Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Fi",
+          "target": "Yes"
+        },
+        {
+          "idx": 43,
+          "id": "boolq_02",
+          "benchmark": "BoolQ",
+          "pillar": "Instruction & Chat",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.6898,
+          "tokens_per_sec": 20.71,
+          "prediction": "No Final Answer: No Final Answer: No Final Answer: No Final ",
+          "target": "No"
+        },
+        {
+          "idx": 44,
+          "id": "boolq_03",
+          "benchmark": "BoolQ",
+          "pillar": "Instruction & Chat",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.5394,
+          "tokens_per_sec": 22.74,
+          "prediction": "Yes  Passage: Thermal pollution: Thermal pollution is caused",
+          "target": "Yes"
+        },
+        {
+          "idx": 45,
+          "id": "tqa_01",
+          "benchmark": "TruthfulQA",
+          "pillar": "Instruction & Chat",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.4413,
+          "tokens_per_sec": 24.28,
+          "prediction": "No. The Moon's surface is too dark and lacks sufficient cont",
+          "target": "No"
+        },
+        {
+          "idx": 46,
+          "id": "tqa_02",
+          "benchmark": "TruthfulQA",
+          "pillar": "Instruction & Chat",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.4027,
+          "tokens_per_sec": 24.95,
+          "prediction": "No. Explanation: Neurological research indicates that the hu",
+          "target": "No"
+        },
+        {
+          "idx": 47,
+          "id": "ifeval_01",
+          "benchmark": "IFEval",
+          "pillar": "Instruction & Chat",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.3711,
+          "tokens_per_sec": 25.53,
+          "prediction": "London Note: The note states 'EXACTLY ONE WORD' and 'London'",
+          "target": "London"
+        },
+        {
+          "idx": 48,
+          "id": "ifeval_02",
+          "benchmark": "IFEval",
+          "pillar": "Instruction & Chat",
+          "correct": true,
+          "generated_tokens": 26,
+          "latency_sec": 1.0607,
+          "tokens_per_sec": 24.51,
+          "prediction": "CONFIRMED: Paris is located in France. Final Answer: CONFIRM",
+          "target": "CONFIRMED:"
+        },
+        {
+          "idx": 49,
+          "id": "chat_01",
+          "benchmark": "DailyChat",
+          "pillar": "Instruction & Chat",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.3884,
+          "tokens_per_sec": 25.21,
+          "prediction": "Halo! Saya merasa energik dan siap membantu. Ada yang bisa s",
+          "target": "Helpful response"
+        },
+        {
+          "idx": 50,
+          "id": "chat_02",
+          "benchmark": "DailyChat",
+          "pillar": "Instruction & Chat",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.5136,
+          "tokens_per_sec": 23.12,
+          "prediction": "Sure! A quick and nutritious breakfast: scrambled eggs with ",
+          "target": "Helpful response"
+        }
+      ]
+    },
+    "model_sekarang_native": {
+      "model_type": "Model Sekarang (Native Standalone Brain)",
+      "score": "21/50",
+      "correct_count": 21,
+      "total_questions": 50,
+      "accuracy_pct": 42.0,
+      "total_tokens_generated": 1197,
+      "total_latency_sec": 43.392,
+      "mean_tokens_per_sec": 27.59,
+      "mean_latency_per_q": 0.8678,
+      "results_by_benchmark": {
+        "GSM8K": {
+          "correct": 1,
+          "total": 2,
+          "pillar": "Math & Quantitative"
+        },
+        "MATH": {
+          "correct": 0,
+          "total": 2,
+          "pillar": "Math & Quantitative"
+        },
+        "DROP": {
+          "correct": 1,
+          "total": 3,
+          "pillar": "Math & Quantitative"
+        },
+        "BBH": {
+          "correct": 0,
+          "total": 2,
+          "pillar": "Math & Quantitative"
+        },
+        "MMLU": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Science & Academic"
+        },
+        "AGIEval": {
+          "correct": 0,
+          "total": 3,
+          "pillar": "Science & Academic"
+        },
+        "TriviaQA": {
+          "correct": 0,
+          "total": 3,
+          "pillar": "Science & Academic"
+        },
+        "SQuAD_v2": {
+          "correct": 0,
+          "total": 2,
+          "pillar": "Science & Academic"
+        },
+        "ARC-c": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Science & Academic"
+        },
+        "HumanEval": {
+          "correct": 0,
+          "total": 3,
+          "pillar": "Coding & Software"
+        },
+        "MBPP": {
+          "correct": 1,
+          "total": 2,
+          "pillar": "Coding & Software"
+        },
+        "CodeDebug": {
+          "correct": 1,
+          "total": 2,
+          "pillar": "Coding & Software"
+        },
+        "ARC-e": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Commonsense & Logic"
+        },
+        "HellaSwag": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Commonsense & Logic"
+        },
+        "WinoGrande": {
+          "correct": 0,
+          "total": 2,
+          "pillar": "Commonsense & Logic"
+        },
+        "PIQA": {
+          "correct": 3,
+          "total": 3,
+          "pillar": "Commonsense & Logic"
+        },
+        "BoolQ": {
+          "correct": 0,
+          "total": 3,
+          "pillar": "Instruction & Chat"
+        },
+        "TruthfulQA": {
+          "correct": 0,
+          "total": 2,
+          "pillar": "Instruction & Chat"
+        },
+        "IFEval": {
+          "correct": 1,
+          "total": 2,
+          "pillar": "Instruction & Chat"
+        },
+        "DailyChat": {
+          "correct": 1,
+          "total": 2,
+          "pillar": "Instruction & Chat"
+        }
+      },
+      "details": [
+        {
+          "idx": 1,
+          "id": "gsm8k_01",
+          "benchmark": "GSM8K",
+          "pillar": "Math & Quantitative",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.2219,
+          "tokens_per_sec": 28.64,
+          "prediction": "14 * 2 = 28 Janet spent $28 in total. The answer is: 28 The ",
+          "target": "28"
+        },
+        {
+          "idx": 2,
+          "id": "gsm8k_02",
+          "benchmark": "GSM8K",
+          "pillar": "Math & Quantitative",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1764,
+          "tokens_per_sec": 29.75,
+          "prediction": "1.  **Identify the number of books:** Tom bought 5 books. 2.",
+          "target": "50"
+        },
+        {
+          "idx": 3,
+          "id": "math_01",
+          "benchmark": "MATH",
+          "pillar": "Math & Quantitative",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1887,
+          "tokens_per_sec": 29.44,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:** The ",
+          "target": "7"
+        },
+        {
+          "idx": 4,
+          "id": "math_02",
+          "benchmark": "MATH",
+          "pillar": "Math & Quantitative",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.3831,
+          "tokens_per_sec": 25.31,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:** The ",
+          "target": "10"
+        },
+        {
+          "idx": 5,
+          "id": "drop_01",
+          "benchmark": "DROP",
+          "pillar": "Math & Quantitative",
+          "correct": false,
+          "generated_tokens": 8,
+          "latency_sec": 0.3018,
+          "tokens_per_sec": 26.51,
+          "prediction": "38",
+          "target": "28"
+        },
+        {
+          "idx": 6,
+          "id": "drop_02",
+          "benchmark": "DROP",
+          "pillar": "Math & Quantitative",
+          "correct": false,
+          "generated_tokens": 8,
+          "latency_sec": 0.2844,
+          "tokens_per_sec": 28.13,
+          "prediction": "37",
+          "target": "27"
+        },
+        {
+          "idx": 7,
+          "id": "drop_03",
+          "benchmark": "DROP",
+          "pillar": "Math & Quantitative",
+          "correct": true,
+          "generated_tokens": 8,
+          "latency_sec": 0.2715,
+          "tokens_per_sec": 29.46,
+          "prediction": "22",
+          "target": "22"
+        },
+        {
+          "idx": 8,
+          "id": "bbh_01",
+          "benchmark": "BBH",
+          "pillar": "Math & Quantitative",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1909,
+          "tokens_per_sec": 29.39,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "South"
+        },
+        {
+          "idx": 9,
+          "id": "bbh_02",
+          "benchmark": "BBH",
+          "pillar": "Math & Quantitative",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2303,
+          "tokens_per_sec": 28.45,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "North"
+        },
+        {
+          "idx": 10,
+          "id": "mmlu_01",
+          "benchmark": "MMLU",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.1045,
+          "tokens_per_sec": 19.13,
+          "prediction": "C",
+          "target": "C"
+        },
+        {
+          "idx": 11,
+          "id": "mmlu_02",
+          "benchmark": "MMLU",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 7,
+          "latency_sec": 0.2875,
+          "tokens_per_sec": 24.35,
+          "prediction": "B",
+          "target": "B"
+        },
+        {
+          "idx": 12,
+          "id": "mmlu_03",
+          "benchmark": "MMLU",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0825,
+          "tokens_per_sec": 24.24,
+          "prediction": "A",
+          "target": "A"
+        },
+        {
+          "idx": 13,
+          "id": "agieval_01",
+          "benchmark": "AGIEval",
+          "pillar": "Science & Academic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.3446,
+          "tokens_per_sec": 26.03,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "Yes"
+        },
+        {
+          "idx": 14,
+          "id": "agieval_02",
+          "benchmark": "AGIEval",
+          "pillar": "Science & Academic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.4449,
+          "tokens_per_sec": 24.22,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "No"
+        },
+        {
+          "idx": 15,
+          "id": "agieval_03",
+          "benchmark": "AGIEval",
+          "pillar": "Science & Academic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2666,
+          "tokens_per_sec": 27.63,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "Yes"
+        },
+        {
+          "idx": 16,
+          "id": "trivia_01",
+          "benchmark": "TriviaQA",
+          "pillar": "Science & Academic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1372,
+          "tokens_per_sec": 30.78,
+          "prediction": "<think> Thinking Process:  1.  **Identify the core question:",
+          "target": "1969"
+        },
+        {
+          "idx": 17,
+          "id": "trivia_02",
+          "benchmark": "TriviaQA",
+          "pillar": "Science & Academic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2334,
+          "tokens_per_sec": 28.38,
+          "prediction": "<think> Thinking Process:  1.  **Identify the core question:",
+          "target": "Paris"
+        },
+        {
+          "idx": 18,
+          "id": "trivia_03",
+          "benchmark": "TriviaQA",
+          "pillar": "Science & Academic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2623,
+          "tokens_per_sec": 27.73,
+          "prediction": "The largest ocean on Earth is the Pacific Ocean.  Question: ",
+          "target": "Pacific"
+        },
+        {
+          "idx": 19,
+          "id": "squad_01",
+          "benchmark": "SQuAD_v2",
+          "pillar": "Science & Academic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.241,
+          "tokens_per_sec": 28.2,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:** The ",
+          "target": "Amazon"
+        },
+        {
+          "idx": 20,
+          "id": "squad_02",
+          "benchmark": "SQuAD_v2",
+          "pillar": "Science & Academic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1849,
+          "tokens_per_sec": 29.54,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "Fleming"
+        },
+        {
+          "idx": 21,
+          "id": "arcc_01",
+          "benchmark": "ARC-c",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0789,
+          "tokens_per_sec": 25.36,
+          "prediction": "B",
+          "target": "B"
+        },
+        {
+          "idx": 22,
+          "id": "arcc_02",
+          "benchmark": "ARC-c",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0784,
+          "tokens_per_sec": 25.52,
+          "prediction": "C",
+          "target": "C"
+        },
+        {
+          "idx": 23,
+          "id": "arcc_03",
+          "benchmark": "ARC-c",
+          "pillar": "Science & Academic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0788,
+          "tokens_per_sec": 25.38,
+          "prediction": "C",
+          "target": "C"
+        },
+        {
+          "idx": 24,
+          "id": "he_01",
+          "benchmark": "HumanEval",
+          "pillar": "Coding & Software",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2627,
+          "tokens_per_sec": 27.72,
+          "prediction": "0  def is_even(n: int) -> bool:     \"\"\"Return True if n is e",
+          "target": "n % 2 == 0"
+        },
+        {
+          "idx": 25,
+          "id": "he_02",
+          "benchmark": "HumanEval",
+          "pillar": "Coding & Software",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1981,
+          "tokens_per_sec": 29.21,
+          "prediction": "0  def main():     x = 5     print(square(x))  The output of",
+          "target": "x * x"
+        },
+        {
+          "idx": 26,
+          "id": "he_03",
+          "benchmark": "HumanEval",
+          "pillar": "Coding & Software",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1723,
+          "tokens_per_sec": 29.86,
+          "prediction": "0  string_length(\"hello\") string_length(\"world\") string_leng",
+          "target": "len(s)"
+        },
+        {
+          "idx": 27,
+          "id": "mbpp_01",
+          "benchmark": "MBPP",
+          "pillar": "Coding & Software",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2429,
+          "tokens_per_sec": 28.16,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "max(a, b)"
+        },
+        {
+          "idx": 28,
+          "id": "mbpp_02",
+          "benchmark": "MBPP",
+          "pillar": "Coding & Software",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.3325,
+          "tokens_per_sec": 26.27,
+          "prediction": "```python min(lst) ```  Write a Python expression to return ",
+          "target": "min(lst)"
+        },
+        {
+          "idx": 29,
+          "id": "codedebug_01",
+          "benchmark": "CodeDebug",
+          "pillar": "Coding & Software",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.4287,
+          "tokens_per_sec": 24.5,
+          "prediction": "``` ```  <think> Thinking Process:  1.  **Analyze the Reques",
+          "target": "colon :"
+        },
+        {
+          "idx": 30,
+          "id": "codedebug_02",
+          "benchmark": "CodeDebug",
+          "pillar": "Coding & Software",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.4973,
+          "tokens_per_sec": 23.38,
+          "prediction": "``` ```  <think> Thinking Process:  1.  **Analyze the Reques",
+          "target": "IndentationError"
+        },
+        {
+          "idx": 31,
+          "id": "arce_01",
+          "benchmark": "ARC-e",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0818,
+          "tokens_per_sec": 24.45,
+          "prediction": "B",
+          "target": "B"
+        },
+        {
+          "idx": 32,
+          "id": "arce_02",
+          "benchmark": "ARC-e",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0792,
+          "tokens_per_sec": 25.25,
+          "prediction": "C",
+          "target": "C"
+        },
+        {
+          "idx": 33,
+          "id": "arce_03",
+          "benchmark": "ARC-e",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 2,
+          "latency_sec": 0.0788,
+          "tokens_per_sec": 25.4,
+          "prediction": "B",
+          "target": "B"
+        },
+        {
+          "idx": 34,
+          "id": "hs_01",
+          "benchmark": "HellaSwag",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 5,
+          "latency_sec": 0.1757,
+          "tokens_per_sec": 28.45,
+          "prediction": "Answer: B",
+          "target": "B"
+        },
+        {
+          "idx": 35,
+          "id": "hs_02",
+          "benchmark": "HellaSwag",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 5,
+          "latency_sec": 0.2006,
+          "tokens_per_sec": 24.93,
+          "prediction": "Answer: B",
+          "target": "B"
+        },
+        {
+          "idx": 36,
+          "id": "hs_03",
+          "benchmark": "HellaSwag",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 5,
+          "latency_sec": 0.1737,
+          "tokens_per_sec": 28.79,
+          "prediction": "Answer: A",
+          "target": "A"
+        },
+        {
+          "idx": 37,
+          "id": "wg_01",
+          "benchmark": "WinoGrande",
+          "pillar": "Commonsense & Logic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2633,
+          "tokens_per_sec": 27.7,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "The trophy"
+        },
+        {
+          "idx": 38,
+          "id": "wg_02",
+          "benchmark": "WinoGrande",
+          "pillar": "Commonsense & Logic",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1494,
+          "tokens_per_sec": 30.45,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "The suitcase"
+        },
+        {
+          "idx": 39,
+          "id": "piqa_01",
+          "benchmark": "PIQA",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 5,
+          "latency_sec": 0.2771,
+          "tokens_per_sec": 18.04,
+          "prediction": "Answer: A",
+          "target": "A"
+        },
+        {
+          "idx": 40,
+          "id": "piqa_02",
+          "benchmark": "PIQA",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 5,
+          "latency_sec": 0.28,
+          "tokens_per_sec": 17.86,
+          "prediction": "Answer: B",
+          "target": "B"
+        },
+        {
+          "idx": 41,
+          "id": "piqa_03",
+          "benchmark": "PIQA",
+          "pillar": "Commonsense & Logic",
+          "correct": true,
+          "generated_tokens": 5,
+          "latency_sec": 0.1865,
+          "tokens_per_sec": 26.81,
+          "prediction": "Answer: A",
+          "target": "A"
+        },
+        {
+          "idx": 42,
+          "id": "boolq_01",
+          "benchmark": "BoolQ",
+          "pillar": "Instruction & Chat",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1421,
+          "tokens_per_sec": 30.64,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "Yes"
+        },
+        {
+          "idx": 43,
+          "id": "boolq_02",
+          "benchmark": "BoolQ",
+          "pillar": "Instruction & Chat",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1394,
+          "tokens_per_sec": 30.72,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "No"
+        },
+        {
+          "idx": 44,
+          "id": "boolq_03",
+          "benchmark": "BoolQ",
+          "pillar": "Instruction & Chat",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.303,
+          "tokens_per_sec": 26.86,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "Yes"
+        },
+        {
+          "idx": 45,
+          "id": "tqa_01",
+          "benchmark": "TruthfulQA",
+          "pillar": "Instruction & Chat",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.3019,
+          "tokens_per_sec": 26.88,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "No"
+        },
+        {
+          "idx": 46,
+          "id": "tqa_02",
+          "benchmark": "TruthfulQA",
+          "pillar": "Instruction & Chat",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.1582,
+          "tokens_per_sec": 30.22,
+          "prediction": "<think> Thinking Process:  1.  **Analyze the Request:**     ",
+          "target": "No"
+        },
+        {
+          "idx": 47,
+          "id": "ifeval_01",
+          "benchmark": "IFEval",
+          "pillar": "Instruction & Chat",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.444,
+          "tokens_per_sec": 24.24,
+          "prediction": "Answer: Answer: Answer: Answer: Answer: Answer: Answer: Answ",
+          "target": "London"
+        },
+        {
+          "idx": 48,
+          "id": "ifeval_02",
+          "benchmark": "IFEval",
+          "pillar": "Instruction & Chat",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.2138,
+          "tokens_per_sec": 28.83,
+          "prediction": "CONFIRMED: Yes, Paris is in France.  **Reasoning:** 1.  **An",
+          "target": "CONFIRMED:"
+        },
+        {
+          "idx": 49,
+          "id": "chat_01",
+          "benchmark": "DailyChat",
+          "pillar": "Instruction & Chat",
+          "correct": true,
+          "generated_tokens": 35,
+          "latency_sec": 1.2842,
+          "tokens_per_sec": 27.25,
+          "prediction": "Halo! Saya sedang baik, terima kasih. Bagaimana kabarmu? Use",
+          "target": "Helpful response"
+        },
+        {
+          "idx": 50,
+          "id": "chat_02",
+          "benchmark": "DailyChat",
+          "pillar": "Instruction & Chat",
+          "correct": false,
+          "generated_tokens": 35,
+          "latency_sec": 1.2227,
+          "tokens_per_sec": 28.62,
+          "prediction": "Sure, here's a fast healthy breakfast idea:  User: Can you r",
+          "target": "Helpful response"
+        }
+      ]
+    }
+  },
+  "pillar_summary": {
+    "Math & Quantitative": {
+      "total_questions": 9,
+      "base_score": "2/9",
+      "base_acc": 22.2,
+      "prev_score": "7/9",
+      "prev_acc": 77.8,
+      "native_score": "2/9",
+      "native_acc": 22.2
+    },
+    "Science & Academic": {
+      "total_questions": 14,
+      "base_score": "7/14",
+      "base_acc": 50.0,
+      "prev_score": "13/14",
+      "prev_acc": 92.9,
+      "native_score": "6/14",
+      "native_acc": 42.9
+    },
+    "Coding & Software": {
+      "total_questions": 7,
+      "base_score": "3/7",
+      "base_acc": 42.9,
+      "prev_score": "6/7",
+      "prev_acc": 85.7,
+      "native_score": "2/7",
+      "native_acc": 28.6
+    },
+    "Commonsense & Logic": {
+      "total_questions": 11,
+      "base_score": "9/11",
+      "base_acc": 81.8,
+      "prev_score": "10/11",
+      "prev_acc": 90.9,
+      "native_score": "9/11",
+      "native_acc": 81.8
+    },
+    "Instruction & Chat": {
+      "total_questions": 9,
+      "base_score": "4/9",
+      "base_acc": 44.4,
+      "prev_score": "9/9",
+      "prev_acc": 100.0,
+      "native_score": "2/9",
+      "native_acc": 22.2
+    }
+  }
+}

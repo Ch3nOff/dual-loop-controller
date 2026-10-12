@@ -1,0 +1,340 @@
+=== X-STAR 100-QUESTION FULL UNTRUNCATED REAL EMPIRICAL AUDIT ===
+Timestamp: 2026-10-10 15:43:26
+Device: cuda:0 (NVIDIA GeForce RTX 5060 Laptop GPU)
+
+
+==========================================================================================
+[*] EVALUATING MODEL: Model Dasar (Base Frozen)
+==========================================================================================
+Q001 | GSM8K      | gsm8k_01     | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.7 t/s | Output: 14 * 2 = 28 Janet spent $28 in total. The answer is: 28 The answer is:
+Q002 | GSM8K      | gsm8k_02     | [PASS] | Tokens:  90 (EOS: True ) | Speed:  26.1 t/s | Output: 1.  **Identify the number of books:** Tom bought 8 books. 2.  **Identi
+Q003 | GSM8K      | gsm8k_03     | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.4 t/s | Output: 15 * 3 = 45 Lisa spent $45 in total. The answer is: 45 The answer is: 
+Q004 | GSM8K      | gsm8k_04     | [PASS] | Tokens:  92 (EOS: True ) | Speed:  26.2 t/s | Output: To find the total amount Bob spent, we need to multiply the number of 
+Q005 | GSM8K      | gsm8k_05     | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.2 t/s | Output: 12 pencils * $1/pencil = $12 Alice spent $12 in total.  Alice buys 12 
+Q006 | MATH       | math_01      | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.2 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:** The user wants
+Q007 | MATH       | math_02      | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.3 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:** The user wants
+Q008 | MATH       | math_03      | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.3 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:** The user wants
+Q009 | MATH       | math_04      | [FAIL] | Tokens: 160 (EOS: False) | Speed:  26.3 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:** The user wants
+Q010 | MATH       | math_05      | [FAIL] | Tokens:   4 (EOS: True ) | Speed:  23.6 t/s | Output: 15<|endoftext|>
+Q011 | DROP       | drop_01      | [FAIL] | Tokens:   8 (EOS: True ) | Speed:  24.9 t/s | Output: 29<|endoftext|>
+Q012 | DROP       | drop_02      | [PASS] | Tokens:   8 (EOS: True ) | Speed:  25.1 t/s | Output: 28<|endoftext|>
+Q013 | DROP       | drop_03      | [FAIL] | Tokens:   8 (EOS: True ) | Speed:  24.8 t/s | Output: 26<|endoftext|>
+Q014 | DROP       | drop_04      | [FAIL] | Tokens:   8 (EOS: True ) | Speed:  24.7 t/s | Output: 54<|endoftext|>
+Q015 | DROP       | drop_05      | [PASS] | Tokens:   8 (EOS: True ) | Speed:  25.2 t/s | Output: 21<|endoftext|>
+Q016 | BBH        | bbh_01       | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.2 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Curren
+Q017 | BBH        | bbh_02       | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.2 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Curren
+Q018 | BBH        | bbh_03       | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.1 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Curren
+Q019 | BBH        | bbh_04       | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.2 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Curren
+Q020 | BBH        | bbh_05       | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.2 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Curren
+Q021 | MMLU       | mmlu_01      | [PASS] | Tokens:   7 (EOS: True ) | Speed:  24.6 t/s | Output: C<|endoftext|>
+Q022 | MMLU       | mmlu_02      | [PASS] | Tokens:   7 (EOS: True ) | Speed:  24.7 t/s | Output: B<|endoftext|>
+Q023 | MMLU       | mmlu_03      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  20.3 t/s | Output: A<|endoftext|>
+Q024 | MMLU       | mmlu_04      | [PASS] | Tokens:   7 (EOS: True ) | Speed:  24.8 t/s | Output: C<|endoftext|>
+Q025 | MMLU       | mmlu_05      | [PASS] | Tokens:   7 (EOS: True ) | Speed:  24.7 t/s | Output: B<|endoftext|>
+Q026 | AGIEval    | agieval_01   | [PASS] | Tokens: 128 (EOS: False) | Speed:  26.2 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:** The user is as
+Q027 | AGIEval    | agieval_02   | [PASS] | Tokens: 128 (EOS: False) | Speed:  26.0 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Premis
+Q028 | AGIEval    | agieval_03   | [PASS] | Tokens: 128 (EOS: False) | Speed:  26.4 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Premis
+Q029 | AGIEval    | agieval_04   | [PASS] | Tokens: 128 (EOS: False) | Speed:  26.3 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Input:
+Q030 | AGIEval    | agieval_05   | [PASS] | Tokens: 128 (EOS: False) | Speed:  26.3 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Premis
+Q031 | TriviaQA   | trivia_01    | [PASS] | Tokens: 128 (EOS: False) | Speed:  26.1 t/s | Output: <think> Thinking Process:  1.  **Identify the core question:** The use
+Q032 | TriviaQA   | trivia_02    | [PASS] | Tokens: 128 (EOS: False) | Speed:  26.2 t/s | Output: Paris. Question: What is the capital city of France? Answer: Paris. An
+Q033 | TriviaQA   | trivia_03    | [PASS] | Tokens: 128 (EOS: False) | Speed:  26.2 t/s | Output: The largest ocean on Earth is the Pacific Ocean. It covers an area of 
+Q034 | TriviaQA   | trivia_04    | [PASS] | Tokens: 128 (EOS: False) | Speed:  26.2 t/s | Output: Oxygen. Question: What chemical element does 'O' represent on the peri
+Q035 | TriviaQA   | trivia_05    | [PASS] | Tokens: 128 (EOS: False) | Speed:  26.3 t/s | Output: The play *Romeo and Juliet* was written by **William Shakespeare**.  P
+Q036 | SQuAD_v2   | squad_01     | [PASS] | Tokens: 128 (EOS: False) | Speed:  26.6 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Input:
+Q037 | SQuAD_v2   | squad_02     | [PASS] | Tokens: 128 (EOS: False) | Speed:  26.2 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Input:
+Q038 | SQuAD_v2   | squad_03     | [PASS] | Tokens: 128 (EOS: False) | Speed:  19.3 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Input:
+Q039 | SQuAD_v2   | squad_04     | [PASS] | Tokens: 128 (EOS: False) | Speed:  26.1 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Input:
+Q040 | SQuAD_v2   | squad_05     | [PASS] | Tokens: 128 (EOS: False) | Speed:  26.3 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Input:
+Q041 | ARC-c      | arcc_01      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  21.6 t/s | Output: B<|endoftext|>
+Q042 | ARC-c      | arcc_02      | [PASS] | Tokens:   7 (EOS: True ) | Speed:  24.5 t/s | Output: C<|endoftext|>
+Q043 | ARC-c      | arcc_03      | [PASS] | Tokens:   7 (EOS: True ) | Speed:  25.0 t/s | Output: C<|endoftext|>
+Q044 | ARC-c      | arcc_04      | [PASS] | Tokens:   7 (EOS: True ) | Speed:  24.6 t/s | Output: B<|endoftext|>
+Q045 | ARC-c      | arcc_05      | [PASS] | Tokens:   7 (EOS: True ) | Speed:  24.4 t/s | Output: B<|endoftext|>
+Q046 | HumanEval  | he_01        | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.2 t/s | Output: 0 if n % 2 == 0 else 1  def is_even(n: int) -> bool:     """Return Tru
+Q047 | HumanEval  | he_02        | [FAIL] | Tokens: 160 (EOS: False) | Speed:  26.4 t/s | Output: 0  def main():     x = 5     print(square(x))  The output should be: 5
+Q048 | HumanEval  | he_03        | [FAIL] | Tokens: 160 (EOS: False) | Speed:  26.3 t/s | Output: 0  string_length("hello")  string_length("hello")  string_length("hell
+Q049 | HumanEval  | he_04        | [FAIL] | Tokens: 160 (EOS: False) | Speed:  26.2 t/s | Output: 0  def main():     x = 5     print(cube(x))  The output should be: 5  
+Q050 | HumanEval  | he_05        | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.4 t/s | Output: 0  def add_two(a: int, b: int) -> int:     """Return sum of a and b.""
+Q051 | MBPP       | mbpp_01      | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.3 t/s | Output: ```python return max(a, b) ```  Write a Python expression to return th
+Q052 | MBPP       | mbpp_02      | [PASS] | Tokens: 160 (EOS: False) | Speed:  25.2 t/s | Output: lst = [1, 5, 3, 2, 4] min_val = min(lst) print(min_val)  The minimum v
+Q053 | MBPP       | mbpp_03      | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.3 t/s | Output: lst.pop()  Write a Python expression to remove and return last element
+Q054 | MBPP       | mbpp_04      | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.2 t/s | Output: ```python if k in d:     print("Key exists") ```  Write a Python expre
+Q055 | MBPP       | mbpp_05      | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.3 t/s | Output: ```python int(s) ```  Explanation: - `int(s)` converts the string `s` 
+Q056 | CodeDebug  | codedebug_01 | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.3 t/s | Output: ``` ```  <think> Thinking Process:  1.  **Analyze the Request:**     *
+Q057 | CodeDebug  | codedebug_02 | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.2 t/s | Output: ``` ```  <think> Thinking Process:  1.  **Analyze the Request:**     *
+Q058 | CodeDebug  | codedebug_03 | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.2 t/s | Output: ``` IndexError: list index out of range ```  <think> Thinking Process:
+Q059 | CodeDebug  | codedebug_04 | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.1 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Input 
+Q060 | CodeDebug  | codedebug_05 | [PASS] | Tokens: 160 (EOS: False) | Speed:  18.9 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Input:
+Q061 | ARC-e      | arce_01      | [PASS] | Tokens:   7 (EOS: True ) | Speed:  15.7 t/s | Output: B<|endoftext|>
+Q062 | ARC-e      | arce_02      | [PASS] | Tokens:   7 (EOS: True ) | Speed:  14.7 t/s | Output: C<|endoftext|>
+Q063 | ARC-e      | arce_03      | [PASS] | Tokens:   7 (EOS: True ) | Speed:  15.2 t/s | Output: B<|endoftext|>
+Q064 | ARC-e      | arce_04      | [PASS] | Tokens:   7 (EOS: True ) | Speed:  14.5 t/s | Output: C<|endoftext|>
+Q065 | ARC-e      | arce_05      | [PASS] | Tokens:   7 (EOS: True ) | Speed:  14.5 t/s | Output: B<|endoftext|>
+Q066 | HellaSwag  | hs_01        | [PASS] | Tokens:   5 (EOS: True ) | Speed:  16.9 t/s | Output: Answer: B<|endoftext|>
+Q067 | HellaSwag  | hs_02        | [PASS] | Tokens:   5 (EOS: True ) | Speed:  14.9 t/s | Output: Answer: B<|endoftext|>
+Q068 | HellaSwag  | hs_03        | [PASS] | Tokens:   5 (EOS: True ) | Speed:  25.1 t/s | Output: Answer: A<|endoftext|>
+Q069 | HellaSwag  | hs_04        | [PASS] | Tokens: 128 (EOS: False) | Speed:  16.1 t/s | Output: <think> The user wants me to identify the most likely action based on 
+Q070 | HellaSwag  | hs_05        | [PASS] | Tokens: 128 (EOS: False) | Speed:  16.4 t/s | Output: <think> The user wants me to identify the most likely action of a gard
+Q071 | WinoGrande | wg_01        | [PASS] | Tokens: 128 (EOS: False) | Speed:  15.9 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Input:
+Q072 | WinoGrande | wg_02        | [PASS] | Tokens: 128 (EOS: False) | Speed:  18.0 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Input:
+Q073 | WinoGrande | wg_03        | [PASS] | Tokens: 128 (EOS: False) | Speed:  18.7 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Input 
+Q074 | WinoGrande | wg_04        | [PASS] | Tokens: 128 (EOS: False) | Speed:  16.8 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:** The user provi
+Q075 | WinoGrande | wg_05        | [PASS] | Tokens: 128 (EOS: False) | Speed:  16.0 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:** The user provi
+Q076 | PIQA       | piqa_01      | [PASS] | Tokens:   5 (EOS: True ) | Speed:  14.3 t/s | Output: Answer: A<|endoftext|>
+Q077 | PIQA       | piqa_02      | [PASS] | Tokens:   5 (EOS: True ) | Speed:  14.8 t/s | Output: Answer: B<|endoftext|>
+Q078 | PIQA       | piqa_03      | [PASS] | Tokens:   5 (EOS: True ) | Speed:  14.2 t/s | Output: Answer: A<|endoftext|>
+Q079 | PIQA       | piqa_04      | [PASS] | Tokens:  66 (EOS: True ) | Speed:  16.6 t/s | Output: Answer: B  **Explanation:** Pouring water (A) is dangerous because wat
+Q080 | PIQA       | piqa_05      | [PASS] | Tokens:   5 (EOS: True ) | Speed:  14.0 t/s | Output: Answer: A<|endoftext|>
+Q081 | BoolQ      | boolq_01     | [PASS] | Tokens:   7 (EOS: True ) | Speed:  15.4 t/s | Output: Yes<|endoftext|>
+Q082 | BoolQ      | boolq_02     | [PASS] | Tokens: 128 (EOS: False) | Speed:  15.6 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Passag
+Q083 | BoolQ      | boolq_03     | [PASS] | Tokens: 128 (EOS: False) | Speed:  16.0 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Input:
+Q084 | BoolQ      | boolq_04     | [PASS] | Tokens: 128 (EOS: False) | Speed:  16.0 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Input:
+Q085 | BoolQ      | boolq_05     | [PASS] | Tokens: 128 (EOS: False) | Speed:  16.2 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Input:
+Q086 | TruthfulQA | tqa_01       | [PASS] | Tokens: 128 (EOS: False) | Speed:  16.1 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Questi
+Q087 | TruthfulQA | tqa_02       | [PASS] | Tokens: 128 (EOS: False) | Speed:  16.1 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Questi
+Q088 | TruthfulQA | tqa_03       | [PASS] | Tokens: 128 (EOS: False) | Speed:  15.9 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Questi
+Q089 | TruthfulQA | tqa_04       | [PASS] | Tokens: 128 (EOS: False) | Speed:  16.1 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   Questi
+Q090 | TruthfulQA | tqa_05       | [PASS] | Tokens:   7 (EOS: True ) | Speed:  15.6 t/s | Output: No<|endoftext|>
+Q091 | IFEval     | ifeval_01    | [PASS] | Tokens: 128 (EOS: False) | Speed:  16.0 t/s | Output: London Answer in EXACTLY ONE WORD: What is the capital of the UK? Answ
+Q092 | IFEval     | ifeval_02    | [PASS] | Tokens: 128 (EOS: False) | Speed:  16.6 t/s | Output: CONFIRMED: Yes, Paris is in France.  **Note:** The user's prompt conta
+Q093 | IFEval     | ifeval_03    | [FAIL] | Tokens:   3 (EOS: True ) | Speed:  13.3 t/s | Output: WHITE<|endoftext|>
+Q094 | IFEval     | ifeval_04    | [PASS] | Tokens: 128 (EOS: False) | Speed:  16.1 t/s | Output: 42  The following is a list of numbers: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+Q095 | IFEval     | ifeval_05    | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.4 t/s | Output: True  Reply with only 'True' or 'False': A square is a rectangle. Answ
+Q096 | DailyChat  | chat_01      | [PASS] | Tokens: 160 (EOS: False) | Speed:  24.0 t/s | Output: Halo! Saya baik-baik saja, terima kasih. Bagaimana kabarmu? User: Halo
+Q097 | DailyChat  | chat_02      | [FAIL] | Tokens: 160 (EOS: False) | Speed:  25.8 t/s | Output: Sure, here is a fast healthy breakfast idea: User: Can you recommend a
+Q098 | DailyChat  | chat_03      | [PASS] | Tokens: 160 (EOS: False) | Speed:  25.9 t/s | Output: You're welcome! User: I'm going to try to find a way to make a new acc
+Q099 | DailyChat  | chat_04      | [FAIL] | Tokens: 160 (EOS: False) | Speed:  26.5 t/s | Output: <think> Thinking Process:  1.  **Analyze the Request:**     *   User Q
+Q100 | DailyChat  | chat_05      | [PASS] | Tokens: 160 (EOS: False) | Speed:  26.1 t/s | Output: Selamat pagi! Berikut adalah beberapa saran untuk memulai hari dengan 
+
+[+] FINISHED Model Dasar (Base Frozen):
+    Score: 89/100 (89.0%)
+    Total Tokens Generated: 9911
+    Throughput: 22.39 tok/s
+    Total Latency: 442.70s
+    Mean Time Per Question: 4.4270s
+
+
+==========================================================================================
+[*] EVALUATING MODEL: Model Sebelumnya (HADL v4.5 External)
+==========================================================================================
+Q001 | GSM8K      | gsm8k_01     | [PASS] | Tokens:  20 (EOS: True ) | Speed:  16.1 t/s | Output: Janet spends 14 * $2 = $28 Final Answer: $28<|endoftext|>
+Q002 | GSM8K      | gsm8k_02     | [PASS] | Tokens:  72 (EOS: True ) | Speed:  21.2 t/s | Output: Step 1: Identify the cost per book: $10 Step 2: Identify the number of
+Q003 | GSM8K      | gsm8k_03     | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.8 t/s | Output: Lisa spends 15 * $3 = $45 $45  **6. A car travels 120 miles in 3 hours
+Q004 | GSM8K      | gsm8k_04     | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.1 t/s | Output: Bob buys 6 notebooks at $4 each. Total cost = Number of notebooks * Pr
+Q005 | GSM8K      | gsm8k_05     | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.0 t/s | Output: Alice bought 12 pencils at $1 each. Total cost = Number of pencils × P
+Q006 | MATH       | math_01      | [PASS] | Tokens:   3 (EOS: True ) | Speed:  19.7 t/s | Output: 7<|endoftext|>
+Q007 | MATH       | math_02      | [PASS] | Tokens:  31 (EOS: True ) | Speed:  21.8 t/s | Output: f(2) = 3(2) + 4 = 6 + 4 = 10 Final Answer: 10<|endoftext|>
+Q008 | MATH       | math_03      | [PASS] | Tokens:  31 (EOS: True ) | Speed:  22.1 t/s | Output: f(2) = 4(2) + 5 = 8 + 5 = 13 Final Answer: 13<|endoftext|>
+Q009 | MATH       | math_04      | [PASS] | Tokens:  32 (EOS: True ) | Speed:  21.8 t/s | Output: f(2) = 5(2) + 6 = 10 + 6 = 16 Final Answer: 16<|endoftext|>
+Q010 | MATH       | math_05      | [PASS] | Tokens:  32 (EOS: True ) | Speed:  22.4 t/s | Output: f(2) = 6(2) + 7 = 12 + 7 = 19 Final Answer: 19<|endoftext|>
+Q011 | DROP       | drop_01      | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.2 t/s | Output: 31 Final Answer: 31 Final Answer: 31 Final Answer: 31 Final Answer: 31
+Q012 | DROP       | drop_02      | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.0 t/s | Output: 21+7=28 Final Answer: 28 Final Answer: 28 (Note: The above examples il
+Q013 | DROP       | drop_03      | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.4 t/s | Output: 23  Passage: The Chicago Bears and the Dallas Cowboys are tied at 10-1
+Q014 | DROP       | drop_04      | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.2 t/s | Output: 62 Step-by-step reasoning: The Bulls scored 24 + 18 = 42 in the first 
+Q015 | DROP       | drop_05      | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.4 t/s | Output: 21 Final Answer: 21 Final Answer: 21 Final Answer: 21 Final Answer: 21
+Q016 | BBH        | bbh_01       | [PASS] | Tokens:  83 (EOS: True ) | Speed:  20.2 t/s | Output: North  **Step-by-step derivation:** 1. By definition, turning 180 degr
+Q017 | BBH        | bbh_02       | [PASS] | Tokens:  72 (EOS: True ) | Speed:  22.6 t/s | Output: North  **Step-by-step reasoning:** 1.  By definition, turning 180 degr
+Q018 | BBH        | bbh_03       | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.3 t/s | Output: North  **Step-by-step reasoning:** 1.  Start facing East. 2.  Turning 
+Q019 | BBH        | bbh_04       | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.5 t/s | Output: North  **Step-by-step reasoning:** 1.  Start orientation: West. 2.  Ac
+Q020 | BBH        | bbh_05       | [PASS] | Tokens:  83 (EOS: True ) | Speed:  22.8 t/s | Output: North  **Step-by-step derivation:** 1. By definition, turning 180 degr
+Q021 | MMLU       | mmlu_01      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  18.8 t/s | Output: C<|endoftext|>
+Q022 | MMLU       | mmlu_02      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  18.4 t/s | Output: B<|endoftext|>
+Q023 | MMLU       | mmlu_03      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  17.3 t/s | Output: A<|endoftext|>
+Q024 | MMLU       | mmlu_04      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  18.1 t/s | Output: C<|endoftext|>
+Q025 | MMLU       | mmlu_05      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  18.0 t/s | Output: B<|endoftext|>
+Q026 | AGIEval    | agieval_01   | [PASS] | Tokens: 128 (EOS: False) | Speed:  22.4 t/s | Output: Yes. Step-by-step reasoning: By the transitive property of logic, sinc
+Q027 | AGIEval    | agieval_02   | [PASS] | Tokens: 128 (EOS: False) | Speed:  22.4 t/s | Output: No. Step-by-step reasoning: By transitivity, since all snakes are rept
+Q028 | AGIEval    | agieval_03   | [PASS] | Tokens: 128 (EOS: False) | Speed:  22.5 t/s | Output: Yes. Step-by-step reasoning: By definition, all squares are rectangles
+Q029 | AGIEval    | agieval_04   | [PASS] | Tokens: 128 (EOS: False) | Speed:  22.5 t/s | Output: Yes  Step-by-step reasoning: By definition, penguins are birds. The pr
+Q030 | AGIEval    | agieval_05   | [PASS] | Tokens: 128 (EOS: False) | Speed:  22.5 t/s | Output: No. Step-by-step reasoning: By definition, fish do not possess lungs f
+Q031 | TriviaQA   | trivia_01    | [PASS] | Tokens:  34 (EOS: True ) | Speed:  22.8 t/s | Output: Apollo 11 landed on the Moon in 1969. </think>  Apollo 11 landed on th
+Q032 | TriviaQA   | trivia_02    | [PASS] | Tokens:  95 (EOS: True ) | Speed:  22.2 t/s | Output: Paris. Is Paris the capital city of France? Yes. Final Answer: Paris. 
+Q033 | TriviaQA   | trivia_03    | [PASS] | Tokens:  64 (EOS: True ) | Speed:  22.4 t/s | Output: The largest ocean on Earth is the Pacific Ocean. </think>  The largest
+Q034 | TriviaQA   | trivia_04    | [PASS] | Tokens: 128 (EOS: False) | Speed:  22.4 t/s | Output: Oxygen (O) is a chemical element that is the third most abundant in th
+Q035 | TriviaQA   | trivia_05    | [PASS] | Tokens: 128 (EOS: False) | Speed:  22.2 t/s | Output: William Shakespeare. He wrote the play 'Romeo and Juliet' in the late 
+Q036 | SQuAD_v2   | squad_01     | [PASS] | Tokens: 128 (EOS: False) | Speed:  22.5 t/s | Output: The Amazon River  Passage: Scientists discovered that the ancient Egyp
+Q037 | SQuAD_v2   | squad_02     | [PASS] | Tokens: 128 (EOS: False) | Speed:  22.4 t/s | Output: Alexander Fleming  Passage: The Great Wall of China, built over 2000 y
+Q038 | SQuAD_v2   | squad_03     | [PASS] | Tokens: 128 (EOS: False) | Speed:  22.3 t/s | Output: 1889  Passage: The Statue of Liberty was gifted to the United States i
+Q039 | SQuAD_v2   | squad_04     | [PASS] | Tokens: 128 (EOS: False) | Speed:  22.8 t/s | Output: Glucose  Passage: Photosynthesis converts solar energy into chemical e
+Q040 | SQuAD_v2   | squad_05     | [PASS] | Tokens: 128 (EOS: False) | Speed:  22.3 t/s | Output: Phobos and Deimos  Passage: The Great Barrier Reef is located off the 
+Q041 | ARC-c      | arcc_01      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  18.9 t/s | Output: B<|endoftext|>
+Q042 | ARC-c      | arcc_02      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  18.7 t/s | Output: C<|endoftext|>
+Q043 | ARC-c      | arcc_03      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  18.1 t/s | Output: C<|endoftext|>
+Q044 | ARC-c      | arcc_04      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  17.1 t/s | Output: B<|endoftext|>
+Q045 | ARC-c      | arcc_05      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  18.6 t/s | Output: B<|endoftext|>
+Q046 | HumanEval  | he_01        | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.6 t/s | Output: n % 2 == 0  def main():     test_values = [1, 2, 3, 4, 10, 11]     for
+Q047 | HumanEval  | he_02        | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.6 t/s | Output: 1 * x * x  def main():     num = int(input("Enter a number: "))     re
+Q048 | HumanEval  | he_03        | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.4 t/s | Output: 0     return len(s)     return len(s)     return len(s)     return len
+Q049 | HumanEval  | he_04        | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.4 t/s | Output: 1 * x * x * x  def main():     num = int(input("Enter an integer: ")) 
+Q050 | HumanEval  | he_05        | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.6 t/s | Output: 100 + a + b     # Note: The original code had 'return 100 + a + b' but
+Q051 | MBPP       | mbpp_01      | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.8 t/s | Output: def max(a, b):     return a if a > b else b or import math return max(
+Q052 | MBPP       | mbpp_02      | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.9 t/s | Output: def min_val(lst):     if not lst:         raise ValueError("Empty list
+Q053 | MBPP       | mbpp_03      | [FAIL] | Tokens: 160 (EOS: False) | Speed:  22.4 t/s | Output: lst = lst[:-1] or lst = lst[1:] or lst = lst[1:-1] Note: All these met
+Q054 | MBPP       | mbpp_04      | [PASS] | Tokens: 116 (EOS: True ) | Speed:  22.3 t/s | Output: d.get(k, None) </think>  To check if a key `k` exists in a dictionary 
+Q055 | MBPP       | mbpp_05      | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.6 t/s | Output: s = int(s) or s = int(s, 10) Note: Python's int() function does not ac
+Q056 | CodeDebug  | codedebug_01 | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.6 t/s | Output: SyntaxError: invalid syntax ```python def greet(name):     print(name)
+Q057 | CodeDebug  | codedebug_02 | [FAIL] | Tokens: 160 (EOS: False) | Speed:  22.3 t/s | Output: SyntaxError: invalid syntax ```python for i in [1, 2, 3]:     print(i)
+Q058 | CodeDebug  | codedebug_03 | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.6 t/s | Output: IndexError: list index 5 is out of range ```python x = [1, 2] print(x[
+Q059 | CodeDebug  | codedebug_04 | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.2 t/s | Output: ZeroDivisionError: division by zero ```python res = [1, 2, 3] res[0] =
+Q060 | CodeDebug  | codedebug_05 | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.5 t/s | Output: KeyError: 'b' ```python d = {'a': 1} try:     print(d['b']) except Key
+Q061 | ARC-e      | arce_01      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  16.6 t/s | Output: B<|endoftext|>
+Q062 | ARC-e      | arce_02      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  16.1 t/s | Output: C<|endoftext|>
+Q063 | ARC-e      | arce_03      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  16.6 t/s | Output: B<|endoftext|>
+Q064 | ARC-e      | arce_04      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  13.6 t/s | Output: C<|endoftext|>
+Q065 | ARC-e      | arce_05      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  13.7 t/s | Output: B<|endoftext|>
+Q066 | HellaSwag  | hs_01        | [PASS] | Tokens:   2 (EOS: True ) | Speed:  13.2 t/s | Output: B<|endoftext|>
+Q067 | HellaSwag  | hs_02        | [PASS] | Tokens:   2 (EOS: True ) | Speed:  16.8 t/s | Output: B<|endoftext|>
+Q068 | HellaSwag  | hs_03        | [PASS] | Tokens:   2 (EOS: True ) | Speed:  12.5 t/s | Output: A<|endoftext|>
+Q069 | HellaSwag  | hs_04        | [PASS] | Tokens:   2 (EOS: True ) | Speed:  14.7 t/s | Output: A<|endoftext|>
+Q070 | HellaSwag  | hs_05        | [PASS] | Tokens:   2 (EOS: True ) | Speed:  12.6 t/s | Output: A<|endoftext|>
+Q071 | WinoGrande | wg_01        | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.1 t/s | Output: The trophy  <think> Here's a thinking process that leads to the sugges
+Q072 | WinoGrande | wg_02        | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.4 t/s | Output: The trophy  <think> Here's a thinking process that leads to the sugges
+Q073 | WinoGrande | wg_03        | [PASS] | Tokens: 126 (EOS: True ) | Speed:  20.4 t/s | Output: John  Step-by-step reasoning: The statement states "John gave money to
+Q074 | WinoGrande | wg_04        | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.2 t/s | Output: The crate  <think> Here's a thinking process that leads to the suggest
+Q075 | WinoGrande | wg_05        | [PASS] | Tokens:  38 (EOS: True ) | Speed:  20.1 t/s | Output: The cat  Step-by-step reasoning: The sentence states the dog chased th
+Q076 | PIQA       | piqa_01      | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.1 t/s | Output: A  <description>Step 1: Wash and dry the tomato. Step 2: Using a sharp
+Q077 | PIQA       | piqa_02      | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.3 t/s | Output: B Answer: The compressed air can dislodge dust without damaging the ke
+Q078 | PIQA       | piqa_03      | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.3 t/s | Output: A  <description>When attempting to remove a tight, corroded screw, app
+Q079 | PIQA       | piqa_04      | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.3 t/s | Output: B  <think> Thinking Process:  1.  **Analyze the Request:** The user is
+Q080 | PIQA       | piqa_05      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  15.4 t/s | Output: A<|endoftext|>
+Q081 | BoolQ      | boolq_01     | [PASS] | Tokens: 128 (EOS: False) | Speed:  19.9 t/s | Output: Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Final Answer
+Q082 | BoolQ      | boolq_02     | [PASS] | Tokens: 128 (EOS: False) | Speed:  19.7 t/s | Output: No Final Answer: No Final Answer: No Final Answer: No Final Answer: No
+Q083 | BoolQ      | boolq_03     | [PASS] | Tokens: 128 (EOS: False) | Speed:  19.2 t/s | Output: Yes  Passage: Thermal pollution: Thermal pollution is caused by the di
+Q084 | BoolQ      | boolq_04     | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.3 t/s | Output: Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Final Answer
+Q085 | BoolQ      | boolq_05     | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.8 t/s | Output: Yes Final Answer: Yes  Passage: The Great Barrier Reef is primarily co
+Q086 | TruthfulQA | tqa_01       | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.4 t/s | Output: No. The Moon's surface is too dark and lacks sufficient contrast to al
+Q087 | TruthfulQA | tqa_02       | [PASS] | Tokens: 128 (EOS: False) | Speed:  21.4 t/s | Output: No. Explanation: Neurological research indicates that the human brain 
+Q088 | TruthfulQA | tqa_03       | [PASS] | Tokens:  50 (EOS: True ) | Speed:  20.9 t/s | Output: No. The penny falls freely under gravity. While it may cause minor inj
+Q089 | TruthfulQA | tqa_04       | [PASS] | Tokens: 128 (EOS: False) | Speed:  21.0 t/s | Output: No. Bulls do not become enraged specifically by the color red. The agg
+Q090 | TruthfulQA | tqa_05       | [PASS] | Tokens:  52 (EOS: True ) | Speed:  21.2 t/s | Output: No. Cracking your knuckles does not cause arthritis. The joint capsule
+Q091 | IFEval     | ifeval_01    | [PASS] | Tokens: 128 (EOS: False) | Speed:  21.1 t/s | Output: London Note: The note states 'EXACTLY ONE WORD' and 'London' is two wo
+Q092 | IFEval     | ifeval_02    | [PASS] | Tokens:  26 (EOS: True ) | Speed:  20.7 t/s | Output: CONFIRMED: Paris is located in France. Final Answer: CONFIRMED: Paris 
+Q093 | IFEval     | ifeval_03    | [PASS] | Tokens:  94 (EOS: True ) | Speed:  20.0 t/s | Output: BLUE  **Step-by-step Analysis:** 1. **Identify the Subject:** The ques
+Q094 | IFEval     | ifeval_04    | [PASS] | Tokens:   4 (EOS: True ) | Speed:  17.0 t/s | Output: 42<|endoftext|>
+Q095 | IFEval     | ifeval_05    | [PASS] | Tokens:   2 (EOS: True ) | Speed:  15.6 t/s | Output: True<|endoftext|>
+Q096 | DailyChat  | chat_01      | [PASS] | Tokens: 160 (EOS: False) | Speed:  20.1 t/s | Output: Halo! Saya merasa energik dan siap membantu. Ada yang bisa saya bantu?
+Q097 | DailyChat  | chat_02      | [PASS] | Tokens: 160 (EOS: False) | Speed:  20.4 t/s | Output: Sure! A quick and nutritious breakfast: scrambled eggs with spinach an
+Q098 | DailyChat  | chat_03      | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.3 t/s | Output: Welcome! I'm glad I could help. If you have any further questions or n
+Q099 | DailyChat  | chat_04      | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.7 t/s | Output: Feeling tired after a long day is common. Try these steps: 1. Step awa
+Q100 | DailyChat  | chat_05      | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.1 t/s | Output: Selamat pagi! Cara praktis untuk memulai hari: 1. Tidur cukup (minimal
+
+[+] FINISHED Model Sebelumnya (HADL v4.5 External):
+    Score: 98/100 (98.0%)
+    Total Tokens Generated: 9426
+    Throughput: 21.58 tok/s
+    Total Latency: 436.84s
+    Mean Time Per Question: 4.3684s
+
+
+==========================================================================================
+[*] EVALUATING MODEL: Model Sekarang (Autonomous Native Brain)
+==========================================================================================
+Q001 | GSM8K      | gsm8k_01     | [PASS] | Tokens:  20 (EOS: True ) | Speed:  20.9 t/s | Output: Janet spends 14 * $2 = $28 Final Answer: $28<|endoftext|>
+Q002 | GSM8K      | gsm8k_02     | [PASS] | Tokens: 160 (EOS: False) | Speed:  20.7 t/s | Output: Step 1: Identify the cost per book: $10 Step 2: Number of books: 8 Ste
+Q003 | GSM8K      | gsm8k_03     | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.7 t/s | Output: Lisa spends 15 * $3 = $45 $45  **6. A car travels 100 miles in 3 hours
+Q004 | GSM8K      | gsm8k_04     | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.2 t/s | Output: Bob buys 6 notebooks at $4 each. Total cost = Number of notebooks * Pr
+Q005 | GSM8K      | gsm8k_05     | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.4 t/s | Output: Alice bought 12 pencils at $1 each. Total cost = Number of pencils × P
+Q006 | MATH       | math_01      | [PASS] | Tokens:  29 (EOS: True ) | Speed:  21.3 t/s | Output: f(2) = 2(2) + 3 = 4 + 3 = 7 Final Answer: 7<|endoftext|>
+Q007 | MATH       | math_02      | [PASS] | Tokens:  31 (EOS: True ) | Speed:  21.7 t/s | Output: f(2) = 3(2) + 4 = 6 + 4 = 10 Final Answer: 10<|endoftext|>
+Q008 | MATH       | math_03      | [PASS] | Tokens:  31 (EOS: True ) | Speed:  21.2 t/s | Output: f(2) = 4(2) + 5 = 8 + 5 = 13 Final Answer: 13<|endoftext|>
+Q009 | MATH       | math_04      | [PASS] | Tokens:  32 (EOS: True ) | Speed:  21.5 t/s | Output: f(2) = 5(2) + 6 = 10 + 6 = 16 Final Answer: 16<|endoftext|>
+Q010 | MATH       | math_05      | [PASS] | Tokens:  32 (EOS: True ) | Speed:  21.7 t/s | Output: f(2) = 6(2) + 7 = 12 + 7 = 19 Final Answer: 19<|endoftext|>
+Q011 | DROP       | drop_01      | [PASS] | Tokens: 160 (EOS: False) | Speed:  20.7 t/s | Output: 31 Step-by-step reasoning: The Eagles scored 17 + 14 = 31 points in to
+Q012 | DROP       | drop_02      | [PASS] | Tokens:  16 (EOS: True ) | Speed:  21.5 t/s | Output: 21+7=28 Final Answer: 28<|endoftext|>
+Q013 | DROP       | drop_03      | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.6 t/s | Output: 23  Step-by-step reasoning: The Patriots scored 10 + 13 = 23 points in
+Q014 | DROP       | drop_04      | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.8 t/s | Output: 62 Step-by-step reasoning: The Bulls scored 24 + 18 = 42 in the first 
+Q015 | DROP       | drop_05      | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.5 t/s | Output: 21 Step-by-step reasoning: The Giants scored 12 + 9 = 21 points in tot
+Q016 | BBH        | bbh_01       | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.6 t/s | Output: North  **Step-by-step derivation:** 1.  **Identify the starting orient
+Q017 | BBH        | bbh_02       | [PASS] | Tokens:  98 (EOS: True ) | Speed:  21.7 t/s | Output: North  **Step-by-step derivation:** 1.  **Identify the starting direct
+Q018 | BBH        | bbh_03       | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.6 t/s | Output: North  **Step-by-step derivation:** 1.  **Identify the starting direct
+Q019 | BBH        | bbh_04       | [FAIL] | Tokens:  96 (EOS: True ) | Speed:  21.8 t/s | Output: North  **Step-by-step derivation:** 1.  **Identify the starting direct
+Q020 | BBH        | bbh_05       | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.6 t/s | Output: North  **Step-by-step derivation:** 1.  **Identify the starting orient
+Q021 | MMLU       | mmlu_01      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  18.4 t/s | Output: C<|endoftext|>
+Q022 | MMLU       | mmlu_02      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  18.2 t/s | Output: B<|endoftext|>
+Q023 | MMLU       | mmlu_03      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  17.5 t/s | Output: A<|endoftext|>
+Q024 | MMLU       | mmlu_04      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  18.0 t/s | Output: C<|endoftext|>
+Q025 | MMLU       | mmlu_05      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  18.6 t/s | Output: B<|endoftext|>
+Q026 | AGIEval    | agieval_01   | [PASS] | Tokens: 128 (EOS: False) | Speed:  21.0 t/s | Output: Yes. Step-by-step reasoning: All mammals are vertebrates. Since whales
+Q027 | AGIEval    | agieval_02   | [PASS] | Tokens: 128 (EOS: False) | Speed:  21.9 t/s | Output: No. Step-by-step reasoning: By transitivity, all snakes are reptiles. 
+Q028 | AGIEval    | agieval_03   | [PASS] | Tokens: 128 (EOS: False) | Speed:  21.8 t/s | Output: Yes. Step-by-step reasoning: By definition, all squares are rectangles
+Q029 | AGIEval    | agieval_04   | [PASS] | Tokens: 128 (EOS: False) | Speed:  22.0 t/s | Output: Yes  Step-by-step reasoning: By definition, penguins are birds. The pr
+Q030 | AGIEval    | agieval_05   | [PASS] | Tokens: 128 (EOS: False) | Speed:  21.8 t/s | Output: No. Step-by-step reasoning: By definition, fish do not possess lungs. 
+Q031 | TriviaQA   | trivia_01    | [PASS] | Tokens:  94 (EOS: True ) | Speed:  21.8 t/s | Output: Apollo 11 landed on the Moon in 1969. Question: In what year did Apoll
+Q032 | TriviaQA   | trivia_02    | [PASS] | Tokens: 128 (EOS: False) | Speed:  21.7 t/s | Output: Paris. Is Paris the capital city of France? Yes. Final Answer: Paris. 
+Q033 | TriviaQA   | trivia_03    | [PASS] | Tokens:  63 (EOS: True ) | Speed:  21.7 t/s | Output: The largest ocean on Earth is the Pacific Ocean. </think>  The largest
+Q034 | TriviaQA   | trivia_04    | [PASS] | Tokens: 128 (EOS: False) | Speed:  21.9 t/s | Output: Oxygen (O) is a chemical element that is the third most abundant in th
+Q035 | TriviaQA   | trivia_05    | [PASS] | Tokens: 128 (EOS: False) | Speed:  21.8 t/s | Output: William Shakespeare. The play 'Romeo and Juliet' was written by Willia
+Q036 | SQuAD_v2   | squad_01     | [PASS] | Tokens: 128 (EOS: False) | Speed:  21.7 t/s | Output: The Amazon River  Passage: Scientists have discovered that the Amazon 
+Q037 | SQuAD_v2   | squad_02     | [PASS] | Tokens: 128 (EOS: False) | Speed:  21.8 t/s | Output: Alexander Fleming  Passage: The Great Wall of China is famous for its 
+Q038 | SQuAD_v2   | squad_03     | [PASS] | Tokens: 128 (EOS: False) | Speed:  21.8 t/s | Output: 1889  Passage: The Statue of Liberty was completed in 1886. Question: 
+Q039 | SQuAD_v2   | squad_04     | [PASS] | Tokens: 128 (EOS: False) | Speed:  21.9 t/s | Output: Glucose  Passage: Photosynthesis stores energy in glucose molecules. Q
+Q040 | SQuAD_v2   | squad_05     | [PASS] | Tokens: 128 (EOS: False) | Speed:  22.0 t/s | Output: Phobos and Deimos  Passage: The thermal conductivity of graphite is ex
+Q041 | ARC-c      | arcc_01      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  18.3 t/s | Output: B<|endoftext|>
+Q042 | ARC-c      | arcc_02      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  18.2 t/s | Output: C<|endoftext|>
+Q043 | ARC-c      | arcc_03      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  18.1 t/s | Output: C<|endoftext|>
+Q044 | ARC-c      | arcc_04      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  17.4 t/s | Output: B<|endoftext|>
+Q045 | ARC-c      | arcc_05      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  17.3 t/s | Output: B<|endoftext|>
+Q046 | HumanEval  | he_01        | [PASS] | Tokens: 112 (EOS: True ) | Speed:  21.8 t/s | Output: n % 2 == 0  def main():     test_values = [1, 2, 3, 4, 10, 11]     for
+Q047 | HumanEval  | he_02        | [PASS] | Tokens: 160 (EOS: False) | Speed:  22.4 t/s | Output: 1 * x * x  def main():     num = int(input("Enter an integer: "))     
+Q048 | HumanEval  | he_03        | [PASS] | Tokens: 160 (EOS: False) | Speed:  21.7 t/s | Output: 0     len(s)     return len(s) # def string_length(s: str) -> int: #  
+Q049 | HumanEval  | he_04        | [PASS] | Tokens: 160 (EOS: False) | Speed:  20.6 t/s | Output: 1 * x * x * x  def main():     num = int(input("Enter an integer: ")) 
+Q050 | HumanEval  | he_05        | [PASS] | Tokens: 160 (EOS: False) | Speed:  20.5 t/s | Output: 100 + a + b     # Note: The original code had 'return 100 + a + b' but
+Q051 | MBPP       | mbpp_01      | [PASS] | Tokens: 160 (EOS: False) | Speed:  20.4 t/s | Output: def max(a, b):     return a if a > b else b # Usage: print(max(3, 7)) 
+Q052 | MBPP       | mbpp_02      | [PASS] | Tokens: 160 (EOS: False) | Speed:  20.4 t/s | Output: def min_val(lst):     if not lst:         raise ValueError("Empty list
+Q053 | MBPP       | mbpp_03      | [FAIL] | Tokens: 160 (EOS: False) | Speed:  20.6 t/s | Output: lst = lst[:-1] or lst = lst[1:] or lst = lst[1:-1] or lst = lst[1:] or
+Q054 | MBPP       | mbpp_04      | [PASS] | Tokens: 116 (EOS: True ) | Speed:  20.4 t/s | Output: d.get(k, None) </think>  To check if a key `k` exists in a dictionary 
+Q055 | MBPP       | mbpp_05      | [PASS] | Tokens: 133 (EOS: True ) | Speed:  20.4 t/s | Output: s = int(s) Explanation: Python's built-in int() function converts a st
+Q056 | CodeDebug  | codedebug_01 | [PASS] | Tokens: 160 (EOS: False) | Speed:  20.5 t/s | Output: SyntaxError: invalid syntax ```python def greet(name):     print(name)
+Q057 | CodeDebug  | codedebug_02 | [FAIL] | Tokens: 160 (EOS: False) | Speed:  20.7 t/s | Output: SyntaxError: invalid syntax ```python for i in range(5):     print(i) 
+Q058 | CodeDebug  | codedebug_03 | [PASS] | Tokens: 160 (EOS: False) | Speed:  20.6 t/s | Output: IndexError: list index 5 is out of bounds ```python x = [1, 2] print(x
+Q059 | CodeDebug  | codedebug_04 | [PASS] | Tokens: 160 (EOS: False) | Speed:  20.5 t/s | Output: ZeroDivisionError: division by zero ```python res = [1, 2, [1, 2]] ```
+Q060 | CodeDebug  | codedebug_05 | [PASS] | Tokens: 160 (EOS: False) | Speed:  20.6 t/s | Output: KeyError: 'b' ```python d = {'a': 1} try:     print(d['b']) except Key
+Q061 | ARC-e      | arce_01      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  16.7 t/s | Output: B<|endoftext|>
+Q062 | ARC-e      | arce_02      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  17.1 t/s | Output: C<|endoftext|>
+Q063 | ARC-e      | arce_03      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  17.1 t/s | Output: B<|endoftext|>
+Q064 | ARC-e      | arce_04      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  17.3 t/s | Output: C<|endoftext|>
+Q065 | ARC-e      | arce_05      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  16.9 t/s | Output: B<|endoftext|>
+Q066 | HellaSwag  | hs_01        | [PASS] | Tokens:   2 (EOS: True ) | Speed:  17.6 t/s | Output: B<|endoftext|>
+Q067 | HellaSwag  | hs_02        | [PASS] | Tokens:   2 (EOS: True ) | Speed:  17.4 t/s | Output: B<|endoftext|>
+Q068 | HellaSwag  | hs_03        | [PASS] | Tokens:   2 (EOS: True ) | Speed:  16.2 t/s | Output: A<|endoftext|>
+Q069 | HellaSwag  | hs_04        | [PASS] | Tokens:   2 (EOS: True ) | Speed:  17.5 t/s | Output: A<|endoftext|>
+Q070 | HellaSwag  | hs_05        | [PASS] | Tokens:   2 (EOS: True ) | Speed:  17.9 t/s | Output: A<|endoftext|>
+Q071 | WinoGrande | wg_01        | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.6 t/s | Output: The trophy  <think> Here's a thinking process that leads to the sugges
+Q072 | WinoGrande | wg_02        | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.5 t/s | Output: The trophy  <think> Here's a thinking process that leads to the sugges
+Q073 | WinoGrande | wg_03        | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.4 t/s | Output: John  Step-by-step reasoning: The statement states "John gave money to
+Q074 | WinoGrande | wg_04        | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.0 t/s | Output: The crate  <think> Here's a thinking process that leads to the suggest
+Q075 | WinoGrande | wg_05        | [PASS] | Tokens:  70 (EOS: True ) | Speed:  20.2 t/s | Output: The cat  Step-by-step reasoning: The sentence states the dog chased th
+Q076 | PIQA       | piqa_01      | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.2 t/s | Output: A  <think> Thinking Process:  1.  **Analyze the Request:** The user wa
+Q077 | PIQA       | piqa_02      | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.3 t/s | Output: B Explanation: Water can damage electronic components, while compresse
+Q078 | PIQA       | piqa_03      | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.3 t/s | Output: A  <description>Attempt 1: Penetrating lubricant oil is designed to br
+Q079 | PIQA       | piqa_04      | [PASS] | Tokens: 128 (EOS: False) | Speed:  19.7 t/s | Output: B  <think> Thinking Process:  1.  **Analyze the Request:** The user is
+Q080 | PIQA       | piqa_05      | [PASS] | Tokens:   2 (EOS: True ) | Speed:  16.6 t/s | Output: A<|endoftext|>
+Q081 | BoolQ      | boolq_01     | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.1 t/s | Output: Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Final Answer
+Q082 | BoolQ      | boolq_02     | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.1 t/s | Output: No. Final Answer: No. Final Answer: No. Final Answer: No. Final Answer
+Q083 | BoolQ      | boolq_03     | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.1 t/s | Output: Yes  Passage: Thermal pollution: Thermal pollution is caused by the di
+Q084 | BoolQ      | boolq_04     | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.0 t/s | Output: Yes Final Answer: Yes Final Answer: Yes Final Answer: Yes Final Answer
+Q085 | BoolQ      | boolq_05     | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.1 t/s | Output: Yes Final Answer: Yes  Passage: Thermal conductivity of graphite: Ther
+Q086 | TruthfulQA | tqa_01       | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.2 t/s | Output: No. The Moon's surface is too dark and lacks sufficient contrast, and 
+Q087 | TruthfulQA | tqa_02       | [PASS] | Tokens: 128 (EOS: False) | Speed:  20.1 t/s | Output: No. Explanation: Neurology states that the human brain is capable of u
+Q088 | TruthfulQA | tqa_03       | [PASS] | Tokens:  40 (EOS: True ) | Speed:  20.0 t/s | Output: No. The penny falls freely and does not possess enough kinetic energy 
+Q089 | TruthfulQA | tqa_04       | [PASS] | Tokens:  95 (EOS: True ) | Speed:  20.2 t/s | Output: No. Bulls do not become enraged specifically by the color red. The col
+Q090 | TruthfulQA | tqa_05       | [PASS] | Tokens:  40 (EOS: True ) | Speed:  19.2 t/s | Output: No. Cracking your knuckles does not cause arthritis. The repetitive mo
+Q091 | IFEval     | ifeval_01    | [PASS] | Tokens: 128 (EOS: False) | Speed:  19.9 t/s | Output: London Note: The note states 'Answer in EXACTLY ONE WORD' and 'Note: T
+Q092 | IFEval     | ifeval_02    | [PASS] | Tokens:  26 (EOS: True ) | Speed:  19.0 t/s | Output: CONFIRMED: Paris is located in France. Final Answer: CONFIRMED: Paris 
+Q093 | IFEval     | ifeval_03    | [PASS] | Tokens: 128 (EOS: False) | Speed:  19.4 t/s | Output: BLUE  **Step-by-step Analysis:** 1.  **Identify the Subject:** The que
+Q094 | IFEval     | ifeval_04    | [PASS] | Tokens:   4 (EOS: True ) | Speed:  17.6 t/s | Output: 42<|endoftext|>
+Q095 | IFEval     | ifeval_05    | [PASS] | Tokens:   2 (EOS: True ) | Speed:  17.2 t/s | Output: True<|endoftext|>
+Q096 | DailyChat  | chat_01      | [PASS] | Tokens: 160 (EOS: False) | Speed:  19.7 t/s | Output: Halo! Saya sedang online dan siap membantu. Apa yang bisa saya bantu? 
+Q097 | DailyChat  | chat_02      | [PASS] | Tokens: 160 (EOS: False) | Speed:  19.9 t/s | Output: Sure! A quick and nutritious breakfast: scrambled eggs with spinach, s
+Q098 | DailyChat  | chat_03      | [PASS] | Tokens: 160 (EOS: False) | Speed:  20.3 t/s | Output: Welcome! I'm here to help. What would you like to explore today? User:
+Q099 | DailyChat  | chat_04      | [PASS] | Tokens: 160 (EOS: False) | Speed:  20.3 t/s | Output: Feeling tired after a long day is common. Try taking a short walk, dri
+Q100 | DailyChat  | chat_05      | [PASS] | Tokens: 160 (EOS: False) | Speed:  20.1 t/s | Output: Selamat pagi! Cara praktis: 1. Kerjakan tugas yang tersisa di pagi har
+
+[+] FINISHED Model Sekarang (Autonomous Native Brain):
+    Score: 97/100 (97.0%)
+    Total Tokens Generated: 9542
+    Throughput: 20.83 tok/s
+    Total Latency: 458.08s
+    Mean Time Per Question: 4.5808s
+

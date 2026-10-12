@@ -1,0 +1,81 @@
+
+=== UJIAN ADAPTIF RONDE 1 ===
+  PG-01 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Algoritma Pengurutan QuickSort & MergeSort
+  PG-02 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Struktur Asam Nukleat: DNA & RNA
+  PG-03 [ComputerScience_Logic-Kuliah-Rekayasa]: [FAIL ✗] | Topik: Ekstraksi Skalar vs Enumerasi Nama
+  PG-04 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Larutan Asam-Basa & Skala pH
+  PG-05 [Math-SMA]: [PASS ✓] | Topik: Sifat Eksponen & Logaritma
+  PG-06 [Math-Kuliah]: [PASS ✓] | Topik: Teorema Bayes & Probabilitas Bersyarat
+  PG-07 [Physics-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Rangkaian RLC & Resonansi
+  PG-08 [Math-SMA]: [PASS ✓] | Topik: Persamaan Kuadrat & Diskriminan
+  PG-09 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Ekologi: Rantai Makanan & Aliran Energi
+  PG-10 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Konsep Mol & Massa Molar
+  PG-11 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Taksonomi Runtime Exception: ValueError
+  PG-12 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Larutan Penyangga (Buffer)
+  PG-13 [Physics-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Hukum Newton I, II, dan III
+  PG-14 [Math-SMA-Kuliah]: [PASS ✓] | Topik: Pertidaksamaan Linear & Nilai Mutlak
+  PG-15 [Math-Kuliah]: [PASS ✓] | Topik: Teknik Pengintegralan Parsial
+  PG-16 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Logika Predikat & Kuantor
+  PG-17 [Math-SMP]: [PASS ✓] | Topik: Statistika Deskriptif (Mean, Median, Modus)
+  PG-18 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Kinetika Reaksi Kuliah & Waktu Paruh
+  PG-19 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Laju Reaksi & Katalis
+  PG-20 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Konsep OS: Proses vs Thread
+  PG-21 [Math-SMA]: [PASS ✓] | Topik: Integral Tak Tentu & Tentu
+  PG-22 [Physics-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Suhu, Kalor & Azas Black
+  PG-23 [Math-SMA]: [PASS ✓] | Topik: Logika Proposisi & Modus Ponens
+  PG-24 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Binary Search Tree (BST)
+  PG-25 [Physics-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Fisika Kuantum & Efek Fotolistrik
+  PG-26 [Physics-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Mekanika Kuantum: Ketidakpastian Heisenberg
+  PG-27 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Paradigma OOP: Enkapsulasi & Polimorfisme
+  PG-28 [Physics-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Listrik Dinamis & Hukum Ohm
+  PG-29 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Struktur Atom & Partikel Subatomik
+  PG-30 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Reaksi Redoks & Bilangan Oksidasi
+  PG-31 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Taksonomi Runtime Exception: TypeError
+  PG-32 [Physics-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Listrik Statis & Hukum Coulomb
+  PG-33 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Teori Komputasi: Automata Hingga (DFA)
+  PG-34 [Physics-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Gelombang Cahaya & Pembiasan Snellius
+  PG-35 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Tabel Periodik & Golongan Unsur
+  PG-36 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Ikatan Kimia: Ionik vs Kovalen
+  PG-37 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Persamaan Reaksi & Hukum Kekekalan Massa
+  PG-38 [Physics-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Hukum Kekekalan Energi Mekanik
+  PG-39 [Math-SMA-Kuliah]: [FAIL ✗] | Topik: Himpunan & Diagram Venn
+  PG-40 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Tipe Data & Boolean Negation di Python
+  PG-41 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Biologi Molekuler Kuliah: Sintesis Protein
+  PG-42 [Math-Kuliah]: [PASS ✓] | Topik: Nilai Eigen & Vektor Eigen
+  PG-43 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Physical Commonsense Material Grounding
+  PG-44 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Stoikiometri & Pereaksi Pembatas
+  PG-45 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Basis Data: Kunci Relasional & Normalisasi
+  PG-46 [Physics-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Gelombang Bunyi & Efek Doppler
+  PG-47 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Prinsip Desain Software: DRY & SOLID
+  PG-48 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Pointer, Alamat Memori & Referensi
+  PG-49 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Fotosintesis & Respirasi Seluler
+  PG-50 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Hukum Pewarisan Sifat Mendel
+  ESAI-01 [Math-SMP-SMA]: [PASS ✓] | Topik: Aritmatika Modulo 7 & Siklus Hari
+  ESAI-02 [Math-SMP]: [PASS ✓] | Topik: Operasi Aljabar & Pecahan
+  ESAI-03 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Taksonomi Runtime Exception: AttributeError
+  ESAI-04 [Physics-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Medan Magnet & Gaya Lorentz
+  ESAI-05 [Math-SMA]: [PASS ✓] | Topik: Kombinasi vs Permutasi
+  ESAI-06 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Enzim & Kinetika Enzimatik
+  ESAI-07 [Math-SMA]: [PASS ✓] | Topik: Trigonometri Dasar
+  ESAI-08 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Semantik Nilai Mutlak Trailing Return
+  ESAI-09 [Math-SMA-Kuliah]: [PASS ✓] | Topik: Notasi Asimptotik Big-O
+  ESAI-10 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Dynamic Programming: Memoization
+  ESAI-11 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Kesetimbangan Kimia & Azas Le Chatelier
+  ESAI-12 [ComputerScience_Logic-Kuliah-Rekayasa]: [PASS ✓] | Topik: Deadlock & Kondisi Coffman
+  ESAI-13 [Math-SMA-Kuliah]: [PASS ✓] | Topik: Vektor & Perkalian Titik
+  ESAI-14 [Physics-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Usaha dan Energi
+  ESAI-15 [Physics-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Hukum Termodinamika & Efisiensi Mesin
+  ESAI-16 [Chemistry_Bio-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Sistem Peredaran Darah Manusia
+  ESAI-17 [Physics-SMP-SMA-Kuliah]: [PASS ✓] | Topik: Fluida Statis & Hukum Archimedes
+  ESAI-18 [Math-SMP]: [PASS ✓] | Topik: SPLDV Eliminasi & Substitusi
+  ESAI-19 [Math-SMP]: [PASS ✓] | Topik: Pythagoras & Dimensi Ruang
+  ESAI-20 [Math-Kuliah]: [PASS ✓] | Topik: Turunan Parsial & Gradien
+
+=======================================================
+HASIL UJIAN ADAPTIF RONDE 1:
+  * Skor Pilihan Ganda (50 Soal) : 48.0 / 50.0 (96.0%)
+  * Skor Esai (20 Soal)          : 50.0 / 50.0 (100.0%)
+  * TOTAL NILAI UJIAN            : 98.0 / 100.0
+  * Status Kelulusan (Min. 80)   : LULUS [TERCAPAI ✓]
+  * Jumlah Topik yang Perlu Remedial : 2
+=======================================================

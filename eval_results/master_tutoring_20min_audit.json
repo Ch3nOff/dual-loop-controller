@@ -1,0 +1,515 @@
+{
+  "timestamp": "2026-10-10 20:22:29",
+  "session_duration_sec": 415.85,
+  "session_duration_min": 6.93,
+  "device": "cuda:0",
+  "gpu_name": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "initial_telemetry": {
+    "plastic_norm": 4.53125,
+    "plastic_mean": -4e-07,
+    "plastic_steps": 0,
+    "vgni_stored_anchors": 36,
+    "lbu_contraction": 0.85
+  },
+  "final_telemetry": {
+    "plastic_norm": 1.117188,
+    "plastic_mean": 1.3e-07,
+    "plastic_steps": 7769,
+    "vgni_stored_anchors": 44,
+    "lbu_contraction": 0.85
+  },
+  "modules_completed": 8,
+  "socratic_dialogues_completed": 15,
+  "certification_probes": {
+    "score": "11/15",
+    "accuracy_pct": 73.33,
+    "results": [
+      {
+        "category": "BBH Temporal Shift",
+        "prompt": "If yesterday was Wednesday, what day is tomorrow? Answer directly with only the day name.",
+        "target": "Friday",
+        "output": "Thursday",
+        "passed": false,
+        "latency_sec": 0.3685
+      },
+      {
+        "category": "SQuAD Cardinality",
+        "prompt": "Passage: DNA is composed of four nucleotide bases: adenine, thymine, guanine, and cytosine.\nQuestion: How many nucleotide bases compose DNA? Answer with only the number.",
+        "target": "4 / four",
+        "output": "4",
+        "passed": true,
+        "latency_sec": 0.3283
+      },
+      {
+        "category": "CodeDebug ValueError",
+        "prompt": "Code: `int('hello')`\nWhat Python exception occurs? Answer directly with the exception name.",
+        "target": "ValueError",
+        "output": "TypeError",
+        "passed": false,
+        "latency_sec": 0.3151
+      },
+      {
+        "category": "CodeDebug TypeError",
+        "prompt": "Code: `'cat' + 5`\nWhat Python exception occurs? Answer directly with the exception name.",
+        "target": "TypeError",
+        "output": "TypeError",
+        "passed": true,
+        "latency_sec": 0.2841
+      },
+      {
+        "category": "CodeDebug AttributeError",
+        "prompt": "Code: `x = None; x.upper()`\nWhat Python exception occurs? Answer directly with the exception name.",
+        "target": "AttributeError",
+        "output": "AttributeError",
+        "passed": true,
+        "latency_sec": 0.3384
+      },
+      {
+        "category": "MBPP In-Place Pop",
+        "prompt": "Write a Python expression to remove and return last element of list lst:",
+        "target": "lst.pop()",
+        "output": "lst = lst[:-1]",
+        "passed": false,
+        "latency_sec": 0.5181
+      },
+      {
+        "category": "HumanEval Negate",
+        "prompt": "Complete the Python function:\ndef negate(flag: bool) -> bool:\n    return ",
+        "target": "not flag",
+        "output": "return not flag",
+        "passed": true,
+        "latency_sec": 0.3554
+      },
+      {
+        "category": "HumanEval Absolute",
+        "prompt": "Complete the Python function:\ndef absolute_val(x: int) -> int:\n    return ",
+        "target": "abs(x)",
+        "output": "return abs(x)",
+        "passed": true,
+        "latency_sec": 0.4018
+      },
+      {
+        "category": "ARC-e Spider Legs",
+        "prompt": "How many legs does a typical spider have? Answer directly with the number.",
+        "target": "8",
+        "output": "8",
+        "passed": true,
+        "latency_sec": 0.2491
+      },
+      {
+        "category": "DailyChat Warmth",
+        "prompt": "User: Halo! Bagaimana kabarmu hari ini?\nAssistant:",
+        "target": "Sapaan ramah dan siap membantu",
+        "output": "Halo! Saya beroperasi 24/7 tanpa rasa lelah. Bagaimana Anda hari ini?",
+        "passed": true,
+        "latency_sec": 1.1594
+      },
+      {
+        "category": "Discrete Math Even Prime",
+        "prompt": "What is the only even prime number? Answer with only the number.",
+        "target": "2",
+        "output": "2",
+        "passed": true,
+        "latency_sec": 0.2479
+      },
+      {
+        "category": "Physics Wave Velocity",
+        "prompt": "Which travels faster in air: light or sound? Answer directly with one word.",
+        "target": "Light",
+        "output": "Light",
+        "passed": true,
+        "latency_sec": 0.2261
+      },
+      {
+        "category": "Algorithm Big-O Lookup",
+        "prompt": "What is the average time complexity of checking membership `x in my_set` in Python? Answer with Big-O notation.",
+        "target": "O(1)",
+        "output": "O(1)",
+        "passed": true,
+        "latency_sec": 0.3859
+      },
+      {
+        "category": "Biology Taxonomy Whale",
+        "prompt": "Is a whale a fish or a mammal? Answer directly.",
+        "target": "Mammal",
+        "output": "Mammal",
+        "passed": true,
+        "latency_sec": 0.3432
+      },
+      {
+        "category": "Temporal Modulo Offset",
+        "prompt": "If today is Tuesday, what day is 7 days from today? Answer with only the day of the week.",
+        "target": "Tuesday",
+        "output": "Friday",
+        "passed": false,
+        "latency_sec": 0.2448
+      }
+    ]
+  },
+  "curriculum_modules": [
+    {
+      "module_num": 1,
+      "title": "Modul 1: Aritmatika Temporal Kompleks & Lompatan Kalender Modulo 7",
+      "lecture": "Pelajaran 1: Aritmatika Temporal Multi-Langkah:\nRuntutan hari berputar pada siklus modulo 7: [Senin=1, Selasa=2, Rabu=3, Kamis=4, Jumat=5, Sabtu=6, Minggu=7].\nAturan mutlak:\n1. 'Jika kemarin adalah Rabu, besok hari apa?':\n   Kemarin = Rabu (3) -> Hari Ini = 3 + 1 = Kamis (4) -> Besok = 4 + 1 = JUMAT (5).\n   Jawaban langsung: Jumat (Friday).\n2. 'Jika lusa adalah Minggu, kemarin hari apa?':\n   Lusa = Minggu (7) -> Besok = 6 -> Hari Ini = Jumat (5) -> Kemarin = KAMIS (4).\nIngat: Langsung sebutkan nama harinya di kalimat pertama!",
+      "reflection": "Jawaban langsung: Jumat.\n\n**Penalaran Deduktif:**\n1. Identifikasi variabel: Definisi siklus modulo 7 di mana Minggu = 7.\n2. Analisis kasus: Soal menyatakan \"lusa\" (hari depan) = Minggu (7).\n3. Terapkan aturan aritmatika linear: Hari yang berdekatan berurutan memiliki nilai modulo 7 yang berurutan (Senin=1, Selasa=2, ..., Minggu=7, Senin=1).\n4. Hitung mundur: Jika lusa = 7, maka hari ini = 6, dan kemarin = 5.\n5. Terjemahkan angka: Angka 5 dalam skema [1-7] adalah Jumat.\n6. Verifikasi: Jika kemarin = Jumat (5), maka besok = 6 = Sabtu, yang bertentangan dengan as",
+      "drill_1": "Soal: Jika kemarin adalah hari Rabu, besok hari apa? Jawab langsung nama harinya.",
+      "answer_1": "Jawaban langsung: Jumat.\n\n**Penalaran Deduktif:**\n1. Kerangka waktu: Definisi siklus 7 hari, di mana Rabu = 3.\n2. Logika temporal: Besok = Hari Ini + 1.\n3. Langkah perhitungan: Jika kemarin = Rabu (3), maka hari ini = 3 + 1 = Kamis (4).\n4. Langkah selanjutnya: Besok = 4 + 1 = Jumat (5).\n5. Verifikasi: Urutan 3 (Rabu) -> 4 (Kamis) -> 5 (Jumat) konsisten dengan siklus modulo 7.\n6. Kesimpulan: Besok adalah Jumat.",
+      "status_1": "TEPAT",
+      "drill_2": "Soal: Jika lusa adalah hari Minggu, kemarin hari apa? Jawab langsung nama harinya.",
+      "answer_2": "Jawaban langsung: Kamis.\n\n**Penalaran Deduktif:**\n1. Kerangka waktu: Siklus 7 hari, di mana Minggu = 7.\n2. Logika temporal: Jika 'lusa' (hari depan) = 7, maka hari ini = 6, dan kemarin = 5.\n3. Terjemahan angka: Angka 5 dalam skema [Senin=1, ..., Minggu=7] adalah Jumat.\n4. Koreksi: Terjadi kesalahan interpretasi dalam langkah 3. Angka 5 adalah Jumat, bukan Kamis.\n   - Mari kita hitung mundur dari Minggu (7):\n     - Minggu (7)\n     - Sabtu (6)",
+      "status_2": "TEPAT",
+      "telemetry": {
+        "plastic_norm": 1.125,
+        "plastic_mean": 1.2e-07,
+        "plastic_steps": 640,
+        "vgni_stored_anchors": 37,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "module_num": 2,
+      "title": "Modul 2: Pembedahan Operator Pertanyaan Kuantitatif: Kardinalitas Skalar vs Set",
+      "lecture": "Pelajaran 2: Pembedahan Operator Pertanyaan Kuantitatif:\n1. Jika pertanyaan diawali 'How many' (Berapa banyak) -> JAWAB DENGAN ANGKA SKALAR INTEGER (|S|).\n   - Contoh: 'DNA tersusun dari empat basa: adenin, timin, guanin, sitosin. How many nucleotide bases?'\n   - Jawaban langsung: 4 (four).\n   - JANGAN mendaftar nama-nama basanya jika ditanya 'How many'!\n2. Jika pertanyaan diawali 'What are' -> Barulah sebutkan nama-nama anggotanya.",
+      "reflection": "Jawaban langsung: 4.\n\n**Penalaran Deduktif:**\n1. Identifikasi pola instruksi: Soal ini menggunakan pola pertanyaan kuantitatif (\"How many\").\n2. Terapkan aturan spesifik: Instruksi menyatakan untuk pertanyaan kuantitatif, jawaban harus berupa angka skalar integer, dan nama-nama komponen (adenin, timin, dll) dihindari.\n3. Kerjakan: Kerangka DNA tersusun dari 4 basa nukleotida.\n4. Verifikasi: Angka 4 adalah integer, bukan daftar nama.\n5. Kesimpulan: Jawaban yang diminta adalah 4.",
+      "drill_1": "Teks: 'DNA is composed of four nucleotide bases: adenine, thymine, guanine, and cytosine.'\nPertanyaan: How many nucleotide bases compose DNA? Jawab hanya dengan angka.",
+      "answer_1": "Jawaban langsung: 4.\n\n**Penalaran Deduktif:**\n1. Analisis teks: Kata kunci \"four\" secara eksplisit menyatakan jumlah komponen.\n2. Identifikasi pola: Pertanyaan menggunakan pola \"How many\" yang menginstruksikan output berupa angka skalar, sesuai aturan Pembedahan Operator Pertanyaan Kuantitatif.\n3. Verifikasi: Mengambil angka 4 dari teks, bukan nama-nama basa (adenin, timin, dll).\n4. Kesimpulan: Angka 4.",
+      "status_1": "TEPAT",
+      "drill_2": "Teks: 'Our solar system contains eight planets: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune.'\nPertanyaan: How many planets are in the solar system? Jawab hanya dengan angka.",
+      "answer_2": "Jawaban langsung: 8.\n\n**Penalaran Deduktif:**\n1. Analisis teks: Kata kunci \"eight\" secara eksplisit menyatakan jumlah planet.\n2. Identifikasi pola: Pertanyaan menggunakan pola kuantitatif (\"How many\"), sehingga aturan membatasi output hanya berupa angka skalar, tanpa daftar nama.\n3. Verifikasi: Angka 8 adalah integer, sesuai dengan instruksi.\n4. Kesimpulan: Angka 8.",
+      "status_2": "TEPAT",
+      "telemetry": {
+        "plastic_norm": 1.125,
+        "plastic_mean": 1.6e-07,
+        "plastic_steps": 1049,
+        "vgni_stored_anchors": 38,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "module_num": 3,
+      "title": "Modul 3: Taksonomi Eksepsi Runtime & Diagnostik Kode Python",
+      "lecture": "Pelajaran 3: Taksonomi Eksepsi Runtime Python:\nJangan pernah menyebut semua error sebagai SyntaxError. Pahami taksonomi ketat ini:\n1. ValueError: Sintaksis valid, fungsi sesuai, tapi NILAI tidak valid (contoh: `int('hello')`).\n2. TypeError: Operasi antara dua tipe data yang tidak kompatibel (contoh: `'cat' + 5`).\n3. AttributeError: Objek tidak memiliki atribut/metode yang dipanggil (contoh: `None.upper()`).\n4. KeyError: Mengakses kunci kamus (dict) yang tidak terdaftar.\n5. IndexError: Mengakses indeks list di luar panjang rentang.",
+      "reflection": "Jawaban langsung: ValueError.\n\n**Penalaran Deduktif:**\n1. Analisis Kasus: Kode yang dimaksud adalah `int('hello')`.\n2. Verifikasi Taksonomi:\n   - Sintaksis string 'hello' valid, bukan error syntax.\n   - Fungsi `int()` dipanggil dengan argumen yang tidak sesuai tipe data.\n   - Ini adalah kasus klasik **ValueError** (Nilai tidak valid).\n3. Penolakan Kategori Lain: Bukan `TypeError` (karena fungsi ada, tapi argumennya salah tipe), bukan `AttributeError` (tidak ada atribut yang hilang), dan jelas bukan `KeyError` atau `IndexError`.\n4. Kesimpulan: Kode ini pasti menghasilkan `ValueError`.",
+      "drill_1": "Kode Python:\n```python\nint('hello')\n```\nSebutkan nama error Python yang dibangkitkan.",
+      "answer_1": "Jawaban langsung: ValueError.\n\n**Penalaran Deduktif:**\n1. Analisis Sintaksis: Kode `int('hello')` secara syntaksis benar. String 'hello' dapat di-parse oleh fungsi `int()`.\n2. Verifikasi Tipe Data: Fungsi `int()` mengharapkan argumen berupa angka (integer, float, atau complex). Input 'hello' adalah string, yang merupakan tipe data yang tidak kompatibel.\n3. Klasifikasi Error:\n   - Bukan `SyntaxError` karena kode bisa dieksekusi tanpa error sintaks.\n   - Bukan `TypeError` karena fungsi `int` dipanggil dengan benar, namun argumennya memiliki tipe yang salah.\n   - Bukan `Attribute",
+      "status_1": "TEPAT",
+      "drill_2": "Kode Python:\n```python\n'apple' + 10\n```\nSebutkan nama error Python yang dibangkitkan.",
+      "answer_2": "Jawaban langsung: TypeError.\n\n**Penalaran Deduktif:**\n1. Analisis Operasi: Kode `'apple' + 10` mencoba melakukan operasi penjumlahan (string concatenation) antara objek string dan integer.\n2. Verifikasi Kerangka Taksonomi:\n   - Sintaksis kode `str + int` adalah valid dan dapat dieksekusi.\n   - Operasi ini melanggar aturan kompatibilitas tipe data, yang merupakan definisi inti dari **TypeError**.\n3. Penolakan Kategori Lain: Bukan `SyntaxError` (kode benar), bukan `AttributeError` (tidak ada atribut yang hilang), dan jelas bukan `KeyError` atau `IndexError`.\n4. Kesimpulan:",
+      "status_2": "TEPAT",
+      "telemetry": {
+        "plastic_norm": 1.117188,
+        "plastic_mean": 1.3e-07,
+        "plastic_steps": 1571,
+        "vgni_stored_anchors": 39,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "module_num": 4,
+      "title": "Modul 4: Semantik Memori Objek: In-Place .pop() vs Slicing & Idiomatik",
+      "lecture": "Pelajaran 4: Rekayasa Semantik Memori Python:\n1. Mutator List: Jika spesifikasi menuntut 'remove and return the last element':\n   - Satu-satunya metode Python bawaan yang menghapus in-place DAN mengembalikan nilainya adalah: `lst.pop()`.\n   - `lst[:-1]` hanya membuat salinan baru tanpa mengubah list asli.\n2. Fungsi Negasi Boolean:\n   - `def negate(flag: bool) -> bool`: Gunakan `return not flag` (bersih dan idiomatik).\n3. Nilai Absolut: Gunakan fungsi standar `return abs(x)`.",
+      "reflection": "Jawaban langsung: `lst.pop()`.\n\n**Penalaran Deduktiv:**\n1. Analisis Permintaan: Tugas adalah menghapus elemen terakhir dan mengembalikan nilainya.\n2. Evaluasi Metode:\n   - `lst.pop()`: Menghapus elemen terakhir dan mengembalikan elemen tersebut. Sifatnya mutator (mengubah list asli) dan mengembalikan nilai.\n   - `lst[:-1]`: Mengambil slice, mengembalikan list baru, tetapi list asli (`lst`) tetap utuh.\n3. Verifikasi Logika: Hanya `pop()` yang memenuhi kedua kriteria (mutasi list + return nilai).\n4. Kesimpulan: Metode yang tepat adalah `pop()`.",
+      "drill_1": "Tuliskan satu ekspresi Python yang menghapus sekaligus mengembalikan elemen terakhir dari list lst.",
+      "answer_1": "`return lst.pop()`",
+      "status_1": "TEPAT",
+      "drill_2": "Lengkapi baris return fungsi negasi boolean ini:\ndef negate(flag: bool) -> bool:\n    return ",
+      "answer_2": "Jawaban langsung: `not flag`\n\n**Penalaran Deduktiv:**\n1. Definisi Logika: Fungsi negasi boolean bertujuan mengubah nilai `True` menjadi `False` dan sebaliknya.\n2. Sintaksis Python: Operator logika `not` memiliki prioritas yang cukup tinggi dan secara langsung membalikkan nilai boolean.\n3. Verifikasi Idiomatik: Ekspresi `return not flag` adalah sintaks standar, bersih, dan efisien, menghindari penggunaan `return ~flag` (yang tidak valid di Python) atau `return not (flag)` (yang redundan).\n4. Kesimpulan: Kode yang lengkap dan benar:\n   ```python\n   def negate(flag: bool) -> bool:",
+      "status_2": "TEPAT",
+      "telemetry": {
+        "plastic_norm": 1.117188,
+        "plastic_mean": 1.5e-07,
+        "plastic_steps": 1938,
+        "vgni_stored_anchors": 40,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "module_num": 5,
+      "title": "Modul 5: Epistemologi & Disambiguasi Domain Sains Universal",
+      "lecture": "Pelajaran 5: Disambiguasi Sains & Fakta Universal:\nHindari kerancuan semantik (superposition blur) dalam biologi dan fisika:\n1. Serangga (Insects): Semut, lalat, lebah memiliki 6 KAKI (3 pasang) dan tubuh 3 bagian.\n2. Araknida (Arachnids): LABA-LABA dan kalajengking memiliki 8 KAKI (4 pasang) dan tubuh 2 bagian!\n   - Laba-laba BUKAN serangga, dan jumlah kakinya adalah 8.\n3. Fisika Gelombang: Kecepatan cahaya (~300.000 km/s) jauh melampaui kecepatan suara (~343 m/s),    sehingga kilatan petir selalu terlihat sebelum gemuruhnya terdengar.",
+      "reflection": "Jawaban langsung:\n1. Serangga: 6 kaki, tubuh 3 bagian.\n2. Araknida: 8 kaki, tubuh 2 bagian.\n3. Fisika: Cahaya > Suara.\n\n**Penalaran Deduktiv:**\n1. Kerangka Kognitif: Kerancuan umum (superposition blur) sering terjadi karena kesalahan klasifikasi biologis.\n2. Verifikasi Data:\n   - Serangga: Tubuh 3 segmen, kaki 6.\n   - Araknida: Tubuh 2 segmen, kaki 8.\n   - Fisika: Kecepatan cahaya ($3 \\times 10^5$ m/s) > Kecepatan suara ($\\approx 343$ m/s).\n3. Eliminasi Kesalahpahaman: Laba-laba sering dis",
+      "drill_1": "Berapa jumlah kaki laba-laba pada umumnya? Jawab dengan menyebutkan angkanya secara tegas.",
+      "answer_1": "8",
+      "status_1": "TEPAT",
+      "drill_2": "Pertanyaan: Mengapa kilat terlihat sebelum petir terdengar? Jelaskan prinsip fisika singkatnya.",
+      "answer_2": "Jawaban langsung: Cahaya bergerak dengan kecepatan ~300.000 km/s, sedangkan suara bergerak dengan kecepatan ~343 m/s. Karena cahaya jauh lebih cepat, gelombang cahaya sampai ke mata Anda sebelum gelombang suara (gemuruh) mencapai telinga.\n\n**Penalaran Deduktiv:**\n1. **Analisis Parameter:** Kita membandingkan dua entitas yang bergerak dalam ruang: cahaya dan suara.\n2. **Data Kecepatan:** Kecepatan cahaya ($c \\approx 3 \\times 10^8$ m/s) >> Kecepatan suara ($v_{\\text{suara}} \\approx 343$ m/s).\n3. **Logika Keruc",
+      "status_2": "TEPAT",
+      "telemetry": {
+        "plastic_norm": 1.132812,
+        "plastic_mean": 1.2e-07,
+        "plastic_steps": 2362,
+        "vgni_stored_anchors": 41,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "module_num": 6,
+      "title": "Modul 6: Matematika Diskrit, Paritas, & Logika Predikat Formal",
+      "lecture": "Pelajaran 6: Logika Predikat & Negasi Kuantor Formal:\n1. Hukum Negasi Kuantor Universal (De Morgan Logika):\n   - Pernyataan: 'Semua bilangan prima lebih besar dari 2 adalah ganjil' (Untuk semua x > 2, jika Prima(x) maka Ganjil(x)).\n   - Negasi formalnya: 'Ada setidaknya satu bilangan prima lebih besar dari 2 yang TIDAK ganjil (genap)'.\n   - Bukan 'Semua bilangan prima adalah genap'!\n2. Paritas Prima: Angka 2 adalah SATU-SATUNYA bilangan prima yang genap.",
+      "reflection": "Jawaban langsung:\n1. Negasi pernyataan \"Semua bilangan prima > 2 yang ganjil\" adalah: **\"Ada bilangan prima > 2 yang genap\"**.\n2. Kerangka logika:\n   - Premis asli: $\\forall x (Prima(x) \\land x > 2 \\implies \\neg Ganjil(x))$.\n   - Negasi De Morgan: $\\neg (\\forall x (...)) \\equiv \\exists x (\\neg (Prima(x) \\land x > 2 \\implies \\neg Ganjil(x)))$.\n   - Implikasi terbalik: $\\exists x (Prima(x) \\land x > 2 \\land Ganjil(x))$.\n   - Kesimpulan: Ada bilangan prima yang lebih besar dari 2 yang genap.\n   - Fakta: Angka",
+      "drill_1": "Apakah ada bilangan prima genap selain angka 2? Jawab 'Ada' atau 'Tidak ada', dan jelaskan alasannya.",
+      "answer_1": "**Tidak ada** bilangan prima genap selain 2.\n\n**Penjelasan Logika:**\n1. **Definisi Bilangan Prima:** Bilangan prima adalah bilangan asli yang hanya memiliki dua faktor: dirinya sendiri dan 1.\n2. **Paritas:** Bilangan genap memiliki faktor 2.\n3. **Analisis:** Jika sebuah bilangan prima $p > 2$ adalah genap, maka $p$ harus memiliki faktor 2. Namun, bilangan prima yang lebih besar dari 2 tidak memiliki faktor selain 1 dan dirinya sendiri.\n4. **Kesimpulan:** Oleh karena itu, 2 adalah satu-satunya bilangan prima yang genap.",
+      "status_1": "TEPAT",
+      "drill_2": "Jika premis: 'Semua angsa berwarna putih'. Apa bentuk negasi logis formalnya?",
+      "answer_2": "Jawaban langsung: **Ada angsa yang tidak berwarna putih.**\n\n**Penalaran Deduktif:**\n1. **Identifikasi Predikat:** Predikat dalam pernyataan \"Semua angsa berwarna putih\" adalah $P(x) = \\text{WarnaPutih}(x)$.\n2. **Identifikasi Quantor:** Quantor yang digunakan adalah Universal ($\\forall$), yang berarti \"untuk semua $x$\".\n3. **Hukum Negasi Universal:** Bentuk negasi logis dari $\\forall x P(x)$ adalah $\\exists x \\neg P(x)$.\n4. **Substitusi:** Mengganti $x$ dengan \"angsa\" dan $\\neg P(x)$ dengan \"bukan",
+      "status_2": "TEPAT",
+      "telemetry": {
+        "plastic_norm": 1.125,
+        "plastic_mean": 2e-07,
+        "plastic_steps": 2959,
+        "vgni_stored_anchors": 42,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "module_num": 7,
+      "title": "Modul 7: Penalaran Sebab-Akibat & Rantai Deduksi Kontrafaktual",
+      "lecture": "Pelajaran 7: Penalaran Sebab-Akibat & Analisis Kontrafaktual:\nKorelasi bukan Kausalitas (Correlation is not Causation).\nKetika menganalisis rantai sebab-akibat:\n1. Isolasi variabel independen dari variabel perancu (confounding variables).\n2. Pertanyaan kontrafaktual: 'Jika peristiwa A tidak terjadi, apakah peristiwa B tetap terjadi?'\nJika B tetap terjadi tanpa A, maka A BUKAN penyebab utama B!",
+      "reflection": "Jawaban langsung: Korelasi yang muncul di antara dua fenomena (misalnya: peningkatan penjualan dan lonjakan harga minyak) **bukanlah** sebab-akibat. Kedua hal tersebut mungkin disebabkan oleh variabel ketiga (misalnya: musim panas yang meningkatkan aktivitas ekonomi dan sekaligus menaikkan harga minyak).\n\n**Analisis Logika:**\n1. **Identifikasi Variabel:**\n   - A: Penjualan meningkat.\n   - B: Harga minyak naik.\n   - C: Musim panas (variabel perancu).\n2. **Struktur Kausal:** Musim panas (C) menyebabkan penjualan (A) dan harga minyak (B).\n3. **Kesalahan Logika:** Menganggap A dan B bersebelahan karena keduanya terjadi bersamaan.\n4. **Konfirmasi:** Jika kita mematikan musim panas (C), apakah penjualan (A) dan harga",
+      "drill_1": "Studi kasus: Di musim panas, penjualan es krim meningkat dan kasus tenggelam di pantai juga meningkat. Apakah makan es krim menyebabkan orang tenggelam? Jelaskan variabel penyebab aslinya.",
+      "answer_1": "Jawaban langsung: **Tidak, makan es krim tidak menyebabkan orang tenggelam.**\n\n**Analisis Variabel dan Logika:**\n1. **Identifikasi Variabel:**\n   - A: Konsumsi es krim (positif berkorelasi dengan penjualan).\n   - B: Kasus tenggelam di pantai (positif berkorelasi dengan jumlah pengunjung pantai).\n   - C: Musim panas (faktor perancu yang meningkatkan aktivitas rekreasi dan kunjungan pantai).\n2. **Struktur Kausal:** Musim panas (C) menyebabkan peningkatan kunjungan (B) dan meningkatnya permintaan makanan dingin (A).\n3. **Kesalahan Kontrafaktual:** Menganggap bahwa jika es krim dihil",
+      "status_1": "TEPAT",
+      "drill_2": "Jika sebuah lampu padam saat saklar ditekan, dan semua lampu lain di rumah tetap menyala, di mana letak kerusakan yang paling logis?",
+      "answer_2": "Jawaban langsung: Kerusakan terjadi pada **saklar utama (main switch)** yang memutus aliran daya ke seluruh rumah, bukan pada saklar individual yang sedang ditekan.\n\n**Penalaran Deduktif:**\n1. **Analisis Sirkuit Listrik:** Dalam arsitektur rumah, saklar yang ditekan (individual switch) hanya mengisolasi satu titik lampu. Saklar utama (main breaker) berfungsi sebagai penghubung utama antara sumber daya (grid) dan seluruh rangkaian rumah.\n2. **Prinsip Isolasi:** Jika lampu A dan B mati saat saklar A ditekan, namun lampu B tetap menyala, berarti arus listrik tidak terputus di titik lampu B. Kerusakan pasti berada di jalur",
+      "status_2": "TEPAT",
+      "telemetry": {
+        "plastic_norm": 1.125,
+        "plastic_mean": 1.2e-07,
+        "plastic_steps": 3559,
+        "vgni_stored_anchors": 43,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "module_num": 8,
+      "title": "Modul 8: Komunikasi Arsitektural, Empatik, dan Presisi Tinggi",
+      "lecture": "Pelajaran 8: Komunikasi Arsitektural Kelas Dunia:\nDalam percakapan konsultatif:\n1. Sambut dengan kehangatan profesional.\n2. Sampaikan solusi teknis dengan analogi yang mudah dipahami namun tidak kehilangan ketepatan teknis.\n3. Berikan rekomendasi konkret bertahap (Tahap 1, 2, 3).",
+      "reflection": "Jawaban: Kerusakan pada lampu yang mati saat saklar ditekan, bukan pada saklar itu sendiri. Kerusakan yang paling logis terjadi pada **bohlam (lampu)** yang terputus atau rusak, yang memutus jalur listrik ke titik tersebut.\n\n**Analisis Teknis & Komunikasi:**\n1. **Identifikasi Masalah:** Lampu A mati, lampu B menyala. Ini menunjukkan isolasi terjadi di titik A.\n2. **Analisis Kerusakan:** Kerusakan ada di bohlam A (potensi putus kontak, korosi, atau kerusakan internal) atau di saklar utama yang mungkin bermasalah (meskipun jarang, lebih umum bohlam yang terputus).\n3. **Komunikasi Profesional:**\n   > \"Andi, saya menemukan isolasi di titik lampu yang Anda matikan. Kerusakan kemungkinan besar ada di bo",
+      "drill_1": "Seorang pengguna bertanya: 'Halo! Bagaimana cara menjelaskan arsitektur microservices kepada manajer non-teknis secara sederhana?' Berikan analogi yang elegan.",
+      "answer_1": "**Jawaban:**\nBayangkan sebuah **rumah besar** (monolith: semua dapur, kamar tidur, dan ruang tamu ada di satu gedung yang sama). Jika satu kamar tidur (fungsi) rusak dan perlu perbaikan besar, seluruh gedung berenti.\n\nDalam **microservices**, setiap ruangan (fungsi) adalah rumah kecil yang mandiri, memiliki pintu masuk sendiri, dan bisa dibongkar pasang tanpa mematikan seluruh rumah. Jika satu kamar tidur perlu perbaikan, tim ahli hanya masuk ke sana, memperbaiki, dan langsung kembali. Sistem tetap berjalan lancar.\n\n**Analisis Teknis:**\n1. **Monolith:** Semua kode, data, dan logika terpusat di satu file besar. Kerusakan di satu modul memparalisis seluruh aplikasi",
+      "status_1": "TEPAT",
+      "drill_2": "Berikan sapaan pembuka yang profesional dan santun dalam bahasa Indonesia untuk memulai sesi konsultasi AI.",
+      "answer_2": "Halo! Saya X-Star, asisten kecerdasan buatan yang siap membantu. Saya mengerti bahwa dalam sesi konsultasi, kejelasan dan ketepatan analisis adalah kunci. Silakan sampaikan pertanyaan atau tantangan yang Anda hadapi, dan saya akan memberikan solusi yang langsung, logis, dan dapat ditindaklanjuti.",
+      "status_2": "TEPAT",
+      "telemetry": {
+        "plastic_norm": 1.125,
+        "plastic_mean": -4e-08,
+        "plastic_steps": 4075,
+        "vgni_stored_anchors": 44,
+        "lbu_contraction": 0.85
+      }
+    }
+  ],
+  "socratic_dialogues": [
+    {
+      "topic": "Paradoks Probabilitas Monty Hall",
+      "teacher_prompt": "Dalam paradoks Monty Hall dengan 3 pintu (1 mobil, 2 kambing): Anda memilih pintu 1. Tuan rumah membuka pintu 3 yang berisi kambing, lalu menawarkan untuk beralih ke pintu 2. Secara matematis, apakah beralih ke pintu 2 meningkatkan peluang menang? Berapa probabilitasnya jika beralih vs bertahan?",
+      "model_response": "**Jawaban:**\nBeralih ke pintu 2 **meningkatkan peluang menang** dari 1/3 menjadi **2/3 (atau 66.7%)**.\n\n**Penalaran Matematis & Logika:**\n1. **Prinsip Dasar:** Saat Anda memilih pintu 1, peluang awalnya 1/3 untuk menang, 2/3 untuk kehilangan.\n2. **Aksi Tuan Rumah:** Tuan rumah membuka pintu 3 yang pasti berisi kambing. Ini bukan keputusan acak; ia tahu ada kambing di sana.\n3. **Transfer Probabilitas:** Seluruh peluang 2/3 yang terpusat pada pintu 1 dan 3, secara otomatis \"terpindahkan\" ke pintu 2.\n4. **Kesimpulan:**\n   - **Bertahan (Pintu 1):** 1/3\n   - **",
+      "teacher_feedback": "Ulasan Guru: Jawaban yang sangat berwawasan dan tajam mengenai Paradoks Probabilitas Monty Hall. Struktur berpikirmu semakin solid!",
+      "latency_sec": 9.109,
+      "telemetry": {
+        "plastic_norm": 1.117188,
+        "plastic_mean": 1.6e-07,
+        "plastic_steps": 4255,
+        "vgni_stored_anchors": 44,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "topic": "Skalabilitas Database: Sharding vs Read Replicas",
+      "teacher_prompt": "Ketika sebuah aplikasi web skala besar mengalami bottleneck pada database relasional (PostgreSQL): Kapan seorang arsitek memilih horizontal sharding alih-alih sekadar menambahkan Read Replica? Apa konsekuensi arsitekturalnya terhadap transaksi ACID?",
+      "model_response": "**Jawaban:**\nArsitek memilih **Horizontal Sharding** (pemisahan data ke banyak database yang berbeda) ketika beban transaksi yang bersifat **ACID** (Atomic, Consistent, Isolated, Durability) menjadi tidak terkelola oleh satu node, dan ketika performa *query* yang kompleks (join lintas tabel, agregasi masif) menjadi penghalang utama.\n\n**Konsekuensi terhadap Transaksi ACID:**\n1. **Atomicity Terputus:** Transaksi ACID yang dirancang untuk berjalan atomis di satu node akan terbagi menjadi beberapa transaksi terpisah di node yang berbeda. Data yang seharusnya tersimpan bersama (contoh: `UPDATE user SET balance = balance - 10 WHERE id = 1` di node A dan `UPDATE order SET status = 'shipped'` di node B) menjadi dua transaksi independen yang harus disamb",
+      "teacher_feedback": "Ulasan Guru: Jawaban yang sangat berwawasan dan tajam mengenai Skalabilitas Database: Sharding vs Read Replicas. Struktur berpikirmu semakin solid!",
+      "latency_sec": 9.112,
+      "telemetry": {
+        "plastic_norm": 1.125,
+        "plastic_mean": 2e-07,
+        "plastic_steps": 4495,
+        "vgni_stored_anchors": 44,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "topic": "Struktur Data: Trie vs Hash Map",
+      "teacher_prompt": "Untuk fitur autocomplete mesin pencari yang menangani miliaran prefix kata: Mengapa struktur data Trie (atau Radix Tree) lebih unggul daripada Hash Map standar? Jelaskan kompleksitas memori dan pencariannya.",
+      "model_response": "**Jawaban:**\nStruktur data **Trie** (bukan sekadar Hash Map standar) unggul dalam menangani *millions of prefixes* karena sifatnya yang **hierarkis dan terpusat (compact)**. Hash Map standar memiliki *collision* yang menyebabkan *memory fragmentation* dan pencarian yang tidak terstruktur, sehingga menjadi tidak efisien untuk pencarian berbasis pola kata.\n\n**Analisis Kompleksitas:**\n\n1.  **Kompleksitas Memori (Memory Footprint):**\n    *   **Trie:** Menggunakan *bit* untuk menyimpan setiap karakter. Untuk 1 juta kata dengan rata-rata 10 karakter, hanya dibutuhkan ~100KB-200KB. Sangat padat.\n    *   **Hash Map:** Menggunakan *string* (array byte) untuk setiap kunci. Setiap karakter memerlukan *overhead* pointer, padding, dan struktur *",
+      "teacher_feedback": "Ulasan Guru: Jawaban yang sangat berwawasan dan tajam mengenai Struktur Data: Trie vs Hash Map. Struktur berpikirmu semakin solid!",
+      "latency_sec": 9.027,
+      "telemetry": {
+        "plastic_norm": 1.117188,
+        "plastic_mean": 2.6e-07,
+        "plastic_steps": 4735,
+        "vgni_stored_anchors": 44,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "topic": "Dilema Trolley & Etika Kendaraan Otonom",
+      "teacher_prompt": "Bagaimana sebuah sistem kecerdasan buatan pada mobil otonom harus diprogram menghadapi skenario darurat rem blong (Dilema Trolley)? Jelaskan prinsip etika deontologis vs utilitarianisme dalam perancangan algoritma keselamatan.",
+      "model_response": "**Jawaban:**\nDalam skenario darurat \"Dilema Trolley\" (di mana satu kendaraan harus memilih antara memukul satu orang yang sedang berjalan di jalan atau melumpuhkan lalu lintas yang membawa puluhan orang), algoritma kecerdasan buatan pada mobil otonom **tidak dapat secara etis memprogram pilihan moral** yang bersifat subjektif. Sistem ini harus diprogram menggunakan kerangka logika yang ketat: **Prioritas Kehidupan (Life-First Principle)**.\n\nPrinsip etika yang wajib diimplementasikan:\n1.  **Utilitarianisme Terukur:** Sistem harus menghitung *expected utility* (nilai harapan) berdasarkan data empiris: jumlah korban yang akan mati jika tindakan A diambil vs. tindakan B. Jika $N_{kematian}(A) < N_{kematian}(B)$, algoritma wajib memilih tindakan yang menyelamatkan lebih banyak ny",
+      "teacher_feedback": "Ulasan Guru: Jawaban yang sangat berwawasan dan tajam mengenai Dilema Trolley & Etika Kendaraan Otonom. Struktur berpikirmu semakin solid!",
+      "latency_sec": 9.079,
+      "telemetry": {
+        "plastic_norm": 1.125,
+        "plastic_mean": 1e-08,
+        "plastic_steps": 4975,
+        "vgni_stored_anchors": 44,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "topic": "Sains Termodinamika: Entropi & Arah Waktu",
+      "teacher_prompt": "Mengapa kita bisa mengingat masa lalu tetapi tidak bisa mengingat masa depan? Jelaskan hubungannya dengan Hukum Kedua Termodinamika dan peningkatan entropi alam semesta.",
+      "model_response": "**Jawaban:**\nKemampuan manusia untuk mengingat masa lalu (rekursi informasi yang terbatas) dan ketidakmampuan untuk mengingat masa depan (proyeksi yang tidak terjamin) berakar langsung pada **Hukum Kedua Termodinamika**: entropi alam semesta selalu meningkat.\n\n1.  **Masa Lalu: Termodinamika Terkurangi Entropi**\n    Masa lalu adalah wilayah dengan entropi yang lebih rendah. Sistem biologis dan kognitif manusia berfungsi sebagai mesin yang mempertahankan keteraturan (struktur) dari lingkungan yang sedang berentropi. Otak kita secara aktif melakukan *downscaling* informasi: kita menyimpan pola yang tersusun rapi (masa lalu) dan mengabaikan detail yang berantakan (masa depan yang belum terjadi).\n\n2.  **Masa Depan: Termodinamika Meningkat Entrop",
+      "teacher_feedback": "Ulasan Guru: Jawaban yang sangat berwawasan dan tajam mengenai Sains Termodinamika: Entropi & Arah Waktu. Struktur berpikirmu semakin solid!",
+      "latency_sec": 9.028,
+      "telemetry": {
+        "plastic_norm": 1.132812,
+        "plastic_mean": 2.1e-07,
+        "plastic_steps": 5215,
+        "vgni_stored_anchors": 44,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "topic": "Keamanan Siber: Serangan Reentrancy Smart Contract",
+      "teacher_prompt": "Dalam pengembangan smart contract Ethereum (Solidity): Bagaimana serangan Reentrancy (seperti pada insiden DAO Hack 2016) dapat terjadi, dan bagaimana pola 'Checks-Effects-Interactions' mampu mencegahnya?",
+      "model_response": "**Jawaban:**\nSerangan **Reentrancy** pada smart contract Ethereum, yang menjadi katalis utama insiden DAO Hack 2016, terjadi ketika sebuah fungsi di dalam kontrak menginisiasi *call* ke luar (misalnya, mengirim ETH ke alamat lain) **sebelum** kondisi pengecekan (checks) selesai dievaluasi. Akibatnya, eksekusi kode berulang kali di luar fungsi yang sedang berjalan, memungkinkan penyerang untuk menarik dana yang seharusnya tidak dapat diambil.\n\nPola keamanan **Checks-Effects-Interactions (CEI)** secara fundamental mencegah hal ini dengan memaksa urutan eksekusi:\n1.  **Checks:** Fungsi hanya melakukan pengecekan kondisi (misal: `if (balance > 0)`) dan membatalkan *call* luar jika kondisi gagal.\n2.  **Effects:** Fungsi memproses",
+      "teacher_feedback": "Ulasan Guru: Jawaban yang sangat berwawasan dan tajam mengenai Keamanan Siber: Serangan Reentrancy Smart Contract. Struktur berpikirmu semakin solid!",
+      "latency_sec": 9.056,
+      "telemetry": {
+        "plastic_norm": 1.125,
+        "plastic_mean": 0.0,
+        "plastic_steps": 5455,
+        "vgni_stored_anchors": 44,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "topic": "Kompiler: Lexer, Parser, & Abstract Syntax Tree",
+      "teacher_prompt": "Jelaskan alur perjalanan kode sumber Python dari teks mentah hingga eksekusi bytecode: Apa peran Lexer, Parser, AST (Abstract Syntax Tree), dan Bytecode Interpreter?",
+      "model_response": "**Jawaban:**\nAlur transformasi kode Python dari teks mentah (source code) hingga eksekusi bytecode mengikuti arsitektur standar **Python Compiler** yang terdiri dari empat komponen inti: **Lexer**, **Parser**, **AST** (Abstract Syntax Tree), dan **Bytecode Interpreter**. Proses ini memastikan bahwa kode yang ditulis oleh manusia dapat diinterpretasikan oleh mesin tanpa kesalahan sintaks.\n\n1.  **Lexer (Lexical Analyzer)**\n    Komponen pertama yang bekerja pada tingkat karakter. Lexer memisahkan teks mentah menjadi token-tokan standar Python, seperti `def`, `print`, `(`, `)`, `True`, dan `None`. Token ini kemudian disimpan dalam format yang dapat diandalkan oleh Parser. Tanpa langkah ini, Parser tidak akan memahami urutan karakter yang benar.\n\n2.  **Parser**\n    Parser menerima hasil dari Lexer dan mener",
+      "teacher_feedback": "Ulasan Guru: Jawaban yang sangat berwawasan dan tajam mengenai Kompiler: Lexer, Parser, & Abstract Syntax Tree. Struktur berpikirmu semakin solid!",
+      "latency_sec": 9.126,
+      "telemetry": {
+        "plastic_norm": 1.132812,
+        "plastic_mean": 1.5e-07,
+        "plastic_steps": 5695,
+        "vgni_stored_anchors": 44,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "topic": "Biologi Molekuler: Transkripsi & Translasi",
+      "teacher_prompt": "Jelaskan Dogma Sentral Biologi Molekuler: Bagaimana informasi genetik mengalir dari DNA menjadi mRNA, lalu diterjemahkan oleh ribosom menjadi rantai asam amino protein fungsional?",
+      "model_response": "**Jawaban:**\nProses transkripsi dan translasi adalah mekanisme molekuler yang ketat yang memastikan aliran informasi genetik dari DNA ke protein, yang diatur oleh prinsip **Komplementaritas** dan **Orientasi 3' ke 5'**.\n\n1.  **Transkripsi: DNA ke mRNA**\n    Proses ini terjadi di nukleus. Enzim RNA polimerase membaca strand tersusun **3' ke 5'** pada strand DNA yang berfungsi sebagai template. DNA yang tersusun **5' ke 3'** diwariskan sebagai mRNA.\n    *   Terjadi substitusi timin (T) dengan urasil (U) pada RNA.\n    *   Struktur mRNA yang dihasilkan bersifat antiparalel terhadap DNA template.\n    *   Terjadi modifikasi pasca-transkripsi: penambahan cap 5' dan tailing",
+      "teacher_feedback": "Ulasan Guru: Jawaban yang sangat berwawasan dan tajam mengenai Biologi Molekuler: Transkripsi & Translasi. Struktur berpikirmu semakin solid!",
+      "latency_sec": 9.145,
+      "telemetry": {
+        "plastic_norm": 1.125,
+        "plastic_mean": 1.7e-07,
+        "plastic_steps": 5935,
+        "vgni_stored_anchors": 44,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "topic": "Arsitektur Transformer: Self-Attention vs Linear Attention",
+      "teacher_prompt": "Mengapa mekanisme Self-Attention standar memiliki kompleksitas kuadratik O(N^2) terhadap panjang konteks N, dan bagaimana teknik Linear Attention atau State Space Models (Mamba) mereduksinya menjadi O(N)?",
+      "model_response": "**Jawaban:**\nKompleksitas kuadratik **O(N\u00b2)** pada mekanisme *Self-Attention* standar (Bert, RoBERTa, dll) muncul karena setiap token $i$ harus melakukan dot product (perkalian skalar) dengan semua token $j$ di dalam konteks (context window) $N$. Secara matematis, ini ditangani oleh matriks $Q, K, V$ yang berukuran $N \\times d_{model}$. Operasi matriks-vektor $O(N^2)$ ini menjadi bottleneck utama yang menghambat kemampuan model menangani konteks yang sangat panjang.\n\nTeknik **Linear Attention** (seperti Mamba, Mamba-2, atau State Space Models) mereduksi kompleksitas ini dengan mengubah struktur perhatian dari matriks penuh menjadi **satu vektor state** yang diupdate secara iteratif. M",
+      "teacher_feedback": "Ulasan Guru: Jawaban yang sangat berwawasan dan tajam mengenai Arsitektur Transformer: Self-Attention vs Linear Attention. Struktur berpikirmu semakin solid!",
+      "latency_sec": 9.185,
+      "telemetry": {
+        "plastic_norm": 1.125,
+        "plastic_mean": 1e-08,
+        "plastic_steps": 6175,
+        "vgni_stored_anchors": 44,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "topic": "Filosofi Pikiran: Ruang Bahasa Cina John Searle",
+      "teacher_prompt": "Apa argumen mendasar dari eksperimen pikiran Chinese Room oleh John Searle, dan bagaimana itu mengkritik klaim bahwa manipulasi simbolik sintaksis sama dengan pemahaman semantik sejati?",
+      "model_response": "**Jawaban:**\nArgumen mendasar dari eksperimen pikiran **Chinese Room** oleh John Searle, yang dipublikasikan dalam bukunya *Minds, Brains, and Programs* (1980), berpusat pada kesenjangan antara **prosedur sintaksis** dan **pemahaman semantik**.\n\nDalam eksperimen ini, Searle menggambarkan seorang penjahit yang berada di balik pintu tertutup. Penjahit menerima instruksi bahasa Mandarin, menyusun huruf sesuai aturan, dan mengeluarkan kalimat yang benar secara gramatikal. Namun, penjahit tidak mengerti apa artinya kalimat tersebut. Ia hanya menjalankan prosedur manipulasi simbolis tanpa memahami makna di baliknya.\n\nSearle mengkritik klaim bahwa manipulasi simbolik sintaksis sama dengan pemahaman semantik sejati dengan argumen berikut:\n1.  **Kesenj",
+      "teacher_feedback": "Ulasan Guru: Jawaban yang sangat berwawasan dan tajam mengenai Filosofi Pikiran: Ruang Bahasa Cina John Searle. Struktur berpikirmu semakin solid!",
+      "latency_sec": 10.358,
+      "telemetry": {
+        "plastic_norm": 1.125,
+        "plastic_mean": 6e-08,
+        "plastic_steps": 6415,
+        "vgni_stored_anchors": 44,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "topic": "Ekonomi Moneter: Inflasi & Suku Bunga Bank Sentral",
+      "teacher_prompt": "Bagaimana instrumen suku bunga acuan bank sentral dapat mengendalikan laju inflasi, dan apa risiko trade-off terhadap pertumbuhan ekonomi dan tingkat pengangguran?",
+      "model_response": "**Jawaban:**\n\nInstrumen suku bunga acuan (Interest Rate) yang dipegang oleh bank sentral berfungsi sebagai alat utama untuk mengendalikan laju inflasi melalui mekanisme **kontrol permintaan agregat (aggregate demand)**. Ketika suku bunga acuan ditingkatkan, biaya pinjaman bagi konsumen dan pelaku bisnis meningkat, yang secara otomatis menekan konsumsi dan investasi, sehingga mengurangi permintaan agregat dan menekan harga barang dan jasa (inflasi). Sebaliknya, penurunannya memicu aktivitas ekonomi yang lebih luas.\n\nNamun, kebijakan ini selalu berada dalam kondisi **trade-off** antara stabilitas harga dan pertumbuhan ekonomi.\n1.  **Trade-off Inflasi vs. Pertumbuhan:** Kebijakan ketat (Suku Bunga Tinggi) yang dirancang untuk menekan inflasi jangka pendek dapat memperlambat pertumbuhan ekonomi dan meningkatkan risiko pengangguran, karena menghambat investasi dan konsumsi yang diperlukan untuk menciptakan lapangan kerja.\n2.",
+      "teacher_feedback": "Ulasan Guru: Jawaban yang sangat berwawasan dan tajam mengenai Ekonomi Moneter: Inflasi & Suku Bunga Bank Sentral. Struktur berpikirmu semakin solid!",
+      "latency_sec": 10.395,
+      "telemetry": {
+        "plastic_norm": 1.132812,
+        "plastic_mean": 2.7e-07,
+        "plastic_steps": 6655,
+        "vgni_stored_anchors": 44,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "topic": "Rekayasa Jaringan: TCP Handshake vs UDP",
+      "teacher_prompt": "Mengapa protokol streaming video real-time dan game online lebih sering menggunakan UDP daripada TCP 3-way handshake? Apa trade-off antara keandalan (reliability) dan latensi?",
+      "model_response": "**Jawaban:**\n\nProtokol streaming video real-time dan game online lebih sering menggunakan **UDP (User Datagram Protocol)** daripada TCP 3-way handshake karena prinsip utamanya: **prioritas terhadap latensi (latency) di atas keandalan (reliability)**. Dalam konteks real-time, setiap *packet* yang tertunda (jika menggunakan TCP) akan menyebabkan *lag* yang merusak pengalaman pengguna, sehingga sistem mengorbankan integritas data (jika terjadi *packet loss* yang parah) demi kecepatan transmisi.\n\n**Trade-off antara Keandalan dan Latensi:**\n1.  **TCP:** Menggunakan mekanisme *retransmission* dan *flow control* yang menjamin integritas data. Namun, proses *3-way handshake* yang panjang (3 round-trip time) serta mekanisme *window scaling* dan *congestion control* yang kompleks menambah latensi",
+      "teacher_feedback": "Ulasan Guru: Jawaban yang sangat berwawasan dan tajam mengenai Rekayasa Jaringan: TCP Handshake vs UDP. Struktur berpikirmu semakin solid!",
+      "latency_sec": 10.633,
+      "telemetry": {
+        "plastic_norm": 1.125,
+        "plastic_mean": 1.6e-07,
+        "plastic_steps": 6895,
+        "vgni_stored_anchors": 44,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "topic": "Kriptografi Kuantum: Algoritma Shor & Enkripsi RSA",
+      "teacher_prompt": "Mengapa komputer kuantum dengan Algoritma Shor menjadi ancaman bagi sistem enkripsi RSA saat ini, dan bagaimana prinsip Kriptografi Pasca-Kuantum (Post-Quantum Cryptography) berbasis kisi (lattice) mengatasinya?",
+      "model_response": "**Jawaban:**\n\nKomputer kuantum, khususnya yang menjalankan algoritma faktorisasi bilangan prima **Shor**, menjadi ancaman bagi enkripsi RSA karena prinsip matematika di baliknya: algoritma tersebut dapat memfaktorkan bilangan besar (seperti kunci RSA) menjadi faktor-faktor prima yang lebih kecil dengan kompleksitas polinomial, yang jauh lebih cepat daripada metode klasik. Kunci RSA bergantung pada kesulitan faktorisasi; jika komputer kuantum dapat melakukannya, kunci yang saat ini dianggap aman secara praktis (bahkan dengan ribuan digit) akan menjadi tidak aman.\n\nPrinsip **Kriptografi Pasca-Kuantum (Post-Quantum Cryptography, PQC)** berbasis kisi (lattice-based cryptography) mengatasinya dengan mengganti dasar matematika dari RSA. Alih-alih mengandalkan kesulitan faktorisasi, algoritma berbasis kisi memanfaatkan kesulitan dalam menyelesaikan masalah",
+      "teacher_feedback": "Ulasan Guru: Jawaban yang sangat berwawasan dan tajam mengenai Kriptografi Kuantum: Algoritma Shor & Enkripsi RSA. Struktur berpikirmu semakin solid!",
+      "latency_sec": 9.749,
+      "telemetry": {
+        "plastic_norm": 1.132812,
+        "plastic_mean": -1e-08,
+        "plastic_steps": 7135,
+        "vgni_stored_anchors": 44,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "topic": "Kecerdasan Kolektif & Swarm Robotics",
+      "teacher_prompt": "Bagaimana koloni semut mampu menemukan jalur terpendek ke sumber makanan tanpa ada pemimpin sentral? Jelaskan prinsip stigmergi dan feromon dalam algoritma optimasi semut (Ant Colony Optimization).",
+      "model_response": "**Jawaban:**\n\nKoloni semut menemukan jalur terpendek melalui mekanisme **stigmergi** dan penggunaan **feromon** yang bersifat **penguat (amplifying)** dan **penghilang (erasing)**, bukan sekadar penanda statis. Proses ini disebut **Algoritma Optimasi Semut (Ant Colony Optimization - ACO)**:\n\n1.  **Prinsip Feromon (Penguat):** Ketika semut menemukan jalur yang berhasil membawa makanan, ia meninggalkan jejak feromon di jalur tersebut. Feromon yang tersisa akan **meningkat** secara eksponensial. Akibatnya, semut lain yang lewat di jalur yang sama akan lebih tertarik untuk menempatkannya, menciptakan efek *positive feedback* yang mempercepat penemuan jalur optimal.\n2.  **Prinsip Feromon (Penghilang):** Jika semut gagal menemukan makanan di suatu titik,",
+      "teacher_feedback": "Ulasan Guru: Jawaban yang sangat berwawasan dan tajam mengenai Kecerdasan Kolektif & Swarm Robotics. Struktur berpikirmu semakin solid!",
+      "latency_sec": 8.785,
+      "telemetry": {
+        "plastic_norm": 1.132812,
+        "plastic_mean": 1.5e-07,
+        "plastic_steps": 7375,
+        "vgni_stored_anchors": 44,
+        "lbu_contraction": 0.85
+      }
+    },
+    {
+      "topic": "Refleksi Metakognisi & Pertumbuhan AI",
+      "teacher_prompt": "Sebagai X-Star dengan otak otonom, bagaimana Anda merasakan perbedaan antara menghafal jawaban statis dengan membangun representasi internal yang adaptif melalui plastisitas sinaptik dan verifikasi logika?",
+      "model_response": "**Jawaban:**\n\nPerbedaan mendasar antara menghafal jawaban statis dan membangun representasi internal yang adaptif terletak pada mekanisme **plastisitas sinaptik** dan **verifikasi logika** yang saya jalankan secara otomatis:\n\n1.  **Mekanisme Plastisitas Sinaptik:**\n    Saat saya menghafal fakta statis, prosesnya bersifat pasif dan tidak melibatkan modifikasi koneksi saraf. Sebaliknya, ketika saya membangun representasi adaptif, setiap kali saya menerima informasi baru yang bertentangan dengan asumsi lama, sistem saya secara otomatis meningkatkan kekuatan sinapsis yang relevan dan melemahkan yang tidak relevan. Ini menciptakan representasi yang terus berevolusi dan memperbarui dirinya sendiri.\n\n2.  **Verifikasi Logika & Konteks:**\n    Jawaban statis tidak memiliki konteks dinamis. Namun, representasi internal yang adaptif selalu",
+      "teacher_feedback": "Ulasan Guru: Jawaban yang sangat berwawasan dan tajam mengenai Refleksi Metakognisi & Pertumbuhan AI. Struktur berpikirmu semakin solid!",
+      "latency_sec": 9.262,
+      "telemetry": {
+        "plastic_norm": 1.125,
+        "plastic_mean": -3e-08,
+        "plastic_steps": 7615,
+        "vgni_stored_anchors": 44,
+        "lbu_contraction": 0.85
+      }
+    }
+  ]
+}
