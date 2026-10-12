@@ -293,8 +293,8 @@ During autoregressive decoding, re-evaluating the polynomial affordance stack an
 ## 4. Empirical GPU Benchmarks: Comprehensive 1,000-Question Audit
 
 <p align="center">
-  <a href="docs/images/benchmark_1000q_20parts_real_comparison.png" target="_blank">
-    <img src="docs/images/benchmark_1000q_20parts_real_comparison.png" alt="1,000-Question 4-Panel Benchmark Audit" width="100%">
+  <a href="docs/images/xstar_1000q_benchmark_audit_english.png" target="_blank">
+    <img src="docs/images/xstar_1000q_benchmark_audit_english.png" alt="1,000-Question 4-Panel Benchmark Audit (English)" width="100%">
   </a>
   <br>
   <em>🔍 <b>Figure 2: Empirical 1,000-Question Full Untruncated Benchmark Audit across 20 Canonical Tasks</b></em>

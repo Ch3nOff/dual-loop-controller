@@ -17,6 +17,7 @@ if sys.platform == "win32":
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 JSON_AUDIT = PROJECT_ROOT / "eval_results" / "benchmark_1000q_20parts_real_audit.json"
 DOCS_IMG = PROJECT_ROOT / "docs" / "images" / "benchmark_1000q_20parts_real_comparison.png"
+DOCS_IMG_EN = PROJECT_ROOT / "docs" / "images" / "xstar_1000q_benchmark_audit_english.png"
 EVAL_IMG = PROJECT_ROOT / "eval_results" / "benchmark_1000q_20parts_real_comparison.png"
 ARTIFACT_IMG = Path(r"C:\Users\Matthew Chen\.gemini\antigravity\brain\19bea55e-42a6-476a-af5b-9c25391e2be9\benchmark_1000q_20parts_real_comparison.png")
 
@@ -112,10 +113,11 @@ def main():
 
     plt.tight_layout()
 
-    # Save to docs/images
+    # Save to docs/images (both canonical and cache-busted English filename)
     DOCS_IMG.parent.mkdir(parents=True, exist_ok=True)
     plt.savefig(str(DOCS_IMG), dpi=300)
-    print(f"[+] Saved English 1000Q Chart to: {DOCS_IMG}")
+    plt.savefig(str(DOCS_IMG_EN), dpi=300)
+    print(f"[+] Saved English 1000Q Chart to: {DOCS_IMG} and {DOCS_IMG_EN}")
 
     # Save to eval_results
     EVAL_IMG.parent.mkdir(parents=True, exist_ok=True)
@@ -123,7 +125,7 @@ def main():
     print(f"[+] Saved English 1000Q Chart to: {EVAL_IMG}")
 
     # Copy to Artifact directory
-    shutil.copy2(DOCS_IMG, ARTIFACT_IMG)
+    shutil.copy2(DOCS_IMG_EN, ARTIFACT_IMG)
     print(f"[+] Copied English 1000Q Chart to Artifact Directory: {ARTIFACT_IMG}")
     plt.close()
 
