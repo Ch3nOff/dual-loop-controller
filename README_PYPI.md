@@ -2,7 +2,7 @@
   English | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_id.md">Bahasa Indonesia</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_zh.md">简体中文</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ja.md">日本語</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ko.md">한국어</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_es.md">Español</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_fr.md">Français</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_de.md">Deutsch</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ru.md">Русский</a> | <a href="https://github.com/Ch3nOff/dual-loop-controller/blob/main/docs/README_ar.md">العربية</a>
 </p>
 
-<h1 align="center">X-Star 2B Autonomous Brain & Dual-Loop Controller (v4.6.0)</h1>
+<h1 align="center">X-Star 2B Autonomous Brain & Dual-Loop Controller (v4.6.1)</h1>
 <h3 align="center">Endogenous Continuous Plasticity, Layer 11 VGNI Epistemic Grounding & Commutative Dual-Composition Architecture</h3>
 
 <p align="center">
@@ -18,7 +18,7 @@
 
 ## Overview
 
-**X-Star 2B Autonomous Brain (v4.6.0)** is an open-source, standalone HuggingFace native cognitive architecture. Built atop the 28-layer hybrid transformer topology (`Qwen3.5-2B`), X-Star introduces endogenous reasoning and lifelong memory anchoring directly inside the forward-pass execution graph:
+**X-Star 2B Autonomous Brain (v4.6.1)** is an open-source, standalone HuggingFace native cognitive architecture. Built atop the 28-layer hybrid transformer topology (`Qwen3.5-2B`), X-Star introduces endogenous reasoning and lifelong memory anchoring directly inside the forward-pass execution graph:
 
 1. **Layer 11 VGNI Epistemic Grounding**: Employs a 128-slot associative memory bank with dynamic sensitivity gating ($0.08 \times \sigma(\text{gate}) \times a_{\text{approach}}$) that roots abstract reasoning in physical reality.
 2. **Commutative Dual-Composition LBU ($f(g)$ vs $g(f)$)**: Resolves formal logic order bias via commutator norm minimization ($\|f(g(h)) - g(f(h))\|_2$).
@@ -31,7 +31,7 @@
 ## Installation
 
 ```bash
-# Core package (PyPI v4.6.0)
+# Core package (PyPI v4.6.1)
 pip install dual-loop-controller
 
 # With GPU dependencies

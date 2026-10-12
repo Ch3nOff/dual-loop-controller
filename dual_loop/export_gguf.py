@@ -172,7 +172,7 @@ def export_hadl_to_gguf(
     output_gguf_path: str = "dist/xstar_2b_carlift_q8_0.gguf",
     outtype: str = "q8_0",
     work_dir: str = "dist/staging_hf_fused",
-    trust_remote_code: bool = True,
+    trust_remote_code: bool = False,
 ) -> str:
     """
     Full end-to-end pipeline:

@@ -291,7 +291,7 @@ def main():
     print("[*] Attaching HADL v4.5 Dual-Cup Controller for Model Sebelumnya...")
     hadl_model = attach_hadl_v45_dualcup(base_model=base_model, target_layer_idx=11, ghost_layer_idx=23)
     if PREV_CHECKPOINT.exists():
-        ckpt_prev = torch.load(str(PREV_CHECKPOINT), map_location=DEVICE, weights_only=False)
+        ckpt_prev = torch.load(str(PREV_CHECKPOINT), map_location=DEVICE, weights_only=True)
         hadl_model.controller.load_state_dict(ckpt_prev["controller_state_dict"], strict=False)
         print(f"[+] Restored HADL v4.5 Checkpoint from: {PREV_CHECKPOINT}")
     else:
@@ -318,7 +318,7 @@ def main():
     vgni_controller.to(dtype=torch.bfloat16)
 
     if CURR_CHECKPOINT.exists():
-        ckpt_curr = torch.load(str(CURR_CHECKPOINT), map_location=DEVICE, weights_only=False)
+        ckpt_curr = torch.load(str(CURR_CHECKPOINT), map_location=DEVICE, weights_only=True)
         vgni_controller.vgni.concept_anchors.copy_(ckpt_curr["vgni_state"]["concept_anchors"].to(DEVICE))
         vgni_controller.vgni.approach_vectors.copy_(ckpt_curr["vgni_state"]["approach_vectors"].to(DEVICE))
         vgni_controller.vgni.usage_counts.copy_(ckpt_curr["vgni_state"]["usage_counts"].to(DEVICE))

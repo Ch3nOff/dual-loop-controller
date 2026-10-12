@@ -6,7 +6,7 @@ with Two-Piston Hydraulic Equilibrium, Porous Orifice Firewall,
 and 100% Frozen Foundation Model Architecture.
 """
 
-__version__ = "4.5.0"
+__version__ = "4.6.1"
 
 try:
     import torch

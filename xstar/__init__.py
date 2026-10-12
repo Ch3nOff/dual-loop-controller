@@ -10,10 +10,11 @@ import sys
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Union
 
-__version__ = "4.6.0"
+__version__ = "4.6.1"
 __author__ = "Ch3nOff & X-Star Research Team"
 
 DEFAULT_MODEL_DIR = Path(__file__).resolve().parent.parent / "dist" / "xstar_2b_autonomous_brain"
+HF_MODEL_REPO = "MatthewChen/xstar-2b-autonomous-brain"
 
 
 class XStarModel:
@@ -25,17 +26,48 @@ class XStarModel:
         self,
         model_path: Optional[Union[str, Path]] = None,
         device: str = "auto",
-        dtype: str = "bfloat16"
+        dtype: str = "bfloat16",
+        trust_remote_code: bool = False
     ):
         import torch
-        from transformers import AutoModelForCausalLM, AutoTokenizer
+        from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig
 
         if model_path is None:
-            model_path = DEFAULT_MODEL_DIR
-        self.model_path = Path(model_path).resolve()
+            if DEFAULT_MODEL_DIR.exists():
+                self.model_path = DEFAULT_MODEL_DIR
+            else:
+                try:
+                    from huggingface_hub import snapshot_download
+                    print(f"[*] Local model directory not found. Downloading weights from {HF_MODEL_REPO}...")
+                    cache_dir = Path.home() / ".cache" / "xstar" / "models"
+                    cache_dir.mkdir(parents=True, exist_ok=True)
+                    downloaded_path = snapshot_download(
+                        repo_id=HF_MODEL_REPO,
+                        local_dir=str(cache_dir / "xstar-2b-autonomous-brain")
+                    )
+                    self.model_path = Path(downloaded_path)
+                except Exception as e:
+                    raise FileNotFoundError(
+                        f"X-Star model directory not found at {DEFAULT_MODEL_DIR} and automated Hugging Face "
+                        f"download failed: {e}. Please run `huggingface-cli download {HF_MODEL_REPO}` or specify model_path."
+                    )
+        else:
+            self.model_path = Path(model_path).resolve()
 
         if not self.model_path.exists():
             raise FileNotFoundError(f"X-Star model directory not found at: {self.model_path}")
+
+        # Register local architecture classes if present to allow safe loading with trust_remote_code=False
+        try:
+            model_dir_str = str(self.model_path)
+            if model_dir_str not in sys.path:
+                sys.path.insert(0, model_dir_str)
+            from configuration_xstar import XStarConfig
+            from modeling_xstar import XStar3_5ForCausalLM
+            AutoConfig.register("xstar3_5", XStarConfig)
+            AutoModelForCausalLM.register(XStarConfig, XStar3_5ForCausalLM)
+        except Exception:
+            pass
 
         # Device determination
         if device == "auto":
@@ -53,11 +85,11 @@ class XStarModel:
         self.torch_dtype = torch_dtype
 
         # Load Tokenizer & Model
-        self.tokenizer = AutoTokenizer.from_pretrained(str(self.model_path), trust_remote_code=True)
+        self.tokenizer = AutoTokenizer.from_pretrained(str(self.model_path), trust_remote_code=trust_remote_code)
         self.model = AutoModelForCausalLM.from_pretrained(
             str(self.model_path),
             dtype=self.torch_dtype,
-            trust_remote_code=True,
+            trust_remote_code=trust_remote_code,
             ignore_mismatched_sizes=True
         ).to(self.device)
         self.model.eval()
@@ -153,7 +185,8 @@ class XStarModel:
 def load(
     model_path: Optional[Union[str, Path]] = None,
     device: str = "auto",
-    dtype: str = "bfloat16"
+    dtype: str = "bfloat16",
+    trust_remote_code: bool = False
 ) -> XStarModel:
     """
     Factory function to quickly instantiate an X-Star Autonomous Brain model.
@@ -162,4 +195,4 @@ def load(
         model = xstar.load()
         print(model.generate("Explain quantum superposition."))
     """
-    return XStarModel(model_path=model_path, device=device, dtype=dtype)
+    return XStarModel(model_path=model_path, device=device, dtype=dtype, trust_remote_code=trust_remote_code)

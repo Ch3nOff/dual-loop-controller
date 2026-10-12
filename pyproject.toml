@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dual-loop-controller"
-version = "4.6.0"
+version = "4.6.1"
 description = "X-Star 2B Autonomous Brain & HADL Dual-Loop Cognitive Controller: Endogenous Continuous Plasticity, Layer 11 VGNI Epistemic Grounding, and Commutative Dual-Composition Architecture"
 readme = "README_PYPI.md"
 requires-python = ">=3.9"

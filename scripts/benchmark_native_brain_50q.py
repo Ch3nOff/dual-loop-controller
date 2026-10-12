@@ -187,7 +187,7 @@ def main():
     print("[*] Attaching HADL v4.5 Controller for Model Sebelumnya...")
     hadl_model = attach_hadl_v45_dualcup(base_model=base_model, target_layer_idx=11, ghost_layer_idx=23)
     if PREV_CHECKPOINT.exists():
-        ckpt_prev = torch.load(str(PREV_CHECKPOINT), map_location=DEVICE, weights_only=False)
+        ckpt_prev = torch.load(str(PREV_CHECKPOINT), map_location=DEVICE, weights_only=True)
         hadl_model.controller.load_state_dict(ckpt_prev["controller_state_dict"], strict=False)
         print(f"[+] Loaded HADL v4.5 Checkpoint from: {PREV_CHECKPOINT}")
     hadl_model.eval()

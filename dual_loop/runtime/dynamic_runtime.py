@@ -144,10 +144,7 @@ class HADLDynamicRuntime(nn.Module):
         
     def load_controller_weights(self, checkpoint_path: str):
         """Loads learned distilled weights into dynamic controller units."""
-        try:
-            ckpt = torch.load(checkpoint_path, map_location=self.device, weights_only=True)
-        except Exception:
-            ckpt = torch.load(checkpoint_path, map_location=self.device, weights_only=False)
+        ckpt = torch.load(checkpoint_path, map_location=self.device, weights_only=True)
         sd = ckpt.get("controller_state_dict", ckpt.get("controller", ckpt))
         
         fb = sd.get("hydraulic_cup.fluid_bridge.weight")

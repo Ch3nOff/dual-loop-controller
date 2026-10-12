@@ -372,7 +372,7 @@ torch.cuda.empty_cache()
 # Load HADL v4.5 Controller weights directly into the endogenous brain submodule
 print(f"[*] Loading 27B-Grade Distilled weights from: {PREV_CHECKPOINT}...")
 if PREV_CHECKPOINT.exists():
-    ckpt_hadl = torch.load(str(PREV_CHECKPOINT), map_location=DEVICE, weights_only=False)
+    ckpt_hadl = torch.load(str(PREV_CHECKPOINT), map_location=DEVICE, weights_only=True)
     hadl_state = ckpt_hadl["controller_state_dict"]
     
     # Load directly into brain.hadl_controller

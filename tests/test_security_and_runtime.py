@@ -441,6 +441,67 @@ class SecurityAndRuntimeTests(unittest.TestCase):
         self.assertEqual(float(weights[0, 0].item()), 1.0)
         self.assertTrue(telem["pure_bypass"])
 
+    def test_audit_v46_xstar_cli_requires_auth_on_non_loopback(self):
+        """AUDIT-v4.6: Verify xstar cmd_serve strictly requires API key when host is non-loopback."""
+        from xstar.cli import cmd_serve
+        import argparse
+
+        old_key = os.environ.pop("XSTAR_API_KEY", None)
+        old_dl = os.environ.pop("DUAL_LOOP_API_KEY", None)
+        try:
+            args = argparse.Namespace(host="0.0.0.0", port=8000, api_key=None, model=None, device="cpu")
+            with self.assertRaises(ValueError) as ctx:
+                cmd_serve(args)
+            self.assertIn("requires an API key", str(ctx.exception))
+        finally:
+            if old_key:
+                os.environ["XSTAR_API_KEY"] = old_key
+            if old_dl:
+                os.environ["DUAL_LOOP_API_KEY"] = old_dl
+
+    def test_audit_v46_dynamic_runtime_strictly_weights_only(self):
+        """AUDIT-v4.6: Verify HADLDynamicRuntime rejects unsafe pickle with weights_only=True."""
+        from dual_loop.runtime.dynamic_runtime import HADLDynamicRuntime
+        mock_model = MockQwenModel()
+        runtime = HADLDynamicRuntime(base_model=mock_model, d_model=64, device="cpu")
+
+        temp_fd, temp_path = tempfile.mkstemp(suffix=".pt")
+        os.close(temp_fd)
+        try:
+            payload = {"malicious": MaliciousExploit()}
+            torch.save(payload, temp_path)
+            with self.assertRaises(Exception) as ctx:
+                runtime.load_controller_weights(temp_path)
+            self.assertIn("weights_only", str(ctx.exception).lower())
+        finally:
+            if os.path.exists(temp_path):
+                os.unlink(temp_path)
+
+    def test_audit_v46_arc_sandbox_ast_validation(self):
+        """AUDIT-v4.6: Verify safe_execute_code AST rejects dangerous syscalls and dunder calls."""
+        from scripts.arc_3hour_autonomous_engine import safe_execute_code, validate_code_ast
+
+        bad_code_1 = "import os\ndef transform(g):\n    os.system('echo bad')\n    return g"
+        bad_code_2 = "def transform(g):\n    return g.__class__.__name__"
+        good_code = "import numpy as np\ndef transform(g):\n    return [row[::-1] for row in g]"
+
+        is_valid_1, _ = validate_code_ast(bad_code_1)
+        self.assertFalse(is_valid_1)
+
+        is_valid_2, _ = validate_code_ast(bad_code_2)
+        self.assertFalse(is_valid_2)
+
+        is_valid_3, _ = validate_code_ast(good_code)
+        self.assertTrue(is_valid_3)
+
+        res, err = safe_execute_code(bad_code_1, "transform", [[1, 2]])
+        self.assertIsNone(res)
+        self.assertIn("Security sandbox rejection", err)
+
+        res_good, err_good = safe_execute_code(good_code, "transform", [[1, 2], [3, 4]])
+        self.assertIsNone(err_good)
+        self.assertEqual(res_good, [[2, 1], [4, 3]])
+
 
 if __name__ == "__main__":
     unittest.main()

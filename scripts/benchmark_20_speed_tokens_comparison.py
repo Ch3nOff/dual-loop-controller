@@ -298,7 +298,7 @@ def main():
         raise FileNotFoundError(f"Checkpoint not found at: {CHECKPOINT_PATH}")
 
     print(f"\n[*] Restoring Stabilized VGNI-LBU Weights from {CHECKPOINT_PATH}...")
-    ckpt = torch.load(str(CHECKPOINT_PATH), map_location=device, weights_only=False)
+    ckpt = torch.load(str(CHECKPOINT_PATH), map_location=device, weights_only=True)
     model_wrapper.vgni.concept_anchors.copy_(ckpt["vgni_state"]["concept_anchors"].to(device))
     model_wrapper.vgni.approach_vectors.copy_(ckpt["vgni_state"]["approach_vectors"].to(device))
     model_wrapper.vgni.usage_counts.copy_(ckpt["vgni_state"]["usage_counts"].to(device))

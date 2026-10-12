@@ -60,7 +60,7 @@ def compute_vgni_lbu_weight_delta(
     Returns: Delta W (D, D) tensor.
     """
     print(f"[*] Loading VGNI-LBU checkpoint from: {vgni_ckpt_path}")
-    ckpt = torch.load(str(vgni_ckpt_path), map_location="cpu", weights_only=False)
+    ckpt = torch.load(str(vgni_ckpt_path), map_location="cpu", weights_only=True)
 
     anchors = ckpt["vgni_state"]["concept_anchors"].float()  # (M, D)
     approaches = ckpt["vgni_state"]["approach_vectors"].float()  # (M, D)
@@ -97,7 +97,7 @@ def compute_hadl_deltas(hadl_ckpt_path: Path, alpha_mid: float = 0.12, alpha_gho
     Computes HADL v4.5 Piston 1 (Layer 11) and Piston 2 (Layer 23) deltas.
     """
     print(f"[*] Loading HADL v4.5 checkpoint from: {hadl_ckpt_path}")
-    ckpt = torch.load(str(hadl_ckpt_path), map_location="cpu", weights_only=False)
+    ckpt = torch.load(str(hadl_ckpt_path), map_location="cpu", weights_only=True)
     state = ckpt.get("controller_state_dict", ckpt)
 
     # Piston 1 (Layer 11)

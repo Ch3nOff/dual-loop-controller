@@ -60,9 +60,10 @@ def load_frontier_multi_domain_mixture(max_samples_per_domain: int = 50) -> List
 
     # 1. UltraChat 200k (Multi-turn dialogue)
     try:
-        parquet_path = "C:/Users/Matthew Chen/.cache/huggingface/hub/datasets--HuggingFaceH4--ultrachat_200k/snapshots/8049631c405ae6576f93f445c6b8166f76f5505a/data/train_sft-00000-of-00003-a3ecf92756993583.parquet"
-        if os.path.exists(parquet_path):
-            t = pq.read_table(parquet_path)
+        hf_cache_dir = Path.home() / ".cache" / "huggingface" / "hub" / "datasets--HuggingFaceH4--ultrachat_200k"
+        parquet_files = list(hf_cache_dir.glob("**/data/train_sft-*.parquet")) if hf_cache_dir.exists() else []
+        if parquet_files and os.path.exists(parquet_files[0]):
+            t = pq.read_table(str(parquet_files[0]))
             msgs_col = t["messages"].to_pylist()
             count = 0
             for item in msgs_col[:max_samples_per_domain * 2]:
@@ -75,6 +76,15 @@ def load_frontier_multi_domain_mixture(max_samples_per_domain: int = 50) -> List
                     if count >= max_samples_per_domain:
                         break
             print(f"  • UltraChat 200k loaded: {count} samples", flush=True)
+        else:
+            ds_chat = load_dataset("HuggingFaceH4/ultrachat_200k", split=f"train_sft[:{max_samples_per_domain}]")
+            for item in ds_chat:
+                if len(item.get("messages", [])) >= 2:
+                    u = item["messages"][0]["content"]
+                    a = item["messages"][1]["content"]
+                    prompt = f"<|im_start|>user\n{u}<|im_end|>\n<|im_start|>assistant\n{a}<|im_end|>"
+                    mixture.append({"domain": "dialogue_ultrachat", "text": prompt})
+            print(f"  • UltraChat 200k loaded via HF datasets: {len(ds_chat)} samples", flush=True)
     except Exception as e:
         print(f"  [!] UltraChat error: {e}", flush=True)
 

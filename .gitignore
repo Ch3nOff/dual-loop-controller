@@ -26,4 +26,5 @@ results/
 scripts/competitor_dumps/
 scripts/*.txt
 external/
+datasets/
 

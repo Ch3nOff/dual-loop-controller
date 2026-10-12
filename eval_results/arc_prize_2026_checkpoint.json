@@ -1,0 +1,365 @@
+{
+  "completed_tasks": 15,
+  "total_tasks": 15,
+  "solved_tasks": 0,
+  "accuracy_pct": 0.0,
+  "total_test_pairs": 26,
+  "solved_test_pairs": 0,
+  "elapsed_time_sec": 571.6391677856445,
+  "results": [
+    {
+      "task_id": "0934a4d8",
+      "task_solved": false,
+      "verified_rule": null,
+      "pairs": [
+        {
+          "test_idx": 0,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 0.0,
+          "verified_heuristic": null,
+          "llm_tokens": 201.5
+        }
+      ],
+      "latency_sec": 21.33838152885437
+    },
+    {
+      "task_id": "135a2760",
+      "task_solved": false,
+      "verified_rule": null,
+      "pairs": [
+        {
+          "test_idx": 0,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 98.92984542211653,
+          "verified_heuristic": null,
+          "llm_tokens": 166.4
+        }
+      ],
+      "latency_sec": 22.69090223312378
+    },
+    {
+      "task_id": "136b0064",
+      "task_solved": false,
+      "verified_rule": null,
+      "pairs": [
+        {
+          "test_idx": 0,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 0.0,
+          "verified_heuristic": null,
+          "llm_tokens": 204.1
+        }
+      ],
+      "latency_sec": 31.264094829559326
+    },
+    {
+      "task_id": "13e47133",
+      "task_solved": false,
+      "verified_rule": null,
+      "pairs": [
+        {
+          "test_idx": 0,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 13.666666666666666,
+          "verified_heuristic": null,
+          "llm_tokens": 211.9
+        },
+        {
+          "test_idx": 1,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 11.555555555555555,
+          "verified_heuristic": null,
+          "llm_tokens": 193.70000000000002
+        }
+      ],
+      "latency_sec": 64.49069356918335
+    },
+    {
+      "task_id": "142ca369",
+      "task_solved": false,
+      "verified_rule": null,
+      "pairs": [
+        {
+          "test_idx": 0,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 45.67901234567901,
+          "verified_heuristic": null,
+          "llm_tokens": 198.9
+        },
+        {
+          "test_idx": 1,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 86.31578947368422,
+          "verified_heuristic": null,
+          "llm_tokens": 208.0
+        }
+      ],
+      "latency_sec": 52.34888195991516
+    },
+    {
+      "task_id": "16b78196",
+      "task_solved": false,
+      "verified_rule": null,
+      "pairs": [
+        {
+          "test_idx": 0,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 89.22222222222223,
+          "verified_heuristic": null,
+          "llm_tokens": 211.9
+        }
+      ],
+      "latency_sec": 22.42583179473877
+    },
+    {
+      "task_id": "16de56c4",
+      "task_solved": false,
+      "verified_rule": null,
+      "pairs": [
+        {
+          "test_idx": 0,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 71.95767195767195,
+          "verified_heuristic": null,
+          "llm_tokens": 182.0
+        },
+        {
+          "test_idx": 1,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 84.12698412698413,
+          "verified_heuristic": null,
+          "llm_tokens": 174.20000000000002
+        }
+      ],
+      "latency_sec": 38.74692392349243
+    },
+    {
+      "task_id": "1818057f",
+      "task_solved": false,
+      "verified_rule": null,
+      "pairs": [
+        {
+          "test_idx": 0,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 93.80165289256198,
+          "verified_heuristic": null,
+          "llm_tokens": 191.1
+        }
+      ],
+      "latency_sec": 20.195058345794678
+    },
+    {
+      "task_id": "195c6913",
+      "task_solved": false,
+      "verified_rule": null,
+      "pairs": [
+        {
+          "test_idx": 0,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 89.66666666666666,
+          "verified_heuristic": null,
+          "llm_tokens": 197.6
+        },
+        {
+          "test_idx": 1,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 88.22222222222223,
+          "verified_heuristic": null,
+          "llm_tokens": 191.1
+        }
+      ],
+      "latency_sec": 43.520124435424805
+    },
+    {
+      "task_id": "1ae2feb7",
+      "task_solved": false,
+      "verified_rule": null,
+      "pairs": [
+        {
+          "test_idx": 0,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 76.0,
+          "verified_heuristic": null,
+          "llm_tokens": 176.8
+        },
+        {
+          "test_idx": 1,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 95.0,
+          "verified_heuristic": null,
+          "llm_tokens": 209.3
+        },
+        {
+          "test_idx": 2,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 70.0,
+          "verified_heuristic": null,
+          "llm_tokens": 189.8
+        }
+      ],
+      "latency_sec": 57.93262529373169
+    },
+    {
+      "task_id": "20270e3b",
+      "task_solved": false,
+      "verified_rule": null,
+      "pairs": [
+        {
+          "test_idx": 0,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 0.0,
+          "verified_heuristic": null,
+          "llm_tokens": 192.4
+        },
+        {
+          "test_idx": 1,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 0.0,
+          "verified_heuristic": null,
+          "llm_tokens": 192.4
+        }
+      ],
+      "latency_sec": 39.11790227890015
+    },
+    {
+      "task_id": "20a9e565",
+      "task_solved": false,
+      "verified_rule": null,
+      "pairs": [
+        {
+          "test_idx": 0,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 0.0,
+          "verified_heuristic": null,
+          "llm_tokens": 170.3
+        },
+        {
+          "test_idx": 1,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 0.0,
+          "verified_heuristic": null,
+          "llm_tokens": 200.20000000000002
+        }
+      ],
+      "latency_sec": 42.46308898925781
+    },
+    {
+      "task_id": "21897d95",
+      "task_solved": false,
+      "verified_rule": null,
+      "pairs": [
+        {
+          "test_idx": 0,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 0.0,
+          "verified_heuristic": null,
+          "llm_tokens": 180.70000000000002
+        },
+        {
+          "test_idx": 1,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 45.83333333333333,
+          "verified_heuristic": null,
+          "llm_tokens": 169.0
+        }
+      ],
+      "latency_sec": 37.70525932312012
+    },
+    {
+      "task_id": "221dfab4",
+      "task_solved": false,
+      "verified_rule": null,
+      "pairs": [
+        {
+          "test_idx": 0,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 72.96000000000001,
+          "verified_heuristic": null,
+          "llm_tokens": 210.6
+        },
+        {
+          "test_idx": 1,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 84.44444444444444,
+          "verified_heuristic": null,
+          "llm_tokens": 196.3
+        }
+      ],
+      "latency_sec": 39.943591833114624
+    },
+    {
+      "task_id": "247ef758",
+      "task_solved": false,
+      "verified_rule": null,
+      "pairs": [
+        {
+          "test_idx": 0,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 87.66666666666667,
+          "verified_heuristic": null,
+          "llm_tokens": 208.0
+        },
+        {
+          "test_idx": 1,
+          "solved": false,
+          "match_attempt_1": false,
+          "match_attempt_2": false,
+          "cell_accuracy_pct": 84.72222222222221,
+          "verified_heuristic": null,
+          "llm_tokens": 214.5
+        }
+      ],
+      "latency_sec": 37.44541335105896
+    }
+  ]
+}

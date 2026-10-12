@@ -22,7 +22,7 @@ print(f"[+] Loaded {len(tensors)} tensors from {SAFETENSORS_PATH}")
 print("[*] Instantiating VGNI-LBU engine and loading stabilized checkpoint...")
 engine = UnifiedVGNIKVCloudEngine(d_model=2048)
 if CKPT_PATH.exists():
-    ckpt = torch.load(str(CKPT_PATH), map_location="cpu", weights_only=False)
+    ckpt = torch.load(str(CKPT_PATH), map_location="cpu", weights_only=True)
     if "vgni_state" in ckpt:
         engine.vgni.concept_anchors.copy_(ckpt["vgni_state"]["concept_anchors"])
         engine.vgni.approach_vectors.copy_(ckpt["vgni_state"]["approach_vectors"])

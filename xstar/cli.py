@@ -26,7 +26,11 @@ if sys.platform == "win32":
 def cmd_run(args):
     import xstar
     print(f"[*] Loading X-Star Model from: {args.model or 'default'}...")
-    model = xstar.load(model_path=args.model, device=args.device)
+    model = xstar.load(
+        model_path=args.model,
+        device=args.device,
+        trust_remote_code=getattr(args, "trust_remote_code", False)
+    )
     
     t0 = time.perf_counter()
     response = model.generate(
@@ -50,7 +54,11 @@ def cmd_chat(args):
     print(f"Device: {args.device} | Type 'exit' or 'quit' to terminate.")
     print("=" * 70)
 
-    model = xstar.load(model_path=args.model, device=args.device)
+    model = xstar.load(
+        model_path=args.model,
+        device=args.device,
+        trust_remote_code=getattr(args, "trust_remote_code", False)
+    )
     messages = []
 
     while True:
@@ -82,7 +90,11 @@ def cmd_chat(args):
 
 def cmd_info(args):
     import xstar
-    model = xstar.load(model_path=args.model, device=args.device)
+    model = xstar.load(
+        model_path=args.model,
+        device=args.device,
+        trust_remote_code=getattr(args, "trust_remote_code", False)
+    )
     info = model.get_info()
 
     print("\n" + "=" * 65)
@@ -122,8 +134,23 @@ def cmd_bench(args):
 
 
 def cmd_serve(args):
+    # SEC-02 hardening: Enforce authentication when binding to non-loopback interfaces
+    is_loopback = args.host in ("127.0.0.1", "localhost", "::1")
+    resolved_api_key = (
+        getattr(args, "api_key", None)
+        or os.environ.get("XSTAR_API_KEY", "").strip()
+        or os.environ.get("DUAL_LOOP_API_KEY", "").strip()
+        or None
+    )
+    if not is_loopback and not resolved_api_key:
+        raise ValueError(
+            f"Binding to non-loopback host '{args.host}' requires an API key for authentication. "
+            "Please provide --api-key or set XSTAR_API_KEY / DUAL_LOOP_API_KEY environment variable."
+        )
+
     try:
-        from fastapi import FastAPI, HTTPException
+        from fastapi import FastAPI, HTTPException, Security, Depends
+        from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
         from pydantic import BaseModel
         import uvicorn
         import xstar
@@ -132,14 +159,28 @@ def cmd_serve(args):
         return
 
     app = FastAPI(title="X-Star Autonomous Brain API", version=xstar.__version__)
-    model = xstar.load(model_path=args.model, device=args.device)
+    security = HTTPBearer(auto_error=False) if resolved_api_key else None
+
+    def verify_api_key(credentials: HTTPAuthorizationCredentials = Security(security) if security else None):
+        if resolved_api_key:
+            if not credentials or credentials.credentials != resolved_api_key:
+                raise HTTPException(status_code=401, detail="Invalid or missing API key")
+        return True
+
+    model = xstar.load(
+        model_path=args.model,
+        device=args.device,
+        trust_remote_code=getattr(args, "trust_remote_code", False)
+    )
 
     class GenerateRequest(BaseModel):
         prompt: str
         max_tokens: int = 256
         temperature: float = 0.0
 
-    @app.post("/v1/completions")
+    dependencies = [Depends(verify_api_key)] if resolved_api_key else []
+
+    @app.post("/v1/completions", dependencies=dependencies)
     def completions(req: GenerateRequest):
         t0 = time.perf_counter()
         text = model.generate(req.prompt, max_new_tokens=req.max_tokens, temperature=req.temperature)
@@ -158,6 +199,7 @@ def main():
     parser = argparse.ArgumentParser(description="X-Star Autonomous Brain CLI")
     parser.add_argument("--model", type=str, default=None, help="Path to X-Star model directory")
     parser.add_argument("--device", type=str, default="auto", help="Compute device (auto, cuda:0, cpu)")
+    parser.add_argument("--trust-remote-code", action="store_true", default=False, help="Allow executing remote code when loading custom models (default: False)")
 
     subparsers = parser.add_subparsers(dest="command", help="Available subcommands")
 
@@ -182,8 +224,9 @@ def main():
 
     # Command: serve
     p_serve = subparsers.add_parser("serve", help="Launch OpenAI-compatible REST API server")
-    p_serve.add_argument("--host", type=str, default="0.0.0.0", help="Host address")
-    p_serve.add_argument("--port", type=int, default=8000, help="Port number")
+    p_serve.add_argument("--host", type=str, default="127.0.0.1", help="Host address (default: 127.0.0.1)")
+    p_serve.add_argument("--port", type=int, default=8000, help="Port number (default: 8000)")
+    p_serve.add_argument("--api-key", type=str, default=None, help="API key for authentication (required for non-loopback)")
 
     args = parser.parse_args()
 

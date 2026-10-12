@@ -1,0 +1,137 @@
+=======================================================================
+X-STAR 2B AUTONOMOUS BRAIN: ARC-AGI-2 KNOWLEDGE PRIORS TUTORING SESSION
+=======================================================================
+
+MODULE 1: Geometric Reflection & Axis Symmetry
+CONCEPT: Objects reflected across horizontal, vertical, or diagonal axes preserve shapes while inverting orientation.
+MODEL RESPONSE:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** X-Star 2B Autonomous Brain.
+    *   **Task:** Learn fundamental transformation priors of the ARC-AGI benchmark.
+    *   **Specific Lesson:** Geometric Reflection & Axis Symmetry.
+    *   **Input:** A 3x3 grid example showing horizontal reflection (flipping rows).
+    *   **Rule:** `output_grid = [row[::-1] for row in input_grid]`.
+    *   **Question:** Explain how I identify this pattern and what invariant I track.
+    *   **Constraint:** Listen carefully, summarize the exact algorithmic rule and transformation invariant. Maintain the persona of an autonomous learning agent.
+----------------------------------------------------------------------
+
+MODULE 2: Discrete 90-Degree Rotations
+CONCEPT: Rotating a 2D matrix clockwise by 90 degrees maps cell (r, c) to (c, H - 1 - r).
+MODEL RESPONSE:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** X-Star 2B Autonomous Brain.
+    *   **Task:** Learn fundamental transformation priors of the ARC-AGI benchmark.
+    *   **Specific Lesson:** Discrete 90-Degree Rotations.
+    *   **Core Rule:** Clockwise 90° rotation maps cell (r, c) to (c, H - 1 - r).
+    *   **Task:** Explain how I identify this pattern and what invariant I track.
+    *   **Constraint:** Listen carefully, summarize the exact algorithmic rule and transformation invariant.
+    *   **Input:** Lesson content provided.
+    *   **Output Requirement:** A
+----------------------------------------------------------------------
+
+MODULE 3: Object Extraction & Minimum Bounding Box Cropping
+CONCEPT: Detect contiguous foreground clusters and crop out the minimal subgrid enclosing them.
+MODEL RESPONSE:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** X-Star 2B Autonomous Brain.
+    *   **Task:** Learn and summarize the fundamental transformation priors of the ARC-AGI benchmark, specifically regarding "Object Extraction & Minimum Bounding Box Cropping" as presented in the provided lesson.
+    *   **Input:** A teacher lesson explaining the steps to find non-zero cells, determine bounding box, and crop the minimal subgrid.
+    *   **Output Requirement:** Explain the identification pattern and the invariant tracked.
+    *   **Constraint:** Maintain the persona of an autonomous learning brain, concise, precise, and focused on the core algorithmic rule.
+
+2.  **Analyze the Lesson Content:**
+----------------------------------------------------------------------
+
+MODULE 4: Color Remapping & Enclosed Flood Fill
+CONCEPT: Colors represent semantics. Enclosed topological boundaries can be filled with a distinct fill color.
+MODEL RESPONSE:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** X-Star 2B Autonomous Brain.
+    *   **Task:** Learn fundamental transformation priors of the ARC-AGI benchmark.
+    *   **Specific Lesson:** Color Remapping & Enclosed Flood Fill.
+    *   **Core Concept:** Topological enclosures (closed loops) of non-background colors can be filled with a distinct fill color.
+    *   **Task:** Summarize the exact algorithmic rule and transformation invariant.
+    *   **Input:** Teacher's lesson content provided.
+    *   **Output Requirement:** Explain identification method and the invariant tracked.
+
+2.  **Deconstruct the Lesson Content:**
+    *   **
+----------------------------------------------------------------------
+
+MODULE 5: Gravity & Physical Contact Dynamics
+CONCEPT: Colored elements slide downwards or in a designated direction until hitting an obstacle or boundary.
+MODEL RESPONSE:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** X-Star 2B Autonomous Brain.
+    *   **Task:** Learn and summarize the exact algorithmic rule and transformation invariant from the provided lesson.
+    *   **Input Material:** A lesson snippet describing "Gravity & Physical Contact Dynamics" specifically focusing on ARC-AGI style grid/colony gravity problems.
+    *   **Specific Question:** "Explain how you identify this pattern and what invariant you track."
+    *   **Constraint:** Act as the learned model, demonstrating understanding of the core logic.
+
+2.  **Deconstruct the Lesson Content:**
+    *   **Concept:** Gravity Transformations.
+    *   **Mechanism:** Col
+----------------------------------------------------------------------
+
+MODULE 6: Pattern Repetition & Tiling
+CONCEPT: A small seed motif (e.g. 3x3) is replicated across a larger canvas or multiplied by an indicator mask.
+MODEL RESPONSE:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** X-Star 2B Autonomous Brain.
+    *   **Task:** Learn and summarize the fundamental transformation priors of the ARC-AGI benchmark based on the provided lesson.
+    *   **Specific Lesson Content:** Pattern Repetition & Tiling. Concept: Seed motif replication, Kronecker scaling, indicator mask logic. Input: Kernel K, Indicator Grid (1/0). Output: Tiled grid. Rule: Replace 1 with K, 0 with empty. Constraint: Output dimensions must be exact integer multiples of input dimensions.
+    *   **Specific Question:** "Explain how you identify this pattern and what invariant you track."
+    *
+----------------------------------------------------------------------
+
+MODULE 7: Cardinality & Size-Based Selection
+CONCEPT: Count pixels per object or color; select the majority, minority, or largest connected component.
+MODEL RESPONSE:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** X-Star 2B Autonomous Brain.
+    *   **Task:** Learn and summarize the fundamental transformation priors of the ARC-AGI benchmark based on the provided lesson.
+    *   **Specific Lesson:** Cardinality & Size-Based Selection.
+    *   **Core Concept:** Count pixels per object or color; select majority, minority, or largest connected component.
+    *   **Teacher's Rule:** Output retains the largest shape OR outputs the color of the most frequent object (1x1 grid).
+    *   **Key Principle:** Count non-zero pixels per color palette -> check if rule is `argmax(count(color))`.
+    *   **Task
+----------------------------------------------------------------------
+
+MODULE 8: Divider Lines & Multi-Grid Boolean Operations
+CONCEPT: Grids separated by a delimiter color (e.g. color 5 or 4) are combined via logical operations (AND, OR, XOR).
+MODEL RESPONSE:
+<think>
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** X-Star 2B Autonomous Brain.
+    *   **Task:** Learn and summarize the specific algorithmic rule and transformation invariant regarding "Divider Lines & Multi-Grid Boolean Operations" from the ARC-AGI benchmark context.
+    *   **Input:** A lesson excerpt explaining how grids separated by delimiter lines (e.g., color 5) are combined via logical operations (AND, OR, XOR).
+    *   **Requirement:** Explain the identification pattern and the invariant tracked.
+    *   **Constraint:** Maintain the persona of an autonomous learning agent, concise, precise, and algorithmic.
+
+2.  **Deconstruct the Lesson Content:**
+    *
+----------------------------------------------------------------------
+
