@@ -232,25 +232,56 @@ flowchart TD
 ```
 
 #### 1. Layer 11 Manifold Interception & VGNI Epistemic Memory
+
 Intermediate latent representations $h \in \mathbb{R}^{B \times S \times D}$ ($D = 2048$) at Layer 11 contain rich semantic embeddings before final lexical collapse. The **Vector Grounded Neural Interface (VGNI)** projects $h$ into normalized concept manifolds:
-$$\mathbf{q}_{\text{norm}} = \frac{\bar{h}}{\|\bar{h}\|_2}, \quad \text{Affinity}_i = \mathbf{q}_{\text{norm}} \cdot \mathbf{k}_{\text{anchor}, i}$$
+
+$$
+\mathbf{q}_{\text{norm}} = \frac{\bar{h}}{\|\bar{h}\|_2}, \quad \text{Affinity}_i = \mathbf{q}_{\text{norm}} \cdot \mathbf{k}_{\text{anchor}, i}
+$$
+
 The **Dynamic Epistemic Sensitivity Gate** modulates grounding activation based on cosine affinity:
-$$\text{Gate} = \sigma\left( 8.0 \times \max_i(\text{Affinity}_i) - 4.0 \right) \in (0, 1)$$
+
+$$
+\text{Gate} = \sigma\left( 8.0 \times \max_i(\text{Affinity}_i) - 4.0 \right) \in (0, 1)
+$$
+
 The grounded hidden vector injected into the residual stream is governed by:
-$$h_{\text{grounded}} = 0.08 \times \text{Gate} \times \mathbf{a}_{\text{approach}}$$
+
+$$
+\mathbf{h}_{\text{grounded}} = 0.08 \times \text{Gate} \times \mathbf{a}_{\text{approach}}
+$$
+
 This mechanism provides physical property invariance (e.g. material rigidity, density, mass) without modifying base transformer weights.
 
 #### 2. Logic Base Unit (LBU) & Commutative Dual-Composition Verification
+
 Prior modular architectures suffered from inverse operator collapse when inverting complex nonlinear representations ($f^{-1}(h)$). X-Star resolves this by implementing **Commutative Dual-Composition Verification**:
-$$\Delta h_{\text{comm}} = \| f(g(h)) - g(f(h)) \|_2$$
+
+$$
+\Delta h_{\text{comm}} = \| f(g(h)) - g(f(h)) \|_2
+$$
+
 Where $f(\cdot)$ and $g(\cdot)$ represent orthogonal sub-step reasoning projections within the Logic Base Unit. By calculating the commutator norm, the controller penalizes non-commutative directional bias and enforces symmetry in transitive syllogisms.
 
 #### 3. Endogenous Banach Continuous Plasticity & Homeostatic Restitution
+
 Continuous parameter adaptation in inference models typically induces catastrophic forgetting or eigenvalue explosion. X-Star bounds adaptation via a **Banach Contraction Mapping** ($\gamma = 0.85 < 1.0$):
-$$W_{\text{plastic}}^{(t+1)} = \gamma W_{\text{plastic}}^{(t)} + \eta \left( h_{\text{norm}} h_{\text{norm}}^T - \alpha W_{\text{plastic}}^{(t)} \right)$$
+
+$$
+W_{\text{plastic}}^{(t+1)} = \gamma W_{\text{plastic}}^{(t)} + \eta \left( h_{\text{norm}} h_{\text{norm}}^T - \alpha W_{\text{plastic}}^{(t)} \right)
+$$
+
 To ensure strict stability across extended generation runs, an **Elastic Homeostatic Restitution** operator executes every 5 plasticity steps:
-$$W_{\text{plastic}} \leftarrow W_{\text{plastic}} - 0.20 \times \left( W_{\text{plastic}} - W_{\text{baseline}} \right)$$
-This pulls the plastic weight matrix back toward its frozen homeostatic baseline $W_{\text{baseline}}$, guaranteeing that weight drift $\delta = \|W_{\text{plastic}} - W_{\text{baseline}}\|_F$ remains strictly bounded at $\delta \le 2.26$.
+
+$$
+W_{\text{plastic}} \leftarrow W_{\text{plastic}} - 0.20 \times \left( W_{\text{plastic}} - W_{\text{baseline}} \right)
+$$
+
+This pulls the plastic weight matrix back toward its frozen homeostatic baseline $W_{\text{baseline}}$, guaranteeing that weight drift remains strictly bounded:
+
+$$
+\delta = \| W_{\text{plastic}} - W_{\text{baseline}} \|_F \le 2.26
+$$
 
 #### 4. Low-Level Kernel Acceleration: cuBLAS GEMM & Dispatch Caching
 During autoregressive decoding, re-evaluating the polynomial affordance stack and routing decisions at every token introduced redundant overhead. Two non-architectural kernel optimizations were applied:
